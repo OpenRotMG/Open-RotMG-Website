@@ -30,13 +30,20 @@
 <body class="game-page">
   <main>
     <h1 class="screen-reader">OpenRotMG client preview</h1>
-    <div id="game" aria-label="Realm of the Mad God 123.5.1 client preview"></div>
+    <div id="game" aria-label="Realm of the Mad God 123.5.1 client preview">
+      <div id="startup" role="status">
+        <img src="{{BASE}}amulet-of-resurrection.png" width="96" height="96" alt="">
+        <strong>OpenRotMG</strong>
+        <span>Loading client…</span>
+        <a href="https://ruffle.rs/">Powered by Ruffle</a>
+      </div>
+    </div>
     <noscript><p class="notice">JavaScript is required to load the preserved Flash client through Ruffle.</p></noscript>
     <p id="load-error" class="notice" role="alert" hidden></p>
   </main>
   <footer>
     <p>OpenRotMG targets Realm of the Mad God build 123.5.1 (2012). <strong>Multiplayer is not online yet.</strong></p>
-    <nav aria-label="Project"><a href="{{BASE}}about/">About</a><a href="https://github.com/OpenRotMG/website">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></nav>
+    <nav aria-label="Project"><a href="{{BASE}}about/">About</a><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a><a href="https://ruffle.rs/">Powered by Ruffle</a></nav>
   </footer>
 </body>
 </html>

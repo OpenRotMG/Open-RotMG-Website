@@ -5,6 +5,7 @@
   await player.ruffle().load({
     url: new URL('client/123.5.1.swf', document.baseURI).href,
     autoplay: 'on',
+    splashScreen: false,
     unmuteOverlay: 'hidden',
     preferredRenderer: 'wgpu-webgl',
     openUrlMode: 'deny',
@@ -15,7 +16,9 @@
     ]
   });
   document.querySelector('#game').dataset.loaded = 'true';
+  document.querySelector('#startup').hidden = true;
 })().catch(error => {
+  document.querySelector('#startup').hidden = true;
   const notice = document.querySelector('#load-error');
   notice.textContent = 'Client failed to load: ' + error.message;
   notice.hidden = false;

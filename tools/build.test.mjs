@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
@@ -42,6 +43,10 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(home.includes('Multiplayer is not online yet.'));
+  assert.ok(home.includes('href="https://github.com/OpenRotMG">Source</a>'));
+  assert.ok(home.includes('Powered by Ruffle'));
+  assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
+  assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)/);
   assert.equal(JSON.parse(home.match(/type="application\/ld\+json">(.*?)<\/script>/s)[1]).url, site.href);
   const robots = readFileSync(new URL('../dist/robots.txt', import.meta.url), 'utf8');
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
@@ -54,4 +59,35 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));
   assert.equal(social.readUInt32BE(16), 1200);
   assert.equal(social.readUInt32BE(20), 630);
+});
+
+test('branded loading screen stays until Ruffle resolves', async () => {
+  let finish;
+  let options;
+  const ready = new Promise(resolve => { finish = resolve; });
+  const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+  const player = { ruffle: () => ({ load: config => { options = config; return ready; } }) };
+  const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
+    window: { RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
+    document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
+  });
+  assert.equal(options.splashScreen, false);
+  assert.equal(nodes['#startup'].hidden, false);
+  finish();
+  await boot;
+  assert.equal(nodes['#startup'].hidden, true);
+  assert.equal(nodes['#game'].dataset.loaded, 'true');
+});
+
+test('startup failure shows an error instead of leaving the branding stuck', async () => {
+  const nodes = { '#startup': { hidden: false }, '#load-error': { hidden: true } };
+  const errors = [];
+  await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
+    window: {}, document: { querySelector: selector => nodes[selector] },
+    console: { error: (...args) => errors.push(args) }
+  });
+  assert.equal(nodes['#startup'].hidden, true);
+  assert.equal(nodes['#load-error'].hidden, false);
+  assert.match(nodes['#load-error'].textContent, /Pinned Ruffle runtime did not load/);
+  assert.equal(errors.length, 1);
 });
