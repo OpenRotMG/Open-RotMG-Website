@@ -22,5 +22,5 @@
   const notice = document.querySelector('#load-error');
   notice.textContent = 'Client failed to load: ' + error.message;
   notice.hidden = false;
-  console.error('OpenRotMG client startup failed', error);
+  console.error('Open RotMG client startup failed', error);
 });

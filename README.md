@@ -1,4 +1,4 @@
-## [OpenRotMG.org](https://openrotmg.org)
+## [Open RotMG](https://openrotmg.org)
 
 One-click play for the recreation of the classic bullethell game.
 

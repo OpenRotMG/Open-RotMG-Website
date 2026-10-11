@@ -43,6 +43,10 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(home.includes('Multiplayer is not online yet.'));
+  for (const html of [home, about]) {
+    assert.ok(html.includes('Open RotMG'));
+    assert.doesNotMatch(html.replaceAll('https://github.com/OpenRotMG', ''), /OpenRotMG/);
+  }
   assert.ok(home.includes('href="https://github.com/OpenRotMG">Source</a>'));
   assert.equal(home.match(/Powered by Ruffle/g)?.length, 1);
   assert.doesNotMatch(home.match(/<footer>(.*?)<\/footer>/s)[1], /Powered by Ruffle/);
