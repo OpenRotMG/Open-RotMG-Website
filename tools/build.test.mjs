@@ -44,7 +44,8 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   const footer = home.match(/<footer>(.*?)<\/footer>/s)[1];
   assert.ok(footer.includes('Open RotMG is rebuilding RotMG as it was in 2012.<br>'));
-  assert.ok(footer.includes('Help out by reporting bugs and missing content on <a href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
+  assert.ok(footer.includes('Report bugs and missing content on Discord.</p>'));
+  assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   assert.ok(footerNav.includes('<span>2% complete</span>'));
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
