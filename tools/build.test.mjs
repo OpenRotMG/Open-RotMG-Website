@@ -42,7 +42,11 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   }
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
-  assert.ok(home.includes('Multiplayer is not online yet.'));
+  const footer = home.match(/<footer>(.*?)<\/footer>/s)[1];
+  assert.ok(footer.includes('Open RotMG is rebuilding RotMG as it was in 2012.<br>'));
+  assert.ok(footer.includes('Help out by reporting bugs and missing content on <a href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
+  assert.equal(footer.match(/href="https:\/\/discord.gg\/EwZWNzzYwP"/g)?.length, 1);
+  assert.doesNotMatch(footer.match(/<nav.*?<\/nav>/s)[0], /Discord/);
   const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
   assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
   assert.ok(home.includes(`name="twitter:description" content="${shareDescription}"`));
