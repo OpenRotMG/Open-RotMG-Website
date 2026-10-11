@@ -1,10 +1,8 @@
-## [Open RotMG](https://openrotmg.org)
+<h1><a href="https://openrotmg.org"><img src="readme-icon.png" width="44" height="44" align="absmiddle" alt=""></a> Open RotMG / Website</h1>
 
 One-click play for the recreation of the classic bullethell game.
 
 Development gameplay only. The full 2012 game is still being rebuilt.
-
-<img width="1194" height="270" alt="image" src="https://github.com/user-attachments/assets/e21e78cf-7009-4fdc-82d0-67e76a50bec7" />
 
 [Discord](https://discord.gg/EwZWNzzYwP)
 
