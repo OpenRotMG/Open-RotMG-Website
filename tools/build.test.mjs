@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
@@ -17,15 +18,15 @@ test('missing deployment URL fails instead of guessing a domain', () => {
   assert.match(result.stderr, /SITE_URL is required/);
 });
 
-test('public HTTP and credentials in canonical URL are rejected', () => {
-  for (const SITE_URL of ['http://example.test/', 'https://user:password@example.test/']) {
+test('public HTTP, credentials and subpaths in canonical URL are rejected', () => {
+  for (const SITE_URL of ['http://example.test/', 'https://user:password@example.test/', 'https://example.test/game/']) {
     const result = build({ SITE_URL });
     assert.notEqual(result.status, 0);
-    assert.match(result.stderr, /must use HTTPS|without credentials/);
+    assert.match(result.stderr, /must use HTTPS|without credentials|must be the origin root/);
   }
 });
 
-test('site builds with real HTML metadata and exact preserved client bytes', () => {
+test('site builds with metadata, strict same-origin WSS and preserved reference bytes', () => {
   const result = build({});
   assert.equal(result.status, 0, result.stderr);
   const site = new URL(process.env.SITE_URL);
@@ -61,7 +62,8 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.equal(home.match(/Powered by Ruffle/g)?.length, 1);
   assert.doesNotMatch(home.match(/<footer>(.*?)<\/footer>/s)[1], /Powered by Ruffle/);
   assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
-  assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)/);
+  assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)|multiplayer server is not online/);
+  assert.ok(about.includes('supports guest Wizard movement'));
   assert.equal(JSON.parse(home.match(/type="application\/ld\+json">(.*?)<\/script>/s)[1]).url, site.href);
   const robots = readFileSync(new URL('../dist/robots.txt', import.meta.url), 'utf8');
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
@@ -69,8 +71,13 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   const lock = JSON.parse(readFileSync(new URL('../client-lock.json', import.meta.url), 'utf8'));
-  const swf = readFileSync(new URL('../dist/client/123.5.1.swf', import.meta.url));
+  const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
   assert.equal(createHash('sha256').update(swf).digest('hex'), lock.swfSha256);
+  assert.ok(home.includes(`connect-src 'self' ${site.origin.replace(/^http/, 'ws')};`));
+  assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js"`));
+  assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
+  assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
+  assert.equal(existsSync(new URL('../dist/vendor', import.meta.url)), false);
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));
   assert.equal(social.readUInt32BE(16), 1200);
   assert.equal(social.readUInt32BE(20), 630);
@@ -92,6 +99,12 @@ test('branded loading screen stays until Ruffle resolves', async () => {
     document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
   });
   assert.equal(options.splashScreen, false);
+  assert.equal(options.url, 'https://example.test/client.swf');
+  assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game');
+  assert.equal(options.socketProxy[0].host, '127.0.0.1');
+  assert.equal(options.socketProxy[0].port, 2050);
+  assert.equal(options.urlRewriteRules[0][1], 'https://example.test/legacy-api/');
+  assert.equal(options.urlRewriteRules[1][1], 'https://example.test/sfx/');
   assert.equal(nodes['#startup'].hidden, false);
   finish();
   await boot;

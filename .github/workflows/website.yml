@@ -1,21 +1,16 @@
 name: Website
 on:
   push:
-    branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: website-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     env:
       SITE_URL: ${{ vars.SITE_URL }}
       CLIENT_DIR: ${{ github.workspace }}/client
@@ -39,10 +34,8 @@ jobs:
           path: client
           persist-credentials: false
       - run: npm --prefix website test
-      - run: npm --prefix website run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: website
           path: website/dist
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          include-hidden-files: true

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' {{SOCKET_ORIGIN}}; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'">
   <title>Open RotMG | 2012 Realm of the Mad God reconstruction</title>
-  <meta name="description" content="Open RotMG is an open-source reconstruction of 2012 Realm of the Mad God, targeting build 123.5.1. Preview the preserved client in your browser.">
+  <meta name="description" content="Open RotMG is an open-source reconstruction of 2012 Realm of the Mad God, targeting build 123.5.1. Play the development build in your browser.">
   <meta name="theme-color" content="#111214">
   <link rel="canonical" href="{{SITE_URL}}">
   <link rel="icon" href="{{BASE}}amulet-of-resurrection.png" type="image/png">
@@ -24,13 +24,13 @@
   <meta name="twitter:description" content="2012 is back. Play Realm of the Mad God with your friends.">
   <meta name="twitter:image" content="{{SITE_URL}}{{SOCIAL_IMAGE}}">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Open RotMG","url":"{{SITE_URL}}","description":"An independent open-source reconstruction of Realm of the Mad God build 123.5.1 from 2012.","inLanguage":"en"}</script>
-  <script src="{{BASE}}runtime/ruffle.js" defer></script>
+  <script src="{{BASE}}vendor/ruffle.js" defer></script>
   <script src="{{BASE}}game.js" defer></script>
 </head>
 <body class="game-page">
   <main>
-    <h1 class="screen-reader">Open RotMG client preview</h1>
-    <div id="game" aria-label="Realm of the Mad God 123.5.1 client preview">
+    <h1 class="screen-reader">Open RotMG</h1>
+    <div id="game" aria-label="Realm of the Mad God 123.5.1">
       <div id="startup" role="status">
         <img src="{{BASE}}amulet-of-resurrection.png" width="96" height="96" alt="">
         <strong>Open RotMG</strong>

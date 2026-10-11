@@ -14,7 +14,8 @@ if (site.username || site.password || site.search || site.hash) throw new Error(
 if (site.protocol !== 'https:' && !(site.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(site.hostname))) {
   throw new Error('SITE_URL must use HTTPS, except for a loopback development server.');
 }
-if (!site.pathname.endsWith('/')) site.pathname += '/';
+if (site.pathname !== '/') throw new Error('SITE_URL must be the origin root for the game backend.');
+const socketOrigin = site.origin.replace(/^http/, 'ws');
 const client = resolve(process.env.CLIENT_DIR);
 const revision = execFileSync('git', ['-C', client, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 if (revision !== lock.revision) throw new Error(`Client revision mismatch: expected ${lock.revision}, received ${revision}. Update the lock deliberately.`);
@@ -35,18 +36,14 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{SOCIAL_IMAGE}}', socialImage);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, html);
     }
   }
 }
 await render(dist);
-await mkdir(join(dist, 'client'));
-await writeFile(join(dist, 'client/123.5.1.swf'), swf);
-await mkdir(join(dist, 'runtime'));
-for (const name of runtimeFiles) await cp(join(client, 'vendor', name), join(dist, 'runtime', name));
 await writeFile(join(dist, '.nojekyll'), '');
-await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: ${site.pathname}runtime/\nDisallow: ${site.pathname}client/\nDisallow: ${site.pathname}legacy-api/\nSitemap: ${site.href}sitemap.xml\n`);
+await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
 await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.href}</loc></url><url><loc>${site.href}about/</loc></url></urlset>\n`);
-console.log(`Built ${site.href} from client ${revision}. Multiplayer remains disconnected.`);
+console.log(`Built ${site.href} for client ${revision}. Rust must serve /client.swf, /vendor/, /sfx/, /legacy-api/ and /game.`);
