@@ -4,7 +4,7 @@ body { margin: 0; }
 a { color: #a3cff4; text-underline-offset: .2em; }
 a:focus-visible { outline: 2px solid #a3cff4; outline-offset: 4px; }
 .game-page { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.game-page main { width: min(800px, 100vw, calc((100svh - 7.5rem) * 4 / 3)); }
+.game-page main { width: min(800px, 100vw, calc((100svh - 6rem) * 4 / 3)); }
 #game { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #111214; }
 ruffle-player { display: block; width: 100%; height: 100%; }
 #startup { position: absolute; inset: 0; z-index: 1; display: grid; place-content: center; justify-items: center; gap: .7rem; background: #111214; }

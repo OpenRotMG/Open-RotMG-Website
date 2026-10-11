@@ -45,9 +45,10 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   const footer = home.match(/<footer>(.*?)<\/footer>/s)[1];
   assert.ok(footer.includes('Open RotMG is rebuilding RotMG as it was in 2012.<br>'));
   assert.ok(footer.includes('Help out by reporting bugs and missing content on <a href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
-  assert.ok(footer.includes('<p>2% complete</p>'));
-  assert.equal(footer.match(/href="https:\/\/discord.gg\/EwZWNzzYwP"/g)?.length, 1);
-  assert.doesNotMatch(footer.match(/<nav.*?<\/nav>/s)[0], /Discord/);
+  const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
+  assert.ok(footerNav.includes('<span>2% complete</span>'));
+  assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
+  assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
   assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
   assert.ok(home.includes(`name="twitter:description" content="${shareDescription}"`));
