@@ -43,6 +43,9 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(home.includes('Multiplayer is not online yet.'));
+  const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
+  assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
+  assert.ok(home.includes(`name="twitter:description" content="${shareDescription}"`));
   for (const html of [home, about]) {
     assert.ok(html.includes('Open RotMG'));
     assert.doesNotMatch(html.replaceAll('https://github.com/OpenRotMG', ''), /OpenRotMG/);
