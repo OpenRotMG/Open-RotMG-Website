@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+  <title>About OpenRotMG | Realm of the Mad God preservation</title>
+  <meta name="description" content="Why OpenRotMG targets Realm of the Mad God build 123.5.1, how the Flash client is preserved, and what is still needed for multiplayer.">
+  <meta name="theme-color" content="#111214">
+  <link rel="canonical" href="{{SITE_URL}}about/">
+  <link rel="icon" href="{{BASE}}favicon.png" type="image/png">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OpenRotMG">
+  <meta property="og:title" content="About OpenRotMG">
+  <meta property="og:description" content="An independent preservation project targeting Realm of the Mad God build 123.5.1 from 2012.">
+  <meta property="og:url" content="{{SITE_URL}}about/">
+  <meta property="og:image" content="{{SITE_URL}}social.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="about-page">
+  <main>
+    <a class="back" href="{{BASE}}">← Client preview</a>
+    <h1>About OpenRotMG</h1>
+    <p>OpenRotMG aims to recreate Realm of the Mad God as it was in 2012. The target is build <strong>123.5.1</strong>, released that September. We want the era's visuals and mechanics, without custom content or donations.</p>
+    <h2>The client comes first</h2>
+    <p>The homepage loads a recovered Flash client through Ruffle, so you do not need to install Flash. The reference files are preserved unchanged; compatibility patches will be documented separately. The recovered copies are community private-server derivatives, not independently authenticated original releases.</p>
+    <h2>What works today?</h2>
+    <p>The client starts and renders its loading scene in a browser. <strong>The multiplayer server is not online yet.</strong> Login, character persistence, combat and dungeon behavior still need implementation and testing. The loading error in the preview is expected while there is no account backend.</p>
+    <h2>Reconstructing the game</h2>
+    <p>Our research compares embedded item and enemy data, historical server implementations, release notes and recorded gameplay. Existing emulator behavior is evidence to check, not a guarantee of historical accuracy. Known gaps and disagreements remain documented.</p>
+    <h2>Follow the work</h2>
+    <ul>
+      <li>Website: <a href="https://github.com/OpenRotMG/website">https://github.com/OpenRotMG/website</a></li>
+      <li>Client: <a href="https://github.com/OpenRotMG/client">https://github.com/OpenRotMG/client</a></li>
+      <li>Server: <a href="https://github.com/OpenRotMG/server">https://github.com/OpenRotMG/server</a></li>
+      <li>Research: <a href="https://github.com/OpenRotMG/research">https://github.com/OpenRotMG/research</a></li>
+      <li>Community: <a href="https://discord.gg/EwZWNzzYwP">https://discord.gg/EwZWNzzYwP</a></li>
+    </ul>
+    <p class="disclaimer">OpenRotMG is an independent project, not the official Realm of the Mad God service. Preserved third-party clients and assets retain their existing notices; our GPL/AGPL licenses do not relicense those works.</p>
+  </main>
+</body>
+</html>
