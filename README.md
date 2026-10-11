@@ -8,6 +8,8 @@ Client preview only for now. Multiplayer is not online yet.
 
 [Discord](https://discord.gg/EwZWNzzYwP)
 
+Social image uses historical gameplay from PC Gamer's 2012 review, not the current server: https://www.pcgamer.com/realm-of-the-mad-god-review/
+
 ## Running locally
 
 Requires Node 22, Python 3, and the sibling client at the revision in client-lock.json. The build downloads and verifies Ruffle locally.

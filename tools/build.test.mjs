@@ -64,6 +64,11 @@ test('site builds with real HTML metadata and exact preserved client bytes', () 
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));
   assert.equal(social.readUInt32BE(16), 1200);
   assert.equal(social.readUInt32BE(20), 630);
+  const socialHash = createHash('sha256').update(social).digest('hex');
+  assert.equal(socialHash, '243a2d1d875f6539c170e598bcb891476fdf24cae6a3caac52db83a31ae2f0b6');
+  const imageUrl = `${site.href}social.png?v=${socialHash.slice(0, 12)}`;
+  for (const html of [home, about]) assert.ok(html.includes(`property="og:image" content="${imageUrl}"`));
+  assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
 });
 
 test('branded loading screen stays until Ruffle resolves', async () => {

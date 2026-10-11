@@ -29,12 +29,13 @@ const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist);
 await cp(join(root, 'public'), dist, { recursive: true });
+const socialImage = `social.png?v=${createHash('sha256').update(await readFile(join(dist, 'social.png'))).digest('hex').slice(0, 12)}`;
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{SOCIAL_IMAGE}}', socialImage);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, html);
     }
