@@ -82,7 +82,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(progress.features.length, 209);
   assert.equal(restoration.percent, '1.4%');
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
-  const lock = JSON.parse(readFileSync(new URL('../client-lock.json', import.meta.url), 'utf8'));
+  const lock = JSON.parse(readFileSync(new URL('./client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
   assert.equal(createHash('sha256').update(swf).digest('hex'), lock.swfSha256);
   assert.ok(home.includes(`connect-src 'self' ${site.origin.replace(/^http/, 'ws')};`));

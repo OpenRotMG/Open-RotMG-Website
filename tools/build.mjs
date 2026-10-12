@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { validateCatalogue } from '../public/restoration/catalogue.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const lock = JSON.parse(await readFile(join(root, 'client-lock.json'), 'utf8'));
+const lock = JSON.parse(await readFile(join(root, 'tools/client-lock.json'), 'utf8'));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
 const restoration = validateCatalogue(progress);
 for (const icon of new Set([...progress.categories, ...progress.features].map(row => row.icon).filter(icon => icon !== null))) {
@@ -26,10 +26,10 @@ const socketOrigin = site.origin.replace(/^http/, 'ws');
 const client = resolve(process.env.CLIENT_DIR);
 const revision = execFileSync('git', ['-C', client, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 if (revision !== lock.revision) throw new Error(`Client revision mismatch: expected ${lock.revision}, received ${revision}. Update the lock deliberately.`);
-execFileSync('git', ['-C', client, 'diff', '--quiet', 'HEAD', '--', 'client.swf', 'run.py']);
+execFileSync('git', ['-C', client, 'diff', '--quiet', 'HEAD', '--', 'client.swf', 'scripts/run.py']);
 const swf = await readFile(join(client, 'client.swf'));
 if (createHash('sha256').update(swf).digest('hex') !== lock.swfSha256) throw new Error('Reference SWF checksum mismatch.');
-execFileSync('python3', [join(client, 'run.py'), '--prepare-only'], { stdio: 'inherit' });
+execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { stdio: 'inherit' });
 const runtimeFiles = await readdir(join(client, 'vendor'));
 if (runtimeFiles.length !== 7 || !runtimeFiles.includes('ruffle.js')) throw new Error('Expected the pinned seven-file Ruffle runtime.');
 

@@ -25,7 +25,7 @@ jobs:
       - name: Read pinned client revision
         id: client
         run: |
-          revision=$(node -p "JSON.parse(require('fs').readFileSync('website/client-lock.json')).revision")
+          revision=$(node -p "JSON.parse(require('fs').readFileSync('website/tools/client-lock.json')).revision")
           echo "revision=$revision" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         with:
