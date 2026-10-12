@@ -2,6 +2,8 @@
 
 Game-first website for the Open RotMG recreation of Realm of the Mad God.
 
+Developing the server? Its `./run.sh` prints a https://openrotmg.org/local/ URL that connects this hosted client to your local server. See https://github.com/OpenRotMG/Open-RotMG-Server for setup.
+
 ## Build locally
 
 Requires Node 22, Python 3, and a sibling `client` checkout at the revision in `tools/client-lock.json`.
