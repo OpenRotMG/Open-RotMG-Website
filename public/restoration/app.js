@@ -39,10 +39,9 @@ function featureRow(f){
   try{
     const response=await fetch('progress.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);
     const data=await response.json();
-    const { e, v, n } = validateCatalogue(data);
+    const { n } = validateCatalogue(data);
     $('overall').textContent=percent(data.features);
     $('overall').setAttribute('aria-label',`${percent(data.features)} on the provisional ${n}-feature catalogue; open source data`);
-    $('catalogue-note').textContent=`Provisional catalogue: ${n} features, ${e} original-rule checks and ${v} recreation checks accepted.`;
     for(const c of data.categories){
       const rows=data.features.filter(f=>f.category===c.id);
       const area=el('a',c.name);area.href='#'+c.id;area.dataset.area=c.id;

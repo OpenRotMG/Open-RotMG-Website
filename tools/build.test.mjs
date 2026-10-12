@@ -93,7 +93,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.ok(html.includes('<footer class="site-footer">'));
     assert.ok(html.includes('content="#000000"'));
   }
-  assert.doesNotMatch(restorationPage, /ring-progress|class="hero"|class="score"/);
+  assert.doesNotMatch(restorationPage, /ring-progress|class="hero"|class="score"|catalogue-note|scope-key|Provisional catalogue:|\* Development scene only/);
+  const restorationApp = readFileSync(new URL('../dist/restoration/app.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(restorationApp, /catalogue-note|Provisional catalogue:/);
+  assert.ok(restorationPage.includes('id="feature-gates"'));
+  assert.ok(restorationPage.includes('id="development-note"'));
   const css = readFileSync(new URL('../dist/style.css', import.meta.url), 'utf8');
   assert.match(css, /overflow-y: scroll/);
   assert.match(css, /width: 850px/);
