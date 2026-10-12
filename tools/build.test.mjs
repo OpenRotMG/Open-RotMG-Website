@@ -82,6 +82,12 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   for (const html of [home, about, restorationPage]) {
     assert.equal((html.match(/class="site-shell"/g) ?? []).length, 1);
     assert.equal((html.match(/<nav aria-label="Project">/g) ?? []).length, 1);
+    const nav = html.match(/<nav aria-label="Project">(.*?)<\/nav>/s)[1];
+    const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
+    assert.equal(rows.length, 2);
+    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}restoration/`]);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
@@ -91,6 +97,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const css = readFileSync(new URL('../dist/style.css', import.meta.url), 'utf8');
   assert.match(css, /overflow-y: scroll/);
   assert.match(css, /width: 850px/);
+  assert.match(css, /\.game-page \.site-shell \{[^}]*width: 800px;[^}]*max-width: 100%;[^}]*min-height: 0;[^}]*padding: 0;[^}]*border: 0;[^}]*box-shadow: none;/);
+  assert.match(css, /\.game-page \.site-footer \{[^}]*border: 0;/);
   assert.match(css, /background: #000/);
   assert.match(css, /color: #cb8585/);
   const restorationCss = readFileSync(new URL('../dist/restoration/style.css', import.meta.url), 'utf8');
