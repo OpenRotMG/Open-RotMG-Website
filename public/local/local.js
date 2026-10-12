@@ -20,6 +20,7 @@ export async function startLocalClient() {
     lastError = error;
     node('error').hidden = false;
     node('error-message').textContent = error.message;
+    if (node('game').dataset.loaded !== 'true') node('game').hidden = true;
     node('status').textContent = 'Local connection failed. See the error and log below.';
     log(`${error.name}: ${error.message}`);
     console.error('[Open RotMG local]', error);
