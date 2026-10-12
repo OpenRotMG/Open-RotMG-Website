@@ -90,6 +90,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
   assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/vendor', import.meta.url)), false);
+  assert.equal(existsSync(new URL('../dist/local', import.meta.url)), false);
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));
   assert.equal(social.readUInt32BE(16), 1200);
   assert.equal(social.readUInt32BE(20), 630);

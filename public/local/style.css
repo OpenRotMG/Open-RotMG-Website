@@ -1,6 +1,0 @@
-main { max-width: 850px; margin: 2rem auto; padding: 0 1rem; }
-h1 { font-size: 1.6rem; }
-#status { color: #f0c160; font-weight: 600; }
-#error { border: 2px solid #ff806d; padding: 0 1rem; margin-bottom: 1rem; }
-#error h2 { color: #ff806d; margin-top: 1rem; }
-#log { white-space: pre-wrap; overflow-wrap: anywhere; padding: 1rem; background: #20242a; max-height: 20rem; overflow: auto; }
