@@ -11,7 +11,7 @@ function environment(fetch, load = async () => {}) {
     close() { this.dispatchEvent(Object.assign(new Event('close'), { code: 1000, wasClean: true, reason: '' })); }
   }
   globalThis.location = { href: 'https://openrotmg.org/local/#port=18923', origin: 'https://openrotmg.org', hash: '#port=18923' };
-  globalThis.document = { getElementById: id => nodes[id] };
+  globalThis.document = { getElementById: id => nodes[id], addEventListener() {} };
   globalThis.window = {
     fetch, WebSocket: Socket,
     RufflePlayer: { newest: () => ({ createPlayer: () => ({ ruffle: () => ({ load: config => { options = config; return load(config); } }) }) }) }
@@ -36,6 +36,7 @@ test('only the development page permits local connections', () => {
   const publicPage = readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
   assert.match(page, /connect-src 'self' http:\/\/127\.0\.0\.1:\* ws:\/\/127\.0\.0\.1:\*/);
   assert.doesNotMatch(publicPage, /http:\/\/127\.0\.0\.1:\*|ws:\/\/127\.0\.0\.1:\*/);
+  assert.match(page, /style-src 'self' 'unsafe-inline';/);
   assert.match(page, /role="alert"/);
   assert.match(page, /\.local\/server\.log/);
   assert.match(page, /noindex/);
@@ -103,6 +104,7 @@ test('later account API rejection and WebSocket loss remain obvious after loadin
     socket.dispatchEvent(Object.assign(new Event('close'), { code: 1006, wasClean: false, reason: '' }));
     assert.equal(env.nodes.error.hidden, false);
     assert.match(env.nodes.log.textContent, /handshake error/);
-    assert.match(env.nodes['error-message'].textContent, /1006/);
+    assert.match(env.nodes['error-message'].textContent, /HTTP 429/);
+    assert.match(env.nodes.log.textContent, /1006/);
   } finally { env.restore(); }
 });
