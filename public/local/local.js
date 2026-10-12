@@ -15,10 +15,14 @@ export async function startLocalClient() {
     console.info('[Open RotMG local]', message);
   };
   let lastError;
-  const fail = error => {
+  let failureSource;
+  const fail = (error, source = 'startup') => {
     if (lastError === error) return;
     lastError = error;
-    if (node('error').hidden) node('error-message').textContent = error.message;
+    if (node('error').hidden) {
+      node('error-message').textContent = error.message;
+      failureSource = source;
+    }
     node('error').hidden = false;
     if (node('game').dataset.loaded !== 'true') node('game').hidden = true;
     node('status').textContent = 'Local connection failed. See the error and log below.';
@@ -69,7 +73,7 @@ export async function startLocalClient() {
         if (new URL(args[0]).href !== socket.href) return connection;
         log(`Connecting ${socket.href}`);
         const timeout = setTimeout(() => {
-          fail(new Error(`WebSocket ${socket.href} did not open within 10 seconds. Check local-network permission and the server log.`));
+          fail(new Error(`WebSocket ${socket.href} did not open within 10 seconds. Check local-network permission and the server log.`), 'socket');
           connection.close();
         }, 10000);
         connection.addEventListener('open', () => {
@@ -77,14 +81,26 @@ export async function startLocalClient() {
           log(`WebSocket open: ${socket.href}`);
           if (node('error').hidden) node('status').textContent = `Connected to your local server at ${endpoint.origin}`;
         });
+        let responded = false;
+        connection.addEventListener('message', () => {
+          if (responded) return;
+          responded = true;
+          log('Local game server sent data.');
+          if (failureSource === 'socket') {
+            log('The game client reconnected to the same local server; the earlier error is preserved above.');
+            node('error').hidden = true;
+            failureSource = undefined;
+          }
+          if (node('error').hidden) node('status').textContent = `Connected to your local server at ${endpoint.origin}`;
+        });
         connection.addEventListener('error', () => {
           clearTimeout(timeout);
-          fail(new Error(`WebSocket ${socket.href} failed. The browser does not expose the handshake error to JavaScript; inspect Developer Tools → Network and .local/server.log.`));
+          fail(new Error(`WebSocket ${socket.href} failed. The browser does not expose the handshake error to JavaScript; inspect Developer Tools → Network and .local/server.log.`), 'socket');
         });
         connection.addEventListener('close', event => {
           clearTimeout(timeout);
           log(`WebSocket closed: code=${event.code}, clean=${event.wasClean}, reason=${event.reason || '(none supplied)'}`);
-          if (!event.wasClean) fail(new Error(`Local game connection lost (WebSocket close code ${event.code}). See the connection log and .local/server.log.`));
+          if (!event.wasClean) fail(new Error(`Local game connection lost (WebSocket close code ${event.code}). See the connection log and .local/server.log.`), 'socket');
           else if (node('error').hidden) node('status').textContent = `Local game connection closed. Local client: ${endpoint.origin}`;
         });
         return connection;
