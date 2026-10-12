@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
   <title>About Open RotMG | Realm of the Mad God preservation</title>
   <meta name="description" content="Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source.">
-  <meta name="theme-color" content="#111214">
+  <meta name="theme-color" content="#000000">
   <link rel="canonical" href="{{SITE_URL}}about/">
   <link rel="icon" href="{{BASE}}amulet-of-resurrection.png" type="image/png">
   <link rel="stylesheet" href="{{BASE}}style.css">
@@ -19,13 +19,20 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="about-page">
-  <main>
+<div class="site-shell">
+  <main class="page-main"><div class="about-copy">
     <a class="back" href="{{BASE}}">← Back to game</a>
     <h1>About Open RotMG</h1>
     <p>Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.</p>
     <h2>What works today?</h2>
     <p>A shared development world supports guest Wizard movement, combat, potions, loot, equipment, death and saved reconnects. The full 2012 game is still being rebuilt. See <a href="{{BASE}}restoration/">Restoration</a> for progress by feature.</p>
-    <nav aria-label="Project"><a href="https://github.com/OpenRotMG">GitHub</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></nav>
-  </main>
+  </div></main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation<br>
+    Report bugs and missing content on Discord.</p>
+    <nav aria-label="Project"><a href="{{BASE}}about/">About</a><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a><a href="{{BASE}}restoration/">{{RESTORATION_PERCENT}} complete</a></nav>
+  </footer>
+</div>
 </body>
 </html>

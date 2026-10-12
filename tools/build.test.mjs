@@ -44,7 +44,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
-  const footer = home.match(/<footer>(.*?)<\/footer>/s)[1];
+  const footer = home.match(/<footer class="site-footer">(.*?)<\/footer>/s)[1];
   assert.ok(footer.includes('2012 Realm of the Mad God reimplementation<br>'));
   assert.ok(footer.includes('Report bugs and missing content on Discord.</p>'));
   assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
@@ -63,7 +63,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   assert.ok(home.includes('href="https://github.com/OpenRotMG">Source</a>'));
   assert.equal(home.match(/Powered by Ruffle/g)?.length, 1);
-  assert.doesNotMatch(home.match(/<footer>(.*?)<\/footer>/s)[1], /Powered by Ruffle/);
+  assert.doesNotMatch(footer, /Powered by Ruffle/);
   assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
   assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)|multiplayer server is not online/);
   assert.ok(about.includes('supports guest Wizard movement'));
@@ -79,6 +79,23 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
   assert.ok(restorationPage.includes('<script type="module" src="app.js">'));
   assert.ok(restorationPage.includes(`href="${site.pathname}style.css"`));
+  for (const html of [home, about, restorationPage]) {
+    assert.equal((html.match(/class="site-shell"/g) ?? []).length, 1);
+    assert.equal((html.match(/<nav aria-label="Project">/g) ?? []).length, 1);
+    assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
+    assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
+    assert.ok(html.includes('<footer class="site-footer">'));
+    assert.ok(html.includes('content="#000000"'));
+  }
+  assert.doesNotMatch(restorationPage, /ring-progress|class="hero"|class="score"/);
+  const css = readFileSync(new URL('../dist/style.css', import.meta.url), 'utf8');
+  assert.match(css, /overflow-y: scroll/);
+  assert.match(css, /width: 850px/);
+  assert.match(css, /background: #000/);
+  assert.match(css, /color: #cb8585/);
+  const restorationCss = readFileSync(new URL('../dist/restoration/style.css', import.meta.url), 'utf8');
+  assert.match(restorationCss, /\.forum-list/);
+  assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, 209);
   assert.equal(restoration.percent, '1.4%');
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);

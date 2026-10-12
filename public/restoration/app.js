@@ -23,16 +23,17 @@ function openFeature(f){
   }
   dialog.showModal();
 }
-function tile(f){
-  const b=el('button',undefined,'feature'+(f.stage===2?' complete':f.stage===1?' referenced':'')+(f.development?' development':''));
-  b.dataset.feature=f.id;b.type='button';b.title=`${f.name}: ${f.stage*50}% restoration${f.development?' · development scene':''}`;
+function featureRow(f){
+  const row=el('li'),b=el('button',undefined,'feature');
+  b.dataset.feature=f.id;b.type='button';b.title=`${f.name}: ${f.stage}/2 verified gates${f.development?' · development scene':''}`;
   if(f.icon){const icon=image(f.icon);if(f.category==='conditions')icon.classList.add('condition-icon');b.append(icon);}
   const name=el('span',f.name);
   if(f.name==='Oryx’s Chamber')name.append(el('small','Oryx 1'));
   if(f.name==='Wine Cellar')name.append(el('small','Oryx 2'));
   b.append(name);
-  if(f.stage===2)b.append(el('span','✓','check'));
-  b.addEventListener('click',()=>openFeature(f));return b;
+  if(f.development)b.append(el('span','*','scene-mark'));
+  b.addEventListener('click',()=>openFeature(f));
+  row.append(b,el('span',`${f.stage}/2 verified`,'gate-count'));return row;
 }
 (async()=>{
   try{
@@ -41,14 +42,13 @@ function tile(f){
     const { e, v, n } = validateCatalogue(data);
     $('overall').textContent=percent(data.features);
     $('overall').setAttribute('aria-label',`${percent(data.features)} on the provisional ${n}-feature catalogue; open source data`);
-    $('ring-progress').style.strokeDasharray=`${100*(e+v)/(2*n)} 100`;
+    $('catalogue-note').textContent=`Provisional catalogue: ${n} features, ${e} original-rule checks and ${v} recreation checks accepted.`;
     for(const c of data.categories){
       const rows=data.features.filter(f=>f.category===c.id);
-      const area=el('a',undefined,'area');area.href='#'+c.id;area.dataset.area=c.id;
-      area.append(image(c.icon),el('span',c.name),el('strong',percent(rows)));
+      const area=el('a',c.name);area.href='#'+c.id;area.dataset.area=c.id;
       const section=el('details',undefined,'category');section.id=c.id;section.open=['heroes','access','conditions','dungeons'].includes(c.id);
-      const summary=el('summary');summary.append(el('h2',c.name));
-      const grid=el('div',undefined,'feature-grid');grid.append(...rows.map(tile));section.append(summary,grid);
+      const summary=el('summary',c.name);summary.append(el('span',`(${rows.length})`,'section-count'));
+      const list=el('ul',undefined,'forum-list');list.append(...rows.map(featureRow));section.append(summary,list);
       area.addEventListener('click',()=>{section.open=true;});
       $('areas').append(area);$('features').append(section);
     }

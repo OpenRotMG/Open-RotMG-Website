@@ -1,12 +1,49 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'"><title>Restoration · Open RotMG</title><meta name="description" content="Restoration progress for Realm of the Mad God build 123.5.1, organized by player-facing features."><link rel="canonical" href="{{SITE_URL}}restoration/"><meta name="theme-color" content="#111214"><link rel="icon" href="{{BASE}}amulet-of-resurrection.png"><link rel="stylesheet" href="{{BASE}}style.css"><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
-<body>
-<header><a class="brand" href="{{BASE}}"><img src="{{BASE}}amulet-of-resurrection.png" alt="">Open RotMG</a><a href="https://github.com/OpenRotMG">GitHub</a></header>
-<main>
-<section class="hero" aria-labelledby="title"><div><p class="version">123.5.1</p><h1 id="title">Restoration</h1></div><div class="score"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="track" cx="100" cy="100" r="90"/><circle id="ring-progress" cx="100" cy="100" r="90" pathLength="100"/></svg><a id="overall" href="progress.json" aria-label="Catalogue score and source data">…</a></div></section>
-<nav id="areas" class="areas" aria-label="Feature categories"></nav>
-<div id="features"></div>
-<p id="error" role="alert" hidden></p>
-</main>
-<dialog id="feature-dialog" aria-labelledby="feature-title"><div class="dialog-head"><div class="feature-heading"><img id="feature-icon" alt="" hidden><h2 id="feature-title"></h2></div><button id="feature-close" aria-label="Close">×</button></div><p id="feature-criterion"></p><p id="development-note" hidden>Works in the demo. Historical accuracy is not verified.</p><div id="feature-gates"></div><ul id="feature-requirements"></ul><div id="feature-proof"></div></dialog>
-</body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Restoration · Open RotMG</title>
+  <meta name="description" content="Restoration progress for Realm of the Mad God build 123.5.1, organized by player-facing features.">
+  <link rel="canonical" href="{{SITE_URL}}restoration/">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="{{BASE}}amulet-of-resurrection.png">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="restoration-page">
+<div class="site-shell">
+  <main class="page-main">
+    <a class="back" href="{{BASE}}">← Back to game</a>
+    <div class="restoration-intro">
+      <h1>Restoration</h1>
+      <p class="progress-line"><a id="overall" href="progress.json" aria-label="Catalogue score and source data">{{RESTORATION_PERCENT}}</a> complete · 123.5.1</p>
+      <p>Click a feature for its rules and recreation checks.</p>
+      <p class="scope-note">{{RESTORATION_PERCENT}} of the current catalogue, not a whole-game estimate.</p>
+    </div>
+    <nav id="areas" class="category-links" aria-label="Feature categories"></nav>
+    <div id="features"></div>
+    <p class="scope-key" id="catalogue-note"></p>
+    <p class="scope-key">* Development scene only. Rules and Recreation are separate verification gates; development gameplay does not count as historical verification.</p>
+    <p id="error" role="alert" hidden></p>
+    <noscript>JavaScript is required to inspect the Restoration catalogue.</noscript>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation<br>
+    Report bugs and missing content on Discord.</p>
+    <nav aria-label="Project"><a href="{{BASE}}about/">About</a><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a><a href="{{BASE}}restoration/">{{RESTORATION_PERCENT}} complete</a></nav>
+  </footer>
+</div>
+<dialog id="feature-dialog" aria-labelledby="feature-title">
+  <div class="dialog-head"><div class="feature-heading"><img id="feature-icon" alt="" hidden><h2 id="feature-title"></h2></div><button id="feature-close" type="button" aria-label="Close feature details">Close</button></div>
+  <p id="feature-criterion"></p>
+  <ul id="feature-requirements"></ul>
+  <div id="feature-gates"></div>
+  <div id="feature-proof"></div>
+  <p id="development-note" hidden>This feature has development gameplay. Historical restoration has not been verified.</p>
+</dialog>
+</body>
+</html>
