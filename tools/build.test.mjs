@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
+import { validateCatalogue } from '../public/restoration/catalogue.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
@@ -48,7 +49,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(footer.includes('Report bugs and missing content on Discord.</p>'));
   assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
-  assert.ok(footerNav.includes('<span>2% complete</span>'));
+  const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
+  const restoration = validateCatalogue(progress);
+  assert.ok(footerNav.includes(`<a href="${site.pathname}restoration/">${restoration.percent} complete</a>`));
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
@@ -70,6 +73,14 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
+  assert.ok(sitemap.includes(`<loc>${site.href}restoration/</loc>`));
+  const restorationPage = readFileSync(new URL('../dist/restoration/index.html', import.meta.url), 'utf8');
+  assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
+  assert.ok(restorationPage.includes('<script type="module" src="app.js">'));
+  assert.ok(restorationPage.includes(`href="${site.pathname}style.css"`));
+  assert.equal(progress.features.length, 209);
+  assert.equal(restoration.percent, '1.4%');
+  assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const lock = JSON.parse(readFileSync(new URL('../client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
   assert.equal(createHash('sha256').update(swf).digest('hex'), lock.swfSha256);

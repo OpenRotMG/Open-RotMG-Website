@@ -1,0 +1,2386 @@
+{
+  "scope": {
+    "id": "player-scope-v1-draft",
+    "status": "Proposed baseline, not yet frozen",
+    "target": "123.5.1",
+    "unit": "Complete player-facing feature bundles. No extra points for their files, assets, internal phases, tiers or tests.",
+    "gate_rule": "One gate for an accepted complete reference contract, one for implementation verified against it.",
+    "research_accepted": 4,
+    "implementation_verified": 2,
+    "features": 209,
+    "earned": 6,
+    "possible": 418,
+    "percent": 1.4,
+    "date": "2026-10-11",
+    "excluded": [
+      {
+        "name": "Real-money payments and external platform login providers",
+        "reason": "Historical gameplay reconstruction; no monetization or live third-party identity service recreation proposed."
+      },
+      {
+        "name": "Editor-world/debug entry, test records and scrapped Dreamscape",
+        "reason": "Retained in the raw audit, not established as target production gameplay. Review separately; do not silently add custom content."
+      },
+      {
+        "name": "Post-target classes, pet feeding/fusion, Gift Chest, Candyland and later boosters",
+        "reason": "Release-history boundaries place these after 123.5.1."
+      }
+    ],
+    "unresolved": "Feature boundaries and production-only/helper dispositions remain reviewable. This draft is an explicit proposed scope, not a certified exhaustive denominator.",
+    "candidate_features": [
+      {
+        "name": "Character news and death history",
+        "scored": false,
+        "reason": "Visible in period footage and present in selected original CharsAndNews/News bytecode; retention, ordering and service boundaries need review.",
+        "notes": "plans/restoration/footage-review.md"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "heroes",
+      "name": "Characters",
+      "icon": "assets/player/wizard.png",
+      "description": "Classes, progression, Legends and death"
+    },
+    {
+      "id": "access",
+      "name": "Client and accounts",
+      "icon": "assets/player/client-and-accounts.png",
+      "description": "The original client and a durable account"
+    },
+    {
+      "id": "conditions",
+      "name": "Conditions",
+      "icon": "assets/player/condition-armor-broken.png",
+      "description": "Buffs, debuffs and immunities"
+    },
+    {
+      "id": "dungeons",
+      "name": "Dungeons",
+      "icon": "assets/player/oryx-the-mad-god-2.png",
+      "description": "Each dungeon is its own complete adventure"
+    },
+    {
+      "id": "realm",
+      "name": "Realm",
+      "icon": "assets/player/actual-ent-ancient.png",
+      "description": "Biomes, creatures, quests and world events"
+    },
+    {
+      "id": "gear",
+      "name": "Equipment",
+      "icon": "assets/player/energy-staff.png",
+      "description": "Weapons, armor, rings, potions and loot"
+    },
+    {
+      "id": "home",
+      "name": "Nexus and Vault",
+      "icon": "assets/player/vault-chest.png",
+      "description": "A safe place to return, shop and keep your loot"
+    },
+    {
+      "id": "social",
+      "name": "Social",
+      "icon": "assets/player/chat.png",
+      "description": "Chat, trading, teleportation and guilds"
+    },
+    {
+      "id": "style",
+      "name": "Pets and cosmetics",
+      "icon": "assets/player/black-cat.png",
+      "description": "The original pets, dyes and cloths"
+    }
+  ],
+  "features": [
+    {
+      "id": "heroes:rogue",
+      "category": "heroes",
+      "name": "Rogue",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/rogue.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:archer",
+      "category": "heroes",
+      "name": "Archer",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/archer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:wizard",
+      "category": "heroes",
+      "name": "Wizard",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/wizard.png",
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "heroes:priest",
+      "category": "heroes",
+      "name": "Priest",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/priest.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:warrior",
+      "category": "heroes",
+      "name": "Warrior",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/warrior.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:knight",
+      "category": "heroes",
+      "name": "Knight",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/knight.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:paladin",
+      "category": "heroes",
+      "name": "Paladin",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/paladin.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:assassin",
+      "category": "heroes",
+      "name": "Assassin",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/assassin.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:necromancer",
+      "category": "heroes",
+      "name": "Necromancer",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/necromancer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:huntress",
+      "category": "heroes",
+      "name": "Huntress",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/huntress.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:mystic",
+      "category": "heroes",
+      "name": "Mystic",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/mystic.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:trickster",
+      "category": "heroes",
+      "name": "Trickster",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/trickster.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:sorcerer",
+      "category": "heroes",
+      "name": "Sorcerer",
+      "criterion": "Starting loadout, class stats and every tier of the class ability.",
+      "icon": "assets/player/sorcerer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:choose-and-unlock-classes",
+      "category": "heroes",
+      "name": "Choose and unlock classes",
+      "criterion": "The original chooser, starting records and persistent class-unlock prerequisites.",
+      "icon": "assets/player/rogue.png",
+      "stage": 1,
+      "evidence": {
+        "reference": "Selected class XML, original chooser/CREATE bytecode and researched unlock records. Existing ready-to-implement issues #1 and #2.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/server/issues/1",
+          "https://github.com/OpenRotMG/server/issues/2"
+        ]
+      },
+      "development": false
+    },
+    {
+      "id": "heroes:level-to-20",
+      "category": "heroes",
+      "name": "Level to 20",
+      "criterion": "XP awards and sharing, level thresholds, stat gains and level caps.",
+      "icon": "assets/player/wizard.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:living-fame",
+      "category": "heroes",
+      "name": "Living fame",
+      "criterion": "Fame earned while alive and the displayed progress toward the next class quest.",
+      "icon": "assets/player/priest.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "The XP-to-fame HUD transition at level 20.",
+        "Living fame gains and progress toward class quests."
+      ]
+    },
+    {
+      "id": "heroes:fame-bonuses",
+      "category": "heroes",
+      "name": "Fame bonuses",
+      "criterion": "Death bonuses, eligibility, rounding and account fame awards.",
+      "icon": "assets/player/gravestone.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:class-stars",
+      "category": "heroes",
+      "name": "Class stars",
+      "criterion": "Class fame quests, unlock records and account star totals.",
+      "icon": "assets/player/class-stars.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:legends-highscores",
+      "category": "heroes",
+      "name": "Legends highscores",
+      "criterion": "Leaderboard periods, ranking, character details and ties.",
+      "icon": "assets/player/legends-highscores.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "heroes:recover-hp-and-mp",
+      "category": "heroes",
+      "name": "Recover HP and MP",
+      "criterion": "Vitality, Wisdom, caps and condition interactions.",
+      "icon": "assets/player/health-potion.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "hero:death",
+      "category": "heroes",
+      "name": "Death and restart",
+      "criterion": "Permanent death without a resurrection amulet, saved death records, Continue and replacement character creation.",
+      "icon": "assets/player/gravestone.png",
+      "stage": 2,
+      "evidence": {
+        "reference": "Original DEATH packet, native death/fame/Continue flow and selected-client character replacement behavior. Fame-award formulas and resurrection are separate features.",
+        "verification": "Independent fresh-clone native acceptance: ordinary death, Continue, Legends, Done, Play, replacement Wizard, movement and spell. No reload workaround.",
+        "links": [
+          "proof.html#death"
+        ]
+      },
+      "development": false
+    },
+    {
+      "id": "heroes:gravestones",
+      "category": "heroes",
+      "name": "Gravestones",
+      "criterion": "Grave tiers, placement, labels, contents and expiry.",
+      "icon": "assets/player/gravestone.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:realm-generation",
+      "category": "realm",
+      "name": "Realm generation",
+      "criterion": "Coast, lowlands, midlands, highlands and mountains with target terrain, roads and population placement.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:find-your-next-quest",
+      "category": "realm",
+      "name": "Find your next quest",
+      "criterion": "Level-appropriate targets, quest arrows and enemy discovery.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Level-appropriate targets, quest arrows and enemy discovery.",
+        "Quest completion feedback, replacement targets and credit rules."
+      ]
+    },
+    {
+      "id": "realm:realm-closure",
+      "category": "realm",
+      "name": "Realm closure",
+      "criterion": "Encounter population, Oryx announcements, closing and the castle transfer.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:walk-and-dodge",
+      "category": "realm",
+      "name": "Walk and dodge",
+      "criterion": "Speed, normalized input, walls, corners, slowing, sinking and movement validation.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "realm:shoot-and-take-damage",
+      "category": "realm",
+      "name": "Shoot and take damage",
+      "criterion": "Weapon cadence and trajectories, hit selection, defense, conditions and damage acknowledgements.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "realm:environmental-hazards",
+      "category": "realm",
+      "name": "Environmental hazards",
+      "criterion": "Lava, pools, sinking, pushing, collision and protective equipment.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:travel-between-worlds",
+      "category": "realm",
+      "name": "Travel between worlds",
+      "criterion": "Nexus escape and authorized portal/reconnect transfers of the same living character.",
+      "icon": "assets/player/nexus-portal.png",
+      "stage": 1,
+      "evidence": {
+        "reference": "Original USEPORTAL, ESCAPE, RECONNECT and LOAD bytecode; endpoint inheritance and active-character semantics. Complete researched transfer contract on issue #11.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/server/issues/11#issuecomment-6107914569"
+        ]
+      },
+      "development": false
+    },
+    {
+      "id": "realm:ent-ancient",
+      "category": "realm",
+      "name": "Ent Ancient",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/ent-ancient.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:lich",
+      "category": "realm",
+      "name": "Lich",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/lich.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ghost-king",
+      "category": "realm",
+      "name": "Ghost King",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/ghost-king.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:deathmage",
+      "category": "realm",
+      "name": "Deathmage",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/deathmage.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:red-demon",
+      "category": "realm",
+      "name": "Red Demon",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/red-demon.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:oasis-giant",
+      "category": "realm",
+      "name": "Oasis Giant",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/oasis-giant.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:cyclops-god",
+      "category": "realm",
+      "name": "Cyclops God",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/cyclops-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:phoenix-lord",
+      "category": "realm",
+      "name": "Phoenix Lord",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/phoenix-lord.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:evil-chicken-god",
+      "category": "realm",
+      "name": "Evil Chicken God",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/evil-chicken-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:great-lizard",
+      "category": "realm",
+      "name": "Great Lizard",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/great-lizard.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:wasp-queen",
+      "category": "realm",
+      "name": "Wasp Queen",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/wasp-queen.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:shambling-sludge",
+      "category": "realm",
+      "name": "Shambling Sludge",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/shambling-sludge.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:swarm",
+      "category": "realm",
+      "name": "Swarm",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/swarm.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:dwarf-king",
+      "category": "realm",
+      "name": "Dwarf King",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/dwarf-king.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:horned-drake",
+      "category": "realm",
+      "name": "Horned Drake",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/horned-drake.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:desert-werewolf",
+      "category": "realm",
+      "name": "Desert Werewolf",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/desert-werewolf.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:sandsman-king",
+      "category": "realm",
+      "name": "Sandsman King",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/sandsman-king.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:giant-crab",
+      "category": "realm",
+      "name": "Giant Crab",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/giant-crab.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:hobbit-mage",
+      "category": "realm",
+      "name": "Hobbit Mage",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/hobbit-mage.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:undead-hobbit-mage",
+      "category": "realm",
+      "name": "Undead Hobbit Mage",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/undead-hobbit-mage.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:elf-wizard",
+      "category": "realm",
+      "name": "Elf Wizard",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/elf-wizard.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:goblin-mage",
+      "category": "realm",
+      "name": "Goblin Mage",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/goblin-mage.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:great-coil-snake",
+      "category": "realm",
+      "name": "Great Coil Snake",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/great-coil-snake.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:scorpion-queen",
+      "category": "realm",
+      "name": "Scorpion Queen",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/scorpion-queen.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:bandit-leader",
+      "category": "realm",
+      "name": "Bandit Leader",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/bandit-leader.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:lord-of-the-lost-lands",
+      "category": "realm",
+      "name": "Lord of the Lost Lands",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/lord-of-the-lost-lands.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:grand-sphinx",
+      "category": "realm",
+      "name": "Grand Sphinx",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/grand-sphinx.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:skull-shrine",
+      "category": "realm",
+      "name": "Skull Shrine",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/skull-shrine.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:cube-god",
+      "category": "realm",
+      "name": "Cube God",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/cube-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:pentaract",
+      "category": "realm",
+      "name": "Pentaract",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/pentaract.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:hermit-god",
+      "category": "realm",
+      "name": "Hermit God",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/hermit-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ghost-ship",
+      "category": "realm",
+      "name": "Ghost Ship",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/ghost-ship.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:crystal-prisoner",
+      "category": "realm",
+      "name": "Crystal Prisoner",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/crystal-prisoner.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:kage-kami",
+      "category": "realm",
+      "name": "Kage Kami",
+      "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
+      "icon": "assets/player/kage-kami.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:pirates",
+      "category": "realm",
+      "name": "Pirates",
+      "criterion": "Ordinary pirates: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/pirate.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:scorpions",
+      "category": "realm",
+      "name": "Scorpions",
+      "criterion": "Ordinary scorpions: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/poison-scorpion.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:bandits",
+      "category": "realm",
+      "name": "Bandits",
+      "criterion": "Ordinary bandits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/bandit.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:elves",
+      "category": "realm",
+      "name": "Elves",
+      "criterion": "Ordinary elves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/elf-archer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:night-elves",
+      "category": "realm",
+      "name": "Night Elves",
+      "criterion": "Ordinary night elves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/night-elf-archer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:dwarves",
+      "category": "realm",
+      "name": "Dwarves",
+      "criterion": "Ordinary dwarves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/dwarf-axebearer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:undead-dwarves",
+      "category": "realm",
+      "name": "Undead Dwarves",
+      "criterion": "Ordinary undead dwarves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/undead-dwarf-warrior.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:hobbits",
+      "category": "realm",
+      "name": "Hobbits",
+      "criterion": "Ordinary hobbits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/hobbit-rogue.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:undead-hobbits",
+      "category": "realm",
+      "name": "Undead Hobbits",
+      "criterion": "Ordinary undead hobbits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/undead-hobbit-rogue.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:goblins",
+      "category": "realm",
+      "name": "Goblins",
+      "criterion": "Ordinary goblins: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/goblin-rogue.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:orcs",
+      "category": "realm",
+      "name": "Orcs",
+      "criterion": "Ordinary orcs: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/orc-warrior.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:shield-orcs",
+      "category": "realm",
+      "name": "Shield Orcs",
+      "criterion": "Ordinary shield orcs: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/shield-orc-key.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ogres",
+      "category": "realm",
+      "name": "Ogres",
+      "criterion": "Ordinary ogres: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/ogre-mage.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:nomads",
+      "category": "realm",
+      "name": "Nomads",
+      "criterion": "Ordinary nomads: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/nomadic-shaman.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:pythons",
+      "category": "realm",
+      "name": "Pythons",
+      "criterion": "Ordinary pythons: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/fire-python.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:flayers",
+      "category": "realm",
+      "name": "Flayers",
+      "criterion": "Ordinary flayers: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/flayer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:skeletons",
+      "category": "realm",
+      "name": "Skeletons",
+      "criterion": "Ordinary skeletons: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/skeleton.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:mummies",
+      "category": "realm",
+      "name": "Mummies",
+      "criterion": "Ordinary mummies: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/mummy.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ghosts",
+      "category": "realm",
+      "name": "Ghosts",
+      "criterion": "Ordinary ghosts: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/ghost-master.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:werecats",
+      "category": "realm",
+      "name": "Werecats",
+      "criterion": "Ordinary werecats: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/weretiger.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:golems",
+      "category": "realm",
+      "name": "Golems",
+      "criterion": "Ordinary golems: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/fire-golem.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:sprites",
+      "category": "realm",
+      "name": "Sprites",
+      "criterion": "Ordinary sprites: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/fire-sprite.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ents",
+      "category": "realm",
+      "name": "Ents",
+      "criterion": "Ordinary ents: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/ent.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:sludges",
+      "category": "realm",
+      "name": "Sludges",
+      "criterion": "Ordinary sludges: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/sludget.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:drakes",
+      "category": "realm",
+      "name": "Drakes",
+      "criterion": "Ordinary drakes: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/drake-baby.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:wargs",
+      "category": "realm",
+      "name": "Wargs",
+      "criterion": "Ordinary wargs: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/tawny-warg.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:sand-phantoms",
+      "category": "realm",
+      "name": "Sand phantoms",
+      "criterion": "Ordinary sandphantoms: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/sand-phantom.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:cubes",
+      "category": "realm",
+      "name": "Cubes",
+      "criterion": "Ordinary cubes: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
+      "icon": "assets/player/red-gelatinous-cube.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:medusa",
+      "category": "realm",
+      "name": "Medusa",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/medusa.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ent-god",
+      "category": "realm",
+      "name": "Ent God",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/ent-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:beholder",
+      "category": "realm",
+      "name": "Beholder",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/beholder.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:flying-brain",
+      "category": "realm",
+      "name": "Flying Brain",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/flying-brain.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:slime-god",
+      "category": "realm",
+      "name": "Slime God",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/slime-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:ghost-god",
+      "category": "realm",
+      "name": "Ghost God",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/ghost-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:djinn",
+      "category": "realm",
+      "name": "Djinn",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/djinn.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:leviathan",
+      "category": "realm",
+      "name": "Leviathan",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/leviathan.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:white-demon",
+      "category": "realm",
+      "name": "White Demon",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/white-demon.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "realm:sprite-god",
+      "category": "realm",
+      "name": "Sprite God",
+      "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
+      "icon": "assets/player/sprite-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:pirate-cave",
+      "category": "dungeons",
+      "name": "Pirate Cave",
+      "criterion": "Coastal entrance, cave generation, pirates, Dreadstump and rewards.",
+      "icon": "assets/player/dreadstump-the-pirate-king.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:spider-den",
+      "category": "dungeons",
+      "name": "Spider Den",
+      "criterion": "Entrance, webs, spiders, Arachna and rewards.",
+      "icon": "assets/player/arachna-the-spider-queen.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:snake-pit",
+      "category": "dungeons",
+      "name": "Snake Pit",
+      "criterion": "Entrance, maze, snakes, Stheno and rewards.",
+      "icon": "assets/player/stheno-the-snake-queen.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:forbidden-jungle",
+      "category": "dungeons",
+      "name": "Forbidden Jungle",
+      "criterion": "Entrance, jungle rooms, encounters, Mixcoatl and rewards.",
+      "icon": "assets/player/mixcoatl-the-masked-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:sprite-world",
+      "category": "dungeons",
+      "name": "Sprite World",
+      "criterion": "Glowing entrance, terrain, native sprites, Limon and rewards.",
+      "icon": "assets/player/limon-the-sprite-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:undead-lair",
+      "category": "dungeons",
+      "name": "Undead Lair",
+      "criterion": "Entrance, rooms, undead encounters, Septavius and rewards.",
+      "icon": "assets/player/septavius-the-ghost-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:abyss-of-demons",
+      "category": "dungeons",
+      "name": "Abyss of Demons",
+      "criterion": "Entrance, lava maze, demons, Malphas and rewards.",
+      "icon": "assets/player/archdemon-malphas.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:tomb-of-the-ancients",
+      "category": "dungeons",
+      "name": "Tomb of the Ancients",
+      "criterion": "Entrance, traps, activation rules, Bes, Nut, Geb and rewards.",
+      "icon": "assets/player/tomb-attacker.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:ocean-trench",
+      "category": "dungeons",
+      "name": "Ocean Trench",
+      "criterion": "Hermit entrance, water and air rules, sea creatures, Thessal and rewards.",
+      "icon": "assets/player/thessal-the-mermaid-goddess.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:manor-of-the-immortals",
+      "category": "dungeons",
+      "name": "Manor of the Immortals",
+      "criterion": "Entrance, rooms, bats and vampires, Ruthven and rewards.",
+      "icon": "assets/player/lord-ruthven.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:davy-jones-s-locker",
+      "category": "dungeons",
+      "name": "Davy Jones’s Locker",
+      "criterion": "Ghost Ship entrance, locker layout, pirate encounters, Davy and rewards.",
+      "icon": "assets/player/davy-jones.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:mad-lab",
+      "category": "dungeons",
+      "name": "Mad Lab",
+      "criterion": "Flying Brain entrance, 123.5.1 pools and encounters, bosses and equipment rewards.",
+      "icon": "assets/player/horrific-creation.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Flying Brain entrance and the 123.5.1 lab layout.",
+        "Blue and green pool effects, Hexed and condition removal.",
+        "Doctor Terrible and Horrific Creation, including activation conditions.",
+        "Encounter loot and class restrictions on the lab equipment."
+      ]
+    },
+    {
+      "id": "dungeons:beachzone",
+      "category": "dungeons",
+      "name": "Beachzone",
+      "criterion": "Entrance, beach layout, party encounter, consumables and rewards.",
+      "icon": "assets/player/masked-party-god.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "dungeons:oryx-s-castle",
+      "category": "dungeons",
+      "name": "Oryx’s Castle",
+      "criterion": "Castle entry, destructible walls, guardian activation, both Stone Guardians, their loot and the Chamber entrance.",
+      "icon": "assets/player/oryx-stone-guardian-right.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Castle layout, destructible walls and its minion encounters.",
+        "The exact activation condition for the red and blue Stone Guardians.",
+        "Both guardian fights, phase changes and interactions with status effects.",
+        "Guardian rewards, including Ancient Stone Sword, loot eligibility and the historical drop chance.",
+        "Opening the Chamber entrance after the required guardian deaths."
+      ]
+    },
+    {
+      "id": "dungeons:oryx-s-chamber",
+      "category": "dungeons",
+      "name": "Oryx’s Chamber",
+      "criterion": "Oryx 1: chamber entry, the complete boss fight, rewards and the locked Wine Cellar exit.",
+      "icon": "assets/player/oryx-the-mad-god-1.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Oryx 1 attack phases, summons, taunts and status-effect interactions.",
+        "Rewards, participation credit and bag ownership.",
+        "The locked Wine Cellar portal and its Wine Cellar Incantation unlock.",
+        "Unlock announcements, portal lifetime and entry into the Wine Cellar."
+      ]
+    },
+    {
+      "id": "dungeons:wine-cellar",
+      "category": "dungeons",
+      "name": "Wine Cellar",
+      "criterion": "Incantation entry, drunken corridors, Oryx 2, Wine Cellar loot and return.",
+      "icon": "assets/player/oryx-the-mad-god-2.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:swords",
+      "category": "gear",
+      "name": "Swords",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/short-sword.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:daggers",
+      "category": "gear",
+      "name": "Daggers",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/steel-dagger.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:bows",
+      "category": "gear",
+      "name": "Bows",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/shortbow.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:wands",
+      "category": "gear",
+      "name": "Wands",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/fire-wand.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:staves",
+      "category": "gear",
+      "name": "Staves",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/energy-staff.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:leather-armor",
+      "category": "gear",
+      "name": "Leather armor",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/leather-armor.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:heavy-armor",
+      "category": "gear",
+      "name": "Heavy armor",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/iron-mail.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:robes",
+      "category": "gear",
+      "name": "Robes",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/robe-of-the-neophyte.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:rings",
+      "category": "gear",
+      "name": "Rings",
+      "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
+      "icon": "assets/player/ring-of-minor-defense.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:loot-and-ownership",
+      "category": "gear",
+      "name": "Loot and ownership",
+      "criterion": "Drop tables, participation credit, public and private bags, pickup rules and expiry.",
+      "icon": "assets/player/loot-bag.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:inventory-and-equipment",
+      "category": "gear",
+      "name": "Inventory and equipment",
+      "criterion": "Equip, swap, drag, pick up and drop without losing or duplicating items.",
+      "icon": "assets/player/vault-chest.png",
+      "stage": 0,
+      "evidence": null,
+      "development": true,
+      "requirements": [
+        "Equip, swap, drag, pick up and drop without losing or duplicating items.",
+        "Class restrictions, stat bonuses and original item tooltips."
+      ]
+    },
+    {
+      "id": "gear:health-potions",
+      "category": "gear",
+      "name": "Health potions",
+      "criterion": "Every target health-potion size, consumption and HP caps.",
+      "icon": "assets/player/health-potion.png",
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "gear:magic-potions",
+      "category": "gear",
+      "name": "Magic potions",
+      "criterion": "Every target magic-potion size, consumption and MP caps.",
+      "icon": "assets/player/magic-potion.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:stat-potions",
+      "category": "gear",
+      "name": "Stat potions",
+      "criterion": "All eight permanent stat potions and class-specific caps.",
+      "icon": "assets/player/potion-of-defense.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:elixirs",
+      "category": "gear",
+      "name": "Elixirs",
+      "criterion": "Health and magic elixirs, remaining charges and successor states.",
+      "icon": "assets/player/elixir-of-health-7.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:tinctures-and-effusions",
+      "category": "gear",
+      "name": "Tinctures and effusions",
+      "criterion": "Temporary self and party stat boosts, stacking, expiry and caps.",
+      "icon": "assets/player/tincture-of-dexterity.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:dungeon-drinks",
+      "category": "gear",
+      "name": "Dungeon drinks",
+      "criterion": "Target dungeon beverages and their individual effects.",
+      "icon": "assets/player/coral-juice.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:rum-and-mushrooms",
+      "category": "gear",
+      "name": "Rum and mushrooms",
+      "criterion": "Drunk, hallucinating and invisibility effects from the original consumables.",
+      "icon": "assets/player/pirate-rum.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:holy-water",
+      "category": "gear",
+      "name": "Holy Water",
+      "criterion": "Healing, condition removal and target hex interactions.",
+      "icon": "assets/player/holy-water.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:transformation-potion",
+      "category": "gear",
+      "name": "Transformation Potion",
+      "criterion": "Hex application and interaction with removal pools and conditions.",
+      "icon": "assets/player/transformation-potion.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:xp-booster",
+      "category": "gear",
+      "name": "XP Booster",
+      "criterion": "Doubled XP until level 20 or death, with no fame boost.",
+      "icon": "assets/player/xp-booster.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:dungeon-keys",
+      "category": "gear",
+      "name": "Dungeon keys",
+      "criterion": "All target keys, consumption, placement and permissions. Destination adventures are separate.",
+      "icon": "assets/player/pirate-cave-key.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:amulet-of-resurrection",
+      "category": "gear",
+      "name": "Amulet of Resurrection",
+      "criterion": "Original equipment bonuses, death protection and consumption, without the later curse.",
+      "icon": "assets/player/amulet-of-resurrection.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "gear:seasonal-toys",
+      "category": "gear",
+      "name": "Seasonal toys",
+      "criterion": "Firecrackers, sand castles and their consumable or multi-dose effects.",
+      "icon": "assets/player/sand-pail-5.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "style:legacy-pet-collection",
+      "category": "style",
+      "name": "Legacy pet collection",
+      "criterion": "All target pet choices, generators, following, persistence and loss rules. Baby is one pet, not a separate gameplay system.",
+      "icon": "assets/player/black-cat.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "style:summon-a-drake",
+      "category": "style",
+      "name": "Summon a drake",
+      "criterion": "All seven temporary drakes, summons, duration and behavior.",
+      "icon": "assets/player/purple-drake-egg.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "style:clothing-and-accessory-dyes",
+      "category": "style",
+      "name": "Clothing and accessory dyes",
+      "criterion": "The original color choices, previews, application and persistence.",
+      "icon": "assets/player/black-clothing-dye.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "style:clothing-and-accessory-cloths",
+      "category": "style",
+      "name": "Clothing and accessory cloths",
+      "criterion": "The original cloth patterns, scale variants, previews, application and persistence.",
+      "icon": "assets/player/wizard.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:nexus",
+      "category": "home",
+      "name": "Nexus",
+      "criterion": "Target lobby layout, spawn, safety, fountains and destination bindings.",
+      "icon": "assets/player/nexus-portal.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:vault",
+      "category": "home",
+      "name": "Vault",
+      "criterion": "Target vault layout, account-owned storage, chest access and durable item transactions.",
+      "icon": "assets/player/vault-chest.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:tutorial-and-kitchen",
+      "category": "home",
+      "name": "Tutorial and Kitchen",
+      "criterion": "Original first-adventure flow, encounters, exits and Kitchen destination.",
+      "icon": "assets/player/pirate.png",
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "home:choose-your-name",
+      "category": "home",
+      "name": "Choose your name",
+      "criterion": "Original default names, chosen-name rules and account persistence.",
+      "icon": "assets/player/name-changer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:browse-realm-portals",
+      "category": "home",
+      "name": "Browse Realm portals",
+      "criterion": "Realm names, population display, capacity and selection.",
+      "icon": "assets/player/nexus-portal.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:buy-from-merchants",
+      "category": "home",
+      "name": "Buy from merchants",
+      "criterion": "Stock, prices, rank restrictions and atomic purchases using game currency.",
+      "icon": "assets/player/merchant.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "home:gold-and-fame-balances",
+      "category": "home",
+      "name": "Gold and fame balances",
+      "criterion": "Original balances and spending rules, without real-money payment processing.",
+      "icon": "assets/player/money-changer.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:chat",
+      "category": "social",
+      "name": "Chat",
+      "criterion": "World chat, player names and chat commands.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Player messages, commands and speech bubbles.",
+        "System announcements for deaths and reaching level 20.",
+        "Enemy taunts and portal-unlock announcements with their original visibility rules."
+      ]
+    },
+    {
+      "id": "social:whispers",
+      "category": "social",
+      "name": "Whispers",
+      "criterion": "Private messages, recipient selection and visibility.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-chat",
+      "category": "social",
+      "name": "Guild chat",
+      "criterion": "Messages delivered only to current guild members.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:trade-with-players",
+      "category": "social",
+      "name": "Trade with players",
+      "criterion": "Requests, offers, accept/cancel flow, eligibility and atomic settlement.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:lock-players",
+      "category": "social",
+      "name": "Lock players",
+      "criterion": "Saved player locks and their visible effects.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:ignore-players",
+      "category": "social",
+      "name": "Ignore players",
+      "criterion": "Saved ignore lists and chat filtering.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:teleport-to-players",
+      "category": "social",
+      "name": "Teleport to players",
+      "criterion": "Eligibility, destination and target restrictions.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:create-and-join-a-guild",
+      "category": "social",
+      "name": "Create and join a guild",
+      "criterion": "Guild creation, joining, costs and membership persistence.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-invitations-and-removal",
+      "category": "social",
+      "name": "Guild invitations and removal",
+      "criterion": "Invites, membership changes and permissions.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-ranks",
+      "category": "social",
+      "name": "Guild ranks",
+      "criterion": "Original rank roles, changes and permissions.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-board",
+      "category": "social",
+      "name": "Guild board",
+      "criterion": "Read and edit the board with the original permissions.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-roster",
+      "category": "social",
+      "name": "Guild roster",
+      "criterion": "Member names, ranks and membership changes.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-hall",
+      "category": "social",
+      "name": "Guild hall",
+      "criterion": "Layout, access, upgrades, merchant and guild facilities.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:guild-chronicle",
+      "category": "social",
+      "name": "Guild chronicle",
+      "criterion": "Original guild history and recorded actions.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "social:share-a-living-world",
+      "category": "social",
+      "name": "Share a living world",
+      "criterion": "Two or more players see movement, attacks, enemies, drops and departures consistently.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": true,
+      "requirements": [
+        "Consistent movement, attacks, enemies, drops and departures for multiple players.",
+        "Nearby-player panel, hover actions and visibility rules."
+      ]
+    },
+    {
+      "id": "access:client",
+      "category": "access",
+      "name": "Open the original client",
+      "criterion": "Preserved reference SWF, browser startup and the verified ALPHA/disposed-bitmap compatibility fixes.",
+      "icon": "assets/player/wizard.png",
+      "stage": 2,
+      "evidence": {
+        "reference": "Immutable recovered 123.5.1 reference client. Independent AS3 reproducers and sandboxed Adobe Flash oracles establish the two generated Ruffle fixes. This is not a claim of pixel parity for every game scene.",
+        "verification": "Both pinned WASM variants, renderer golden tests, fresh-clone startup and same-instance native acceptance passed.",
+        "links": [
+          "proof.html#client"
+        ]
+      },
+      "development": false
+    },
+    {
+      "id": "access:guest-accounts",
+      "category": "access",
+      "name": "Guest accounts",
+      "criterion": "Guest identity and durable progress, with conversion to a registered account.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "access:registration",
+      "category": "access",
+      "name": "Registration",
+      "criterion": "Create an account or convert a guest without losing characters.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:login",
+      "category": "access",
+      "name": "Login",
+      "criterion": "Sign in with account credentials and retain the same progress.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:email-verification",
+      "category": "access",
+      "name": "Email verification",
+      "criterion": "Verification email, confirmation and verified account state.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:account-recovery",
+      "category": "access",
+      "name": "Account recovery",
+      "criterion": "Password recovery email, reset and subsequent login.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:change-password",
+      "category": "access",
+      "name": "Change password",
+      "criterion": "Change account credentials without losing progress.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:character-persistence",
+      "category": "access",
+      "name": "Character persistence",
+      "criterion": "Load the same living character with the correct saved resources, inventory and records.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": true
+    },
+    {
+      "id": "access:character-slots",
+      "category": "access",
+      "name": "Character slots",
+      "criterion": "Slot capacity, selection and purchases.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:character-deletion",
+      "category": "access",
+      "name": "Character deletion",
+      "criterion": "Delete a living character with the original confirmation and persistence rules.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:server-selection",
+      "category": "access",
+      "name": "Server selection",
+      "criterion": "Available servers, capacity, unavailable states and choosing a server.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:reconnect-safely",
+      "category": "access",
+      "name": "Reconnect safely",
+      "criterion": "Interruptions, session fencing, explicit errors and correct resume/departure behavior.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:controls-and-display",
+      "category": "access",
+      "name": "Controls and display",
+      "criterion": "Original controls, camera, graphics and saved settings.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "requirements": [
+        "Camera, rotation, zoom, controls and saved settings.",
+        "Minimap exploration, terrain, player markers and zoom behavior."
+      ]
+    },
+    {
+      "id": "access:sound-and-music",
+      "category": "access",
+      "name": "Sound and music",
+      "criterion": "Target sounds, music, playback and volume controls.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:player-art-gallery",
+      "category": "access",
+      "name": "Player art gallery",
+      "criterion": "Browse the original player-picture gallery.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "access:player-art-editor",
+      "category": "access",
+      "name": "Player art editor",
+      "criterion": "Create, save and retrieve player pictures.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false
+    },
+    {
+      "id": "condition:2",
+      "category": "conditions",
+      "name": "Quiet",
+      "criterion": "Mana loss, regeneration suppression and expiry.",
+      "icon": "assets/player/condition-quiet.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Quiet",
+        "array_index": 2,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:3",
+      "category": "conditions",
+      "name": "Weak",
+      "criterion": "Damage reduction and interaction with Damaging.",
+      "icon": "assets/player/condition-weak.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Weak",
+        "array_index": 3,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:4",
+      "category": "conditions",
+      "name": "Slowed",
+      "criterion": "Movement speed and interaction with Speedy and terrain.",
+      "icon": "assets/player/condition-slowed.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Slowed",
+        "array_index": 4,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:5",
+      "category": "conditions",
+      "name": "Sick",
+      "criterion": "Healing restrictions, duration and removal.",
+      "icon": "assets/player/condition-sick.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Sick",
+        "array_index": 5,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:6",
+      "category": "conditions",
+      "name": "Dazed",
+      "criterion": "Firing rate and interaction with Berserk.",
+      "icon": "assets/player/condition-dazed.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Dazed",
+        "array_index": 6,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:7",
+      "category": "conditions",
+      "name": "Stunned",
+      "criterion": "Shot and ability restrictions, duration and removal.",
+      "icon": "assets/player/condition-stunned.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Stunned",
+        "array_index": 7,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:8",
+      "category": "conditions",
+      "name": "Blind",
+      "criterion": "Restricted vision, rendering, duration and removal.",
+      "icon": "assets/player/condition-blind.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Blind",
+        "array_index": 8,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:9",
+      "category": "conditions",
+      "name": "Hallucinating",
+      "criterion": "Sprite substitutions, duration and removal.",
+      "icon": "assets/player/condition-hallucinating.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Hallucinating",
+        "array_index": 9,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:10",
+      "category": "conditions",
+      "name": "Drunk",
+      "criterion": "Camera distortion, aiming, duration and removal.",
+      "icon": "assets/player/condition-drunk.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Drunk",
+        "array_index": 10,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:11",
+      "category": "conditions",
+      "name": "Confused",
+      "criterion": "Movement input remapping, duration and removal.",
+      "icon": "assets/player/condition-confused.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Confused",
+        "array_index": 11,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:12",
+      "category": "conditions",
+      "name": "Stun immunity",
+      "criterion": "Targets that resist stun and how immunity is displayed.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Stun Immume",
+        "array_index": 12,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:13",
+      "category": "conditions",
+      "name": "Invisible",
+      "criterion": "Visibility, enemy targeting, damage and expiry.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Invisible",
+        "array_index": 13,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:14",
+      "category": "conditions",
+      "name": "Paralyzed",
+      "criterion": "Movement and ability restrictions, duration and removal.",
+      "icon": "assets/player/condition-paralyzed.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Paralyzed",
+        "array_index": 14,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:15",
+      "category": "conditions",
+      "name": "Speedy",
+      "criterion": "Speed multiplier and interaction with terrain and Slowed.",
+      "icon": "assets/player/condition-speedy.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Speedy",
+        "array_index": 15,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:16",
+      "category": "conditions",
+      "name": "Bleeding",
+      "criterion": "Damage over time, death limits, duration and removal.",
+      "icon": "assets/player/condition-bleeding.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Bleeding",
+        "array_index": 16,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:18",
+      "category": "conditions",
+      "name": "Healing",
+      "criterion": "HP regeneration, caps, duration and removal.",
+      "icon": "assets/player/condition-healing.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Healing",
+        "array_index": 18,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:19",
+      "category": "conditions",
+      "name": "Damaging",
+      "criterion": "Attack multiplier and interaction with Weak.",
+      "icon": "assets/player/condition-damaging.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Damaging",
+        "array_index": 19,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:20",
+      "category": "conditions",
+      "name": "Berserk",
+      "criterion": "Firing rate and interaction with Dazed.",
+      "icon": "assets/player/condition-berserk.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Berserk",
+        "array_index": 20,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:21",
+      "category": "conditions",
+      "name": "Paused",
+      "criterion": "Pause eligibility, movement, targeting and expiry.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Paused",
+        "array_index": 21,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:22",
+      "category": "conditions",
+      "name": "Stasis",
+      "criterion": "Enemy suspension, damage restrictions, duration and immunity.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Stasis",
+        "array_index": 22,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:23",
+      "category": "conditions",
+      "name": "Stasis immunity",
+      "criterion": "Targets immune to Stasis and the original feedback.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Stasis Immune",
+        "array_index": 23,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:24",
+      "category": "conditions",
+      "name": "Invincible",
+      "criterion": "Damage immunity and targeting rules.",
+      "icon": null,
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Invincible",
+        "array_index": 24,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:25",
+      "category": "conditions",
+      "name": "Invulnerable",
+      "criterion": "Damage immunity and differences from Invincible.",
+      "icon": "assets/player/condition-invulnerable.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Invulnerable",
+        "array_index": 25,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:26",
+      "category": "conditions",
+      "name": "Armored",
+      "criterion": "Defense multiplier and interaction with Armor Broken.",
+      "icon": "assets/player/condition-armored.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Armored",
+        "array_index": 26,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:27",
+      "category": "conditions",
+      "name": "Armor broken",
+      "criterion": "Defense bypass and interaction with Armored.",
+      "icon": "assets/player/condition-armor-broken.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Armor Broken",
+        "array_index": 27,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    },
+    {
+      "id": "condition:28",
+      "category": "conditions",
+      "name": "Hexed",
+      "criterion": "Transformation, ability interaction and removal pools.",
+      "icon": "assets/player/condition-hexed.png",
+      "stage": 0,
+      "evidence": null,
+      "development": false,
+      "source": {
+        "original_name": "Hexed",
+        "array_index": 28,
+        "path": "com/company/assembleegameclient/util/ConditionEffect.pcode"
+      }
+    }
+  ]
+}

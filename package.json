@@ -4,6 +4,6 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
-    "test": "node --test tools/build.test.mjs"
+    "test": "node --test tools/*.test.mjs"
   }
 }

@@ -4,6 +4,8 @@ One-click play for the recreation of the classic bullethell game.
 
 Development gameplay only. The full 2012 game is still being rebuilt.
 
+Restoration data lives in `public/restoration/progress.json`. The build validates its gates and calculates both displayed percentages from it. These are reviewed evidence assignments, not a live backend test report. Artwork provenance and publication limits are in `THIRD_PARTY.md`.
+
 [Discord](https://discord.gg/EwZWNzzYwP)
 
 ## Running locally
