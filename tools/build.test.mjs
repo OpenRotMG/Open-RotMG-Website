@@ -142,6 +142,27 @@ test('branded loading screen stays until Ruffle resolves', async () => {
   assert.equal(nodes['#game'].dataset.loaded, 'true');
 });
 
+test('legacy API rewrites leave same-origin game assets alone on port 8080', async () => {
+  for (const port of [8080, 18923, 65535]) {
+    const origin = `http://127.0.0.1:${port}`;
+    let options;
+    const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+    const player = { ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
+    await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
+      window: { RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
+      document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
+    });
+    const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);
+    for (const path of ['client.swf', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
+      assert.equal(rewrite(`${origin}/${path}`), `${origin}/${path}`);
+    }
+    for (const path of ['char/list', 'char/fame']) {
+      assert.equal(rewrite(`http://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+    }
+    assert.equal(rewrite(options.url), options.url);
+  }
+});
+
 test('startup failure shows an error instead of leaving the branding stuck', async () => {
   const nodes = { '#startup': { hidden: false }, '#load-error': { hidden: true } };
   const errors = [];
