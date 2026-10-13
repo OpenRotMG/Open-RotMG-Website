@@ -5,13 +5,13 @@
     "target": "123.5.1",
     "unit": "Complete player-facing feature bundles. No extra points for their files, assets, internal phases, tiers or tests.",
     "gate_rule": "One gate for an accepted complete reference contract, one for implementation verified against it.",
-    "research_accepted": 4,
-    "implementation_verified": 2,
+    "research_accepted": 7,
+    "implementation_verified": 6,
     "features": 209,
-    "earned": 6,
+    "earned": 13,
     "possible": 418,
-    "percent": 1.4,
-    "date": "2026-10-11",
+    "percent": 3.1,
+    "date": "2026-10-13",
     "excluded": [
       {
         "name": "Real-money payments and external platform login providers",
@@ -247,8 +247,14 @@
       "criterion": "XP awards and sharing, level thresholds, stat gains and level caps.",
       "icon": "assets/player/wizard.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #19 verifies native leveling and tests level boundaries through 20 with selected class growth fields. Complete historical XP awards, sharing and growth rules remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:living-fame",
@@ -400,12 +406,13 @@
       "name": "Travel between worlds",
       "criterion": "Nexus escape and authorized portal/reconnect transfers of the same living character.",
       "icon": "assets/player/nexus-portal.png",
-      "stage": 1,
+      "stage": 2,
       "evidence": {
         "reference": "Original USEPORTAL, ESCAPE, RECONNECT and LOAD bytecode; endpoint inheritance and active-character semantics. Complete researched transfer contract on issue #11.",
-        "verification": null,
+        "verification": "Merged PR #19: two native Wizards used a genuinely dropped portal to enter the same Pirate Cave, then the published boss exit to return to Nexus with the same character through LOAD. Tests verify account/character-bound, expiring, single-use transfer grants and durable departure before entry.",
         "links": [
-          "https://github.com/OpenRotMG/server/issues/11#issuecomment-6107914569"
+          "https://github.com/OpenRotMG/server/issues/11#issuecomment-6107914569",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
         ]
       },
       "development": false
@@ -1137,8 +1144,15 @@
       "criterion": "Coastal entrance, cave generation, pirates, Dreadstump and rewards.",
       "icon": "assets/player/dreadstump-the-pirate-king.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #19 includes a playable full candidate cave, native two-player Dreadstump clear, rewards and return. Historical cave generation, AI and reward rules are not fully accepted, so neither restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/data/README.md"
+        ]
+      },
+      "development": true
     },
     {
       "id": "dungeons:spider-den",
@@ -1406,8 +1420,14 @@
       "criterion": "Drop tables, participation credit, public and private bags, pickup rules and expiry.",
       "icon": "assets/player/loot-bag.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #19 implements real drops, participation, private/public bags, pickup and expiry. Selected item identities are preserved, but complete target drop tables, credit thresholds and rates remain provisional.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:inventory-and-equipment",
@@ -1600,8 +1620,14 @@
       "criterion": "Target lobby layout, spawn, safety, fountains and destination bindings.",
       "icon": "assets/player/nexus-portal.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #19 implements a safe Nexus and destination travel. The recovered map is a candidate, not an authenticated target layout; the full Nexus contract remains unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+        ]
+      },
+      "development": true
     },
     {
       "id": "home:vault",
@@ -1610,8 +1636,14 @@
       "criterion": "Target vault layout, account-owned storage, chest access and durable item transactions.",
       "icon": "assets/player/vault-chest.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #19 verifies native account-private eight-slot chest deposits, withdrawals, persistence and re-equipping a replacement after death. Target layout and the full historical Vault contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+        ]
+      },
+      "development": true
     },
     {
       "id": "home:tutorial-and-kitchen",
@@ -1704,8 +1736,15 @@
       "name": "Trade with players",
       "criterion": "Requests, offers, accept/cancel flow, eligibility and atomic settlement.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
+      "stage": 2,
+      "evidence": {
+        "reference": "Selected client trade serializers and native UI establish requests, twelve-slot offers, mutual acceptance, cancellation and success codes. Inventory-only, nonempty, non-Soulbound eligibility and resetting acceptance on changed offers are checked against the recovered trade behavior.",
+        "verification": "Merged PR #19: two native dungeon clearers traded legitimately earned equipment through the original UI. Canonical item conservation and both durable revisions were checked. Tests cover full inventories, stale offers, cancellation, atomic rollback, death and disconnect during settlement.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/world/trade.rs"
+        ]
+      },
       "development": false
     },
     {
@@ -1904,9 +1943,16 @@
       "name": "Character persistence",
       "criterion": "Load the same living character with the correct saved resources, inventory and records.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
-      "development": true
+      "stage": 2,
+      "evidence": {
+        "reference": "Original character-list, LOAD and selected character/stat fields establish resuming the same living character with saved resources, inventory and records. This feature does not certify XP, fame or dungeon reward formulas, account registration, guilds or pets.",
+        "verification": "Merged PR #19: both native Wizards retained identical character/account identities, HP/MP, base stats, XP/level, inventory, clear counters and durable revisions after ordinary LOAD and server restart. Tests cover stale writes, immutable death records and transaction rollback.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/store.rs"
+        ]
+      },
+      "development": false
     },
     {
       "id": "access:character-slots",
@@ -1944,8 +1990,15 @@
       "name": "Reconnect safely",
       "criterion": "Interruptions, session fencing, explicit errors and correct resume/departure behavior.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
+      "stage": 2,
+      "evidence": {
+        "reference": "Selected HELLO, LOAD and RECONNECT flow resumes an existing character rather than creating another. Account-bound ownership, explicit failure and saving departure before resuming define this reliability contract; regional capacity and operating-system coverage are separate.",
+        "verification": "Merged PR #19: ordinary native LOAD resumed both living dungeon clearers after disconnect and server restart. Tests verify exclusive ownership, expiring one-use transfers, interrupted departures and quarantining uncertain persistence rather than reporting a false successful resume.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/world.rs"
+        ]
+      },
       "development": false
     },
     {

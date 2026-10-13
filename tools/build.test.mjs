@@ -109,7 +109,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.forum-list/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, 209);
-  assert.equal(restoration.percent, '1.4%');
+  assert.equal(restoration.percent, '3.1%');
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const lock = JSON.parse(readFileSync(new URL('./client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
