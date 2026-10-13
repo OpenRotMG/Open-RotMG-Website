@@ -16,7 +16,6 @@
 .feature small { font-size: 10px; margin-left: 5px; color: #99988d; }
 .sprite { width: 22px; height: 24px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; }
 .condition-icon { filter: drop-shadow(1px 0 0 #85877b) drop-shadow(-1px 0 0 #85877b); }
-.scene-mark { font-size: 10px; color: #a6a184; }
 .gate-count { font-size: 11px; color: #8f8f8f; white-space: nowrap; align-self: center; }
 dialog { width: 580px; max-width: calc(100vw - 28px); max-height: calc(100dvh - 28px); overflow: auto; background: #191916; color: #c8c7bc; border: 1px solid #77766b; padding: 17px; font: 12px/1.7 Verdana, sans-serif; box-shadow: 4px 4px 0 #0009; }
 dialog::backdrop { background: #000b; }
@@ -30,9 +29,6 @@ dialog::backdrop { background: #000b; }
 #feature-gates { margin: 14px 0; }
 #feature-requirements { padding-left: 20px; }
 #feature-requirements li { margin: 6px 0; }
-#feature-proof { font-size: 11px; color: #aaa798; }
-#feature-proof a { display: block; overflow-wrap: anywhere; margin: 8px 0; }
-#development-note { font-size: 11px; color: #b3a784; }
 #error { border: 1px solid #b27070; padding: 10px; color: #d9a0a0; }
 article { max-width: 800px; margin: 36px auto; padding: 0 20px; }
 article h2 { margin-top: 25px; }

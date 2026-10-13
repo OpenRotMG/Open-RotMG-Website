@@ -9,29 +9,21 @@ function openFeature(f){
   $('feature-title').textContent=f.name;$('feature-criterion').textContent=f.criterion;
   $('feature-criterion').hidden=f.requirements!==undefined&&f.requirements.length>0;
   $('feature-icon').hidden=!f.icon;if(f.icon)$('feature-icon').src=f.icon;else $('feature-icon').removeAttribute('src');
-  $('development-note').hidden=!f.development;
   $('feature-gates').replaceChildren(...['Original rules','Recreation'].map((name,i)=>{
     const row=el('div',undefined,'gate');row.dataset.verified=String(f.stage>i);
     row.append(el('span',name),el('strong',f.stage>i?'Verified':'Not verified',f.stage>i?'passed':''));return row;
   }));
   $('feature-requirements').replaceChildren(...(f.requirements===undefined?[]:f.requirements).map(text=>el('li',text)));
-  const proof=$('feature-proof');proof.replaceChildren();
-  if(f.evidence){
-    proof.append(el('p',f.evidence.reference));
-    if(f.evidence.verification)proof.append(el('p',f.evidence.verification));
-    for(const url of f.evidence.links){const a=el('a',url);a.href=url;proof.append(a);}
-  }
   dialog.showModal();
 }
 function featureRow(f){
   const row=el('li'),b=el('button',undefined,'feature');
-  b.dataset.feature=f.id;b.type='button';b.title=`${f.name}: ${f.stage}/2 verified gates${f.development?' · development scene':''}`;
+  b.dataset.feature=f.id;b.type='button';b.title=`${f.name}: ${f.stage}/2 verified gates`;
   if(f.icon){const icon=image(f.icon);if(f.category==='conditions')icon.classList.add('condition-icon');b.append(icon);}
   const name=el('span',f.name);
   if(f.name==='Oryx’s Chamber')name.append(el('small','Oryx 1'));
   if(f.name==='Wine Cellar')name.append(el('small','Oryx 2'));
   b.append(name);
-  if(f.development)b.append(el('span','*','scene-mark'));
   b.addEventListener('click',()=>openFeature(f));
   row.append(b,el('span',`${f.stage}/2 verified`,'gate-count'));return row;
 }

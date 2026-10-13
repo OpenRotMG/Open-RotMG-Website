@@ -116,7 +116,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const restorationApp = readFileSync(new URL('../dist/restoration/app.js', import.meta.url), 'utf8');
   assert.doesNotMatch(restorationApp, /catalogue-note|Provisional catalogue:/);
   assert.ok(restorationPage.includes('id="feature-gates"'));
-  assert.ok(restorationPage.includes('id="development-note"'));
+  assert.doesNotMatch(restorationPage, /feature-proof|development-note|Historical restoration has not been verified/);
+  assert.doesNotMatch(restorationApp, /f\.evidence|f\.development|scene-mark|feature-proof|development-note/);
   const css = readFileSync(new URL('../dist/style.css', import.meta.url), 'utf8');
   assert.match(css, /overflow-y: scroll/);
   assert.match(css, /width: 850px/);
