@@ -5,9 +5,8 @@
 .asset-preview.icon { width: 102px; image-rendering: pixelated; }
 .branding-page label { display: block; margin-bottom: 5px; font-size: 11px; }
 .copy-row { display: flex; gap: 8px; }
-.branding-page input, .branding-page textarea { width: 100%; min-width: 0; padding: 8px; border: 1px solid #444; background: #171717; color: #ddd; font: 12px/1.5 monospace; }
-.branding-page textarea { display: block; resize: vertical; margin-bottom: 8px; }
-.branding-page input:focus-visible, .branding-page textarea:focus-visible { outline: 1px solid #dedbcf; }
+.branding-page input { width: 100%; min-width: 0; padding: 8px; border: 1px solid #444; background: #171717; color: #ddd; font: 12px/1.5 monospace; }
+.branding-page input:focus-visible { outline: 1px solid #dedbcf; }
 .branding-page button { flex-shrink: 0; padding: 6px 10px; border: 1px solid #555; background: #262626; }
 .branding-page button:hover { background: #383838; }
 .asset-note { color: #999; font-size: 11px; margin: 12px 0 0; }

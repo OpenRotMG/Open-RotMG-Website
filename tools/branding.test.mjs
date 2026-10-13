@@ -23,25 +23,21 @@ async function click(id, clipboard, field) {
 
 test('every copy control points to a unique readable field', () => {
   const ids = [...html.matchAll(/data-copy="([^"]+)"/g)].map(match => match[1]);
-  assert.equal(ids.length, 6);
+  assert.equal(ids.length, 5);
+  assert.doesNotMatch(html, /discourse-code|Post on Discourse|Forum embed|Lost City|Images for sharing/);
   for (const id of ids) {
     assert.equal([...html.matchAll(new RegExp(`id="${id}"`, 'g'))].length, 1);
     assert.match(html, new RegExp(`(?:input|textarea) id="${id}" readonly`));
   }
-  const embed = html.match(/<textarea[^>]*>(.*?)<\/textarea>/s)[1];
-  assert.equal([...embed.matchAll(/&lt;img /g)].length, 5);
-  assert.equal([...embed.matchAll(/&lt;a /g)].length, 1);
-  assert.match(embed, /&lt;a href="https:\/\/discord.gg\/EwZWNzzYwP"&gt;&lt;img src="{{SITE_URL}}branding\/slices\/discord.png" width="30%" alt="Join Discord"&gt;&lt;\/a&gt;/);
-  assert.doesNotMatch(embed, /picture|style=|&gt;\s+&lt;/);
 });
 
-test('embed and image URL controls copy the exact field value', async () => {
-  for (const id of ['discourse-code', 'banner-url']) {
-    const value = id === 'discourse-code' ? html.match(/<textarea[^>]*>(.*?)<\/textarea>/s)[1].replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('{{SITE_URL}}', 'https://openrotmg.org/') : 'https://openrotmg.org/branding/banner.png';
+test('image URL controls copy the exact field value', async () => {
+  for (const id of ['banner-url', 'mobile-url', 'oryx-url', 'social-url', 'icon-url']) {
+    const value = html.match(new RegExp(`<input id="${id}" readonly value="([^"]+)"`))[1].replaceAll('{{SITE_URL}}', 'https://openrotmg.org/');
     const writes = [];
     const { status, errors } = await click(id, { writeText: async text => { writes.push(text); } }, { value });
     assert.deepEqual(writes, [value]);
-    assert.equal(status.textContent, id === 'discourse-code' ? 'Embed copied.' : 'Image URL copied.');
+    assert.equal(status.textContent, 'Image URL copied.');
     assert.equal(errors.length, 0);
   }
 });
