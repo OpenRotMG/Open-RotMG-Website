@@ -81,6 +81,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   assert.ok(home.includes('href="https://github.com/OpenRotMG">Source</a>'));
   assert.equal(home.match(/Powered by Ruffle/g)?.length, 1);
+  assert.match(home, /<p class="alpha-warning" role="note">Open RotMG is in early alpha\. Saves will be reset before Beta release\.<\/p>\s*<div id="game"/);
+  assert.equal(home.match(/class="alpha-warning"/g)?.length, 1);
   assert.doesNotMatch(footer, /Powered by Ruffle/);
   assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
   assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)|multiplayer server is not online/);

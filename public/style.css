@@ -10,6 +10,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .game-page .site-shell { width: 800px; max-width: 100%; margin: 0 auto; min-height: 0; padding: 0; border: 0; background: #000; box-shadow: none; }
 .game-page .site-footer { margin-top: 18px; border: 0; }
 .page-main { flex: 1; min-width: 0; }
+.alpha-warning { margin: 0; padding: 8px 12px; color: #f0c160; text-align: center; }
 #game { position: relative; width: 100%; max-width: 800px; margin: 0 auto; aspect-ratio: 4 / 3; background: #000; }
 ruffle-player { display: block; width: 100%; height: 100%; }
 #startup { position: absolute; inset: 0; z-index: 1; display: grid; place-content: center; justify-items: center; gap: .7rem; background: #0b0b0b; }
