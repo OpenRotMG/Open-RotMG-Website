@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+  <title>Branding · Open RotMG</title>
+  <meta name="description" content="Open RotMG logos and banners for community posts, with downloads, direct image links and a Discourse embed.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="{{SITE_URL}}branding/">
+  <link rel="icon" href="{{BASE}}amulet-of-resurrection.png" type="image/png">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <link rel="stylesheet" href="style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Open RotMG">
+  <meta property="og:title" content="Open RotMG branding">
+  <meta property="og:description" content="Logos and banners for sharing Open RotMG.">
+  <meta property="og:url" content="{{SITE_URL}}branding/">
+  <meta property="og:image" content="{{SITE_URL}}{{SOCIAL_IMAGE}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="copy.js" defer></script>
+</head>
+<body class="branding-page">
+<div class="site-shell">
+  <main class="page-main">
+    <a class="back" href="{{BASE}}">← Back to game</a>
+    <h1>Branding</h1>
+    <p>Images for sharing Open RotMG on forums and in community posts. Download a file or copy its direct URL.</p>
+    <section aria-labelledby="discourse-title">
+      <h2 id="discourse-title">Post on Discourse</h2>
+      <p>Paste this into the post editor. The banner is one image, so there are no gaps between slices. Clicking it opens our Discord.</p>
+      <label for="discourse-code">Forum embed</label>
+      <textarea id="discourse-code" readonly rows="4" spellcheck="false">&lt;a href="https://discord.gg/EwZWNzzYwP"&gt;&lt;img src="{{SITE_URL}}branding/banner.png" width="690" alt="Open RotMG. Recreating the 2012 realm. Join Discord."&gt;&lt;/a&gt;</textarea>
+      <button type="button" data-copy="discourse-code">Copy embed</button>
+      <p class="asset-note">This is a static image, not an interactive button. The banners retain the GitHub README's “coming soon” label.</p>
+    </section>
+    <section aria-labelledby="banner-title">
+      <h2 id="banner-title">Forum banner</h2>
+      <a href="banner.png" download><img class="asset-preview" src="banner.png" width="1360" height="560" alt="Open RotMG banner with Join Discord and Play now, coming soon."></a>
+      <p>1360 × 560 PNG · <a href="banner.png" download>Download banner</a></p>
+      <label for="banner-url">Direct image URL</label>
+      <div class="copy-row"><input id="banner-url" readonly value="{{SITE_URL}}branding/banner.png"><button type="button" data-copy="banner-url">Copy URL</button></div>
+    </section>
+    <section aria-labelledby="mobile-title">
+      <h2 id="mobile-title">Compact forum banner</h2>
+      <a href="banner-mobile.png" download><img class="asset-preview compact" src="banner-mobile.png" width="800" height="530" alt="Compact Open RotMG banner with Join Discord and Play now, coming soon." loading="lazy"></a>
+      <p>800 × 530 PNG · <a href="banner-mobile.png" download>Download compact banner</a></p>
+      <label for="mobile-url">Direct image URL</label>
+      <div class="copy-row"><input id="mobile-url" readonly value="{{SITE_URL}}branding/banner-mobile.png"><button type="button" data-copy="mobile-url">Copy URL</button></div>
+    </section>
+    <section aria-labelledby="oryx-title">
+      <h2 id="oryx-title">Oryx organization logo</h2>
+      <a href="oryx-logo.png" download><img class="asset-preview compact" src="oryx-logo.png" width="1448" height="1086" alt="Oryx above red Open RotMG lettering on a forest background." loading="lazy"></a>
+      <p>1448 × 1086 PNG · <a href="oryx-logo.png" download>Download Oryx logo</a></p>
+      <label for="oryx-url">Direct image URL</label>
+      <div class="copy-row"><input id="oryx-url" readonly value="{{SITE_URL}}branding/oryx-logo.png"><button type="button" data-copy="oryx-url">Copy URL</button></div>
+    </section>
+    <section aria-labelledby="social-title">
+      <h2 id="social-title">Social image</h2>
+      <a href="{{BASE}}social.png" download><img class="asset-preview" src="{{BASE}}social.png" width="1200" height="630" alt="Open RotMG amulet over historical Realm of the Mad God gameplay. Recreating the 2012 realm." loading="lazy"></a>
+      <p>1200 × 630 PNG · <a href="{{BASE}}social.png" download>Download social image</a></p>
+      <label for="social-url">Direct image URL</label>
+      <div class="copy-row"><input id="social-url" readonly value="{{SITE_URL}}social.png"><button type="button" data-copy="social-url">Copy URL</button></div>
+    </section>
+    <section aria-labelledby="icon-title">
+      <h2 id="icon-title">Amulet icon</h2>
+      <a href="{{BASE}}amulet-of-resurrection.png" download><img class="asset-preview icon" src="{{BASE}}amulet-of-resurrection.png" width="34" height="34" alt="Amulet of Resurrection pixel-art icon." loading="lazy"></a>
+      <p>34 × 34 PNG · <a href="{{BASE}}amulet-of-resurrection.png" download>Download icon</a></p>
+      <label for="icon-url">Direct image URL</label>
+      <div class="copy-row"><input id="icon-url" readonly value="{{SITE_URL}}amulet-of-resurrection.png"><button type="button" data-copy="icon-url">Copy URL</button></div>
+    </section>
+    <p class="asset-note">Banner and social-image backgrounds depict historical Realm of the Mad God gameplay, not the current Open RotMG development build. Original game artwork belongs to its rightsholders; sharing these files does not grant a new license to that artwork.</p>
+    <p id="copy-status" role="status" aria-live="polite"></p>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation<br>
+    Report bugs and missing content on Discord.</p>
+    <nav aria-label="Project">
+      <div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}restoration/">{{RESTORATION_PERCENT}} complete</a></div>
+      <div><a href="{{BASE}}branding/">Branding</a><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

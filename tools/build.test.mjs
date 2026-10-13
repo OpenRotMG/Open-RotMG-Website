@@ -34,7 +34,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   if (!site.pathname.endsWith('/')) site.pathname += '/';
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
-  for (const html of [home, about]) {
+  const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
+  for (const html of [home, about, branding]) {
     assert.match(html, /<html lang="en">/);
     assert.match(html, /<h1[ >]/);
     assert.match(html, /name="description"/);
@@ -44,6 +45,17 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
+  assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
+  assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
+  assert.ok(branding.includes(`&lt;img src="${site.href}branding/banner.png"`));
+  assert.ok(branding.includes('src="copy.js" defer'));
+  for (const [file, width, height] of [['banner.png', 1360, 560], ['banner-mobile.png', 800, 530], ['oryx-logo.png', 1448, 1086]]) {
+    const png = readFileSync(new URL(`../dist/branding/${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), width);
+    assert.equal(png.readUInt32BE(20), height);
+    assert.ok(branding.includes(`value="${site.href}branding/${file}"`));
+    assert.ok(branding.includes(`href="${file}" download`));
+  }
   const footer = home.match(/<footer class="site-footer">(.*?)<\/footer>/s)[1];
   assert.ok(footer.includes('2012 Realm of the Mad God reimplementation<br>'));
   assert.ok(footer.includes('Report bugs and missing content on Discord.</p>'));
@@ -75,19 +87,20 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}restoration/</loc>`));
+  assert.ok(sitemap.includes(`<loc>${site.href}branding/</loc>`));
   const restorationPage = readFileSync(new URL('../dist/restoration/index.html', import.meta.url), 'utf8');
   assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
   assert.ok(restorationPage.includes('<script type="module" src="app.js">'));
   assert.ok(restorationPage.includes(`href="${site.pathname}style.css"`));
-  for (const html of [home, about, restorationPage]) {
+  for (const html of [home, about, restorationPage, branding]) {
     assert.equal((html.match(/class="site-shell"/g) ?? []).length, 1);
     assert.equal((html.match(/<nav aria-label="Project">/g) ?? []).length, 1);
     const nav = html.match(/<nav aria-label="Project">(.*?)<\/nav>/s)[1];
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
     assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}restoration/`]);
-    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Source', 'Discord']);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Branding', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
