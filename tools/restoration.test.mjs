@@ -7,7 +7,7 @@ const catalogue = () => JSON.parse(readFileSync(new URL('../public/restoration/p
 
 test('reviewed player catalogue retains its membership and gates', () => {
   const data = catalogue();
-  assert.deepEqual(validateCatalogue(data), { e: 7, v: 6, n: 209, percent: '3.1%' });
+  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
   assert.equal(data.features.filter(f => f.category === 'conditions').length, 26);
   assert.equal(data.features.filter(f => f.category === 'dungeons').length, 16);
   assert.equal(percentage([{ stage: 0 }, { stage: 1 }, { stage: 2 }]), '50%');
@@ -23,6 +23,17 @@ test('reviewed player catalogue retains its membership and gates', () => {
     assert.equal(feature.development, true, id);
   }
   assert.equal(data.features.find(f => f.id === 'heroes:choose-and-unlock-classes').stage, 1);
+  for (const id of ['access:guest-accounts', 'access:registration', 'access:login']) {
+    const feature = data.features.find(f => f.id === id);
+    assert.equal(feature.stage, 2, id);
+    assert.ok(feature.evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/21'), id);
+  }
+  for (const id of ['heroes:priest', 'social:teleport-to-players', 'social:chat', 'home:choose-your-name', 'heroes:legends-highscores', 'realm:realm-generation']) {
+    const feature = data.features.find(f => f.id === id);
+    assert.equal(feature.stage, 0, id);
+    assert.equal(feature.development, true, id);
+    assert.ok(feature.evidence.reference, id);
+  }
 });
 
 test('requested category icons are distinct original sprites', () => {

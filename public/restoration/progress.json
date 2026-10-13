@@ -5,12 +5,12 @@
     "target": "123.5.1",
     "unit": "Complete player-facing feature bundles. No extra points for their files, assets, internal phases, tiers or tests.",
     "gate_rule": "One gate for an accepted complete reference contract, one for implementation verified against it.",
-    "research_accepted": 7,
-    "implementation_verified": 6,
+    "research_accepted": 10,
+    "implementation_verified": 9,
     "features": 209,
-    "earned": 13,
+    "earned": 19,
     "possible": 418,
-    "percent": 3.1,
+    "percent": 4.5,
     "date": "2026-10-13",
     "excluded": [
       {
@@ -130,8 +130,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/priest.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #24 adds an earned Wizard-level-5 Priest unlock, selected starting fields and tier 0–6 single-activation HealNova tomes. Native healing restored an injured Wizard from 284 to 331 HP and consumed Priest mana. UT/multi-activation behavior and the complete class progression are not verified, so no full Priest restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/24"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:warrior",
@@ -297,8 +303,14 @@
       "criterion": "Leaderboard periods, ranking, character details and ties.",
       "icon": "assets/player/legends-highscores.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #21 verifies native Week/Month/All Time rows, detail navigation, immutable deaths and deterministic ties, including three genuinely dead named players. Historical period, eligibility and ranking policies remain reference-server candidates, not an accepted full target contract.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:recover-hp-and-mp",
@@ -343,8 +355,15 @@
       "criterion": "Coast, lowlands, midlands, highlands and mountains with target terrain, roads and population placement.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #21 adds seeded terrain with coastal-to-inland biomes, roads and native traversal. This is a new candidate generator, not the recovered original generator or complete Realm population and closure.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/data/README.md"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:find-your-next-quest",
@@ -1662,8 +1681,14 @@
       "criterion": "Original default names, chosen-name rules and account persistence.",
       "icon": "assets/player/name-changer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #21 verifies native first-name selection, uniqueness and persistent canonical names. The complete original default-name and naming-policy contract is not accepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21"
+        ]
+      },
+      "development": true
     },
     {
       "id": "home:browse-realm-portals",
@@ -1702,8 +1727,14 @@
       "criterion": "World chat, player names and chat commands.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #20 verifies native typed messages, speech bubbles, authenticated names and isolation across worlds and transfers. Slash commands are rejected; system death/level-20 announcements, enemy taunts and portal announcements in this complete feature contract remain unimplemented.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/20"
+        ]
+      },
+      "development": true,
       "requirements": [
         "Player messages, commands and speech bubbles.",
         "System announcements for deaths and reaching level 20.",
@@ -1774,8 +1805,14 @@
       "criterion": "Eligibility, destination and target restrictions.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #24 verifies the native minimap menu, TELEPORT packet, same-world target, cooldown and applied destination. Full historical condition, hazard and world-permission restrictions remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/24"
+        ]
+      },
+      "development": true
     },
     {
       "id": "social:create-and-join-a-guild",
@@ -1883,9 +1920,16 @@
       "name": "Guest accounts",
       "criterion": "Guest identity and durable progress, with conversion to a registered account.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
-      "development": true
+      "stage": 2,
+      "evidence": {
+        "reference": "Original guest GUID, character-list and native guest-conversion flow establish stable guest identity and retaining progress when registering. Email verification and account recovery are separate features.",
+        "verification": "Merged PR #21: a native guest earned and banked an item, converted to a registered account, restarted the server and signed in from a separate browser profile with the same account, character, XP and Vault. Tests verify conversion revokes guest access and duplicate or racing registration cannot split ownership.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/src/store/accounts.rs"
+        ]
+      },
+      "development": false
     },
     {
       "id": "access:registration",
@@ -1893,8 +1937,15 @@
       "name": "Registration",
       "criterion": "Create an account or convert a guest without losing characters.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
+      "stage": 2,
+      "evidence": {
+        "reference": "Selected native registration and guest-to-account conversion forms, account response and subsequent HELLO establish creating credentials without replacing existing guest characters.",
+        "verification": "Merged PR #21: original-client registration preserved the guest account, characters and storage; a fresh native sign-in retrieved the legitimately earned item. Tests verify atomic conversion, validation, duplicate email and concurrent conversion, with password verifiers rather than plaintext storage.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/src/store/accounts.rs"
+        ]
+      },
       "development": false
     },
     {
@@ -1903,8 +1954,15 @@
       "name": "Login",
       "criterion": "Sign in with account credentials and retain the same progress.",
       "icon": null,
-      "stage": 0,
-      "evidence": null,
+      "stage": 2,
+      "evidence": {
+        "reference": "Selected character-list and encrypted HELLO credentials establish signing in as the same account and resuming its saved characters. Password recovery and email delivery are separate contracts.",
+        "verification": "Merged PR #21: a separate native browser profile signed in after restart and resumed the same earned progress and Vault. Tests reject incorrect credentials, converted guest access and duplicate live ownership; character-list and gameplay authentication use the same account.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/src/store/accounts.rs"
+        ]
+      },
       "development": false
     },
     {
