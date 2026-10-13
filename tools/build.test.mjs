@@ -127,6 +127,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(css, /color: #cb8585/);
   const restorationCss = readFileSync(new URL('../dist/restoration/style.css', import.meta.url), 'utf8');
   assert.match(restorationCss, /\.forum-list/);
+  assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, 209);
   assert.equal(restoration.percent, '4.5%');
