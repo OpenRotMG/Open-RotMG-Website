@@ -29,14 +29,15 @@ test('every copy control points to a unique readable field', () => {
     assert.match(html, new RegExp(`(?:input|textarea) id="${id}" readonly`));
   }
   const embed = html.match(/<textarea[^>]*>(.*?)<\/textarea>/s)[1];
-  assert.equal([...embed.matchAll(/&lt;img /g)].length, 1);
-  assert.doesNotMatch(embed, /picture|style=|<br|&lt;br/);
-  assert.match(embed, /https:\/\/discord.gg\/EwZWNzzYwP/);
+  assert.equal([...embed.matchAll(/&lt;img /g)].length, 5);
+  assert.equal([...embed.matchAll(/&lt;a /g)].length, 1);
+  assert.match(embed, /&lt;a href="https:\/\/discord.gg\/EwZWNzzYwP"&gt;&lt;img src="{{SITE_URL}}branding\/slices\/discord.png" width="30%" alt="Join Discord"&gt;&lt;\/a&gt;/);
+  assert.doesNotMatch(embed, /picture|style=|&gt;\s+&lt;/);
 });
 
 test('embed and image URL controls copy the exact field value', async () => {
   for (const id of ['discourse-code', 'banner-url']) {
-    const value = id === 'discourse-code' ? '<a href="https://discord.gg/EwZWNzzYwP"><img src="https://openrotmg.org/branding/banner.png"></a>' : 'https://openrotmg.org/branding/banner.png';
+    const value = id === 'discourse-code' ? html.match(/<textarea[^>]*>(.*?)<\/textarea>/s)[1].replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('{{SITE_URL}}', 'https://openrotmg.org/') : 'https://openrotmg.org/branding/banner.png';
     const writes = [];
     const { status, errors } = await click(id, { writeText: async text => { writes.push(text); } }, { value });
     assert.deepEqual(writes, [value]);

@@ -47,8 +47,14 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
-  assert.ok(branding.includes(`&lt;img src="${site.href}branding/banner.png"`));
+  assert.ok(branding.includes(`&lt;img src="${site.href}branding/slices/discord.png" width="30%" alt="Join Discord"`));
   assert.ok(branding.includes('src="copy.js" defer'));
+  for (const [file, width, height] of [['slices/top.png', 1360, 303], ['slices/left.png', 60, 171], ['slices/discord.png', 408, 171], ['slices/right.png', 892, 171], ['slices/bottom.png', 1360, 86]]) {
+    const png = readFileSync(new URL(`../dist/branding/${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), width);
+    assert.equal(png.readUInt32BE(20), height);
+    assert.ok(branding.includes(`src="${site.href}branding/${file}"`));
+  }
   for (const [file, width, height] of [['banner.png', 1360, 560], ['banner-mobile.png', 800, 530], ['oryx-logo.png', 1448, 1086]]) {
     const png = readFileSync(new URL(`../dist/branding/${file}`, import.meta.url));
     assert.equal(png.readUInt32BE(16), width);
