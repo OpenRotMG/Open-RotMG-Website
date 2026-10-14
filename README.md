@@ -4,6 +4,8 @@ Game-first website for the Open RotMG recreation of Realm of the Mad God.
 
 Developing the server? Its `./run.sh` downloads the client and serves the whole game locally. See https://github.com/OpenRotMG/Open-RotMG-Server for setup.
 
+`/hiscores/` lists account records and clickable drop collections. Metrics and same-origin game APIs are defined in the server's `docs/hiscores.md`.
+
 ## Build locally
 
 Requires Node 22, Python 3, and a sibling `client` checkout at the revision in `tools/client-lock.json`.
