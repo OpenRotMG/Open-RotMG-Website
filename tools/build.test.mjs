@@ -107,8 +107,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
     assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}restoration/`]);
-    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Branding', 'Source', 'Discord']);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}hiscores/`, `${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));

@@ -1,6 +1,6 @@
 # Third-party artwork
 
-The Restoration sprites are exact crops from the preserved 123.5.1 Flash client. The recovered client originates from these preservation repositories:
+The Restoration and hiscore collection sprites are exact crops from the preserved 123.5.1 Flash client. Hiscores uses a small atlas of the current enemy-drop items; silhouettes are a CSS filter, not replacement artwork. The recovered client originates from these preservation repositories:
 
 https://github.com/ViciousFate/rotmg-redis
 
