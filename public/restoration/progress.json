@@ -1297,7 +1297,15 @@
       "criterion": "Entrance, beach layout, party encounter, consumables and rewards.",
       "icon": "assets/player/masked-party-god.png",
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "2012 content: the preserved chronology lists build 123.4.4; Beach Party Madness is dated August 16–21, 2012. Beachzone remains unimplemented, and complete historical rules are unverified.",
+        "verification": null,
+        "links": [
+          "https://wikiwiki.jp/rmd/DungeonChronology/table",
+          "https://wikiwiki.jp/rmd/Official%20Events/forum",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/1268d0ef116177c922eee5dc0471b647e320d31e/src/world.rs#L439-L462"
+        ]
+      },
       "development": false
     },
     {

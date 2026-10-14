@@ -10,6 +10,12 @@ test('reviewed player catalogue retains its membership and gates', () => {
   assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
   assert.equal(data.features.filter(f => f.category === 'conditions').length, 26);
   assert.equal(data.features.filter(f => f.category === 'dungeons').length, 16);
+  const beachzone = data.features.find(f => f.id === 'dungeons:beachzone');
+  assert.equal(beachzone.stage, 0);
+  assert.equal(beachzone.development, false);
+  assert.equal(beachzone.evidence.verification, null);
+  assert.match(beachzone.evidence.reference, /123\.4\.4.*2012/);
+  assert.ok(beachzone.evidence.links.includes('https://wikiwiki.jp/rmd/Official%20Events/forum'));
   assert.equal(percentage([{ stage: 0 }, { stage: 1 }, { stage: 2 }]), '50%');
   assert.equal(data.scope.candidate_features[0].scored, false);
   for (const id of ['realm:travel-between-worlds', 'social:trade-with-players', 'access:character-persistence', 'access:reconnect-safely']) {
