@@ -6,6 +6,8 @@ Developing the server? Its `./run.sh` downloads the client and serves the whole 
 
 `/hiscores/` lists account records and clickable drop collections. Metrics and same-origin game APIs are defined in the server's `docs/hiscores.md`.
 
+Before researching a feature's era, check the [historical feature ledger](docs/historical-features.md). Restoration evidence and gate assignments live in `public/restoration/progress.json`.
+
 ## Build locally
 
 Requires Node 22, Python 3, and a sibling `client` checkout at the revision in `tools/client-lock.json`.
