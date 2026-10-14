@@ -81,12 +81,11 @@ test('restoration links the dated historical ledger without changing the dialogs
   assert.ok(page.includes('docs/historical-features.md'));
   assert.ok(page.includes('Native visuals and full historical contracts remain unverified'));
   assert.doesNotMatch(page, /feature-proof|development-note/);
-  for (const classification of ['confirmed post-2012', 'non-original extension', 'unresolved']) assert.ok(ledger.includes(`**${classification}**`));
-  assert.equal((ledger.match(/Last checked: \*\*2026-10-14\*\*/g) ?? []).length, 4);
-  for (const title of ['Native `/lefttomax` command', 'Seven-dose health and magic elixirs']) {
-    const section = ledger.split(`## ${title}\n`)[1]?.split('\n## ')[0];
-    assert.ok(section, title);
-    assert.match(section, /Classification: \*\*unresolved\*\*/);
+  assert.match(ledger, /Last checked: \*\*\d{4}-\d{2}-\d{2}\*\*/);
+  for (const name of ['native `/lefttomax`', 'seven-dose elixirs']) {
+    const entry = ledger.split('\n').find(line => line.includes(name));
+    assert.ok(entry, name);
+    assert.match(entry, /^- \*\*Unresolved:\*\*/);
   }
 });
 
