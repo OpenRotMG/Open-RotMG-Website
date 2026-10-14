@@ -1,7 +1,7 @@
 export const boards = {
   base_fame: {title: 'Base fame', description: 'Highest base fame on a single character per account, living or dead.'},
-  collection: {title: 'Collection', description: 'Unique items personally picked up from enemy drops. Starter gear, trades and player-dropped items do not count.'},
-  total_fame: {title: 'Total fame', description: 'Lifetime fame credited from dead characters, before spending. Living characters do not count here.'}
+  collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
+  total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'}
 };
 export function ranked(players, board) {
   if (!Object.hasOwn(boards, board)) throw new Error('Unknown hiscore category');
@@ -62,7 +62,7 @@ async function start() {
   const refresh = async () => {
     try {
       const scores = await json('/api/hiscores');rows = ranked(scores.players, board);render();
-      status.textContent = rows.length ? `Updated ${new Date(scores.updated_at * 1000).toLocaleTimeString()}` : 'No ranked players yet. Sign into a registered game account to enter.';
+      status.textContent = rows.length ? '' : 'No ranked players yet.';
     } catch (error) {status.textContent = `Update failed: ${error.message}. Previously loaded records may be stale.`;}
   };
   await refresh();setInterval(refresh, 60000);
