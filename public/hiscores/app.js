@@ -42,7 +42,7 @@ async function start() {
       const tile = document.createElement('div'), sprite = document.createElement('span'), name = document.createElement('span'), state = document.createElement('span');
       tile.className = 'item';tile.dataset.name = item.name.toLowerCase();name.textContent = item.name;
       sprite.className = found.has(item.id) ? 'sprite' : 'sprite missing';sprite.setAttribute('aria-hidden', 'true');
-      sprite.style.backgroundPosition = `${-item.x * 2}px ${-item.y * 2}px`;
+      sprite.style.backgroundPosition = `${-item.x}px ${-item.y}px`;
       state.textContent = found.has(item.id) ? `Obtained ${new Date(found.get(item.id) * 1000).toLocaleDateString()}` : 'Not obtained';
       tile.append(sprite, name, state);grid.append(tile);
     }
