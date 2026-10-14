@@ -32,4 +32,5 @@ function start() {
     } finally {button.disabled = false;}
   });
 }
-if (typeof document !== 'undefined') start();
+// A new fragment must not retain the previous form's grant or password.
+if (typeof document !== 'undefined') {start();addEventListener('hashchange', () => location.reload());}

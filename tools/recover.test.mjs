@@ -19,7 +19,7 @@ test('reset secrets stay in a same-origin no-store JSON body, never URLs or cred
 });
 test('reset page erases fragments and hiscores use the requested concise copy',async () => {
   const app=await readFile(new URL('../public/recover/app.js',import.meta.url),'utf8');
-  assert.match(app,/history.replaceState/);assert.ok(!/localStorage|sessionStorage|console\./.test(app));
+  assert.match(app,/history.replaceState/);assert.match(app,/addEventListener\('hashchange', \(\) => location\.reload\(\)\)/);assert.ok(!/localStorage|sessionStorage|console\./.test(app));
   const html=await readFile(new URL('../public/recover/index.html',import.meta.url),'utf8');
   assert.match(html,/noindex,nofollow/);assert.match(html,/no-referrer/);assert.ok(!/<script[^>]*src="https?:/.test(html));
   const scores=await readFile(new URL('../public/hiscores/app.js',import.meta.url),'utf8');
