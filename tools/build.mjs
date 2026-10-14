@@ -26,12 +26,12 @@ const socketOrigin = site.origin.replace(/^http/, 'ws');
 const client = resolve(process.env.CLIENT_DIR);
 const revision = execFileSync('git', ['-C', client, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 if (revision !== lock.revision) throw new Error(`Client revision mismatch: expected ${lock.revision}, received ${revision}. Update the lock deliberately.`);
-execFileSync('git', ['-C', client, 'diff', '--quiet', 'HEAD', '--', 'client.swf', 'scripts/run.py']);
+execFileSync('git', ['-C', client, 'diff', '--quiet', 'HEAD', '--', 'client.swf', 'scripts/run.py', 'ruffle']);
 const swf = await readFile(join(client, 'client.swf'));
 if (createHash('sha256').update(swf).digest('hex') !== lock.swfSha256) throw new Error('Reference SWF checksum mismatch.');
 execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { stdio: 'inherit' });
 const runtimeFiles = await readdir(join(client, 'vendor'));
-if (runtimeFiles.length !== 7 || !runtimeFiles.includes('ruffle.js')) throw new Error('Expected the pinned seven-file Ruffle runtime.');
+if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
 
 const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
