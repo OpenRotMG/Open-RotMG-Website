@@ -138,7 +138,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
   assert.equal(createHash('sha256').update(swf).digest('hex'), lock.swfSha256);
   assert.ok(home.includes(`connect-src 'self' ${site.origin.replace(/^http/, 'ws')};`));
-  assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js"`));
+  assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js?v=${lock.revision}"`));
   assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
   assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/vendor', import.meta.url)), false);
