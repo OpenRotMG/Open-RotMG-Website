@@ -11,7 +11,7 @@
     "earned": 19,
     "possible": 418,
     "percent": 4.5,
-    "date": "2026-10-13",
+    "date": "2026-10-14",
     "excluded": [
       {
         "name": "Real-money payments and external platform login providers",
@@ -254,10 +254,11 @@
       "icon": "assets/player/wizard.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #19 verifies native leveling and tests level boundaries through 20 with selected class growth fields. Complete historical XP awards, sharing and growth rules remain unaccepted.",
+        "reference": "Merged PR #19 already implements random, per-class stat gains from selected XML minimum/maximum growth fields, with caps. Native leveling and level-boundary tests through 20 passed; this is existing work, not a new addition. Complete historical XP awards, sharing and growth rules remain unaccepted.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/store.rs#L49-L77"
         ]
       },
       "development": true
@@ -1728,10 +1729,12 @@
       "icon": null,
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #20 verifies native typed messages, speech bubbles, authenticated names and isolation across worlds and transfers. Slash commands are rejected; system death/level-20 announcements, enemy taunts and portal announcements in this complete feature contract remain unimplemented.",
+        "reference": "Merged PR #20 verifies native typed messages, speech bubbles, authenticated names and world isolation. PR #29 adds /pause; PR #31 adds /tell (/t), /ignore and /unignore with shared chat throttling and ignore filtering. The new commands passed Rust and encrypted-WebSocket checks, but native visuals remain unverified. System death/level-20 announcements, enemy taunts and portal announcements remain unimplemented.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/20"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/20",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/29",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/31"
         ]
       },
       "development": true,
@@ -1748,8 +1751,14 @@
       "criterion": "Private messages, recipient selection and visibility.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #31 implements private cross-world /tell (/t), authenticated names, recipient selection, sender echo, ignore filtering and shared chat throttling. Rust and two independent encrypted-WebSocket harnesses passed privacy, spoofing, isolation and lifecycle checks. Named-sender eligibility follows a 2013 reference, not proven original 2012 server policy. Native chat rendering remains unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/31"
+        ]
+      },
+      "development": true
     },
     {
       "id": "social:guild-chat",
@@ -1785,8 +1794,14 @@
       "criterion": "Saved player locks and their visible effects.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #31 implements native account-list packets and durable account-ID locks, including reconnect, transfer, restart and backup/restore. Rust and encrypted-WebSocket checks passed, including failure recovery after an optimistic lock addition. Native lock indicators and visible effects remain unverified; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/31"
+        ]
+      },
+      "development": true
     },
     {
       "id": "social:ignore-players",
@@ -1795,8 +1810,14 @@
       "criterion": "Saved ignore lists and chat filtering.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged PR #31 implements durable account-ID ignore lists, native list edits, /ignore and /unignore with offline targets, and filtering of local chat and private tells. Rust and encrypted-WebSocket checks passed account isolation, persistence, fault/race handling and list bounds. Native UI and complete historical policy remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/31"
+        ]
+      },
+      "development": true
     },
     {
       "id": "social:teleport-to-players",
@@ -2140,8 +2161,14 @@
       "criterion": "Movement speed and interaction with Speedy and terrain.",
       "icon": "assets/player/condition-slowed.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #30 implements player-only condition mechanics. Slowed movement uses the selected-client speed rule and takes precedence over Speedy. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Slowed",
         "array_index": 4,
@@ -2170,8 +2197,14 @@
       "criterion": "Firing rate and interaction with Berserk.",
       "icon": "assets/player/condition-dazed.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #30 implements player-only condition mechanics. Dazed uses the selected-client firing rate; early native volleys consume shot counters and RNG without firing. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Dazed",
         "array_index": 6,
@@ -2185,8 +2218,14 @@
       "criterion": "Shot and ability restrictions, duration and removal.",
       "icon": "assets/player/condition-stunned.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #30 implements player-only condition mechanics. Stunned suppresses player shots while preserving native counters and RNG; it does not disable abilities. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Stunned",
         "array_index": 7,
@@ -2290,8 +2329,14 @@
       "criterion": "Movement and ability restrictions, duration and removal.",
       "icon": "assets/player/condition-paralyzed.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #30 implements player-only condition mechanics. Paralyzed prevents player movement; it does not disable abilities. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Paralyzed",
         "array_index": 14,
@@ -2305,8 +2350,14 @@
       "criterion": "Speed multiplier and interaction with terrain and Slowed.",
       "icon": "assets/player/condition-speedy.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #30 implements player-only condition mechanics. Speedy applies the selected-client movement multiplier, with Slowed taking precedence. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. No supported naturally earned Speedy grant exists; its WebSocket projectile fixture was synthetic. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Speedy",
         "array_index": 15,
@@ -2380,8 +2431,14 @@
       "criterion": "Pause eligibility, movement, targeting and expiry.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Merged PR #29 implements /pause, the selected 123.5.1 Paused mask, frozen movement and regeneration, blocked actions, targeting and damage immunity. Rust regressions and live encrypted-WebSocket checks passed. The eight-tile safety radius follows a historical reference server; complete original-server parity and native visuals remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/29"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Paused",
         "array_index": 21,

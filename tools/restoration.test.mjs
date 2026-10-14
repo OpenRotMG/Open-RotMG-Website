@@ -49,6 +49,46 @@ test('requested category icons are distinct original sprites', () => {
   }
 });
 
+test('merged pause, conditions and social work stays development-only', () => {
+  const data = catalogue();
+  for (const [id, pr] of [
+    ['condition:21', 29],
+    ...[4, 6, 7, 14, 15].map(n => [`condition:${n}`, 30]),
+    ...['chat', 'whispers', 'lock-players', 'ignore-players'].map(name => [`social:${name}`, 31])
+  ]) {
+    const feature = data.features.find(f => f.id === id);
+    assert.equal(feature.stage, 0, id);
+    assert.equal(feature.development, true, id);
+    assert.equal(feature.evidence.verification, null, id);
+    assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), id);
+    assert.match(feature.evidence.reference, /[Nn]ative .*unverified/, id);
+  }
+  for (const n of [4, 6, 7, 14]) {
+    const reference = data.features.find(f => f.id === `condition:${n}`).evidence.reference;
+    assert.match(reference, /player-only condition mechanics/);
+    assert.match(reference, /prepared fixtures; current naturally spawned enemies do not apply this condition/);
+  }
+  assert.match(data.features.find(f => f.id === 'condition:15').evidence.reference, /no supported naturally earned Speedy grant/i);
+  assert.match(data.features.find(f => f.id === 'social:whispers').evidence.reference, /2013 reference/);
+  assert.doesNotMatch(data.features.find(f => f.id === 'social:chat').evidence.reference, /Slash commands are rejected/);
+  assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /PR #19 already implements random, per-class stat gains/);
+  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
+});
+
+test('restoration links the dated historical ledger without changing the dialogs', () => {
+  const page = readFileSync(new URL('../public/restoration/index.html', import.meta.url), 'utf8');
+  const ledger = readFileSync(new URL('../docs/historical-features.md', import.meta.url), 'utf8');
+  assert.ok(page.includes('docs/historical-features.md'));
+  assert.ok(page.includes('Native visuals and full historical contracts remain unverified'));
+  assert.doesNotMatch(page, /feature-proof|development-note/);
+  assert.match(ledger, /Last checked: \*\*\d{4}-\d{2}-\d{2}\*\*/);
+  for (const name of ['native `/lefttomax`', 'seven-dose elixirs']) {
+    const entry = ledger.split('\n').find(line => line.includes(name));
+    assert.ok(entry, name);
+    assert.match(entry, /^- \*\*Unresolved:\*\*/);
+  }
+});
+
 test('missing proof, invalid stages, duplicate IDs and tampered totals fail closed', () => {
   for (const [mutate, error] of [
     [d => { d.features[0].stage = 3; }, /Invalid feature/],
