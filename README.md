@@ -4,8 +4,6 @@ Game-first website for the Open RotMG recreation of Realm of the Mad God.
 
 Developing the server? Its `./run.sh` downloads the client and serves the whole game locally. See https://github.com/OpenRotMG/Open-RotMG-Server for setup.
 
-`/hiscores/` lists account records and clickable drop collections. Metrics and same-origin game APIs are defined in the server's `docs/hiscores.md`.
-
 Before researching a feature's era, check the [historical feature ledger](docs/historical-features.md). Restoration evidence and gate assignments live in `public/restoration/progress.json`.
 
 ## Build locally
