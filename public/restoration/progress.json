@@ -11,7 +11,7 @@
     "earned": 19,
     "possible": 418,
     "percent": 4.5,
-    "date": "2026-10-14",
+    "date": "2026-10-15",
     "excluded": [
       {
         "name": "Real-money payments and external platform login providers",
@@ -100,8 +100,15 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/rogue.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements cloak invisibility, targeting and expiry; Planewalker teleport. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:archer",
@@ -110,8 +117,15 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/archer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements tiered quivers and their projectile conditions; special quiver activations. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:wizard",
@@ -120,7 +134,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/wizard.png",
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "Merged class work implements tiered spell novas, selected projectile damage and special multi-nova spells. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
       "development": true
     },
     {
@@ -131,10 +152,11 @@
       "icon": "assets/player/priest.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #24 adds an earned Wizard-level-5 Priest unlock, selected starting fields and tier 0–6 single-activation HealNova tomes. Native healing restored an injured Wizard from 284 to 331 HP and consumed Priest mana. UT/multi-activation behavior and the complete class progression are not verified, so no full Priest restoration gate is awarded.",
+        "reference": "Merged class work implements tiered healing, cleansing and Armored tome activations. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/24"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/24",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
         ]
       },
       "development": true
@@ -146,8 +168,15 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/warrior.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements berserk and Speedy helm effects; Juggernaut Armored. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:knight",
@@ -156,8 +185,15 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/knight.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements shield cone damage and Stunned; Ogmur Armor Broken. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:paladin",
@@ -166,8 +202,15 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/paladin.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements healing and Damaging seals; the Seal of Blasphemous Prayer invulnerability effect. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:assassin",
@@ -176,8 +219,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/assassin.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements poison grenades with delayed damage-over-time fields. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:necromancer",
@@ -186,8 +235,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/necromancer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements vampire blasts, enemy damage and bounded healing. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:huntress",
@@ -196,8 +251,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/huntress.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements placed traps, triggering, damage and conditions. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:mystic",
@@ -206,8 +267,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/mystic.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements stasis, target immunity and bounded suspension. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:trickster",
@@ -216,8 +283,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/trickster.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements teleport, decoys, prism-specific effects and the old single-blast Ghostly candidate. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts. Ghostly bomb radius and delay remain reconstruction choices.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:sorcerer",
@@ -226,8 +299,14 @@
       "criterion": "Starting loadout, class stats and every tier of the class ability.",
       "icon": "assets/player/sorcerer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Merged class work implements chained lightning, target bounds and scepter-specific conditions. Selected XML loadouts, growth and ability metadata are used; native ability tests include prepared characters. Complete target-era class and every-item behavior are not accepted historical contracts.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "heroes:choose-and-unlock-classes",
@@ -237,14 +316,17 @@
       "icon": "assets/player/rogue.png",
       "stage": 1,
       "evidence": {
-        "reference": "Selected class XML, original chooser/CREATE bytecode and researched unlock records. Existing ready-to-implement issues #1 and #2.",
+        "reference": "Selected class XML, original chooser/CREATE bytecode and researched unlock records. Existing ready-to-implement issues #1 and #2. The existing accepted chooser reference is retained. PRs #38, #42 and #46 extend persisted unlock prerequisites and class creation to all thirteen classes. Prepared ability demonstrations do not establish every ordinary unlock journey, so no recreation gate is added.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/server/issues/1",
-          "https://github.com/OpenRotMG/server/issues/2"
+          "https://github.com/OpenRotMG/server/issues/2",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
         ]
       },
-      "development": false
+      "development": true
     },
     {
       "id": "heroes:level-to-20",
@@ -254,11 +336,12 @@
       "icon": "assets/player/wizard.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #19 already implements random, per-class stat gains from selected XML minimum/maximum growth fields, with caps. Native leveling and level-boundary tests through 20 passed; this is existing work, not a new addition. Complete historical XP awards, sharing and growth rules remain unaccepted.",
+        "reference": "Merged PR #19 already implements random, per-class stat gains from selected XML minimum/maximum growth fields, with caps. Native leveling and level-boundary tests through 20 passed; this is existing work, not a new addition. Complete historical XP awards, sharing and growth rules remain unaccepted. PR #35 adds inland progression and permanent-stat consumption. XP sharing, reward rates and complete historical progression remain candidate policies.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
-          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/store.rs#L49-L77"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/store.rs#L49-L77",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
         ]
       },
       "development": true
@@ -270,8 +353,14 @@
       "criterion": "Fame earned while alive and the displayed progress toward the next class quest.",
       "icon": "assets/player/priest.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "PR #35 records earned base fame as XP/1000 and retains it with committed progression and death. This is a reference-server candidate policy; complete original fame scoring and death bonuses are not restored.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true,
       "requirements": [
         "The XP-to-fame HUD transition at level 20.",
         "Living fame gains and progress toward class quests."
@@ -320,8 +409,16 @@
       "criterion": "Vitality, Wisdom, caps and condition interactions.",
       "icon": "assets/player/health-potion.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Shared regeneration, Quiet/Sick interactions and class healing effects are implemented. Prepared native ability tests cover several healing paths; the full historical recovery contract remains unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "hero:death",
@@ -357,11 +454,15 @@
       "icon": null,
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #21 adds seeded terrain with coastal-to-inland biomes, roads and native traversal. This is a new candidate generator, not the recovered original generator or complete Realm population and closure.",
+        "reference": "Seeded candidate terrain now carries inland populations, grouped Elves, shore/lowland families and bounded Godlands encounters. Roads, placement, density and replacement policies are reconstructions, not recovered original generation.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/21",
-          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/data/README.md"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d85952fbfc633e516ff14f14997d5428623e5c50/data/README.md",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/40",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
         ]
       },
       "development": true
@@ -373,8 +474,16 @@
       "criterion": "Level-appropriate targets, quest arrows and enemy discovery.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Level-filtered quest targets, distant native markers, replacement targets and quest credit are implemented. Native Elf and lowland encounters exercise these paths; complete original selection and credit policies remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/40",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true,
       "requirements": [
         "Level-appropriate targets, quest arrows and enemy discovery.",
         "Quest completion feedback, replacement targets and credit rules."
@@ -387,8 +496,14 @@
       "criterion": "Encounter population, Oryx announcements, closing and the castle transfer.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "A candidate closure cycle uses six finite original Red Demon/Cyclops identities, announcements, countdown, admission sealing, collective Castle transfer and a replacement Realm. Prepared collective transfer is not a freshly earned full Realm clear or accepted historical population policy.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:walk-and-dodge",
@@ -397,7 +512,14 @@
       "criterion": "Speed, normalized input, walls, corners, slowing, sinking and movement validation.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "PR #35 adds shared conditions and terrain movement; PR #36 changes native movement/cadence authority to preserve the unchanged client through network jitter while retaining bounded ingress. This is candidate responsiveness work, not complete historical movement or load acceptance.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36"
+        ]
+      },
       "development": true
     },
     {
@@ -407,7 +529,17 @@
       "criterion": "Weapon cadence and trajectories, hit selection, defense, conditions and damage acknowledgements.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "Native cadence, mirrored projectiles and once-only acknowledged contact handling coexist with shared simulated combat. Class abilities and Godlands effects extend combat coverage. Complete historical combat rules and representative load remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
       "development": true
     },
     {
@@ -417,8 +549,14 @@
       "criterion": "Lava, pools, sinking, pushing, collision and protective equipment.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected dungeon conveyors, traps, delayed grenades and encounter fields are implemented. Complete target lava, pools, sinking and protective-equipment interactions are not established.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:travel-between-worlds",
@@ -484,8 +622,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/red-demon.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements a selected-XML candidate minion encounter and three finite originals used by Realm closure. Spawn placement, AI, reward rates and complete original-server behavior remain reconstructions.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:oasis-giant",
@@ -504,8 +648,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/cyclops-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements a selected-XML candidate minion encounter and three finite originals used by Realm closure. Spawn placement, AI, reward rates and complete original-server behavior remain reconstructions.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:phoenix-lord",
@@ -574,8 +724,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/dwarf-king.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places Dwarf Kings with explicit attacks and loot in their XML biome. The full coordinated Dwarf family, replenishment and historical encounter rules are not restored.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:horned-drake",
@@ -604,8 +760,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/sandsman-king.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:giant-crab",
@@ -624,8 +786,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/hobbit-mage.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:undead-hobbit-mage",
@@ -634,8 +802,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/undead-hobbit-mage.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:elf-wizard",
@@ -644,8 +818,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/elf-wizard.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #40 replaces independent Elves with bounded Wizard-led groups, role-specific movement, reinforcement, explicit leader loss and camp replacement. Prepared native multiplayer combat, rewards and same-character persistence were tested. Exact 123.5.1 AI and population rules remain candidate reconstructions.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/40"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:goblin-mage",
@@ -654,8 +834,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/goblin-mage.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:great-coil-snake",
@@ -674,8 +860,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/scorpion-queen.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:bandit-leader",
@@ -684,8 +876,14 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/bandit-leader.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:lord-of-the-lost-lands",
@@ -784,8 +982,14 @@
       "criterion": "Ordinary pirates: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/pirate.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 adds Pirate/Piratess/Snake coastal variety, corrects pirate/cube terrain placement and distributes the bounded shore population beyond arrival. Prepared native travel and combat were tested. Complete target spawning, variants and drops remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:scorpions",
@@ -794,8 +998,14 @@
       "criterion": "Ordinary scorpions: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/poison-scorpion.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:bandits",
@@ -804,8 +1014,14 @@
       "criterion": "Ordinary bandits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/bandit.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:elves",
@@ -814,8 +1030,14 @@
       "criterion": "Ordinary elves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/elf-archer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #40 replaces independent Elves with bounded Wizard-led groups, role-specific movement, reinforcement, explicit leader loss and camp replacement. Prepared native multiplayer combat, rewards and same-character persistence were tested. Exact 123.5.1 AI and population rules remain candidate reconstructions.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/40"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:night-elves",
@@ -824,8 +1046,14 @@
       "criterion": "Ordinary night elves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/night-elf-archer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:dwarves",
@@ -834,8 +1062,14 @@
       "criterion": "Ordinary dwarves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/dwarf-axebearer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:undead-dwarves",
@@ -844,8 +1078,14 @@
       "criterion": "Ordinary undead dwarves: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/undead-dwarf-warrior.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:hobbits",
@@ -854,8 +1094,14 @@
       "criterion": "Ordinary hobbits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/hobbit-rogue.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:undead-hobbits",
@@ -864,8 +1110,14 @@
       "criterion": "Ordinary undead hobbits: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/undead-hobbit-rogue.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:goblins",
@@ -874,8 +1126,14 @@
       "criterion": "Ordinary goblins: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/goblin-rogue.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 implements the selected family with bounded followers, distinct combat, reinforcement, leader loss and cleared-group replacement. Prepared two-native-player encounters exercise quests, XP and return. Historical placement, cooldowns and orphan policies remain reconstructed; no full restoration gate is awarded.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:orcs",
@@ -904,8 +1162,14 @@
       "criterion": "Ordinary ogres: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/ogre-mage.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:nomads",
@@ -984,8 +1248,14 @@
       "criterion": "Ordinary golems: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/fire-golem.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements Fire and Darkness Golem encounters. Earth, Paper, Metal and Clockwork variants and complete family/population behavior are still missing.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:sprites",
@@ -994,8 +1264,14 @@
       "criterion": "Ordinary sprites: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/fire-sprite.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:ents",
@@ -1054,8 +1330,14 @@
       "criterion": "Ordinary cubes: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/red-gelatinous-cube.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #45 adds Pirate/Piratess/Snake coastal variety, corrects pirate/cube terrain placement and distributes the bounded shore population beyond arrival. Prepared native travel and combat were tested. Complete target spawning, variants and drops remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:medusa",
@@ -1064,8 +1346,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/medusa.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:ent-god",
@@ -1074,8 +1362,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/ent-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:beholder",
@@ -1084,8 +1378,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/beholder.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:flying-brain",
@@ -1094,8 +1394,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/flying-brain.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:slime-god",
@@ -1104,8 +1410,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/slime-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:ghost-god",
@@ -1114,8 +1426,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/ghost-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:djinn",
@@ -1124,8 +1442,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/djinn.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies. The candidate uses a telegraphed three-second self-destruction.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:leviathan",
@@ -1134,8 +1458,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/leviathan.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies. Cloak detection is implemented; movement interpretation remains reconstructed.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:white-demon",
@@ -1144,8 +1474,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/white-demon.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:sprite-god",
@@ -1154,8 +1490,14 @@
       "criterion": "Godlands spawning, attacks, movement, dungeon drops and loot.",
       "icon": "assets/player/sprite-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #47 implements all ten ordinary Godlands gods with distinct combat, selected XML projectiles, normal rewards and bounded population. Prepared native cases defeated each god; earned drops and same-character persistence were tested. Exact target AI, site weights, leashes and reward probabilities remain candidate policies. Sprite Children and construct trios share the unchanged 32-body Mountain cap.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "dungeons:pirate-cave",
@@ -1191,8 +1533,14 @@
       "criterion": "Entrance, maze, snakes, Stheno and rewards.",
       "icon": "assets/player/stheno-the-snake-queen.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements seeded seven-room candidate routing, destructible walls and grates, Stheno phases, rewards, permanent Speed and return paths. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "dungeons:forbidden-jungle",
@@ -1211,8 +1559,14 @@
       "criterion": "Glowing entrance, terrain, native sprites, Limon and rewards.",
       "icon": "assets/player/limon-the-sprite-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements candidate map, conveyors, native sprites, Limon phases, rewards, permanent Dexterity and return paths. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "dungeons:undead-lair",
@@ -1221,8 +1575,14 @@
       "criterion": "Entrance, rooms, undead encounters, Septavius and rewards.",
       "icon": "assets/player/septavius-the-ghost-god.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements candidate rooms, traps, splitting enemies, Septavius phases, rewards, permanent Wisdom and return paths. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "dungeons:abyss-of-demons",
@@ -1311,12 +1671,18 @@
     {
       "id": "dungeons:oryx-s-castle",
       "category": "dungeons",
-      "name": "Oryx’s Castle",
+      "name": "Oryx\u2019s Castle",
       "criterion": "Castle entry, destructible walls, guardian activation, both Stone Guardians, their loot and the Chamber entrance.",
       "icon": "assets/player/oryx-stone-guardian-right.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "PR #35 implements candidate collective entry, minion rooms, paired full-strength Guardians, recovery/swords, loot and earned Chamber entry. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true,
       "requirements": [
         "Castle layout, destructible walls and its minion encounters.",
         "The exact activation condition for the red and blue Stone Guardians.",
@@ -1328,12 +1694,18 @@
     {
       "id": "dungeons:oryx-s-chamber",
       "category": "dungeons",
-      "name": "Oryx’s Chamber",
+      "name": "Oryx\u2019s Chamber",
       "criterion": "Oryx 1: chamber entry, the complete boss fight, rewards and the locked Wine Cellar exit.",
       "icon": "assets/player/oryx-the-mad-god-1.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "PR #35 implements candidate full-strength Oryx 1 phases, summons, rewards and committed Incantation unlocking. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true,
       "requirements": [
         "Oryx 1 attack phases, summons, taunts and status-effect interactions.",
         "Rewards, participation credit and bag ownership.",
@@ -1348,8 +1720,19 @@
       "criterion": "Incantation entry, drunken corridors, Oryx 2, Wine Cellar loot and return.",
       "icon": "assets/player/oryx-the-mad-god-2.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 implements candidate Incantation entry, full-strength Oryx 2 combat, rewards, native collection and durable return. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted. Wine Barrel placement and complete ordinary corridor encounters are still incomplete.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true,
+      "requirements": [
+        "Committed Incantation consumption, entry and portal lifetime.",
+        "Target corridor layout, destructible barrels, ordinary enemies and Drunk/Slowed/Sick hazards.",
+        "Complete Oryx 2 encounter, participation, rewards and return."
+      ]
     },
     {
       "id": "gear:swords",
@@ -1358,8 +1741,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/short-sword.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:daggers",
@@ -1368,8 +1760,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/steel-dagger.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:bows",
@@ -1378,8 +1779,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/shortbow.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:wands",
@@ -1388,8 +1798,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/fire-wand.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:staves",
@@ -1398,8 +1817,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/energy-staff.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:leather-armor",
@@ -1408,8 +1836,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/leather-armor.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:heavy-armor",
@@ -1418,8 +1855,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/iron-mail.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:robes",
@@ -1428,8 +1874,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/robe-of-the-neophyte.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:rings",
@@ -1438,8 +1893,17 @@
       "criterion": "All target tiers and unique variants, their equip rules, exact stats and native item behavior. Acquisition is covered by loot.",
       "icon": "assets/player/ring-of-minor-defense.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Selected XML equip stats and starting/progression gear are used by the implemented classes and native encounters. This is candidate item behavior, not acceptance of every target tier, unique variant and acquisition rule.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:loot-and-ownership",
@@ -1449,10 +1913,13 @@
       "icon": "assets/player/loot-bag.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #19 implements real drops, participation, private/public bags, pickup and expiry. Selected item identities are preserved, but complete target drop tables, credit thresholds and rates remain provisional.",
+        "reference": "PR #35 extends real drops and participation with account-private boss rewards, bounded bags and commit-before-publication collection. Native earned pickups and durable return/reconnect are tested in separate declared runs. Complete historical drop tables, thresholds and rates remain provisional.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
         ]
       },
       "development": true
@@ -1464,7 +1931,15 @@
       "criterion": "Equip, swap, drag, pick up and drop without losing or duplicating items.",
       "icon": "assets/player/vault-chest.png",
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "Native drag/drop, equip, pickup and atomic save barriers are exercised by dungeon, class and Realm encounters. Canonical inventory/revision, permanent death and collected-slot conservation are tested; complete target equip/interaction coverage remains unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
       "development": true,
       "requirements": [
         "Equip, swap, drag, pick up and drop without losing or duplicating items.",
@@ -1478,7 +1953,14 @@
       "criterion": "Every target health-potion size, consumption and HP caps.",
       "icon": "assets/player/health-potion.png",
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "Ordinary native healing-potion use, consumption, HP caps and Sick restrictions are exercised in progression and class tests. Every target size and its complete historical interactions remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
       "development": true
     },
     {
@@ -1488,8 +1970,15 @@
       "criterion": "Every target magic-potion size, consumption and MP caps.",
       "icon": "assets/player/magic-potion.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Native mana-potion use and committed consumption are implemented, with MP caps and Quiet restrictions. Complete target-size coverage and historical interactions remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:stat-potions",
@@ -1498,8 +1987,15 @@
       "criterion": "All eight permanent stat potions and class-specific caps.",
       "icon": "assets/player/potion-of-defense.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #35 adds atomic permanent-stat consumption and class caps, including Speed/Dexterity/Wisdom dungeon progression. Godlands candidate drops extend acquisition. All eight historical acquisition tables, rates and full potion coverage remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:elixirs",
@@ -1528,8 +2024,14 @@
       "criterion": "Target dungeon beverages and their individual effects.",
       "icon": "assets/player/coral-juice.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "Snake Oil healing and condition-aware consumption are implemented in PR #35. This is partial support, not verification of every target dungeon beverage.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+        ]
+      },
+      "development": true
     },
     {
       "id": "gear:rum-and-mushrooms",
@@ -1920,7 +2422,18 @@
       "criterion": "Two or more players see movement, attacks, enemies, drops and departures consistently.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
+      "evidence": {
+        "reference": "Native multiplayer encounters show shared movement, attacks, enemies, rewards and transfers; PR #34 restores same-world minimap players without widening fog/private loot. Complete nearby-panel, visibility and historical multiplayer contracts remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/34",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/40",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/45",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
       "development": true,
       "requirements": [
         "Consistent movement, attacks, enemies, drops and departures for multiple players.",
@@ -2139,8 +2652,16 @@
       "criterion": "Mana loss, regeneration suppression and expiry.",
       "icon": "assets/player/condition-quiet.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Quiet mana loss, regeneration suppression and mana-use restrictions are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Quiet",
         "array_index": 2,
@@ -2154,8 +2675,15 @@
       "criterion": "Damage reduction and interaction with Damaging.",
       "icon": "assets/player/condition-weak.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Weak and Damaging attack multipliers are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Weak",
         "array_index": 3,
@@ -2170,10 +2698,13 @@
       "icon": "assets/player/condition-slowed.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #30 implements player-only condition mechanics. Slowed movement uses the selected-client speed rule and takes precedence over Speedy. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "reference": "Slowed movement, terrain and Speedy precedence, including trap/projectile sources are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42"
         ]
       },
       "development": true,
@@ -2190,8 +2721,15 @@
       "criterion": "Healing restrictions, duration and removal.",
       "icon": "assets/player/condition-sick.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Sick healing restrictions and expiry are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Sick",
         "array_index": 5,
@@ -2206,10 +2744,12 @@
       "icon": "assets/player/condition-dazed.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #30 implements player-only condition mechanics. Dazed uses the selected-client firing rate; early native volleys consume shot counters and RNG without firing. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "reference": "Dazed attack cadence and its interaction with Berserk are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
         ]
       },
       "development": true,
@@ -2227,10 +2767,12 @@
       "icon": "assets/player/condition-stunned.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #30 implements player-only condition mechanics. Stunned suppresses player shots while preserving native counters and RNG; it does not disable abilities. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "reference": "Stunned shooting and ability restrictions on players and enemies are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
         ]
       },
       "development": true,
@@ -2247,8 +2789,16 @@
       "criterion": "Restricted vision, rendering, duration and removal.",
       "icon": "assets/player/condition-blind.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Selected Blind projectile metadata, timed publication and native condition masks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Blind",
         "array_index": 8,
@@ -2262,8 +2812,15 @@
       "criterion": "Sprite substitutions, duration and removal.",
       "icon": "assets/player/condition-hallucinating.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Selected Hallucinating metadata and timed native condition masks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Hallucinating",
         "array_index": 9,
@@ -2277,8 +2834,15 @@
       "criterion": "Camera distortion, aiming, duration and removal.",
       "icon": "assets/player/condition-drunk.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Selected Drunk metadata and timed native condition masks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Drunk",
         "array_index": 10,
@@ -2292,8 +2856,16 @@
       "criterion": "Movement input remapping, duration and removal.",
       "icon": "assets/player/condition-confused.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Selected Confused metadata and timed native condition masks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Confused",
         "array_index": 11,
@@ -2307,8 +2879,15 @@
       "criterion": "Targets that resist stun and how immunity is displayed.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Shared enemy stun-immunity checks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Stun Immume",
         "array_index": 12,
@@ -2322,8 +2901,17 @@
       "criterion": "Visibility, enemy targeting, damage and expiry.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Cloak invisibility, enemy target selection and expiry; Leviathan detection are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Invisible",
         "array_index": 13,
@@ -2338,10 +2926,13 @@
       "icon": "assets/player/condition-paralyzed.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #30 implements player-only condition mechanics. Paralyzed prevents player movement; it does not disable abilities. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. Authentic XML projectile metadata was tested using prepared fixtures; current naturally spawned enemies do not apply this condition. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "reference": "Paralyzed movement restrictions, projectile sources and expiry are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38"
         ]
       },
       "development": true,
@@ -2359,10 +2950,13 @@
       "icon": "assets/player/condition-speedy.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #30 implements player-only condition mechanics. Speedy applies the selected-client movement multiplier, with Slowed taking precedence. Timed expiry, movement/firing budgets and encrypted-WebSocket checks passed. No supported naturally earned Speedy grant exists; its WebSocket projectile fixture was synthetic. Duration replacement follows a historical reference server; complete historical coverage and native visuals remain unverified.",
+        "reference": "Speedy from selected helm/cloak abilities, with Slowed precedence are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/30",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/42"
         ]
       },
       "development": true,
@@ -2379,8 +2973,15 @@
       "criterion": "Damage over time, death limits, duration and removal.",
       "icon": "assets/player/condition-bleeding.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Bleeding damage-over-time and regeneration interactions are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Bleeding",
         "array_index": 16,
@@ -2394,8 +2995,15 @@
       "criterion": "HP regeneration, caps, duration and removal.",
       "icon": "assets/player/condition-healing.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Healing regeneration effects and Sick interactions are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Healing",
         "array_index": 18,
@@ -2409,8 +3017,15 @@
       "criterion": "Attack multiplier and interaction with Weak.",
       "icon": "assets/player/condition-damaging.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Damaging party effects and Weak interaction are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Damaging",
         "array_index": 19,
@@ -2424,8 +3039,15 @@
       "criterion": "Firing rate and interaction with Dazed.",
       "icon": "assets/player/condition-berserk.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Berserk firing-rate effects and Dazed interaction are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Berserk",
         "array_index": 20,
@@ -2460,8 +3082,15 @@
       "criterion": "Enemy suspension, damage restrictions, duration and immunity.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Stasis suspension, damage restrictions and expiry are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Stasis",
         "array_index": 22,
@@ -2475,8 +3104,15 @@
       "criterion": "Targets immune to Stasis and the original feedback.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Stasis immunity and original-client immune feedback are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Stasis Immune",
         "array_index": 23,
@@ -2490,8 +3126,15 @@
       "criterion": "Damage immunity and targeting rules.",
       "icon": null,
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Shared Invincible damage immunity checks are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Invincible",
         "array_index": 24,
@@ -2505,8 +3148,15 @@
       "criterion": "Damage immunity and differences from Invincible.",
       "icon": "assets/player/condition-invulnerable.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Invulnerable boss phases and class ability effects are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Invulnerable",
         "array_index": 25,
@@ -2520,8 +3170,15 @@
       "criterion": "Defense multiplier and interaction with Armor Broken.",
       "icon": "assets/player/condition-armored.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Armored defense effects and expiry are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Armored",
         "array_index": 26,
@@ -2535,8 +3192,15 @@
       "criterion": "Defense bypass and interaction with Armored.",
       "icon": "assets/player/condition-armor-broken.png",
       "stage": 0,
-      "evidence": null,
-      "development": false,
+      "evidence": {
+        "reference": "Armor Broken defense bypass from selected ability effects are implemented in the shared condition/ability or selected-projectile paths. Prepared native tests cover bounded cases, not every source and removal rule. Native full-feature coverage and the complete historical contract remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46"
+        ]
+      },
+      "development": true,
       "source": {
         "original_name": "Armor Broken",
         "array_index": 27,

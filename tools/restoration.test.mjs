@@ -42,6 +42,31 @@ test('reviewed player catalogue retains its membership and gates', () => {
   }
 });
 
+test('recent merged gameplay adds candidate evidence without restoration points', () => {
+  const data = catalogue();
+  assert.equal(data.scope.date, '2026-10-15');
+  for (const [ids, pr] of [
+    [data.features.slice(0, 13).map(f => f.id), 46],
+    [['snake-pit', 'sprite-world', 'undead-lair', 'oryx-s-castle', 'oryx-s-chamber', 'wine-cellar'].map(n => `dungeons:${n}`), 35],
+    [['realm:elves', 'realm:elf-wizard'], 40],
+    [['bandit-leader', 'scorpion-queen', 'sandsman-king', 'hobbit-mage', 'undead-hobbit-mage', 'goblin-mage', 'pirates', 'cubes'].map(n => `realm:${n}`), 45],
+    [['medusa', 'ent-god', 'beholder', 'flying-brain', 'slime-god', 'ghost-god', 'djinn', 'leviathan', 'white-demon', 'sprite-god'].map(n => `realm:${n}`), 47]
+  ]) {
+    for (const id of ids) {
+      const feature = data.features.find(f => f.id === id);
+      assert.equal(feature.stage, 0, id);
+      assert.equal(feature.development, true, id);
+      assert.equal(feature.evidence.verification, null, id);
+      assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), id);
+    }
+  }
+  assert.match(data.features.find(f => f.id === 'dungeons:wine-cellar').evidence.reference, /Barrel placement.*incomplete/);
+  for (const id of ['realm:ent-ancient', 'realm:pentaract', 'dungeons:abyss-of-demons', 'condition:28']) {
+    assert.equal(data.features.find(f => f.id === id).development, false, id);
+  }
+  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
+});
+
 test('requested category icons are distinct original sprites', () => {
   const data = catalogue(), icons = Object.fromEntries(data.categories.map(c => [c.id, c.icon]));
   assert.notEqual(icons.heroes, icons.access);
@@ -69,12 +94,11 @@ test('merged pause, conditions and social work stays development-only', () => {
     assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), id);
     assert.match(feature.evidence.reference, /[Nn]ative .*unverified/, id);
   }
-  for (const n of [4, 6, 7, 14]) {
-    const reference = data.features.find(f => f.id === `condition:${n}`).evidence.reference;
-    assert.match(reference, /player-only condition mechanics/);
-    assert.match(reference, /prepared fixtures; current naturally spawned enemies do not apply this condition/);
+  for (const [n, pr] of [[4, 46], [6, 46], [7, 46], [14, 38], [15, 42]]) {
+    const feature = data.features.find(f => f.id === `condition:${n}`);
+    assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`));
+    assert.doesNotMatch(feature.evidence.reference, /player-only|naturally spawned enemies do not apply|no supported naturally earned Speedy/i);
   }
-  assert.match(data.features.find(f => f.id === 'condition:15').evidence.reference, /no supported naturally earned Speedy grant/i);
   assert.match(data.features.find(f => f.id === 'social:whispers').evidence.reference, /2013 reference/);
   assert.doesNotMatch(data.features.find(f => f.id === 'social:chat').evidence.reference, /Slash commands are rejected/);
   assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /PR #19 already implements random, per-class stat gains/);
@@ -85,7 +109,9 @@ test('restoration links the dated historical ledger without changing the dialogs
   const page = readFileSync(new URL('../public/restoration/index.html', import.meta.url), 'utf8');
   const ledger = readFileSync(new URL('../docs/historical-features.md', import.meta.url), 'utf8');
   assert.ok(page.includes('docs/historical-features.md'));
-  assert.ok(page.includes('Native visuals and full historical contracts remain unverified'));
+  assert.ok(page.includes('15 October 2026'));
+  assert.ok(page.includes('Full historical contracts remain unverified'));
+  for (const pr of [35, 40, 45, 46, 47]) assert.ok(page.includes(`/pull/${pr}`));
   assert.doesNotMatch(page, /feature-proof|development-note/);
   assert.match(ledger, /Last checked: \*\*\d{4}-\d{2}-\d{2}\*\*/);
   for (const name of ['native `/lefttomax`', 'seven-dose elixirs']) {
