@@ -1,0 +1,7 @@
+#status { color: #aaa79c; font-size: 11px; }
+.update { padding: 23px 0; border-top: 1px solid #303030; overflow-wrap: anywhere; scroll-margin-top: 16px; }
+.update:target { border-top-color: #cb8585; }
+.update h2 { font: normal 20px/1.4 Georgia, serif; margin: 0 0 8px; }
+.update h2 a { color: #dbd9ca; text-decoration: none; }
+.update .meta { color: #aaa79c; font-size: 11px; margin-bottom: 14px; }
+.update .content { white-space: pre-wrap; }
