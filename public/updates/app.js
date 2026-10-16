@@ -1,5 +1,6 @@
 const discordId = value => typeof value === 'string' && /^[1-9]\d{16,19}$/.test(value) && BigInt(value) <= 18446744073709551615n;
 const timestamp = value => Number.isSafeInteger(value) && value > 0 && value <= 2147483647;
+const renderedSources = new WeakMap();
 export function validateFeed(feed) {
   if (!feed || (feed.synced_at === null ? feed.source !== null : !timestamp(feed.synced_at) || !feed.source || typeof feed.source !== 'object')) throw new Error('Malformed updates feed');
   if (feed.source === null) return feed;
@@ -27,8 +28,8 @@ export async function loadFeed(fetchImpl = fetch) {
 export function renderFeed(feed, document, now = Date.now()) {
   validateFeed(feed);
   const container = document.querySelector('#updates');
-  const nodes = [];
-  if (feed.source) for (const post of feed.source.posts) {
+  const source = JSON.stringify(feed.source), changed = renderedSources.get(container) !== source, nodes = [];
+  if (changed && feed.source) for (const post of feed.source.posts) {
     const article = document.createElement('article'), heading = document.createElement('h2'), permalink = document.createElement('a');
     const meta = document.createElement('p'), date = document.createElement('time'), original = document.createElement('a'), body = document.createElement('p');
     article.className = 'update'; article.id = post.id;
@@ -64,9 +65,10 @@ export function renderFeed(feed, document, now = Date.now()) {
     }
     nodes.push(article);
   }
-  container.replaceChildren(...nodes);
+  // The minute polling must not replace a playing video when only synced_at changes.
+  if (changed) {container.replaceChildren(...nodes); renderedSources.set(container, source);}
   document.querySelector('#status').textContent = feed.synced_at === null ? 'Updates have not been synced yet.'
-    : `${nodes.length ? 'Recent updates' : 'No updates posted yet'}. Last synced ${new Date(feed.synced_at * 1000).toLocaleString()}.${now - feed.synced_at * 1000 > 300000 ? ' Sync is overdue; these posts may be out of date.' : ''}`;
+    : `${feed.source.posts.length ? 'Recent updates' : 'No updates posted yet'}. Last synced ${new Date(feed.synced_at * 1000).toLocaleString()}.${now - feed.synced_at * 1000 > 300000 ? ' Sync is overdue; these posts may be out of date.' : ''}`;
 }
 async function start() {
   const refresh = async () => {

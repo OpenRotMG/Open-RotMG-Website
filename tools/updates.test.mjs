@@ -39,6 +39,8 @@ test('attachments render inline media or file links and report expired media',()
   assert.equal(video.children[0].preload,'metadata');assert.equal(video.children[0].src,f.source.posts[0].attachments[0].url);
   assert.equal(image.children[0].tag,'img');assert.equal(image.children[0].alt,'screen.png');
   assert.equal(file.children.length,1);assert.equal(file.children[0].href,url+'notes.txt');
+  const playing=d.nodes['#updates'].children;
+  f.synced_at+=60;renderFeed(f,d);assert.equal(d.nodes['#updates'].children,playing);
   video.children[0].error();assert.match(video.children.at(-1).textContent,/Unable to load attachment: demo.mp4/);
   for (const bad of ['javascript:alert(1)','https://cdn.discordapp.com.evil.test/attachments/x','https://example.org/a.mp4']) {
     f.source.posts[0].attachments[0].url=bad;assert.throws(()=>renderFeed(f,d),/Malformed update attachment/);
