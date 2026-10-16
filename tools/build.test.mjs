@@ -160,12 +160,12 @@ test('branded loading screen stays until Ruffle resolves', async () => {
   const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
   const player = { ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
-    window: { RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
+    window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
     document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
   });
   assert.equal(options.splashScreen, false);
   assert.equal(options.url, 'https://example.test/client.swf');
-  assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game');
+  assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
   assert.equal(options.socketProxy[0].port, 2050);
   assert.equal(options.urlRewriteRules[0][1], 'https://example.test/legacy-api/');
@@ -184,7 +184,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
     const player = { ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
-      window: { RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
+      window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
       document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
     });
     const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);

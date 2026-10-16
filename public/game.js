@@ -4,6 +4,7 @@
   document.querySelector('#game').append(player);
   const socketEndpoint = new URL('/game', document.baseURI);
   socketEndpoint.protocol = socketEndpoint.protocol === 'https:' ? 'wss:' : 'ws:';
+  window.OpenRotMGDiagnostics.start(socketEndpoint);
   await player.ruffle().load({
     url: new URL('/client.swf', document.baseURI).href,
     autoplay: 'on',

@@ -1,0 +1,68 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+import {webcrypto} from 'node:crypto';
+
+function fixture({longTasks = true, graphicsError = false} = {}) {
+  let tick, frame, visibility, observer, time = 0, status = 204;
+  const uploads = [], errors = [];
+  const document = {
+    baseURI: 'https://example.test/', hidden: false,
+    createElement: () => ({getContext() {if (graphicsError) throw Error('blocked'); return null;}}),
+    querySelector: () => ({getBoundingClientRect: () => ({width: 800, height: 600})}),
+    addEventListener: (event, callback) => {assert.equal(event, 'visibilitychange'); visibility = callback;}
+  };
+  class Observer {
+    static supportedEntryTypes = longTasks ? ['longtask'] : [];
+    constructor(callback) {observer = callback;}
+    observe(options) {assert.equal(options.type, 'longtask');}
+  }
+  const context = {window: {}, crypto: webcrypto, URL, document, devicePixelRatio: 1.5, PerformanceObserver: Observer,
+    performance: {now: () => time}, requestAnimationFrame: callback => {frame = callback;},
+    setInterval: (callback, delay) => {assert.equal(delay, 5000); tick = callback;}, AbortSignal,
+    console: {error: (...args) => errors.push(args)}, fetch: async (url, options) => {
+      if (!options?.method) return Response.json({website: 'a'.repeat(40), client: 'b'.repeat(40)});
+      uploads.push({url: url.href, options}); return new Response(null, {status});
+    }
+  };
+  runInNewContext(readFileSync(new URL('../public/diagnostics.js', import.meta.url), 'utf8'), context);
+  const endpoint = new URL('wss://example.test/game');
+  context.window.OpenRotMGDiagnostics.start(endpoint);
+  return {endpoint, uploads, errors, document, sample: async () => {time += 5000; await tick();},
+    frame: t => frame(t), task: ms => observer({getEntries: () => [{duration: ms}]}), visibility: () => visibility(), status: value => {status = value;}};
+}
+
+test('wrapper uses a random per-page socket key, bounded telemetry and no identifying fields', async () => {
+  const f = fixture();
+  assert.match(f.endpoint.searchParams.get('diagnostics'), /^[a-f0-9]{32}$/);
+  assert.notEqual(f.endpoint.href, fixture().endpoint.href);
+  await new Promise(resolve => setImmediate(resolve));
+  f.frame(0); f.frame(16); f.frame(216); f.task(80);
+  await f.sample();
+  const upload = f.uploads[0];
+  assert.equal(upload.url, `https://example.test/api/diagnostics/${f.endpoint.searchParams.get('diagnostics')}`);
+  assert.equal(upload.options.redirect, 'error');
+  const sample = JSON.parse(upload.options.body);
+  assert.deepEqual(sample, {build: JSON.stringify({website: 'a'.repeat(40), client: 'b'.repeat(40)}), renderer: null,
+    renderer_status: 'webgl-unavailable', width: 800, height: 600, pixel_ratio: 1.5,
+    hidden: false, hidden_during_interval: false, frames: 3, max_frame_gap_ms: 200, long_tasks: 1, long_task_ms: 80, elapsed_ms: 5000});
+  f.document.hidden = true; f.visibility(); f.document.hidden = false; f.visibility();
+  await f.sample();
+  const next = JSON.parse(f.uploads[1].options.body);
+  assert.equal(next.frames, 0); assert.equal(next.long_tasks, 0); assert.equal(next.hidden_during_interval, true);
+});
+
+test('unsupported long tasks and probe errors remain explicitly unavailable, not fabricated success', async () => {
+  const f = fixture({longTasks: false, graphicsError: true});
+  await f.sample();
+  const sample = JSON.parse(f.uploads[0].options.body);
+  assert.equal(sample.renderer, null); assert.equal(sample.renderer_status, 'probe-error');
+  assert.equal(sample.long_tasks, null); assert.equal(sample.long_task_ms, null);
+  assert.equal(f.errors.length, 1);
+});
+
+test('title-screen/transfer absence is expected; real upload errors remain visible', async () => {
+  const f = fixture(); f.status(409); await f.sample(); assert.equal(f.errors.length, 0);
+  f.status(400); await f.sample(); assert.deepEqual(f.errors[0], ['Bug diagnostics upload rejected', 400]);
+});
