@@ -6,6 +6,8 @@ const feed = () => ({synced_at:1700000100,source:{guild_id:'12345678901234567',c
 class Node {
   children=[];
   append(...children) {this.children.push(...children);}
+  setAttribute(name,value) {this[name]=value;}
+  addEventListener(name,callback) {this[name]=callback;}
   replaceChildren(...children) {this.children=children;}
 }
 function document() {
@@ -25,6 +27,22 @@ test('updates render escaped text, dates, paragraphs and stable public/Discord l
   assert.equal(body.textContent,'<script>bad()</script>\n\nAnother paragraph.');
   assert.match(d.nodes['#status'].textContent,/Last synced/);
   renderFeed(f,d,1700001000000);assert.match(d.nodes['#status'].textContent,/Sync is overdue/);
+});
+test('attachments render inline media or file links and report expired media',()=>{
+  const f=feed(), url='https://cdn.discordapp.com/attachments/23456789012345678/34567890123456789/';
+  f.source.posts[0].attachments=[{filename:'demo.mp4',url:url+'demo.mp4?ex=abc&hm=def',content_type:'video/mp4'},
+    {filename:'screen.png',url:url+'screen.png',content_type:'image/png'},
+    {filename:'notes.txt',url:url+'notes.txt',content_type:null}];
+  const d=document();renderFeed(f,d);
+  const [video,image,file]=d.nodes['#updates'].children[0].children.slice(3);
+  assert.equal(video.children[0].tag,'video');assert.equal(video.children[0].controls,true);
+  assert.equal(video.children[0].preload,'metadata');assert.equal(video.children[0].src,f.source.posts[0].attachments[0].url);
+  assert.equal(image.children[0].tag,'img');assert.equal(image.children[0].alt,'screen.png');
+  assert.equal(file.children.length,1);assert.equal(file.children[0].href,url+'notes.txt');
+  video.children[0].error();assert.match(video.children.at(-1).textContent,/Unable to load attachment: demo.mp4/);
+  for (const bad of ['javascript:alert(1)','https://cdn.discordapp.com.evil.test/attachments/x','https://example.org/a.mp4']) {
+    f.source.posts[0].attachments[0].url=bad;assert.throws(()=>renderFeed(f,d),/Malformed update attachment/);
+  }
 });
 test('unsynced and empty channels differ; bad posts cannot replace published DOM',()=>{
   const d=document();renderFeed({synced_at:null,source:null},d);assert.match(d.nodes['#status'].textContent,/not been synced/);
