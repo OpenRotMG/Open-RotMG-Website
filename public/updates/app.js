@@ -9,7 +9,7 @@ export function validateFeed(feed) {
   for (const post of posts) {
     if (!discordId(post.id) || (previous && BigInt(post.id) >= BigInt(previous)) || typeof post.content !== 'string'
         || !post.content.trim() || post.content !== post.content.trim() || post.content.length > 8000
-        || /[\x00-\x08\x0b-\x1f\x7f-\x9f]/.test(post.content) || !timestamp(post.published_at)
+        || /[\x00-\x08\x0b-\x1f\x7f-\x9f\ufffe\uffff]/.test(post.content) || !timestamp(post.published_at)
         || !(post.edited_at === null || (timestamp(post.edited_at) && post.edited_at >= post.published_at))) throw new Error('Malformed update post');
     previous = post.id;
   }

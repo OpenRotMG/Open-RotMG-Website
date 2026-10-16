@@ -34,7 +34,7 @@ test('unsynced and empty channels differ; bad posts cannot replace published DOM
   assert.throws(()=>renderFeed(bad,d),/Malformed/);assert.equal(d.nodes['#updates'].children,previous);
   for (const mutate of [f=>f.source.guild_id='javascript:alert(1)',f=>f.source.posts[0].id='18446744073709551616',
     f=>f.source.posts[0].published_at=-1,f=>f.source.posts[0].content='',f=>f.source.posts[0].edited_at=1,
-    f=>f.source.posts[0].content='x'.repeat(8001)]) {
+    f=>f.source.posts[0].content='x'.repeat(8001),f=>f.source.posts[0].content='a\uffffb']) {
     const f=feed();mutate(f);assert.throws(()=>validateFeed(f),/Malformed/);
   }
 });
