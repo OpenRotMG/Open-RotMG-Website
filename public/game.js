@@ -20,7 +20,7 @@
     logLevel: 'warn',
     socketProxy: [{ host: '127.0.0.1', port: 2050, proxyUrl: socketEndpoint.href }],
     urlRewriteRules: [
-      [/^https?:\/\/127\.0\.0\.1:8080\/(?=(?:char|account|fame)\/)/, new URL('/legacy-api/', document.baseURI).href],
+      [/^https?:\/\/127\.0\.0\.1:8080\/(?=(?:char|account|fame|guild)\/)/, new URL('/legacy-api/', document.baseURI).href],
       [/^https?:\/\/realmofthemadgod\.appspot\.com\/sfx\//, new URL('/sfx/', document.baseURI).href]
     ]
   });
