@@ -5,13 +5,13 @@
     "target": "123.5.1",
     "unit": "Complete player-facing feature bundles. No extra points for their files, assets, internal phases, tiers or tests.",
     "gate_rule": "One gate for an accepted complete reference contract, one for implementation verified against it.",
-    "research_accepted": 10,
-    "implementation_verified": 9,
+    "research_accepted": 11,
+    "implementation_verified": 10,
     "features": 209,
-    "earned": 19,
+    "earned": 21,
     "possible": 418,
-    "percent": 4.5,
-    "date": "2026-10-15",
+    "percent": 5,
+    "date": "2026-10-16",
     "excluded": [
       {
         "name": "Real-money payments and external platform login providers",
@@ -31,7 +31,7 @@
       {
         "name": "Character news and death history",
         "scored": false,
-        "reason": "Visible in period footage and present in selected original CharsAndNews/News bytecode; retention, ordering and service boundaries need review.",
+        "reason": "PR #64 restores native News from a persistent Discord updates feed. The original full character-news/death-history retention and ordering contract is still unresolved; no feature or completion points are added.",
         "notes": "plans/restoration/footage-review.md"
       }
     ]
@@ -336,12 +336,15 @@
       "icon": "assets/player/wizard.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #19 already implements random, per-class stat gains from selected XML minimum/maximum growth fields, with caps. Native leveling and level-boundary tests through 20 passed; this is existing work, not a new addition. Complete historical XP awards, sharing and growth rules remain unaccepted. PR #35 adds inland progression and permanent-stat consumption. XP sharing, reward rates and complete historical progression remain candidate policies.",
+        "reference": "Merged PR #19 already implements random, per-class stat gains from selected XML minimum/maximum growth fields, with caps. Native leveling and level-boundary tests through 20 passed; this is existing work, not a new addition. Complete historical XP awards, sharing and growth rules remain unaccepted. PR #35 adds inland progression and permanent-stat consumption. XP sharing, reward rates and complete historical progression remain candidate policies. Issue #69's historical check confirms that Build 108 (November 2010) already capped ordinary per-enemy XP at 10% of the next-level requirement, including 5 XP at level 1. This resolves that specific era question, not every XP/sharing rule.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
           "https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f2cd0ce0d8df557fed79154e66f872f72039b1/src/store.rs#L49-L77",
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/issues/69#issuecomment-6217136676",
+          "https://wikiwiki.jp/rmd/version/build108",
+          "https://wikiwiki.jp/rmd/ステータス/ステータスの詳細#EXP"
         ]
       },
       "development": true
@@ -382,8 +385,16 @@
       "name": "Class stars",
       "criterion": "Class fame quests, unlock records and account star totals.",
       "icon": "assets/player/class-stars.png",
-      "stage": 0,
-      "evidence": null,
+      "stage": 2,
+      "evidence": {
+        "reference": "Recovered 123.5.1 client util §_-ZB§ defines class-fame thresholds [20,150,400,800,2000], stars from each class BestFame, and the next quest above max(current fame, class best), returning -1 after the last quest. ClassStats reads BestLevel and BestFame. Fame earning and death-bonus formulas are separate catalogue features.",
+        "verification": "PR #55 implements committed per-class fame maxima, account star totals, the next class quest and native status fields. On server 0309acf, all five store::presentation_tests passed: every threshold boundary, class isolation, lower later deaths, replacement characters, reopen, backup/restore and corrupt-record rejection. The native packet regression separately checks star and quest fields. These are implementation tests, not a new all-class gameplay journey.",
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/55",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/store/presentation_tests.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/client_contract_tests.rs"
+        ]
+      },
       "development": false
     },
     {
@@ -497,10 +508,11 @@
       "icon": null,
       "stage": 0,
       "evidence": {
-        "reference": "A candidate closure cycle uses six finite original Red Demon/Cyclops identities, announcements, countdown, admission sealing, collective Castle transfer and a replacement Realm. Prepared collective transfer is not a freshly earned full Realm clear or accepted historical population policy.",
+        "reference": "The candidate closure cycle now tracks ten finite original identities: six Red Demon/Cyclops originals plus Ent Ancient, Lich, Ghost King and Phoenix Lord. PR #59 preserves identity through transformations so only final defeats contribute; announcements, admission sealing and collective Castle transfer remain implemented. Prepared collective transfer is not a freshly earned full Realm clear or accepted original population policy.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/59"
         ]
       },
       "development": true
@@ -513,11 +525,12 @@
       "icon": null,
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 adds shared conditions and terrain movement; PR #36 changes native movement/cadence authority to preserve the unchanged client through network jitter while retaining bounded ingress. This is candidate responsiveness work, not complete historical movement or load acceptance.",
+        "reference": "PR #35 adds shared conditions and terrain movement; PR #36 changes native movement/cadence authority to preserve the unchanged client through network jitter while retaining bounded ingress. This is candidate responsiveness work, not complete historical movement or load acceptance. PR #55 restores the selected client's half-cell movement/corner validation and collision rules, with boundary regressions. Full terrain and historical movement acceptance remain open.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/55"
         ]
       },
       "development": true
@@ -530,14 +543,15 @@
       "icon": null,
       "stage": 0,
       "evidence": {
-        "reference": "Native cadence, mirrored projectiles and once-only acknowledged contact handling coexist with shared simulated combat. Class abilities and Godlands effects extend combat coverage. Complete historical combat rules and representative load remain unverified.",
+        "reference": "Native cadence, mirrored projectiles and once-only acknowledged contact handling coexist with shared simulated combat. Class abilities and Godlands effects extend combat coverage. Complete historical combat rules and representative load remain unverified. PR #55 corrects native damage precision/RNG draw order, parametric projectile lobes, shots across nonwalkable water and void/cover collision, with packet/trajectory regressions and native before/after evidence.",
         "verification": null,
         "links": [
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/36",
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/38",
           "https://github.com/OpenRotMG/Open-RotMG-Server/pull/46",
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/47",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/55"
         ]
       },
       "development": true
@@ -582,8 +596,17 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/ent-ancient.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #59 implements damage evaluation, growth transformations, projectile stages and vulnerability windows. PR #63 adds the named boss's reference-derived setpiece, habitat placement, rotations and protected spacing. The pinned community reference is moistosaurus/realm-src@1855c017; selected 123.5.1 identities and projectiles remain authoritative. Phase, transformation, reward and setpiece regressions plus merged native demonstrations cover implementation. Original 2012 timing, population and reward parity remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/59",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/63",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_quests.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_setpieces.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:lich",
@@ -592,8 +615,17 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/lich.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #59 implements damage-triggered waves, encounter-owned minions, healing and final transformation. PR #63 adds the named boss's reference-derived setpiece, habitat placement, rotations and protected spacing. The pinned community reference is moistosaurus/realm-src@1855c017; selected 123.5.1 identities and projectiles remain authoritative. Phase, transformation, reward and setpiece regressions plus merged native demonstrations cover implementation. Original 2012 timing, population and reward parity remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/59",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/63",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_quests.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_setpieces.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:ghost-king",
@@ -602,8 +634,17 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/ghost-king.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #59 implements the Ghost Master release sequence, owned subjects and final transformation. PR #63 adds the named boss's reference-derived setpiece, habitat placement, rotations and protected spacing. The pinned community reference is moistosaurus/realm-src@1855c017; selected 123.5.1 identities and projectiles remain authoritative. Phase, transformation, reward and setpiece regressions plus merged native demonstrations cover implementation. Original 2012 timing, population and reward parity remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/59",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/63",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_quests.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_setpieces.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:deathmage",
@@ -664,8 +705,17 @@
       "criterion": "Spawn rules, the whole encounter including transformations and minions, target combat behavior and rewards.",
       "icon": "assets/player/phoenix-lord.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #59 implements Lord, Egg and Reborn forms with carried damage and once-only final rewards. PR #63 adds the named boss's reference-derived setpiece, habitat placement, rotations and protected spacing. The pinned community reference is moistosaurus/realm-src@1855c017; selected 123.5.1 identities and projectiles remain authoritative. Phase, transformation, reward and setpiece regressions plus merged native demonstrations cover implementation. Original 2012 timing, population and reward parity remain unverified.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/59",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/63",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_quests.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/realm_setpieces.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:evil-chicken-god",
@@ -1047,10 +1097,13 @@
       "icon": "assets/player/night-elf-archer.png",
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "reference": "PR #52 implements living Midlands/Highlands groups. Lizard God camps include Night Elf King, Archer, Warrior, Mage and Veteran roles. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
         ]
       },
       "development": true
@@ -1063,10 +1116,13 @@
       "icon": "assets/player/dwarf-axebearer.png",
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "reference": "PR #52 implements living Midlands/Highlands groups. Dwarf King camps include Axebearer, Mage and Veteran followers. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
         ]
       },
       "development": true
@@ -1079,10 +1135,13 @@
       "icon": "assets/player/undead-dwarf-warrior.png",
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "reference": "PR #52 implements living Midlands/Highlands groups. Undead Dwarf God camps include King, Warrior, Axebearer, Mage and Soulless Dwarf roles. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
         ]
       },
       "development": true
@@ -1142,8 +1201,16 @@
       "criterion": "Ordinary orcs: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/orc-warrior.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #52 implements living Midlands/Highlands groups. Orc King camps include warriors, mages and the healing Queen, with camp-owned reinforcement and combat. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:shield-orcs",
@@ -1152,8 +1219,16 @@
       "criterion": "Ordinary shield orcs: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/shield-orc-key.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #52 implements living Midlands/Highlands groups. Shield Orc Key, Flooder and Shield groups include healing, orbiting shields, telegraphed final bursts and surviving followers. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:ogres",
@@ -1163,10 +1238,13 @@
       "icon": "assets/player/ogre-mage.png",
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 places selected variants with explicit movement, attacks, XML projectiles and candidate loot. These are individual inland encounters, not complete historical family behavior or population rules.",
+        "reference": "PR #52 implements living Midlands/Highlands groups. Nonreproducing Ogre King bands include Mage, Warrior and Wizard roles. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
         ]
       },
       "development": true
@@ -1198,8 +1276,16 @@
       "criterion": "Ordinary flayers: target-era variants, spawning, movement, attacks and drops. Named quest bosses are tracked separately.",
       "icon": "assets/player/flayer.png",
       "stage": 0,
-      "evidence": null,
-      "development": false
+      "evidence": {
+        "reference": "PR #52 implements living Midlands/Highlands groups. Flayer God camps include Flayer and Flayer Veteran followers. Selected XML supplies identities, terrain and projectiles; bounded placement, density and respawn policies remain reconstructions. Deterministic family tests and the merged native demonstration are implementation evidence, not acceptance of the complete historical family contract.",
+        "verification": null,
+        "links": [
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/52",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/population.rs",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0309acf/src/world/midlands_tests.rs"
+        ]
+      },
+      "development": true
     },
     {
       "id": "realm:skeletons",
@@ -1534,10 +1620,11 @@
       "icon": "assets/player/stheno-the-snake-queen.png",
       "stage": 0,
       "evidence": {
-        "reference": "PR #35 implements seeded seven-room candidate routing, destructible walls and grates, Stheno phases, rewards, permanent Speed and return paths. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted.",
+        "reference": "PR #35 implements seeded seven-room candidate routing, destructible walls and grates, Stheno phases, rewards, permanent Speed and return paths. Prepared native and shared-engine tests cover declared separate stages and lives, not one newly earned complete journey. Layouts, AI and full target adventure contracts remain unaccepted. PR #62 extends autonomous crews through inland progression and Snake Pit. This is additional implementation coverage, not acceptance of original maze generation, the entire adventure or historical reward tables.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/35",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/62"
         ]
       },
       "development": true
@@ -2151,10 +2238,11 @@
       "icon": "assets/player/nexus-portal.png",
       "stage": 0,
       "evidence": {
-        "reference": "Merged PR #19 implements a safe Nexus and destination travel. The recovered map is a candidate, not an authenticated target layout; the full Nexus contract remains unverified.",
+        "reference": "Merged PR #19 implements a safe Nexus and destination travel. The recovered map is a candidate, not an authenticated target layout; the full Nexus contract remains unverified. PR #51 restores shared fountain healing within five tiles, once per second for up to 100 HP, respecting maximum HP and Sick. Cadence/range tests and ordinary native escape-to-fountain recordings passed. This does not authenticate the entire Nexus layout.",
         "verification": null,
         "links": [
-          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19"
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/19",
+          "https://github.com/OpenRotMG/Open-RotMG-Server/pull/51"
         ]
       },
       "development": true

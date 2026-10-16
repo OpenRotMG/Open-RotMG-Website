@@ -7,7 +7,7 @@ const catalogue = () => JSON.parse(readFileSync(new URL('../public/restoration/p
 
 test('reviewed player catalogue retains its membership and gates', () => {
   const data = catalogue();
-  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
+  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
   assert.equal(data.features.filter(f => f.category === 'conditions').length, 26);
   assert.equal(data.features.filter(f => f.category === 'dungeons').length, 16);
   const beachzone = data.features.find(f => f.id === 'dungeons:beachzone');
@@ -44,7 +44,7 @@ test('reviewed player catalogue retains its membership and gates', () => {
 
 test('recent merged gameplay adds candidate evidence without restoration points', () => {
   const data = catalogue();
-  assert.equal(data.scope.date, '2026-10-15');
+  assert.equal(data.scope.date, '2026-10-16');
   for (const [ids, pr] of [
     [data.features.slice(0, 13).map(f => f.id), 46],
     [['snake-pit', 'sprite-world', 'undead-lair', 'oryx-s-castle', 'oryx-s-chamber', 'wine-cellar'].map(n => `dungeons:${n}`), 35],
@@ -61,10 +61,37 @@ test('recent merged gameplay adds candidate evidence without restoration points'
     }
   }
   assert.match(data.features.find(f => f.id === 'dungeons:wine-cellar').evidence.reference, /Barrel placement.*incomplete/);
-  for (const id of ['realm:ent-ancient', 'realm:pentaract', 'dungeons:abyss-of-demons', 'condition:28']) {
+  for (const id of ['realm:pentaract', 'dungeons:abyss-of-demons', 'condition:28']) {
     assert.equal(data.features.find(f => f.id === id).development, false, id);
   }
-  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
+  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
+});
+
+test('October 16 review credits class stars but keeps partial gameplay out of completion', () => {
+  const data = catalogue();
+  const stars = data.features.find(f => f.id === 'heroes:class-stars');
+  assert.equal(stars.stage, 2);
+  assert.equal(stars.development, false);
+  assert.match(stars.evidence.reference, /20,150,400,800,2000/);
+  assert.match(stars.evidence.verification, /five store::presentation_tests passed/);
+  assert.ok(stars.evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/55'));
+  for (const [names, prs] of [
+    [['orcs', 'shield-orcs', 'dwarves', 'undead-dwarves', 'night-elves', 'ogres', 'flayers'], [52]],
+    [['ent-ancient', 'lich', 'ghost-king', 'phoenix-lord'], [59, 63]]
+  ]) {
+    for (const name of names) {
+      const f = data.features.find(f => f.id === `realm:${name}`);
+      assert.equal(f.stage, 0, name);
+      assert.equal(f.development, true, name);
+      assert.equal(f.evidence.verification, null, name);
+      for (const pr of prs) assert.ok(f.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), name);
+    }
+  }
+  assert.ok(data.features.find(f => f.id === 'home:nexus').evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/51'));
+  assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /5 XP at level 1/);
+  assert.match(data.features.find(f => f.id === 'realm:realm-closure').evidence.reference, /ten finite original identities/);
+  assert.equal(data.features.filter(f => f.development || f.stage === 2).length, 132);
+  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
 });
 
 test('requested category icons are distinct original sprites', () => {
@@ -102,16 +129,16 @@ test('merged pause, conditions and social work stays development-only', () => {
   assert.match(data.features.find(f => f.id === 'social:whispers').evidence.reference, /2013 reference/);
   assert.doesNotMatch(data.features.find(f => f.id === 'social:chat').evidence.reference, /Slash commands are rejected/);
   assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /PR #19 already implements random, per-class stat gains/);
-  assert.deepEqual(validateCatalogue(data), { e: 10, v: 9, n: 209, percent: '4.5%' });
+  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
 });
 
 test('restoration links the dated historical ledger without changing the dialogs', () => {
   const page = readFileSync(new URL('../public/restoration/index.html', import.meta.url), 'utf8');
   const ledger = readFileSync(new URL('../docs/historical-features.md', import.meta.url), 'utf8');
   assert.ok(page.includes('docs/historical-features.md'));
-  assert.ok(page.includes('15 October 2026'));
-  assert.ok(page.includes('Full historical contracts remain unverified'));
-  for (const pr of [35, 40, 45, 46, 47]) assert.ok(page.includes(`/pull/${pr}`));
+  assert.ok(page.includes('16 October 2026'));
+  assert.ok(page.includes('Other additions retain their historical-verification gaps'));
+  for (const pr of [51, 52, 55, 59, 63]) assert.ok(page.includes(`/pull/${pr}`));
   assert.doesNotMatch(page, /feature-proof|development-note/);
   assert.match(ledger, /Last checked: \*\*\d{4}-\d{2}-\d{2}\*\*/);
   for (const name of ['native `/lefttomax`', 'seven-dose elixirs']) {

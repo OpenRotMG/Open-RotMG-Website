@@ -137,7 +137,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, 209);
-  assert.equal(restoration.percent, '4.5%');
+  assert.equal(restoration.percent, '5%');
+  assert.ok(restorationPage.includes('132 of 209 features have implementation work.'));
+  assert.equal(progress.features.filter(f => f.development || f.stage === 2).length, 132);
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const lock = JSON.parse(readFileSync(new URL('./client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
