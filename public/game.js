@@ -15,7 +15,7 @@
     splashScreen: false,
     unmuteOverlay: 'hidden',
     preferredRenderer: 'wgpu-webgl',
-    openUrlMode: 'deny',
+    openUrlMode: 'confirm',
     allowScriptAccess: false,
     logLevel: 'warn',
     socketProxy: [{ host: '127.0.0.1', port: 2050, proxyUrl: socketEndpoint.href }],

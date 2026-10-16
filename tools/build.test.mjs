@@ -94,6 +94,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
+  assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));
+  const updates = readFileSync(new URL('../dist/updates/index.html', import.meta.url), 'utf8');
+  assert.ok(updates.includes(`rel="canonical" href="${site.href}updates/"`));
+  assert.ok(updates.includes('id="updates"'));
+  assert.ok(!updates.includes('{{'));
   assert.ok(sitemap.includes(`<loc>${site.href}restoration/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}branding/</loc>`));
   const restorationPage = readFileSync(new URL('../dist/restoration/index.html', import.meta.url), 'utf8');
@@ -106,9 +111,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     const nav = html.match(/<nav aria-label="Project">(.*?)<\/nav>/s)[1];
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
-    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}restoration/`]);
+    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}updates/`, `${site.pathname}restoration/`]);
     assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}hiscores/`, `${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Updates', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
@@ -165,6 +170,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
     document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
   });
   assert.equal(options.splashScreen, false);
+  assert.equal(options.openUrlMode, 'confirm');
   assert.equal(options.url, 'https://example.test/client.swf');
   assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
