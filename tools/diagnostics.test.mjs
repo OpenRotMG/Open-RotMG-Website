@@ -4,9 +4,9 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import {webcrypto} from 'node:crypto';
 
-function fixture({longTasks = true, graphicsError = false} = {}) {
+function fixture({longTasks = true, graphicsError = false, loaded = true} = {}) {
   let tick, frame, visibility, observer, time = 0, status = 204;
-  const uploads = [], errors = [];
+  const uploads = [], errors = [], lookups = [];
   const document = {
     baseURI: 'https://example.test/', hidden: false,
     createElement: () => ({getContext() {if (graphicsError) throw Error('blocked'); return null;}}),
@@ -22,16 +22,29 @@ function fixture({longTasks = true, graphicsError = false} = {}) {
     performance: {now: () => time}, requestAnimationFrame: callback => {frame = callback;},
     setInterval: (callback, delay) => {assert.equal(delay, 5000); tick = callback;}, AbortSignal,
     console: {error: (...args) => errors.push(args)}, fetch: async (url, options) => {
-      if (!options?.method) return Response.json({website: 'a'.repeat(40), client: 'b'.repeat(40)});
+      if (!options?.method) { lookups.push(url.href); return Response.json({website: 'a'.repeat(40), client: 'b'.repeat(40)}); }
       uploads.push({url: url.href, options}); return new Response(null, {status});
     }
   };
   runInNewContext(readFileSync(new URL('../public/diagnostics.js', import.meta.url), 'utf8'), context);
   const endpoint = new URL('wss://example.test/game');
-  context.window.OpenRotMGDiagnostics.start(endpoint);
-  return {endpoint, uploads, errors, document, sample: async () => {time += 5000; await tick();},
+  let load;
+  const player = {addEventListener(event, callback, options) {assert.equal(event, 'loadeddata'); assert.equal(options.once, true); load = callback;}};
+  context.window.OpenRotMGDiagnostics.start(endpoint, player);
+  if (loaded) load();
+  return {load, endpoint, uploads, lookups, errors, document, sample: async () => {time += 5000; await tick();},
     frame: t => frame(t), task: ms => observer({getEntries: () => [{duration: ms}]}), visibility: () => visibility(), status: value => {status = value;}};
 }
+
+test('startup sends no build lookup or telemetry and starts only after the movie loads', async () => {
+  const f = fixture({loaded: false});
+  assert.equal(f.uploads.length, 0);
+  assert.equal(f.lookups.length, 0);
+  assert.throws(() => f.frame(0));
+  f.load();
+  await f.sample();
+  assert.equal(f.uploads.length, 1);
+});
 
 test('wrapper uses a random per-page socket key, bounded telemetry and no identifying fields', async () => {
   const f = fixture();

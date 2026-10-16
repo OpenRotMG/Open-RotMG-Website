@@ -4,7 +4,11 @@
   document.querySelector('#game').append(player);
   const socketEndpoint = new URL('/game', document.baseURI);
   socketEndpoint.protocol = socketEndpoint.protocol === 'https:' ? 'wss:' : 'ws:';
-  window.OpenRotMGDiagnostics.start(socketEndpoint);
+  player.addEventListener('loadeddata', () => {
+    document.querySelector('#game').dataset.loaded = 'true';
+    document.querySelector('#startup').hidden = true;
+  }, {once: true});
+  window.OpenRotMGDiagnostics.start(socketEndpoint, player);
   await player.ruffle().load({
     url: new URL('/client.swf', document.baseURI).href,
     autoplay: 'on',
@@ -20,8 +24,6 @@
       [/^https?:\/\/realmofthemadgod\.appspot\.com\/sfx\//, new URL('/sfx/', document.baseURI).href]
     ]
   });
-  document.querySelector('#game').dataset.loaded = 'true';
-  document.querySelector('#startup').hidden = true;
 })().catch(error => {
   document.querySelector('#startup').hidden = true;
   const notice = document.querySelector('#load-error');

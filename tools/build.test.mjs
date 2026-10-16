@@ -153,12 +153,13 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
 });
 
-test('branded loading screen stays until Ruffle resolves', async () => {
+test('loading screen waits for movie data, not just runtime initialization', async () => {
   let finish;
   let options;
   const ready = new Promise(resolve => { finish = resolve; });
   const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
-  const player = { ruffle: () => ({ load: config => { options = config; return ready; } }) };
+  let loaded;
+  const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
     window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
     document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
@@ -173,6 +174,8 @@ test('branded loading screen stays until Ruffle resolves', async () => {
   assert.equal(nodes['#startup'].hidden, false);
   finish();
   await boot;
+  assert.equal(nodes['#startup'].hidden, false);
+  loaded();
   assert.equal(nodes['#startup'].hidden, true);
   assert.equal(nodes['#game'].dataset.loaded, 'true');
 });
@@ -182,7 +185,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     const origin = `http://127.0.0.1:${port}`;
     let options;
     const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
-    const player = { ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
+    const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
       document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
