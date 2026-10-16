@@ -28,9 +28,10 @@ test('public HTTP, credentials and subpaths in canonical URL are rejected', () =
 });
 
 test('site builds with metadata, strict same-origin WSS and preserved reference bytes', () => {
-  const result = build({});
+  const SITE_URL = 'https://example.test/';
+  const result = build({ SITE_URL });
   assert.equal(result.status, 0, result.stderr);
-  const site = new URL(process.env.SITE_URL);
+  const site = new URL(SITE_URL);
   if (!site.pathname.endsWith('/')) site.pathname += '/';
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
