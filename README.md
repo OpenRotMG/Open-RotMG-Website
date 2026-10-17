@@ -8,7 +8,7 @@ Before researching a feature's era, check the [historical feature ledger](docs/h
 
 ## Build locally
 
-Requires Node 22, Python 3, and a sibling `client` checkout at the revision in `tools/client-lock.json`.
+Requires Node 22, Python 3, and a clean sibling `client` checkout.
 
 ```sh
 SITE_URL=http://127.0.0.1:18924/ CLIENT_DIR=../client npm run build
