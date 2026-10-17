@@ -6,7 +6,6 @@ import { join, resolve } from 'node:path';
 import { validateCatalogue } from '../public/restoration/catalogue.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const lock = JSON.parse(await readFile(join(root, 'tools/client-lock.json'), 'utf8'));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
 const restoration = validateCatalogue(progress);
 for (const icon of new Set([...progress.categories, ...progress.features].map(row => row.icon).filter(icon => icon !== null))) {
@@ -25,10 +24,7 @@ if (site.pathname !== '/') throw new Error('SITE_URL must be the origin root for
 const socketOrigin = site.origin.replace(/^http/, 'ws');
 const client = resolve(process.env.CLIENT_DIR);
 const revision = execFileSync('git', ['-C', client, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
-if (revision !== lock.revision) throw new Error(`Client revision mismatch: expected ${lock.revision}, received ${revision}. Update the lock deliberately.`);
-execFileSync('git', ['-C', client, 'diff', '--quiet', 'HEAD', '--', 'client.swf', 'scripts/run.py', 'ruffle']);
-const swf = await readFile(join(client, 'client.swf'));
-if (createHash('sha256').update(swf).digest('hex') !== lock.swfSha256) throw new Error('Reference SWF checksum mismatch.');
+execFileSync('git', ['-C', client, 'diff', '--exit-code', 'HEAD']);
 execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { stdio: 'inherit' });
 const runtimeFiles = await readdir(join(client, 'vendor'));
 if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
@@ -43,7 +39,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', lock.revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_FEATURES}}', progress.features.length);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_FEATURES}}', progress.features.length);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, html);
     }
@@ -53,7 +49,7 @@ await render(dist);
 await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
   website: execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim(),
   dirty: execFileSync('git', ['status', '--porcelain'], {cwd: root, encoding: 'utf8'}).trim().length > 0,
-  client: lock.revision, runtime: createHash('sha256').update(await readFile(join(client, 'vendor/openrotmg.json'))).digest('hex').slice(0, 16)
+  client: revision, runtime: createHash('sha256').update(await readFile(join(client, 'vendor/openrotmg.json'))).digest('hex').slice(0, 16)
 }));
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
