@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { validateCatalogue, validateSources } from '../public/restoration/catalogue.js';
 
 const catalogue = () => JSON.parse(readFileSync(new URL('../public/restoration/progress.json', import.meta.url), 'utf8'));
 
@@ -15,4 +16,19 @@ test('requested category icons are distinct original sprites', () => {
     assert.equal(png.subarray(1, 4).toString(), 'PNG');
     assert.ok(png.readUInt32BE(16) > 0 && png.readUInt32BE(20) > 0);
   }
+});
+
+test('restoration keeps historical references, not our implementation snapshots', () => {
+  const data = catalogue();
+  validateCatalogue(data);
+  assert.deepEqual(Object.keys(data.scope), ['target']);
+  for (const f of data.features) {
+    assert.equal(Object.hasOwn(f.audit, 'observed'), false);
+    assert.equal(Object.hasOwn(f.audit, 'verification'), false);
+  }
+  for (const url of [
+    'https://github.com/OpenRotMG/Open-RotMG-Server/blob/' + 'a'.repeat(40) + '/src/world.rs',
+    'https://github.com/dginovker/Open-RotMG-Server/blob/' + 'a'.repeat(40) + '/src/world.rs',
+    'https://openrotmg.org/restoration/proof.html',
+  ]) assert.throws(() => validateSources([{ url, label: 'Implementation' }], 'probe'), /not a historical source/);
 });

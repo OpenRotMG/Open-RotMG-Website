@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
-import { validateCatalogue } from '../public/restoration/catalogue.js';
+import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
@@ -29,17 +29,22 @@ execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { st
 const runtimeFiles = await readdir(join(client, 'vendor'));
 if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
 
+const reference = await readFile(join(client, 'client.swf'));
+if (createHash('sha256').update(reference).digest('hex') !== referenceSha256) throw new Error('Restoration reference data must be the unchanged original 123.5.1 client.');
 const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist);
 await cp(join(root, 'public'), dist, { recursive: true });
+await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
+await writeFile(join(dist, 'restoration', referenceClient), reference);
 const socialImage = `social.png?v=${createHash('sha256').update(await readFile(join(dist, 'social.png'))).digest('hex').slice(0, 12)}`;
+const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_FEATURES}}', progress.features.length);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, html);
     }
