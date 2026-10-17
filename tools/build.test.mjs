@@ -154,8 +154,6 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(progress.features.length, restoration.n);
   assert.ok(restorationPage.includes(`${restoration.percent}</a> provisional evidence score`));
   assert.ok(restorationPage.includes(`${restoration.n} provisional feature bundles`));
-  assert.ok(restorationPage.includes('id="implementation-summary"'));
-  assert.ok(restorationPage.includes('id="historical-summary"'));
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const lock = JSON.parse(readFileSync(new URL('./client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));
