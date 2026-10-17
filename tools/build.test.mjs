@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
-import { validateCatalogue } from '../public/restoration/catalogue.js';
+import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
@@ -57,7 +57,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /100 Gold per 1,000 views/);
   assert.match(gold, /50 Gold per 1,000 views/);
   assert.match(gold, /reviewed and granted manually/);
-  for (const html of [home, about]) assert.ok(html.includes(`href="${site.pathname}gold/">Gold</a>`));
+  for (const page of ['gold', 'updates', 'restoration']) assert.ok(about.includes(`href="${site.pathname}${page}/">`));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
   assert.doesNotMatch(branding, /discourse-code|Post on Discourse|Forum embed|Lost City|Images for sharing/);
@@ -82,7 +82,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
   const restoration = validateCatalogue(progress);
-  assert.ok(footerNav.includes(`<a href="${site.pathname}restoration/">Restoration</a>`));
+  assert.doesNotMatch(footerNav, />Gold<|>Updates<|>Restoration<|>Branding</);
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
@@ -99,8 +99,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(footer, /Powered by Ruffle/);
   assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
   assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)|multiplayer server is not online/);
-  assert.ok(about.includes('supports guest Wizard movement'));
-  assert.ok(about.includes(`href="${site.pathname}restoration/">Restoration</a> for progress by feature.`));
+  assert.doesNotMatch(about, /supports guest Wizard movement|What works today/);
   assert.equal(JSON.parse(home.match(/type="application\/ld\+json">(.*?)<\/script>/s)[1]).url, site.href);
   const robots = readFileSync(new URL('../dist/robots.txt', import.meta.url), 'utf8');
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
@@ -125,9 +124,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     const nav = html.match(/<nav aria-label="Project">(.*?)<\/nav>/s)[1];
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
-    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}gold/`, `${site.pathname}updates/`, `${site.pathname}restoration/`]);
-    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}hiscores/`, `${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Gold', 'Updates', 'Restoration', 'Hiscores', 'Branding', 'Source', 'Discord']);
+    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}hiscores/`]);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Hiscores', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
@@ -136,7 +135,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(restorationPage, /ring-progress|class="hero"|class="score"|catalogue-note|scope-key|Provisional catalogue:|\* Development scene only/);
   const restorationApp = readFileSync(new URL('../dist/restoration/app.js', import.meta.url), 'utf8');
   assert.doesNotMatch(restorationApp, /catalogue-note|Provisional catalogue:/);
-  assert.ok(restorationPage.includes('id="feature-gates"'));
+  assert.doesNotMatch(restorationPage, /feature-gates|provisional|Scope, evidence|scope-dispositions|audit-date/);
+  assert.doesNotMatch(restorationApp, /Research-stage verification notes|Implementation at this snapshot|a\.observed|a\.verification/);
   assert.doesNotMatch(restorationPage, /feature-proof|development-note|Historical restoration has not been verified/);
   assert.doesNotMatch(restorationApp, /f\.evidence|f\.development|scene-mark|feature-proof|development-note/);
   const css = readFileSync(new URL('../dist/style.css', import.meta.url), 'utf8');
@@ -151,8 +151,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, restoration.n);
-  assert.ok(restorationPage.includes(`${restoration.percent}</a> provisional evidence score`));
-  assert.ok(restorationPage.includes(`${restoration.n} provisional feature bundles`));
+  assert.ok(restorationPage.includes(`${restoration.percent}</span> complete`));
+  const originalClient = readFileSync(new URL(`../dist/restoration/${referenceClient}`, import.meta.url));
+  assert.equal(createHash('sha256').update(originalClient).digest('hex'), referenceSha256);
+  assert.equal(existsSync(new URL('../dist/restoration/proof.html', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const provenance = JSON.parse(readFileSync(new URL('../dist/diagnostics-build.json', import.meta.url), 'utf8'));
   assert.match(provenance.client, /^[a-f0-9]{40}$/);
