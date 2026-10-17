@@ -36,7 +36,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
-  for (const html of [home, about, branding]) {
+  const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');
+  for (const html of [home, about, branding, gold]) {
     assert.match(html, /<html lang="en">/);
     assert.match(html, /<h1[ >]/);
     assert.match(html, /name="description"/);
@@ -46,6 +47,15 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
+  assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
+  assert.match(gold, /free to play forever\. No P2W/);
+  assert.match(gold, /\/discord/); assert.match(gold, /\/link code:/);
+  assert.match(gold, /hiscores\/\?board=collection/);
+  assert.match(gold, /top 50%/); assert.match(gold, /once per game account/);
+  assert.match(gold, /100 Gold per 1,000 views/);
+  assert.match(gold, /50 Gold per 1,000 views/);
+  assert.match(gold, /reviewed and granted manually/);
+  for (const html of [home, about]) assert.ok(html.includes(`href="${site.pathname}gold/">Gold</a>`));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
   assert.doesNotMatch(branding, /discourse-code|Post on Discourse|Forum embed|Lost City|Images for sharing/);
@@ -93,6 +103,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const robots = readFileSync(new URL('../dist/robots.txt', import.meta.url), 'utf8');
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
+  assert.ok(sitemap.includes(`<loc>${site.href}gold/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));
@@ -106,15 +117,15 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
   assert.ok(restorationPage.includes('<script type="module" src="app.js">'));
   assert.ok(restorationPage.includes(`href="${site.pathname}style.css"`));
-  for (const html of [home, about, restorationPage, branding]) {
+  for (const html of [home, about, restorationPage, branding, gold]) {
     assert.equal((html.match(/class="site-shell"/g) ?? []).length, 1);
     assert.equal((html.match(/<nav aria-label="Project">/g) ?? []).length, 1);
     const nav = html.match(/<nav aria-label="Project">(.*?)<\/nav>/s)[1];
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
-    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}updates/`, `${site.pathname}restoration/`]);
+    assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}gold/`, `${site.pathname}updates/`, `${site.pathname}restoration/`]);
     assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}hiscores/`, `${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Updates', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Gold', 'Updates', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
