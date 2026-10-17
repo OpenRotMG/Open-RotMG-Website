@@ -8,7 +8,7 @@
 .category summary { background: linear-gradient(#2b2b2b, #1d1d1d); border-bottom: 1px solid #353535; padding: 6px 10px; font: 700 12px Verdana, sans-serif; color: #c8c6b9; cursor: pointer; }
 .section-count { font: 10px Verdana, sans-serif; color: #88887e; margin-left: 5px; }
 .forum-list { list-style: none; padding: 0; margin: 0; }
-.forum-list li { padding: 7px 10px; border-top: 1px solid #242424; display: flex; justify-content: space-between; gap: 14px; }
+.forum-list li { padding: 7px 10px; border-top: 1px solid #242424; display: grid; grid-template-columns: minmax(0, 1fr) 130px 30px; align-items: center; gap: 14px; }
 .forum-list li:nth-child(even) { background: #141414; }
 .feature { border: 0; background: none; padding: 0; display: inline-flex; align-items: center; gap: 7px; text-align: left; font: 12px/1.65 Verdana, sans-serif; max-width: 100%; color: #cb8585; text-decoration: underline; text-underline-offset: 2px; }
 .feature:hover { color: #e3b1b1; }
@@ -27,8 +27,20 @@ dialog::backdrop { background: #000b; }
 .gate { display: flex; justify-content: space-between; gap: 15px; padding: 5px 0; border-bottom: 1px solid #36362e; }
 .gate .passed { color: #acba92; }
 #feature-gates { margin: 14px 0; }
-#feature-requirements { padding-left: 20px; }
-#feature-requirements li { margin: 6px 0; }
+.audit-summary { font-size: 11px; line-height: 1.9; }
+.audit-state { font-size: 10px; text-align: right; color: #b8b8ad; }
+.audit-state span { display: block; }
+.historical-verified, .implementation-present { color: #acba92; }
+.implementation-missing { color: #cb8585; }
+.historical-known-differences { color: #d9b477; }
+#feature-audit h3 { font-size: 12px; margin: 18px 0 5px; }
+#feature-audit p { margin: 6px 0; }
+#feature-audit ul, .scope-dispositions { padding-left: 20px; }
+#feature-audit li, .scope-dispositions li { margin: 8px 0; }
+#feature-audit, .scope-dispositions { overflow-wrap: anywhere; }
+.citation { font-size: 11px; }
+.citation span { display: block; color: #a9a99c; }
+.scope-dispositions { font-size: 11px; margin-right: 12px; }
 #error { border: 1px solid #b27070; padding: 10px; color: #d9a0a0; }
 article { max-width: 800px; margin: 36px auto; padding: 0 20px; }
 article h2 { margin-top: 25px; }
@@ -38,7 +50,8 @@ article a { overflow-wrap: anywhere; }
   .scope-note { font-size: 10px; }
   .feature { font-size: 11px; }
   .sprite { width: 19px; height: 22px; }
-  .forum-list li { gap: 8px; }
+  .forum-list li { grid-template-columns: minmax(0, 1fr) 105px 24px; gap: 8px; }
+  .audit-state { font-size: 9px; }
   .gate-count { font-size: 10px; }
   dialog { padding: 13px; }
   .dialog-head { margin: -13px -13px 13px; padding: 5px 9px; }

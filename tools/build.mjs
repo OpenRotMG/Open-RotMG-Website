@@ -43,7 +43,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', lock.revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_STARTED}}', progress.features.filter(f => f.development || f.stage === 2).length).replaceAll('{{RESTORATION_FEATURES}}', progress.features.length);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', lock.revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_FEATURES}}', progress.features.length);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, html);
     }
