@@ -19,21 +19,11 @@
     <a class="back" href="{{BASE}}">← Back to game</a>
     <div class="restoration-intro">
       <h1>Restoration</h1>
-      <p class="progress-line"><a id="overall" href="progress.json" aria-label="Provisional evidence score and source data">{{RESTORATION_PERCENT}}</a> provisional evidence score · 123.5.1</p>
-      <p>The score tracks accepted evidence gates, not how much of the game works. Implementation and historical verification are listed separately. Open an entry for its sources and remaining questions.</p>
-      <p class="audit-summary"><strong>Implementation:</strong> <span id="implementation-summary">Loading audit snapshot...</span><br><strong>Historical verification:</strong> <span id="historical-summary">Loading audit snapshot...</span></p>
-      <p class="scope-note">{{RESTORATION_FEATURES}} provisional feature bundles. Scope changes and unresolved candidates are recorded below.</p>
-      <p id="audit-date" class="scope-note"></p>
-      <details class="scope-note"><summary>Scope, evidence and verification</summary>
-        <p>Each bundle earns one gate for accepted original rules and one for a recreation verified against them. A merged PR or a partial match does not pass both gates.</p>
-        <p>Present means code supports the scoped behavior. Partial means incomplete or only partly mapped support. Missing requires an inspected unsupported path, not merely missing tests. These are not historical signoffs. Known differences can include intentional changes, such as modern account recovery, as well as missing target content.</p>
-        <p id="audit-verification"></p>
-        <p>Period documentation, the recovered client and qualified community-server comparisons inform this audit. Copied forks are not independent confirmation; an item in the client is not proof it was deployed. Rate-limited or unavailable source checks are identified in citation notes. <a id="source-reference">Source versions and limitations</a>. <a href="https://github.com/OpenRotMG/Open-RotMG-Website/blob/main/docs/historical-features.md">Earlier historical notes</a>.</p>
-      </details>
+      <p class="progress-line"><span id="overall">{{RESTORATION_PERCENT}}</span> complete · 123.5.1</p>
+      <p class="audit-summary"><strong>Implementation:</strong> <span id="implementation-summary">Loading...</span><br><strong>Historical verification:</strong> <span id="historical-summary">Loading...</span></p>
     </div>
     <nav id="areas" class="category-links" aria-label="Feature categories"></nav>
     <div id="features"></div>
-    <details class="category"><summary>Scope changes and unresolved candidates</summary><ul id="scope-dispositions" class="scope-dispositions"></ul></details>
     <p id="error" role="alert" hidden></p>
     <noscript>JavaScript is required to inspect the Restoration catalogue.</noscript>
   </main>
@@ -41,16 +31,12 @@
     <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
     <p>2012 Realm of the Mad God reimplementation<br>
     Report bugs and missing content on Discord.</p>
-    <nav aria-label="Project">
-      <div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}gold/">Gold</a><a href="{{BASE}}updates/">Updates</a><a href="{{BASE}}restoration/">Restoration</a></div>
-      <div><a href="{{BASE}}hiscores/">Hiscores</a><a href="{{BASE}}branding/">Branding</a><a href="https://github.com/OpenRotMG">Source</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>
-    </nav>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
   </footer>
 </div>
 <dialog id="feature-dialog" aria-labelledby="feature-title">
   <div class="dialog-head"><div class="feature-heading"><img id="feature-icon" alt="" hidden><h2 id="feature-title"></h2></div><button id="feature-close" type="button" aria-label="Close feature details">Close</button></div>
   <p id="feature-status"></p>
-  <div id="feature-gates"></div>
   <div id="feature-audit"></div>
 </dialog>
 </body>
