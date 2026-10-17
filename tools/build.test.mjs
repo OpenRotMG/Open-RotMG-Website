@@ -83,7 +83,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
   const restoration = validateCatalogue(progress);
-  assert.ok(footerNav.includes(`<a href="${site.pathname}restoration/">${restoration.percent} complete</a>`));
+  assert.ok(footerNav.includes(`<a href="${site.pathname}restoration/">Restoration</a>`));
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
@@ -128,7 +128,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.equal(rows.length, 2);
     assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}gold/`, `${site.pathname}updates/`, `${site.pathname}restoration/`]);
     assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [`${site.pathname}hiscores/`, `${site.pathname}branding/`, 'https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Gold', 'Updates', `${restoration.percent} complete`, 'Hiscores', 'Branding', 'Source', 'Discord']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Gold', 'Updates', 'Restoration', 'Hiscores', 'Branding', 'Source', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
@@ -151,10 +151,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.forum-list/);
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
-  assert.equal(progress.features.length, 209);
-  assert.equal(restoration.percent, '5%');
-  assert.ok(restorationPage.includes('132 of 209 features have implementation work.'));
-  assert.equal(progress.features.filter(f => f.development || f.stage === 2).length, 132);
+  assert.equal(progress.features.length, restoration.n);
+  assert.ok(restorationPage.includes(`${restoration.percent}</a> provisional evidence score`));
+  assert.ok(restorationPage.includes(`${restoration.n} provisional feature bundles`));
+  assert.ok(restorationPage.includes('id="implementation-summary"'));
+  assert.ok(restorationPage.includes('id="historical-summary"'));
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const lock = JSON.parse(readFileSync(new URL('./client-lock.json', import.meta.url), 'utf8'));
   const swf = readFileSync(resolve(process.env.CLIENT_DIR, 'client.swf'));

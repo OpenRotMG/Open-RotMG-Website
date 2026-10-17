@@ -1,167 +1,114 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { validateCatalogue, percentage } from '../public/restoration/catalogue.js';
+import { createHash } from 'node:crypto';
+import { validateCatalogue, percentage, auditCounts } from '../public/restoration/catalogue.js';
 
 const catalogue = () => JSON.parse(readFileSync(new URL('../public/restoration/progress.json', import.meta.url), 'utf8'));
+function fixture() {
+  return {
+    scope: { target: '123.5.1', features: 1, research_accepted: 1, implementation_verified: 1, earned: 2, possible: 2, percent: 100,
+      audit: { date: '2026-10-17', server: 'a'.repeat(40), client: 'b'.repeat(40), baseline_website: 'c'.repeat(40), verification: 'Synthetic fixture checks.' }, dispositions: [] },
+    categories: [{ id: 'fixture', name: 'Test fixture', icon: 'fixture.png' }],
+    features: [{ id: 'fixture:feature', name: 'Synthetic unit-test feature', category: 'fixture', icon: null, stage: 2,
+      audit: { implementation: 'present', historical: 'verified', expected: 'Fixture rule.', observed: 'Fixture match.', verification: 'Synthetic test evidence, not a game assertion.', differences: [], unknowns: [],
+        sources: ['historical', 'implementation', 'verification'].map(kind => ({ url: `https://example.test/${kind}`, kind, passage: 'Synthetic fixture citation.' })) } }]
+  };
+}
 
-test('reviewed player catalogue retains its membership and gates', () => {
-  const data = catalogue();
-  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
-  assert.equal(data.features.filter(f => f.category === 'conditions').length, 26);
-  assert.equal(data.features.filter(f => f.category === 'dungeons').length, 16);
-  const beachzone = data.features.find(f => f.id === 'dungeons:beachzone');
-  assert.equal(beachzone.stage, 0);
-  assert.equal(beachzone.development, false);
-  assert.equal(beachzone.evidence.verification, null);
-  assert.match(beachzone.evidence.reference, /123\.4\.4.*2012/);
-  assert.ok(beachzone.evidence.links.includes('https://wikiwiki.jp/rmd/Official%20Events/forum'));
+test('audit schema derives counts without equating implementation with fidelity', () => {
+  const data = fixture();
+  assert.deepEqual(validateCatalogue(data), { e: 1, v: 1, n: 1, percent: '100%' });
+  data.features[0].audit.historical = 'known-differences';
+  data.features[0].audit.differences = ['Synthetic documented discrepancy.'];
+  data.features[0].stage = 1;
+  Object.assign(data.scope, { implementation_verified: 0, earned: 1, percent: 50 });
+  assert.equal(validateCatalogue(data).percent, '50%');
+  const counts = auditCounts(data.features);
+  assert.equal(counts.implementation.present, 1);
+  assert.equal(counts.historical.verified, 0);
+  assert.equal(counts.historical['known-differences'], 1);
   assert.equal(percentage([{ stage: 0 }, { stage: 1 }, { stage: 2 }]), '50%');
-  assert.equal(data.scope.candidate_features[0].scored, false);
-  for (const id of ['realm:travel-between-worlds', 'social:trade-with-players', 'access:character-persistence', 'access:reconnect-safely']) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.stage, 2, id);
-    assert.ok(feature.evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/19'), id);
-  }
-  for (const id of ['dungeons:pirate-cave', 'home:nexus', 'home:vault', 'gear:loot-and-ownership', 'heroes:level-to-20']) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.stage, 0, id);
-    assert.equal(feature.development, true, id);
-  }
-  assert.equal(data.features.find(f => f.id === 'heroes:choose-and-unlock-classes').stage, 1);
-  for (const id of ['access:guest-accounts', 'access:registration', 'access:login']) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.stage, 2, id);
-    assert.ok(feature.evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/21'), id);
-  }
-  for (const id of ['heroes:priest', 'social:teleport-to-players', 'social:chat', 'home:choose-your-name', 'heroes:legends-highscores', 'realm:realm-generation']) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.stage, 0, id);
-    assert.equal(feature.development, true, id);
-    assert.ok(feature.evidence.reference, id);
-  }
 });
 
-test('recent merged gameplay adds candidate evidence without restoration points', () => {
-  const data = catalogue();
-  assert.equal(data.scope.date, '2026-10-16');
-  for (const [ids, pr] of [
-    [data.features.slice(0, 13).map(f => f.id), 46],
-    [['snake-pit', 'sprite-world', 'undead-lair', 'oryx-s-castle', 'oryx-s-chamber', 'wine-cellar'].map(n => `dungeons:${n}`), 35],
-    [['realm:elves', 'realm:elf-wizard'], 40],
-    [['bandit-leader', 'scorpion-queen', 'sandsman-king', 'hobbit-mage', 'undead-hobbit-mage', 'goblin-mage', 'pirates', 'cubes'].map(n => `realm:${n}`), 45],
-    [['medusa', 'ent-god', 'beholder', 'flying-brain', 'slime-god', 'ghost-god', 'djinn', 'leviathan', 'white-demon', 'sprite-god'].map(n => `realm:${n}`), 47]
+test('audit schema rejects unsupported verdicts, unsafe sources and invented totals', () => {
+  for (const [mutate, error] of [
+    [d => { d.scope.target = '7.0'; }, /Unexpected restoration target/],
+    [d => { delete d.scope.audit; }, /Invalid audit snapshot/],
+    [d => { d.features[0].stage = 3; }, /Invalid feature/],
+    [d => { d.features[0] = null; }, /Invalid catalogue entry/],
+    [d => { d.features.push(structuredClone(d.features[0])); }, /Duplicate catalogue identifiers/],
+    [d => { d.features[0].audit.implementation = 'probably'; }, /Invalid audit status/],
+    [d => { d.features[0].audit.historical = 'complete'; }, /Invalid audit status/],
+    [d => { d.features[0].audit.sources = []; }, /Missing reference/],
+    [d => { d.features[0].audit.sources = d.features[0].audit.sources.filter(s => s.kind !== 'verification'); }, /Missing verification/],
+    [d => { d.features[0].audit.expected = ''; }, /Incomplete audit/],
+    [d => { d.features[0].audit.sources[0].passage = ''; }, /Invalid citation/],
+    [d => { d.features[0].audit.sources[0].url = 'javascript:alert(1)'; }, /Unsafe citation URL/],
+    [d => { d.features[0].audit.sources[0].url = 'https://user:secret@example.test/'; }, /Unsafe citation URL/],
+    [d => { d.features[0].audit.sources[0].url = 'https://example.test/?token=private'; }, /Sensitive citation URL/],
+    [d => { d.features[0].audit.sources[0].url = 'not a URL'; }, /Invalid citation URL/],
+    [d => { d.features[0].audit.sources[0].url = 'https://github.com/OpenRotMG/Open-RotMG-Server/blob/main/src/world.rs'; }, /Unpinned GitHub citation/],
+    [d => { d.features[0].audit.sources[0].url = 'https://github.com/OpenRotMG/Open-RotMG-Server/blob/69b40eeab0d53be6c6e1f9ff4527ed71e0527ed71e052a23c/src/world.rs'; }, /Unpinned GitHub citation/],
+    [d => { d.features[0].audit.unknowns = ['Not established.']; }, /Unsupported verified verdict/],
+    [d => { d.features[0].audit.differences = ['Does not match.']; }, /Unsupported verified verdict/],
+    [d => { d.features[0].audit.implementation = 'partial'; }, /Unsupported verified verdict/],
+    [d => { d.features[0].audit.historical = 'partial'; }, /Unsupported verified verdict/],
+    [d => { d.features[0].stage = 0; d.features[0].audit.historical = 'known-differences'; }, /Missing discrepancy/],
+    [d => { d.scope.percent = 99; }, /Catalogue totals do not match/],
+    [d => { d.categories.push({ id: 'empty', name: 'Empty', icon: '' }); }, /Empty category/],
+    [d => { d.scope.dispositions = [{ name: 'Candidate', reason: 'Fixture reason', disposition: 'covered', covered_by: ['absent:id'], sources: [] }]; }, /Invalid scope disposition/],
+    [d => { d.scope.dispositions = [{ name: 'Candidate', reason: 'Fixture reason', disposition: 'add', covered_by: [], sources: [] }]; }, /Unmapped scope disposition/]
   ]) {
-    for (const id of ids) {
-      const feature = data.features.find(f => f.id === id);
-      assert.equal(feature.stage, 0, id);
-      assert.equal(feature.development, true, id);
-      assert.equal(feature.evidence.verification, null, id);
-      assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), id);
-    }
+    const data = fixture(); mutate(data); assert.throws(() => validateCatalogue(data), error);
   }
-  assert.match(data.features.find(f => f.id === 'dungeons:wine-cellar').evidence.reference, /Barrel placement.*incomplete/);
-  for (const id of ['realm:pentaract', 'dungeons:abyss-of-demons', 'condition:28']) {
-    assert.equal(data.features.find(f => f.id === id).development, false, id);
-  }
-  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
+  assert.throws(() => validateCatalogue(null), /Invalid catalogue/);
 });
 
-test('October 16 review credits class stars but keeps partial gameplay out of completion', () => {
-  const data = catalogue();
-  const stars = data.features.find(f => f.id === 'heroes:class-stars');
-  assert.equal(stars.stage, 2);
-  assert.equal(stars.development, false);
-  assert.match(stars.evidence.reference, /20,150,400,800,2000/);
-  assert.match(stars.evidence.verification, /five store::presentation_tests passed/);
-  assert.ok(stars.evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/55'));
-  for (const [names, prs] of [
-    [['orcs', 'shield-orcs', 'dwarves', 'undead-dwarves', 'night-elves', 'ogres', 'flayers'], [52]],
-    [['ent-ancient', 'lich', 'ghost-king', 'phoenix-lord'], [59, 63]]
-  ]) {
-    for (const name of names) {
-      const f = data.features.find(f => f.id === `realm:${name}`);
-      assert.equal(f.stage, 0, name);
-      assert.equal(f.development, true, name);
-      assert.equal(f.evidence.verification, null, name);
-      for (const pr of prs) assert.ok(f.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), name);
-    }
+test('published audit has a disposition and traceable basis for every feature', () => {
+  const data = catalogue(), result = validateCatalogue(data), counts = auditCounts(data.features);
+  assert.equal(data.scope.target, '123.5.1');
+  assert.equal(Object.values(counts.implementation).reduce((a, b) => a + b, 0), result.n);
+  assert.equal(Object.values(counts.historical).reduce((a, b) => a + b, 0), result.n);
+  assert.equal(counts.historical.verified, result.v);
+  assert.ok(data.scope.dispositions.length > 0);
+  // Scope edits must account for old entries rather than silently losing them.
+  const added = new Set(data.scope.dispositions.filter(d => d.disposition === 'add').flatMap(d => d.covered_by));
+  const original = data.features.filter(f => !added.has(f.id)).map(f => f.id);
+  original.push(...data.scope.dispositions.filter(d => ['merge', 'exclude'].includes(d.disposition) && d.id !== undefined).map(d => d.id));
+  assert.equal(new Set(original).size, 209);
+  assert.equal(createHash('sha256').update(original.sort().join('\n')).digest('hex'), '25e16012aec0d6e31a8ae73771dca84098a283f15ce0a6e99a1c1ae098cf357b');
+  for (const f of data.features) {
+    assert.ok(f.audit.sources.every(s => !/\/home\/|\/tmp\/|credentials|profile\//i.test(s.url)), f.id);
+    assert.ok(!/\u2014/.test(JSON.stringify(f.audit)), f.id);
   }
-  assert.ok(data.features.find(f => f.id === 'home:nexus').evidence.links.includes('https://github.com/OpenRotMG/Open-RotMG-Server/pull/51'));
-  assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /5 XP at level 1/);
-  assert.match(data.features.find(f => f.id === 'realm:realm-closure').evidence.reference, /ten finite original identities/);
-  assert.equal(data.features.filter(f => f.development || f.stage === 2).length, 132);
-  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
+  const guild = data.features.find(f => f.id === 'social:guild-roster');
+  assert.ok(['present', 'partial'].includes(guild.audit.implementation));
+  assert.doesNotMatch(guild.audit.expected, /original guild history and recorded actions/i);
+  for (const id of ['heroes:gravestones', 'access:character-deletion', 'home:buy-from-merchants']) {
+    assert.ok(['present', 'partial'].includes(data.features.find(f => f.id === id).audit.implementation), id);
+  }
 });
 
-test('requested category icons are distinct original sprites', () => {
+test('original sprite assets and catalogue identities remain inspectable', () => {
   const data = catalogue(), icons = Object.fromEntries(data.categories.map(c => [c.id, c.icon]));
   assert.notEqual(icons.heroes, icons.access);
   assert.equal(icons.access, 'assets/player/client-and-accounts.png');
-  assert.equal(icons.conditions, data.features.find(f => f.name === 'Armor broken').icon);
   assert.equal(icons.social, 'assets/player/chat.png');
   for (const path of Object.values(icons)) {
     const png = readFileSync(new URL(`../public/restoration/${path}`, import.meta.url));
     assert.equal(png.subarray(1, 4).toString(), 'PNG');
-    assert.ok(png.readUInt32BE(16) > 0 && png.readUInt32BE(20) > 0);
   }
 });
 
-test('merged pause, conditions and social work stays development-only', () => {
-  const data = catalogue();
-  for (const [id, pr] of [
-    ['condition:21', 29],
-    ...[4, 6, 7, 14, 15].map(n => [`condition:${n}`, 30]),
-    ...['chat', 'whispers', 'lock-players', 'ignore-players'].map(name => [`social:${name}`, 31])
-  ]) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.stage, 0, id);
-    assert.equal(feature.development, true, id);
-    assert.equal(feature.evidence.verification, null, id);
-    assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`), id);
-    assert.match(feature.evidence.reference, /[Nn]ative .*unverified/, id);
-  }
-  for (const [n, pr] of [[4, 46], [6, 46], [7, 46], [14, 38], [15, 42]]) {
-    const feature = data.features.find(f => f.id === `condition:${n}`);
-    assert.ok(feature.evidence.links.includes(`https://github.com/OpenRotMG/Open-RotMG-Server/pull/${pr}`));
-    assert.doesNotMatch(feature.evidence.reference, /player-only|naturally spawned enemies do not apply|no supported naturally earned Speedy/i);
-  }
-  assert.match(data.features.find(f => f.id === 'social:whispers').evidence.reference, /2013 reference/);
-  assert.doesNotMatch(data.features.find(f => f.id === 'social:chat').evidence.reference, /Slash commands are rejected/);
-  assert.match(data.features.find(f => f.id === 'heroes:level-to-20').evidence.reference, /PR #19 already implements random, per-class stat gains/);
-  assert.deepEqual(validateCatalogue(data), { e: 11, v: 10, n: 209, percent: '5%' });
-});
-
-test('restoration links the dated historical ledger without changing the dialogs', () => {
+test('website exposes audit statuses, sources and scope rather than a merge-count score', () => {
   const page = readFileSync(new URL('../public/restoration/index.html', import.meta.url), 'utf8');
-  const ledger = readFileSync(new URL('../docs/historical-features.md', import.meta.url), 'utf8');
-  assert.ok(page.includes('docs/historical-features.md'));
-  assert.ok(page.includes('16 October 2026'));
-  assert.ok(page.includes('Other additions retain their historical-verification gaps'));
-  for (const pr of [51, 52, 55, 59, 63]) assert.ok(page.includes(`/pull/${pr}`));
-  assert.doesNotMatch(page, /feature-proof|development-note/);
-  assert.match(ledger, /Last checked: \*\*\d{4}-\d{2}-\d{2}\*\*/);
-  for (const name of ['native `/lefttomax`', 'seven-dose elixirs']) {
-    const entry = ledger.split('\n').find(line => line.includes(name));
-    assert.ok(entry, name);
-    assert.match(entry, /^- \*\*Unresolved:\*\*/);
-  }
-});
-
-test('missing proof, invalid stages, duplicate IDs and tampered totals fail closed', () => {
-  for (const [mutate, error] of [
-    [d => { d.features[0].stage = 3; }, /Invalid feature/],
-    [d => { d.features[0].id = d.features[1].id; }, /Duplicate catalogue identifiers/],
-    [d => { d.features.find(f => f.stage).evidence = null; }, /Missing reference/],
-    [d => { d.features.find(f => f.stage === 2).evidence.verification = ''; }, /Missing verification/],
-    [d => { d.features[0].requirements = ['']; }, /Invalid requirements/],
-    [d => { d.scope.percent = 99; }, /Catalogue totals do not match/],
-    [d => { d.scope.earned = 99; }, /Catalogue totals do not match/],
-    [d => { d.categories.push({ id: 'empty', name: 'Empty', icon: 'missing.png' }); }, /Empty category/]
-  ]) {
-    const data = catalogue();
-    mutate(data);
-    assert.throws(() => validateCatalogue(data), error);
-  }
-  assert.throws(() => validateCatalogue(null), /Invalid catalogue/);
+  const app = readFileSync(new URL('../public/restoration/app.js', import.meta.url), 'utf8');
+  assert.match(page, /provisional evidence score/);
+  for (const id of ['implementation-summary', 'historical-summary', 'feature-status', 'feature-audit', 'scope-dispositions', 'audit-date']) assert.ok(page.includes(`id="${id}"`), id);
+  assert.match(app, /source\.passage/);
+  assert.match(app, /a\.unknowns/);
+  assert.match(app, /a\.differences/);
+  assert.doesNotMatch(app, /innerHTML|f\.development|f\.evidence/);
+  assert.match(app, /Cannot load restoration/);
 });
