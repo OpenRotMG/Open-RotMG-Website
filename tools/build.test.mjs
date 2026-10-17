@@ -50,6 +50,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
   assert.match(gold, /free to play forever\. No P2W/);
   assert.match(gold, /\/discord/); assert.match(gold, /\/link code:/);
+  assert.match(gold, /first bug report: 50 Gold/);
+  assert.match(gold, /\/bug description/);
+  assert.match(gold, /when your report is posted to GitHub/);
   assert.match(gold, /hiscores\/\?board=collection/);
   assert.match(gold, /top 50%/); assert.match(gold, /once per game account/);
   assert.match(gold, /100 Gold per 1,000 views/);
