@@ -37,14 +37,10 @@ test('merged restoration capabilities no longer claim to be unsupported', () => 
   }
 });
 
-test('chat badge verification and unmerged vault purchases remain unresolved', () => {
+test('current-runtime chat badge verification remains unresolved', () => {
   const data = catalogue();
   const chat = data.features.find(f => f.id === 'social:chat');
   assert.ok(chat.audit.unknowns.some(question => /current launcher-pinned runtime.*chat-star badges/.test(question)));
-  const vault = data.features.find(f => f.id === 'home:vault');
-  assert.equal(vault.audit.implementation, 'partial');
-  assert.equal(vault.audit.historical, 'known-differences');
-  assert.ok(vault.audit.differences.some(difference => /additional chests cannot be purchased/.test(difference)));
 });
 
 test('restoration keeps historical references, not our implementation snapshots', () => {
