@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
+import { clientRelease } from './client-release.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
@@ -29,6 +30,8 @@ execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { st
 const runtimeFiles = await readdir(join(client, 'vendor'));
 if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
 
+const lock = JSON.parse(await readFile(join(client, 'ruffle/lock.json'), 'utf8'));
+const selection = await clientRelease(revision, lock);
 const reference = await readFile(join(client, 'client.swf'));
 if (createHash('sha256').update(reference).digest('hex') !== referenceSha256) throw new Error('Restoration reference data must be the unchanged original 123.5.1 client.');
 const dist = join(root, 'dist');
@@ -54,7 +57,7 @@ await render(dist);
 await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
   website: execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim(),
   dirty: execFileSync('git', ['status', '--porcelain'], {cwd: root, encoding: 'utf8'}).trim().length > 0,
-  client: revision, runtime: createHash('sha256').update(await readFile(join(client, 'vendor/openrotmg.json'))).digest('hex').slice(0, 16)
+  ...selection, runtime: createHash('sha256').update(await readFile(join(client, 'vendor/openrotmg.json'))).digest('hex').slice(0, 16)
 }));
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
