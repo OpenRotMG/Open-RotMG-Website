@@ -1,5 +1,5 @@
 export const boards = {
-  base_fame: {title: 'Base fame', description: 'Highest base fame on a single character per account, living or dead.'},
+  base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'},
   collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
   total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'}
 };
