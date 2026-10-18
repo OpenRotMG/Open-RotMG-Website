@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {ranked} from '../public/hiscores/app.js';
-test('one account per row, living/dead metric, stable competition ties and no mutating sort',()=>{
+import {boards,ranked} from '../public/hiscores/app.js';
+test('living fame keeps existing board links and labels the living-only metric',async()=>{
+ assert.equal(boards.base_fame.title,'Living fame');
+ assert.equal(boards.base_fame.description,'Highest fame of an alive character per account.');
+ const index=await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8');
+ assert.match(index,/href="\?board=base_fame">Living fame<\/a>/);
+ assert.ok(!index.includes('Base fame'));
+});
+test('one account per row, stable competition ties and no mutating sort',()=>{
  const players=[{account:3,name:'Third',base_fame:10},{account:2,name:'Second',base_fame:10},{account:1,name:'First',base_fame:20}];
  assert.deepEqual(ranked(players,'base_fame').map(p=>[p.account,p.rank]),[[1,1],[2,2],[3,2]]);
  assert.equal(players[0].account,3);assert.throws(()=>ranked(players,'wallet'),/Unknown/);
