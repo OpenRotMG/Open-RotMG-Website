@@ -18,6 +18,35 @@ test('requested category icons are distinct original sprites', () => {
   }
 });
 
+test('merged restoration capabilities no longer claim to be unsupported', () => {
+  const data = catalogue();
+  for (const [id, implementation, stage] of [
+    ['gear:xp-booster', 'present', 1],
+    ['access:character-slots', 'present', 0],
+    ['access:change-password', 'present', 0],
+    ['home:choose-your-name', 'present', 0],
+    ['dungeons:spider-den', 'present', 0],
+    ['social:chat', 'partial', 0],
+  ]) {
+    const feature = data.features.find(f => f.id === id);
+    assert.equal(feature.audit.implementation, implementation, id);
+    assert.equal(feature.audit.historical, 'partial', id);
+    assert.deepEqual(feature.audit.differences, [], id);
+    assert.equal(feature.stage, stage, id);
+    assert.ok(feature.audit.unknowns.length > 0, id);
+  }
+});
+
+test('chat badge verification and unmerged vault purchases remain unresolved', () => {
+  const data = catalogue();
+  const chat = data.features.find(f => f.id === 'social:chat');
+  assert.ok(chat.audit.unknowns.some(question => /current launcher-pinned runtime.*chat-star badges/.test(question)));
+  const vault = data.features.find(f => f.id === 'home:vault');
+  assert.equal(vault.audit.implementation, 'partial');
+  assert.equal(vault.audit.historical, 'known-differences');
+  assert.ok(vault.audit.differences.some(difference => /additional chests cannot be purchased/.test(difference)));
+});
+
 test('restoration keeps historical references, not our implementation snapshots', () => {
   const data = catalogue();
   validateCatalogue(data);

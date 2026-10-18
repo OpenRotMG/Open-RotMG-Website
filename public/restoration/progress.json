@@ -2264,12 +2264,10 @@
       "icon": "assets/player/arachna-the-spider-queen.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
-        "differences": [
-          "Spider Den adventure is unavailable through the registered dungeon admission/earned-portal paths."
-        ],
+        "differences": [],
         "unknowns": [
           "Original entrance/layout/rewards and Arachna phase geometry/timing.",
           "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
@@ -3147,12 +3145,10 @@
       "icon": "assets/player/xp-booster.png",
       "stage": 1,
       "audit": {
-        "implementation": "missing",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "The normal soulbound XP Booster doubles XP until level 20 or death. It does not increase Fame.",
-        "differences": [
-          "XP Boosters cannot be used."
-        ],
+        "differences": [],
         "unknowns": [
           "Original repeated-use, reconnect and level-20 crossing behavior.",
           "Was the separate XP Booster Test item ever distributed?"
@@ -3417,12 +3413,10 @@
       "icon": "assets/player/name-changer.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Choose/change registered account name; client maximum ten ASCII letters, unique-name UI and subsequent Gold-priced rename. Client advertises 1000 Gold; authoritative original enforcement, minimum length, default-name pool and first-choice rank remain unresolved.",
-        "differences": [
-          "Paid rename flow exposed by recovered target client is explicitly unsupported."
-        ],
+        "differences": [],
         "unknowns": [
           "Original minimum length, generated-name distribution, rank gate, reserved/profanity rules and server-side rename price."
         ],
@@ -3508,13 +3502,12 @@
       "stage": 0,
       "audit": {
         "implementation": "partial",
-        "historical": "known-differences",
+        "historical": "partial",
         "expected": "World chat includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players and /yell reaches all Nexus players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
-        "differences": [
-          "/who, /yell, /teleport <name> and /trade <name> are not supported."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration.",
+          "Does the current launcher-pinned runtime display chat-star badges? Earlier native QA confirmed star transport but did not display badges."
         ],
         "sources": [
           {
@@ -3994,12 +3987,10 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "missing",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Authenticated current-password/new-password change preserves account identity; rejected changes leave credentials intact. This does not imply self-service email change.",
-        "differences": [
-          "Native current-password change is unsupported."
-        ],
+        "differences": [],
         "unknowns": [
           "Historical session invalidation and concurrent change policy."
         ],
@@ -4040,12 +4031,10 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "List and select living characters, create within capacity, and buy additional slots at the advertised price. Change Characters returns to selection while preserving the living character. Original starting capacity, maximum slots and prices remain unresolved.",
-        "differences": [
-          "Additional slot purchase and multiple living-character capacity are not implemented."
-        ],
+        "differences": [],
         "unknowns": [
           "Original initial capacity, maximum and complete pricing schedule.",
           "In-world character-switching persistence timing."
