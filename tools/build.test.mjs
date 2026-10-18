@@ -47,17 +47,19 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
-  assert.match(gold, /free to play forever\. No P2W/);
-  assert.match(gold, /\/discord/); assert.match(gold, /\/link code:/);
-  assert.match(gold, /first bug report: 50 Gold/);
-  assert.match(gold, /\/bug description/);
-  assert.match(gold, /when your report is posted to GitHub/);
-  assert.match(gold, /hiscores\/\?board=collection/);
-  assert.match(gold, /top 50%/); assert.match(gold, /once per game account/);
-  assert.match(gold, /100 Gold per 1,000 views/);
-  assert.match(gold, /50 Gold per 1,000 views/);
-  assert.match(gold, /reviewed and granted manually/);
-  for (const page of ['gold', 'updates', 'restoration']) assert.ok(about.includes(`href="${site.pathname}${page}/">`));
+  assert.match(gold, /You cannot buy Gold in Open RotMG\./);
+  assert.match(gold, /<h2>One-time Gold<\/h2>/);
+  assert.match(gold, /<h2>Repeatable Gold<\/h2>/);
+  assert.match(gold, /Link Discord - type <code>\/discord<\/code> in game/);
+  assert.match(gold, /Submit your first bug report - type <code>\/bug<\/code> in game/);
+  assert.match(gold, /top 50%.*hiscores\/\?board=collection/);
+  assert.match(gold, /Make a YouTube video about Open RotMG/);
+  assert.equal((gold.match(/Per 1,000 views/g) ?? []).length, 2);
+  assert.deepEqual([...gold.matchAll(/<li>(\d+) <img/g)].map(match => Number(match[1])), [100, 100, 50, 100, 100, 50]);
+  assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 6);
+  assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
+  assert.doesNotMatch(gold, /<strong>|How to get|methods|\/link|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
+  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Updates', 'Restoration', 'Gold']);
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
   assert.doesNotMatch(branding, /discourse-code|Post on Discourse|Forum embed|Lost City|Images for sharing/);
@@ -109,6 +111,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));
   const updates = readFileSync(new URL('../dist/updates/index.html', import.meta.url), 'utf8');
+  const hiscores = readFileSync(new URL('../dist/hiscores/index.html', import.meta.url), 'utf8');
+  for (const html of [updates, hiscores]) {
+    assert.doesNotMatch(html, /Back to game|class="back"/);
+    assert.match(html, /<a href="\/">Game<\/a>/);
+  }
   assert.ok(updates.includes(`rel="canonical" href="${site.href}updates/"`));
   assert.ok(updates.includes('id="updates"'));
   assert.ok(!updates.includes('{{'));
@@ -130,6 +137,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
+    assert.doesNotMatch(html, /Back to game|class="back"/);
     assert.ok(html.includes('content="#000000"'));
   }
   assert.doesNotMatch(restorationPage, /ring-progress|class="hero"|class="score"|catalogue-note|scope-key|Provisional catalogue:|\* Development scene only/);
