@@ -10,7 +10,15 @@ window.OpenRotMGDiagnostics = {
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
-        }).then(value => { build = JSON.stringify(value); })
+        }).then(value => {
+          for (const [field, length] of [['website', 40], ['client', 40], ['runtime', 16]]) {
+            if (typeof value[field] !== 'string' || !new RegExp(`^[a-f0-9]{${length}}$`).test(value[field])) throw new Error(`Invalid diagnostic identity: ${field}`);
+          }
+          if (typeof value.dirty !== 'boolean' || (value.local_client !== undefined && value.local_client !== true)) throw new Error('Invalid diagnostic source qualification');
+          // The server bounds the identity string, not the complete release-selection manifest.
+          build = JSON.stringify({website: value.website, client: value.client, runtime: value.runtime, dirty: value.dirty,
+            ...(value.local_client === true ? {local_client: true} : {})});
+        })
         .catch(error => { build = 'unavailable'; console.error('Bug diagnostics build lookup failed', error); });
 
       // A separate probe cannot establish which renderer Ruffle actually uses.
