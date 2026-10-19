@@ -90,9 +90,11 @@ class WebsiteDeploy(unittest.TestCase):
         config = self.root / 'config.json'
         config.write_text(json.dumps({'state': str(self.root), 'bind': '127.0.0.1:18923'}))
         (self.root / 'server.pem').write_text('private fixture')
-        return SimpleNamespace(CONFIG=config, LAST_BACKUP=self.root / 'receipt.json', LIVE=self.root / 'server',
-                               start_backup=Mock(), rehearse=Mock(), warn_restart=Mock(), run=Mock(),
-                               copy_db=Mock(side_effect=lambda src, dst: dst.write_text('frozen')), ready=Mock())
+        updater = SimpleNamespace(CONFIG=config, LAST_BACKUP=self.root / 'receipt.json', LIVE=self.root / 'server',
+                                  start_backup=Mock(), rehearse=Mock(), warn_restart=Mock(), run=Mock(),
+                                  copy_db=Mock(side_effect=lambda src, dst: dst.write_text('frozen')), ready=Mock())
+        updater.stop_prepared = Mock(side_effect=lambda config, work: updater.run('systemctl', 'stop', 'openrotmg.service'))
+        return updater
 
     def test_readme_only_client_revision_rehearses_saves_restarts_and_retains_both_trees(self):
         self.live_client.with_suffix('.REVISION').write_text('c' * 40)
@@ -120,10 +122,106 @@ class WebsiteDeploy(unittest.TestCase):
             with patch.object(deploy, 'current_main'), patch.object(deploy, 'server_updater', return_value=updater), \
                     patch.object(deploy.subprocess, 'check_output', return_value='failed'), \
                     patch.object(deploy, 'exchange') as exchange:
-                with self.assertRaisesRegex(ValueError, 'failed'):
+                with self.assertRaisesRegex(ValueError if step == 'rehearse' else RuntimeError, 'failed'):
                     self.publish()
                 exchange.assert_not_called()
             self.assertEqual(deploy.files(self.live), self.before)
+
+    def test_changed_client_warning_preparation_stop_order_and_shared_arguments(self):
+        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        updater = self.updater()
+        events = []
+        updater.rehearse.side_effect = lambda *args: events.append('rehearse')
+        updater.start_backup.side_effect = lambda: events.append('backup')
+        updater.warn_restart.side_effect = lambda config: events.append('warning')
+        def prepare(config, work):
+            events.append('prepare')
+            self.assertEqual(config, json.loads(updater.CONFIG.read_text()))
+            self.assertEqual(work.parent, deploy.STATE)
+            updater.run('systemctl', 'stop', 'openrotmg.service')
+        updater.stop_prepared.side_effect = prepare
+        updater.run.side_effect = lambda *args: events.append(args[1])
+        with patch.object(deploy, 'current_main', side_effect=lambda *args: events.append('main')), \
+                patch.object(deploy, 'verify_public'), patch.object(deploy, 'server_updater', return_value=updater), \
+                patch.object(deploy.subprocess, 'check_output', return_value='success'):
+            self.publish()
+        self.assertEqual(events, ['main', 'rehearse', 'backup', 'main', 'warning', 'main', 'prepare', 'stop', 'start', 'backup'])
+        updater.stop_prepared.assert_called_once()
+
+    def test_shared_preparation_failures_never_stop_exchange_or_report_success(self):
+        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        before_client = deploy.files(self.live_client)
+        for message in ['SQL preparation failed', 'timeout before acceptance', 'timeout after acceptance',
+                        'accepted response lost', 'stale receipt', 'process replaced',
+                        'SQL preparation failed; drain cancellation failed: unavailable', 'HTTP 404']:
+            with self.subTest(message=message):
+                updater = self.updater()
+                updater.stop_prepared.side_effect = RuntimeError(message)
+                with patch.object(deploy, 'current_main'), patch.object(deploy, 'verify_public') as public, \
+                        patch.object(deploy, 'server_updater', return_value=updater), \
+                        patch.object(deploy, 'exchange') as exchange, self.assertRaisesRegex(RuntimeError, message):
+                    self.publish()
+                updater.run.assert_not_called()
+                exchange.assert_not_called()
+                public.assert_not_called()
+                self.assertEqual(updater.start_backup.call_count, 1)
+                status = json.loads((deploy.STATE / 'status.json').read_text())
+                self.assertEqual(status['error'], message)
+                self.assertNotEqual(status['state'], 'deployed')
+                self.assertFalse((Path(status['recovery']) / 'cutover').exists())
+                self.assertEqual(deploy.files(self.live), self.before)
+                self.assertEqual(deploy.files(self.live_client), before_client)
+
+    def test_stale_main_before_preparation_and_during_warning_never_stops(self):
+        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        for fail_at in [2, 3]:
+            with self.subTest(main_check=fail_at):
+                updater = self.updater()
+                with patch.object(deploy, 'current_main', side_effect=[None] * (fail_at - 1) + [ValueError('Main advanced')]), \
+                        patch.object(deploy, 'server_updater', return_value=updater), \
+                        patch.object(deploy, 'exchange') as exchange, self.assertRaisesRegex(ValueError, 'Main advanced'):
+                    self.publish()
+                updater.stop_prepared.assert_not_called()
+                updater.run.assert_not_called()
+                exchange.assert_not_called()
+                self.assertEqual(updater.warn_restart.call_count, int(fail_at == 3))
+
+    def test_post_stop_failure_retains_stage_evidence_without_rollback_or_restart(self):
+        for stage in ['shutdown_result', 'freeze_recovery', 'client_exchange', 'site_exchange',
+                      'start', 'verify_running', 'backup_after_start']:
+            with self.subTest(stage=stage):
+                updater = self.updater()
+                work = self.root / stage
+                work.mkdir()
+                site, client = self.root / 'staged-site', self.root / 'staged-client'
+                result = 'failed' if stage == 'shutdown_result' else 'success'
+                if stage == 'freeze_recovery':
+                    updater.copy_db.side_effect = RuntimeError('injected freeze')
+                elif stage == 'start':
+                    def run(*args):
+                        if args[1] == 'start':
+                            raise RuntimeError('injected start')
+                    updater.run.side_effect = run
+                elif stage == 'verify_running':
+                    updater.ready.side_effect = RuntimeError('injected ready')
+                elif stage == 'backup_after_start':
+                    updater.start_backup.side_effect = [None, RuntimeError('injected backup')]
+                effects = [RuntimeError('injected client')] if stage == 'client_exchange' else \
+                          [None, RuntimeError('injected site')] if stage == 'site_exchange' else None
+                with patch.object(deploy, 'current_main'), patch.object(deploy, 'server_updater', return_value=updater), \
+                        patch.object(deploy.subprocess, 'check_output', return_value=result), \
+                        patch.object(deploy, 'atomic'), patch.object(deploy, 'exchange', side_effect=effects) as exchange, \
+                        self.assertRaisesRegex(RuntimeError, 'Post-stop ' + stage):
+                    deploy.activate(site, client, work, REV, self.client_revision, True)
+                evidence = json.loads((work / 'post-stop-failure.json').read_text())
+                self.assertEqual(evidence['stage'], stage)
+                self.assertEqual(evidence['previous_site'], str(site))
+                self.assertEqual(evidence['previous_client'], str(client))
+                self.assertLessEqual(exchange.call_count, 2)
+                calls = [c.args for c in updater.run.call_args_list]
+                self.assertEqual(calls.count(('systemctl', 'stop', 'openrotmg.service')), 1)
+                self.assertEqual(calls.count(('systemctl', 'start', 'openrotmg.service')),
+                                 int(stage in ['start', 'verify_running', 'backup_after_start']))
 
     def test_stale_main_and_drift_fail_closed(self):
         with patch.object(deploy, 'current_main', side_effect=ValueError('Main advanced')), patch.object(deploy, 'exchange') as exchange:
