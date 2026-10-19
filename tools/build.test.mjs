@@ -27,7 +27,8 @@ test('public HTTP, credentials and subpaths in canonical URL are rejected', () =
 });
 
 test('site builds with metadata, strict same-origin WSS and preserved reference bytes', () => {
-  const SITE_URL = 'https://example.test/';
+  const local = process.env.LOCAL_CLIENT_BUILD === '1';
+  const SITE_URL = local ? 'http://127.0.0.1:18923/' : 'https://example.test/';
   const result = build({ SITE_URL });
   assert.equal(result.status, 0, result.stderr);
   const site = new URL(SITE_URL);
@@ -166,7 +167,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const provenance = JSON.parse(readFileSync(new URL('../dist/diagnostics-build.json', import.meta.url), 'utf8'));
   assert.match(provenance.client, /^[a-f0-9]{40}$/);
-  assert.match(provenance.client_archive_sha256, /^[a-f0-9]{64}$/);
+  if (local) {
+    assert.equal(provenance.local_client, true);
+    assert.match(provenance.client_tree, /^[a-f0-9]{40}$/);
+    assert.equal(Object.hasOwn(provenance, 'client_archive_sha256'), false);
+  } else assert.match(provenance.client_archive_sha256, /^[a-f0-9]{64}$/);
   const runtimeLock = JSON.parse(readFileSync(`${process.env.CLIENT_DIR}/ruffle/lock.json`, 'utf8'));
   assert.equal(provenance.runtime_version, runtimeLock.version);
   assert.equal(provenance.runtime_bundle_sha256, runtimeLock.bundleSha256);
@@ -190,7 +195,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   let finish;
   let options;
   const ready = new Promise(resolve => { finish = resolve; });
-  const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+  const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
   let loaded;
   const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
@@ -218,7 +223,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
   for (const port of [8080, 18923, 65535]) {
     const origin = `http://127.0.0.1:${port}`;
     let options;
-    const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+    const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
     const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },

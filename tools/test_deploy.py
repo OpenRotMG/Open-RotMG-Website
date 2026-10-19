@@ -1,4 +1,5 @@
 import io
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -26,7 +27,12 @@ class WebsiteDeploy(unittest.TestCase):
         self.client.mkdir()
         for name in ['index.html', 'client.swf']:
             (self.client / name).write_text(name)
-        (self.client / '.gitignore').write_text('vendor/\n')
+        (self.client / '.gitignore').write_text('vendor/\nnative-texture-editor.swf\n')
+        (self.client / 'editor').mkdir()
+        (self.client / 'editor/lock.json').write_text(json.dumps({
+            'sourceSha256': hashlib.sha256(b'client.swf').hexdigest(),
+            'outputSha256': hashlib.sha256(b'editor').hexdigest()}))
+        (self.client / 'native-texture-editor.swf').write_bytes(b'editor')
         subprocess.run(['git', 'init', '-q', str(self.client)], check=True)
         subprocess.run(['git', '-C', str(self.client), 'add', '.'], check=True)
         subprocess.run(['git', '-C', str(self.client), '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'fixture'], check=True)
@@ -36,7 +42,8 @@ class WebsiteDeploy(unittest.TestCase):
         (self.client / 'vendor/openrotmg.json').write_text('{}')
         (self.build / 'diagnostics-build.json').write_text(json.dumps({
             'website': REV, 'client': self.client_revision, 'dirty': False,
-            'runtime': deploy.digest(b'{}')[:16]}))
+            'runtime': deploy.digest(b'{}')[:16], 'client_archive_sha256': 'd' * 64,
+            'runtime_bundle_sha256': 'e' * 64, 'runtime_version': '0.7.1-openrotmg.8'}))
         archive = self.root / 'bundle.tar.gz'
         package(self.build, self.client, REV, archive)
         self.raw = archive.read_bytes()
@@ -45,9 +52,9 @@ class WebsiteDeploy(unittest.TestCase):
         (self.live / 'old.html').write_text('previous site')
         self.live_client = self.root / 'client'
         self.live_client.mkdir()
-        for name in ['index.html', 'client.swf', '.gitignore', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
+        for name in ['index.html', 'client.swf', '.gitignore', 'editor/lock.json', 'native-texture-editor.swf', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
             path = self.live_client / name
-            path.parent.mkdir(exist_ok=True)
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((self.client / name).read_bytes())
         self.before = deploy.files(self.live)
         for tree, revision in [(self.live, 'b' * 40), (self.live_client, self.client_revision)]:
@@ -57,6 +64,34 @@ class WebsiteDeploy(unittest.TestCase):
             p = patch.object(deploy, name, value)
             p.start()
             self.addCleanup(p.stop)
+
+    def test_local_or_incomplete_selection_cannot_be_packaged_or_deployed(self):
+        build_path = self.build / 'diagnostics-build.json'
+        normal = json.loads(build_path.read_text())
+        for change in [{'local_client': True}, {'client_archive_sha256': None}, {'runtime_bundle_sha256': None}, {'runtime_version': None}]:
+            invalid = normal | change
+            invalid = {k: v for k, v in invalid.items() if v is not None}
+            build_path.write_text(json.dumps(invalid))
+            output = self.root / 'invalid.tar.gz'
+            with self.assertRaisesRegex(ValueError, 'normal deployed client selection'):
+                package(self.build, self.client, REV, output)
+            self.assertFalse(output.exists())
+            def rewrite(entries):
+                data = {n: d for n, d in entries}
+                data['site/diagnostics-build.json'] = json.dumps(invalid).encode()
+                meta = json.loads(data['metadata.json'])
+                meta['manifest']['site/diagnostics-build.json'] = deploy.digest(data['site/diagnostics-build.json'])
+                data['metadata.json'] = json.dumps(meta).encode()
+                return data.items()
+            with self.assertRaisesRegex(ValueError, 'normal deployed client selection'):
+                deploy.payload(self.rewrite(rewrite), REV, self.client_revision)
+
+    def test_package_includes_verified_derived_editor_and_rejects_corruption(self):
+        with tarfile.open(fileobj=io.BytesIO(self.raw)) as archive:
+            self.assertEqual(archive.extractfile('client/native-texture-editor.swf').read(), b'editor')
+        (self.client / 'native-texture-editor.swf').write_bytes(b'corrupt')
+        with self.assertRaisesRegex(ValueError, 'editor asset checksum mismatch'):
+            package(self.build, self.client, REV, self.root / 'corrupt.tar.gz')
 
     def publish(self):
         deploy.deploy(REV, self.client_revision, self.raw)

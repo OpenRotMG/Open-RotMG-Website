@@ -17,6 +17,11 @@ def package(root, client, revision, output):
     build = json.loads(files['diagnostics-build.json'])
     if build['website'] != revision or build['dirty'] is not False:
         raise ValueError('Website build does not match the clean source revision')
+    if (build.get('local_client') is not None
+            or not re.fullmatch('[0-9a-f]{64}', build.get('client_archive_sha256', ''))
+            or not re.fullmatch('[0-9a-f]{64}', build.get('runtime_bundle_sha256', ''))
+            or not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+-openrotmg\.[0-9]+', build.get('runtime_version', ''))):
+        raise ValueError('A complete normal deployed client selection is required; local client builds cannot be packaged')
     client = Path(client)
     actual = subprocess.check_output(['git', '-C', str(client), 'rev-parse', 'HEAD'], text=True).strip()
     subprocess.run(['git', '-C', str(client), 'diff', '--exit-code', 'HEAD'], check=True)
@@ -24,6 +29,11 @@ def package(root, client, revision, output):
         raise ValueError('Client build revision mismatch')
     names = subprocess.check_output(['git', '-C', str(client), 'ls-files', '-z']).decode().split('\0')[:-1]
     names += [str(p.relative_to(client)) for p in (client / 'vendor').rglob('*') if p.is_file()]
+    lock = json.loads((client / 'editor/lock.json').read_text())
+    for name, expected in [('client.swf', lock['sourceSha256']), ('native-texture-editor.swf', lock['outputSha256'])]:
+        if hashlib.sha256((client / name).read_bytes()).hexdigest() != expected:
+            raise ValueError(f'Native editor asset checksum mismatch: {name}')
+    names += ['native-texture-editor.swf']
     if any((client / name).is_symlink() for name in names):
         raise ValueError('Symlink in client build')
     files = {'site/' + n: d for n, d in files.items()} | {'client/' + n: (client / n).read_bytes() for n in names}
