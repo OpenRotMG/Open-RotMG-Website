@@ -28,7 +28,9 @@ test('public HTTP, credentials and subpaths in canonical URL are rejected', () =
 
 test('site builds with metadata, strict same-origin WSS and preserved reference bytes', () => {
   const local = process.env.LOCAL_CLIENT_BUILD === '1';
-  const SITE_URL = local ? 'http://127.0.0.1:18923/' : 'https://example.test/';
+  // The deployment pipeline packages this build, so an explicit deployment origin must survive the test.
+  const SITE_URL = Object.hasOwn(process.env, 'SITE_URL') ? process.env.SITE_URL
+    : local ? 'http://127.0.0.1:18923/' : 'https://example.test/';
   const result = build({ SITE_URL });
   assert.equal(result.status, 0, result.stderr);
   const site = new URL(SITE_URL);
