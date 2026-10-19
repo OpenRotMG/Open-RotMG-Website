@@ -146,22 +146,42 @@ def activate(site, client, work, revision, client_revision, changed_client):
         fcntl.flock(lock, fcntl.LOCK_EX)
         current_main(revision, client_revision)
         update.warn_restart(config)
-        update.run('systemctl', 'stop', 'openrotmg.service')
-        require(subprocess.check_output(['systemctl', 'show', 'openrotmg', '-p', 'Result', '--value'], text=True).strip() == 'success',
-                'Shutdown save failed; no client exchange performed')
-        frozen = work / 'cutover'
-        frozen.mkdir(mode=0o700)
-        update.copy_db(Path(config['state']) / 'game.db', frozen / 'game.db')
-        shutil.copyfile(Path(config['state']) / 'server.pem', frozen / 'server.pem')
-        (frozen / 'server.pem').chmod(0o600)
-        # The SWF is cached in memory, unlike the website and runtime files.
-        exchange(CLIENT, client)
-        atomic(CLIENT.with_suffix('.REVISION'), (client_revision + '\n').encode())
-        atomic(CLIENT.with_suffix('.sha256.json'), json.dumps(files(CLIENT), sort_keys=True).encode())
-        exchange(LIVE, site)
-        update.run('systemctl', 'start', 'openrotmg.service')
-        update.ready(int(config['bind'].rsplit(':', 1)[1]))
-    update.start_backup()
+        current_main(revision, client_revision)
+        update.stop_prepared(config, work)
+        cutover = 'shutdown_result'
+        try:
+            require(subprocess.check_output(['systemctl', 'show', 'openrotmg', '-p', 'Result', '--value'], text=True).strip() == 'success',
+                    'Shutdown save failed; no client exchange performed')
+            cutover = 'freeze_recovery'
+            frozen = work / 'cutover'
+            frozen.mkdir(mode=0o700)
+            update.copy_db(Path(config['state']) / 'game.db', frozen / 'game.db')
+            shutil.copyfile(Path(config['state']) / 'server.pem', frozen / 'server.pem')
+            (frozen / 'server.pem').chmod(0o600)
+            cutover = 'client_exchange'
+            # The SWF is cached in memory, unlike the website and runtime files.
+            exchange(CLIENT, client)
+            atomic(CLIENT.with_suffix('.REVISION'), (client_revision + '\n').encode())
+            atomic(CLIENT.with_suffix('.sha256.json'), json.dumps(files(CLIENT), sort_keys=True).encode())
+            cutover = 'site_exchange'
+            exchange(LIVE, site)
+            cutover = 'start'
+            update.run('systemctl', 'start', 'openrotmg.service')
+            cutover = 'verify_running'
+            update.ready(int(config['bind'].rsplit(':', 1)[1]))
+        except BaseException as error:
+            post_stop_failure(work, cutover, error, site, client)
+    try:
+        update.start_backup()
+    except BaseException as error:
+        post_stop_failure(work, 'backup_after_start', error, site, client)
+
+
+def post_stop_failure(work, stage, error, site, client):
+    failure = {'stage': stage, 'error': str(error), 'recovery': str(work),
+               'previous_site': str(site), 'previous_client': str(client)}
+    (work / 'post-stop-failure.json').write_text(json.dumps(failure, indent=2) + '\n')
+    raise RuntimeError(f'Post-stop {stage} failed: {error}; recovery: {work}') from error
 
 
 def deploy(revision, client_revision, raw):
