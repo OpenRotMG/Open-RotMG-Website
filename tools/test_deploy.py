@@ -33,6 +33,8 @@ class WebsiteDeploy(unittest.TestCase):
             'sourceSha256': hashlib.sha256(b'client.swf').hexdigest(),
             'outputSha256': hashlib.sha256(b'editor').hexdigest()}))
         (self.client / 'native-texture-editor.swf').write_bytes(b'editor')
+        (self.build / 'draw').mkdir()
+        (self.build / 'draw/native-texture-editor.swf').write_bytes(b'editor')
         subprocess.run(['git', 'init', '-q', str(self.client)], check=True)
         subprocess.run(['git', '-C', str(self.client), 'add', '.'], check=True)
         subprocess.run(['git', '-C', str(self.client), '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'fixture'], check=True)
@@ -52,7 +54,7 @@ class WebsiteDeploy(unittest.TestCase):
         (self.live / 'old.html').write_text('previous site')
         self.live_client = self.root / 'client'
         self.live_client.mkdir()
-        for name in ['index.html', 'client.swf', '.gitignore', 'editor/lock.json', 'native-texture-editor.swf', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
+        for name in ['index.html', 'client.swf', '.gitignore', 'editor/lock.json', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
             path = self.live_client / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((self.client / name).read_bytes())
@@ -88,8 +90,9 @@ class WebsiteDeploy(unittest.TestCase):
 
     def test_package_includes_verified_derived_editor_and_rejects_corruption(self):
         with tarfile.open(fileobj=io.BytesIO(self.raw)) as archive:
-            self.assertEqual(archive.extractfile('client/native-texture-editor.swf').read(), b'editor')
-        (self.client / 'native-texture-editor.swf').write_bytes(b'corrupt')
+            self.assertEqual(archive.extractfile('site/draw/native-texture-editor.swf').read(), b'editor')
+            self.assertNotIn('client/native-texture-editor.swf', archive.getnames())
+        (self.build / 'draw/native-texture-editor.swf').write_bytes(b'corrupt')
         with self.assertRaisesRegex(ValueError, 'editor asset checksum mismatch'):
             package(self.build, self.client, REV, self.root / 'corrupt.tar.gz')
 
@@ -117,6 +120,8 @@ class WebsiteDeploy(unittest.TestCase):
         status = json.loads((deploy.STATE / 'status.json').read_text())
         self.assertEqual(status['state'], 'deployed')
         self.assertFalse(status['client_restarted'])
+        self.assertEqual((self.live / 'draw/native-texture-editor.swf').read_bytes(), b'editor')
+        self.assertFalse((self.live_client / 'native-texture-editor.swf').exists())
         self.assertEqual(deploy.files(Path(status['previous_site'])), self.before)
         self.assertEqual((self.live / 'index.html').stat().st_mode & 0o777, 0o644)
 

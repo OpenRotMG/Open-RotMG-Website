@@ -30,10 +30,9 @@ def package(root, client, revision, output):
     names = subprocess.check_output(['git', '-C', str(client), 'ls-files', '-z']).decode().split('\0')[:-1]
     names += [str(p.relative_to(client)) for p in (client / 'vendor').rglob('*') if p.is_file()]
     lock = json.loads((client / 'editor/lock.json').read_text())
-    for name, expected in [('client.swf', lock['sourceSha256']), ('native-texture-editor.swf', lock['outputSha256'])]:
-        if hashlib.sha256((client / name).read_bytes()).hexdigest() != expected:
-            raise ValueError(f'Native editor asset checksum mismatch: {name}')
-    names += ['native-texture-editor.swf']
+    if (hashlib.sha256((client / 'client.swf').read_bytes()).hexdigest() != lock['sourceSha256']
+            or hashlib.sha256(files['draw/native-texture-editor.swf']).hexdigest() != lock['outputSha256']):
+        raise ValueError('Native editor asset checksum mismatch')
     if any((client / name).is_symlink() for name in names):
         raise ValueError('Symlink in client build')
     files = {'site/' + n: d for n, d in files.items()} | {'client/' + n: (client / n).read_bytes() for n in names}

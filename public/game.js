@@ -9,7 +9,7 @@
     document.querySelector('#startup').hidden = true;
   }, {once: true});
   window.OpenRotMGDiagnostics.start(socketEndpoint, player);
-  const movies = {game: '/client.swf', editor: '/native-texture-editor.swf'};
+  const movies = {game: '/client.swf', editor: '/draw/native-texture-editor.swf'};
   const mode = document.querySelector('#game').dataset.mode;
   if (!Object.hasOwn(movies, mode)) throw new Error(`Unknown client mode: ${mode}`);
   await player.ruffle().load({

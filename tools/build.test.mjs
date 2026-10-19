@@ -179,6 +179,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js?v=${provenance.client}"`));
   assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
   assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
+  const editor = readFileSync(new URL('../dist/draw/native-texture-editor.swf', import.meta.url));
+  const editorLock = JSON.parse(readFileSync(`${process.env.CLIENT_DIR}/editor/lock.json`, 'utf8'));
+  assert.equal(createHash('sha256').update(editor).digest('hex'), editorLock.outputSha256);
+  assert.equal(existsSync(new URL('../dist/native-texture-editor.swf', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/vendor', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/local', import.meta.url)), false);
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));

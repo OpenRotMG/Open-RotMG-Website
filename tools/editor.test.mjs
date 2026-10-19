@@ -7,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import test from 'node:test';
 
 const script = readFileSync(new URL('../public/game.js', import.meta.url), 'utf8');
-for (const [mode, path] of [['game', '/client.swf'], ['editor', '/native-texture-editor.swf']]) {
+for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-texture-editor.swf']]) {
   test(`${mode} resolves only its named root asset from the nested editor page`, async () => {
     for (const baseURI of ['http://127.0.0.1:18923/draw/', 'https://example.test/draw/?url=https://evil.example/movie.swf']) {
       let options;

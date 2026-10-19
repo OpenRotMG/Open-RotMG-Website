@@ -48,6 +48,8 @@ const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist);
 await cp(join(root, 'public'), dist, { recursive: true });
+// Site ownership keeps adding the editor from changing an already-deployed client revision's files.
+await cp(join(client, 'native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
 await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
 const socialImage = `social.png?v=${createHash('sha256').update(await readFile(join(dist, 'social.png'))).digest('hex').slice(0, 12)}`;
@@ -72,4 +74,4 @@ await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
 await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.href}</loc></url><url><loc>${site.href}about/</loc></url><url><loc>${site.href}restoration/</loc></url><url><loc>${site.href}branding/</loc></url><url><loc>${site.href}hiscores/</loc></url><url><loc>${site.href}gold/</loc></url><url><loc>${site.href}updates/</loc></url></urlset>\n`);
-console.log(`Built ${site.href} for client ${revision}. Rust must serve /client.swf, /native-texture-editor.swf, /vendor/, /sfx/, /legacy-api/ and /game.`);
+console.log(`Built ${site.href} for client ${revision}. Rust must serve /client.swf, /vendor/, /sfx/, /legacy-api/ and /game.`);
