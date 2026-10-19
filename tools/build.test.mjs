@@ -27,7 +27,8 @@ test('public HTTP, credentials and subpaths in canonical URL are rejected', () =
 });
 
 test('site builds with metadata, strict same-origin WSS and preserved reference bytes', () => {
-  const SITE_URL = 'https://example.test/';
+  const local = process.env.LOCAL_CLIENT_BUILD === '1';
+  const SITE_URL = local ? 'http://127.0.0.1:18923/' : 'https://example.test/';
   const result = build({ SITE_URL });
   assert.equal(result.status, 0, result.stderr);
   const site = new URL(SITE_URL);
@@ -166,7 +167,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(existsSync(new URL('../dist/restoration/audit.html', import.meta.url)), false);
   const provenance = JSON.parse(readFileSync(new URL('../dist/diagnostics-build.json', import.meta.url), 'utf8'));
   assert.match(provenance.client, /^[a-f0-9]{40}$/);
-  assert.match(provenance.client_archive_sha256, /^[a-f0-9]{64}$/);
+  if (local) {
+    assert.equal(provenance.local_client, true);
+    assert.match(provenance.client_tree, /^[a-f0-9]{40}$/);
+    assert.equal(Object.hasOwn(provenance, 'client_archive_sha256'), false);
+  } else assert.match(provenance.client_archive_sha256, /^[a-f0-9]{64}$/);
   const runtimeLock = JSON.parse(readFileSync(`${process.env.CLIENT_DIR}/ruffle/lock.json`, 'utf8'));
   assert.equal(provenance.runtime_version, runtimeLock.version);
   assert.equal(provenance.runtime_bundle_sha256, runtimeLock.bundleSha256);
@@ -174,6 +179,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js?v=${provenance.client}"`));
   assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
   assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
+  const editor = readFileSync(new URL('../dist/draw/native-texture-editor.swf', import.meta.url));
+  const editorLock = JSON.parse(readFileSync(`${process.env.CLIENT_DIR}/editor/lock.json`, 'utf8'));
+  assert.equal(createHash('sha256').update(editor).digest('hex'), editorLock.outputSha256);
+  assert.equal(existsSync(new URL('../dist/native-texture-editor.swf', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/vendor', import.meta.url)), false);
   assert.equal(existsSync(new URL('../dist/local', import.meta.url)), false);
   const social = readFileSync(new URL('../dist/social.png', import.meta.url));
@@ -190,7 +199,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   let finish;
   let options;
   const ready = new Promise(resolve => { finish = resolve; });
-  const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+  const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
   let loaded;
   const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
@@ -218,19 +227,32 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
   for (const port of [8080, 18923, 65535]) {
     const origin = `http://127.0.0.1:${port}`;
     let options;
-    const nodes = { '#game': { dataset: {}, append() {} }, '#startup': { hidden: false } };
+    const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
     const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
       document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
     });
     const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);
-    for (const path of ['client.swf', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
+    for (const path of ['client.swf', 'native-texture-editor.swf', 'draw/', 'game.js', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
       assert.equal(rewrite(`${origin}/${path}`), `${origin}/${path}`);
     }
-    for (const path of ['char/list', 'char/fame', 'account/register', 'account/verify', 'account/setName', 'fame/list', 'guild/listMembers', 'guild/getBoard', 'guild/setBoard']) {
-      assert.equal(rewrite(`http://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+    for (const protocol of ['http', 'https']) {
+      for (const path of ['char/list', 'char/fame', 'account/register', 'account/verify', 'account/setName', 'fame/list', 'guild/listMembers', 'guild/getBoard', 'guild/setBoard', 'picture/save', 'picture/list', 'picture/get', 'picture/delete']) {
+        assert.equal(rewrite(`${protocol}://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+      }
     }
+    for (const url of [
+      'https://127.0.0.1.evil.example:8080/picture/get',
+      'http://127.0.0.1:8080.evil.example/picture/get',
+      'http://127.0.0.1:8080@evil.example/picture/get',
+      'http://127.0.0.1:8081/picture/get', 'http://localhost:8080/picture/get',
+      'http://evil.example/picture/get', 'ftp://127.0.0.1:8080/picture/get',
+      'http://127.0.0.1:8080/picture', 'http://127.0.0.1:8080/pictures/list',
+      'http://127.0.0.1:8080/not/picture/get', 'http://127.0.0.1:8080/?next=/picture/get'
+    ]) assert.equal(rewrite(url), url);
+    assert.equal(options.allowScriptAccess, false);
+    assert.equal(options.openUrlMode, 'confirm');
     assert.equal(rewrite(options.url), options.url);
   }
 });

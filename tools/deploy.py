@@ -86,6 +86,11 @@ def payload(raw, revision, client_revision):
     build = json.loads(site['diagnostics-build.json'])
     require(build['website'] == revision and build['client'] == client_revision and build['dirty'] is False,
             'Website/client build provenance mismatch')
+    require(build.get('local_client') is None
+            and re.fullmatch('[0-9a-f]{64}', build.get('client_archive_sha256', ''))
+            and re.fullmatch('[0-9a-f]{64}', build.get('runtime_bundle_sha256', ''))
+            and re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+-openrotmg\.[0-9]+', build.get('runtime_version', '')),
+            'A complete normal deployed client selection is required; local client builds cannot be deployed')
     require(build['runtime'] == digest(client['vendor/openrotmg.json'])[:16], 'Runtime provenance mismatch')
     return site, client
 

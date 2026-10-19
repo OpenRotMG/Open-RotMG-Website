@@ -9,8 +9,11 @@
     document.querySelector('#startup').hidden = true;
   }, {once: true});
   window.OpenRotMGDiagnostics.start(socketEndpoint, player);
+  const movies = {game: '/client.swf', editor: '/draw/native-texture-editor.swf'};
+  const mode = document.querySelector('#game').dataset.mode;
+  if (!Object.hasOwn(movies, mode)) throw new Error(`Unknown client mode: ${mode}`);
   await player.ruffle().load({
-    url: new URL('/client.swf', document.baseURI).href,
+    url: new URL(movies[mode], document.baseURI).href,
     autoplay: 'on',
     splashScreen: false,
     unmuteOverlay: 'hidden',
@@ -20,7 +23,7 @@
     logLevel: 'warn',
     socketProxy: [{ host: '127.0.0.1', port: 2050, proxyUrl: socketEndpoint.href }],
     urlRewriteRules: [
-      [/^https?:\/\/127\.0\.0\.1:8080\/(?=(?:char|account|fame|guild)\/)/, new URL('/legacy-api/', document.baseURI).href],
+      [/^https?:\/\/127\.0\.0\.1:8080\/(?=(?:char|account|fame|guild|picture)\/)/, new URL('/legacy-api/', document.baseURI).href],
       [/^https?:\/\/realmofthemadgod\.appspot\.com\/sfx\//, new URL('/sfx/', document.baseURI).href]
     ]
   });
