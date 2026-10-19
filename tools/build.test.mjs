@@ -230,7 +230,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
       document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
     });
     const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);
-    for (const path of ['client.swf', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
+    for (const path of ['client.swf', 'native-texture-editor.swf', 'draw/', 'game.js', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
       assert.equal(rewrite(`${origin}/${path}`), `${origin}/${path}`);
     }
     for (const protocol of ['http', 'https']) {

@@ -4,11 +4,11 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import {webcrypto} from 'node:crypto';
 
-function fixture({longTasks = true, graphicsError = false, loaded = true} = {}) {
+function fixture({longTasks = true, graphicsError = false, loaded = true, baseURI = 'https://example.test/'} = {}) {
   let tick, frame, visibility, observer, time = 0, status = 204;
   const uploads = [], errors = [], lookups = [];
   const document = {
-    baseURI: 'https://example.test/', hidden: false,
+    baseURI, hidden: false,
     createElement: () => ({getContext() {if (graphicsError) throw Error('blocked'); return null;}}),
     querySelector: () => ({getBoundingClientRect: () => ({width: 800, height: 600})}),
     addEventListener: (event, callback) => {assert.equal(event, 'visibilitychange'); visibility = callback;}
@@ -35,6 +35,13 @@ function fixture({longTasks = true, graphicsError = false, loaded = true} = {}) 
   return {load, endpoint, uploads, lookups, errors, document, sample: async () => {time += 5000; await tick();},
     frame: t => frame(t), task: ms => observer({getEntries: () => [{duration: ms}]}), visibility: () => visibility(), status: value => {status = value;}};
 }
+
+test('nested editor page looks up the same root build identity and telemetry API', async () => {
+  const f = fixture({baseURI: 'https://example.test/draw/'});
+  assert.deepEqual(f.lookups, ['https://example.test/diagnostics-build.json']);
+  await f.sample();
+  assert.match(f.uploads[0].url, /^https:\/\/example\.test\/api\/diagnostics\/[a-f0-9]{32}$/);
+});
 
 test('startup sends no build lookup or telemetry and starts only after the movie loads', async () => {
   const f = fixture({loaded: false});

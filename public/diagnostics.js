@@ -6,7 +6,7 @@ window.OpenRotMGDiagnostics = {
     // Startup downloads must not compete with telemetry for the same connection.
     player.addEventListener('loadeddata', () => {
       let build = 'pending';
-      fetch(new URL('diagnostics-build.json', document.baseURI), {cache: 'no-store'})
+      fetch(new URL('/diagnostics-build.json', document.baseURI), {cache: 'no-store'})
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
