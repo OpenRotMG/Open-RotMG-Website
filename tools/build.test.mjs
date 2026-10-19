@@ -228,9 +228,22 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     for (const path of ['client.swf', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
       assert.equal(rewrite(`${origin}/${path}`), `${origin}/${path}`);
     }
-    for (const path of ['char/list', 'char/fame', 'account/register', 'account/verify', 'account/setName', 'fame/list', 'guild/listMembers', 'guild/getBoard', 'guild/setBoard']) {
-      assert.equal(rewrite(`http://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+    for (const protocol of ['http', 'https']) {
+      for (const path of ['char/list', 'char/fame', 'account/register', 'account/verify', 'account/setName', 'fame/list', 'guild/listMembers', 'guild/getBoard', 'guild/setBoard', 'picture/save', 'picture/list', 'picture/get', 'picture/delete']) {
+        assert.equal(rewrite(`${protocol}://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+      }
     }
+    for (const url of [
+      'https://127.0.0.1.evil.example:8080/picture/get',
+      'http://127.0.0.1:8080.evil.example/picture/get',
+      'http://127.0.0.1:8080@evil.example/picture/get',
+      'http://127.0.0.1:8081/picture/get', 'http://localhost:8080/picture/get',
+      'http://evil.example/picture/get', 'ftp://127.0.0.1:8080/picture/get',
+      'http://127.0.0.1:8080/picture', 'http://127.0.0.1:8080/pictures/list',
+      'http://127.0.0.1:8080/not/picture/get', 'http://127.0.0.1:8080/?next=/picture/get'
+    ]) assert.equal(rewrite(url), url);
+    assert.equal(options.allowScriptAccess, false);
+    assert.equal(options.openUrlMode, 'confirm');
     assert.equal(rewrite(options.url), options.url);
   }
 });
