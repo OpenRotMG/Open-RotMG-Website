@@ -11,7 +11,7 @@ const authorization=()=>{
 test('linking automatically uses the authenticated browser without passwords or a second confirmation',async()=>{
   const result=await startLink(token,origin,async(path,request)=>{
     assert.equal(path,'/api/account/link/start');assert.deepEqual(JSON.parse(request.body),{token});
-    assert.equal(request.credentials,'same-origin');assert.equal(request.redirect,'error');assert.equal(request.cache,'no-store');assert.equal(request.method,'POST');
+    assert.equal(request.credentials,'same-origin');assert.equal(request.mode,'cors');assert.equal(request.redirect,'error');assert.equal(request.cache,'no-store');assert.equal(request.method,'POST');
     return Response.json({state:'authorize',url:authorization()});
   });assert.equal(result.state,'authorize');
   assert.deepEqual(await startLink(token,origin,async()=>Response.json({state:'signed_out'})),{state:'signed_out'});

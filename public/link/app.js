@@ -1,6 +1,7 @@
 async function request(path, token, fetchImpl) {
   if (!/^[a-f0-9]{64}$/.test(token)) throw new Error('Run /link in Discord again.');
-  const response = await fetchImpl(path, {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token}), credentials: 'same-origin', mode: 'same-origin', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(15000)});
+  // CORS mode preserves Origin under no-referrer: https://fetch.spec.whatwg.org/#append-a-request-origin-header
+  const response = await fetchImpl(path, {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token}), credentials: 'same-origin', mode: 'cors', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(15000)});
   const result = await response.json();
   if (!response.ok) throw new Error(typeof result.error === 'string' ? result.error : `Linking unavailable (${response.status})`);
   return result;

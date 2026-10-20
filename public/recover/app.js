@@ -4,7 +4,7 @@ export function passwordValid(password) {
 }
 export async function submitReset(token, password, fetchImpl = fetch) {
   if (!/^[a-f0-9]{64}$/.test(token) || !passwordValid(password)) throw new Error('Invalid reset link or password');
-  const response = await fetchImpl('/api/account/recover', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token, password}), credentials: 'omit', mode: 'same-origin', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(25000)});
+  const response = await fetchImpl('/api/account/recover', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token, password}), credentials: 'omit', mode: 'cors', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(25000)});
   const result = await response.json();
   if (!response.ok) throw new Error(typeof result.error === 'string' ? result.error : `Reset rejected (${response.status})`);
   if (result.reset !== true) throw new Error('Invalid reset confirmation');
