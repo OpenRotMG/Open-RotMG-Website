@@ -27,9 +27,9 @@ test('July100 exact member sets and every ordered occurrence/parameter match the
   assert.equal(baselineLeaves.filter(leaf => leaf.template === 'xp-source').length, 196);
   assert.equal(baseline.members.filter(m => /^object-08/.test(m.id)).length,27);
   assert.equal(baseline.members.reduce((n,m)=>n+(m.audio?.length??0),0),565);
-  assert.equal(baseline.systems.length,218);
-  assert.equal(baselineLeaves.length, 10883);
-  assert.equal(new Set(baselineLeaves.map(leaf => leaf.id)).size, 10883);
+  assert.equal(baseline.systems.length,223);
+  assert.equal(baselineLeaves.length, 10888);
+  assert.equal(new Set(baselineLeaves.map(leaf => leaf.id)).size, 10888);
 });
 
 test('class starts/caps/growth bounds and twelve slot/loadout positions are independent leaves', () => {
@@ -258,9 +258,9 @@ test('variant details expose every selected repair without rewriting original in
 
 test('search/domain/status counts are exact check counts, not overlapping member totals', () => {
   assert.equal(filterChecks(baseline,baselineLeaves,{status:'verified'}).length,0);
-  assert.equal(filterChecks(baseline,baselineLeaves,{status:'not-run'}).length,10883);
+  assert.equal(filterChecks(baseline,baselineLeaves,{status:'not-run'}).length,10888);
   const all = Object.keys(baseline.domains).flatMap(domain => filterChecks(baseline,baselineLeaves,{domain}));
-  assert.equal(new Set(all.map(l=>l.id)).size,10883);
+  assert.equal(new Set(all.map(l=>l.id)).size,10888);
   const matches = filterChecks(baseline,baselineLeaves,{query:'Red Fire',domain:'classes'});
   assert.ok(matches.length>0); assert.ok(matches.every(l=>l.domain==='classes'));
 });
@@ -280,7 +280,7 @@ class Element {
 }
 const descendants = node => [node,...node.children.flatMap(descendants)];
 function dom(hash='') {
-  const ids=['search-form','check-dialog','check-close','check-title','check-status','check-content','domain','search','status','variant','clear','completion','implementation-summary','historical-summary','functional-summary','questions-summary','inventory-summary','visible-count','areas','checks','filters','global-gates','error'];
+  const ids=['search-form','check-dialog','check-close','check-title','check-status','check-content','domain','search','status','variant','clear','completion','implementation-summary','historical-summary','functional-summary','questions-summary','inventory-summary','visible-count','areas','checks','filters','global-gates','error','roadmap','roadmap-nav','roadmap-summary','technical'];
   const nodes = Object.fromEntries(ids.map(id=>[id,new Element()]));nodes.variant.value='original';
   const document={createElement:tag=>new Element(tag),getElementById:id=>nodes[id]??Object.values(nodes).flatMap(descendants).find(n=>n.id===id)};
   const window={location:{hash},events:{},addEventListener(type,callback){this.events[type]=callback;}};
@@ -294,8 +294,8 @@ test('native DOM seam renders every group with safe text, exact filters, details
   const mounted=await mountCatalogue(env.document,success(d),env.window,{error:e=>errors.push(e)});
   assert.ok(mounted);assert.equal(errors.length,0);assert.equal(env.nodes.filters.disabled,false);
   assert.equal(env.nodes['check-dialog'].open,true);assert.match(env.nodes['check-content'].textContent, /-y,-x,-rotation/);
-  assert.match(env.nodes['questions-summary'].textContent,/Global gates: 4 · category gates: 10 · repaired variant gates: 1 · leaf-local question bindings: 10884/);
-  assert.equal(env.nodes.variant.value,'repaired');assert.match(env.nodes['visible-count'].textContent,/10883 \/ 10883/);
+  assert.match(env.nodes['questions-summary'].textContent,/Global gates: 4 · category gates: 10 · repaired variant gates: 1 · leaf-local question bindings: 10889/);
+  assert.equal(env.nodes.variant.value,'repaired');assert.match(env.nodes['visible-count'].textContent,/10888 \/ 10888/);
   assert.equal(descendants(env.nodes.checks).filter(n=>n.tagName==='details').length,new Set(baselineLeaves.map(l=>l.domain+':'+l.group)).size);
   assert.ok(env.nodes.checks.textContent.includes(hostile));assert.equal(descendants(env.nodes.checks).filter(n=>n.tagName==='img').length,0);
   env.nodes['check-close'].dispatch('click');assert.equal(env.nodes['check-dialog'].open,false);
@@ -303,11 +303,39 @@ test('native DOM seam renders every group with safe text, exact filters, details
   assert.match(env.nodes['visible-count'].textContent,new RegExp('^'+filterChecks(d,mounted.leaves,{query:'Falchion',variant:'repaired'}).length+' /'));
   const member=descendants(env.nodes.checks).find(n=>n.tagName==='details');member.open=true;member.dispatch('toggle');
   const anchors=descendants(member).filter(n=>n.tagName==='a');assert.ok(anchors.length>0);assert.ok(anchors.every(n=>n.href.startsWith('#check=')));
-  env.nodes.status.value='verified';env.nodes.status.dispatch('change');assert.equal(env.nodes.checks.children.length,0);assert.match(env.nodes['visible-count'].textContent,/^0 \/ 10883/);
-  env.nodes.clear.dispatch('click');assert.match(env.nodes['visible-count'].textContent,/^10883/);
+  env.nodes.status.value='verified';env.nodes.status.dispatch('change');assert.equal(env.nodes.checks.children.length,0);assert.match(env.nodes['visible-count'].textContent,/^0 \/ 10888/);
+  env.nodes.clear.dispatch('click');assert.match(env.nodes['visible-count'].textContent,/^10888/);
   env.window.location.hash='#member=object-0212';env.window.events.hashchange();
   const oryx=env.document.getElementById('member-enemies-object-0212');assert.equal(oryx.open,true);assert.equal(oryx.scrolled,true);
   assert.ok(descendants(oryx).some(n=>n.href?.includes('object-0212-behavior-1')));
+});
+
+test('roadmap-first DOM keeps technical details collapsed, opens area/member links and preserves honest statuses under filters', async () => {
+  const env = dom('#area=tutorial'), errors = [], data = catalogue();
+  data.roadmap[0].requirements[0].current = '<img src=x onerror=alert(1)>';
+  const mounted = await mountCatalogue(env.document, success(data), env.window, {error:error=>errors.push(error)});
+  assert.equal(env.nodes.technical.open, false);
+  assert.equal(env.nodes.roadmap.children.length, 7);
+  assert.equal(env.document.getElementById('area-tutorial').open, true);
+  assert.match(env.nodes.roadmap.textContent, /Map layout and object placement/);
+  assert.ok(env.nodes.roadmap.textContent.includes('<img src=x onerror=alert(1)>'));
+  assert.equal(descendants(env.nodes.roadmap).some(node => node.tagName === 'img'), false);
+  assert.match(env.nodes['roadmap-summary'].textContent, /7 areas need research.*0 restored/);
+  assert.equal(env.nodes.completion.textContent, 'Restoration incomplete');
+  env.nodes.status.value='verified';env.nodes.status.dispatch('change');
+  assert.match(env.nodes['visible-count'].textContent, /^0 \/ 10888/);
+  assert.equal(env.nodes.completion.textContent, 'Restoration incomplete');
+  assert.equal(env.document.getElementById('area-tutorial').open, true);
+  env.window.location.hash='#member=object-0823';env.window.events.hashchange();
+  assert.equal(env.nodes.technical.open, true);
+  assert.equal(env.document.getElementById('member-terrain-object-0823').open, true);
+  env.window.location.hash='#area=unknown';env.window.events.hashchange();
+  assert.equal(env.nodes.error.hidden, false);
+  env.window.location.hash='#area=realm';env.window.events.hashchange();
+  assert.equal(env.nodes.error.hidden, true);
+  assert.equal(env.document.getElementById('area-realm').open, true);
+  assert.equal(mounted.roadmap.length, 7);
+  assert.equal(errors.length, 1);
 });
 
 test('hash navigation from a check to empty/domain/member destinations closes the old modal', async () => {

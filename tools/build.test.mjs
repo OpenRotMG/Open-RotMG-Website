@@ -136,7 +136,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(july, /aria-current="page">July 2010/);
   assert.match(july, /property="og:title"/);
   assert.doesNotMatch(july, /\{\{|RESTORATION_PERCENT|\u2014/);
-  for (const file of ['catalogue.json', 'catalogue.js', 'app.js', 'style.css']) assert.ok(existsSync(new URL(`../dist/restoration/2010/${file}`, import.meta.url)));
+  assert.match(july, /id="roadmap"/);
+  assert.match(july, /<details id="technical" class="scope-details">/);
+  assert.match(july, /Unresolved research and known differences block completion/);
+  for (const file of ['catalogue.json', 'catalogue.js', 'roadmap.js', 'app.js', 'style.css']) assert.ok(existsSync(new URL(`../dist/restoration/2010/${file}`, import.meta.url)));
   assert.equal(readFileSync(new URL('../dist/restoration/2010/catalogue.json', import.meta.url), 'utf8'), readFileSync(new URL('../public/restoration/2010/catalogue.json', import.meta.url), 'utf8'));
   assert.equal(createHash('sha256').update(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url))).digest('hex'), '7e1c2cdcf3c7eeb7f83632ea684629b87a42faee2cede650d09672b787f3157e');
   assert.ok(sitemap.includes(`<loc>${site.href}branding/</loc>`));
