@@ -5,13 +5,15 @@ import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 import { validateCatalogue as validateJulyCatalogue } from '../public/restoration/2010/catalogue.js';
+import { validateRoadmap } from '../public/restoration/2010/roadmap.js';
 import { clientRelease, localClientRelease } from './client-release.mjs';
 import {socialMetadata} from './social.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
 const restoration = validateCatalogue(progress);
-validateJulyCatalogue(JSON.parse(await readFile(join(root, 'public/restoration/2010/catalogue.json'), 'utf8')));
+const july = JSON.parse(await readFile(join(root, 'public/restoration/2010/catalogue.json'), 'utf8'));
+validateRoadmap(july, validateJulyCatalogue(july));
 for (const icon of new Set([...progress.categories, ...progress.features].map(row => row.icon).filter(icon => icon !== null))) {
   if (!/^assets\/player\/[a-z0-9-]+\.png$/.test(icon)) throw new Error(`Invalid restoration asset: ${icon}`);
   await readFile(join(root, 'public/restoration', icon));

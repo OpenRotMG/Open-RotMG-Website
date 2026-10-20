@@ -1,4 +1,5 @@
 import {validateCatalogue, countChecks, filterChecks, leafState, blockers, variantBinding, implementationLabels, historicalLabels, evidenceLabels} from './catalogue.js';
+import {validateRoadmap, restorationStage, stageLabels} from './roadmap.js';
 
 export async function mountCatalogue(document, fetch, window, logger = console) {
   const $ = id => document.getElementById(id);
@@ -23,6 +24,7 @@ export async function mountCatalogue(document, fetch, window, logger = console) 
     const response = await fetch('catalogue.json');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json(), leaves = validateCatalogue(data), byId = new Map(leaves.map(leaf => [leaf.id, leaf]));
+    const roadmap = validateRoadmap(data, leaves);
     const countsText = (counts, labels) => Object.entries(labels).map(([key, label]) => `${counts[key]} ${label.toLowerCase()}`).join(' · ');
     for (const [id, name] of Object.entries(data.domains)) {
       const option = el('option', name); option.value = id; $('domain').append(option);
@@ -54,13 +56,42 @@ export async function mountCatalogue(document, fetch, window, logger = console) 
       a.addEventListener('click', () => openCheck(leaf));
       return a;
     }
+    function renderRoadmap(variant) {
+      const cards = [], navigation = [], stages = Object.fromEntries(stageLabels.map(label => [label, 0]));
+      for (const area of roadmap) {
+        const open = $('area-' + area.id)?.open === true;
+        const rows = [...new Map([...area.leaves, ...area.requirements.flatMap(row => row.leaves)].map(leaf => [leaf.id, leaf])).values()];
+        const stage = restorationStage(data, rows, variant); stages[stage]++;
+        const card = el('details', undefined, 'roadmap-area'); card.id = 'area-' + area.id; card.open = open;
+        const heading = el('summary');
+        heading.append(el('span', area.title, 'area-title'), el('span', stage, 'stage'), el('span', area.summary, 'area-description'));
+        card.append(heading, section('Current differences', area.current), section('Next research', area.next));
+        for (const requirement of area.requirements) {
+          const detail = el('details', undefined, 'requirement'), summary = el('summary');
+          summary.append(el('span', requirement.title), el('span', restorationStage(data, requirement.leaves, variant), 'stage'));
+          detail.append(summary, section('Historical target', requirement.target), section('Current difference', requirement.current), section('Research still needed', list([...new Set(requirement.leaves.flatMap(leaf => leaf.unknowns))])));
+          const evidence = el('details', undefined, 'requirement-evidence');
+          evidence.append(el('summary', 'Evidence and acceptance checks'));
+          evidence.append(sourcesSection([...new Set(requirement.leaves.flatMap(leaf => [...leaf.sources, ...leaf.implementationSources]))]));
+          const checks = el('ul');
+          for (const leaf of requirement.leaves) {
+            const item = el('li'); item.append(link(`${leaf.groupName}: ${leaf.name}`, `#check=${encodeURIComponent(leaf.id)}&variant=${variant}`), el('p', leaf.check)); checks.append(item);
+          }
+          evidence.append(checks); detail.append(evidence); card.append(detail);
+        }
+        cards.push(card); navigation.push(link(area.title, '#area=' + area.id));
+      }
+      $('roadmap').replaceChildren(...cards); $('roadmap-nav').replaceChildren(...navigation);
+      $('roadmap-summary').textContent = `${stages['Needs research']} areas need research · ${stages['Ready to implement']} ready to implement · ${stages['Needs verification']} need verification · ${stages.Restored} restored. No parameter-count percentage.`;
+    }
     function render() {
       const variant = $('variant').value, counts = countChecks(data, leaves, variant);
+      renderRoadmap(variant);
       $('implementation-summary').textContent = countsText(counts.implementation, implementationLabels);
       $('historical-summary').textContent = `${counts.historical.verified} / ${counts.total} leaf checks accepted · ${counts.historical.unresolved} unresolved · ${counts.historical.differences} known differences`;
       $('functional-summary').textContent = `${counts.functional.passed} passed · ${counts.functional.failed} failed · ${counts.functional['not-run']} not run. Source inspection is not executed acceptance.`;
       $('questions-summary').textContent = `Global gates: ${data.questions.global.length} · category gates: ${Object.values(data.questions.categories).reduce((n, questions) => n + questions.length, 0)} · ${variant} variant gates: ${data.questions.variants[variant].length} · leaf-local question bindings: ${leaves.reduce((n, leaf) => n + leaf.unknowns.length, 0)}. These are separate units, not a summed fidelity score.`;
-      $('completion').textContent = counts.complete ? 'All stated historical checks accepted' : 'Historical restoration incomplete';
+      $('completion').textContent = counts.complete ? 'Restoration complete' : 'Restoration incomplete';
       $('inventory-summary').textContent = '528 object identities · 115 ground identities · 7 classes · 161 equipment · 259 projectile definitions / 41 visuals · 779 ordered behaviors / 33 names · 52 Activate + 95 ActivateOnEquip · 723 Loot occurrences (4 empty). Subsets overlap; these are not a feature sum.';
       const visible = filterChecks(data, leaves, {query: $('search').value, domain: $('domain').value, status: $('status').value, variant});
       const groups = new Set(visible.map(leaf => leaf.domain + ':' + leaf.group));
@@ -112,7 +143,14 @@ export async function mountCatalogue(document, fetch, window, logger = console) 
         if (!leaf) throw new Error(`Unknown check link: ${hash.get('check')}`);
         openCheck(leaf);
       }
+      if (hash.has('area')) {
+        const id = hash.get('area');
+        if (!roadmap.some(area => area.id === id)) throw new Error(`Unknown restoration area: ${id}`);
+        const node = $('area-' + id); node.open = true; node.scrollIntoView();
+      }
+      if (window.location.hash.startsWith('#domain-')) $('technical').open = true;
       if (hash.has('member')) {
+        $('technical').open = true;
         const id = hash.get('member'), memberLeaves = leaves.filter(leaf => leaf.group === id);
         if (!memberLeaves.length) throw new Error(`Unknown member link: ${id}`);
         $('search').value = ''; $('domain').value = ''; $('status').value = ''; render();
@@ -120,17 +158,19 @@ export async function mountCatalogue(document, fetch, window, logger = console) 
         node.open = true; node.populate(); node.scrollIntoView();
       }
     }
-    const guardedHash = () => { try { followHash(); } catch (exception) { error(exception); } };
+    const guardedHash = () => { try { $('error').hidden = true; followHash(); } catch (exception) { error(exception); } };
     for (const id of ['search', 'domain', 'status', 'variant']) $(id).addEventListener(id === 'search' ? 'input' : 'change', () => { render(); if (dialog.open) dialog.close(); });
     $('clear').addEventListener('click', () => { $('search').value = ''; $('domain').value = ''; $('status').value = ''; render(); });
     window.addEventListener('hashchange', guardedHash);
     $('global-gates').replaceChildren(list(data.questions.global));
     render(); guardedHash();
     $('filters').disabled = false;
-    return {data, leaves, render, openCheck};
+    return {data, leaves, roadmap, render, openCheck};
   } catch (exception) {
     $('completion').textContent = 'Catalogue unavailable';
     $('checks').replaceChildren();
+    $('roadmap').replaceChildren();
+    $('roadmap-nav').replaceChildren();
     error(exception);
     return null;
   }

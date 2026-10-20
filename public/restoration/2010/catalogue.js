@@ -193,7 +193,7 @@ export function validateCatalogue(data) {
   const proximity = data.members.filter(member => member.whenClose !== undefined);
   require(proximity.length === 1 && proximity[0].id === 'object-0823', 'Missing original WhenClose coverage');
   require(data.inventorySignature === inventorySignature && signature(inventory(data)) === inventorySignature, 'Original inventory/occurrence binding mismatch');
-  require(signature(data.systems.map(row => [row.id, row.domain])) === '329d91f9', 'Missing/replaced non-DATA system requirement');
+  require(signature(data.systems.map(row => [row.id, row.domain])) === '87ec182f', 'Missing/replaced non-DATA system requirement');
   require(Array.isArray(data.conditions) && data.conditions.join('|') === 'Nothing|Dead|Quiet|Weak|Slowed|Sick|Dazed|Stunned|Blind|Hallucinating|Drunk|Confused|Knockback|Invisible|Paralyzed|Jumpy|Bleeding|Armor Pierce|Healing|Damaging|Berserk|Paused', 'Wrong-era conditions');
   require(Array.isArray(data.packetIds) && data.packetIds.join(',') === '0,1,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29', 'Wrong-era protocol');
   for (const [id, expected] of [['packet-13', 'i16 status count then statuses only; no tickTime or tickId'], ['packet-18', 'i32 objectId and position; immediate move, no registered ACK'], ['packet-28', 'i32 target; pending suppresses Move until29'], ['packet-29', 'empty body; clears pending only, not success flag or position']]) require(data.systems.find(row => row.id === id)?.expected === expected, `Wrong-era protocol body: ${id}`);
