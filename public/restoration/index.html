@@ -19,8 +19,10 @@
     <nav class="category-links" aria-label="Restoration year"><a href="./" aria-current="page">2012 · 123.5.1</a><a href="2010/">July 2010 · build100</a></nav>
     <div class="restoration-intro">
       <h1>Restoration</h1>
-      <p class="progress-line"><span id="overall">{{RESTORATION_PERCENT}}</span> complete · 123.5.1</p>
-      <p class="audit-summary"><strong>Implementation:</strong> <span id="implementation-summary">Loading...</span><br><strong>Historical verification:</strong> <span id="historical-summary">Loading...</span></p>
+      <p class="progress-line"><span id="work-count">{{RESTORATION_WORK}}</span> features missing or partial · 123.5.1</p>
+      <p>Present means playable support exists. Historical questions are tracked separately.</p>
+      <p class="audit-summary"><strong>Implementation:</strong> <span id="implementation-summary">Loading...</span><br><strong>Historical verification:</strong> <span id="historical-summary">Loading...</span><br>Historical evidence score: <span id="overall">{{RESTORATION_PERCENT}}</span></p>
+      <label>Show <select id="view"><option value="work">Missing or partial</option><option value="all">All features</option></select></label>
     </div>
     <nav id="areas" class="category-links" aria-label="Feature categories"></nav>
     <div id="features"></div>

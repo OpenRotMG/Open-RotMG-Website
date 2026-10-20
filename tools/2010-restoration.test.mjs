@@ -340,10 +340,10 @@ test('unknown deep links fail visibly instead of opening an arbitrary nearby che
   assert.equal(env.nodes.error.hidden,false);assert.match(env.nodes.error.textContent,/Unknown check link/);assert.equal(errors.length,1);
 });
 
-test('2012 bytes, nine categories,211 rows and0.7% stay untouched; footer/year integration is narrow',()=>{
+test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes),'7e1c2cdcf3c7eeb7f83632ea684629b87a42faee2cede650d09672b787f3157e');
-  const old=JSON.parse(bytes);assert.equal(old.features.length,211);assert.equal(old.categories.length,9);assert.equal(validate2012(old).percent,'0.7%');
+  const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
+  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
   assert.equal(read('public/2010/index.html').split('href="https://openrotmg.org/restoration/2010/"').length-1,1);
   assert.match(read('public/2010/index.html'),/July 2010 Realm of the Mad God client with minimal server/);

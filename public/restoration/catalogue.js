@@ -1,5 +1,6 @@
 export const implementationLabels = { present: 'Present', partial: 'Partial', missing: 'Missing' };
 export const historicalLabels = { verified: 'Verified', partial: 'Partially verified', 'known-differences': 'Known differences', unreviewed: 'Unreviewed' };
+export const needsImplementation = feature => feature.audit.implementation !== 'present';
 export const referenceClient = 'reference-data/client-123.5.1.swf';
 export const referenceSha256 = '07ae4fc3ca021a5bf08bbf94f057f7620be18b85e01abd763b3a198382e8fa48';
 export const percentage = rows => (100 * rows.reduce((sum, f) => sum + f.stage, 0) / (2 * rows.length)).toFixed(1).replace(/\.0$/, '') + '%';
@@ -60,5 +61,5 @@ export function validateCatalogue(data) {
     if (a.historical === 'known-differences' && !a.differences.length) throw new Error(`Missing discrepancy: ${f.id}`);
   }
   const e = features.filter(f => f.stage >= 1).length, v = features.filter(f => f.stage === 2).length, n = features.length;
-  return { e, v, n, percent: percentage(features) };
+  return { e, v, n, work: features.filter(needsImplementation).length, percent: percentage(features) };
 }

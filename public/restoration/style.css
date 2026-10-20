@@ -21,8 +21,9 @@ dialog::backdrop { background: #000b; }
 .feature-heading { display: flex; align-items: center; gap: 9px; min-width: 0; }
 .feature-heading img { width: 28px; height: 32px; object-fit: contain; image-rendering: pixelated; }
 .feature-heading h2 { font: bold 13px Verdana, sans-serif; margin: 0; color: #ddd9c8; }
-#feature-close { font: 11px Verdana, sans-serif; background: #38382f; border: 1px outset #636256; color: #d7d3c1; padding: 2px 6px; }
+#feature-close, #view { font: 11px Verdana, sans-serif; background: #38382f; border: 1px outset #636256; color: #d7d3c1; padding: 2px 6px; }
 .audit-summary { font-size: 11px; line-height: 1.9; }
+.work-note { margin: 3px 0 0; font: 11px/1.6 Verdana, sans-serif; color: #aaa99e; }
 .audit-state { font-size: 10px; text-align: right; color: #b8b8ad; }
 .audit-state span { display: block; }
 .historical-verified, .implementation-present { color: #acba92; }
