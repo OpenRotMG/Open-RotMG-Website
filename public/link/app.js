@@ -26,7 +26,12 @@ async function start() {
   function failed(reason) {signin.hidden = true;status.textContent = 'Couldn’t link account';error.textContent = reason.message;error.hidden = false;}
   const result = new URLSearchParams(hash);
   if (!query && result.has('result')) {
-    try {status.textContent = `Linked to ${await completeLink(result.get('result'))}`;} catch (reason) {failed(reason);}
+    try {
+      const name = await completeLink(result.get('result'));
+      status.textContent = 'Account linked!';
+      document.querySelector('#account-name').textContent = name;
+      document.querySelector('#success').hidden = false;
+    } catch (reason) {failed(reason);}
     return;
   }
   if (!query && result.has('error')) {failed(new Error(result.get('error')));return;}

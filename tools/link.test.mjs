@@ -29,10 +29,14 @@ test('success requires a server-verified cookie-bound completion receipt, never 
   await assert.rejects(completeLink(token,async()=>Response.json({})),/could not be confirmed/);
   await assert.rejects(completeLink(token,async()=>Response.json({error:'receipt rejected'},{status:400})),/receipt rejected/);
 });
-test('page contains no password form or explanatory consent text and strips secrets from history',()=>{
+test('page has no password form, shows confirmed next steps only after success, and strips secrets from history',()=>{
   const html=readFileSync(new URL('../public/link/index.html',import.meta.url),'utf8');
   const app=readFileSync(new URL('../public/link/app.js',import.meta.url),'utf8');
-  assert.doesNotMatch(html,/<form|password|recovery|hiscores|confirm/i);
+  assert.doesNotMatch(html,/<form|<input/i);
+  assert.match(html,/<section id="success" hidden>/);
+  for (const command of ['kick','recover','unlink']) assert.ok(html.includes(`<code>/${command}</code>`));
+  assert.match(html,/You can now close this tab/);
+  assert.match(app,/status.textContent = 'Account linked!'/);
   assert.match(html,/target="_blank" rel="noopener"/);assert.match(html,/no-referrer/);
   assert.match(app,/history.replaceState/);assert.match(app,/visibilitychange/);
   assert.doesNotMatch(app,/localStorage|sessionStorage|console\.|result\.has\('linked'\)/);
