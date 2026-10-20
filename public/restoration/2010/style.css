@@ -1,0 +1,35 @@
+.restoration-intro p { line-height: 1.8; }
+#completion { font-size: 15px; color: #d9b477; }
+.scope-details { border-top: 1px solid #35352e; padding: 10px 0; }
+.scope-details summary, .member summary { cursor: pointer; }
+code, #check-content { overflow-wrap: anywhere; white-space: normal; }
+fieldset { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; border: 1px solid #55554b; padding: 12px; font: 11px/1.8 Verdana, sans-serif; }
+label { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+label:first-of-type { flex: 1 1 230px; }
+input, select, #clear, #check-close { background: #232320; color: #ddd9c8; border: 1px solid #77766b; padding: 7px; font: 12px Verdana, sans-serif; max-width: 100%; }
+input { width: 100%; box-sizing: border-box; }
+:focus-visible { outline: 2px solid #e8b980; outline-offset: 3px; }
+#visible-count { font: 11px/1.8 Verdana, sans-serif; }
+.category { padding: 10px; }
+.category h2 { font-size: 14px; margin: 5px 0 10px; }
+.category h3 { font-size: 11px; }
+.category > section { font: 11px/1.7 Verdana, sans-serif; }
+.member { margin: 0; border-top: 1px solid #35352e; }
+.member summary { padding: 10px; font: 12px/1.8 Verdana, sans-serif; overflow-wrap: anywhere; }
+.member:nth-child(even) { background: #161614; }
+.check-list { list-style: none; margin: 0; padding: 0 10px 10px 24px; }
+.check-list li { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding: 8px 0; border-top: 1px solid #292923; font: 11px/1.8 Verdana, sans-serif; }
+.audit-state { max-width: 44%; min-width: 125px; font-size: 9px; }
+#check-title { font: bold 13px/1.7 Verdana, sans-serif; margin: 0; }
+#check-content h3 { font-size: 12px; margin: 18px 0 6px; }
+#check-content p { white-space: pre-wrap; }
+#check-content ul { padding-left: 20px; }
+#check-content li { margin: 6px 0; }
+@media (max-width: 600px) {
+  fieldset { gap: 10px; }
+  fieldset label { flex: 1 1 100%; }
+  input, select, #clear, #check-close { min-height: 40px; }
+  .check-list li { flex-direction: column; gap: 2px; }
+  .audit-state { text-align: left; max-width: 100%; }
+  .member summary { padding: 12px 5px; }
+}
