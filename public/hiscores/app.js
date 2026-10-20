@@ -1,7 +1,7 @@
 export const boards = {
-  base_fame: {title: 'Base fame', description: 'Highest base fame on a single character per account, living or dead.'},
   collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
-  total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'}
+  total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'},
+  base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'}
 };
 export function ranked(players, board) {
   if (!Object.hasOwn(boards, board)) throw new Error('Unknown hiscore category');
@@ -21,7 +21,7 @@ async function json(path) {
   return response.json();
 }
 async function start() {
-  const params = new URLSearchParams(location.search), board = params.get('board') ?? 'base_fame', account = params.get('player');
+  const params = new URLSearchParams(location.search), board = params.get('board') ?? 'collection', account = params.get('player');
   if (!Object.hasOwn(boards, board)) throw new Error('Unknown hiscore category');
   const title = document.querySelector('#title'), status = document.querySelector('#status'), search = document.querySelector('#search');
   title.textContent = boards[board].title;document.querySelector('#metric').textContent = boards[board].title;
