@@ -41,8 +41,10 @@ test('unknown or absent mode fails visibly without loading arbitrary content', a
 });
 test('ordinary linked editor uses the same launcher, diagnostics, runtime and CSP', () => {
   const home = readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
+  const about = readFileSync(new URL('../public/about/index.html', import.meta.url), 'utf8');
   const draw = readFileSync(new URL('../public/draw/index.html', import.meta.url), 'utf8');
-  assert.match(home, /href="{{BASE}}draw\/"/);
+  assert.match(about, /href="{{BASE}}draw\/"/);
+  assert.doesNotMatch(home, /href="{{BASE}}draw\/"/);
   assert.match(home, /data-mode="game"/);
   assert.match(draw, /data-mode="editor"/);
   assert.equal(draw.match(/content="default-src[^"]+"/)[0], home.match(/content="default-src[^"]+"/)[0]);
