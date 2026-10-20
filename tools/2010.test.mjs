@@ -36,7 +36,7 @@ test('2010 entry labels its limits and preserves an unchanged client download', 
   assert.match(html, /not authenticated original balance/);
   assert.match(html, /Characters and saves are separate/);
   assert.match(html, /href="original-client.swf" download/);
-  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/23bae46692fb5fd507cc2898c9494b71d67bbf6e">Source</a>'));
+  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/3d70257721c4d24225c91bbc2273cf676b234f8a">Source</a>'));
   assert.match(html, /src="vendor\/ruffle.js"/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.openrotmg\.org\/2010\/"/);
   assert.doesNotMatch(html, /\u2014|'unsafe-eval'|objects\.xml|grounds\.xml/);
