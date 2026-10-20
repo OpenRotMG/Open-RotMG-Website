@@ -11,11 +11,11 @@ for (const href of ['https://www.openrotmg.org/2010/', 'https://www.openrotmg.or
     const status = {};
     let config;
     let appended = 0;
-    const player = { ruffle: () => ({ load: async options => { config = options; } }) };
+    const player = { addEventListener() {}, ruffle: () => ({ load: async options => { config = options; } }) };
     await runInNewContext(script, {
       URL, location,
       window: { RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
-      document: { querySelector: selector => selector === '#status' ? status : { append: value => { assert.equal(value, player); appended++; } } },
+      document: { querySelector: selector => selector === '#load-error' ? status : { append: value => { assert.equal(value, player); appended++; } } },
       console: { error: error => { throw error; } }
     });
     assert.equal(appended, 1);
@@ -33,10 +33,11 @@ for (const href of ['https://www.openrotmg.org/2010/', 'https://www.openrotmg.or
 
 test('2010 entry labels its limits and preserves an unchanged client download', () => {
   const html = readFileSync(new URL('../public/2010/index.html', import.meta.url), 'utf8');
-  assert.match(html, /not authenticated original balance/);
-  assert.match(html, /Characters and saves are separate/);
+  assert.match(html, /incomplete\. Characters are separate/);
+  assert.match(html, /<body class="game-page">/);
+  assert.match(html, /\{\{PROJECT_NAV\}\}/);
   assert.match(html, /href="original-client.swf" download/);
-  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/128bd1de03aaace23381b8705488494490e9061f">Source</a>'));
+  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/128bd1de03aaace23381b8705488494490e9061f">2010 source</a>'));
   assert.match(html, /src="vendor\/ruffle.js"/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.openrotmg\.org\/2010\/"/);
   assert.doesNotMatch(html, /\u2014|'unsafe-eval'|objects\.xml|grounds\.xml/);
@@ -44,13 +45,16 @@ test('2010 entry labels its limits and preserves an unchanged client download', 
 
 test('2010 load failures remain visible instead of loading another revision', async () => {
   const status = {};
+  const startup = {};
   const errors = [];
   await runInNewContext(script, {
     URL, location: new URL('https://openrotmg.org/2010/'),
-    window: { RufflePlayer: { newest: () => ({ createPlayer: () => ({ ruffle: () => ({ load: async () => { throw new Error('asset unavailable'); } }) }) }) } },
-    document: { querySelector: selector => selector === '#status' ? status : { append() {} } },
+    window: { RufflePlayer: { newest: () => ({ createPlayer: () => ({ addEventListener() {}, ruffle: () => ({ load: async () => { throw new Error('asset unavailable'); } }) }) }) } },
+    document: { querySelector: selector => ({'#load-error': status, '#startup': startup})[selector] ?? { append() {} } },
     console: { error: error => errors.push(error) }
   });
   assert.match(status.textContent, /2010 preview failed to load: asset unavailable/);
+  assert.equal(status.hidden, false);
+  assert.equal(startup.hidden, true);
   assert.equal(errors.length, 1);
 });
