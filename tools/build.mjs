@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 import { clientRelease, localClientRelease } from './client-release.mjs';
+import {socialMetadata} from './social.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
@@ -61,7 +62,7 @@ async function render(directory) {
     else if (entry.name.endsWith('.html')) {
       const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
-      await writeFile(path, html);
+      await writeFile(path, socialMetadata(html, site.href + socialImage));
     }
   }
 }

@@ -92,7 +92,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(footerNav, />Gold<|>Updates<|>Restoration<|>Branding</);
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
-  const shareDescription = '2012 is back. Play Realm of the Mad God with your friends.';
+  const shareDescription = home.match(/<meta name="description" content="([^"]+)"/)[1];
   assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
   assert.ok(home.includes(`name="twitter:description" content="${shareDescription}"`));
   for (const html of [home, about]) {
