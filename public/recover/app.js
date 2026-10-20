@@ -14,7 +14,7 @@ function start() {
   const valid = /^[a-f0-9]{64}$/.test(token) && !location.search;
   history.replaceState(null, '', location.pathname);
   const status = document.querySelector('#status'), form = document.querySelector('#reset');
-  if (!valid) {status.textContent = 'Open the private reset link from /recover in Discord. Recovery must first be enabled using /discord recovery in game.';return;}
+  if (!valid) {status.textContent = 'Open the private reset link from /recover in Discord. Use /link in Discord to enable recovery.';return;}
   status.textContent = 'This private link expires after 15 minutes and can only be used once.';
   form.hidden = false;
   form.addEventListener('submit', async event => {
