@@ -7,6 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
+const browserTab = 'a'.repeat(64);
+const browserGlobals = {fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}};
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
   cwd: root, env: { ...process.env, ...overrides }, encoding: 'utf8'
@@ -53,7 +55,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /You cannot buy Gold in Open RotMG\./);
   assert.match(gold, /<h2>One-time Gold<\/h2>/);
   assert.match(gold, /<h2>Repeatable Gold<\/h2>/);
-  assert.match(gold, /Link Discord - type <code>\/discord<\/code> in game/);
+  assert.match(gold, /Link Discord - use <code>\/link<\/code> in Discord/);
   assert.match(gold, /Submit your first bug report - type <code>\/bug<\/code> in game/);
   assert.match(gold, /top 50%.*hiscores\/\?board=collection/);
   assert.match(gold, /Make a YouTube video about Open RotMG/);
@@ -61,7 +63,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.deepEqual([...gold.matchAll(/<li>(\d+) <img/g)].map(match => Number(match[1])), [100, 100, 50, 100, 100, 50]);
   assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 6);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
-  assert.doesNotMatch(gold, /<strong>|How to get|methods|\/link|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
+  assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Updates', 'Restoration', 'Gold']);
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
@@ -206,16 +208,18 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
     window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
-    document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL
+    document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals
   });
+  await new Promise(setImmediate);
   assert.equal(options.splashScreen, false);
   assert.equal(options.openUrlMode, 'confirm');
   assert.equal(options.url, 'https://example.test/client.swf');
   assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
   assert.equal(options.socketProxy[0].port, 2050);
-  assert.equal(options.urlRewriteRules[0][1], 'https://example.test/legacy-api/');
-  assert.equal(options.urlRewriteRules[1][1], 'https://example.test/sfx/');
+  assert.equal(options.urlRewriteRules[0][1], `https://example.test/legacy-api/char/list?browser=${browserTab}`);
+  assert.equal(options.urlRewriteRules[1][1], 'https://example.test/legacy-api/');
+  assert.equal(options.urlRewriteRules[2][1], 'https://example.test/sfx/');
   assert.equal(nodes['#startup'].hidden, false);
   finish();
   await boot;
@@ -233,7 +237,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
-      document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL
+      document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals
     });
     const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);
     for (const path of ['client.swf', 'native-texture-editor.swf', 'draw/', 'game.js', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {
@@ -241,7 +245,7 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     }
     for (const protocol of ['http', 'https']) {
       for (const path of ['char/list', 'char/fame', 'account/register', 'account/verify', 'account/setName', 'fame/list', 'guild/listMembers', 'guild/getBoard', 'guild/setBoard', 'picture/save', 'picture/list', 'picture/get', 'picture/delete']) {
-        assert.equal(rewrite(`${protocol}://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}`);
+        assert.equal(rewrite(`${protocol}://127.0.0.1:8080/${path}`), `${origin}/legacy-api/${path}${path === 'char/list' ? `?browser=${browserTab}` : ''}`);
       }
     }
     for (const url of [
