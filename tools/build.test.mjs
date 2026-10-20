@@ -62,7 +62,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 6);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|\/link|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
-  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Updates', 'Restoration', 'Gold']);
+  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Updates', 'Restoration', 'Gold', 'Pixel editor']);
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
   assert.doesNotMatch(branding, /discourse-code|Post on Discourse|Forum embed|Lost City|Images for sharing/);
