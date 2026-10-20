@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>July 2010 Restoration · Open RotMG</title>
+  <meta name="description" content="July 2010 build100 restoration checklist: original artifact members, individual behavior checks, implementation gaps and unresolved history. Tutorial to realm, no Nexus.">
+  <link rel="canonical" href="{{SITE_URL}}restoration/2010/">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="{{BASE}}amulet-of-resurrection.png">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="restoration-page">
+<div class="site-shell">
+  <main class="page-main">
+    <nav class="category-links" aria-label="Restoration year"><a href="../">2012 · 123.5.1</a><a href="./" aria-current="page">July 2010 · build100</a></nav>
+    <div class="restoration-intro">
+      <h1>July 2010 restoration</h1>
+      <p>Tutorial → realm. Build100, no Nexus. Not a calendar-year composite.</p>
+      <h2 id="completion" role="status">Loading catalogue…</h2>
+      <p id="inventory-summary"></p>
+      <p class="audit-summary"><strong>Source implementation, leaf checks:</strong> <span id="implementation-summary">Loading…</span><br><strong>Historical acceptance:</strong> <span id="historical-summary">Loading…</span><br><strong>Executed acceptance:</strong> <span id="functional-summary">Loading…</span><br><strong>Unresolved questions:</strong> <span id="questions-summary">Loading…</span></p>
+      <p>These counts measure different things. Parsing an enemy, passing a shared template or completing a Wizard journey does not pass every member. No fidelity percentage is assigned. A finite checklist cannot certify the absence of unknown historical mechanics.</p>
+      <details class="scope-details"><summary>Original artifact, play copy and evidence limits</summary>
+        <p>The supplied client self-identifies as build100. Its production origin is not authenticated. Artifact confidence describes these bytes, not everything that ran on Wild Shadow's servers.</p>
+        <p><a href="https://www.openrotmg.org/2010/original-client.swf">Original client</a><br>SHA256 <code>ec031064b61d22e860de802ae1967ef1bb193b2c35d297ca1d25b1a96f76684e</code></p>
+        <p>The repaired play copy changes 23 numeric fields and one tooltip across eight items, not executable instructions. Those values are selected reconstruction, not authenticated production balance.<br>SHA256 <code>68b9220aeee798db883db7c336fd0f09e3b12a8f9856b65a013379b00cfe6bfd</code></p>
+        <p>Source dispositions refer only to frozen server revision <code>128bd1de03aaace23381b8705488494490e9061f</code>. They are not new native tests or an attestation of the current deployment.</p>
+        <p>184 structural Enemy records include 170 Characters and 14 other objects, not 184 proven live monster types. The 27 tutorial objects, 139 environmental objects and six dungeon bosses are overlapping subsets of the 528 objects. Five items without declared acquisition references remain availability questions, not exclusions.</p>
+      </details>
+      <details class="scope-details"><summary>Global historical gates</summary><div id="global-gates"></div></details>
+    </div>
+    <form id="search-form" role="search">
+      <fieldset id="filters" disabled>
+        <legend>Find individual checks</legend>
+        <label>Search names, IDs or parameters <input id="search" type="search" autocomplete="off"></label>
+        <label>Domain <select id="domain"><option value="">All domains</option></select></label>
+        <label>Status <select id="status"><option value="">All statuses</option><optgroup label="Source implementation"><option value="present">Present in source</option><option value="partial">Partial in source</option><option value="missing">Missing in source</option><option value="not-inspected">Not inspected</option></optgroup><optgroup label="Historical acceptance"><option value="unresolved">Unresolved history</option><option value="differences">Known differences</option><option value="verified">Historically accepted</option></optgroup><optgroup label="Executed check"><option value="not-run">Not run</option><option value="passed">Passed</option><option value="failed">Failed</option></optgroup></select></label>
+        <label>Tested variant <select id="variant"><option value="original">Original artifact</option><option value="repaired">Repaired play copy</option></select></label>
+        <button id="clear" type="button">Clear filters</button>
+      </fieldset>
+    </form>
+    <p id="visible-count" role="status" aria-live="polite"></p>
+    <nav id="areas" class="category-links" aria-label="Check domains"></nav>
+    <p class="audit-summary">Open a member, then a check for its bound parameters, expected behavior, acceptance test, evidence and remaining gates. Each check has a stable link. Nothing here claims a new gameplay test passed.</p>
+    <div id="checks"></div>
+    <p id="error" role="alert" hidden></p>
+    <noscript><p class="notice">JavaScript is required to search and inspect the catalogue. Historical restoration is incomplete; no acceptance score is available without validated data.</p></noscript>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>July 2010 restoration checklist<br><a href="https://www.openrotmg.org/2010/">Play the incomplete preview</a></p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+  </footer>
+</div>
+<dialog id="check-dialog" aria-labelledby="check-title">
+  <div class="dialog-head"><h2 id="check-title"></h2><button id="check-close" type="button">Close</button></div>
+  <p id="check-status"></p>
+  <div id="check-content"></div>
+</dialog>
+</body>
+</html>

@@ -4,12 +4,14 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
+import { validateCatalogue as validateJulyCatalogue } from '../public/restoration/2010/catalogue.js';
 import { clientRelease, localClientRelease } from './client-release.mjs';
 import {socialMetadata} from './social.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
 const restoration = validateCatalogue(progress);
+validateJulyCatalogue(JSON.parse(await readFile(join(root, 'public/restoration/2010/catalogue.json'), 'utf8')));
 for (const icon of new Set([...progress.categories, ...progress.features].map(row => row.icon).filter(icon => icon !== null))) {
   if (!/^assets\/player\/[a-z0-9-]+\.png$/.test(icon)) throw new Error(`Invalid restoration asset: ${icon}`);
   await readFile(join(root, 'public/restoration', icon));
@@ -74,5 +76,5 @@ await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
 }));
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
-await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.href}</loc></url><url><loc>${site.href}about/</loc></url><url><loc>${site.href}restoration/</loc></url><url><loc>${site.href}branding/</loc></url><url><loc>${site.href}hiscores/</loc></url><url><loc>${site.href}gold/</loc></url><url><loc>${site.href}updates/</loc></url></urlset>\n`);
+await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.href}</loc></url><url><loc>${site.href}about/</loc></url><url><loc>${site.href}restoration/</loc></url><url><loc>${site.href}restoration/2010/</loc></url><url><loc>${site.href}branding/</loc></url><url><loc>${site.href}hiscores/</loc></url><url><loc>${site.href}gold/</loc></url><url><loc>${site.href}updates/</loc></url></urlset>\n`);
 console.log(`Built ${site.href} for client ${revision}. Rust must serve /client.swf, /vendor/, /sfx/, /legacy-api/ and /game.`);

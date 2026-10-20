@@ -127,6 +127,18 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(updates.includes('id="updates"'));
   assert.ok(!updates.includes('{{'));
   assert.ok(sitemap.includes(`<loc>${site.href}restoration/</loc>`));
+  assert.ok(sitemap.includes(`<loc>${site.href}restoration/2010/</loc>`));
+  const july = readFileSync(new URL('../dist/restoration/2010/index.html', import.meta.url), 'utf8');
+  assert.ok(july.includes(`rel="canonical" href="${site.href}restoration/2010/"`));
+  assert.ok(july.includes(`href="${site.pathname}style.css"`));
+  assert.match(july, /href="\.\.\/style.css"/);
+  assert.match(july, /src="app.js"/);
+  assert.match(july, /aria-current="page">July 2010/);
+  assert.match(july, /property="og:title"/);
+  assert.doesNotMatch(july, /\{\{|RESTORATION_PERCENT|\u2014/);
+  for (const file of ['catalogue.json', 'catalogue.js', 'app.js', 'style.css']) assert.ok(existsSync(new URL(`../dist/restoration/2010/${file}`, import.meta.url)));
+  assert.equal(readFileSync(new URL('../dist/restoration/2010/catalogue.json', import.meta.url), 'utf8'), readFileSync(new URL('../public/restoration/2010/catalogue.json', import.meta.url), 'utf8'));
+  assert.equal(createHash('sha256').update(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url))).digest('hex'), '7e1c2cdcf3c7eeb7f83632ea684629b87a42faee2cede650d09672b787f3157e');
   assert.ok(sitemap.includes(`<loc>${site.href}branding/</loc>`));
   const restorationPage = readFileSync(new URL('../dist/restoration/index.html', import.meta.url), 'utf8');
   assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
