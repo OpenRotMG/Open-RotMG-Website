@@ -14,11 +14,13 @@ for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-te
       const nodes = {'#game': {dataset: {mode}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
       const player = {addEventListener() {}, ruffle: () => ({load: async value => {options = value;}})};
       await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
-        document: {baseURI, querySelector: key => nodes[key]}, URL});
+        document: {baseURI, querySelector: key => nodes[key]}, URL, AbortSignal, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}},
+        fetch: async () => ({ok: true, json: async () => ({tab: 'a'.repeat(64)})}), setInterval: () => 1, clearInterval() {}, addEventListener() {}});
       const origin = new URL(baseURI).origin;
       assert.equal(options.url, origin + path);
-      assert.equal(options.urlRewriteRules[0][1], origin + '/legacy-api/');
-      assert.equal(options.urlRewriteRules[1][1], origin + '/sfx/');
+      const offset = mode === 'game' ? 1 : 0;
+      assert.equal(options.urlRewriteRules[offset][1], origin + '/legacy-api/');
+      assert.equal(options.urlRewriteRules[offset + 1][1], origin + '/sfx/');
       assert.equal(options.socketProxy[0].proxyUrl, origin.replace(/^http/, 'ws') + '/game');
       assert.equal(options.allowScriptAccess, false);
       assert.equal(options.openUrlMode, 'confirm');
