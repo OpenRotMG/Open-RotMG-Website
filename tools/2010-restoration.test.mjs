@@ -183,7 +183,7 @@ test('source kinds, confidence, URL hygiene and code pins cannot manufacture his
   for (const url of ['javascript:alert(1)', 'file:///home/private', 'https://user:pass@example.test/', 'https://example.test/?token=secret', 'https://example.test/?guid=private', 'https://example.test/.local/receipt.json', 'https://github.com/example/repo/blob/main/code.rs']) {
     const source = {...baseline.sources.july, url}; assert.throws(() => validateSource(source, 'probe'), /source URL|code source/);
   }
-  for (const ref of ['impl-world', 'impl-inventory-drop']) for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources[ref], kind, mode: undefined}, 'probe'), /not history/);
+  for (const ref of ['impl-world', 'impl-inventory-drop', 'impl-player-teleport']) for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources[ref], kind, mode: undefined}, 'probe'), /not history/);
   assert.throws(() => validateSource({...baseline.sources.july, confidence: 'certain'}, 'probe'), /confidence/);
   assert.throws(() => validateSource({...baseline.sources['impl-world'], url: baseline.sources['impl-world'].url.replace('128bd1de03aaace23381b8705488494490e9061f', 'a'.repeat(40))}, 'probe'), /Wrong implementation pin/);
   for (const source of Object.values(baseline.sources)) validateSource(source, 'valid');
@@ -202,6 +202,27 @@ test('reviewed Drop19 evidence leaves the frozen audit and broad inventory accep
   }
   d.implementationPin = '95dfd8cdfbb6de907d758c4c72073b338a6135c3';
   assert.throws(() => validateCatalogue(d), /implementation pin/);
+});
+
+test('reviewed teleport evidence preserves unresolved historical and full-game gates', () => {
+  const d = catalogue(), source = d.sources['impl-player-teleport'];
+  assert.equal(d.implementationPin, '128bd1de03aaace23381b8705488494490e9061f');
+  assert.equal(source.mode, 'native');
+  assert.match(source.url, /143b32856987c5d494e9788ec8a7dad1f567ff84/);
+  assert.match(source.qualification, /reconstruction; reconnect resets server cooldown/);
+  for (const [id, bytes] of [['packet-18', 12], ['packet-28', 4], ['packet-29', 0]]) {
+    const leaf = baselineLeaves.find(row => row.id === id);
+    assert.equal(leaf.implementation, 'present');
+    assert.match(leaf.expected, new RegExp('exactly ' + bytes + ' body bytes'));
+    assert.deepEqual(leaf.implementationSources, ['impl-player-teleport']);
+  }
+  const leaf = baselineLeaves.find(row => row.id === 'system-teleport');
+  assert.equal(leaf.implementation, 'partial');
+  for (const variant of ['original', 'repaired']) {
+    assert.equal(leafState(d, leaf, variant).functional, 'not-run');
+    assert.equal(leafState(d, leaf, variant).historical, 'unresolved');
+    assert.equal(countChecks(d, baselineLeaves, variant).complete, false);
+  }
 });
 
 test('one executed result never passes a template, sibling, or other variant', () => {
