@@ -2836,11 +2836,18 @@
             "name": "Entrance/end candles and blood floors",
             "expected": "Build 122 documents candles at spawn and end, with blood-spattered floors.",
             "acceptance": "Check endpoint candle markers across seeds, selected blood appearance and collision. Random ordinary-room candles do not establish endpoint dressing.",
-            "implementation": "partial",
-            "historical": "unreviewed",
+            "implementation": "present",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original candle identities, count, spacing and blood-floor density are unrecovered. The four-candle endpoint layout and inherited 1-in-32 accent frequency are explicit reconstruction."
+            ],
+            "sources": [
+              {
+                "label": "Build 122.0.1 announcement (reproduced English)",
+                "url": "https://wikiwiki.jp/rmd/version/build122.0.1"
+              }
+            ],
             "group": "layout"
           }
         ]
