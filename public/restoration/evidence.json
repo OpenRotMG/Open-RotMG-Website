@@ -1,6 +1,65 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "ground-appearance-source-0a19612": {
+      "kind": "source",
+      "revision": "0a1961234c2dfea79047311d117d90a78020d376",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0a1961234c2dfea79047311d117d90a78020d376/src/world/ground_dye.rs",
+      "method": "Ground appearance use validates a known accessible ephemeral bag, exact source, actor state and revision, reserves the source, commits inventory/appearance atomically, then publishes one consumption. Uncertain outcomes quarantine without refund or replay.",
+      "limitations": "Implementation inspection, not gameplay or recovered original-server authority. This bounded ground-use restoration does not certify palette, previews, seasonal stock or the complete cloth roster.",
+      "checks": [
+        "style:clothing-and-accessory-dyes",
+        "style:clothing-and-accessory-cloths"
+      ]
+    },
+    "ground-appearance-regression-09caf36": {
+      "kind": "regression",
+      "revision": "09caf36a5867d755c769c7553357beef690c1756",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/296#issuecomment-6323039359",
+      "method": "Final clean source passed 196 Rust tests, formatting, strict all-target Clippy and locked release. Real World/Store regressions cover all four kinds with full capacity, owner/range/readiness, reservation/competing pickup, stale revision, rollback, lost replies and postcommit faults. Normal merge preserved the exact tested tree; its retained release separately served the same eight assets in a zero-player smoke.",
+      "limitations": "Authoritative backend tests are not native adversarial packets. Native execution remains on 778e8a9 and 9e015f9, projected through unchanged appearance paths; final integration adds only peer Undead Lair endpoints. The smoke helper's post-shutdown TIME_WAIT bind failed; independent process/listener checks confirmed cleanup.",
+      "checks": [
+        "style:clothing-and-accessory-dyes",
+        "style:clothing-and-accessory-cloths"
+      ]
+    },
+    "ground-dyes-accessory-cloth-native-778e8a9": {
+      "kind": "native",
+      "revision": "778e8a94b81d01f9524e7c438708919a177d221c",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/296#issuecomment-6323039359",
+      "method": "Ordinary selected-client Shift-clicks used clothing dye, accessory dye and Small Skull accessory cloth from owned ground bags with the same full eight-slot backpack. Each source consumed once; accessory dye preserved nonzero clothing texture. Settled images, actual same-character reconnects, live state and saved SQL agreed. Original-live patched SWF and runtime bytes were separately retained.",
+      "limitations": "Selected client 9904a0b/runtime 0.7.1-openrotmg.8. Immediate clothing-only After was unsettled; combined settled/reconnect captures supply appearance proof. Owner/range pane behavior is client policy, not invalid server requests. Historical empty WAL and volatile SHM sidecars were lost during inspection; durable database and other gameplay evidence remain unchanged. Broader palette/previews remain untested.",
+      "checks": [
+        "style:clothing-and-accessory-dyes",
+        "style:clothing-and-accessory-cloths"
+      ]
+    },
+    "ground-clothing-cloth-native-9e015f9": {
+      "kind": "native",
+      "revision": "9e015f9602df41d9f59cef0d8754e1aa5152d77b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/296#issuecomment-6323039359",
+      "method": "A genuine normal character used Black Accessory Dye then Large Jester clothing cloth from its owned bag with a full backpack. Clothing Tex1 preserved nonzero accessory Tex2; sources consumed once, inventory stayed exact, and the patterned robe/black accessory persisted through real same-character reconnect and SQL. Sources were bought with genuinely earned currency; fillers moved through native player-menu/popup trade. Loaded patched SWF/JS/WASM and own checkout-bound executed bytes were retained.",
+      "limitations": "Separate captures and native revisions, not continuous footage or all-pattern rendering. One prior outing permanently killed a character; a separately approved ordinary new character on the same account spent surviving currency, without revival/refund or further farming. Reconnect reached Nexus Limbo; this is appearance durability, not all-world return reliability. Historical roster/scale/stock and previews remain open.",
+      "checks": [
+        "style:clothing-and-accessory-dyes",
+        "style:clothing-and-accessory-cloths"
+      ]
+    },
+    "ground-appearance-repeat-native-9e015f9": {
+      "kind": "native",
+      "revision": "9e015f9602df41d9f59cef0d8754e1aa5152d77b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/296#issuecomment-6323039359",
+      "method": "Two rapid Shift-click attempts on the clothing-cloth source were acknowledged within 81 ms of first dispatch; browser-source use-send to first subsequent receive was 109.239 ms. The repeat therefore preceded response without relying on callback delivery time. Stock pending policy emitted one use, consumed one source and advanced revision once; separate real World reservation tests cover authoritative duplicates.",
+      "limitations": "The native repeat was clothing cloth and was suppressed by the client, not a second server-received pending refusal. No packet/clock/delay injection or guard change. Fresh independent reviews accepted the bounded ground-use proof, not palette, previews, complete cloth roster or original-server fidelity.",
+      "checks": [
+        "style:clothing-and-accessory-cloths"
+      ]
+    },
     "trade-lifecycle-native-eb85988": {
       "kind": "native",
       "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
@@ -540,8 +599,8 @@
     "gear:seasonal-toys": {"status":"not-run","evidence":[]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
     "style:summon-a-drake": {"status":"not-run","evidence":[]},
-    "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":[]},
-    "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":[]},
+    "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
+    "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
     "home:nexus": {"status":"not-run","evidence":[]},
     "home:vault": {"status":"not-run","evidence":[]},
     "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
