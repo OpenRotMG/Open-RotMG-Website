@@ -3,7 +3,7 @@ export const originalSha256 = 'ec031064b61d22e860de802ae1967ef1bb193b2c35d297ca1
 export const repairedSha256 = '68b9220aeee798db883db7c336fd0f09e3b12a8f9856b65a013379b00cfe6bfd';
 export const implementationPin = '128bd1de03aaace23381b8705488494490e9061f';
 // Keep the audit frozen while reviewed increments receive independent citations.
-const implementationPins = new Set([implementationPin, '95dfd8cdfbb6de907d758c4c72073b338a6135c3', '143b32856987c5d494e9788ec8a7dad1f567ff84', 'ff285b5e970a2cd9f71b71c68b388d41cf4b5203']);
+const implementationPins = new Set([implementationPin, '95dfd8cdfbb6de907d758c4c72073b338a6135c3', '143b32856987c5d494e9788ec8a7dad1f567ff84', 'ff285b5e970a2cd9f71b71c68b388d41cf4b5203', '376b6425eb402de2271950e142866227b874534a']);
 export const inventorySignature = '590876b4';
 export const implementationLabels = {present: 'Present in source', partial: 'Partial in source', missing: 'Missing in source', 'not-inspected': 'Not inspected'};
 export const historicalLabels = {unresolved: 'Unresolved history', verified: 'Historically accepted', differences: 'Known differences'};

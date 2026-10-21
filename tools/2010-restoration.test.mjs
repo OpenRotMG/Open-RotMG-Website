@@ -245,6 +245,66 @@ test('ordinary Priest heals do not pass deferred compounds or unrelated class jo
   }
 });
 
+test('prediction repair citations separate executed reconstruction from historical and ordinary-play claims', () => {
+  const pin = '376b6425eb402de2271950e142866227b874534a';
+  const tests = baseline.sources['impl-prediction-repair-tests'], native = baseline.sources['impl-prediction-repair-native'];
+  for (const [source, mode, file] of [[tests, 'test', 'prediction_runtime_tests.rs'], [native, 'native', 'world.rs']]) {
+    assert.equal(source.kind, 'implementation'); assert.equal(source.mode, mode);
+    assert.equal(source.url, `https://github.com/dginovker/Open-RotMG-Server/blob/${pin}/src/build100/${file}`);
+    assert.doesNotMatch(JSON.stringify(source), /\.local\/|\/home\/|guid=|credential|authenticated.?trace|profile\/|\.db\b/i);
+    validateSource(source, 'prediction');
+    for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) {
+      assert.throws(() => validateSource({...source, kind, mode: undefined}, 'prediction'), /not history/);
+    }
+    assert.throws(() => validateSource({...source, url: source.url.replace(pin, 'a'.repeat(40))}, 'prediction'), /Wrong implementation pin/);
+  }
+  assert.match(tests.selector, /prediction_runtime_known_living_enemy_self_only_drop_then_make/);
+  assert.match(tests.selector, /prediction_actor_actual_sql_begin_failure_preserves_candidate_view_and_outputs/);
+  assert.match(tests.selector, /prediction_actor_postcommit_full_or_closed_queue_detaches_no_delivery_or_replay/);
+  for (const pattern of [/13 new.*334 total.*15 qualification guards/, /SQL begin failure and dispatcher fatality/, /no candidate install\/publication before commit/, /no Character writes/, /peer isolation/, /drained requests/, /full\/closed postcommit queues/]) assert.match(tests.qualification, pattern);
+  for (const symbol of ['Room::repairable_enemy', 'Room::handle_at packet9', 'Room::publication']) assert.ok(native.selector.includes(symbol));
+  for (const pattern of [/Unchanged repaired-client native acceptance only/, /PREPARED private Pirate HP20/, /prediction27\/Dead1 versus authoritative8 left HP12/, /visibility and collision.*peer untouched/, /real bow death occurred once/, /server-to-client-only 150ms WebSocket conditioning/, /Separately, actual public HTTPS\/WSS with normal Pirate HP5 and no relay/, /rejected quiver prediction56\/Dead1/, /HP121 and HP124.*MP100, XP1, inventories and generation1/, /Quivers remain unsupported and MP was not charged/, /Predicted rolls are not trusted and RNG is not synchronized/, /not double HP damage/, /not.*full Archer\/class acceptance/]) assert.match(native.qualification, pattern);
+});
+
+test('prediction repair changes only five partial systems and two qualified roadmap currents without passing leaves', () => {
+  const refs = ['impl-prediction-repair-tests', 'impl-prediction-repair-native'];
+  const priorRefs = {'condition-1-client': [], 'condition-1-wire': [], 'condition-1-lifecycle': [], 'packet-9': ['impl-protocol'], 'combat-collision-matrix': ['impl-combat']};
+  const scoped = baseline.systems.filter(row => row.implementationSources.some(ref => refs.includes(ref)));
+  assert.deepEqual(scoped.map(row => row.id).sort(), Object.keys(priorRefs).sort());
+  for (const row of scoped) {
+    assert.equal(row.implementation, 'partial');
+    assert.deepEqual(row.implementationSources, [...priorRefs[row.id], ...refs]);
+    assert.deepEqual(row.sources, ['artifact']);
+  }
+  assert.equal(digest(JSON.stringify(baseline.systems.filter(row => !Object.hasOwn(priorRefs, row.id)))), '443a99a30585d7190b16e34200d10e3f9b1d48be5889c158d1f9e4547c0168e9');
+  const frozen = structuredClone(baseline); delete frozen.sources; delete frozen.systems; delete frozen.roadmap;
+  assert.equal(digest(JSON.stringify(frozen)), '8746920f0778d190e098747ca3edbe691ad593676811e0c9ceff8477a70e1b50');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => !refs.includes(id))))), 'fc95d0b220e1d715f101985c59cca6ba66a3ff8da4a151042282ad5dad97c237');
+  const roadmap = baseline.roadmap.map(area => ({...area, requirements: area.requirements.map(row => (area.id === 'combat' && row.title === 'Conditions and their lifecycle') || (area.id === 'multiplayer' && row.title === 'Identity, saves and world transitions') ? {...row, current: null} : row)}));
+  assert.equal(digest(JSON.stringify(roadmap)), '3a7783f094415c6fc49c3cfd731df05147b6968d753907dd672f1765a3e1df5d');
+  const leaf = id => baselineLeaves.find(row => row.id === id);
+  assert.match(leaf('condition-1-client').expected, /separate sticky client dead boolean.*without HP subtraction or local dictionary deletion/);
+  assert.match(leaf('condition-1-client').check, /stat1 and stat29 do not clear.*bare same-ID Make10 fails.*self-only Drop11 then fresh Make10/);
+  assert.match(leaf('condition-1-wire').expected, /exactly 13 body bytes: i32 target, u8 condition, u8 duration, i16 amount, u8 bullet, i32 source/);
+  assert.match(leaf('condition-1-wire').check, /Distinguish enum1 from stat29 bitmask/);
+  assert.match(leaf('condition-1-lifecycle').check, /not fabricated Dead expiry, refresh or stacking/);
+  assert.equal(leaf('packet-9').expected, 'i32 target, u8 condition, u8 duration, i16 amount, u8 bullet, i32 source');
+  assert.match(leaf('packet-9').check, /amount\/duration\/collision claims cannot damage, kill or authorize rewards/);
+  assert.match(leaf('combat-collision-matrix').expected, /Dead\/Paused, faction, ProtectFromProjectiles, tile cover and Continues memory; Invisible is not projectile immunity/);
+  assert.match(leaf('combat-collision-matrix').check, /Two aligned targets, owner\/observer, Invisible pre-existing hostile shot, repeated victim and recreated identity/);
+  const quivers = ['object-0a61-activation-0', 'object-0a62-activation-0', 'object-0a63-activation-1', 'object-0a64-activation-1', 'object-0a65-activation-1'].map(leaf);
+  assert.equal(quivers.length, 5);
+  assert.ok(quivers.every(row => row.implementation === 'missing' && row.name.endsWith(': Shoot')));
+  assert.ok(baselineLeaves.filter(row => row.id.endsWith('-journey')).every(row => row.implementation === 'partial' && !row.implementationSources.some(ref => refs.includes(ref))));
+  for (const variant of ['original', 'repaired']) {
+    const totals = countChecks(baseline, baselineLeaves, variant);
+    assert.deepEqual(totals.implementation, {present: 892, partial: 5591, missing: 1758, 'not-inspected': 2647});
+    assert.deepEqual(totals.functional, {'not-run': 10888, passed: 0, failed: 0});
+    assert.deepEqual(totals.historical, {unresolved: 10864, verified: 0, differences: 24});
+    assert.equal(totals.complete, false);
+  }
+});
+
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
   const s = catalogue().sources['period-healing-20100807'];
   assert.equal(s.kind, 'contemporary-testing');
