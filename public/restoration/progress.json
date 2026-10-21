@@ -7,13 +7,12 @@
       "id": "heroes",
       "name": "Characters",
       "icon": "assets/player/wizard.png",
-      "description": "Classes, progression, Legends and death"
+      "summary": "Classes, progression, Legends and death"
     },
     {
       "id": "access",
       "name": "Client and accounts",
       "icon": "assets/player/client-and-accounts.png",
-      "description": "The original client and a durable account",
       "unknowns": [
         {
           "question": "Were editor/debug worlds available to ordinary players in 123.5.1?",
@@ -28,19 +27,19 @@
             }
           ]
         }
-      ]
+      ],
+      "summary": "The original client and a durable account"
     },
     {
       "id": "conditions",
       "name": "Conditions",
       "icon": "assets/player/condition-armor-broken.png",
-      "description": "Buffs, debuffs and immunities"
+      "summary": "Buffs, debuffs and immunities"
     },
     {
       "id": "dungeons",
       "name": "Dungeons",
       "icon": "assets/player/oryx-the-mad-god-2.png",
-      "description": "Each dungeon is its own complete adventure",
       "unknowns": [
         {
           "question": "Which second dungeon received a treasure room in build 123.3.0?",
@@ -55,37 +54,38 @@
             }
           ]
         }
-      ]
+      ],
+      "summary": "Each dungeon is its own complete adventure"
     },
     {
       "id": "realm",
       "name": "Realm",
       "icon": "assets/player/actual-ent-ancient.png",
-      "description": "Biomes, creatures, quests and world events"
+      "summary": "Biomes, creatures, quests and world events"
     },
     {
       "id": "gear",
       "name": "Equipment",
       "icon": "assets/player/energy-staff.png",
-      "description": "Weapons, armor, rings, potions and loot"
+      "summary": "Weapons, armor, rings, potions and loot"
     },
     {
       "id": "home",
       "name": "Nexus and Vault",
       "icon": "assets/player/vault-chest.png",
-      "description": "A safe place to return, shop and keep your loot"
+      "summary": "A safe place to return, shop and keep your loot"
     },
     {
       "id": "social",
       "name": "Social",
       "icon": "assets/player/chat.png",
-      "description": "Chat, trading, teleportation and guilds"
+      "summary": "Chat, trading, teleportation and guilds"
     },
     {
       "id": "style",
       "name": "Pets and cosmetics",
       "icon": "assets/player/black-cat.png",
-      "description": "The original pets, dyes and cloths"
+      "summary": "The original pets, dyes and cloths"
     }
   ],
   "features": [
@@ -94,7 +94,6 @@
       "name": "Rogue",
       "category": "heroes",
       "icon": "assets/player/rogue.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -117,7 +116,6 @@
       "name": "Archer",
       "category": "heroes",
       "icon": "assets/player/archer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -140,7 +138,6 @@
       "name": "Wizard",
       "category": "heroes",
       "icon": "assets/player/wizard.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -167,7 +164,6 @@
       "name": "Priest",
       "category": "heroes",
       "icon": "assets/player/priest.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -190,7 +186,6 @@
       "name": "Warrior",
       "category": "heroes",
       "icon": "assets/player/warrior.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -217,7 +212,6 @@
       "name": "Knight",
       "category": "heroes",
       "icon": "assets/player/knight.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -239,7 +233,6 @@
       "name": "Paladin",
       "category": "heroes",
       "icon": "assets/player/paladin.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -262,7 +255,6 @@
       "name": "Assassin",
       "category": "heroes",
       "icon": "assets/player/assassin.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -285,7 +277,6 @@
       "name": "Necromancer",
       "category": "heroes",
       "icon": "assets/player/necromancer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -308,7 +299,6 @@
       "name": "Huntress",
       "category": "heroes",
       "icon": "assets/player/huntress.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -335,7 +325,6 @@
       "name": "Mystic",
       "category": "heroes",
       "icon": "assets/player/mystic.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -362,7 +351,6 @@
       "name": "Trickster",
       "category": "heroes",
       "icon": "assets/player/trickster.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -385,7 +373,6 @@
       "name": "Sorcerer",
       "category": "heroes",
       "icon": "assets/player/sorcerer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -411,7 +398,6 @@
       "name": "Choose and unlock classes",
       "category": "heroes",
       "icon": "assets/player/rogue.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -434,7 +420,6 @@
       "name": "Level to 20",
       "category": "heroes",
       "icon": "assets/player/wizard.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -460,7 +445,6 @@
       "name": "Living fame",
       "category": "heroes",
       "icon": "assets/player/priest.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -486,7 +470,6 @@
       "name": "Fame bonuses",
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -516,16 +499,26 @@
           {
             "id": "heroes:lifetime-combat-statistics",
             "name": "Lifetime counters and death statistics",
-            "status": "partial",
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
-            "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters."
+            "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           },
           {
             "id": "heroes:equipment-fame-bonus",
             "name": "Well Equipped snapshot and payout",
-            "status": "verify",
             "expected": "Only worn equipment contributes, with correct rounding, an immutable archived award and once-only payout.",
-            "acceptance": "Compare combined versus per-item rounding, carried items, last-moment swaps, retry/save failure and resurrection. When other bonuses are added, verify the running subtotal and ordering rather than assuming base-only interaction."
+            "acceptance": "Compare combined versus per-item rounding, carried items, last-moment swaps, retry/save failure and resurrection. When other bonuses are added, verify the running subtotal and ordering rather than assuming base-only interaction.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -535,7 +528,6 @@
       "name": "Class stars",
       "category": "heroes",
       "icon": "assets/player/class-stars.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -557,7 +549,6 @@
       "name": "Legends highscores",
       "category": "heroes",
       "icon": "assets/player/legends-highscores.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -579,7 +570,6 @@
       "name": "Recover HP and MP",
       "category": "heroes",
       "icon": "assets/player/health-potion.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -609,7 +599,6 @@
       "name": "Death and restart",
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -631,7 +620,6 @@
       "name": "Gravestones",
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "unreviewed",
@@ -653,7 +641,6 @@
       "name": "Realm generation",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -677,198 +664,338 @@
           {
             "id": "realm:map-world-01",
             "name": "Classic World 1 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 1 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-02",
             "name": "Classic World 2 identity",
-            "status": "partial",
             "expected": "Identify the documented Classic World 2 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks, safe-lava visuals and scenery substitutions."
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks, safe-lava visuals and scenery substitutions.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-03",
             "name": "Classic World 3 identity",
-            "status": "partial",
             "expected": "Identify the documented Classic World 3 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions; a generated recipe is not recovered elevation data."
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions; a generated recipe is not recovered elevation data.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-04",
             "name": "Classic World 4 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 4 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southern bay and northeastern inland water. The preserved image is 2000 pixels square, not evidence for rescaling game coordinates to 2048."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southern bay and northeastern inland water. The preserved image is 2000 pixels square, not evidence for rescaling game coordinates to 2048.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-05",
             "name": "Classic World 5 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 5 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the deep eastern inlet and southern extensions; distinguish silhouette matching from a recovered river/biome variant."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the deep eastern inlet and southern extensions; distinguish silhouette matching from a recovered river/biome variant.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-06",
             "name": "Classic World 6 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 6 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southwestern bay, northeastern projection and bottom extent rather than filling or cropping the source to make construction pass."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southwestern bay, northeastern projection and bottom extent rather than filling or cropping the source to make construction pass.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-07",
             "name": "Classic World 7 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 7 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the north lake, its river links, elongated southern body and mountain/snow supports."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the north lake, its river links, elongated southern body and mountain/snow supports.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-08",
             "name": "Classic World 8 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 8 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Resolve the west-central lake/bay system, transparency and image extent. Red/magenta pixels do not by themselves establish damaging lava."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Resolve the west-central lake/bay system, transparency and image extent. Red/magenta pixels do not by themselves establish damaging lava.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-09",
             "name": "Classic World 9 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 9 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the narrow central/western links, northern lake, roads and terrain bands remain usable after object placement."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the narrow central/western links, northern lake, roads and terrain bands remain usable after object placement.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-10",
             "name": "Classic World 10 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 10 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the star-like arms and investigate the eastern red/magenta patch before assigning ground damage or native scale."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the star-like arms and investigate the eastern red/magenta patch before assigning ground damage or native scale.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-11",
             "name": "Classic World 11 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 11 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the northern lake, southwest spur and snow/rock distribution separately from the first road."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the northern lake, southwest spur and snow/rock distribution separately from the first road.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-12",
             "name": "Classic World 12 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 12 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Match all five lobes and lake/road joins. A generic blob/logo silhouette is not evidence for this world's interior organization."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Match all five lobes and lake/road joins. A generic blob/logo silhouette is not evidence for this world's interior organization.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-world-13",
             "name": "Classic World 13 identity",
-            "status": "missing",
             "expected": "Identify the documented Classic World 13 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the paired north/south bodies and central connection. Do not label an approximate radial candidate a recovered original."
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the paired north/south bodies and central connection. Do not label an approximate radial candidate a recovered original.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "maps"
           },
           {
             "id": "realm:map-registration",
             "name": "Native map scale and registration",
-            "status": "partial",
             "expected": "Preserve each source map's orientation, crop, coordinate scale and meaningful travel distances.",
-            "acceptance": "Register independent landmarks and routes at native scale. Do not assume every source image has the same dimensions or that padding proves original geography."
+            "acceptance": "Register independent landmarks and routes at native scale. Do not assume every source image has the same dimensions or that padding proves original geography.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:biome-zones",
             "name": "Biome and monster-zone mapping",
-            "status": "partial",
             "expected": "Ground appearance and habitat tiers are separate map properties.",
-            "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds."
+            "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:water-network",
             "name": "Coasts, lakes and rivers",
-            "status": "partial",
             "expected": "Preserve shorelines, beach bands, lakes, river connections and the correct water identities.",
-            "acceptance": "Check connected components, widths, outlets and crossings, then walk representative supports. Do not infer depth or passability from blue pixels alone."
+            "acceptance": "Check connected components, widths, outlets and crossings, then walk representative supports. Do not infer depth or passability from blue pixels alone.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:road-network",
             "name": "Road circuits and crossings",
-            "status": "partial",
             "expected": "Road topology, widths and crossings must form usable routes at the intended scale.",
-            "acceptance": "Follow the first-road circuit and inland routes against source evidence. Verify crossing continuity and terrain speed on actual mapped roads."
+            "acceptance": "Follow the first-road circuit and inland routes against source evidence. Verify crossing continuity and terrain speed on actual mapped roads.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:godlands-terrain",
             "name": "Rocky and snowy Godlands",
-            "status": "partial",
             "expected": "Verify Godlands geography, walkable combat space and regional ecology separately.",
-            "acceptance": "Compare rock/snow boundaries and disconnected components. Test routes from every arrival and population on both terrain types."
+            "acceptance": "Compare rock/snow boundaries and disconnected components. Test routes from every arrival and population on both terrain types.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:setpiece-sites",
             "name": "Setpiece placement and reachability",
-            "status": "partial",
             "expected": "Place encounters on source-supported sites with usable approaches and meaningful terrain changes.",
-            "acceptance": "Check footprint, rotation, non-overlap, roads/water and reachable bosses/chests. Research fixed sites versus randomized buildings rather than choosing a comparator by default."
+            "acceptance": "Check footprint, rotation, non-overlap, roads/water and reachable bosses/chests. Research fixed sites versus randomized buildings rather than choosing a comparator by default.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "scenery"
           },
           {
             "id": "realm:minor-landmarks",
             "name": "Minor ruins and buildings",
-            "status": "partial",
             "expected": "Inventory ordinary ruins, forts, graveyards, oases and temples separately from boss AI.",
-            "acceptance": "Inspect each map before and after augmentation. Verify entrances, walls, cover and period-supported occupants/rewards; do not assume every comparator variant was deployed."
+            "acceptance": "Inspect each map before and after augmentation. Verify entrances, walls, cover and period-supported occupants/rewards; do not assume every comparator variant was deployed.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "scenery"
           },
           {
             "id": "realm:scenery-placement",
             "name": "Scenery palette, size and variation",
-            "status": "partial",
             "expected": "Biome-associated trees, rocks, plants and other scenery must retain their intended variation and usable gaps.",
-            "acceptance": "Compare palette, density and size by region. Reopen the same layout to distinguish fixed geography from variable scenery; avoid treating source pixels as complete metadata."
+            "acceptance": "Compare palette, density and size by region. Reopen the same layout to distinguish fixed geography from variable scenery; avoid treating source pixels as complete metadata.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "scenery"
           },
           {
             "id": "realm:scenery-interactions",
             "name": "Destructible and protective scenery",
-            "status": "partial",
             "expected": "Ordinary and destructible scenery must preserve occupancy, sight, cover, size and ground-protection behavior.",
-            "acceptance": "Shoot mapped ordinary/destructible pairs with two observers. Check removal, shared collision updates, zero-XP behavior and protective floors, not only map colors."
+            "acceptance": "Shoot mapped ordinary/destructible pairs with two observers. Check removal, shared collision updates, zero-XP behavior and protective floors, not only map colors.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "scenery"
           },
           {
             "id": "realm:coastal-arrivals",
             "name": "Every coastal arrival route",
-            "status": "verify",
             "expected": "Repeated arrivals must preserve one shared Realm layout and provide safe, usable inward routes.",
-            "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters."
+            "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "geography"
           },
           {
             "id": "realm:population-ecology",
             "name": "Regional encounter density and grouping",
-            "status": "partial",
             "expected": "Species presence alone does not establish original encounter frequency or group composition.",
-            "acceptance": "Measure region areas, eligible sites, species/group/body distributions and route encounter spacing. Research original probabilities and group-versus-body accounting."
+            "acceptance": "Measure region areas, eligible sites, species/group/body distributions and route encounter spacing. Research original probabilities and group-versus-body accounting.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "populations"
           },
           {
             "id": "realm:population-recovery",
             "name": "Recovery versus finite encounters",
-            "status": "verify",
             "expected": "Ordinary repopulation, family reinforcement and finite closure encounters have distinct lifecycles.",
-            "acceptance": "Clear groups near and far from players and compare recovery. Check shared budgets, no spawn on players, and that finite heroes are not resurrected by ordinary refill."
+            "acceptance": "Clear groups near and far from players and compare recovery. Check shared budgets, no spawn on players, and that finite heroes are not resurrected by ordinary refill.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "populations"
           },
           {
             "id": "realm:terrain-encounter-navigation",
             "name": "Encounters across actual terrain",
-            "status": "verify",
             "expected": "Walking and flying families must traverse their real habitat with identity-specific obstacle rules.",
-            "acceptance": "Lure enemies across roads and biome edges and around trees, walls and water. Check approach/retreat, stuck movement and unintended habitat fences."
+            "acceptance": "Lure enemies across roads and biome edges and around trees, walls and water. Check approach/retreat, stuck movement and unintended habitat fences.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "populations"
           },
           {
             "id": "realm:enemy-pursuit-and-collision",
             "name": "Pursuit, target loss and obstacles",
-            "status": "verify",
             "expected": "Acquisition, sight/stop distances, home/owner behavior and wall movement need per-family checks.",
-            "acceptance": "Exercise entry/exit from sight, invisible/paused/dead targets, corners, reacquisition and owner loss. Do not impose one universal historical radius."
+            "acceptance": "Exercise entry/exit from sight, invisible/paused/dead targets, corners, reacquisition and owner loss. Do not impose one universal historical radius.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "populations"
           },
           {
             "id": "realm:encounter-clock-semantics",
             "name": "Encounter clocks and queued movement",
-            "status": "verify",
             "expected": "Pursuit cooldowns, child completion, terminal bursts and suspended clocks must preserve their distinct semantics.",
-            "acceptance": "Trace reacquisition, dormancy, Stasis and Paralyzed. Check once-only bursts/rewards and invocation-relative timers rather than restarting from global encounter age."
+            "acceptance": "Trace reacquisition, dormancy, Stasis and Paralyzed. Check once-only bursts/rewards and invocation-relative timers rather than restarting from global encounter age.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "populations"
           }
         ]
       }
@@ -878,7 +1005,6 @@
       "name": "Find your next quest",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -900,7 +1026,6 @@
       "name": "Realm closure",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -920,9 +1045,14 @@
           {
             "id": "realm:event-admission",
             "name": "Progression-triggered event admission",
-            "status": "partial",
             "expected": "Establish era-correct event admission, caps and completion independently of a fixed opening roster.",
-            "acceptance": "Trace hero defeat, event eligibility, site selection and completion without duplicate transformation/minion credit. Original trigger probabilities and repeatability remain research questions."
+            "acceptance": "Trace hero defeat, event eligibility, site selection and completion without duplicate transformation/minion credit. Original trigger probabilities and repeatability remain research questions.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -932,7 +1062,6 @@
       "name": "Walk and dodge",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -955,7 +1084,6 @@
       "name": "Shoot and take damage",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -974,16 +1102,26 @@
           {
             "id": "access:combat-status-feedback",
             "name": "Damage, condition names and icons",
-            "status": "verify",
             "expected": "Particles, actual damage text, status names/icons and paused presentation must correspond to real state.",
-            "acceptance": "Apply and expire overlapping effects, hit ordinary/immune/dying targets and pause/unpause. Avoid invented icons and duplicated prediction feedback; selected Hexed icon gating needs care."
+            "acceptance": "Apply and expire overlapping effects, hit ordinary/immune/dying targets and pause/unpause. Avoid invented icons and duplicated prediction feedback; selected Hexed icon gating needs care.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           },
           {
             "id": "realm:area-damage-feedback",
             "name": "AOE boundaries, protection and feedback",
-            "status": "verify",
             "expected": "AOE radius, effects, protection and a single authoritative HP result need checks apart from ordinary projectiles.",
-            "acceptance": "Test just inside, exactly on and outside the radius with Paused/Invincible/defense/effects. Check feedback, attribution and ACK duplication/loss; source-only Pause/effect risks are not claimed reproduced failures."
+            "acceptance": "Test just inside, exactly on and outside the radius with Paused/Invincible/defense/effects. Check feedback, attribution and ACK duplication/loss; source-only Pause/effect risks are not claimed reproduced failures.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -993,7 +1131,6 @@
       "name": "Environmental hazards",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1019,7 +1156,6 @@
       "name": "Travel between worlds",
       "category": "realm",
       "icon": "assets/player/nexus-portal.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1045,7 +1181,6 @@
       "name": "Ent Ancient and Ents",
       "category": "realm",
       "icon": "assets/player/ent-ancient.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1073,7 +1208,6 @@
       "name": "Lich and Mummies",
       "category": "realm",
       "icon": "assets/player/lich.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1101,7 +1235,6 @@
       "name": "Ghost King",
       "category": "realm",
       "icon": "assets/player/ghost-king.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1124,7 +1257,6 @@
       "name": "Deathmage and Skeletons",
       "category": "realm",
       "icon": "assets/player/deathmage.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1154,7 +1286,6 @@
       "name": "Red Demon",
       "category": "realm",
       "icon": "assets/player/red-demon.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1177,7 +1308,6 @@
       "name": "Oasis Giant",
       "category": "realm",
       "icon": "assets/player/oasis-giant.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1201,7 +1331,6 @@
       "name": "Cyclops God",
       "category": "realm",
       "icon": "assets/player/cyclops-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1224,7 +1353,6 @@
       "name": "Phoenix Lord",
       "category": "realm",
       "icon": "assets/player/phoenix-lord.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1251,7 +1379,6 @@
       "name": "Evil Chicken God",
       "category": "realm",
       "icon": "assets/player/evil-chicken-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1274,7 +1401,6 @@
       "name": "Great Lizard",
       "category": "realm",
       "icon": "assets/player/great-lizard.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1298,7 +1424,6 @@
       "name": "Wasp Queen",
       "category": "realm",
       "icon": "assets/player/wasp-queen.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1323,7 +1448,6 @@
       "name": "Sludge family",
       "category": "realm",
       "icon": "assets/player/shambling-sludge.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -1356,7 +1480,6 @@
       "name": "Swarm",
       "category": "realm",
       "icon": "assets/player/swarm.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1378,7 +1501,6 @@
       "name": "Dwarf family",
       "category": "realm",
       "icon": "assets/player/dwarf-king.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1401,7 +1523,6 @@
       "name": "Horned Drake family",
       "category": "realm",
       "icon": "assets/player/horned-drake.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1428,7 +1549,6 @@
       "name": "Desert Werewolf",
       "category": "realm",
       "icon": "assets/player/desert-werewolf.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1454,7 +1574,6 @@
       "name": "Sandsman King",
       "category": "realm",
       "icon": "assets/player/sandsman-king.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1480,7 +1599,6 @@
       "name": "Giant Crab",
       "category": "realm",
       "icon": "assets/player/giant-crab.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1506,7 +1624,6 @@
       "name": "Hobbit family",
       "category": "realm",
       "icon": "assets/player/hobbit-mage.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1533,7 +1650,6 @@
       "name": "Undead Hobbit family",
       "category": "realm",
       "icon": "assets/player/undead-hobbit-mage.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1560,7 +1676,6 @@
       "name": "Elf family",
       "category": "realm",
       "icon": "assets/player/elf-wizard.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1583,7 +1698,6 @@
       "name": "Goblin family",
       "category": "realm",
       "icon": "assets/player/goblin-mage.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1606,7 +1720,6 @@
       "name": "Great Coil Snake",
       "category": "realm",
       "icon": "assets/player/great-coil-snake.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1632,7 +1745,6 @@
       "name": "Scorpion family",
       "category": "realm",
       "icon": "assets/player/scorpion-queen.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1659,7 +1771,6 @@
       "name": "Bandit family",
       "category": "realm",
       "icon": "assets/player/bandit-leader.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1686,7 +1797,6 @@
       "name": "Lord of the Lost Lands",
       "category": "realm",
       "icon": "assets/player/lord-of-the-lost-lands.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -1710,7 +1820,6 @@
       "name": "Grand Sphinx",
       "category": "realm",
       "icon": "assets/player/grand-sphinx.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -1739,7 +1848,6 @@
       "name": "Skull Shrine",
       "category": "realm",
       "icon": "assets/player/skull-shrine.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1761,7 +1869,6 @@
       "name": "Cube God",
       "category": "realm",
       "icon": "assets/player/cube-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1783,7 +1890,6 @@
       "name": "Pentaract",
       "category": "realm",
       "icon": "assets/player/pentaract.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1809,7 +1915,6 @@
       "name": "Hermit God",
       "category": "realm",
       "icon": "assets/player/hermit-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1835,7 +1940,6 @@
       "name": "Ghost Ship",
       "category": "realm",
       "icon": "assets/player/ghost-ship.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -1859,7 +1963,6 @@
       "name": "Crystal Prisoner",
       "category": "realm",
       "icon": "assets/player/crystal-prisoner.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -1883,7 +1986,6 @@
       "name": "Kage Kami",
       "category": "realm",
       "icon": "assets/player/kage-kami.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1914,7 +2016,6 @@
       "name": "Pirates",
       "category": "realm",
       "icon": "assets/player/pirate.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1936,7 +2037,6 @@
       "name": "Night Elves",
       "category": "realm",
       "icon": "assets/player/night-elf-archer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1962,7 +2062,6 @@
       "name": "Undead Dwarves",
       "category": "realm",
       "icon": "assets/player/undead-dwarf-warrior.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -1984,7 +2083,6 @@
       "name": "Orcs",
       "category": "realm",
       "icon": "assets/player/orc-warrior.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2006,7 +2104,6 @@
       "name": "Shield Orcs",
       "category": "realm",
       "icon": "assets/player/shield-orc-key.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2032,7 +2129,6 @@
       "name": "Ogres",
       "category": "realm",
       "icon": "assets/player/ogre-mage.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2058,7 +2154,6 @@
       "name": "Nomads",
       "category": "realm",
       "icon": "assets/player/nomadic-shaman.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2080,7 +2175,6 @@
       "name": "Snakes and pythons",
       "category": "realm",
       "icon": "assets/player/fire-python.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2102,7 +2196,6 @@
       "name": "Flayers",
       "category": "realm",
       "icon": "assets/player/flayer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2124,7 +2217,6 @@
       "name": "Ghosts",
       "category": "realm",
       "icon": "assets/player/ghost-master.png",
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "partial",
@@ -2146,7 +2238,6 @@
       "name": "Werecats",
       "category": "realm",
       "icon": "assets/player/weretiger.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2168,7 +2259,6 @@
       "name": "Golems",
       "category": "realm",
       "icon": "assets/player/fire-golem.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2194,7 +2284,6 @@
       "name": "Sprites",
       "category": "realm",
       "icon": "assets/player/fire-sprite.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2216,7 +2305,6 @@
       "name": "Wargs",
       "category": "realm",
       "icon": "assets/player/tawny-warg.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2238,7 +2326,6 @@
       "name": "Sand phantoms",
       "category": "realm",
       "icon": "assets/player/sand-phantom.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2261,7 +2348,6 @@
       "name": "Cubes",
       "category": "realm",
       "icon": "assets/player/red-gelatinous-cube.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2289,7 +2375,6 @@
       "name": "Medusa",
       "category": "realm",
       "icon": "assets/player/medusa.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2311,7 +2396,6 @@
       "name": "Ent God",
       "category": "realm",
       "icon": "assets/player/ent-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2333,7 +2417,6 @@
       "name": "Beholder",
       "category": "realm",
       "icon": "assets/player/beholder.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2355,7 +2438,6 @@
       "name": "Flying Brain",
       "category": "realm",
       "icon": "assets/player/flying-brain.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2377,7 +2459,6 @@
       "name": "Slime God",
       "category": "realm",
       "icon": "assets/player/slime-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2399,7 +2480,6 @@
       "name": "Ghost God",
       "category": "realm",
       "icon": "assets/player/ghost-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2421,7 +2501,6 @@
       "name": "Djinn",
       "category": "realm",
       "icon": "assets/player/djinn.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2443,7 +2522,6 @@
       "name": "Leviathan",
       "category": "realm",
       "icon": "assets/player/leviathan.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2465,7 +2543,6 @@
       "name": "White Demon",
       "category": "realm",
       "icon": "assets/player/white-demon.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2491,7 +2568,6 @@
       "name": "Sprite God",
       "category": "realm",
       "icon": "assets/player/sprite-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2513,7 +2589,6 @@
       "name": "Pirate Cave",
       "category": "dungeons",
       "icon": "assets/player/dreadstump-the-pirate-king.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2532,9 +2607,14 @@
           {
             "id": "dungeons:pirate-cave:officers-and-cave-roster",
             "name": "Officers, fighters and passive fauna",
-            "status": "verify",
             "expected": "Cave officer roles, pursuing fighters and passive fauna must appear through ordinary room traversal.",
-            "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance."
+            "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "population"
           }
         ]
       }
@@ -2544,7 +2624,6 @@
       "name": "Spider Den",
       "category": "dungeons",
       "icon": "assets/player/arachna-the-spider-queen.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -2570,9 +2649,14 @@
           {
             "id": "dungeons:spider-den:egg-and-cover-environment",
             "name": "Aesthetic eggs, live sacs and boss pillars",
-            "status": "partial",
             "expected": "Keep decorative eggs distinct from live hatchable sacs and surround the boss arena with its documented pillars.",
-            "acceptance": "Check natural boss-room cover and ordinary egg collision/hatching behavior. The current generator has no dedicated boss-pillar placement."
+            "acceptance": "Check natural boss-room cover and ordinary egg collision/hatching behavior. The current generator has no dedicated boss-pillar placement.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           }
         ]
       }
@@ -2582,7 +2666,6 @@
       "name": "Snake Pit",
       "category": "dungeons",
       "icon": "assets/player/stheno-the-snake-queen.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2602,9 +2685,14 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "status": "verify",
             "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
-            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end."
+            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           }
         ]
       }
@@ -2614,7 +2702,6 @@
       "name": "Forbidden Jungle",
       "category": "dungeons",
       "icon": "assets/player/mixcoatl-the-masked-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2637,9 +2724,14 @@
           {
             "id": "dungeons:forbidden-jungle:foliage-and-tribal-rooms",
             "name": "Foliage, tribes and owned Totems",
-            "status": "verify",
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
-            "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup."
+            "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           }
         ]
       }
@@ -2649,7 +2741,6 @@
       "name": "Sprite World",
       "category": "dungeons",
       "icon": "assets/player/limon-the-sprite-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -2674,9 +2765,14 @@
           {
             "id": "dungeons:sprite-world:floor-and-native-variants",
             "name": "Floor variants, trees and native gods",
-            "status": "partial",
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
-            "acceptance": "Exercise every push direction and stationary floor, tree destruction and documented variant seeds. The current painter does not provide a non-tiled variant; exact original probabilities remain unverified."
+            "acceptance": "Exercise every push direction and stationary floor, tree destruction and documented variant seeds. The current painter does not provide a non-tiled variant; exact original probabilities remain unverified.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           }
         ]
       }
@@ -2686,7 +2782,6 @@
       "name": "Undead Lair",
       "category": "dungeons",
       "icon": "assets/player/septavius-the-ghost-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -2711,16 +2806,26 @@
           {
             "id": "dungeons:undead-lair:room-family-and-split-lifecycle",
             "name": "Room families, slime splits and traps",
-            "status": "verify",
             "expected": "Coherent room families and death/summon lifecycles need checks beyond defeating Septavius.",
-            "acceptance": "Verify black/brown slime replacements, reward exclusion on intermediate forms, single-use traps and owned escorts. Late joins must not restart the encounter."
+            "acceptance": "Verify black/brown slime replacements, reward exclusion on intermediate forms, single-use traps and owned escorts. Late joins must not restart the encounter.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "population"
           },
           {
             "id": "dungeons:undead-lair:entrance-end-dressing",
             "name": "Entrance/end candles and blood floors",
-            "status": "partial",
             "expected": "Build 122 documents candles at spawn and end, with blood-spattered floors.",
-            "acceptance": "Check endpoint candle markers across seeds, selected blood appearance and collision. Random ordinary-room candles do not establish endpoint dressing."
+            "acceptance": "Check endpoint candle markers across seeds, selected blood appearance and collision. Random ordinary-room candles do not establish endpoint dressing.",
+            "implementation": "partial",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           }
         ]
       }
@@ -2730,7 +2835,6 @@
       "name": "Abyss of Demons",
       "category": "dungeons",
       "icon": "assets/player/archdemon-malphas.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2757,9 +2861,14 @@
           {
             "id": "dungeons:abyss-of-demons:idol-and-treasure-lifecycle",
             "name": "Idol treasure-room control",
-            "status": "verify",
             "expected": "Optional Idol rooms must control their own bridges and temporary lava without completing the main dungeon.",
-            "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify restored access to loot, independent rooms and no main clear from Idol defeat alone."
+            "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify restored access to loot, independent rooms and no main clear from Idol defeat alone.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           }
         ]
       }
@@ -2769,7 +2878,6 @@
       "name": "Tomb of the Ancients",
       "category": "dungeons",
       "icon": "assets/player/tomb-attacker.png",
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "partial",
@@ -2795,30 +2903,50 @@
           {
             "id": "dungeons:tomb-of-the-ancients:sarcophagus-awakening",
             "name": "Sarcophagus awakening gate",
-            "status": "missing",
             "expected": "Restore the period-supported awakening predicate for dormant bosses; exact required roster needs corroboration.",
-            "acceptance": "Resolve required sarcophagi/priest/treasure participation first. Test the last required defeat, one-time awakening, reconnect and late join without guessing an activation threshold."
+            "acceptance": "Resolve required sarcophagi/priest/treasure participation first. Test the last required defeat, one-time awakening, reconnect and late join without guessing an activation threshold.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           },
           {
             "id": "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand",
             "name": "Trap switches, quicksand and cover",
-            "status": "missing",
             "expected": "Local trap control and terrain hazards must be distinct from the boss encounter.",
-            "acceptance": "Verify interrupted switch activation, local rather than global disable, separate rooms/players and selected trap conditions. Exact timing remains source-qualified."
+            "acceptance": "Verify interrupted switch activation, local rather than global disable, separate rooms/players and selected trap conditions. Exact timing remains source-qualified.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion",
             "name": "Optional treasure and three-boss finish",
-            "status": "missing",
             "expected": "Optional treasure, individual boss rewards and the final group completion must remain separate.",
-            "acceptance": "Check optional rewards do not complete the dungeon, each eligible boss award occurs once, peer healing/artifact behavior is correct, and the earned exit waits for all required bosses."
+            "acceptance": "Check optional rewards do not complete the dungeon, each eligible boss award occurs once, peer healing/artifact behavior is correct, and the earned exit waits for all required bosses.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "rewards"
           },
           {
             "id": "dungeons:tomb-of-the-ancients:ordinary-encounters",
             "name": "Ordinary Tomb passage families",
-            "status": "missing",
             "expected": "Swarm, Jackal, Mummy, Scarab, Sentry and Archer traversal roles need a population-family suite.",
-            "acceptance": "Source the deployed roster and packs, then verify natural projectiles/conditions, bounded followers, leader loss, XP/loot and traversal without extra controller completion credit."
+            "acceptance": "Source the deployed roster and packs, then verify natural projectiles/conditions, bounded followers, leader loss, XP/loot and traversal without extra controller completion credit.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "population"
           }
         ]
       }
@@ -2828,7 +2956,6 @@
       "name": "Ocean Trench",
       "category": "dungeons",
       "icon": "assets/player/thessal-the-mermaid-goddess.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2851,16 +2978,26 @@
           {
             "id": "dungeons:ocean-trench:oxygen-route-and-air-pockets",
             "name": "Oxygen, vents and death air pocket",
-            "status": "verify",
             "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
-            "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state."
+            "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:ocean-trench:wounded-thessal-response",
             "name": "Wounded Thessal and response gifts",
-            "status": "verify",
             "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
-            "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off."
+            "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           }
         ]
       }
@@ -2870,7 +3007,6 @@
       "name": "Manor of the Immortals",
       "category": "dungeons",
       "icon": "assets/player/lord-ruthven.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -2906,16 +3042,26 @@
           {
             "id": "dungeons:manor-of-the-immortals:secret-shelves-and-coffins",
             "name": "Secret shelves and real/false coffins",
-            "status": "verify",
             "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
-            "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it."
+            "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech",
             "name": "Ruthven ownership and actual-hit life steal",
-            "status": "verify",
             "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
-            "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified."
+            "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           }
         ]
       }
@@ -2925,7 +3071,6 @@
       "name": "Davy Jones’s Locker",
       "category": "dungeons",
       "icon": "assets/player/davy-jones.png",
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "partial",
@@ -2950,23 +3095,38 @@
           {
             "id": "dungeons:davy-jones-s-locker:colored-key-door-chain",
             "name": "Internal colored keys, doors and HUD",
-            "status": "missing",
             "expected": "Internal matching-color keys and doors are distinct from the admission key; exact original sequence needs evidence.",
-            "acceptance": "Restore a solvable ordinary route, correct key HUD and shared door state. Test wrong-color actions, reconnect and two players without prescribing an unproven later-server order."
+            "acceptance": "Restore a solvable ordinary route, correct key HUD and shared door state. Test wrong-color actions, reconnect and two players without prescribing an unproven later-server order.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle",
             "name": "Lantern-controlled vulnerability",
-            "status": "missing",
             "expected": "Lantern state changes and the boss damage window form their own encounter gate.",
-            "acceptance": "Use naturally reachable lamps and verify valid state changes, boss window and reset/burst. Foreign lamps must not unlock the fight; exact historical counts and timing need corroboration."
+            "acceptance": "Use naturally reachable lamps and verify valid state changes, boss window and reset/burst. Foreign lamps must not unlock the fight; exact historical counts and timing need corroboration.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           },
           {
             "id": "dungeons:davy-jones-s-locker:ship-trash-and-objects",
             "name": "Ship populations and destructibles",
-            "status": "missing",
             "expected": "Ship-room families, offspring and intended regeneration need ordinary traversal checks.",
-            "acceptance": "Verify room roles, conditions, sack/offspring lifecycle and revisit behavior. Keep ship barrels distinct from Wine Barrels; source respawn and collision rules before fixing values."
+            "acceptance": "Verify room roles, conditions, sack/offspring lifecycle and revisit behavior. Keep ship barrels distinct from Wine Barrels; source respawn and collision rules before fixing values.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "population"
           }
         ]
       }
@@ -2976,7 +3136,6 @@
       "name": "Mad Lab",
       "category": "dungeons",
       "icon": "assets/player/horrific-creation.png",
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "partial",
@@ -3001,16 +3160,26 @@
           {
             "id": "dungeons:mad-lab:ordinary-lab-and-gas",
             "name": "Ordinary lab rooms, gas and cages",
-            "status": "missing",
             "expected": "Ordinary cages, gas, turrets and robots are not replaced by a successful first-boss fight.",
-            "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility."
+            "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "population"
           },
           {
             "id": "dungeons:mad-lab:coil-secret-and-pool-chain",
             "name": "Coils, secret boss and transformation pools",
-            "status": "missing",
             "expected": "Secret admission, melee-accessible coils, green transformation and blue cure need independent checks.",
-            "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing."
+            "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           }
         ]
       }
@@ -3020,7 +3189,6 @@
       "name": "Beachzone",
       "category": "dungeons",
       "icon": "assets/player/masked-party-god.png",
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "partial",
@@ -3048,7 +3216,6 @@
       "name": "Oryx’s Castle",
       "category": "dungeons",
       "icon": "assets/player/oryx-stone-guardian-right.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3071,16 +3238,26 @@
           {
             "id": "dungeons:oryx-s-castle:mandatory-route-and-armor",
             "name": "Anti-rush traversal and armor rewards",
-            "status": "verify",
             "expected": "Long bridges, the three-deep wall, Quiet towers and non-farmable respawning armor must work on the full route.",
-            "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient."
+            "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:oryx-s-castle:guardian-survivor-and-chamber",
             "name": "Either guardian order and shared unlock",
-            "status": "verify",
             "expected": "Guardian survival, the bound sword and shared Chamber admission must work in either defeat order.",
-            "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified."
+            "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           }
         ]
       }
@@ -3090,7 +3267,6 @@
       "name": "Oryx’s Chamber",
       "category": "dungeons",
       "icon": "assets/player/oryx-the-mad-god-1.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3109,16 +3285,26 @@
           {
             "id": "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract",
             "name": "Oryx 1 phases and minions",
-            "status": "verify",
             "expected": "The full Oryx 1 encounter includes its minion conditions and rewards, not just access to the room.",
-            "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs."
+            "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "boss"
           },
           {
             "id": "dungeons:oryx-s-chamber:incantation-unlock-transaction",
             "name": "Committed shared Cellar unlock",
-            "status": "verify",
             "expected": "A committed Incantation use opens one shared Cellar route, without consuming or exposing success on rejected actions.",
-            "acceptance": "Test pre-victory, wrong-world/range/item, competing users and commit failure. Exactly one successful consumption must bind a usable shared destination; original range/lifetime remain qualified."
+            "acceptance": "Test pre-victory, wrong-world/range/item, competing users and commit failure. Exactly one successful consumption must bind a usable shared destination; original range/lifetime remain qualified.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "admission"
           }
         ]
       }
@@ -3128,7 +3314,6 @@
       "name": "Wine Cellar",
       "category": "dungeons",
       "icon": "assets/player/oryx-the-mad-god-2.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -3155,23 +3340,38 @@
           {
             "id": "dungeons:wine-cellar:barrel-destruction",
             "name": "Destructible Wine Barrels",
-            "status": "missing",
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
-            "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence."
+            "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:wine-cellar:bile-trail-and-wine-threats",
             "name": "Persistent Bile/Goo trail and wine attacks",
-            "status": "missing",
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
-            "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards."
+            "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
+            "implementation": "missing",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "layout"
           },
           {
             "id": "dungeons:wine-cellar:oryx-two-reward-return",
             "name": "Oryx 2, rewards and return",
-            "status": "verify",
             "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
-            "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels."
+            "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "rewards"
           }
         ]
       }
@@ -3181,7 +3381,6 @@
       "name": "Swords",
       "category": "gear",
       "icon": "assets/player/short-sword.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3204,7 +3403,6 @@
       "name": "Daggers",
       "category": "gear",
       "icon": "assets/player/steel-dagger.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3227,7 +3425,6 @@
       "name": "Bows",
       "category": "gear",
       "icon": "assets/player/shortbow.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3250,7 +3447,6 @@
       "name": "Wands",
       "category": "gear",
       "icon": "assets/player/fire-wand.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3276,7 +3472,6 @@
       "name": "Staves",
       "category": "gear",
       "icon": "assets/player/energy-staff.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3299,7 +3494,6 @@
       "name": "Leather armor",
       "category": "gear",
       "icon": "assets/player/leather-armor.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3322,7 +3516,6 @@
       "name": "Heavy armor",
       "category": "gear",
       "icon": "assets/player/iron-mail.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3344,7 +3537,6 @@
       "name": "Robes",
       "category": "gear",
       "icon": "assets/player/robe-of-the-neophyte.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3370,7 +3562,6 @@
       "name": "Rings",
       "category": "gear",
       "icon": "assets/player/ring-of-minor-defense.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3397,7 +3588,6 @@
       "name": "Loot and ownership",
       "category": "gear",
       "icon": "assets/player/loot-bag.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3417,9 +3607,14 @@
           {
             "id": "gear:loot-bag-presentation",
             "name": "Bag rarity, packaging and permissions",
-            "status": "verify",
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
-            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify per-chunk appearance, lossless contents, ownership, permissions and expiry. Do not infer undocumented bag generation from XML alone."
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify per-chunk appearance, lossless contents, ownership, permissions and expiry. Do not infer undocumented bag generation from XML alone.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -3429,7 +3624,6 @@
       "name": "Inventory and equipment",
       "category": "gear",
       "icon": "assets/player/vault-chest.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3454,9 +3648,14 @@
           {
             "id": "gear:ability-activation-contract",
             "name": "Ability validation and cooldown continuity",
-            "status": "verify",
             "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
-            "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending. The source-observed swap discrepancy is not yet a reproduced gameplay failure."
+            "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending. The source-observed swap discrepancy is not yet a reproduced gameplay failure.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -3466,7 +3665,6 @@
       "name": "Health potions",
       "category": "gear",
       "icon": "assets/player/health-potion.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3489,7 +3687,6 @@
       "name": "Magic potions",
       "category": "gear",
       "icon": "assets/player/magic-potion.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3511,7 +3708,6 @@
       "name": "Stat potions",
       "category": "gear",
       "icon": "assets/player/potion-of-defense.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3530,9 +3726,14 @@
           {
             "id": "gear:consumable-result-feedback",
             "name": "Actual restoration and rejected-use feedback",
-            "status": "verify",
             "expected": "Visible results must reflect actual committed restoration/stat changes, not an unclipped advertised amount.",
-            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no fictitious gain or success feedback on rejected consumption; review existing native evidence."
+            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no fictitious gain or success feedback on rejected consumption; review existing native evidence.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -3542,7 +3743,6 @@
       "name": "Elixirs",
       "category": "gear",
       "icon": "assets/player/elixir-of-health-7.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3564,7 +3764,6 @@
       "name": "Tinctures and effusions",
       "category": "gear",
       "icon": "assets/player/tincture-of-dexterity.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3586,7 +3785,6 @@
       "name": "Dungeon drinks",
       "category": "gear",
       "icon": "assets/player/coral-juice.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3608,7 +3806,6 @@
       "name": "Rum and mushrooms",
       "category": "gear",
       "icon": "assets/player/pirate-rum.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3630,7 +3827,6 @@
       "name": "Holy Water",
       "category": "gear",
       "icon": "assets/player/holy-water.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3652,7 +3848,6 @@
       "name": "Transformation Potion",
       "category": "gear",
       "icon": "assets/player/transformation-potion.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3679,7 +3874,6 @@
       "name": "XP Booster",
       "category": "gear",
       "icon": "assets/player/xp-booster.png",
-      "stage": 1,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3706,7 +3900,6 @@
       "name": "Dungeon keys",
       "category": "gear",
       "icon": "assets/player/pirate-cave-key.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3729,7 +3922,6 @@
       "name": "Amulet of Resurrection",
       "category": "gear",
       "icon": "assets/player/amulet-of-resurrection.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3751,7 +3943,6 @@
       "name": "Seasonal toys",
       "category": "gear",
       "icon": "assets/player/sand-pail-5.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -3779,7 +3970,6 @@
       "name": "Legacy pet collection",
       "category": "style",
       "icon": "assets/player/black-cat.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3803,7 +3993,6 @@
       "name": "Summon a drake",
       "category": "style",
       "icon": "assets/player/purple-drake-egg.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3827,7 +4016,6 @@
       "name": "Clothing and accessory dyes",
       "category": "style",
       "icon": "assets/player/black-clothing-dye.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3850,7 +4038,6 @@
       "name": "Clothing and accessory cloths",
       "category": "style",
       "icon": "assets/player/wizard.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3872,7 +4059,6 @@
       "name": "Nexus",
       "category": "home",
       "icon": "assets/player/nexus-portal.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3900,7 +4086,6 @@
       "name": "Vault",
       "category": "home",
       "icon": "assets/player/vault-chest.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3926,7 +4111,6 @@
       "name": "Tutorial and Kitchen",
       "category": "home",
       "icon": "assets/player/pirate.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -3949,7 +4133,6 @@
       "name": "Choose your name",
       "category": "home",
       "icon": "assets/player/name-changer.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3971,7 +4154,6 @@
       "name": "Browse Realm portals",
       "category": "home",
       "icon": "assets/player/nexus-portal.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -3993,7 +4175,6 @@
       "name": "Buy from merchants",
       "category": "home",
       "icon": "assets/player/merchant.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4015,7 +4196,6 @@
       "name": "Gold and fame balances",
       "category": "home",
       "icon": "assets/player/money-changer.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4034,9 +4214,16 @@
           {
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
-            "status": "substituted",
             "expected": "The project deliberately uses a Gold guide/rewards instead of historical payment offers.",
-            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments."
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
+            "implementation": "present",
+            "historical": "known-differences",
+            "differences": [
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards."
+            ],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -4046,7 +4233,6 @@
       "name": "Chat",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4069,7 +4255,6 @@
       "name": "Whispers",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4095,7 +4280,6 @@
       "name": "Guild chat",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4122,7 +4306,6 @@
       "name": "Trade with players",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4144,7 +4327,6 @@
       "name": "Lock players",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4166,7 +4348,6 @@
       "name": "Ignore players",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4192,7 +4373,6 @@
       "name": "Teleport to players",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4219,7 +4399,6 @@
       "name": "Create and join a guild",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4249,7 +4428,6 @@
       "name": "Guild invitations and removal",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4272,7 +4450,6 @@
       "name": "Guild ranks",
       "category": "social",
       "icon": null,
-      "stage": 1,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4298,7 +4475,6 @@
       "name": "Guild board",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4324,7 +4500,6 @@
       "name": "Guild Chronicle and roster",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4347,7 +4522,6 @@
       "name": "Guild hall",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4375,7 +4549,6 @@
       "name": "Share a living world",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4397,7 +4570,6 @@
       "name": "Open the original client",
       "category": "access",
       "icon": "assets/player/wizard.png",
-      "stage": 1,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4417,7 +4589,6 @@
       "name": "Guest accounts",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4439,7 +4610,6 @@
       "name": "Registration",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4461,7 +4631,6 @@
       "name": "Login",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4483,7 +4652,6 @@
       "name": "Email verification",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "known-differences",
@@ -4508,7 +4676,6 @@
       "name": "Account recovery",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
@@ -4532,7 +4699,6 @@
       "name": "Change password",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4554,7 +4720,6 @@
       "name": "Character persistence",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4576,7 +4741,6 @@
       "name": "Character slots",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4599,7 +4763,6 @@
       "name": "Character deletion",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4621,7 +4784,6 @@
       "name": "Server selection",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4645,7 +4807,6 @@
       "name": "Reconnect safely",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4664,16 +4825,26 @@
           {
             "id": "access:idle-disconnect",
             "name": "Idle warnings and disconnect lifecycle",
-            "status": "verify",
             "expected": "The recovered local client warns at ten/fifteen minutes and exits at twenty; a matching original server AFK policy is not established.",
-            "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress."
+            "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           },
           {
             "id": "access:world-loading-presentation",
             "name": "Destination loading and input release",
-            "status": "verify",
             "expected": "Destination loading must survive initialization, then fade and stop consuming input when play is ready.",
-            "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames."
+            "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -4683,7 +4854,6 @@
       "name": "Controls and display",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4702,23 +4872,38 @@
           {
             "id": "access:character-status-panel",
             "name": "HP/MP and six-stat readout",
-            "status": "verify",
             "expected": "Live vitals, effective maxima, signed modifiers, cap colors and stat hover text must agree with selected rendering rules.",
-            "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI."
+            "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           },
           {
             "id": "access:minimap-player-menu",
             "name": "Overlapping minimap players and teleport",
-            "status": "verify",
             "expected": "Overlapping markers must resolve to a usable group/menu with eligible teleport choices.",
-            "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click."
+            "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           },
           {
             "id": "access:keybinding-input-lifecycle",
             "name": "Bindings, tab reset and released input",
-            "status": "verify",
             "expected": "Duplicate bindings, local persistence, tab-scoped reset, chat-focus gating and deactivation release are separate from saved preferences.",
-            "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck."
+            "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck.",
+            "implementation": "present",
+            "historical": "unreviewed",
+            "differences": [],
+            "unknowns": [],
+            "sources": [],
+            "group": "behavior"
           }
         ]
       }
@@ -4728,7 +4913,6 @@
       "name": "Sound and music",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -4751,7 +4935,6 @@
       "name": "Player art gallery",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4773,7 +4956,6 @@
       "name": "Player art editor",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4795,7 +4977,6 @@
       "name": "Quiet",
       "category": "conditions",
       "icon": "assets/player/condition-quiet.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4821,7 +5002,6 @@
       "name": "Weak",
       "category": "conditions",
       "icon": "assets/player/condition-weak.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4843,7 +5023,6 @@
       "name": "Slowed",
       "category": "conditions",
       "icon": "assets/player/condition-slowed.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4865,7 +5044,6 @@
       "name": "Sick",
       "category": "conditions",
       "icon": "assets/player/condition-sick.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4887,7 +5065,6 @@
       "name": "Dazed",
       "category": "conditions",
       "icon": "assets/player/condition-dazed.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4909,7 +5086,6 @@
       "name": "Stunned",
       "category": "conditions",
       "icon": "assets/player/condition-stunned.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4931,7 +5107,6 @@
       "name": "Blind",
       "category": "conditions",
       "icon": "assets/player/condition-blind.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4953,7 +5128,6 @@
       "name": "Hallucinating",
       "category": "conditions",
       "icon": "assets/player/condition-hallucinating.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -4975,7 +5149,6 @@
       "name": "Drunk",
       "category": "conditions",
       "icon": "assets/player/condition-drunk.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5001,7 +5174,6 @@
       "name": "Confused",
       "category": "conditions",
       "icon": "assets/player/condition-confused.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5023,7 +5195,6 @@
       "name": "Stun immunity",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5045,7 +5216,6 @@
       "name": "Invisible",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5071,7 +5241,6 @@
       "name": "Paralyzed",
       "category": "conditions",
       "icon": "assets/player/condition-paralyzed.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5094,7 +5263,6 @@
       "name": "Speedy",
       "category": "conditions",
       "icon": "assets/player/condition-speedy.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5116,7 +5284,6 @@
       "name": "Bleeding",
       "category": "conditions",
       "icon": "assets/player/condition-bleeding.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5143,7 +5310,6 @@
       "name": "Healing",
       "category": "conditions",
       "icon": "assets/player/condition-healing.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5170,7 +5336,6 @@
       "name": "Damaging",
       "category": "conditions",
       "icon": "assets/player/condition-damaging.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5192,7 +5357,6 @@
       "name": "Berserk",
       "category": "conditions",
       "icon": "assets/player/condition-berserk.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5214,7 +5378,6 @@
       "name": "Paused",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5237,7 +5400,6 @@
       "name": "Stasis",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5259,7 +5421,6 @@
       "name": "Stasis immunity",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5285,7 +5446,6 @@
       "name": "Invincible",
       "category": "conditions",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "known-differences",
@@ -5309,7 +5469,6 @@
       "name": "Invulnerable",
       "category": "conditions",
       "icon": "assets/player/condition-invulnerable.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5332,7 +5491,6 @@
       "name": "Armored",
       "category": "conditions",
       "icon": "assets/player/condition-armored.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5354,7 +5512,6 @@
       "name": "Armor broken",
       "category": "conditions",
       "icon": "assets/player/condition-armor-broken.png",
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5376,7 +5533,6 @@
       "name": "Hexed",
       "category": "conditions",
       "icon": "assets/player/condition-hexed.png",
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5404,7 +5560,6 @@
       "name": "Guild Fame economy",
       "category": "social",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5431,7 +5586,6 @@
       "name": "Character news and Fame links",
       "category": "access",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5453,7 +5607,6 @@
       "name": "Sumo family",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "missing",
         "historical": "known-differences",
@@ -5481,7 +5634,6 @@
       "name": "Construct trio",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "present",
         "historical": "partial",
@@ -5507,7 +5659,6 @@
       "name": "Blobs",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5535,7 +5686,6 @@
       "name": "Green slimes",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5567,7 +5717,6 @@
       "name": "Red spiders",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5595,7 +5744,6 @@
       "name": "Black bats",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5623,7 +5771,6 @@
       "name": "Sand Devils",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5645,7 +5792,6 @@
       "name": "Enraged Bunny",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5667,7 +5813,6 @@
       "name": "Forest Nymph",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5689,7 +5834,6 @@
       "name": "Flamer family",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5715,7 +5859,6 @@
       "name": "Urgle encounter",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5742,7 +5885,6 @@
       "name": "White Dragons and Dragon Eggs",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",
@@ -5770,7 +5912,6 @@
       "name": "Minotaurs",
       "category": "realm",
       "icon": null,
-      "stage": 0,
       "audit": {
         "implementation": "partial",
         "historical": "partial",

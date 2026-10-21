@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
-import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
+import { validateEvidence, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 import { validateCatalogue as validateJulyCatalogue } from '../public/restoration/2010/catalogue.js';
 import { validateRoadmap } from '../public/restoration/2010/roadmap.js';
 import { clientRelease, localClientRelease } from './client-release.mjs';
@@ -11,7 +11,8 @@ import {socialMetadata} from './social.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const progress = JSON.parse(await readFile(join(root, 'public/restoration/progress.json'), 'utf8'));
-const restoration = validateCatalogue(progress);
+const evidence = JSON.parse(await readFile(join(root, 'public/restoration/evidence.json'), 'utf8'));
+validateEvidence(progress, evidence);
 const july = JSON.parse(await readFile(join(root, 'public/restoration/2010/catalogue.json'), 'utf8'));
 validateRoadmap(july, validateJulyCatalogue(july));
 for (const icon of new Set([...progress.categories, ...progress.features].map(row => row.icon).filter(icon => icon !== null))) {
@@ -64,7 +65,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{RESTORATION_PERCENT}}', restoration.percent).replaceAll('{{RESTORATION_WORK}}', restoration.work);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, socialMetadata(html, site.href + socialImage));
     }

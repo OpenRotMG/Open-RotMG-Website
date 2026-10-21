@@ -4,7 +4,7 @@ Game-first website for the Open RotMG recreation of Realm of the Mad God.
 
 Developing the server? Its `./run.sh` downloads the client and serves the whole game locally. See https://github.com/OpenRotMG/Open-RotMG-Server for setup.
 
-Before researching a feature's era, check the [historical feature ledger](docs/historical-features.md). Restoration evidence and gate assignments live in `public/restoration/progress.json`.
+Before researching a feature's era, check the [historical feature ledger](docs/historical-features.md). Restoration requirements: `public/restoration/progress.json`; acceptance ledger: `public/restoration/evidence.json`. PR comments identify affected IDs and revision-bound evidence. Source inspection or merging is not acceptance.
 
 ## Build locally
 

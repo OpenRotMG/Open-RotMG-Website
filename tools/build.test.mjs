@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
-import { validateCatalogue, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
+import { validateEvidence, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
 const browserTab = 'a'.repeat(64);
 const browserGlobals = {fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}};
@@ -90,7 +90,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
-  const restoration = validateCatalogue(progress);
+  const evidence = JSON.parse(readFileSync(new URL('../dist/restoration/evidence.json', import.meta.url), 'utf8'));
+  const requirements = validateEvidence(progress, evidence);
   assert.doesNotMatch(footerNav, />Gold<|>Updates<|>Restoration<|>Branding</);
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
@@ -180,11 +181,12 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.forum-list/);
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
-  assert.equal(progress.features.length, restoration.n);
-  assert.ok(restorationPage.includes(`${restoration.work}</span> feature groups with open work`));
-  assert.ok(restorationPage.includes(`Historical evidence score: <span id="overall">${restoration.percent}</span>`));
-  assert.doesNotMatch(restorationPage, /<\/span> complete/);
-  assert.match(restorationPage, /<option value="work">Implementation or verification work<\/option>/);
+  assert.equal(progress.features.length, 211);
+  assert.equal(requirements.length, 281);
+  assert.match(restorationPage, /id="roadmap"/);
+  assert.match(restorationPage, /id="search"/);
+  assert.doesNotMatch(restorationPage, /Historical evidence score|RESTORATION_PERCENT|RESTORATION_WORK/);
+  assert.deepEqual(readFileSync(new URL('../dist/restoration/evidence.json', import.meta.url)), readFileSync(new URL('../public/restoration/evidence.json', import.meta.url)));
   const originalClient = readFileSync(new URL(`../dist/restoration/${referenceClient}`, import.meta.url));
   assert.equal(createHash('sha256').update(originalClient).digest('hex'), referenceSha256);
   assert.equal(existsSync(new URL('../dist/restoration/proof.html', import.meta.url)), false);
