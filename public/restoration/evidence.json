@@ -295,6 +295,39 @@
         "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle",
         "dungeons:davy-jones-s-locker:ship-trash-and-objects"
       ]
+    },
+    "udl-dressing-source-47c7543": {
+      "kind": "source",
+      "revision": "47c75436a56759fbc07eb67598b311e3cc5cd01b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/47c75436a56759fbc07eb67598b311e3cc5cd01b/src/dungeon/undead.rs",
+      "method": "Four guarded endpoint candles use selected nonblocking Big/Small Candle definitions at both established centers. Existing rare Grey Quad accents become selected nonhazardous Grey Bloody ground without changing RNG draws, room geometry, families or populations.",
+      "limitations": "Build 122 establishes endpoint candles and blood presence, not original models, count, offsets or density. The four-candle layout and inherited 1-in-32 accent frequency are explicit reconstruction.",
+      "checks": [
+        "dungeons:undead-lair:entrance-end-dressing"
+      ]
+    },
+    "udl-dressing-regression-47c7543": {
+      "kind": "regression",
+      "revision": "47c75436a56759fbc07eb67598b311e3cc5cd01b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/292#issuecomment-6319827504",
+      "method": "Real RED 2 failures, GREEN 2 regressions across 48 seeds; 180 integrated Rust, 154 Python and 62 JavaScript tests, formatter, strict Clippy and release/package contracts pass. Parent compares complete ground/object/region projections: only four added candles and 6-to-0xd4 accents differ; dimensions, spawn and boss stay identical.",
+      "limitations": "Seed comparison projects ground/object/region; unchanged remaining cell fields are a source-inspection claim, not serialized fingerprint coverage. These checks do not recover original-server geometry or floor probability.",
+      "checks": [
+        "dungeons:undead-lair:entrance-end-dressing"
+      ]
+    },
+    "udl-dressing-native-47c7543": {
+      "kind": "native",
+      "revision": "47c75436a56759fbc07eb67598b311e3cc5cd01b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/292#issuecomment-6319827504",
+      "method": "Clean d283e22 native entry/boss baselines lack endpoint candles. Clean 47c7543 entry/boss server views identify both selected candles and blood; living, condition-unpaused native positions occupy both candle squares in active-world samples, with 24/25 entry and 21/24 boss hits. Retained, packaged and runtime executable hashes match.",
+      "limitations": "Separately generated prepared maps use a privileged geometry oracle, selected gear and SPD 1. Three ordinary 2500-ms movement actions are segmented by normal QA clock pauses; paused samples do not count. Boss traversal consumes three prepared Greater Health Potions. This is not earned, normal-speed, uninterrupted or whole-dungeon acceptance. Passed cases did not exercise the Confused-input branch. Server views are not independently decoded packets; traversal and same-executable original images corroborate rendering. The initial 47 boss loading still is not appearance evidence. Failed attempts, a real earlier death and a failed optional render-environment observer remain preserved.",
+      "checks": [
+        "dungeons:undead-lair:entrance-end-dressing"
+      ]
     }
   },
   "results": {
@@ -439,7 +472,14 @@
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":[]},
     "dungeons:undead-lair": {"status":"not-run","evidence":[]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {"status":"not-run","evidence":[]},
-    "dungeons:undead-lair:entrance-end-dressing": {"status":"not-run","evidence":[]},
+    "dungeons:undead-lair:entrance-end-dressing": {
+      "status": "passed",
+      "evidence": [
+        "udl-dressing-source-47c7543",
+        "udl-dressing-regression-47c7543",
+        "udl-dressing-native-47c7543"
+      ]
+    },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":[]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":[]},
     "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":[]},
