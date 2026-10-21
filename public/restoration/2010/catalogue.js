@@ -2,6 +2,8 @@ export const target = 'july-2010-build100';
 export const originalSha256 = 'ec031064b61d22e860de802ae1967ef1bb193b2c35d297ca1d25b1a96f76684e';
 export const repairedSha256 = '68b9220aeee798db883db7c336fd0f09e3b12a8f9856b65a013379b00cfe6bfd';
 export const implementationPin = '128bd1de03aaace23381b8705488494490e9061f';
+// Keep the audit frozen while reviewed increments receive independent citations.
+const implementationPins = new Set([implementationPin, '95dfd8cdfbb6de907d758c4c72073b338a6135c3']);
 export const inventorySignature = '590876b4';
 export const implementationLabels = {present: 'Present in source', partial: 'Partial in source', missing: 'Missing in source', 'not-inspected': 'Not inspected'};
 export const historicalLabels = {unresolved: 'Unresolved history', verified: 'Historically accepted', differences: 'Known differences'};
@@ -39,7 +41,7 @@ export function validateSource(source, id) {
   require(!own || source.kind === 'implementation' || originalArtifact || source.kind === 'reconstruction', `Project code is not history: ${id}`);
   if (source.kind === 'implementation') {
     require(['source', 'test', 'native'].includes(source.mode), `Missing implementation evidence mode: ${id}`);
-    require(url.hostname === 'github.com' && parts[1] === 'dginovker' && parts[2] === 'Open-RotMG-Server' && parts[3] === 'blob' && parts[4] === implementationPin && url.pathname.includes('/src/build100/'), `Wrong implementation pin/path: ${id}`);
+    require(url.hostname === 'github.com' && parts[1] === 'dginovker' && parts[2] === 'Open-RotMG-Server' && parts[3] === 'blob' && implementationPins.has(parts[4]) && url.pathname.includes('/src/build100/'), `Wrong implementation pin/path: ${id}`);
   } else require(!Object.hasOwn(source, 'mode'), `Historical source has implementation mode: ${id}`);
 }
 function validateRule(rule, data, id) {

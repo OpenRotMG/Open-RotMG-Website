@@ -183,10 +183,25 @@ test('source kinds, confidence, URL hygiene and code pins cannot manufacture his
   for (const url of ['javascript:alert(1)', 'file:///home/private', 'https://user:pass@example.test/', 'https://example.test/?token=secret', 'https://example.test/?guid=private', 'https://example.test/.local/receipt.json', 'https://github.com/example/repo/blob/main/code.rs']) {
     const source = {...baseline.sources.july, url}; assert.throws(() => validateSource(source, 'probe'), /source URL|code source/);
   }
-  for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources['impl-world'], kind, mode: undefined}, 'probe'), /not history/);
+  for (const ref of ['impl-world', 'impl-inventory-drop']) for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources[ref], kind, mode: undefined}, 'probe'), /not history/);
   assert.throws(() => validateSource({...baseline.sources.july, confidence: 'certain'}, 'probe'), /confidence/);
   assert.throws(() => validateSource({...baseline.sources['impl-world'], url: baseline.sources['impl-world'].url.replace('128bd1de03aaace23381b8705488494490e9061f', 'a'.repeat(40))}, 'probe'), /Wrong implementation pin/);
   for (const source of Object.values(baseline.sources)) validateSource(source, 'valid');
+});
+
+test('reviewed Drop19 evidence leaves the frozen audit and broad inventory acceptance intact', () => {
+  const d = catalogue(), leaf = baselineLeaves.find(row => row.id === 'system-inventory');
+  assert.equal(d.implementationPin, '128bd1de03aaace23381b8705488494490e9061f');
+  assert.equal(d.sources['impl-inventory-drop'].mode, 'native');
+  assert.match(d.sources['impl-inventory-drop'].url, /95dfd8cdfbb6de907d758c4c72073b338a6135c3/);
+  assert.equal(leaf.implementation, 'partial');
+  assert.equal(baselineLeaves.find(row => row.id === 'packet-19').expected, 'objectId i32, slotId u8, item type i16; exactly 7 body bytes.');
+  for (const variant of ['original', 'repaired']) {
+    assert.equal(leafState(d, leaf, variant).functional, 'not-run');
+    assert.equal(leafState(d, leaf, variant).historical, 'unresolved');
+  }
+  d.implementationPin = '95dfd8cdfbb6de907d758c4c72073b338a6135c3';
+  assert.throws(() => validateCatalogue(d), /implementation pin/);
 });
 
 test('one executed result never passes a template, sibling, or other variant', () => {
