@@ -183,7 +183,7 @@ test('source kinds, confidence, URL hygiene and code pins cannot manufacture his
   for (const url of ['javascript:alert(1)', 'file:///home/private', 'https://user:pass@example.test/', 'https://example.test/?token=secret', 'https://example.test/?guid=private', 'https://example.test/.local/receipt.json', 'https://github.com/example/repo/blob/main/code.rs']) {
     const source = {...baseline.sources.july, url}; assert.throws(() => validateSource(source, 'probe'), /source URL|code source/);
   }
-  for (const ref of ['impl-world', 'impl-inventory-drop', 'impl-player-teleport']) for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources[ref], kind, mode: undefined}, 'probe'), /not history/);
+  for (const ref of ['impl-world', 'impl-inventory-drop', 'impl-player-teleport', 'impl-priest-heals', 'impl-priest-starter-native']) for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...baseline.sources[ref], kind, mode: undefined}, 'probe'), /not history/);
   assert.throws(() => validateSource({...baseline.sources.july, confidence: 'certain'}, 'probe'), /confidence/);
   assert.throws(() => validateSource({...baseline.sources['impl-world'], url: baseline.sources['impl-world'].url.replace('128bd1de03aaace23381b8705488494490e9061f', 'a'.repeat(40))}, 'probe'), /Wrong implementation pin/);
   for (const source of Object.values(baseline.sources)) validateSource(source, 'valid');
@@ -223,6 +223,36 @@ test('reviewed teleport evidence preserves unresolved historical and full-game g
     assert.equal(leafState(d, leaf, variant).historical, 'unresolved');
     assert.equal(countChecks(d, baselineLeaves, variant).complete, false);
   }
+});
+
+test('ordinary Priest heals do not pass deferred compounds or unrelated class journeys', () => {
+  const d = catalogue();
+  assert.equal(d.sources['impl-priest-heals'].mode, 'test');
+  assert.equal(d.sources['impl-priest-starter-native'].mode, 'native');
+  assert.match(d.sources['impl-priest-heals'].url, /ff285b5e970a2cd9f71b71c68b388d41cf4b5203/);
+  for (const owner of ['0a31', '0a32', '0a33', '0a3f', '0a5b']) {
+    const leaf = baselineLeaves.find(row => row.id === 'object-' + owner + '-activation-0');
+    assert.equal(leaf.implementation, ['0a31', '0a32', '0a33'].includes(owner) ? 'present' : 'missing');
+    assert.equal(leaf.implementationSources.includes('impl-priest-starter-native'), owner === '0a31');
+    for (const variant of ['original', 'repaired']) {
+      assert.equal(leafState(d, leaf, variant).functional, 'not-run');
+      assert.equal(leafState(d, leaf, variant).historical, 'unresolved');
+    }
+  }
+  for (const leaf of baselineLeaves.filter(row => row.id.endsWith('-journey'))) {
+    assert.equal(leaf.implementation, 'partial');
+    assert.equal(leaf.implementationSources.includes('impl-priest-starter-native'), leaf.group === 'object-0310');
+  }
+});
+
+test('archived healing testimony stays approximate testing evidence, not server authority', () => {
+  const s = catalogue().sources['period-healing-20100807'];
+  assert.equal(s.kind, 'contemporary-testing');
+  assert.equal(s.confidence, 'medium');
+  assert.equal(Object.hasOwn(s, 'mode'), false);
+  assert.match(s.url, /20100807092328id_.*943#comment-5639$/);
+  assert.match(s.qualification, /approximately 10 to 35 HP\/sec/);
+  assert.match(s.qualification, /exact Healing arithmetic remain unknown/);
 });
 
 test('one executed result never passes a template, sibling, or other variant', () => {
