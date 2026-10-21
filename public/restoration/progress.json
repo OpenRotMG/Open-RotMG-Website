@@ -2629,12 +2629,10 @@
       "category": "dungeons",
       "icon": "assets/player/arachna-the-spider-queen.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
-        "differences": [
-          "The generated boss arena has no dedicated pillar placement, despite the documented surrounding pillars."
-        ],
+        "differences": [],
         "unknowns": [
           "Original entrance/layout/rewards and Arachna phase geometry/timing.",
           "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
@@ -2654,12 +2652,19 @@
             "id": "dungeons:spider-den:egg-and-cover-environment",
             "name": "Aesthetic eggs, live sacs and boss pillars",
             "expected": "Keep decorative eggs distinct from live hatchable sacs and surround the boss arena with its documented pillars.",
-            "acceptance": "Check natural boss-room cover and ordinary egg collision/hatching behavior. The current generator has no dedicated boss-pillar placement.",
-            "implementation": "partial",
-            "historical": "unreviewed",
+            "acceptance": "Check natural boss-room cover and ordinary egg collision/hatching behavior.",
+            "implementation": "present",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original pillar model, count and placement. Current choices are a bounded reconstruction."
+            ],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+                "label": "Build 122.0.1 release notes: aesthetic eggs and boss pillars"
+              }
+            ],
             "group": "layout"
           }
         ]

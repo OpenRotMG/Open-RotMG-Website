@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "spider-pillars-regression-7019e28": {
+      "kind": "regression",
+      "revision": "7019e28b1d528e3611fa6b72f85c61858faa03dd",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/283#issuecomment-6311652231",
+      "method": "48 generated seeds preserve routes, boss, entrance and five live sacs. Real World-step tests exercise Grey Pillar projectile cover, including PassesCover controls. All 170 Rust tests, strict Clippy, formatting and the ordinary release package passed.",
+      "limitations": "Generation and cover checks only, not a complete egg-and-cover lifecycle test or historical sign-off.",
+      "checks": ["dungeons:spider-den:egg-and-cover-environment"]
+    },
+    "spider-pillars-native-7019e28": {
+      "kind": "native",
+      "revision": "7019e28b1d528e3611fa6b72f85c61858faa03dd",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/283#issuecomment-6311652231",
+      "method": "Four clean-revision native cases observed the pillars, blocked movement with a living detour, decorative-egg traversal and early Arachna-shot disappearance while an uncovered same-volley shot continued.",
+      "limitations": "Prepared local scenes with different population seeds, not earned entry or a full clear. Movement included combat conditions. Disappearance is not direct impact instrumentation. Live-sac lifecycle remains not-run; original pillar geometry is unresolved. PR images identify their earlier source revisions separately.",
+      "checks": ["dungeons:spider-den:egg-and-cover-environment"]
+    },
+    "spider-pillars-source-7019e28": {
+      "kind": "source",
+      "revision": "7019e28b1d528e3611fa6b72f85c61858faa03dd",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/7019e28b1d528e3611fa6b72f85c61858faa03dd/src/dungeon/spider.rs",
+      "method": "Four guarded Grey Pillars surround Arachna on Spider Dirt without additional RNG draws. Decorative egg props remain distinct from live sacs.",
+      "limitations": "Pillar model, count and offsets are reconstruction choices, not a recovered original map. Source inspection does not establish gameplay acceptance.",
+      "checks": ["dungeons:spider-den", "dungeons:spider-den:egg-and-cover-environment"]
+    },
     "davy-source-5ca33c3": {
       "kind": "source",
       "revision": "5ca33c3509a77c879a27c5489e312118f2f0d64b",
@@ -172,8 +199,8 @@
     "realm:sprite-god": {"status":"not-run","evidence":[]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":[]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
-    "dungeons:spider-den": {"status":"not-run","evidence":[]},
-    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":[]},
+    "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
+    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":[]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
