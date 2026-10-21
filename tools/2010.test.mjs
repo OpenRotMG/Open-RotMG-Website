@@ -37,7 +37,7 @@ test('2010 entry labels its limits and preserves an unchanged client download', 
   assert.match(html, /<body class="game-page">/);
   assert.match(html, /\{\{PROJECT_NAV\}\}/);
   assert.match(html, /href="original-client.swf" download/);
-  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/128bd1de03aaace23381b8705488494490e9061f">2010 source</a>'));
+  assert.ok(html.includes('href="https://github.com/dginovker/Open-RotMG-Server/tree/95dfd8cdfbb6de907d758c4c72073b338a6135c3">2010 source</a>'));
   assert.match(html, /src="vendor\/ruffle.js"/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.openrotmg\.org\/2010\/"/);
   assert.doesNotMatch(html, /\u2014|'unsafe-eval'|objects\.xml|grounds\.xml/);
