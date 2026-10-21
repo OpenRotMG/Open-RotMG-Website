@@ -1,6 +1,42 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "guest-registration-refusals-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6317293824",
+      "method": "A genuinely earned normal guest received native client-local invalid-TLD rejection with no account request, then a distinct client-accepted submission reached the server and was refused by email policy. Sanitized before/after identity, living character/items/revision/base/progress and zero credentials matched exactly.",
+      "limitations": "Client prepacket rejection is not backend proof; the separate server refusal is. This does not certify exhaustive password/Terms/duplicate-email/race/rate policy or historical authentication. Generated local test fields are redacted in published captures.",
+      "checks": [
+        "access:guest-accounts",
+        "access:registration"
+      ]
+    },
+    "guest-registration-conversion-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6317293824",
+      "method": "Actual native valid registration and automatic verify succeeded in place: account1/character1 and selected character data stayed identical while credentials changed0→1. The guest had earned ring2639, XP8, seven kills and quest1. Fresh independent review accepted this original continuity scope; owned resources closed.",
+      "limitations": "No copied/prepared state or direct-API-as-native substitute. Old guest-auth revocation is source/log-observed, not independently runtime-certified. Broader guest/registration and historical-policy acceptance remain unrecorded.",
+      "checks": [
+        "access:guest-accounts",
+        "access:registration"
+      ]
+    },
+    "registered-credential-login-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6317293824",
+      "method": "After closing the original browser, two entirely fresh same-origin profiles acquired different charless guests, then used the new credentials through native Sign In and visibly entered Tutorial as the original living Wizard with earned ring/XP8/quest1 preserved. Checkout-bound primary inputs and retained/executed server bytes matched; selected client9904a0b/runtime0.7.1-openrotmg.8.",
+      "limitations": "Both subsequent Nexus transfers FAILED with tick-ack backlog; those failures are retained, not world-success or a proven renderer/TMPDIR cause. Tutorial login is observed, not every-world reliability, external email/recovery/security, all classes or historical fidelity. Whole login umbrella stays not-run.",
+      "checks": [
+        "access:guest-accounts",
+        "access:login"
+      ]
+    },
     "paused-area-source-a886831": {
       "kind": "source",
       "revision": "a88683102733c22b33cc0b7adb5b9ae6076478b3",
@@ -435,9 +471,9 @@
     "social:guild-hall": {"status":"not-run","evidence":[]},
     "social:share-a-living-world": {"status":"not-run","evidence":[]},
     "access:client": {"status":"not-run","evidence":[]},
-    "access:guest-accounts": {"status":"not-run","evidence":["tutorial-continuity-native-96b2b3f"]},
-    "access:registration": {"status":"not-run","evidence":[]},
-    "access:login": {"status":"not-run","evidence":[]},
+    "access:guest-accounts": {"status":"not-run","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988"]},
+    "access:registration": {"status":"not-run","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
+    "access:login": {"status":"not-run","evidence":["registered-credential-login-native-eb85988"]},
     "access:email-verification": {"status":"not-run","evidence":[]},
     "access:account-recovery": {"status":"not-run","evidence":[]},
     "access:change-password": {"status":"not-run","evidence":[]},
