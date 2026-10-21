@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "trade-lifecycle-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319796833",
+      "method": "Two actual browser-driven Human participants opened reciprocal native trade through player menu/request popup. Equipped/Soulbound entries stayed disabled; insufficient space visibly refused Trade without mutation. Changed offers reset acceptance; cancellation closed both panels with exact owner/slot/revision state unchanged. Fresh prepared run passed10/10 assertions under unchanged runner bindings/leases/clocks/caps.",
+      "limitations": "Prepared setup is not earned acquisition or two physical operators. Disabled native UI is client policy, not a server-received invalid offer; separate direct-QA server refusals remain supplementary. Historical name/rank/distance/timeout/item/delay policies are not certified.",
+      "checks": ["social:trade-with-players"]
+    },
+    "trade-conservation-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319796833",
+      "method": "After A accepted and B changed its offer, B accepted alone: real ticks left inventories/revisions unchanged until A freshly reaccepted. Exactly one settlement advanced each revision once, conserved the duplicate-sensitive combined multiset and did not repeat. Native images, live state and final SQLite agreed. Own ROOT inputs/dep-info/executed bytes and replacement ORIGINAL-live patched SWF/JS/WASM were separately bound; fresh independent review found no issues.",
+      "limitations": "Original sessions lacked captured patched responses; bounded replacements supply their own live chain, not retrospective certification. Base SWF and later static re-serving are not the original response. Selected client9904a0b/runtime0.7.1-openrotmg.8 only, not exhaustive races/fault injection or historical fidelity.",
+      "checks": ["social:trade-with-players"]
+    },
+    "trade-durable-reconnect-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319796833",
+      "method": "Separate genuinely normal original Guest2/Guest3 profiles/accounts2/3/characters2/3 natively exchanged two owned Health Potions for a backpack spell. One new commit advanced revisions2/1→3/2 with exact multiset conservation. Both ordinary reload→Play→same Wizard selector→Play reconnects visibly retained nondefault items; live owner/slot/revision state and SQLite matched before/after reconnect and final close. Original gameplay server HTTP bodies matched during reconnect; owned resources closed.",
+      "limitations": "Same-profile guest durability, not prepared-actor reconnect or credential login. Public native-chat teleport used normal eligibility/cooldown, not dev mutation. Earlier separate A Nexus transfer FAILED ACK64 and stays retained; no all-world success or causal fix is implied. No source/harness/guard/security changes.",
+      "checks": ["social:trade-with-players"]
+    },
     "keybinding-conflict-persistence-reset-native-eb85988": {
       "kind": "native",
       "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
@@ -486,7 +513,7 @@
     "social:chat": {"status":"not-run","evidence":[]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
-    "social:trade-with-players": {"status":"not-run","evidence":[]},
+    "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "social:lock-players": {"status":"not-run","evidence":[]},
     "social:ignore-players": {"status":"not-run","evidence":[]},
     "social:teleport-to-players": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f"]},
