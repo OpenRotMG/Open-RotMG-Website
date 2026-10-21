@@ -1115,12 +1115,19 @@
             "id": "realm:area-damage-feedback",
             "name": "AOE boundaries, protection and feedback",
             "expected": "AOE radius, effects, protection and a single authoritative HP result need checks apart from ordinary projectiles.",
-            "acceptance": "Test just inside, exactly on and outside the radius with Paused/Invincible/defense/effects. Check feedback, attribution and ACK duplication/loss; source-only Pause/effect risks are not claimed reproduced failures.",
+            "acceptance": "Test just inside, exactly on and outside the radius with Paused/Invincible/defense/effects. Check feedback, attribution and ACK duplication/loss.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original server protection and acknowledgement timing policy; complete area-effect and ACK duplication/loss coverage."
+            ],
+            "sources": [
+              {
+                "url": "reference-data/client-123.5.1.swf",
+                "label": "Original 123.5.1 client (SWF reference data)"
+              }
+            ],
             "group": "behavior"
           }
         ]

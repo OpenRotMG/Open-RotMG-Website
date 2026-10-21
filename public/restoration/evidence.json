@@ -37,6 +37,42 @@
         "access:login"
       ]
     },
+    "paused-area-source-a886831": {
+      "kind": "source",
+      "revision": "a88683102733c22b33cc0b7adb5b9ae6076478b3",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/a88683102733c22b33cc0b7adb5b9ae6076478b3/src/world/mechanics.rs",
+      "method": "Paused recipients are skipped after AOE visual dispatch and before HP/death mutation, including at delayed grenade impact. The recovered 123.5.1 client similarly displays the hazard before its Paused/Invincible return.",
+      "limitations": "Selected client behavior supports protection, not recovered original-server authority or timing. A later Trapped implementation is a comparator, not independent original-server proof.",
+      "checks": [
+        "realm:area-damage-feedback",
+        "condition:21"
+      ]
+    },
+    "paused-area-regression-a886831": {
+      "kind": "regression",
+      "revision": "a88683102733c22b33cc0b7adb5b9ae6076478b3",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/289#issuecomment-6317820590",
+      "method": "Three focused regressions, the existing firecracker control and all 178 Rust tests passed after genuine paused-player RED failures. Covers strict radius, visual preservation, pause/unpause during a real grenade fuse, defense/protection and once-only lethal attribution/finalization. Formatting, warning-denied Clippy, release and complete package checks passed.",
+      "limitations": "Exact fuse/radius/damage boundaries come from deterministic tests. Full area effects, feedback attribution and ACK duplication/loss remain separately unverified.",
+      "checks": [
+        "realm:area-damage-feedback",
+        "condition:21"
+      ]
+    },
+    "paused-area-native-a886831": {
+      "kind": "native",
+      "revision": "a88683102733c22b33cc0b7adb5b9ae6076478b3",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/289#issuecomment-6317820590",
+      "method": "Clean base eb85988: paused native HP fell 840→816 from three direct artifact hits of 8 and 840→762 from a delayed grenade hit of 78. Clean a886831: both native characters stayed at 840 HP, Paused21 and alive while explicit active controls received the same source damage. Native diagnostics, retained ELF and package hashes match.",
+      "limitations": "Prepared natural encounters: one real native Human plus a separately identified scripted/direct positive control, not two-native or earned-progression acceptance. Controls later died; their survival or AoE-caused death is not claimed. Raw state/events establish numeric HP; grey screenshots alone do not. No peak-circle, original encounter timing or complete ACK/effect acceptance is implied.",
+      "checks": [
+        "realm:area-damage-feedback",
+        "condition:21"
+      ]
+    },
     "tutorial-prompts-native-96b2b3f": {
       "kind": "native",
       "revision": "96b2b3f962c7a481f3abe9a58e64ecc7ed809871",
@@ -267,7 +303,14 @@
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":[]},
     "access:combat-status-feedback": {"status":"not-run","evidence":[]},
-    "realm:area-damage-feedback": {"status":"not-run","evidence":[]},
+    "realm:area-damage-feedback": {
+      "status": "not-run",
+      "evidence": [
+        "paused-area-source-a886831",
+        "paused-area-regression-a886831",
+        "paused-area-native-a886831"
+      ]
+    },
     "realm:environmental-hazards": {"status":"not-run","evidence":[]},
     "realm:travel-between-worlds": {"status":"not-run","evidence":[]},
     "realm:ent-ancient": {"status":"not-run","evidence":[]},
@@ -466,7 +509,14 @@
     "condition:18": {"status":"not-run","evidence":[]},
     "condition:19": {"status":"not-run","evidence":[]},
     "condition:20": {"status":"not-run","evidence":[]},
-    "condition:21": {"status":"not-run","evidence":[]},
+    "condition:21": {
+      "status": "not-run",
+      "evidence": [
+        "paused-area-source-a886831",
+        "paused-area-regression-a886831",
+        "paused-area-native-a886831"
+      ]
+    },
     "condition:22": {"status":"not-run","evidence":[]},
     "condition:23": {"status":"not-run","evidence":[]},
     "condition:24": {"status":"not-run","evidence":[]},
