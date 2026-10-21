@@ -15,7 +15,7 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert.equal(rows.filter(r=>r.id.startsWith('realm:map-world-')).length,13);
   assert.equal(digest(data.features.map(f=>f.id)),'d4590c87ab5751a89132a40ed16a37258b5f407ba70d9f5be84724a113b9fa3a');
   assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'27e5eec1f99db6d2e0c2a0846cbce7471def7dbf165f78679f58a53b33b59bed');
-  assert(rows.every(r=>evidence.results[r.id].status==='not-run'));
+  assert(data.features.every(f=>!accepted(f,evidence)));
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 

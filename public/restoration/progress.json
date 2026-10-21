@@ -1945,15 +1945,19 @@
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "Ghost Ship combat support exists, but normal Realm placement and item drops still need implementation."
+          "One finite startup lake now supports ordinary combat and a natural 50% Locker portal. Original overseer timing and full item-drop policy remain unverified."
         ],
         "unknowns": [
-          "Target phase choreography, initial skull eligibility, portal/reward policy and exact no-experience identity mapping."
+          "Original phase choreography, initial skull XP eligibility and item-drop allocation still need historical sign-off; the restored portal probability follows community references."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.4",
             "label": "Build 123.4.4 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
+            "label": "Historical Locker guide: shared colored keys and ordinary access"
           }
         ]
       }
@@ -3072,14 +3076,16 @@
       "category": "dungeons",
       "icon": "assets/player/davy-jones.png",
       "audit": {
-        "implementation": "missing",
-        "historical": "partial",
+        "implementation": "present",
+        "historical": "known-differences",
         "expected": "Davy Jones’s Locker includes entrance and key access, a traversable pirate dungeon, Davy, rewards and an exit. Original Ghost Ship access conditions, layout and encounter behavior remain unresolved.",
         "differences": [
-          "Playable Locker absent."
+          "The lost original maze generator is replaced by a connected 25-room reconstruction.",
+          "Encounter and drop tuning follows compared community references, not a certified original server build."
         ],
         "unknowns": [
-          "Ghost Ship portal condition/chance; map, phases, summons, reward allocation."
+          "Original map distribution, precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
+          "Full ordinary disconnect/reconnect and every whole-dungeon acceptance path still need separately scoped results."
         ],
         "sources": [
           {
@@ -3089,6 +3095,18 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
+            "label": "Historical Locker guide: shared colored keys and ordinary access"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.DavyJones.cs",
+            "label": "FSoD comparator: independent lantern clocks and five-second window"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=DSrzfLhuP4k",
+            "label": "2013 video static samples: asymmetric lamps, rug and Realm Portal label; not playback timing"
           }
         ],
         "checks": [
@@ -3097,11 +3115,22 @@
             "name": "Internal colored keys, doors and HUD",
             "expected": "Internal matching-color keys and doors are distinct from the admission key; exact original sequence needs evidence.",
             "acceptance": "Restore a solvable ordinary route, correct key HUD and shared door state. Test wrong-color actions, reconnect and two players without prescribing an unproven later-server order.",
-            "implementation": "missing",
-            "historical": "unreviewed",
+            "implementation": "present",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Shared discovery and late arrival were executed; a full ordinary disconnect/reconnect is not separately recorded."
+            ],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
+                "label": "Historical Locker guide: shared colored keys and ordinary access"
+              },
+              {
+                "url": "https://gaming.stackexchange.com/questions/92600/why-do-i-have-a-purple-key",
+                "label": "Period shared-key HUD discussion and original forum lead"
+              }
+            ],
             "group": "layout"
           },
           {
@@ -3109,11 +3138,24 @@
             "name": "Lantern-controlled vulnerability",
             "expected": "Lantern state changes and the boss damage window form their own encounter gate.",
             "acceptance": "Use naturally reachable lamps and verify valid state changes, boss window and reset/burst. Foreign lamps must not unlock the fight; exact historical counts and timing need corroboration.",
-            "implementation": "missing",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "present",
+            "historical": "known-differences",
+            "differences": [
+              "Five-second vulnerability and independent 5+10-second lamp clocks follow FSoD; Valor gives a conflicting 2.5-second window."
+            ],
+            "unknowns": [
+              "Original server timing has not been recovered."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.DavyJones.cs",
+                "label": "FSoD comparator: independent lantern clocks and five-second window"
+              },
+              {
+                "url": "https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.DavyJones.cs",
+                "label": "Valor comparator: conflicting 2.5-second window, not independent original evidence"
+              }
+            ],
             "group": "boss"
           },
           {
@@ -3121,11 +3163,20 @@
             "name": "Ship populations and destructibles",
             "expected": "Ship-room families, offspring and intended regeneration need ordinary traversal checks.",
             "acceptance": "Verify room roles, conditions, sack/offspring lifecycle and revisit behavior. Keep ship barrels distinct from Wine Barrels; source respawn and collision rules before fixing values.",
-            "implementation": "missing",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "partial",
+            "historical": "known-differences",
+            "differences": [
+              "Active selected crew, bounded ghost regrowth, Roger-owned Souls and armor cycles are implemented. Unproven Maggot/Sack content is not spawned."
+            ],
+            "unknowns": [
+              "Original sack presence, complete collision/destructible/revisit behavior and precise crew timing lack full historical sign-off."
+            ],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
+                "label": "Historical Locker guide: shared colored keys and ordinary access"
+              }
+            ],
             "group": "population"
           }
         ]
