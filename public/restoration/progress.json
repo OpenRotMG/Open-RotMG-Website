@@ -3705,12 +3705,19 @@
             "id": "gear:ability-activation-contract",
             "name": "Ability validation and cooldown continuity",
             "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
-            "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending. The source-observed swap discrepancy is not yet a reproduced gameplay failure.",
+            "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original server policy for starting a cooldown after a rejected cast, reconnect or world transfer. The recreation retains accepted-spend timing."
+            ],
+            "sources": [
+              {
+                "url": "reference-data/client-123.5.1.swf",
+                "label": "Original 123.5.1 client (SWF reference data)"
+              }
+            ],
             "group": "behavior"
           }
         ]

@@ -37,6 +37,33 @@
         "condition:13"
       ]
     },
+    "ability-deadline-source-22c9a7c": {
+      "kind": "source",
+      "revision": "22c9a7c80dae3385c01b042786152621f53e730f",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/22c9a7c80dae3385c01b042786152621f53e730f/src/world/abilities.rs",
+      "method": "The accepted activation stores one player-wide next-ready deadline; equipment swaps do not recalculate it. OwnCharacter exposes the same stored deadline. Checked addition precedes MP mutation.",
+      "limitations": "Source inspection does not certify all ability validation cases or authenticate original server rejection, reconnect or transfer policy.",
+      "checks": ["gear:ability-activation-contract"]
+    },
+    "ability-deadline-regression-22c9a7c": {
+      "kind": "regression",
+      "revision": "22c9a7c80dae3385c01b042786152621f53e730f",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/288#issuecomment-6315005594",
+      "method": "Four focused regressions passed within 175 Rust tests: committed swaps in both cooldown directions, exact boundary equality, same-item/view continuity and 12 pre-spend refusals preserving MP, deadline and effects.",
+      "limitations": "Direct-server tests, not native exact-millisecond proof. Empty/incompatible slot, genuinely blocked teleport and reconnect/transfer policy remain outside this added coverage; the whole activation contract stays not-run.",
+      "checks": ["gear:ability-activation-contract"]
+    },
+    "ability-deadline-native-22c9a7c": {
+      "kind": "native",
+      "revision": "22c9a7c80dae3385c01b042786152621f53e730f",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/288#issuecomment-6315005594",
+      "method": "Two clean-revision native cases preserve the accepted cast's deadline through committed swaps. Shadows to Planewalker spends 100MP after 5.4s and produces Invisible plus Teleport. The reverse case retains the 6.5s deadline, then actually spends 60MP after it expires. Native, retained and packaged binaries are byte-identical and tied to this checkout.",
+      "limitations": "Prepared gear, not earned acquisition. Early reverse refusal is client-local consistency, not a received server rejection or packet-capture proof. Exact-ms equality is tested directly, not inferred from native timing. Original rejection/reconnect/transfer policy and the full activation umbrella remain unaccepted. Failed stale-cache and timing attempts are excluded; PR before image is separately pinned to clean e7d09bc.",
+      "checks": ["gear:ability-activation-contract"]
+    },
     "spider-pillars-regression-7019e28": {
       "kind": "regression",
       "revision": "7019e28b1d528e3611fa6b72f85c61858faa03dd",
@@ -289,7 +316,7 @@
     "gear:loot-and-ownership": {"status":"not-run","evidence":[]},
     "gear:loot-bag-presentation": {"status":"not-run","evidence":[]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
-    "gear:ability-activation-contract": {"status":"not-run","evidence":[]},
+    "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
     "gear:magic-potions": {"status":"not-run","evidence":[]},
     "gear:stat-potions": {"status":"not-run","evidence":[]},
