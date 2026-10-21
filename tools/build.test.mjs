@@ -178,10 +178,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, restoration.n);
-  assert.ok(restorationPage.includes(`${restoration.work}</span> features missing or partial`));
+  assert.ok(restorationPage.includes(`${restoration.work}</span> feature groups with open work`));
   assert.ok(restorationPage.includes(`Historical evidence score: <span id="overall">${restoration.percent}</span>`));
   assert.doesNotMatch(restorationPage, /<\/span> complete/);
-  assert.match(restorationPage, /<option value="work">Missing or partial<\/option>/);
+  assert.match(restorationPage, /<option value="work">Implementation or verification work<\/option>/);
   const originalClient = readFileSync(new URL(`../dist/restoration/${referenceClient}`, import.meta.url));
   assert.equal(createHash('sha256').update(originalClient).digest('hex'), referenceSha256);
   assert.equal(existsSync(new URL('../dist/restoration/proof.html', import.meta.url)), false);
