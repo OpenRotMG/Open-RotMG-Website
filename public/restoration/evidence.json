@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "keybinding-conflict-persistence-reset-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319063661",
+      "method": "Normal native MoveUp D displaced MoveRight to Unset; Options K and actual movement mapping survived same-profile/origin reload. Current Hot Keys reset restored Options O while changed Chat filtering, Graphics shadows and Controls D/Unset survived; subsequent native actions confirmed the mappings.",
+      "limitations": "Selected client9904a0b/runtime0.7.1-openrotmg.8 only, not all preferences/platforms or historical fidelity. Own checkout-bound inputs/dep-info and retained/executed bytes matched. Broader Options acceptance is separate.",
+      "checks": ["access:keybinding-input-lifecycle"]
+    },
+    "text-options-input-release-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319063661",
+      "method": "Normal chat text focus gated previously working movement/fire/ability inputs. Actual Options opening/closing stopped held movement and physical mouse fire before testcase releases; fresh input moved again. A separate actual player-element focus-loss case also stopped input.",
+      "limitations": "Chat is the observed text field, not every form. Element focus loss was correctly rejected as browser-window proof; the separate window source supplies that missing event. Input journals/oracle effects, not screenshots or dispatch success alone, establish release.",
+      "checks": ["access:keybinding-input-lifecycle"]
+    },
+    "window-deactivation-input-release-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319063661",
+      "method": "On verified owned private Xvfb/Openbox, actual helper-window focus produced trusted window blur/document focus false while visible and activeElement RUFFLE-PLAYER. Held D/autofire had moved/fired; after drain, five samples kept position/shots56/projectiles0 while server time advanced359300→363300ms and the same socket exchanged61received/60sent frames. Manual releases followed completion. Fresh independent reviews accepted the full component; owned resources closed.",
+      "limitations": "Untrusted keyups were natural unchanged-wrapper behavior, not testcase fabrication; no host focus/input or synthetic blur. No physical-mouse-held window-blur variant, click-free reactivation, universal-platform or historical claim. Earlier incomplete probe/failures and627-file archive remain preserved. Separate labelled captures are not continuous footage.",
+      "checks": ["access:keybinding-input-lifecycle"]
+    },
     "guest-registration-refusals-native-eb85988": {
       "kind": "native",
       "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
@@ -487,7 +514,7 @@
     "access:controls-and-display": {"status":"not-run","evidence":[]},
     "access:character-status-panel": {"status":"not-run","evidence":[]},
     "access:minimap-player-menu": {"status":"not-run","evidence":[]},
-    "access:keybinding-input-lifecycle": {"status":"not-run","evidence":[]},
+    "access:keybinding-input-lifecycle": {"status":"passed","evidence":["keybinding-conflict-persistence-reset-native-eb85988","text-options-input-release-native-eb85988","window-deactivation-input-release-native-eb85988"]},
     "access:sound-and-music": {"status":"not-run","evidence":[]},
     "access:player-art-gallery": {"status":"not-run","evidence":[]},
     "access:player-art-editor": {"status":"not-run","evidence":[]},
