@@ -1,133 +1,86 @@
-import { test } from 'node:test';
+import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { validateCatalogue, validateSources, needsWork } from '../public/restoration/catalogue.js';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {validateCatalogue,validateEvidence,validateSources,records,matches,workCounts,accepted} from '../public/restoration/catalogue.js';
+const load=file=>JSON.parse(readFileSync(new URL('../public/restoration/'+file,import.meta.url),'utf8'));
+const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
+const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 
-const catalogue = () => JSON.parse(readFileSync(new URL('../public/restoration/progress.json', import.meta.url), 'utf8'));
+test('stable 211 parents and 70 components remain separate from evidence',()=>{
+  const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
+  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
+  assert.equal(new Set(rows.map(r=>r.id)).size,281);
+  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,70);
+  assert.equal(rows.filter(r=>r.id.startsWith('realm:map-world-')).length,13);
+  assert.equal(digest(data.features.map(f=>f.id)),'d4590c87ab5751a89132a40ed16a37258b5f407ba70d9f5be84724a113b9fa3a');
+  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'27e5eec1f99db6d2e0c2a0846cbce7471def7dbf165f78679f58a53b33b59bed');
+  assert(rows.every(r=>evidence.results[r.id].status==='not-run'));
+  assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
+});
 
-test('requested category icons are distinct original sprites', () => {
-  const data = catalogue(), icons = Object.fromEntries(data.categories.map(c => [c.id, c.icon]));
-  assert.notEqual(icons.heroes, icons.access);
-  assert.equal(icons.access, 'assets/player/client-and-accounts.png');
-  assert.equal(icons.conditions, data.features.find(f => f.name === 'Armor broken').icon);
-  assert.equal(icons.social, 'assets/player/chat.png');
-  for (const path of Object.values(icons)) {
-    const png = readFileSync(new URL(`../public/restoration/${path}`, import.meta.url));
-    assert.equal(png.subarray(1, 4).toString(), 'PNG');
-    assert.ok(png.readUInt32BE(16) > 0 && png.readUInt32BE(20) > 0);
+test('present features remain visible for gameplay and historical work',()=>{
+  const data=catalogue(),evidence=ledger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
+  assert.equal(matches(kage,evidence,'implementation'),false);
+  for(const view of ['work','verification','research','all'])assert.equal(matches(kage,evidence,view),true,view);
+  assert.equal(matches(kage,evidence,'accepted'),false);
+  const recovery=rows.find(r=>r.id==='access:account-recovery');assert.equal(matches(recovery,evidence,'differences'),true);
+  assert.equal(matches(rows.find(r=>r.id==='dungeons:wine-cellar:barrel-destruction'),evidence,'implementation','BARREL'),true);
+  assert.equal(matches(kage,evidence,'all','barrel'),false);
+  assert.throws(()=>matches(kage,evidence,'unknown'),/Unknown restoration view/);
+  assert.equal(workCounts(data.features,evidence).verification,211);
+});
+
+test('partial implementation, research and verification can all be outstanding',()=>{
+  const data=catalogue(),evidence=ledger(),row=records(data).find(r=>r.id==='dungeons:wine-cellar');
+  assert.equal(row.rule.implementation,'partial');
+  for(const view of ['implementation','verification','research','differences'])assert.equal(matches(row,evidence,view),true,view);
+  assert.match(row.rule.differences.join(' '),/no Wine Barrels.*persistent Slowed\/Sick trail/);
+  assert.equal(data.features.find(f=>f.id==='dungeons:wine-cellar').audit.checks.find(c=>c.id.endsWith('barrel-destruction')).group,'layout');
+});
+
+test('executed acceptance requires an exact ID, revision and test/native receipt',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:rogue';
+  evidence.results[id].status='passed';assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
+  evidence.sources.test={kind:'source',revision:'a'.repeat(40),date:'2026-10-21',method:'Read the handler',limitations:'No execution',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs'};
+  evidence.results[id].evidence=['test'];assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
+  evidence.sources.test.kind='regression';evidence.sources.test.method='Executed scenario and asserted the saved result';validateEvidence(data,evidence);
+  evidence.sources.test.checks=['heroes:wizard'];assert.throws(()=>validateEvidence(data,evidence),/Invalid result binding/);
+  evidence.sources.test.checks=[id];evidence.sources.test.revision='main';assert.throws(()=>validateEvidence(data,evidence),/Invalid execution evidence/);
+});
+
+test('missing and orphan results fail explicitly instead of assuming untested',()=>{
+  const data=catalogue(),evidence=ledger();delete evidence.results['heroes:rogue'];assert.throws(()=>validateEvidence(data,evidence),/Missing or orphan/);
+  evidence.results.unknown={status:'not-run',evidence:[]};assert.throws(()=>validateEvidence(data,evidence),/Missing or orphan/);
+});
+
+test('one component pass cannot accept its whole feature or historical rules',()=>{
+  const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
+  evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
+  evidence.results[id]={status:'passed',evidence:['test']};validateEvidence(data,evidence);
+  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'unreviewed');
+  for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
+  assert.equal(accepted(f,evidence),false);
+  evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];
+  for(const check of evidence.sources.test.checks)evidence.results[check]={status:'passed',evidence:['test']};
+  validateEvidence(data,evidence);assert.equal(accepted(f,evidence),true);
+  f.audit.checks[0].historical='known-differences';f.audit.checks[0].differences=['Deliberately substituted behavior'];
+  assert.equal(accepted(f,evidence),false);
+});
+
+test('bad grouping, duplicate IDs and unsupported historical acceptance are rejected',()=>{
+  for(const mutate of [c=>c.group='invented',c=>c.id='heroes:rogue',c=>c.acceptance='',c=>c.historical='verified']){
+    const data=catalogue();mutate(data.features.find(f=>f.audit.checks).audit.checks[0]);assert.throws(()=>validateCatalogue(data));
   }
+  const data=catalogue(),fs=data.features.filter(f=>f.audit.checks);fs[1].audit.checks[0].id=fs[0].audit.checks[0].id;assert.throws(()=>validateCatalogue(data),/Invalid component/);
 });
 
-test('merged restoration capabilities no longer claim to be unsupported', () => {
-  const data = catalogue();
-  for (const [id, implementation, stage] of [
-    ['gear:xp-booster', 'present', 1],
-    ['access:character-slots', 'present', 0],
-    ['access:change-password', 'present', 0],
-    ['home:choose-your-name', 'present', 0],
-    ['dungeons:forbidden-jungle', 'present', 0],
-    ['dungeons:manor-of-the-immortals', 'present', 0],
-    ['realm:great-coil-snake', 'present', 0],
-    ['realm:kage-kami', 'present', 0],
-    ['realm:find-your-next-quest', 'present', 0],
-    ['home:vault', 'present', 0],
-    ['access:player-art-gallery', 'present', 0],
-    ['access:player-art-editor', 'present', 0],
-    ...['swords', 'daggers', 'bows', 'wands', 'staves', 'leather-armor', 'heavy-armor', 'robes', 'rings'].map(name => ['gear:' + name, 'present', 0]),
-    ['social:chat', 'partial', 0],
-  ]) {
-    const feature = data.features.find(f => f.id === id);
-    assert.equal(feature.audit.implementation, implementation, id);
-    assert.equal(feature.audit.historical, 'partial', id);
-    assert.deepEqual(feature.audit.differences, [], id);
-    assert.equal(feature.stage, stage, id);
-    assert.ok(feature.audit.unknowns.length > 0, id);
-  }
+test('historical references cannot be implementation PRs or unpinned code',()=>{
+  for(const url of ['https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs','https://openrotmg.org/restoration/','https://github.com/trapped/rotmg_svr/blob/main/file.cs'])assert.throws(()=>validateSources([{url,label:'probe'}],'probe'));
 });
 
-test('worklist separates implementation gaps from historical uncertainty', () => {
-  const data = catalogue(), byId = id => data.features.find(f => f.id === id);
-  assert.equal(needsWork(byId('realm:kage-kami')), false);
-  assert.equal(needsWork(byId('dungeons:manor-of-the-immortals')), true);
-  const recovery = byId('access:account-recovery');
-  assert.equal(needsWork(recovery), false);
-  assert.equal(recovery.audit.historical, 'known-differences');
-  assert.match(recovery.audit.differences.join(' '), /intentionally replaces/);
-  for (const id of ['heroes:fame-bonuses', 'gear:seasonal-toys', 'dungeons:undead-lair', 'realm:wasp-queen', 'realm:great-lizard', 'realm:shambling-sludge']) {
-    const feature = byId(id);
-    assert.equal(feature.audit.implementation, 'partial', id);
-    assert.equal(needsWork(feature), true, id);
-    assert.ok(feature.audit.differences.length, id);
-  }
-  assert.match(byId('heroes:fame-bonuses').audit.differences.join(' '), /Only Well Equipped.*other named death bonuses/);
-  assert.match(byId('gear:seasonal-toys').audit.differences.join(' '), /Firecrackers work.*Sand Castle/);
-  assert.match(byId('dungeons:undead-lair').audit.differences.join(' '), /does not explicitly mark/);
-  assert.doesNotMatch(byId('access:server-selection').audit.differences.join(' '), /usage.*zero/i);
-  for (const id of ['dungeons:tomb-of-the-ancients', 'dungeons:davy-jones-s-locker', 'dungeons:mad-lab', 'dungeons:beachzone']) assert.equal(byId(id).audit.implementation, 'missing', id);
-  assert.equal(validateCatalogue(data).work, data.features.filter(needsWork).length);
-});
-
-test('component coverage preserves the scored inventory without awarding verification', () => {
-  const data = catalogue(), checks = data.features.flatMap(f => f.audit.checks ?? []);
-  assert.equal(data.features.length, 211);
-  assert.equal(checks.length, 70);
-  assert.equal(new Set(checks.map(c => c.id)).size, 70);
-  assert.deepEqual(Object.fromEntries(['missing', 'partial', 'verify', 'substituted', 'verified'].map(status => [status, checks.filter(c => c.status === status).length])), { missing: 22, partial: 17, verify: 30, substituted: 1, verified: 0 });
-  assert.equal(checks.filter(c => /^realm:map-world-\d+$/.test(c.id)).length, 13);
-  const { e, v, n, percent } = validateCatalogue(data);
-  assert.deepEqual({ e, v, n, percent }, { e: 3, v: 0, n: 211, percent: '0.7%' });
-  assert.ok(!checks.some(c => /barrel-activation-summons-and-loot-research|treasure-research|oryx-taunts/.test(c.id)));
-});
-
-test('deep audit keeps concrete environment and collision defects visible', () => {
-  const data = catalogue(), byId = id => data.features.find(f => f.id === id);
-  for (const id of ['condition:24', 'dungeons:spider-den', 'dungeons:sprite-world']) assert.equal(byId(id).audit.implementation, 'partial', id);
-  assert.match(byId('condition:24').audit.differences.join(' '), /hostile shots.*Invincible non-human/);
-  assert.match(byId('dungeons:spider-den').audit.differences.join(' '), /pillar/);
-  const cellar = byId('dungeons:wine-cellar');
-  assert.match(cellar.audit.differences.join(' '), /no Wine Barrels.*persistent Slowed\/Sick trail/);
-  assert.match(cellar.audit.unknowns.join(' '), /zero XP does not establish zero loot/);
-  assert.equal(cellar.audit.checks.find(c => /barrel-destruction$/.test(c.id)).status, 'missing');
-});
-
-test('component validation rejects malformed or colliding checks', () => {
-  for (const change of [c => { c.status = 'done'; }, c => { c.acceptance = ''; }, c => { c.id = 'realm:realm-generation'; }]) {
-    const data = catalogue(); change(data.features.find(f => f.audit.checks).audit.checks[0]);
-    assert.throws(() => validateCatalogue(data), /Invalid component check/);
-  }
-  const data = catalogue(), groups = data.features.filter(f => f.audit.checks);
-  groups[1].audit.checks[0].id = groups[0].audit.checks[0].id;
-  assert.throws(() => validateCatalogue(data), /Invalid component check/);
-});
-
-test('functional sign-off needs proof and does not promote historical credit', () => {
-  const data = catalogue(), manor = data.features.find(f => f.id === 'dungeons:manor-of-the-immortals');
-  manor.audit.checks[0].status = 'verified';
-  assert.throws(() => validateCatalogue(data), /Missing functional proof/);
-  for (const c of manor.audit.checks) { c.status = 'verified'; c.proof = 'Reviewed native actions and regression assertions'; }
-  assert.equal(needsWork(manor), false);
-  assert.equal(validateCatalogue(data).percent, '0.7%');
-  manor.stage = 2; manor.audit.historical = 'verified'; manor.audit.unknowns = []; manor.audit.checks[0].status = 'verify';
-  assert.throws(() => validateCatalogue(data), /Unverified components/);
-});
-
-test('current-runtime chat badge verification remains unresolved', () => {
-  const data = catalogue();
-  const chat = data.features.find(f => f.id === 'social:chat');
-  assert.ok(chat.audit.unknowns.some(question => /current launcher-pinned runtime.*chat-star badges/.test(question)));
-});
-
-test('restoration keeps historical references, not our implementation snapshots', () => {
-  const data = catalogue();
-  validateCatalogue(data);
-  assert.deepEqual(Object.keys(data.scope), ['target']);
-  for (const f of data.features) {
-    assert.equal(Object.hasOwn(f.audit, 'observed'), false);
-    assert.equal(Object.hasOwn(f.audit, 'verification'), false);
-  }
-  for (const url of [
-    'https://github.com/OpenRotMG/Open-RotMG-Server/blob/' + 'a'.repeat(40) + '/src/world.rs',
-    'https://github.com/dginovker/Open-RotMG-Server/blob/' + 'a'.repeat(40) + '/src/world.rs',
-    'https://openrotmg.org/restoration/proof.html',
-  ]) assert.throws(() => validateSources([{ url, label: 'Implementation' }], 'probe'), /not a historical source/);
+test('category and condition sprites stay original and distinct',()=>{
+  const data=catalogue(),icons=Object.fromEntries(data.categories.map(c=>[c.id,c.icon]));assert.notEqual(icons.heroes,icons.access);
+  assert.equal(icons.conditions,data.features.find(f=>f.name==='Armor broken').icon);
+  for(const path of Object.values(icons)){const bytes=readFileSync(new URL('../public/restoration/'+path,import.meta.url));assert.equal(bytes.subarray(1,4).toString(),'PNG');assert(bytes.readUInt32BE(16)>0&&bytes.readUInt32BE(20)>0);}
 });

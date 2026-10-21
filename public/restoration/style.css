@@ -46,7 +46,35 @@ dialog::backdrop { background: #000b; }
 .category-questions h3 { font-size: 12px; }
 .category-questions .citation { margin: 3px 0; }
 #error { border: 1px solid #b27070; padding: 10px; color: #d9a0a0; }
+.roadmap-2012 #roadmap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0 30px; }
+.roadmap-2012 .roadmap-area { border: 1px solid #363636; background: #171717; padding: 12px; font: 11px/1.7 Verdana, sans-serif; min-width: 0; }
+.roadmap-2012 .roadmap-area h3 { display: flex; align-items: center; gap: 9px; margin: 0 0 8px; font-size: 13px; color: #ddd9c8; }
+.roadmap-2012 .roadmap-area h3 .sprite { width: 28px; height: 30px; }
+.roadmap-2012 .roadmap-area h3 + p { color: #aaa99e; }
+.roadmap-2012 .roadmap-area section h3 { font-size: 11px; }
+.roadmap-2012 .roadmap-area ul { padding-left: 18px; }
+.roadmap-2012 .area-counts { color: #d9b477; }
+.roadmap-2012 .research-preview { margin: 10px 0; }
+.roadmap-2012 #filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; border: 1px solid #363636; padding: 12px; font-size: 11px; }
+.roadmap-2012 #filters label { display: grid; gap: 5px; }
+.roadmap-2012 #filters input, .roadmap-2012 #filters select, .roadmap-2012 #clear { font: 11px Verdana, sans-serif; background: #242420; color: #ddd9c8; border: 1px solid #626257; padding: 7px; max-width: 100%; }
+.roadmap-2012 #visible-count { font-size: 11px; }
+.roadmap-2012 .forum-list > li { grid-template-columns: minmax(0, 1fr) 175px; }
+.roadmap-2012 .component-group { margin: 9px 0 4px 14px; border: 1px solid #30302b; }
+.roadmap-2012 .component-group > summary { font: 11px/1.7 Verdana, sans-serif; padding: 5px 8px; background: #20201d; }
+.roadmap-2012 .component-group > .work-note { margin: 6px 8px; }
+.roadmap-2012 .check-list { padding: 0 8px; }
+.roadmap-2012 .check-list li { grid-template-columns: minmax(0, 1fr) 150px; }
+.roadmap-2012 #feature-status .audit-state { display: flex; gap: 12px; flex-wrap: wrap; text-align: left; }
+.roadmap-2012 .functional-passed { color: #acba92; }
+.roadmap-2012 .functional-failed { color: #cb8585; }
+.roadmap-2012 .roadmap-area, .roadmap-2012 .component-group, .roadmap-2012 .check-list { overflow-wrap: anywhere; }
 @media (max-width: 600px) {
+  .roadmap-2012 #roadmap { grid-template-columns: 1fr; }
+  .roadmap-2012 .forum-list > li, .roadmap-2012 .check-list li { grid-template-columns: 1fr; }
+  .roadmap-2012 .audit-state { text-align: left; display: flex; flex-wrap: wrap; gap: 3px 10px; }
+  .roadmap-2012 #filters label { width: 100%; }
+  .roadmap-2012 #filters input, .roadmap-2012 #filters select { width: 100%; }
   .category-links { font-size: 10px; }
   .feature { font-size: 11px; }
   .sprite { width: 19px; height: 22px; }
