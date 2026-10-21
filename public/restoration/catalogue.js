@@ -1,5 +1,7 @@
 export const implementationLabels = { present: 'Present', partial: 'Partial', missing: 'Missing' };
 export const historicalLabels = { verified: 'Verified', partial: 'Partially verified', 'known-differences': 'Known differences', unreviewed: 'Unreviewed' };
+export const checkLabels = { missing: 'Missing', partial: 'Partial', verify: 'Verify behavior', substituted: 'Intentional difference', verified: 'Functionally verified' };
+export const needsWork = f => f.audit.implementation !== 'present' || (f.audit.checks !== undefined && f.audit.checks.some(c => !['verified', 'substituted'].includes(c.status)));
 export const referenceClient = 'reference-data/client-123.5.1.swf';
 export const referenceSha256 = '07ae4fc3ca021a5bf08bbf94f057f7620be18b85e01abd763b3a198382e8fa48';
 export const percentage = rows => (100 * rows.reduce((sum, f) => sum + f.stage, 0) / (2 * rows.length)).toFixed(1).replace(/\.0$/, '') + '%';
@@ -49,16 +51,26 @@ export function validateCatalogue(data) {
     }
   }
   auditCounts(features);
+  const checkIds = new Set(features.map(f => f.id));
   for (const f of features) {
     if (!nonempty(f.name) || ![0, 1, 2].includes(f.stage) || !categories.some(c => c.id === f.category) || (f.icon !== null && typeof f.icon !== 'string')) throw new Error(`Invalid feature: ${f.id}`);
     const a = f.audit;
     if (['observed', 'verification'].some(key => Object.hasOwn(a, key))) throw new Error(`Implementation snapshots do not belong in the catalogue: ${f.id}`);
     if (!nonempty(a.expected) || !stringList(a.differences) || !stringList(a.unknowns)) throw new Error(`Incomplete rules: ${f.id}`);
     validateSources(a.sources, f.id);
+    if (a.checks !== undefined) {
+      if (!Array.isArray(a.checks) || !a.checks.length) throw new Error(`Invalid component checklist: ${f.id}`);
+      for (const c of a.checks) {
+        if (!c || ![c.id, c.name, c.expected, c.acceptance].every(nonempty) || !Object.hasOwn(checkLabels, c.status) || checkIds.has(c.id)) throw new Error(`Invalid component check: ${f.id}`);
+        if (c.status === 'verified' && !nonempty(c.proof)) throw new Error(`Missing functional proof: ${c.id}`);
+        checkIds.add(c.id);
+      }
+      if (f.stage === 2 && a.checks.some(c => c.status !== 'verified')) throw new Error(`Unverified components: ${f.id}`);
+    }
     if ((f.stage || a.historical !== 'unreviewed') && !a.sources.length) throw new Error(`Missing historical source: ${f.id}`);
     if ((a.historical === 'verified') !== (f.stage === 2) || (f.stage === 2 && (a.implementation !== 'present' || a.differences.length || a.unknowns.length))) throw new Error(`Unsupported verified verdict: ${f.id}`);
     if (a.historical === 'known-differences' && !a.differences.length) throw new Error(`Missing discrepancy: ${f.id}`);
   }
   const e = features.filter(f => f.stage >= 1).length, v = features.filter(f => f.stage === 2).length, n = features.length;
-  return { e, v, n, percent: percentage(features) };
+  return { e, v, n, work: features.filter(needsWork).length, percent: percentage(features) };
 }

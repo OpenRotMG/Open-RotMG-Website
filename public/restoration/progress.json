@@ -492,16 +492,40 @@
         "historical": "known-differences",
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
         "differences": [
-          "No named death bonuses are returned or credited; displayed base and total are identical regardless of recorded statistics."
+          "Only Well Equipped is awarded. The other named death bonuses still need implementation.",
+          "God kills, Oryx kills and level-up assists are still returned as zero in death statistics."
         ],
         "unknowns": [
-          "Full target bonus table, eligibility, ordering and rounding.",
-          "Production interpretation of individual aggregate counters."
+          "Original edge cases, counter eligibility and rounding must be checked when implementing the remaining bonuses."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607014226id_/http://forums.wildshadow.com/wiki/realm-mad-god/fame-bonuses",
+            "label": "June 2012 Fame Bonuses wiki: named bonuses and compounding order"
+          },
+          {
+            "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rotmg-fame-calculator/RotMG_Fame_Calculator.ods",
+            "label": "May 2012 community Fame calculator (ODS reference)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "heroes:lifetime-combat-statistics",
+            "name": "Lifetime counters and death statistics",
+            "status": "partial",
+            "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
+            "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters."
+          },
+          {
+            "id": "heroes:equipment-fame-bonus",
+            "name": "Well Equipped snapshot and payout",
+            "status": "verify",
+            "expected": "Only worn equipment contributes, with correct rounding, an immutable archived award and once-only payout.",
+            "acceptance": "Compare combined versus per-item rounding, carried items, last-moment swaps, retry/save failure and resurrection. When other bonuses are added, verify the running subtotal and ordering rather than assuming base-only interaction."
           }
         ]
       }
@@ -643,6 +667,208 @@
           {
             "url": "https://simblob.blogspot.com/2012/02/polygon-map-generation-faq.html",
             "label": "2012 map-generation notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20130522030032/https://forums.wildshadow.com/wiki/realm-mad-god/maps-builds-106-123",
+            "label": "Archived guide to thirteen numbered maps in builds 106–123; exact target continuity remains qualified"
+          }
+        ],
+        "checks": [
+          {
+            "id": "realm:map-world-01",
+            "name": "Classic World 1 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 1 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur."
+          },
+          {
+            "id": "realm:map-world-02",
+            "name": "Classic World 2 identity",
+            "status": "partial",
+            "expected": "Identify the documented Classic World 2 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks, safe-lava visuals and scenery substitutions."
+          },
+          {
+            "id": "realm:map-world-03",
+            "name": "Classic World 3 identity",
+            "status": "partial",
+            "expected": "Identify the documented Classic World 3 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions; a generated recipe is not recovered elevation data."
+          },
+          {
+            "id": "realm:map-world-04",
+            "name": "Classic World 4 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 4 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southern bay and northeastern inland water. The preserved image is 2000 pixels square, not evidence for rescaling game coordinates to 2048."
+          },
+          {
+            "id": "realm:map-world-05",
+            "name": "Classic World 5 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 5 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the deep eastern inlet and southern extensions; distinguish silhouette matching from a recovered river/biome variant."
+          },
+          {
+            "id": "realm:map-world-06",
+            "name": "Classic World 6 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 6 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southwestern bay, northeastern projection and bottom extent rather than filling or cropping the source to make construction pass."
+          },
+          {
+            "id": "realm:map-world-07",
+            "name": "Classic World 7 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 7 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the north lake, its river links, elongated southern body and mountain/snow supports."
+          },
+          {
+            "id": "realm:map-world-08",
+            "name": "Classic World 8 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 8 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Resolve the west-central lake/bay system, transparency and image extent. Red/magenta pixels do not by themselves establish damaging lava."
+          },
+          {
+            "id": "realm:map-world-09",
+            "name": "Classic World 9 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 9 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the narrow central/western links, northern lake, roads and terrain bands remain usable after object placement."
+          },
+          {
+            "id": "realm:map-world-10",
+            "name": "Classic World 10 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 10 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the star-like arms and investigate the eastern red/magenta patch before assigning ground damage or native scale."
+          },
+          {
+            "id": "realm:map-world-11",
+            "name": "Classic World 11 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 11 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the northern lake, southwest spur and snow/rock distribution separately from the first road."
+          },
+          {
+            "id": "realm:map-world-12",
+            "name": "Classic World 12 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 12 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Match all five lobes and lake/road joins. A generic blob/logo silhouette is not evidence for this world's interior organization."
+          },
+          {
+            "id": "realm:map-world-13",
+            "name": "Classic World 13 identity",
+            "status": "missing",
+            "expected": "Identify the documented Classic World 13 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
+            "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the paired north/south bodies and central connection. Do not label an approximate radial candidate a recovered original."
+          },
+          {
+            "id": "realm:map-registration",
+            "name": "Native map scale and registration",
+            "status": "partial",
+            "expected": "Preserve each source map's orientation, crop, coordinate scale and meaningful travel distances.",
+            "acceptance": "Register independent landmarks and routes at native scale. Do not assume every source image has the same dimensions or that padding proves original geography."
+          },
+          {
+            "id": "realm:biome-zones",
+            "name": "Biome and monster-zone mapping",
+            "status": "partial",
+            "expected": "Ground appearance and habitat tiers are separate map properties.",
+            "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds."
+          },
+          {
+            "id": "realm:water-network",
+            "name": "Coasts, lakes and rivers",
+            "status": "partial",
+            "expected": "Preserve shorelines, beach bands, lakes, river connections and the correct water identities.",
+            "acceptance": "Check connected components, widths, outlets and crossings, then walk representative supports. Do not infer depth or passability from blue pixels alone."
+          },
+          {
+            "id": "realm:road-network",
+            "name": "Road circuits and crossings",
+            "status": "partial",
+            "expected": "Road topology, widths and crossings must form usable routes at the intended scale.",
+            "acceptance": "Follow the first-road circuit and inland routes against source evidence. Verify crossing continuity and terrain speed on actual mapped roads."
+          },
+          {
+            "id": "realm:godlands-terrain",
+            "name": "Rocky and snowy Godlands",
+            "status": "partial",
+            "expected": "Verify Godlands geography, walkable combat space and regional ecology separately.",
+            "acceptance": "Compare rock/snow boundaries and disconnected components. Test routes from every arrival and population on both terrain types."
+          },
+          {
+            "id": "realm:setpiece-sites",
+            "name": "Setpiece placement and reachability",
+            "status": "partial",
+            "expected": "Place encounters on source-supported sites with usable approaches and meaningful terrain changes.",
+            "acceptance": "Check footprint, rotation, non-overlap, roads/water and reachable bosses/chests. Research fixed sites versus randomized buildings rather than choosing a comparator by default."
+          },
+          {
+            "id": "realm:minor-landmarks",
+            "name": "Minor ruins and buildings",
+            "status": "partial",
+            "expected": "Inventory ordinary ruins, forts, graveyards, oases and temples separately from boss AI.",
+            "acceptance": "Inspect each map before and after augmentation. Verify entrances, walls, cover and period-supported occupants/rewards; do not assume every comparator variant was deployed."
+          },
+          {
+            "id": "realm:scenery-placement",
+            "name": "Scenery palette, size and variation",
+            "status": "partial",
+            "expected": "Biome-associated trees, rocks, plants and other scenery must retain their intended variation and usable gaps.",
+            "acceptance": "Compare palette, density and size by region. Reopen the same layout to distinguish fixed geography from variable scenery; avoid treating source pixels as complete metadata."
+          },
+          {
+            "id": "realm:scenery-interactions",
+            "name": "Destructible and protective scenery",
+            "status": "partial",
+            "expected": "Ordinary and destructible scenery must preserve occupancy, sight, cover, size and ground-protection behavior.",
+            "acceptance": "Shoot mapped ordinary/destructible pairs with two observers. Check removal, shared collision updates, zero-XP behavior and protective floors, not only map colors."
+          },
+          {
+            "id": "realm:coastal-arrivals",
+            "name": "Every coastal arrival route",
+            "status": "verify",
+            "expected": "Repeated arrivals must preserve one shared Realm layout and provide safe, usable inward routes.",
+            "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters."
+          },
+          {
+            "id": "realm:population-ecology",
+            "name": "Regional encounter density and grouping",
+            "status": "partial",
+            "expected": "Species presence alone does not establish original encounter frequency or group composition.",
+            "acceptance": "Measure region areas, eligible sites, species/group/body distributions and route encounter spacing. Research original probabilities and group-versus-body accounting."
+          },
+          {
+            "id": "realm:population-recovery",
+            "name": "Recovery versus finite encounters",
+            "status": "verify",
+            "expected": "Ordinary repopulation, family reinforcement and finite closure encounters have distinct lifecycles.",
+            "acceptance": "Clear groups near and far from players and compare recovery. Check shared budgets, no spawn on players, and that finite heroes are not resurrected by ordinary refill."
+          },
+          {
+            "id": "realm:terrain-encounter-navigation",
+            "name": "Encounters across actual terrain",
+            "status": "verify",
+            "expected": "Walking and flying families must traverse their real habitat with identity-specific obstacle rules.",
+            "acceptance": "Lure enemies across roads and biome edges and around trees, walls and water. Check approach/retreat, stuck movement and unintended habitat fences."
+          },
+          {
+            "id": "realm:enemy-pursuit-and-collision",
+            "name": "Pursuit, target loss and obstacles",
+            "status": "verify",
+            "expected": "Acquisition, sight/stop distances, home/owner behavior and wall movement need per-family checks.",
+            "acceptance": "Exercise entry/exit from sight, invisible/paused/dead targets, corners, reacquisition and owner loss. Do not impose one universal historical radius."
+          },
+          {
+            "id": "realm:encounter-clock-semantics",
+            "name": "Encounter clocks and queued movement",
+            "status": "verify",
+            "expected": "Pursuit cooldowns, child completion, terminal bursts and suspended clocks must preserve their distinct semantics.",
+            "acceptance": "Trace reacquisition, dormancy, Stasis and Paralyzed. Check once-only bursts/rewards and invocation-relative timers rather than restarting from global encounter age."
           }
         ]
       }
@@ -654,12 +880,12 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Level-oriented quest selection and delayed client directional guidance, with completion/reselection distinct from XP and realm closure.",
         "differences": [],
         "unknowns": [
-          "Target ranking, completion/reselection timing and invocation."
+          "Original tie-breaking and evaluation cadence, and exact client/server completion and reselection timing."
         ],
         "sources": [
           {
@@ -681,12 +907,22 @@
         "expected": "Finite qualifying encounter lifecycle, announcements, sealed admission, eligible Castle transfer and replacement realm; exact target roster/countdowns remain qualified.",
         "differences": [],
         "unknowns": [
-          "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility."
+          "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
+          "Original ongoing encounter-count, spawn/death and entry taunts need period transcripts; copied comparator strings are not enough."
         ],
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/Oryx.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "realm:event-admission",
+            "name": "Progression-triggered event admission",
+            "status": "partial",
+            "expected": "Establish era-correct event admission, caps and completion independently of a fixed opening roster.",
+            "acceptance": "Trace hero defeat, event eligibility, site selection and completion without duplicate transformation/minion credit. Original trigger probabilities and repeatability remain research questions."
           }
         ]
       }
@@ -732,6 +968,22 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "access:combat-status-feedback",
+            "name": "Damage, condition names and icons",
+            "status": "verify",
+            "expected": "Particles, actual damage text, status names/icons and paused presentation must correspond to real state.",
+            "acceptance": "Apply and expire overlapping effects, hit ordinary/immune/dying targets and pause/unpause. Avoid invented icons and duplicated prediction feedback; selected Hexed icon gating needs care."
+          },
+          {
+            "id": "realm:area-damage-feedback",
+            "name": "AOE boundaries, protection and feedback",
+            "status": "verify",
+            "expected": "AOE radius, effects, protection and a single authoritative HP result need checks apart from ordinary projectiles.",
+            "acceptance": "Test just inside, exactly on and outside the radius with Paused/Invincible/defense/effects. Check feedback, attribution and ACK duplication/loss; source-only Pause/effect risks are not claimed reproduced failures."
           }
         ]
       }
@@ -877,7 +1129,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
-        "differences": [],
+        "differences": [
+          "Deathmage combat scripts exist, but a normal Realm spawn route and item drops are not configured."
+        ],
         "unknowns": [
           "Original graveyard or setpiece placement and ordinary Skeleton population.",
           "Deathmage’s relationship to the early Necromancer, population limits, closure eligibility and chest rewards.",
@@ -928,7 +1182,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, replenishment and movement roles; no transformation established. Target setpiece/chest and rewards remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Oasis Giant combat scripts exist, but a normal Realm spawn route and item drops are not configured."
+        ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
         ],
@@ -1020,17 +1276,19 @@
       "icon": "assets/player/great-lizard.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Roaming Great Lizard with pursuit/wander, aimed/spread attacks, ring phase and repositioning; no established children or transformation.",
-        "differences": [],
+        "differences": [
+          "The encounter runs, but its item-drop table is empty."
+        ],
         "unknowns": [
           "Original habitat density, attack timing, random choices, planewalk behavior and rewards."
         ],
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L687-L717",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -1042,18 +1300,20 @@
       "icon": "assets/player/wasp-queen.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Roaming Wasp Queen with Worker/Warrior births and replenishment, owned follower movement and separate role/reward identities; no transformation established.",
-        "differences": [],
+        "differences": [
+          "The family fights and spawns normally, but Warrior Wasp item drops are not configured."
+        ],
         "unknowns": [
           "Target habitat density, replenishment cadence, probabilities and rewards.",
           "Warrior loot must not be silently attributed to Queen."
         ],
         "sources": [
           {
-            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L208-L237",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L208-L250",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -1065,10 +1325,12 @@
       "icon": "assets/player/shambling-sludge.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
-        "differences": [],
+        "differences": [
+          "The family runs, but Shambling Sludge and Sludget item drops are not configured."
+        ],
         "unknowns": [
           "Original child counts, throw delays, health thresholds and drops.",
           "What happens to Sludgets when the parent dies or a landing location is blocked?"
@@ -1081,6 +1343,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -1342,12 +1608,12 @@
       "icon": "assets/player/great-coil-snake.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Level8 quest0xdc2,900 HP/16 DEF; Snake Shot50/speed65/lifetime16000ms and Ghost Shot40. Egg0xdc1→Temple Snake0xdc0 lifecycle belongs here; exact hatching/rings/placement/portal policy qualified.",
         "differences": [],
         "unknowns": [
-          "Target production access/placement, hatch timing/counts, rings, cloak interaction and Jungle portal policy. Preserve recovered16000ms lifetime despite later wiki range."
+          "Original temple placement/distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
         ],
         "sources": [
           {
@@ -1426,7 +1692,7 @@
         "historical": "known-differences",
         "expected": "Lord of the Lost Lands was introduced in build 121.0.0; build 122.0.1 fixed kill awards and increased health. The encounter includes activation, protection, combatants and rewards.",
         "differences": [
-          "Historically deployed encounter still lacks a normal Realm population path."
+          "Lord of the Lost Lands combat support exists, but normal Realm placement and item drops still need implementation."
         ],
         "unknowns": [
           "Original phase timings, health, spawning and reward probabilities."
@@ -1450,7 +1716,7 @@
         "historical": "known-differences",
         "expected": "At most one Sphinx per Realm, setting, combat and Horrid Reapers; Reapers disappear after boss death and are Stasis-susceptible at123.5.1.",
         "differences": [
-          "Normal playable Realm placement remains absent despite combat support."
+          "Grand Sphinx combat support exists, but normal Realm placement and item drops still need implementation."
         ],
         "unknowns": [
           "Original setting and selection, attack timing, loot and portals.",
@@ -1547,15 +1813,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Production Hermit encounter by122.0.1, with increased difficulty; coastal setting, tentacle vulnerability, associated combatants, completion/rewards and Trench access. Exact target cycle and portal policy remain qualified.",
+        "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
         "differences": [],
         "unknowns": [
-          "Target coastal topology, cycle/counts, difficulty values, portal probability and loot distribution."
+          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability and loot rates."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120429072116id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
+            "label": "April 2012 Hermit wiki: lake in mountain and forest terrain"
           }
         ]
       }
@@ -1571,7 +1841,7 @@
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "Historically deployed Ship battle still lacks normal Realm placement/admission."
+          "Ghost Ship combat support exists, but normal Realm placement and item drops still need implementation."
         ],
         "unknowns": [
           "Target phase choreography, initial skull eligibility, portal/reward policy and exact no-experience identity mapping."
@@ -1595,7 +1865,7 @@
         "historical": "known-differences",
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
-          "Normal Realm Crystal activation encounter remains unpopulated."
+          "Crystal activation and Prisoner combat support exists, but normal Realm placement and item drops still need implementation."
         ],
         "unknowns": [
           "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
@@ -1615,14 +1885,13 @@
       "icon": "assets/player/kage-kami.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
-        "historical": "known-differences",
-        "expected": "Production Realm quest by122.3.2; period testing describes grave destruction releasing Kage and possible Manor access. Final activation/combat/reward policy remains unresolved.",
-        "differences": [
-          "Production Kage Kami quest remains absent from normal playable Realm paths."
-        ],
+        "implementation": "present",
+        "historical": "partial",
+        "expected": "A disguised grave in a graveyard reveals Kage when damaged. The fight alternates human and protected flying forms, includes Specter Shots and Specter Mines, and can award a Manor entrance.",
+        "differences": [],
         "unknowns": [
-          "Final grave selection, combat variants, Manor probability, rewards and closure participation."
+          "Original graveyard distribution, reveal and combat timings, mine policy, Manor probability and rewards.",
+          "Whether Kage participated in target-era quest selection or Realm closure."
         ],
         "sources": [
           {
@@ -1632,6 +1901,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/test/build122.2.1",
             "label": "Build 122.2.1 test-server notes"
+          },
+          {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
           }
         ]
       }
@@ -2254,6 +2527,15 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:pirate-cave:officers-and-cave-roster",
+            "name": "Officers, fighters and passive fauna",
+            "status": "verify",
+            "expected": "Cave officer roles, pursuing fighters and passive fauna must appear through ordinary room traversal.",
+            "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance."
+          }
         ]
       }
     },
@@ -2264,10 +2546,12 @@
       "icon": "assets/player/arachna-the-spider-queen.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
-        "differences": [],
+        "differences": [
+          "The generated boss arena has no dedicated pillar placement, despite the documented surrounding pillars."
+        ],
         "unknowns": [
           "Original entrance/layout/rewards and Arachna phase geometry/timing.",
           "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
@@ -2276,6 +2560,19 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "Build 122.0.1 release notes: aesthetic eggs and boss pillars"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:spider-den:egg-and-cover-environment",
+            "name": "Aesthetic eggs, live sacs and boss pillars",
+            "status": "partial",
+            "expected": "Keep decorative eggs distinct from live hatchable sacs and surround the boss arena with its documented pillars.",
+            "acceptance": "Check natural boss-room cover and ordinary egg collision/hatching behavior. The current generator has no dedicated boss-pillar placement."
           }
         ]
       }
@@ -2300,6 +2597,15 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:snake-pit:diggable-route-and-cover",
+            "name": "Diggable tunnels, grates and cover",
+            "status": "verify",
+            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
+            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end."
+          }
         ]
       }
     },
@@ -2310,15 +2616,12 @@
       "icon": "assets/player/mixcoatl-the-masked-god.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
-        "expected": "Forbidden Jungle was introduced in production 122.0.1. Restore its adventure, entrance, environment, Mixcoatl/totem encounters and rewards; a Realm precursor alone is insufficient. Exact topology, phase coordination and reward policy remain qualified.",
-        "differences": [
-          "Forbidden Jungle adventure is unavailable through the checked dungeon admission/earned-portal paths."
-        ],
+        "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
+        "differences": [],
         "unknowns": [
-          "Mixcoatl/totem phase coordination, original topology and reward/portal policies.",
-          "Historical Trapped file covers precursor only, so it cannot close the dungeon contract."
+          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
         ],
         "sources": [
           {
@@ -2328,6 +2631,15 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:forbidden-jungle:foliage-and-tribal-rooms",
+            "name": "Foliage, tribes and owned Totems",
+            "status": "verify",
+            "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
+            "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup."
           }
         ]
       }
@@ -2339,10 +2651,12 @@
       "icon": "assets/player/limon-the-sprite-god.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
-        "differences": [],
+        "differences": [
+          "The painter provides one tiled floor motif; a non-tiled variant is not represented. Its exact target-era selection policy still needs corroboration."
+        ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
         ],
@@ -2350,6 +2664,19 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+            "label": "May 2012 Sprite World guide: floor variants, trees and native gods"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:sprite-world:floor-and-native-variants",
+            "name": "Floor variants, trees and native gods",
+            "status": "partial",
+            "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
+            "acceptance": "Exercise every push direction and stationary floor, tree destruction and documented variant seeds. The current painter does not provide a non-tiled variant; exact original probabilities remain unverified."
           }
         ]
       }
@@ -2361,13 +2688,14 @@
       "icon": "assets/player/septavius-the-ghost-god.png",
       "stage": 0,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entrance, connected undead dungeon, Septavius, rewards and completion/exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5.",
-        "differences": [],
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "differences": [
+          "The procedural generator adds candles to ordinary rooms and random walls, but does not explicitly mark the entrance and end with candles."
+        ],
         "unknowns": [
-          "Original projectile mapping, rotation and timing, minion/layout distribution and rewards.",
-          "Build 122’s candle markers at the entrance and exit, and blood-spattered floors."
+          "Original projectile rotation and timing, room/population distributions and reward rates."
         ],
         "sources": [
           {
@@ -2377,6 +2705,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:undead-lair:room-family-and-split-lifecycle",
+            "name": "Room families, slime splits and traps",
+            "status": "verify",
+            "expected": "Coherent room families and death/summon lifecycles need checks beyond defeating Septavius.",
+            "acceptance": "Verify black/brown slime replacements, reward exclusion on intermediate forms, single-use traps and owned escorts. Late joins must not restart the encounter."
+          },
+          {
+            "id": "dungeons:undead-lair:entrance-end-dressing",
+            "name": "Entrance/end candles and blood floors",
+            "status": "partial",
+            "expected": "Build 122 documents candles at spawn and end, with blood-spattered floors.",
+            "acceptance": "Check endpoint candle markers across seeds, selected blood appearance and collision. Random ordinary-room candles do not establish endpoint dressing."
           }
         ]
       }
@@ -2390,11 +2734,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Earned Abyss entrance, lava/bridges/demons, Malphas, treasure rooms, rewards and durable completion/exit; exact lost generation and controller policy qualified.",
+        "expected": "Earned Abyss entry, varied lava rooms, bridges and demons, Malphas, Idol treasure rooms, rewards and durable completion/exit. Build 122 documents bones along paths and a lava moat with two bridge rings around Malphas.",
         "differences": [],
         "unknowns": [
-          "Original layout and treasure-room distribution, controller behavior, Malphas phases and rewards.",
-          "Build 122’s bones, Malphas lava moat and two bridge rings."
+          "Original layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities."
         ],
         "sources": [
           {
@@ -2408,6 +2751,15 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:abyss-of-demons:idol-and-treasure-lifecycle",
+            "name": "Idol treasure-room control",
+            "status": "verify",
+            "expected": "Optional Idol rooms must control their own bridges and temporary lava without completing the main dungeon.",
+            "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify restored access to loot, independent rooms and no main clear from Idol defeat alone."
           }
         ]
       }
@@ -2438,6 +2790,36 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:tomb-of-the-ancients:sarcophagus-awakening",
+            "name": "Sarcophagus awakening gate",
+            "status": "missing",
+            "expected": "Restore the period-supported awakening predicate for dormant bosses; exact required roster needs corroboration.",
+            "acceptance": "Resolve required sarcophagi/priest/treasure participation first. Test the last required defeat, one-time awakening, reconnect and late join without guessing an activation threshold."
+          },
+          {
+            "id": "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand",
+            "name": "Trap switches, quicksand and cover",
+            "status": "missing",
+            "expected": "Local trap control and terrain hazards must be distinct from the boss encounter.",
+            "acceptance": "Verify interrupted switch activation, local rather than global disable, separate rooms/players and selected trap conditions. Exact timing remains source-qualified."
+          },
+          {
+            "id": "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion",
+            "name": "Optional treasure and three-boss finish",
+            "status": "missing",
+            "expected": "Optional treasure, individual boss rewards and the final group completion must remain separate.",
+            "acceptance": "Check optional rewards do not complete the dungeon, each eligible boss award occurs once, peer healing/artifact behavior is correct, and the earned exit waits for all required bosses."
+          },
+          {
+            "id": "dungeons:tomb-of-the-ancients:ordinary-encounters",
+            "name": "Ordinary Tomb passage families",
+            "status": "missing",
+            "expected": "Swarm, Jackal, Mummy, Scarab, Sentry and Archer traversal roles need a population-family suite.",
+            "acceptance": "Source the deployed roster and packs, then verify natural projectiles/conditions, bounded followers, leader loss, XP/loot and traversal without extra controller completion credit."
+          }
         ]
       }
     },
@@ -2464,6 +2846,22 @@
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:ocean-trench:oxygen-route-and-air-pockets",
+            "name": "Oxygen, vents and death air pocket",
+            "status": "verify",
+            "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
+            "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state."
+          },
+          {
+            "id": "dungeons:ocean-trench:wounded-thessal-response",
+            "name": "Wounded Thessal and response gifts",
+            "status": "verify",
+            "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
+            "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off."
+          }
         ]
       }
     },
@@ -2474,14 +2872,13 @@
       "icon": "assets/player/lord-ruthven.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
-        "expected": "Manor access, rooms, vampires/bats, Ruthven, rewards and exit; Ruthven bats give no EXP. Production entrance and detailed encounter policy unresolved.",
-        "differences": [
-          "Playable Manor absent."
-        ],
+        "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
+        "differences": [],
         "unknowns": [
-          "Production entrance chance; secret bookshelves/rooms; Ruthven lifesteal, phases and loot."
+          "Original layout and spawn distributions, attack schedules, throw and transformation timing, entrance chance and loot probabilities.",
+          "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
           {
@@ -2491,6 +2888,34 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
+          },
+          {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "May 2012 Manor wiki: enemies, treasure coffins and secret rooms"
+          },
+          {
+            "url": "https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven",
+            "label": "May 2012 Lord Ruthven wiki: transformations and life steal"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:manor-of-the-immortals:secret-shelves-and-coffins",
+            "name": "Secret shelves and real/false coffins",
+            "status": "verify",
+            "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
+            "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it."
+          },
+          {
+            "id": "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech",
+            "name": "Ruthven ownership and actual-hit life steal",
+            "status": "verify",
+            "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
+            "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified."
           }
         ]
       }
@@ -2520,6 +2945,29 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:davy-jones-s-locker:colored-key-door-chain",
+            "name": "Internal colored keys, doors and HUD",
+            "status": "missing",
+            "expected": "Internal matching-color keys and doors are distinct from the admission key; exact original sequence needs evidence.",
+            "acceptance": "Restore a solvable ordinary route, correct key HUD and shared door state. Test wrong-color actions, reconnect and two players without prescribing an unproven later-server order."
+          },
+          {
+            "id": "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle",
+            "name": "Lantern-controlled vulnerability",
+            "status": "missing",
+            "expected": "Lantern state changes and the boss damage window form their own encounter gate.",
+            "acceptance": "Use naturally reachable lamps and verify valid state changes, boss window and reset/burst. Foreign lamps must not unlock the fight; exact historical counts and timing need corroboration."
+          },
+          {
+            "id": "dungeons:davy-jones-s-locker:ship-trash-and-objects",
+            "name": "Ship populations and destructibles",
+            "status": "missing",
+            "expected": "Ship-room families, offspring and intended regeneration need ordinary traversal checks.",
+            "acceptance": "Verify room roles, conditions, sack/offspring lifecycle and revisit behavior. Keep ship barrels distinct from Wine Barrels; source respawn and collision rules before fixing values."
+          }
         ]
       }
     },
@@ -2547,6 +2995,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:mad-lab:ordinary-lab-and-gas",
+            "name": "Ordinary lab rooms, gas and cages",
+            "status": "missing",
+            "expected": "Ordinary cages, gas, turrets and robots are not replaced by a successful first-boss fight.",
+            "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility."
+          },
+          {
+            "id": "dungeons:mad-lab:coil-secret-and-pool-chain",
+            "name": "Coils, secret boss and transformation pools",
+            "status": "missing",
+            "expected": "Secret admission, melee-accessible coils, green transformation and blue cure need independent checks.",
+            "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing."
           }
         ]
       }
@@ -2602,6 +3066,22 @@
             "url": "https://wikiwiki.jp/rmd/version/build123.4.4",
             "label": "Build 123.4.4 release notes"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:oryx-s-castle:mandatory-route-and-armor",
+            "name": "Anti-rush traversal and armor rewards",
+            "status": "verify",
+            "expected": "Long bridges, the three-deep wall, Quiet towers and non-farmable respawning armor must work on the full route.",
+            "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient."
+          },
+          {
+            "id": "dungeons:oryx-s-castle:guardian-survivor-and-chamber",
+            "name": "Either guardian order and shared unlock",
+            "status": "verify",
+            "expected": "Guardian survival, the bound sword and shared Chamber admission must work in either defeat order.",
+            "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified."
+          }
         ]
       }
     },
@@ -2624,6 +3104,22 @@
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
           }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract",
+            "name": "Oryx 1 phases and minions",
+            "status": "verify",
+            "expected": "The full Oryx 1 encounter includes its minion conditions and rewards, not just access to the room.",
+            "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs."
+          },
+          {
+            "id": "dungeons:oryx-s-chamber:incantation-unlock-transaction",
+            "name": "Committed shared Cellar unlock",
+            "status": "verify",
+            "expected": "A committed Incantation use opens one shared Cellar route, without consuming or exposing success on rejected actions.",
+            "acceptance": "Test pre-victory, wrong-world/range/item, competing users and commit failure. Exactly one successful consumption must bind a usable shared destination; original range/lifetime remain qualified."
+          }
         ]
       }
     },
@@ -2635,16 +3131,47 @@
       "stage": 0,
       "audit": {
         "implementation": "partial",
-        "historical": "partial",
+        "historical": "known-differences",
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
-        "differences": [],
+        "differences": [
+          "The active map has no Wine Barrels, and the encounter roster has no Wine Barrel handler.",
+          "Bile and Purple Goo are not placed or normally summoned, so the persistent Slowed/Sick trail is not available through ordinary gameplay."
+        ],
         "unknowns": [
-          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime."
+          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
+          "Barrel proximity triggers, summons, contents and loot require positive period evidence; zero XP does not establish zero loot."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "dungeons:wine-cellar:barrel-destruction",
+            "name": "Destructible Wine Barrels",
+            "status": "missing",
+            "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
+            "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence."
+          },
+          {
+            "id": "dungeons:wine-cellar:bile-trail-and-wine-threats",
+            "name": "Persistent Bile/Goo trail and wine attacks",
+            "status": "missing",
+            "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
+            "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards."
+          },
+          {
+            "id": "dungeons:wine-cellar:oryx-two-reward-return",
+            "name": "Oryx 2, rewards and return",
+            "status": "verify",
+            "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
+            "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels."
           }
         ]
       }
@@ -2656,12 +3183,10 @@
       "icon": "assets/player/short-sword.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Evidenced target swords retain individual damage, rate, shot spread, trajectory, class compatibility, equipment bonuses and fame behavior. Embedded upper/admin tiers do not establish production availability.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Complete obtainable roster, particularly T13/T14 swords and admin items.",
           "Individual swords’ original firing and collision behavior."
@@ -2681,12 +3206,10 @@
       "icon": "assets/player/steel-dagger.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Evidenced slot2 daggers retain individual rate/damage, piercing/wave behavior and bonuses; distinguish Obsidian, Cronus, Bone and Spirit daggers. Novelty/high-tier distribution is separately unresolved.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "All obtainable variants, including novelty items.",
           "Original dagger collision and firing timing."
@@ -2706,12 +3229,10 @@
       "icon": "assets/player/shortbow.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Original availability of Thousand Shot and upper-tier bows.",
           "Each bow’s original spread and collision behavior."
@@ -2731,12 +3252,10 @@
       "icon": "assets/player/fire-wand.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot8 compatibility, individual damage/rate/range/bonuses, Crystal Wand piercing and Bulwark slow parametric cover-passing projectile. Conducting Wand uses target-buffed values.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Complete obtainable wand roster and original parametric-projectile/collision behavior."
         ],
@@ -2759,12 +3278,10 @@
       "icon": "assets/player/energy-staff.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot17 compatibility and individual rate/damage/wave/shot count/spread; ordinary two-shot zero-gap staves must remain distinct from Extreme Prejudice, Crystal Serpent and Anatis. Deployment is separately qualified.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Original availability of Anatis and upper-tier staves.",
           "Each staff’s trajectories and collision behavior."
@@ -2784,12 +3301,10 @@
       "icon": "assets/player/leather-armor.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot6 compatibility and exact reversible additive bonuses/fame behavior for evidenced tiered and named leathers, including Snake Skin, Coral Silk and Spectral Cloth. Embedded upper tiers are not automatically obtainable requirements.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Complete obtainable roster and upper-tier availability.",
           "Original equipment changes and stat-cap interactions."
@@ -2809,12 +3324,10 @@
       "icon": "assets/player/iron-mail.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot7 restrictions, exact reversible defense and fame behavior for evidenced heavy armor; do not invent a unique-heavy-armor requirement or infer upper-tier deployment from XML.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Upper-tier availability and any unique heavy-armor variants outside the recovered definitions."
         ],
@@ -2833,12 +3346,10 @@
       "icon": "assets/player/robe-of-the-neophyte.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot14 compatibility and reversible exact individual stat/fame bonuses. Preserve Tlatoani's lack of DEF and distinct Chasuble/Mad Scientist bonuses; use target-buffed Mad Scientist values.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Complete obtainable robe roster, upper-tier availability and stat-cap interactions."
         ],
@@ -2861,12 +3372,10 @@
       "icon": "assets/player/ring-of-minor-defense.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Slot9 compatibility and reversible exact individual stat/fame bonuses for evidenced deployed rings. Use target Experimental Ring and changed Divine Faith; resurrection and seasonal acquisition remain separate bundles.",
-        "differences": [
-          "Equipment does not yet apply its Fame bonus."
-        ],
+        "differences": [],
         "unknowns": [
           "Complete obtainable ring roster, developer Crown availability and seasonal calendar.",
           "Original bonuses and tooltip presentation."
@@ -2903,6 +3412,15 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "gear:loot-bag-presentation",
+            "name": "Bag rarity, packaging and permissions",
+            "status": "verify",
+            "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify per-chunk appearance, lossless contents, ownership, permissions and expiry. Do not infer undocumented bag generation from XML alone."
+          }
         ]
       }
     },
@@ -2930,6 +3448,15 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.0",
             "label": "Build 123.4.0 release notes"
+          }
+        ],
+        "checks": [
+          {
+            "id": "gear:ability-activation-contract",
+            "name": "Ability validation and cooldown continuity",
+            "status": "verify",
+            "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
+            "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending. The source-observed swap discrepancy is not yet a reproduced gameplay failure."
           }
         ]
       }
@@ -2997,6 +3524,15 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "gear:consumable-result-feedback",
+            "name": "Actual restoration and rejected-use feedback",
+            "status": "verify",
+            "expected": "Visible results must reflect actual committed restoration/stat changes, not an unclipped advertised amount.",
+            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no fictitious gain or success feedback on rejected consumption; review existing native evidence."
           }
         ]
       }
@@ -3217,11 +3753,11 @@
       "icon": "assets/player/sand-pail-5.png",
       "stage": 0,
       "audit": {
-        "implementation": "missing",
+        "implementation": "partial",
         "historical": "known-differences",
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
         "differences": [
-          "Firecracker and Sand Castle summons are unavailable."
+          "Small and Large Firecrackers work, but Sand Pail cannot summon a healing Sand Castle."
         ],
         "unknowns": [
           "Historical firecracker damage/timing/lifetime and castle healing/range/lifetime remain unestablished."
@@ -3366,19 +3902,21 @@
       "icon": "assets/player/vault-chest.png",
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
-        "expected": "Account-shared eight-item chests retain stored items across character deaths. Closed chests can be purchased to expand storage. The original map, starting chest count, prices and limit remain unresolved.",
-        "differences": [
-          "Storage is limited to one eight-slot vault; additional chests cannot be purchased."
-        ],
+        "implementation": "present",
+        "historical": "partial",
+        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each.",
+        "differences": [],
         "unknowns": [
-          "Historical unlocked count, expansion price/cap, exact map and transaction timing."
+          "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com/wiki/realm-mad-god/nexus",
+            "label": "June 2012 Nexus wiki: twenty eight-slot chests, one free, 500 Gold each"
           }
         ]
       }
@@ -3490,6 +4028,15 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "home:realm-gold-offers",
+            "name": "Intentional Gold-interface replacement",
+            "status": "substituted",
+            "expected": "The project deliberately uses a Gold guide/rewards instead of historical payment offers.",
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments."
           }
         ]
       }
@@ -3963,11 +4510,11 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Native forgot-password email request offers recovery to the same account. Recovered UI says password will be emailed; modern reset links must not be labelled verified historical mechanics.",
         "differences": [
-          "Discord-linked token recovery replaces the evidenced native email-request channel."
+          "Secure Discord-linked recovery intentionally replaces the original native email-request channel."
         ],
         "unknowns": [
           "Original password regeneration and invalidation, and recovery-email delivery."
@@ -4080,7 +4627,7 @@
         "historical": "partial",
         "expected": "The client lists advertised servers, locations, usage and restricted access, remembers a preference and selects an eligible server. Full/busy selection and admission are separate checks.",
         "differences": [
-          "Server usage is shown as zero, with only one advertised endpoint."
+          "Only one server endpoint is advertised; multi-region server selection is not implemented."
         ],
         "unknowns": [
           "Original full/busy server presentation and region-specific server lists."
@@ -4112,6 +4659,22 @@
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
           }
+        ],
+        "checks": [
+          {
+            "id": "access:idle-disconnect",
+            "name": "Idle warnings and disconnect lifecycle",
+            "status": "verify",
+            "expected": "The recovered local client warns at ten/fifteen minutes and exits at twenty; a matching original server AFK policy is not established.",
+            "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress."
+          },
+          {
+            "id": "access:world-loading-presentation",
+            "name": "Destination loading and input release",
+            "status": "verify",
+            "expected": "Destination loading must survive initialization, then fade and stop consuming input when play is ready.",
+            "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames."
+          }
         ]
       }
     },
@@ -4133,6 +4696,29 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          }
+        ],
+        "checks": [
+          {
+            "id": "access:character-status-panel",
+            "name": "HP/MP and six-stat readout",
+            "status": "verify",
+            "expected": "Live vitals, effective maxima, signed modifiers, cap colors and stat hover text must agree with selected rendering rules.",
+            "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI."
+          },
+          {
+            "id": "access:minimap-player-menu",
+            "name": "Overlapping minimap players and teleport",
+            "status": "verify",
+            "expected": "Overlapping markers must resolve to a usable group/menu with eligible teleport choices.",
+            "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click."
+          },
+          {
+            "id": "access:keybinding-input-lifecycle",
+            "name": "Bindings, tab reset and released input",
+            "status": "verify",
+            "expected": "Duplicate bindings, local persistence, tab-scoped reset, chat-focus gating and deactivation release are separate from saved preferences.",
+            "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck."
           }
         ]
       }
@@ -4167,12 +4753,10 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "missing",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, retrieve a bitmap into the editor, and confirm owner deletion. Collected bitmaps can be downloaded as spritesheet.png. Recovery of the original hosted gallery is a separate question.",
-        "differences": [
-          "Browsing, retrieving and deleting saved art are unavailable."
-        ],
+        "differences": [],
         "unknowns": [
           "Original corpus, ordering/retention and historical authorization policy."
         ],
@@ -4191,12 +4775,10 @@
       "icon": null,
       "stage": 0,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "The editor supports drawing, erasing, sampling, undo/redo, clearing, size and preview selection, and loading or saving named, typed and tagged PNG art for later retrieval.",
-        "differences": [
-          "Saving and retrieving art are unavailable."
-        ],
+        "differences": [],
         "unknowns": [
           "Original overwrite/collision behavior and supported dimensions and animation frames."
         ],
@@ -4709,7 +5291,7 @@
         "historical": "known-differences",
         "expected": "Invincible excludes client projectile collision, not merely damage, and suppresses local ground damage.",
         "differences": [
-          "Invincible objects can consume server projectile collisions although selected target client excludes them."
+          "Friendly shots now pass through Invincible targets, but hostile shots can still be consumed by Invincible non-human-controlled players."
         ],
         "unknowns": [
           "Other original damage categories, enemy targeting and sources of Invincible."
@@ -4930,7 +5512,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Pink Blob 0x205 and proximity-exploding Gray Blob 0x20d; one family distinct from splitting slimes.",
-        "differences": [],
+        "differences": [
+          "Pink and Gray Blob item-drop tables are empty."
+        ],
         "unknowns": [
           "123.5.1 operational population, timing, reward/withdrawal credit rules."
         ],
@@ -4938,6 +5522,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -4952,7 +5540,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Big/Little Green Slime 0x20e/f, with death splitting; exact target count unresolved.",
-        "differences": [],
+        "differences": [
+          "Little Green Slime item drops are not configured."
+        ],
         "unknowns": [
           "Original split count and randomness, independent Little Slime spawning, density and rewards."
         ],
@@ -4964,6 +5554,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Big%20Green%20Slime",
             "label": "Big Green Slime wiki page (date unconfirmed)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -4978,7 +5572,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Ordinary MidForest Red Spider0x202, single-shot wandering species; reproduction details qualified.",
-        "differences": [],
+        "differences": [
+          "Red Spider item drops are not configured."
+        ],
         "unknowns": [
           "Target reproduction, density, movement timing and rewards."
         ],
@@ -4986,6 +5582,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -5000,7 +5600,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Flying MidForest Black Bat0x204, charging close-range shooter.",
-        "differences": [],
+        "differences": [
+          "Black Bat item drops are not configured."
+        ],
         "unknowns": [
           "Original target charge timing, targeting, population and rewards."
         ],
@@ -5008,6 +5610,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }

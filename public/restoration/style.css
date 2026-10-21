@@ -7,8 +7,8 @@
 .category summary { background: linear-gradient(#2b2b2b, #1d1d1d); border-bottom: 1px solid #353535; padding: 6px 10px; font: 700 12px Verdana, sans-serif; color: #c8c6b9; cursor: pointer; }
 .section-count { font: 10px Verdana, sans-serif; color: #88887e; margin-left: 5px; }
 .forum-list { list-style: none; padding: 0; margin: 0; }
-.forum-list li { padding: 7px 10px; border-top: 1px solid #242424; display: grid; grid-template-columns: minmax(0, 1fr) 130px; align-items: center; gap: 14px; }
-.forum-list li:nth-child(even) { background: #141414; }
+.forum-list > li { padding: 7px 10px; border-top: 1px solid #242424; display: grid; grid-template-columns: minmax(0, 1fr) 130px; align-items: center; gap: 14px; }
+.forum-list > li:nth-child(even) { background: #141414; }
 .feature { border: 0; background: none; padding: 0; display: inline-flex; align-items: center; gap: 7px; text-align: left; font: 12px/1.65 Verdana, sans-serif; max-width: 100%; color: #cb8585; text-decoration: underline; text-underline-offset: 2px; }
 .feature:hover { color: #e3b1b1; }
 .feature > span { overflow-wrap: anywhere; }
@@ -21,9 +21,17 @@ dialog::backdrop { background: #000b; }
 .feature-heading { display: flex; align-items: center; gap: 9px; min-width: 0; }
 .feature-heading img { width: 28px; height: 32px; object-fit: contain; image-rendering: pixelated; }
 .feature-heading h2 { font: bold 13px Verdana, sans-serif; margin: 0; color: #ddd9c8; }
-#feature-close { font: 11px Verdana, sans-serif; background: #38382f; border: 1px outset #636256; color: #d7d3c1; padding: 2px 6px; }
+#feature-close, #view { font: 11px Verdana, sans-serif; background: #38382f; border: 1px outset #636256; color: #d7d3c1; padding: 2px 6px; }
 .audit-summary { font-size: 11px; line-height: 1.9; }
-.audit-state { font-size: 10px; text-align: right; color: #b8b8ad; }
+.work-note { margin: 3px 0 0; font: 11px/1.6 Verdana, sans-serif; color: #aaa99e; }
+.audit-state { font-size: 10px; text-align: right; color: #b8b8ad; align-self: start; padding-top: 3px; }
+.check-list { list-style: none; padding: 4px 0 0 14px; margin: 0; }
+.check-list li { display: grid; grid-template-columns: minmax(0, 1fr) 100px; gap: 8px; padding: 4px 0; border-top: 1px solid #242424; }
+.check { border: 0; background: none; padding: 0; color: #b8b8ad; text-align: left; font: 11px/1.6 Verdana, sans-serif; text-decoration: underline; cursor: pointer; }
+.check-state { font: 10px/1.6 Verdana, sans-serif; color: #99988d; text-align: right; }
+.check-missing { color: #cb8585; }
+.check-partial, .check-substituted { color: #d9b477; }
+.check-verified { color: #acba92; }
 .audit-state span { display: block; }
 .historical-verified, .implementation-present { color: #acba92; }
 .implementation-missing { color: #cb8585; }
@@ -42,7 +50,9 @@ dialog::backdrop { background: #000b; }
   .category-links { font-size: 10px; }
   .feature { font-size: 11px; }
   .sprite { width: 19px; height: 22px; }
-  .forum-list li { grid-template-columns: minmax(0, 1fr) 105px; gap: 8px; }
+  .forum-list > li { grid-template-columns: minmax(0, 1fr) 105px; gap: 8px; }
+  .check-list li { grid-template-columns: 1fr; gap: 2px; }
+  .check-state { text-align: left; }
   .audit-state { font-size: 9px; }
   dialog { padding: 13px; }
   .dialog-head { margin: -13px -13px 13px; padding: 5px 9px; }
