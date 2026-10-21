@@ -36,8 +36,8 @@
       "revision": "5ca33c3509a77c879a27c5489e312118f2f0d64b",
       "date": "2026-10-21",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/281#issuecomment-6308338398",
-      "method": "20 uploaded native screenshots. Actual key consumption/four-key route and late join; crew attacks, ordinary ghost kill/regrowth and Soul charge/burst; lamps, damage/reset/paralysis; captain loot, durable clear=1 and living Realm return. Wild production Ghost Ship died, rolled the unchanged successful 50% branch and admitted the same living native Priest.",
-      "limitations": "Separate prepared cases, normal capped gear and finite selected elixirs. Captain party: one native Priest plus four scripted Wizards; paralysis: one plus two; wild ship: one plus three. Seven-dose elixir production availability in 2012 is unproven. Full reconnect, original layout and sack/destructible sign-off remain open.",
+      "method": "Current source-hash-matched captain and wild-route replays: private loot, durable clear=1, living Realm return, production Ghost Ship death, unchanged successful 50% branch and living Locker entry. The PR also contains 20 screenshots with supporting earlier key, late-join, crew and lantern captures.",
+      "limitations": "Separate prepared cases; earlier component captures are supporting runs, not blanket current-revision sign-off. Normal capped gear and finite selected elixirs. Captain party: one native Priest plus four scripted Wizards; paralysis: one plus two; wild ship: one plus three. Seven-dose elixir production availability in 2012 is unproven. Full reconnect, original layout and sack/destructible sign-off remain open.",
       "checks": [
         "realm:ghost-ship",
         "dungeons:davy-jones-s-locker",
