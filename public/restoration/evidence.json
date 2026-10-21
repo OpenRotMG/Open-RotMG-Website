@@ -387,6 +387,46 @@
       "checks": [
         "dungeons:undead-lair:entrance-end-dressing"
       ]
+    },
+    "starter-rewards-source-be37896": {
+      "kind": "source",
+      "revision": "be37896b4fa97181e69b7f020fc76aad862fa5c1",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/be37896b4fa97181e69b7f020fc76aad862fa5c1/src/loot.rs",
+      "method": "Pink/Gray Blob, Little Green Slime and Red Spider now have ordered public HP/MP definitions. Black Bat tries selected numeric Tier 2 armor before potions. Gray also has a separate private Mushroom channel. Public attempts remain min(2 times living positive-damage contributors, 8). Private eligibility requires damage greater than 1; N attempts yield at most eight successes assigned in descending damage order, not one roll per player. Big Green Slime, AI, credit and permissions are unchanged. Successful enemy-death traces include the actual kind captured before entity removal.",
+      "limitations": "Probabilities and allocation semantics are qualified Trapped 593e490 engineering choices, not recovered official 123.5.1 rates. May2012 Gray prose supports potion/Mushroom identities and a 1-in-200 Mushroom report, not private credit/attempt mechanics. Old Bat Tier 1 armor names crosswalk only to selected numeric Tier 2 Leather Armor, Apprentice Robe and Chainmail. Untouched Gray still makes no loot attempt; existing proximity XP is unchanged.",
+      "checks": [
+        "realm:blobs",
+        "realm:green-slimes",
+        "realm:red-spiders",
+        "realm:black-bats"
+      ]
+    },
+    "starter-rewards-regression-be37896": {
+      "kind": "regression",
+      "revision": "be37896b4fa97181e69b7f020fc76aad862fa5c1",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/302#issuecomment-6327965198",
+      "method": "Real RED 3 failures and GREEN 6 matched tests cover all five reward definitions, unchanged Big Green Slime, simultaneous Gray public/private routing, strict damage eligibility, eight-success cap and success-ranked ownership. Integrated 200 Rust, 154 Python and 62 JavaScript tests, formatter, strict Clippy and normal release/package contracts pass. Parent independently binds 438 archive members, 436 exact Git source bytes/modes, 132 own-root compiler inputs and retained/package executable hashes.",
+      "limitations": "Forced deterministic World tests establish implementation behavior, not native Mushroom/private acquisition or original drop statistics. They do not pass whole fauna, population, timing, splitting or reproduction requirements.",
+      "checks": [
+        "realm:blobs",
+        "realm:green-slimes",
+        "realm:red-spiders",
+        "realm:black-bats"
+      ]
+    },
+    "starter-rewards-native-be37896": {
+      "kind": "native",
+      "revision": "be37896b4fa97181e69b7f020fc76aad862fa5c1",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/302#issuecomment-6327965198",
+      "method": "Independent clean Gray/Bat baseline samples yield no new bags. Current native cases record six credited Gray and four Bat deaths with actual logged kinds. Both proof actors receive each public Health Potion bag at the same ID, contents and position within eight tiles. A late different-account Gray guest and the Bat acquirer walk to the bag and native-drag HP into empty slot 4, revision 1 to 2; source slots clear and read-only live-WAL character/collection rows match. Three real natives per case remain alive with condition 21 absent. Retained, packaged and actual runtime executables match.",
+      "limitations": "Prepared source-guided initial access uses a privileged full-map observer, selected gear and SPD 1, not earned or normal-speed play. Gray/Bat request 18000/3600 ms across 33/6 inputs, segmented by ordinary QA pauses, not continuous world time. Gray baseline is a qualified target subset of an overall failed run; Bat baseline includes four collateral kills. Current Gray acquirer receives the bag but its sprite is not discernible; the guest floor bag and collected potion are clear. Both Bat bag views are clear. No native Mushroom/private/armor, independent packet decode, rate, history or whole-fauna acceptance. Earlier failures and two permanently unknown deaths remain preserved, not backfilled by new logging.",
+      "checks": [
+        "realm:blobs",
+        "realm:black-bats"
+      ]
     }
   },
   "results": {
@@ -681,10 +721,10 @@
     "access:character-news": {"status":"not-run","evidence":[]},
     "realm:sumo-family": {"status":"not-run","evidence":[]},
     "realm:construct-trio": {"status":"not-run","evidence":[]},
-    "realm:blobs": {"status":"not-run","evidence":[]},
-    "realm:green-slimes": {"status":"not-run","evidence":[]},
-    "realm:red-spiders": {"status":"not-run","evidence":[]},
-    "realm:black-bats": {"status":"not-run","evidence":[]},
+    "realm:blobs": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896","starter-rewards-native-be37896"]},
+    "realm:green-slimes": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896"]},
+    "realm:red-spiders": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896"]},
+    "realm:black-bats": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896","starter-rewards-native-be37896"]},
     "realm:sand-devils": {"status":"not-run","evidence":[]},
     "realm:enraged-bunnies": {"status":"not-run","evidence":[]},
     "realm:forest-nymphs": {"status":"not-run","evidence":[]},
