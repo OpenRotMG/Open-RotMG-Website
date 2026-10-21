@@ -3,7 +3,7 @@ export const originalSha256 = 'ec031064b61d22e860de802ae1967ef1bb193b2c35d297ca1
 export const repairedSha256 = '68b9220aeee798db883db7c336fd0f09e3b12a8f9856b65a013379b00cfe6bfd';
 export const implementationPin = '128bd1de03aaace23381b8705488494490e9061f';
 // Keep the audit frozen while reviewed increments receive independent citations.
-const implementationPins = new Set([implementationPin, '95dfd8cdfbb6de907d758c4c72073b338a6135c3']);
+const implementationPins = new Set([implementationPin, '95dfd8cdfbb6de907d758c4c72073b338a6135c3', '143b32856987c5d494e9788ec8a7dad1f567ff84']);
 export const inventorySignature = '590876b4';
 export const implementationLabels = {present: 'Present in source', partial: 'Partial in source', missing: 'Missing in source', 'not-inspected': 'Not inspected'};
 export const historicalLabels = {unresolved: 'Unresolved history', verified: 'Historically accepted', differences: 'Known differences'};
@@ -198,7 +198,7 @@ export function validateCatalogue(data) {
   require(signature(data.systems.map(row => [row.id, row.domain])) === '87ec182f', 'Missing/replaced non-DATA system requirement');
   require(Array.isArray(data.conditions) && data.conditions.join('|') === 'Nothing|Dead|Quiet|Weak|Slowed|Sick|Dazed|Stunned|Blind|Hallucinating|Drunk|Confused|Knockback|Invisible|Paralyzed|Jumpy|Bleeding|Armor Pierce|Healing|Damaging|Berserk|Paused', 'Wrong-era conditions');
   require(Array.isArray(data.packetIds) && data.packetIds.join(',') === '0,1,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29', 'Wrong-era protocol');
-  for (const [id, expected] of [['packet-13', 'i16 status count then statuses only; no tickTime or tickId'], ['packet-18', 'i32 objectId and position; immediate move, no registered ACK'], ['packet-28', 'i32 target; pending suppresses Move until29'], ['packet-29', 'empty body; clears pending only, not success flag or position']]) require(data.systems.find(row => row.id === id)?.expected === expected, `Wrong-era protocol body: ${id}`);
+  for (const [id, expected] of [['packet-13', 'i16 status count then statuses only; no tickTime or tickId'], ['packet-18', 'objectId i32, x f32, y f32; exactly 12 body bytes. Relocates that object; no GOTO ACK.'], ['packet-28', 'target objectId i32; exactly 4 body bytes. Pending suppresses Move until29.'], ['packet-29', 'empty body; exactly 0 body bytes. Clears pending only, not success flag or position.']]) require(data.systems.find(row => row.id === id)?.expected === expected, `Wrong-era protocol body: ${id}`);
   for (const dungeon of data.dungeons) require(dungeon.roster.every(id => members.has('object-' + id)) && members.has('object-' + dungeon.boss) && (dungeon.key === null || members.get('object-' + dungeon.key)?.kind === 'Equipment'), `Missing dungeon reference: ${dungeon.id}`);
   require(record(data.questions) && strings(data.questions.global) && record(data.questions.categories) && record(data.questions.variants) && ['original', 'repaired'].every(v => strings(data.questions.variants[v])) && Object.keys(data.domains).every(d => strings(data.questions.categories[d])), 'Invalid global/category/variant questions');
   const leaves = expandCatalogue(data), byId = new Map();
