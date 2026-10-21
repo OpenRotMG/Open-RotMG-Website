@@ -1,6 +1,40 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "tutorial-prompts-native-96b2b3f": {
+      "kind": "native",
+      "revision": "96b2b3f962c7a481f3abe9a58e64ecc7ed809871",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/123#issuecomment-6315882866",
+      "method": "Genuinely fresh normal guest entered Tutorial; all six recovered minimap, HP, equipment, loot/ring, special-power and portal highlights were observed outside/inside/outside. Selected client 9904a0b/runtime 0.7.1-openrotmg.8. Checkout-bound primary inputs and retained/executed release bytes matched; fresh independent review found no issues for this scope.",
+      "limitations": "Separate genuine captures, not continuous footage or radius-boundary proof. No prepared state, new campaign, all-class/multiplayer/capacity or historical-fidelity acceptance. Portal proximity is not transfer success.",
+      "checks": [
+        "home:tutorial-and-kitchen"
+      ]
+    },
+    "tutorial-continuity-native-96b2b3f": {
+      "kind": "native",
+      "revision": "96b2b3f962c7a481f3abe9a58e64ecc7ed809871",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/123#issuecomment-6315882866",
+      "method": "Normal first guest Play, earned ring2639, actual Nexus control, chat /tutorial reentry and Nexus return preserved one living account/character, all twelve items/revision1, base/appearance, level1/XP8/quest1. Counters were monotonic before normal departure flush and exact afterward; the retained private-oracle timing correction changed no game state. Owned resources closed.",
+      "limitations": "Release-mode scoped verification only; prior stale-cache runs/debug crash remain unqualified. Reentry did not repeat every prompt. Registration, login, capacity refusal, all first-run policy and original server history are not certified.",
+      "checks": [
+        "home:tutorial-and-kitchen",
+        "access:guest-accounts"
+      ]
+    },
+    "kitchen-transfer-failure-native-96b2b3f": {
+      "kind": "native",
+      "revision": "96b2b3f962c7a481f3abe9a58e64ecc7ed809871",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/123#issuecomment-6315882866",
+      "method": "FAILED: one ordinary Kitchen Portal 0x071e Enter disconnected to the character selector with unsupported portal destination Protocol. Subsequent Continue entered Realm, not Nexus; an actual Nexus control preceded the successful /tutorial reentry. The failed transfer and screenshots are retained.",
+      "limitations": "No Kitchen-to-Nexus alias or invented map/script. Related pinned forks describe a separate Kitchen, not selected-production authority. Full Tutorial/Kitchen encounters/exits and historical fidelity remain unresolved and the broader row stays unaccepted.",
+      "checks": [
+        "home:tutorial-and-kitchen"
+      ]
+    },
     "invisible-teleport-source-96b2b3f": {
       "kind": "source",
       "revision": "96b2b3f962c7a481f3abe9a58e64ecc7ed809871",
@@ -337,7 +371,7 @@
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":[]},
     "home:nexus": {"status":"not-run","evidence":[]},
     "home:vault": {"status":"not-run","evidence":[]},
-    "home:tutorial-and-kitchen": {"status":"not-run","evidence":[]},
+    "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
     "home:browse-realm-portals": {"status":"not-run","evidence":[]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
@@ -358,7 +392,7 @@
     "social:guild-hall": {"status":"not-run","evidence":[]},
     "social:share-a-living-world": {"status":"not-run","evidence":[]},
     "access:client": {"status":"not-run","evidence":[]},
-    "access:guest-accounts": {"status":"not-run","evidence":[]},
+    "access:guest-accounts": {"status":"not-run","evidence":["tutorial-continuity-native-96b2b3f"]},
     "access:registration": {"status":"not-run","evidence":[]},
     "access:login": {"status":"not-run","evidence":[]},
     "access:email-verification": {"status":"not-run","evidence":[]},
