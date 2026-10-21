@@ -6,6 +6,7 @@ import {validateCatalogue,validateEvidence,validateSources,records,matches,workC
 const load=file=>JSON.parse(readFileSync(new URL('../public/restoration/'+file,import.meta.url),'utf8'));
 const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
+const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
 test('stable 211 parents and 70 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
@@ -20,7 +21,7 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
 });
 
 test('present features remain visible for gameplay and historical work',()=>{
-  const data=catalogue(),evidence=ledger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
+  const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);
   for(const view of ['work','verification','research','all'])assert.equal(matches(kage,evidence,view),true,view);
   assert.equal(matches(kage,evidence,'accepted'),false);
@@ -29,6 +30,16 @@ test('present features remain visible for gameplay and historical work',()=>{
   assert.equal(matches(kage,evidence,'all','barrel'),false);
   assert.throws(()=>matches(kage,evidence,'unknown'),/Unknown restoration view/);
   assert.equal(workCounts(data.features,evidence).verification,211);
+});
+
+test('a passed parent leaves gameplay work without implying historical acceptance',()=>{
+  const data=catalogue(),evidence=untestedLedger(),row=records(data).find(r=>r.id==='social:trade-with-players');
+  const before=workCounts(data.features,evidence).verification;
+  evidence.results[row.id].status='passed';
+  assert.equal(workCounts(data.features,evidence).verification,before-1);
+  assert.equal(matches(row,evidence,'verification'),false);
+  assert.equal(matches(row,evidence,'research'),true);
+  assert.equal(accepted(row.feature,evidence),false);
 });
 
 test('partial implementation, research and verification can all be outstanding',()=>{
