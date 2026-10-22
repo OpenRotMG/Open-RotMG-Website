@@ -5741,10 +5741,11 @@
         "historical": "partial",
         "expected": "Pink Blob 0x205 and proximity-exploding Gray Blob 0x20d; one family distinct from splitting slimes.",
         "differences": [
-          "Pink and Gray Blob item-drop tables are empty."
+          "Untouched Gray Blob self-termination still makes no loot attempt. The period potion report does not establish its original damage-credit or reward rules."
         ],
         "unknowns": [
-          "123.5.1 operational population, timing, reward/withdrawal credit rules."
+          "123.5.1 operational population, timing, reward/withdrawal credit rules.",
+          "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
         ],
         "sources": [
           {
@@ -5754,6 +5755,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community behavior/loot comparator; original rates remain unverified"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519154640id_/http://forums.wildshadow.com/wiki/realm-mad-god/gray-blob",
+            "label": "May 2012 Gray Blob rewards and 1-in-200 Mushroom report; private mechanics unspecified"
           }
         ]
       }
@@ -5764,14 +5769,13 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Big/Little Green Slime 0x20e/f, with death splitting; exact target count unresolved.",
-        "differences": [
-          "Little Green Slime item drops are not configured."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original split count and randomness, independent Little Slime spawning, density and rewards."
+          "Original split count and randomness, independent Little Slime spawning, density and rewards.",
+          "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
         ],
         "sources": [
           {
@@ -5795,14 +5799,13 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Ordinary MidForest Red Spider0x202, single-shot wandering species; reproduction details qualified.",
-        "differences": [
-          "Red Spider item drops are not configured."
-        ],
+        "differences": [],
         "unknowns": [
-          "Target reproduction, density, movement timing and rewards."
+          "Target reproduction, density, movement timing and rewards.",
+          "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
         ],
         "sources": [
           {
@@ -5822,14 +5825,13 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Flying MidForest Black Bat0x204, charging close-range shooter.",
-        "differences": [
-          "Black Bat item drops are not configured."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original target charge timing, targeting, population and rewards."
+          "Original target charge timing, targeting, population and rewards.",
+          "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
         ],
         "sources": [
           {
@@ -5839,6 +5841,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community behavior/loot comparator; original rates remain unverified"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519205409id_/http://forums.wildshadow.com/wiki/realm-mad-god/black-bat",
+            "label": "May 2012 capture of Build 115 Black Bat article; named armor tiers need selected-client crosswalk"
           }
         ]
       }
