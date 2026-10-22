@@ -10,6 +10,24 @@
       "limitations": "ZIP SHA256 22c2756ae1d738ca3f8cdde8af0d0437e3c1615c043e548906f2f1fcb1d7ab4a. Matching output was observed on these local and GitHub build environments, not universally. Both WASMs differ from native-tested .10, so its pass does not qualify .12; fresh native evidence must bind these exact bytes separately. Source/module comparisons and module compilation are not native execution. The failed .10 CI and unqualified .11 draft remain preserved.",
       "checks": ["access:reconnect-safely", "access:idle-disconnect"]
     },
+    "idle-warnings-resets-native-b693808": {
+      "kind": "native",
+      "revision": "b69380854402daeca4936b6f30eeefffbbefafc1",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/14#issuecomment-6330648674",
+      "method": "A fresh normal .12 run on the exact actual-origin package observed ten/fifteen-minute warnings, prethreshold controls and effective Stage mouse/key resets. Renewed thresholds followed each input while the client survived both prior twenty-minute deadlines. Uninterrupted final idle ended at the same earned-Wizard selector; actual server close was 1200.146635 seconds after the final trusted keydown. Independent review supports this bounded sequence.",
+      "limitations": "INSTRUMENTED: passive trusted-event metadata and sampled liveness, nonzero unmeasured overhead, not observer-free or exhaustive FPS. Separate clocks, frame accounting and capture latency limit subframe/exposure precision. One optional t0 screenshot timed out in an aggregate shell envelope after the real key release; it was neither retried nor claimed complete. No fake clock, server AFK timer, lifecycle trick or guard change.",
+      "checks": ["access:reconnect-safely", "access:idle-disconnect"]
+    },
+    "idle-first-return-durable-native-b693808": {
+      "kind": "native",
+      "revision": "b69380854402daeca4936b6f30eeefffbbefafc1",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/14#issuecomment-6330648674",
+      "method": "One new blank profile genuinely signed into the latest original earned Wizard: Tutorial, genuine Home/FIRST selector return to Realm, Nexus, real idle completion, FIRST connected Nexus Limbo, then ONE real reload/reconnect to Nexus. Native 8/50 XP/ring, original living identity/inventory/revision, decoded server MOVE and final closed Store agreed. Exact ZIP22c2756a, loaded extensions bcda69b0 and nine original-live assets were bound to the frozen server/process; fresh independent review supports the sequence.",
+      "limitations": "Server96b2b3f/OWN360dc996 and original-key LIVE patched SWF69489584, not base reference bytes; resource requests identify the loaded variant, with same-server HTTP captures rather than independent Chromium-cache dumps. Initial FIRST-Limbo samples had 1–3 records; allowed reload closed at26 and MOVE age2493.155ms, below unchanged64 but not stall-free proof. Passive listeners remained through return. One instrumented observation is not statistical reliability, Tomb/all-world coverage, GPU/common-cause resolution or historical fidelity. Earlier failures and the attributed old report-only inventory exception remain preserved.",
+      "checks": ["access:reconnect-safely", "access:idle-disconnect"]
+    },
     "idle-runtime-source-e002d29": {
       "kind": "source",
       "revision": "e002d290f159109fe133e885a74f9593fa2a56a8",
@@ -728,8 +746,8 @@
     "access:character-slots": {"status":"not-run","evidence":[]},
     "access:character-deletion": {"status":"not-run","evidence":[]},
     "access:server-selection": {"status":"not-run","evidence":[]},
-    "access:reconnect-safely": {"status":"not-run","evidence":["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808"]},
-    "access:idle-disconnect": {"status":"passed","evidence":["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808"]},
+    "access:reconnect-safely": {"status":"not-run","evidence":["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808","idle-warnings-resets-native-b693808","idle-first-return-durable-native-b693808"]},
+    "access:idle-disconnect": {"status":"passed","evidence":["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808","idle-warnings-resets-native-b693808","idle-first-return-durable-native-b693808"]},
     "access:world-loading-presentation": {"status":"not-run","evidence":[]},
     "access:controls-and-display": {"status":"not-run","evidence":[]},
     "access:character-status-panel": {"status":"not-run","evidence":[]},

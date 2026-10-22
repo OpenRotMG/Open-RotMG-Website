@@ -360,7 +360,7 @@ test('quivers change exactly four expanded leaves while every other aspect, jour
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*public HP5 deaths do not prove duration.*Player Slowed.*unverified/);
   assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'ad1ff485f78a1f71682f05171bd5c9f122463afda26e259d2a50d94afdb59b53');
   // The legacy ledger now includes its separately verified idle-lifecycle increment.
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '7a574307f8958fc09388b3d9b2bb6ce774164dae9b43efbd8a45cf68119e0d2c');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'fab477c628ab662991136baa85cd9f266543b57f7faf8b1e83fae8a66bd41ae3');
 });
 
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
