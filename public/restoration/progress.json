@@ -2801,12 +2801,12 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "The procedural generator adds candles to ordinary rooms and random walls, but does not explicitly mark the entrance and end with candles."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius and chase policy remain unrecovered; the archived guide describes following players without numeric motor parameters."
         ],
         "sources": [
           {
@@ -2816,6 +2816,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Undead_Lair.cs",
+            "label": "Older community Septavius: wandering runs alongside the attack queue"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs",
+            "label": "Modified 7.0: conflicting stationary spiral, not an official 2012 specification"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
+            "label": "June 2012 Wild Shadow guide: mobile boss, no numeric movement contract"
           }
         ],
         "checks": [
