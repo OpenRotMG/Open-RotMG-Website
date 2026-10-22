@@ -141,6 +141,42 @@
       "limitations": "World-level regression, not native gameplay. Only admission eligibility and existing 17% policy were tested, not full-dungeon acceptance or original official probabilities. Reported missing eligibility was not reproduced; gameplay is unchanged.",
       "checks": ["dungeons:snake-pit"]
     },
+    "midland-rewards-source-bf5425c": {
+      "kind": "source",
+      "revision": "bf5425c83a4016ca2d9d9cf9bc58021983d547a3",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/bf5425c83a4016ca2d9d9cf9bc58021983d547a3/src/loot.rs",
+      "method": "Great Lizard has ordered public Tier 5 weapon/armor rewards and a private Tier 2 ring channel. Warrior Wasp has public Tier 3/4 weapon/armor and private Tier 6 weapon/armor rewards. Private eligibility requires damage greater than 1, with N Great Lizard attempts or 2N Warrior attempts, an eight-success cap and damage-ranked successful allocation. This reward patch leaves existing public living-contributor attempts, Gray rewards, Queen/Worker behavior, spawns and credit intact.",
+      "limitations": "Tiers, chances and allocation are qualified Trapped 593e490 engineering choices, not recovered official 123.5.1 policy. The 2013 Great Lizard list is not 2012 authority; the archived Warrior replay does not establish original rewards.",
+      "checks": [
+        "realm:great-lizard",
+        "realm:wasp-queen"
+      ]
+    },
+    "midland-rewards-regression-bf5425c": {
+      "kind": "regression",
+      "revision": "bf5425c83a4016ca2d9d9cf9bc58021983d547a3",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/bf5425c83a4016ca2d9d9cf9bc58021983d547a3/src/world/starter_loot_tests.rs",
+      "method": "Five focused reward tests pass after three behavioral RED assertion failures. Fresh integrated gates pass all 214 Rust, 154 Python and 63 JavaScript tests, formatting, strict all-target Clippy and normal release/package. Reward tests cover pools, branch order, eligibility, attempt counts, allocation, deduplication, ownership and committed pickup. Parent verification matches 437 Git files by bytes/modes, 439 archive members and 132 checkout-root compiler inputs to the tested executable.",
+      "limitations": "Deterministic World tests are not native private acquisition, empirical rates or historical proof. A previously random background-packet test failed during integration; a local prepared seed now retains all seven templates and packet assertions without changing production generation. Initial compile/environment failures remain retained. Error-only acknowledgement context does not change the five-second safeguard or prove its earlier cause.",
+      "checks": [
+        "realm:great-lizard",
+        "realm:wasp-queen"
+      ]
+    },
+    "midland-rewards-native-bf5425c": {
+      "kind": "native",
+      "revision": "bf5425c83a4016ca2d9d9cf9bc58021983d547a3",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/bf5425c83a4016ca2d9d9cf9bc58021983d547a3/src/world.rs",
+      "method": "Normal 21f/.12 native clients ran the exact integrated bf5425 release. Great Lizard: four 952 defeats, public Golden Chainmail T5. Warrior Wasp: two 949 defeats plus two Worker 948 collateral deaths, public Missile Wand T3 from source 282878. Each case used three distinct real native accounts; two actors received the same public bag ID, contents and position. Ordinary native pickup filled empty backpack slot 4, revision 1 to 2, and cleared the source slot. Read-only character and collection queries matched while the server and normal WAL were live. All three actors survived each case; genuine captures include both bag views and item tooltips.",
+      "limitations": "Initial placement, equipment, SPD1 and the paused full-map read were prepared, not earned play or native perception. The older 9904/.8 baseline proves the source gap but is not a same-runtime Rust-only comparison. Earlier failures remain retained; cumulative AFTER is 27 Great/3 Warrior, with baseline 1/1 separate. A 300ms search step executed with movement; the specific old-gap 200ms counterexample is offline-only. Warrior's other owner-only allocation was not collected. Multiple rendered bags are not pixel-level ID proof. No rates, privacy, full-fauna or historical acceptance is claimed.",
+      "checks": [
+        "realm:great-lizard",
+        "realm:wasp-queen"
+      ]
+    },
     "ground-appearance-source-0a19612": {
       "kind": "source",
       "revision": "0a1961234c2dfea79047311d117d90a78020d376",
@@ -648,8 +684,8 @@
     "realm:cyclops-god": {"status":"not-run","evidence":[]},
     "realm:phoenix-lord": {"status":"not-run","evidence":[]},
     "realm:evil-chicken-god": {"status":"not-run","evidence":[]},
-    "realm:great-lizard": {"status":"not-run","evidence":[]},
-    "realm:wasp-queen": {"status":"not-run","evidence":[]},
+    "realm:great-lizard": {"status":"not-run","evidence":["midland-rewards-source-bf5425c","midland-rewards-regression-bf5425c","midland-rewards-native-bf5425c"]},
+    "realm:wasp-queen": {"status":"not-run","evidence":["midland-rewards-source-bf5425c","midland-rewards-regression-bf5425c","midland-rewards-native-bf5425c"]},
     "realm:shambling-sludge": {"status":"not-run","evidence":[]},
     "realm:swarm": {"status":"not-run","evidence":[]},
     "realm:dwarf-king": {"status":"not-run","evidence":[]},
