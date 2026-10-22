@@ -358,7 +358,7 @@ test('quivers change exactly four expanded leaves while every other aspect, jour
   const combat = baseline.roadmap.find(area => area.id === 'combat').requirements;
   assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced.*prepared private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*public HP5 deaths do not prove duration.*Player Slowed.*unverified/);
-  assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'f7d937986913a3777307329fe8804e29bed32b01ae72e23080b7d9faf3761a5e');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'a2dfe13776ef7dae336ac25782d74a0ba03ef4c5af7aba613f17102a5d1d966b');
   assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'e8145e9e53f1548c7ba78c9b63906468db272ab9b44ee200b1fa963f1fe42683');
 });
 
