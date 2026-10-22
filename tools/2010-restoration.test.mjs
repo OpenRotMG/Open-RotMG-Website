@@ -359,7 +359,8 @@ test('quivers change exactly four expanded leaves while every other aspect, jour
   assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced.*prepared private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*public HP5 deaths do not prove duration.*Player Slowed.*unverified/);
   assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'a2dfe13776ef7dae336ac25782d74a0ba03ef4c5af7aba613f17102a5d1d966b');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'e8145e9e53f1548c7ba78c9b63906468db272ab9b44ee200b1fa963f1fe42683');
+  // The legacy ledger now includes its separately verified idle-lifecycle increment.
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'f0a8f59e4274f2e2af4a9ad6c63cf5340cc6f78ed205de54da4782615cb49cad');
 });
 
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
