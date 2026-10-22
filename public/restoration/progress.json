@@ -1048,10 +1048,17 @@
             "expected": "Establish era-correct event admission, caps and completion independently of a fixed opening roster.",
             "acceptance": "Trace hero defeat, event eligibility, site selection and completion without duplicate transformation/minion credit. Original trigger probabilities and repeatability remain research questions.",
             "implementation": "partial",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "known-differences",
+            "differences": [
+              "Qualifying final quest defeats now roll a 10% event chance and extend closure accounting. Pre-reserved terrain and one existing bundle per type remain; classic repeatable Skull Shrine, Cube God and Pentaract admission is not restored."
+            ],
+            "unknowns": [
+              "Exact 123.5.1 trigger probability, type distribution and site selection remain qualified. Related server comparators disagree on the roll."
+            ],
+            "sources": [
+              {"url":"https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88","label":"Classic quest and event reference"},
+              {"url":"https://remaster.realmofthemadgod.com/?p=3259","label":"2022 change to 25% and expanded repeat limits, not target-era policy"}
+            ],
             "group": "behavior"
           }
         ]
@@ -1952,7 +1959,7 @@
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "One finite startup lake now supports ordinary combat and a natural 50% Locker portal. Original overseer timing and full item-drop policy remain unverified."
+          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. Original overseer timing and full item-drop policy remain unverified."
         ],
         "unknowns": [
           "Original phase choreography, initial skull XP eligibility and item-drop allocation still need historical sign-off; the restored portal probability follows community references."

@@ -1,6 +1,52 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "quest-event-source-322c425": {
+      "kind": "source",
+      "revision": "322c42556d8f9882ebe2849d2a880d0e2c653d13",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/tree/322c42556d8f9882ebe2849d2a880d0e2c653d13/src",
+      "method": "Inspected startup reservation, critical final-defeat admission, owned actor reindexing and event registration before closure retirement. Existing event terrain and finite inventory remain prepared during initial population/terrain placement.",
+      "limitations": "Implementation inspection, not historical acceptance. Existing one-bundle-per-type inventory and prebuilt scenery remain; repeatable classic event inventories and exact target probabilities/distribution are not certified.",
+      "checks": [
+        "realm:event-admission",
+        "realm:realm-closure",
+        "realm:skull-shrine",
+        "realm:cube-god",
+        "realm:pentaract",
+        "realm:hermit-god",
+        "realm:ghost-ship"
+      ]
+    },
+    "quest-event-regression-322c425": {
+      "kind": "regression",
+      "revision": "322c42556d8f9882ebe2849d2a880d0e2c653d13",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/294#issuecomment-6330994749",
+      "method": "All 209 Rust tests passed serially, formatting and warning-denied all-target Clippy passed. Real damage/defeat regression covers startup absence, hits/misses, admin/wandering/duplicate exclusions, complete actor/quest/spatial/timer indexes, cooldowns, site spacing, occupied-site and capacity waits without reroll, and last-quest closure ordering.",
+      "limitations": "World-level fixtures, not native earned-summon gameplay or full encounter acceptance. Rare map-authored Sphinx/Lord/Oasis branches are source-reviewed, not a separate executed gameplay claim. Earlier parallel lease timing failure was retained; no native gate was relaxed.",
+      "checks": [
+        "realm:event-admission",
+        "realm:realm-closure",
+        "realm:skull-shrine",
+        "realm:cube-god",
+        "realm:pentaract",
+        "realm:hermit-god",
+        "realm:ghost-ship"
+      ]
+    },
+    "quest-event-native-741def5": {
+      "kind": "native",
+      "revision": "741def5759bdb72a565f9ec5ebbf5aacc1c2627d",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/294#issuecomment-6330994749",
+      "method": "Actual selected native Priest moved and spent finite mana healing in a separate generated Realm at a prepared Cube God site. Settled capture and authoritative observation show zero kills, no startup Cube God and the same living character; readiness/ACK/settled-save and cleanup passed.",
+      "limitations": "Client9904a0b/runtime0.7.1-openrotmg.8. Startup absence only, not a native earned summon or full event acceptance. Prepared stats/gear, not earned progression or matched before/after coordinates. Baseline capture later disconnected. Native revision741def5; final322c425 integrates only peer Lair/portal changes with admission/closure modules unchanged.",
+      "checks": [
+        "realm:event-admission",
+        "realm:cube-god"
+      ]
+    },
     "idle-runtime-build-b693808": {
       "kind": "regression",
       "revision": "b69380854402daeca4936b6f30eeefffbbefafc1",
@@ -578,8 +624,8 @@
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":[]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":[]},
     "realm:find-your-next-quest": {"status":"not-run","evidence":[]},
-    "realm:realm-closure": {"status":"not-run","evidence":[]},
-    "realm:event-admission": {"status":"not-run","evidence":[]},
+    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":[]},
     "access:combat-status-feedback": {"status":"not-run","evidence":[]},
@@ -620,11 +666,11 @@
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},
     "realm:grand-sphinx": {"status":"not-run","evidence":[]},
-    "realm:skull-shrine": {"status":"not-run","evidence":[]},
-    "realm:cube-god": {"status":"not-run","evidence":[]},
-    "realm:pentaract": {"status":"not-run","evidence":[]},
-    "realm:hermit-god": {"status":"not-run","evidence":[]},
-    "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
+    "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
+    "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
     "realm:kage-kami": {"status":"not-run","evidence":[]},
     "realm:pirates": {"status":"not-run","evidence":[]},
