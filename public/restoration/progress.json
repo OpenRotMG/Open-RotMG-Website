@@ -2825,10 +2825,21 @@
             "expected": "Coherent room families and death/summon lifecycles need checks beyond defeating Septavius.",
             "acceptance": "Verify black/brown slime replacements, reward exclusion on intermediate forms, single-use traps and owned escorts. Late joins must not restart the encounter.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Trap shot counts and directional spread differ between period guides and the later community server. This single-use lifecycle check does not resolve those patterns or establish complete slime, escort and late-join behavior."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs#L462-L480",
+                "label": "Community comparator: both Lair traps shoot then suicide"
+              },
+              {
+                "url": "https://anticosmic.blogspot.com/2012/04/rotmg-survival-guide.html",
+                "label": "2012 survival guide: trigger floor traps and dodge their shots"
+              }
+            ],
             "group": "population"
           },
           {
@@ -4139,7 +4150,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. Exact target layout and fountain policy remain unresolved; mixed-era Nexus wiki text is not a numerical specification.",
+        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
         "differences": [],
         "unknowns": [
           "Original 123.5.1 layout, spawn points and destination bindings.",
@@ -4154,6 +4165,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/Nexus",
             "label": "Nexus wiki page (date unconfirmed)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/Nexus.cs",
+            "label": "2013 community Nexus: background 2, not authenticated official policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
+            "label": "Conflicting modified 7.0 Nexus: background 0"
           }
         ]
       }
@@ -4166,7 +4185,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each.",
+        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each. The older community server selects blue background 2, also visible in the linked Vault tutorial's thumbnail; modified 7.0 settings instead select 0.",
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
@@ -4179,6 +4198,18 @@
           {
             "url": "https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com/wiki/realm-mad-god/nexus",
             "label": "June 2012 Nexus wiki: twenty eight-slot chests, one free, 500 Gold each"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/Vault.cs",
+            "label": "2013 community Vault: background 2, not authenticated official policy"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=-vFTjK8lHLM",
+            "label": "Vault tutorial: blue visible in inspected thumbnail; full playback and date unverified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Vault.jw",
+            "label": "Conflicting modified 7.0 Vault: background 0"
           }
         ]
       }

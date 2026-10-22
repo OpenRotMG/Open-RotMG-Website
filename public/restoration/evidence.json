@@ -64,6 +64,28 @@
       "limitations": "Server 96b2b3f/own executable360dc996, loaded extensions WASM28c36473 and original-key patched SWF69489584, not the unpatched reference. One qualification is not statistical reliability, all-world/race coverage or historical fidelity. Old .8 first-return and private .9 transfer failures remain unchanged. Passive listeners stayed installed during return; observer overhead is unmeasured. An older report-only inventory correction is explicitly attributed, not blanket preservation equality.",
       "checks": ["access:reconnect-safely", "access:idle-disconnect"]
     },
+    "lair-traps-regression-d3ed388": {
+      "kind": "regression",
+      "revision": "d3ed388a9871254ca26b2fe08a753a05980efb36",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/307#issuecomment-6330642527",
+      "method": "Both selected trap kinds are warmed outside range, approached between auxiliary checks, then approached repeatedly. Baseline emitted 48 projectiles instead of 12. The fix emits one volley, retires actor/timer on the next tick and preserves emitted bullets. Final integrated source passed 206 Rust, 42 Python and 62 Node tests plus formatting; the merged tree equals the tested tree.",
+      "limitations": "Trap lifecycle regression only. It does not accept the grouped slime replacements, escorts or late-join behavior, and it does not establish historical shot counts or directional spread.",
+      "checks": [
+        "dungeons:undead-lair:room-family-and-split-lifecycle"
+      ]
+    },
+    "lair-traps-native-2f9f272": {
+      "kind": "native",
+      "revision": "2f9f27287cf5080dcbb1a8ed80bb6cce1cb73737",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/307#issuecomment-6330642527",
+      "method": "Two actual selected-client native participants observed the same prepared Burst Trap. Ordinary movement triggered its volley; both then observed removal. The accepted after capture shows continuing projectiles with the floor trap gone. Native acknowledgement and input guards were unchanged.",
+      "limitations": "A temporary trap placement on existing generated entrance floor at spawn plus (3,-3) was removed before the PR. This is prepared setup, not earned progression or native Blast Trap coverage. Final integration adds peer Abyss changes, not different trap lifecycle code. Earlier acknowledgement failures and a paused-overlay capture were retained, not accepted as visual proof. The broader grouped component remains not-run.",
+      "checks": [
+        "dungeons:undead-lair:room-family-and-split-lifecycle"
+      ]
+    },
     "highland-portals-12770cc": {
       "kind": "regression",
       "revision": "12770cc84c9c2fef644e79bfe4741b95413c6e7b",
@@ -642,7 +664,13 @@
     "dungeons:sprite-world": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":[]},
     "dungeons:undead-lair": {"status":"not-run","evidence":[]},
-    "dungeons:undead-lair:room-family-and-split-lifecycle": {"status":"not-run","evidence":[]},
+    "dungeons:undead-lair:room-family-and-split-lifecycle": {
+      "status": "not-run",
+      "evidence": [
+        "lair-traps-regression-d3ed388",
+        "lair-traps-native-2f9f272"
+      ]
+    },
     "dungeons:undead-lair:entrance-end-dressing": {
       "status": "passed",
       "evidence": [

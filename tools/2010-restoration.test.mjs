@@ -358,9 +358,9 @@ test('quivers change exactly four expanded leaves while every other aspect, jour
   const combat = baseline.roadmap.find(area => area.id === 'combat').requirements;
   assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced.*prepared private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*public HP5 deaths do not prove duration.*Player Slowed.*unverified/);
-  assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'ad1ff485f78a1f71682f05171bd5c9f122463afda26e259d2a50d94afdb59b53');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'f7d937986913a3777307329fe8804e29bed32b01ae72e23080b7d9faf3761a5e');
   // The legacy ledger now includes its separately verified idle-lifecycle increment.
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'fab477c628ab662991136baa85cd9f266543b57f7faf8b1e83fae8a66bd41ae3');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'f0a8f59e4274f2e2af4a9ad6c63cf5340cc6f78ed205de54da4782615cb49cad');
 });
 
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
