@@ -2825,10 +2825,21 @@
             "expected": "Coherent room families and death/summon lifecycles need checks beyond defeating Septavius.",
             "acceptance": "Verify black/brown slime replacements, reward exclusion on intermediate forms, single-use traps and owned escorts. Late joins must not restart the encounter.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Trap shot counts and directional spread differ between period guides and the later community server. This single-use lifecycle check does not resolve those patterns or establish complete slime, escort and late-join behavior."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs#L462-L480",
+                "label": "Community comparator: both Lair traps shoot then suicide"
+              },
+              {
+                "url": "https://anticosmic.blogspot.com/2012/04/rotmg-survival-guide.html",
+                "label": "2012 survival guide: trigger floor traps and dodge their shots"
+              }
+            ],
             "group": "population"
           },
           {
