@@ -41,7 +41,7 @@
       "date": "2026-10-22",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/294#issuecomment-6330994749",
       "method": "Actual selected native Priest moved and spent finite mana healing in a separate generated Realm at a prepared Cube God site. Settled capture and authoritative observation show zero kills, no startup Cube God and the same living character; readiness/ACK/settled-save and cleanup passed.",
-      "limitations": "Client9904a0b/runtime0.7.1-openrotmg.8. Startup absence only, not a native earned summon or full event acceptance. Prepared stats/gear, not earned progression or matched before/after coordinates. Baseline capture later disconnected. Native revision741def5; final322c425 integrates only peer Lair/portal changes with admission/closure modules unchanged.",
+      "limitations": "Before client9904a0b/runtime0.7.1-openrotmg.8; after client21f5c7f/runtime0.7.1-openrotmg.12, per actual launch receipts. Separate runtimes, not a performance comparison. Startup absence only, not a native earned summon or full event acceptance. Prepared stats/gear, not earned progression or matched before/after coordinates. Baseline capture later disconnected. Native revision741def5; final322c425 integrates only peer Lair/portal changes with admission/closure modules unchanged.",
       "checks": [
         "realm:event-admission",
         "realm:cube-god"
