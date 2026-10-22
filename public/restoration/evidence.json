@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "highland-portals-12770cc": {
+      "kind": "regression",
+      "revision": "12770cc84c9c2fef644e79bfe4741b95413c6e7b",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/303#issuecomment-6329435738",
+      "method": "Executed 64 damage-path defeats for each of five classic Snake Pit source leaders and four followers, using actual family camps where applicable. Every eligible kind produced drops and misses; followers, nonlethal hits and duplicate damage produced no extra portals. All 201 Rust tests, formatting and all-target Clippy passed.",
+      "limitations": "World-level regression, not native gameplay. Only admission eligibility and existing 17% policy were tested, not full-dungeon acceptance or original official probabilities. Reported missing eligibility was not reproduced; gameplay is unchanged.",
+      "checks": ["dungeons:snake-pit"]
+    },
     "ground-appearance-source-0a19612": {
       "kind": "source",
       "revision": "0a1961234c2dfea79047311d117d90a78020d376",
@@ -563,7 +572,7 @@
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
-    "dungeons:snake-pit": {"status":"not-run","evidence":[]},
+    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
