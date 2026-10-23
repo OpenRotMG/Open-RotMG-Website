@@ -24,8 +24,8 @@
       "revision": "89b554072124bf7ab087490dfc874a21f6684f3d",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369289338",
-      "method": "Four bag tests passed locally and on merged eb18fe8: packaging, privacy/reservation, insertion and durable replacement failures. Formatting and required PR CI passed.",
-      "limitations": "Local Clippy pending at publication. No full-suite, new native/adversarial or simultaneous durable-store race pass.",
+      "method": "Four bag tests passed locally and on merged eb18fe8: packaging, privacy/reservation, insertion and durable replacement failures. Formatting, Clippy and required PR CI passed.",
+      "limitations": "Local full suite failed the Lab wall-budget gate. No new native/adversarial or simultaneous durable-store race pass.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
     "loot-bag-glyphs-native-764fad1": {
@@ -34,7 +34,7 @@
       "date": "2026-10-22",
       "url": "https://github.com/user-attachments/assets/de8cd300-3d20-4401-88b4-21e62c4f0186",
       "method": "Reused October 22 client21f/runtime.12 fixture: five distinct glyphs, production packaging, unchanged contents; run completed.",
-      "limitations": "Not current .13 native, earned drops or historical rates/allocation proof. Earlier visual failures remain failed.",
+      "limitations": "Not a new native run, earned drops or historical rates/allocation proof. Earlier visual failures remain failed.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
     "loot-bag-collection-privacy-native-2d6bf14": {
@@ -43,7 +43,7 @@
       "date": "2026-10-22",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369520367",
       "method": "Reused October 22 fixture: nine collections, three-client privacy/public controls, one recipient; server/known-object/SQLite corroboration. Current World bodies unchanged; durable failures tested separately.",
-      "limitations": "Not current .13 native or earned progression. Old private-rejection classifier is not current logging proof. Placement remains failed; tests do not finish its matrix.",
+      "limitations": "Not a new native run or earned progression. Old private-rejection classifier is not current logging proof. Placement remains failed; tests do not finish its matrix.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
     "lair-room-space-native-89bc191": {
