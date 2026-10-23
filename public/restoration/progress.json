@@ -1472,7 +1472,7 @@
         "historical": "partial",
         "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
         "differences": [
-          "The family runs, but Shambling Sludge and Sludget item drops are not configured."
+          "Sludge equipment and Sludget consumables are reconstructed from the older community table; original 123.5.1 probabilities remain unverified."
         ],
         "unknowns": [
           "Original child counts, throw delays, health thresholds and drops.",
@@ -1559,6 +1559,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1609,6 +1613,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1634,6 +1642,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1708,6 +1720,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1730,6 +1746,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2138,6 +2158,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2293,6 +2317,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2339,6 +2367,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2382,6 +2414,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -5996,6 +6032,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6017,6 +6057,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6038,6 +6082,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6063,6 +6111,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6089,6 +6141,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6116,6 +6172,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Juvenile%20White%20Dragon",
             "label": "Juvenile White Dragon wiki page (date unconfirmed)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
