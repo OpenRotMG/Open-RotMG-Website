@@ -645,7 +645,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Island terrain with coast-to-interior difficulty, central mountains, water, vegetation, roads and terrain-associated populations. Exact production layout, dimensions, biome thresholds and population rules remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Server PR272 preserves destructible prepared-map scenery and explicit Palm/Cherry sizes, with regression coverage. This is implementation evidence, not acceptance of original map layouts or population rules. Revision: https://github.com/OpenRotMG/Open-RotMG-Server/commit/c2decb23b58665590903f4f17e34b544a40aef48"
+        ],
         "unknowns": [
           "Original terrain and population inventory, placement, biome thresholds and map dimensions.",
           "A 2048-square export request does not establish the dimensions of deployed maps."
