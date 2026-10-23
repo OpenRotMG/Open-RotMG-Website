@@ -1156,7 +1156,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Damaging ground, terrain speed, progressive Sinking, Push and protective map objects/bridges. Oxygen belongs to Ocean Trench; distinguish cosmetic liquids and curing pools.",
-        "differences": [],
+        "differences": [
+          "Merged PR373 fixes same-square ground-damage cooldown (>500ms); hidden-map-field recovery remains unverified and environmental-hazard acceptance incomplete. https://github.com/OpenRotMG/Open-RotMG-Server/pull/373"
+        ],
         "unknowns": [
           "Complete target tile inventory, progressive Sinking/curing pools, protective-equipment exceptions and original-server admission policy."
         ],
