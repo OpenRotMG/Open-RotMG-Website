@@ -2893,7 +2893,7 @@
           "The procedural generator adds candles to ordinary rooms and random walls, but does not explicitly mark the entrance and end with candles."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
         ],
         "sources": [
           {
@@ -2919,6 +2919,10 @@
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
             "label": "June 2012 Wild Shadow guide: mobile boss, no numeric movement contract"
+          },
+          {
+            "url": "https://web.archive.org/web/20120425182543/http://forums.wildshadow.com/wiki/realm-mad-god/undead-lair",
+            "label": "2012 Wild Shadow guide: rectangular/round chambers with little to no corridors"
           }
         ],
         "checks": [

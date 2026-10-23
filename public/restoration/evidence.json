@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "lair-room-space-native-89bc191": {
+      "kind": "native",
+      "revision": "89bc1919964d65870671f218e6ae5c853afe4497",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/360",
+      "method": "The shared native runner passed four assertions before and after: ordinary keyboard movement changed position, the same Knight remained alive in Undead Lair, no weapon shots or kills occurred, and the native-known view contained the entrance return portal. Genuine active-client captures show the larger chamber scale.",
+      "limitations": "Prepared legal gear and entrance placement in independently generated worlds, not earned progression, multiplayer, boss-clear or timing acceptance. Both accepted runs explicitly pinned client f4e2781/runtime .13; they do not accept the newer .14 runtime. Earlier loader, browser-registration, lease and capture failures remain rejected, with all guards unchanged. Original numeric room sizes remain unrecovered.",
+      "checks": ["dungeons:undead-lair"]
+    },
+    "lair-room-space-regression-89bc191": {
+      "kind": "regression",
+      "revision": "89bc1919964d65870671f218e6ae5c853afe4497",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/89bc1919964d65870671f218e6ae5c853afe4497/src/dungeon/undead.rs",
+      "method": "Both product generator tests pass. Across 48 seeds, ordinary chambers stay within 13-21 tiles with larger size variation, all walkable floor is connected, endpoint candles remain reachable, room families remain unmixed and blood floors retain their selected nonhazardous definition. A separate exact-generator geometry survey measured mean room area increasing from 120 to 279 tiles; 512 candidate seeds generated within the existing map bound.",
+      "limitations": "The 512-seed survey uses a selected-ID validation adapter, not the full World. Exact room-size distributions are reconstruction, not original-server evidence. No change to room count, short connections, boss size or population formulas; no complete dungeon, earned progression or historical acceptance is promoted.",
+      "checks": ["dungeons:undead-lair"]
+    },
     "oryx-count-regression-41e462f": {
       "kind": "regression",
       "revision": "41e462f6fcb58f70a22ceb3447d9270cd63b5614",
