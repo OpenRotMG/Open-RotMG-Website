@@ -2840,7 +2840,7 @@
           "The procedural generator adds candles to ordinary rooms and random walls, but does not explicitly mark the entrance and end with candles."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius and chase policy remain unrecovered; the archived guide describes following players without numeric motor parameters."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
         ],
         "sources": [
           {
@@ -2858,6 +2858,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs",
             "label": "Modified 7.0: conflicting stationary spiral, not an official 2012 specification"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Follow.cs",
+            "label": "Modified 7.0 comparator: independent steering jitter, not original spawn-spacing evidence"
           },
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
