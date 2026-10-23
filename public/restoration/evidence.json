@@ -671,6 +671,50 @@
         "style:clothing-and-accessory-cloths"
       ]
     },
+    "trade-clock-source-b45c281": {
+      "kind": "source",
+      "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
+      "date": "2026-10-23",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
+      "method": "The authoritative trade deadline uses the existing pause-aware Clock for a full 3000ms after creation and every offer change. Exact masks, participants, revisions, pending commits, terms and atomic settlement remain authoritative. Bots retain their tick minimum and also wait for an elapsed deadline, restarted after acknowledged own changes and received peer changes.",
+      "limitations": "Source inspection does not establish gameplay acceptance or the original server's delay. Selected 123.5.1 SWF and readable modified-7 TradeButton agree on getTimer and 2999ms, not an official server policy. Controller Instants are process-local, omitted from serialized views and market memory; recorded views cannot reconstruct them.",
+      "checks": [
+        "social:trade-with-players"
+      ]
+    },
+    "trade-clock-regression-b45c281": {
+      "kind": "regression",
+      "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
+      "date": "2026-10-23",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
+      "method": "Four maintained World/Store tests cover a stopped-tick world, a pause longer than three seconds that cannot fund settling, the exact 3000ms reset, cleared acceptances, stale masks, pending-commit exclusion and owner/slot/revision persistence. Advancing only the simulation timestamp does not fund the elapsed guard. The canonical-profile suite at this revision passed 560 tests with one existing ignored test, using two test threads.",
+      "limitations": "This reproduces the clock failure class, not the reporter's ephemeral instance or missing acceptance packet. It does not certify the original server's delay. Earlier browser/setup failures and broader failed attempts are retained separately, not counted as passes.",
+      "checks": [
+        "social:trade-with-players"
+      ]
+    },
+    "trade-clock-controller-b45c281": {
+      "kind": "regression",
+      "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
+      "date": "2026-10-23",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/bots/runtime/market_consent_tests.rs",
+      "method": "Four controller/World/Store ordering cases and four gift/revocation cases passed. A negative counterfactual forces only the local tick predicate before elapsed readiness, observes no acceptance, restores the original predicate and then waits for the real latch. Second-installment, executor-stall, pending-exchange, revocation and replay checks keep their original limits. Paid and gift controllers retain the tick minimum and start their own elapsed minimum after acknowledged offer changes.",
+      "limitations": "Fixture-level adapter integration is not ordinary actor culture, two physical players, live-server QA or a replay of serialized views. Instants are process-local and are not reconstructed from exported state. Historical trading restrictions and delay policy remain partial.",
+      "checks": [
+        "social:trade-with-players"
+      ]
+    },
+    "trade-clock-native-b45c281": {
+      "kind": "native",
+      "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/388#issuecomment-6372822683",
+      "method": "The shared native framework passed five assertions with two prepared legal weaponless Knights in ordinary Nexus, clean selected client f3c7b49 and Ruffle 0.7.1-openrotmg.14. Real GUI requests and distinct potion offers reached native acceptance; one acceptance left both inventories unchanged. Mutual acceptance exchanged the items exactly once. Independent post-cleanup SQLite matched all slots and both revision increments, conserved the duplicate-sensitive combined inventory and contained one trade transaction. Both living characters kept their identities with zero shots or kills.",
+      "limitations": "Prepared inventories are not earned acquisition, the reporter's original trade, live-server QA or historical-policy certification. The earlier healthy Realm baseline used a longer wait and is not a matched-scene timing comparison or the failure reproduction. Earlier setup, CDP and controller failures remain failed; no native clock, ACK, readiness, lease or deadline guard was relaxed.",
+      "checks": [
+        "social:trade-with-players"
+      ]
+    },
     "trade-lifecycle-native-eb85988": {
       "kind": "native",
       "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
@@ -1309,7 +1353,7 @@
     "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
-    "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988"]},
+    "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281"]},
     "social:lock-players": {"status":"not-run","evidence":[]},
     "social:ignore-players": {"status":"not-run","evidence":[]},
     "social:teleport-to-players": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2"]},

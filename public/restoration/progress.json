@@ -4583,15 +4583,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items.",
-        "differences": [],
+        "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
+        "differences": [
+          "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum."
+        ],
         "unknowns": [
-          "Original name/rank restrictions, distance, timeout, item eligibility and confirmation delay."
+          "Original server-side name/rank restrictions, distance, request timeout, item eligibility and confirmation delay."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TradeButton.as",
+            "label": "Readable modified-7 TradeButton elapsed countdown; selected SWF checked separately"
           }
         ]
       }
