@@ -24,7 +24,7 @@
       "revision": "89b554072124bf7ab087490dfc874a21f6684f3d",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369289338",
-      "method": "Four focused Rust tests and formatting passed: packaging, privacy/reservation, insertion and durable replacement failures. Unchanged tests; current-head required CI passed.",
+      "method": "Four bag tests passed locally and on merged eb18fe8: packaging, privacy/reservation, insertion and durable replacement failures. Formatting and required PR CI passed.",
       "limitations": "Local Clippy pending at publication. No full-suite, new native/adversarial or simultaneous durable-store race pass.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
