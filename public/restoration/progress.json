@@ -1032,7 +1032,8 @@
         "historical": "partial",
         "expected": "Finite qualifying encounter lifecycle, announcements, sealed admission, eligible Castle transfer and replacement realm; exact target roster/countdowns remain qualified.",
         "differences": [
-          "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+          "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
         ],
         "unknowns": [
           "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
@@ -1054,10 +1055,10 @@
             "name": "Progression-triggered event admission",
             "expected": "Establish era-correct event admission, caps and completion independently of a fixed opening roster.",
             "acceptance": "Trace hero defeat, event eligibility, site selection and completion without duplicate transformation/minion credit. Original trigger probabilities and repeatability remain research questions.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "Qualifying final quest defeats now roll a 10% event chance and extend closure accounting. Pre-reserved terrain and one existing bundle per type remain; classic repeatable Skull Shrine, Cube God and Pentaract admission is not restored."
+              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten prebuilt reserves, sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
             ],
             "unknowns": [
               "Exact 123.5.1 trigger probability, type distribution and site selection remain qualified. Related server comparators disagree on the roll."
@@ -1849,11 +1850,11 @@
       "category": "realm",
       "icon": "assets/player/lord-of-the-lost-lands.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Lord of the Lost Lands was introduced in build 121.0.0; build 122.0.1 fixed kill awards and increased health. The encounter includes activation, protection, combatants and rewards.",
         "differences": [
-          "Lord of the Lost Lands combat support exists, but normal Realm placement and item drops still need implementation."
+          "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. Full native encounter completion and original reward-rate fidelity are not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
         ],
         "unknowns": [
           "Original phase timings, health, spawning and reward probabilities."
@@ -2012,11 +2013,11 @@
       "category": "realm",
       "icon": "assets/player/ghost-ship.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. Original overseer timing and full item-drop policy remain unverified."
+          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
         ],
         "unknowns": [
           "Original phase choreography, initial skull XP eligibility and item-drop allocation still need historical sign-off; the restored portal probability follows community references."
