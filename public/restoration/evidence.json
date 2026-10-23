@@ -1,6 +1,28 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "crowd-entry-regression-460dfdc": {
+      "kind": "regression",
+      "revision": "460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0/src/bots/realm_tests.rs",
+      "method": "23 focused Rust tests passed, including four new crowd-choice regressions, bot/social behavior, reserved capacity and exact consumed-grant destinations. The ordinary-view regression fails before the fix at 0/512 choices for the populated second entrance; fixed-seed policy checks cover 34000 draws, order reversal, ties, commitment, unavailable entrances and malformed public counters. 74 Node and 41 Python tests, formatting, strict all-target Clippy and Build storage CI passed.",
+      "limitations": "Modern issue365 bot policy, not an original-server probability or guaranteed population split. Focused tests, not a fresh full Rust suite or complete native Full/Locked/name-pool acceptance.",
+      "checks": [
+        "home:browse-realm-portals"
+      ]
+    },
+    "crowd-entry-native-460dfdc": {
+      "kind": "native",
+      "revision": "460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
+      "method": "The unmodified prepared native runner passed six assertions: one actual gameplay controller observed public counts0/3 and used the bound entrance to Realm1, producing0/4; the controller, three prepared crowd anchors and same native observer remained alive, with no cleanup errors. Separate ordinary level1 Wizard sessions walked from tutorial/Nexus to live portals; startup snapshots were2/4 before and5/1 after. Published client images were downloaded and byte-verified.",
+      "limitations": "Prepared starting context and one observed choice, not earned progression, multiplayer-human or statistical ratio acceptance. Ordinary screenshots are independent live examples, not matched-seed counterfactuals. Rejected attempts are not passes; original capacity, name pool and full/locked equivalence remain unresolved.",
+      "checks": [
+        "home:browse-realm-portals"
+      ]
+    },
     "sand-castle-source-0e3f09d": {
       "kind": "source",
       "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
@@ -1244,7 +1266,7 @@
     "home:vault": {"status":"not-run","evidence":[]},
     "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
-    "home:browse-realm-portals": {"status":"not-run","evidence":[]},
+    "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
     "home:realm-gold-offers": {"status":"not-run","evidence":[]},
