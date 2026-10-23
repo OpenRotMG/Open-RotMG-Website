@@ -86,6 +86,24 @@
         "dungeons:snake-pit:diggable-route-and-cover"
       ]
     },
+    "potion-chat-regression-ee3d1fc": {
+      "kind": "regression",
+      "revision": "ee3d1fcf055ba2813bbcf3a120ea3f8b411bb04d",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/346#issuecomment-6363618685",
+      "method": "Executed the release World regression for all eight stat potions: expected base-stat changes, one consumed item, one revision increment, successful inventory result and no TEXT packet. The same regression failed before the fix. Formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Only stat-potion success chat is qualified here. This does not accept the broader cap, failure, HP/MP restoration or boost-expiry contract. The full suite has community runtime failures and is not claimed green. The 2013 comparator is silent, but original July2012 server chat policy remains unproven.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
+    "potion-chat-native-ee3d1fc": {
+      "kind": "native",
+      "revision": "ee3d1fcf055ba2813bbcf3a120ea3f8b411bb04d",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/346#issuecomment-6363618685",
+      "method": "Prepared Wizard used normal native hotkeys in Tutorial. Before e0662d5 and after ee3d1fc both changed Speed30 to31 and maximum HP500 to505, consumed each item once and advanced revision1 to3. Closed SQLite records agree. Before shows the stat-potion chat line; after does not. Selected client f4e2781 and Ruffle .13 were unchanged; captures and cleanup passed.",
+      "limitations": "Prepared Speed/Life consumption, not earned acquisition, all-eight native coverage, reconnect or historical sign-off. Earlier startup, CDP and control failures remain failed. The accepted after run explicitly selected ANGLE/OpenGL; not a performance comparison. Parent and broader feedback acceptance remain not-run.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
     "abyss-regression-5a5502f": {
       "kind": "regression",
       "revision": "5a5502f2c57c284aa58a3f784d1a0bc8b2960bc4",
@@ -959,8 +977,8 @@
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
     "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
-    "gear:stat-potions": {"status":"not-run","evidence":[]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
+    "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
+    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
