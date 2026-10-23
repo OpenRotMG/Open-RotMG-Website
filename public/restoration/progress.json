@@ -2402,7 +2402,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Medusa, HP2000/DEF18, Green Bolt100; qualified comparator supports pursuit, five-shot fan and grenade. Exact population, rewards and Snake Pit eligibility/rate remain qualified.",
+        "expected": "Mountain Medusa, HP2000/DEF18, Green Bolt100; qualified comparator supports pursuit, five-shot fan and grenade. Exact population, rewards and Abyss of Demons portal eligibility/rate remain qualified.",
         "differences": [],
         "unknowns": [
           "Target attack/movement constants, population/repopulation policy and loot/portal probabilities."
@@ -2920,8 +2920,8 @@
           {
             "id": "dungeons:abyss-of-demons:idol-and-treasure-lifecycle",
             "name": "Idol treasure-room control",
-            "expected": "Optional Idol rooms must control their own bridges and temporary lava without completing the main dungeon.",
-            "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify restored access to loot, independent rooms and no main clear from Idol defeat alone.",
+            "expected": "The adopted Idol reconstruction has dry shrine access before activation and restores it after defeat. Lava changes stay local, and Idol defeat does not clear the main dungeon.",
+            "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify dry shrine access, room-local lava restoration, independent rooms and no main clear from Idol defeat alone.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
