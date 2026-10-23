@@ -10,6 +10,64 @@
       "limitations": "Constructed World fixtures, not a full native Hermit loot clear or an earned Realm journey. Native lake-context screenshots are not loot acceptance. The modified-7 comparator supplies allocation semantics; period documentation supports soulbound loot but does not establish original numeric eligibility, pools, rates or minima. No functional result is promoted to passed.",
       "checks": ["realm:hermit-god"]
     },
+    "mana-text-source-65dd762": {
+      "kind": "source",
+      "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/65dd762251b65368c40a3c3e383145f6d734a83a/src/world/consumables.rs",
+      "method": "The shared consumable Mana completion sends cyan0xff00ffff for actual positive restoration; HP remains green and the native text/outline/lifetime and white particles are unchanged.",
+      "limitations": "Implements explicit issue322 color request, not an authenticated original palette. Trapped white, realm-src purple and later FSoD blue conflict. No gameplay amount, Quiet/full policy or full-feature acceptance change.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-text-regression-65dd762": {
+      "kind": "regression",
+      "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/343#issuecomment-6362663744",
+      "method": "All342 Rust tests passed with four threads, formatting and warning-denied all-target Clippy passed. Wire-level completion test checks full100/partial25 MP cyan notifications, no positive number at full MP/Quiet, actual resource gain, exact recipient and unchanged HP green.",
+      "limitations": "World-level completion test, not a new full consumable transaction or multiplayer journey. Native is bound separately to4759ff7. Prior ENOSPC, failed native one-cast deficit assertion and serial timeout are retained as failures.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-text-native-4759ff7": {
+      "kind": "native",
+      "revision": "4759ff7474edb34f0652ac0b9c88217f26cd186f",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/343#issuecomment-6362663744",
+      "method": "Real native Wizard casts twice then consumes one Magic Potion. Before009109e shows purple+100; after4759ff7 shows cyan+100. Both pass actual mana spending/restoration, once-only slot/revision change, same living character and cleanup. Identical pinned client21f5c7f/runtime0.7.1-openrotmg.12 bundle22c2756ae1d738ca3f8cdde8af0d0437e3c1615c043e548906f2f1fcb1d7ab4a.",
+      "limitations": "Prepared Level20 gear in separate isolated runs, not earned progression or multiplayer. Final65dd762 consumable module is byte-identical; integrated peer Realm/encounter work is not native-qualified here. One color fix does not accept the broader feedback bundle or certify target hue.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "snake-cover-regression-3778af2": {
+      "kind": "regression",
+      "revision": "3778af2b3146d7bc20a504131f1769c01cf005ad",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/341#issuecomment-6362578588",
+      "method": "335 Rust, 42 Python and 73 Node tests passed. The 64-seed regression checks all 40 boss-cover cells are permanent while tunnel walls remain diggable. Paired generation audits retain 10-15 connected rooms, six entrance-to-boss edges and reachable bosses after digging, with exactly 40 fewer damageable cells per seed.",
+      "limitations": "Implementation regression, not an authenticated original generator or complete native dungeon acceptance. Exact boss outline, cover footprints, maze distributions and target-date treasure-room deployment remain unresolved.",
+      "checks": [
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
+    "snake-cover-native-3778af2": {
+      "kind": "native",
+      "revision": "3778af2b3146d7bc20a504131f1769c01cf005ad",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/341#issuecomment-6362578588",
+      "method": "Accepted native-before-3 at009109e removed generated cover with ordinary staff shots (20 shots, two wall kills). Accepted native-after-2 at3778af2 retained all 40 cover cells (16 shots, zero kills). Both used clientf4e2781/runtime0.7.1-openrotmg.13 and kept the same living Wizard within each run; cleanupErrors were empty.",
+      "limitations": "Prepared boss-side placement and legal stats/gear, not earned progression. This does not validate grate lifecycle, minimap updates, endpoint floors, multiplayer or a complete dungeon clear. One temporary spawn marker and a test-only audit helper were removed before publication. Separate fresh instances, not a performance comparison; failed ENOSPC builds and CDP setup timeouts were not accepted.",
+      "checks": [
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
     "abyss-regression-5a5502f": {
       "kind": "regression",
       "revision": "5a5502f2c57c284aa58a3f784d1a0bc8b2960bc4",
@@ -816,7 +874,7 @@
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc"]},
-    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":[]},
+    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":[]},
@@ -882,9 +940,9 @@
     "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
-    "gear:magic-potions": {"status":"not-run","evidence":[]},
+    "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:stat-potions": {"status":"not-run","evidence":[]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":[]},
+    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
