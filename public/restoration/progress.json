@@ -1033,7 +1033,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Finite qualifying encounter lifecycle, announcements, sealed admission, eligible Castle transfer and replacement realm; exact target roster/countdowns remain qualified.",
-        "differences": [],
+        "differences": [
+          "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+        ],
         "unknowns": [
           "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
           "Original ongoing encounter-count, spawn/death and entry taunts need period transcripts; copied comparator strings are not enough."
@@ -1326,11 +1328,11 @@
       "category": "realm",
       "icon": "assets/player/oasis-giant.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, replenishment and movement roles; no transformation established. Target setpiece/chest and rewards remain unresolved.",
         "differences": [
-          "Oasis Giant combat scripts exist, but a normal Realm spawn route and item drops are not configured."
+          "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
         ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
@@ -1842,7 +1844,8 @@
         "historical": "known-differences",
         "expected": "At most one Sphinx per Realm, setting, combat and Horrid Reapers; Reapers disappear after boss death and are Stasis-susceptible at123.5.1.",
         "differences": [
-          "The Sphinx site's center motif and placement geometry are reconstructed, not recovered official map data."
+          "The Sphinx site's center motif and placement geometry are reconstructed, not recovered official map data.",
+          "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
         ],
         "unknowns": [
           "Exact period setting/distribution and loot probabilities.",
@@ -1940,7 +1943,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
-        "differences": [],
+        "differences": [
+          "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue335 and exhaustive native combat/loot-return acceptance remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+        ],
         "unknowns": [
           "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability and loot rates."
         ],
@@ -4325,7 +4330,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
-        "differences": [],
+        "differences": [
+          "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+        ],
         "unknowns": [
           "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."
         ],
