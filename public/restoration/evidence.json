@@ -1,6 +1,28 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "snake-cover-regression-3778af2": {
+      "kind": "regression",
+      "revision": "3778af2b3146d7bc20a504131f1769c01cf005ad",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/341#issuecomment-6362578588",
+      "method": "335 Rust, 42 Python and 73 Node tests passed. The 64-seed regression checks all 40 boss-cover cells are permanent while tunnel walls remain diggable. Paired generation audits retain 10-15 connected rooms, six entrance-to-boss edges and reachable bosses after digging, with exactly 40 fewer damageable cells per seed.",
+      "limitations": "Implementation regression, not an authenticated original generator or complete native dungeon acceptance. Exact boss outline, cover footprints, maze distributions and target-date treasure-room deployment remain unresolved.",
+      "checks": [
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
+    "snake-cover-native-3778af2": {
+      "kind": "native",
+      "revision": "3778af2b3146d7bc20a504131f1769c01cf005ad",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/341#issuecomment-6362578588",
+      "method": "Accepted native-before-3 at009109e removed generated cover with ordinary staff shots (20 shots, two wall kills). Accepted native-after-2 at3778af2 retained all 40 cover cells (16 shots, zero kills). Both used clientf4e2781/runtime0.7.1-openrotmg.13 and kept the same living Wizard within each run; cleanupErrors were empty.",
+      "limitations": "Prepared boss-side placement and legal stats/gear, not earned progression. This does not validate grate lifecycle, minimap updates, endpoint floors, multiplayer or a complete dungeon clear. One temporary spawn marker and a test-only audit helper were removed before publication. Separate fresh instances, not a performance comparison; failed ENOSPC builds and CDP setup timeouts were not accepted.",
+      "checks": [
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
     "abyss-regression-5a5502f": {
       "kind": "regression",
       "revision": "5a5502f2c57c284aa58a3f784d1a0bc8b2960bc4",
@@ -807,7 +829,7 @@
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc"]},
-    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":[]},
+    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":[]},

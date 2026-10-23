@@ -31,6 +31,21 @@ test('Tomb release records source restoration without inventing full acceptance'
   assert.match(evidence.sources['tomb-native-partial-99451ac'].limitations,/One boss, not a complete Tomb acceptance/);
 });
 
+test('Snake Pit cover evidence does not accept the full route',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:snake-pit:diggable-route-and-cover';
+  validateEvidence(data,evidence);
+  const row=records(data).find(r=>r.id===id),result=evidence.results[id];
+  assert.equal(row.rule.historical,'partial');assert.equal(result.status,'not-run');
+  assert.equal(accepted(row.feature,evidence),false);
+  assert.deepEqual(result.evidence,['snake-cover-regression-3778af2','snake-cover-native-3778af2']);
+  for(const ref of result.evidence){
+    assert.equal(evidence.sources[ref].revision,'3778af2b3146d7bc20a504131f1769c01cf005ad');
+    assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  assert.match(row.rule.unknowns.join(' '),/not the original generator/);
+  assert.match(evidence.sources['snake-cover-native-3778af2'].limitations,/not earned.*grate.*minimap/);
+});
+
 test('present features remain visible for gameplay and historical work',()=>{
   const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);

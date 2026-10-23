@@ -2718,10 +2718,25 @@
             "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
             "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact 123.5.1 maze probabilities, boss-room outline and cover footprints remain unrecovered. The later static community map is a comparator, not the original generator."
+            ],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+                "label": "Build 122.0.1: four Stheno cover walls and darker diggable paths"
+              },
+              {
+                "url": "https://bluenosersguide.weebly.com/snake-pit.html",
+                "label": "Legacy guide: unbreakable boss-cover pillars; exact page date unresolved"
+              },
+              {
+                "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/snakepit.wmap",
+                "label": "Active later community map: permanent boss-cover walls, not an original generator"
+              }
+            ],
             "group": "layout"
           }
         ]
