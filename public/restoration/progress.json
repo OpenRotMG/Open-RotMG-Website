@@ -471,15 +471,13 @@
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
-        "differences": [
-          "Only Well Equipped is awarded. The other named death bonuses still need implementation.",
-          "God kills, Oryx kills and level-up assists are still returned as zero in death statistics."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original edge cases, counter eligibility and rounding must be checked when implementing the remaining bonuses."
+          "Fresh final-head normal-client combat, death, archived Legends reopening and a complete native backup-restore journey are deferred.",
+          "Long-history and dungeon-condition cases have regression-fixture coverage, not complete historical or native acceptance. Unknown legacy history is preserved rather than reconstructed as zero."
         ],
         "sources": [
           {
@@ -501,7 +499,7 @@
             "name": "Lifetime counters and death statistics",
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
             "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
             "unknowns": [],
@@ -1769,12 +1767,20 @@
         "expected": "Level8 quest0xdc2,900 HP/16 DEF; Snake Shot50/speed65/lifetime16000ms and Ghost Shot40. Egg0xdc1→Temple Snake0xdc0 lifecycle belongs here; exact hatching/rings/placement/portal policy qualified.",
         "differences": [],
         "unknowns": [
-          "Original temple placement/distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
+          "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/great-coil-snake",
+            "label": "Wild Shadow Great Coil Snake guide (April 2012 archive): ruins near the lowland/midland grass border and their treasure chest"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
+            "label": "Community temple-placement comparison: MidForest/MidPlains (2013), not a target-date population count"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
@@ -2758,11 +2764,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
+        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
         "differences": [],
         "unknowns": [
-          "Exact treasure-room introduction date, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
-          "Original phase timings, entrance probability, Guard damage eligibility and reward rates."
+          "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
+          "Original phase timings, entrance probability, Guard damage eligibility and reward rates.",
+          "Exact original guardian orbit speed, direction, initial variance and activation range."
         ],
         "sources": [
           {
@@ -2784,6 +2791,14 @@
           {
             "url": "https://realmofthemadblogger.blogspot.com/2013/06/3-treasure-room-snake-pit.html",
             "label": "June 2013 room description, later corroboration only"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
+            "label": "2012-05-31: fast circling snake guardians, not an exact movement specification"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Orbit.cs#L68-L86",
+            "label": "Modified 7.0 comparator: actual-angle orbit with matched angular and motor speed"
           }
         ],
         "checks": [
@@ -2866,7 +2881,7 @@
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
-          "The painter provides one tiled floor motif; a non-tiled variant is not represented. Its exact target-era selection policy still needs corroboration."
+          "Alternate white/yellow stationary checker: engineering reconstruction, not authenticated historical non-tiled rendering/selection."
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
@@ -2886,7 +2901,7 @@
             "id": "dungeons:sprite-world:floor-and-native-variants",
             "name": "Floor variants, trees and native gods",
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
-            "acceptance": "Exercise every push direction and stationary floor, tree destruction and documented variant seeds. The current painter does not provide a non-tiled variant; exact original probabilities remain unverified.",
+            "acceptance": "Exercise all push directions, tree destruction and both stationary-pattern seeds; historical non-tiled rendering/selection probabilities remain unverified.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [],
@@ -3858,7 +3873,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
-            "unknowns": [],
+            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
             "sources": [],
             "group": "behavior"
           }
@@ -4198,14 +4213,12 @@
       "category": "gear",
       "icon": "assets/player/sand-pail-5.png",
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
-        "differences": [
-          "Small and Large Firecrackers work, but Sand Pail cannot summon a healing Sand Castle."
-        ],
+        "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and castle healing/range/lifetime remain unestablished."
+          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
         ],
         "sources": [
           {
@@ -4433,7 +4446,8 @@
         "historical": "partial",
         "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
         "differences": [
-          "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+          "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+        "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability. Revision-bound regression and native after evidence do not establish the broader historical name/capacity or full/locked obligations: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998"
         ],
         "unknowns": [
           "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."
@@ -4585,15 +4599,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items.",
-        "differences": [],
+        "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
+        "differences": [
+          "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum."
+        ],
         "unknowns": [
-          "Original name/rank restrictions, distance, timeout, item eligibility and confirmation delay."
+          "Original server-side name/rank restrictions, distance, request timeout, item eligibility and confirmation delay."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TradeButton.as",
+            "label": "Readable modified-7 TradeButton elapsed countdown; selected SWF checked separately"
           }
         ]
       }

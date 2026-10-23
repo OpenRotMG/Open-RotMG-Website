@@ -9,6 +9,8 @@ const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8'
 const catalogue = () => JSON.parse(read('public/restoration/2010/catalogue.json'));
 const digest = value => createHash('sha256').update(value).digest('hex');
 const baseline = catalogue(), baselineLeaves = validateCatalogue(baseline);
+const paralyzingRefs = ['impl-paralyzing-tests', 'impl-paralyzing-native'];
+const paralyzingIds = ['object-0a64-activation-1', 'object-0a65-activation-1', 'condition-14-wire', 'condition-14-lifecycle', 'combat-collision-matrix'];
 const counts = rows => rows.reduce((out, row) => (out[row.kind] = (out[row.kind] ?? 0) + 1, out), {});
 
 test('July100 exact member sets and every ordered occurrence/parameter match the independently derived original inventory', () => {
@@ -273,13 +275,13 @@ test('prediction repair stays scoped alongside the quiver increments without pas
   assert.deepEqual(scoped.map(row => row.id).sort(), Object.keys(priorRefs).sort());
   for (const row of scoped) {
     assert.equal(row.implementation, 'partial');
-    assert.deepEqual(row.implementationSources, [...priorRefs[row.id], ...refs, ...(row.id === 'combat-collision-matrix' ? ['impl-iron-tests', 'impl-iron-native'] : [])]);
+    assert.deepEqual(row.implementationSources, [...priorRefs[row.id], ...refs, ...(row.id === 'combat-collision-matrix' ? ['impl-iron-tests', 'impl-iron-native', ...paralyzingRefs] : [])]);
     assert.deepEqual(row.sources, ['artifact']);
   }
-  assert.equal(digest(JSON.stringify(baseline.systems.filter(row => !Object.hasOwn(priorRefs, row.id) && !['condition-4-wire', 'condition-4-lifecycle'].includes(row.id)))), '3330dfc41b884348066c1c0f2e21476a1fbd07e9b889e32b486f1cd1f782da3a');
+  assert.equal(digest(JSON.stringify(baseline.systems.filter(row => !Object.hasOwn(priorRefs, row.id) && !['condition-4-wire', 'condition-4-lifecycle', 'condition-14-wire', 'condition-14-lifecycle'].includes(row.id)))), '3b753f84ca58978520a1c43fe836a2373ad5259e082bd44d5c3918ac92fca9e9');
   const frozen = structuredClone(baseline); delete frozen.sources; delete frozen.systems; delete frozen.roadmap;
   assert.equal(digest(JSON.stringify(frozen)), '8746920f0778d190e098747ca3edbe691ad593676811e0c9ceff8477a70e1b50');
-  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => ![...refs, 'impl-quiver-tests', 'impl-quiver-native', 'impl-iron-tests', 'impl-iron-native'].includes(id))))), 'fc95d0b220e1d715f101985c59cca6ba66a3ff8da4a151042282ad5dad97c237');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => ![...refs, 'impl-quiver-tests', 'impl-quiver-native', 'impl-iron-tests', 'impl-iron-native', ...paralyzingRefs].includes(id))))), 'fc95d0b220e1d715f101985c59cca6ba66a3ff8da4a151042282ad5dad97c237');
   const roadmap = baseline.roadmap.map(area => ({...area, requirements: area.requirements.map(row => (area.id === 'combat' && ['Weapons, spells and projectiles', 'Conditions and their lifecycle'].includes(row.title)) || (area.id === 'multiplayer' && row.title === 'Identity, saves and world transitions') ? {...row, current: null} : row)}));
   assert.equal(digest(JSON.stringify(roadmap)), '63a4a090465819bdbf657dba0b64c84ed3c47f84cca1c56306e23f1c6366a2e6');
   const leaf = id => baselineLeaves.find(row => row.id === id);
@@ -294,12 +296,12 @@ test('prediction repair stays scoped alongside the quiver increments without pas
   assert.match(leaf('combat-collision-matrix').check, /Two aligned targets, owner\/observer, Invisible pre-existing hostile shot, repeated victim and recreated identity/);
   const quivers = ['object-0a61-activation-0', 'object-0a62-activation-0', 'object-0a63-activation-1', 'object-0a64-activation-1', 'object-0a65-activation-1'].map(leaf);
   assert.equal(quivers.length, 5);
-  assert.deepEqual(quivers.map(row => row.implementation), ['partial', 'partial', 'partial', 'missing', 'missing']);
+  assert.deepEqual(quivers.map(row => row.implementation), ['partial', 'partial', 'partial', 'partial', 'partial']);
   assert.ok(quivers.every(row => row.name.endsWith(': Shoot')));
   assert.ok(baselineLeaves.filter(row => row.id.endsWith('-journey')).every(row => row.implementation === 'partial' && !row.implementationSources.some(ref => refs.includes(ref))));
   for (const variant of ['original', 'repaired']) {
     const totals = countChecks(baseline, baselineLeaves, variant);
-    assert.deepEqual(totals.implementation, {present: 892, partial: 5596, missing: 1755, 'not-inspected': 2645});
+    assert.deepEqual(totals.implementation, {present: 892, partial: 5600, missing: 1753, 'not-inspected': 2643});
     assert.deepEqual(totals.functional, {'not-run': 10888, passed: 0, failed: 0});
     assert.deepEqual(totals.historical, {unresolved: 10864, verified: 0, differences: 24});
     assert.equal(totals.complete, false);
@@ -335,7 +337,7 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
     assert.deepEqual(leaf.implementationSources, [...(leaf.id.startsWith('object-') ? ['impl-world'] : []), ...refs]);
   }
   // These digests freeze the pre-increment expanded surface, not just the inventory counts.
-  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ![...scopedIds, 'object-0a63-activation-1', 'combat-collision-matrix'].includes(row.id)))), '354ec5a4092041dad6dbc2391d0318d352f1c20a10414cca521613ad5f19a595');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ![...scopedIds, 'object-0a63-activation-1', ...paralyzingIds].includes(row.id)))), 'e40513b5c35e3ac9ad832726bc95c9705c4db8a1c81d60fc3cf8fc011a8fccd7');
   assert.equal(digest(JSON.stringify(scoped.map(({implementation, implementationSources, check, unknowns, ...row}) => row))), '56a9176ab72bda4e4295bfb1c20953f41719e1d2ac47809132b9a723fbcea9c8');
   assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => row.id.endsWith('-journey')))), 'e4ada9b5a32ff09e32be427e6d9ae438fbd1310d686a40423ddb05d9148b5d71');
   const leaf = id => baselineLeaves.find(row => row.id === id);
@@ -345,7 +347,7 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
   assert.match(leaf('condition-4-wire').check, /Damage9 enum4\/duration3.*stat29 mask8.*does not accept duration255\/256/);
   assert.match(leaf('condition-4-lifecycle').check, /Enemy-only transient.*overwrites remaining3s, not max\/stack.*whole positive-on-entry.*equality clear.*next-advance.*unchanged attack\/state clocks.*cleanup/);
   assert.match(leaf('condition-4-lifecycle').unknowns.join(' '), /Player admission\/held-key effects.*historical policy remain Unknown/);
-  for (const id of ['object-0a64-activation-1', 'object-0a65-activation-1']) assert.equal(leaf(id).implementation, 'missing');
+  for (const id of ['object-0a64-activation-1', 'object-0a65-activation-1']) assert.equal(leaf(id).implementation, 'partial');
   assert.deepEqual(baseline.results, {});
   for (const variant of ['original', 'repaired']) {
     const totals = countChecks(baseline, baselineLeaves, variant);
@@ -356,8 +358,8 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
   assert.equal(baseline.roadmap.length, 7);
   assert.equal(baseline.roadmap.reduce((n, area) => n + area.requirements.length, 0), 30);
   const combat = baseline.roadmap.find(area => area.id === 'combat').requirements;
-  assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced and Iron.*PREPARED private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
-  assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*Tattered, Reinforced and Iron.*public HP5 deaths do not prove duration.*Player conditions.*history.*full class journeys.*unverified/);
+  assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered normal public native.*Reinforced, Iron, Steel and Golden PREPARED private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
+  assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed and Paralyzed are partial.*Tattered\/Reinforced\/Iron.*Steel\/Golden.*Public HP5 deaths do not prove duration.*Player conditions.*history.*full class journeys.*unverified/);
 });
 
 test('Iron citations pin executed tests and prepared native scope without historical or public acceptance', () => {
@@ -378,12 +380,12 @@ test('Iron citations pin executed tests and prepared native scope without histor
   for (const pattern of [/PREPARED HP500.*a63 starter override, unchanged repaired SWF.*one80MP arrow.*distinct authoritative victims once.*mask8->explicit0 in both views/, /Both green arrows remained rendered after actual first Damage9 processing, before a later genuine native-only\/offscreen contact/, /not an additional authoritative or rendered peer hit/, /PREPARED HP100.*same paid bullet1.*twice.*Drop11\/fresh Make10 at HP100.*fresh second instance.*both contacts preceded actual106-damage backend death and XP10 once each/, /Post-backend-hit living\/Slowed\/nonempty-ledger native recontact remains unobserved; deterministic tests cover that ledger separately/, /No Iron relay or outcome-driven reset; external host reboots restarted volatile Rooms\/RNG without restoring saved progress/, /Private ordinary a61 paid-arrow\/death.*PREPARED a62 positive-bullet Damage9\/moving-Slowed expiry regressions passed at this pin/, /not earned Iron or historical production proof; no public Iron\/full Archer journey acceptance/, /Original SWF functional checks remain not-run; history unresolved/, /not an original sentinel.*lifetimes are independent.*without synchronized retirement or delivery guarantees/]) assert.match(native.qualification, pattern);
 });
 
-test('Iron changes only its Shoot leaf and the partial collision matrix among10888 complete leaf objects', () => {
+test('Iron evidence remains frozen alongside the five-leaf Steel/Golden increment', () => {
   const refs = ['impl-iron-tests', 'impl-iron-native'];
   const leaf = id => baselineLeaves.find(row => row.id === id);
   const changedIds = ['object-0a63-activation-1', 'combat-collision-matrix'];
   assert.deepEqual(baselineLeaves.filter(row => row.implementationSources.some(ref => refs.includes(ref))).map(row => row.id), changedIds);
-  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => !changedIds.includes(row.id)))), 'df67acb9dce59e84c44025b3cf93e4f2c1b895dbadaf593c04f8eae4ee99f5fd');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ![...changedIds, ...paralyzingIds].includes(row.id)))), 'e5377351941214d444eb3d66e020d77d58b6786cf0f38f3ffe6c1d803ab7338f');
   const iron = leaf(changedIds[0]), matrix = leaf(changedIds[1]);
   assert.equal(iron.implementation, 'partial');
   assert.equal(iron.valuePath, 'Activate');
@@ -395,27 +397,103 @@ test('Iron changes only its Shoot leaf and the partial collision matrix among108
   assert.equal(leaf('object-0a63-activation-0').valuePath, 'ActivateOnEquip');
   assert.deepEqual(JSON.parse(leaf('object-0a63-activation-0').binding).attributes, {stat: '28', amount: '2'});
   for (const id of ['object-0a64-activation-1', 'object-0a65-activation-1']) {
-    assert.equal(leaf(id).implementation, 'missing');
-    assert.deepEqual(leaf(id).implementationSources, ['impl-world']);
+    assert.equal(leaf(id).implementation, 'partial');
+    assert.deepEqual(leaf(id).implementationSources, ['impl-world', ...paralyzingRefs]);
   }
   assert.equal(matrix.implementation, 'partial');
-  assert.deepEqual(matrix.implementationSources, ['impl-combat', 'impl-prediction-repair-tests', 'impl-prediction-repair-native', ...refs]);
+  assert.deepEqual(matrix.implementationSources, ['impl-combat', 'impl-prediction-repair-tests', 'impl-prediction-repair-native', ...refs, ...paralyzingRefs]);
   const {check, unknowns, implementationSources: matrixRefs, ...matrixFixed} = matrix;
   assert.equal(digest(JSON.stringify(matrixFixed)), '77f1b565d75d03818b5f096bb91c1845d61b23166aab82a0299bb8c3ec532652');
-  assert.match(check, /Iron0a63 only.*stable Room numeric IDs at discovery through retirement.*view repair\/removal and earlier buffered kills.*entry then lower ID without global ordinary bullet\/reward reordering/);
-  assert.match(check, /Only Iron bypasses static OccupySquare cover.*presentation bullet0.*owner\/target\/damage\/Slowed4-duration3.*funded IDs1..96 and peer Shoot remain unchanged/);
+  assert.match(check, /Iron0a63 and Golden0a65.*stable Room numeric IDs at discovery through retirement.*view repair\/removal and earlier buffered kills.*entry then lower ID without global ordinary bullet\/reward reordering/);
+  assert.match(check, /Only these continuing quivers bypass static OccupySquare cover.*presentation bullet0.*owner\/target\/damage\/effect.*Slowed4 or Paralyzed14, duration3.*funded IDs1..96 and peer Shoot remain unchanged/);
   assert.match(unknowns.join(' '), /recontacts preceded backend collision, not a post-hit living\/Slowed\/nonempty-ledger test/);
   assert.match(unknowns.join(' '), /later native-only\/offscreen contact, not an additional authoritative or rendered peer hit/);
   assert.match(unknowns.join(' '), /lifetimes retire independently.*no synchronized retirement or delivery guarantee.*not establish an original historical bullet0 sentinel/);
-  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => !refs.includes(id))))), 'b06180da12d36b61b8422d6df6743184a2e5a69794325c3ecc32e45511f1ee9e');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => ![...refs, ...paralyzingRefs].includes(id))))), 'b06180da12d36b61b8422d6df6743184a2e5a69794325c3ecc32e45511f1ee9e');
   // Mask only the approved prose fields; every other parsed data value stays frozen.
   const frozen = structuredClone(baseline);
-  for (const ref of refs) delete frozen.sources[ref];
+  for (const ref of [...refs, ...paralyzingRefs]) delete frozen.sources[ref];
+  frozen.systems = frozen.systems.filter(row => !['condition-14-wire', 'condition-14-lifecycle'].includes(row.id));
   const collision = frozen.systems.find(row => row.id === matrix.id);
   collision.check = null; collision.unknowns = null;
-  collision.implementationSources = collision.implementationSources.filter(ref => !refs.includes(ref));
+  collision.implementationSources = collision.implementationSources.filter(ref => ![...refs, ...paralyzingRefs].includes(ref));
   for (const area of frozen.roadmap) for (const row of area.requirements) if (area.id === 'combat' && ['Weapons, spells and projectiles', 'Conditions and their lifecycle'].includes(row.title)) row.current = null;
-  assert.equal(digest(JSON.stringify(frozen)), '9644f02ec8b0108f1653b85ba5e460ef5ebd2977c497c9e7436c9a9bf9b3b8ba');
+  assert.equal(digest(JSON.stringify(frozen)), 'cb61ee9f532245f80c400579a3c56c25fb85771cf15da44a79bf41d2bb663259');
+  assert.deepEqual(baseline.results, {});
+  for (const variant of ['original', 'repaired']) {
+    assert.deepEqual(countChecks(baseline, baselineLeaves, variant).functional, {'not-run': 10888, passed: 0, failed: 0});
+    assert.deepEqual(countChecks(baseline, baselineLeaves, variant).historical, {unresolved: 10864, verified: 0, differences: 24});
+    assert.equal(countChecks(baseline, baselineLeaves, variant).complete, false);
+  }
+});
+
+test('Steel/Golden citations pin test versus prepared native evidence and preserve critical limits', () => {
+  const pin = '56db1f589f082670b2eac22e7667dedbee9a8aa6';
+  const [tests, native] = paralyzingRefs.map(ref => baseline.sources[ref]);
+  for (const [source, mode, file, words] of [[tests, 'test', 'quiver_runtime_tests.rs', 160], [native, 'native', 'world.rs', 210]]) {
+    assert.equal(source.kind, 'implementation'); assert.equal(source.mode, mode);
+    assert.equal(source.url, `https://github.com/dginovker/Open-RotMG-Server/blob/${pin}/src/build100/${file}`);
+    assert.ok(source.qualification.split(/\s+/).length <= words);
+    assert.doesNotMatch(JSON.stringify(source), /\u2014|\.local\/|\/home\/|guid=|credential|profile\/|\.db\b/i);
+    validateSource(source, 'paralyzing');
+    assert.throws(() => validateSource({...source, mode: 'source-only'}, 'probe'), /evidence mode/);
+    assert.throws(() => validateSource({...source, url: source.url.replace(pin, 'a'.repeat(40))}, 'probe'), /Wrong implementation pin/);
+    for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...source, kind, mode: undefined}, 'probe'), /not history/);
+  }
+  for (const symbol of ['quiver_runtime_steel_golden_original_repaired_shapes_dex_and_fail_closed', 'quiver_runtime_paralyzed_whole_entry_step_chase_return_wander_clocks_and_resume', 'quiver_runtime_paid_slow_and_paralyzed_refresh_independently_without_stacking_or_pausing', 'quiver_actor_iron_steel_golden_advance_begin_write_failure_installs_no_candidate_or_output', 'quiver_actor_golden_paid_separate_contacts_real_advisory_repair_preserves_paralysis_and_ledger', 'quiver_transport_encrypted_split_coalesced_serial_awaited_replies_no_adjacency_or_deadlock']) assert.ok(tests.selector.includes(symbol));
+  for (const pattern of [/371 July tests/, /Steel uses 110-130 damage, 80 MP, DEX\+3 and a noncontinuing Blue Arrow/, /Golden uses 130-170, 100 MP, DEX\+5 and a continuing Gold Arrow/, /three-second Paralyzed to enemies only \(enum14, mask8192\)/, /positive timer blocks the whole movement step before aging; refresh overwrites even a longer duration/, /Slowed ages independently, with paralysis taking precedence.*Targeting, attacks and clocks continue/, /Real actor tests cover SQL rollback and advisory repair/, /policy is reconstruction, not historical NPC behavior or Player condition support/, /RED reached Steel, not Golden independently/]) assert.match(tests.qualification, pattern);
+  for (const symbol of ['Room::handle_at packet8/9/15', 'Room::advance_shore', 'enemy_movement_factor', 'Room::entity_wire_stats', 'Room::repairable_enemy', 'Room::publication']) assert.ok(native.selector.includes(symbol));
+  for (const pattern of [/PREPARED starter-quiver\/HP500 overrides.*banners.*unchanged repaired SWF; no relay or instruction changes/, /Both native BEFORE cases were recorded before implementation/, /Steel paid 80 MP once.*surviving enemy.*Blue Arrow in both views.*server Damage9 retains a positive real bullet ID/, /Golden paid 100 MP once and damaged four distinct surviving enemies/, /Both showed moving enemies stop under mask8192, clear explicitly and resume/, /same gold arrow remained visible in both views after actual first bullet0 Damage9 processing and before a later genuine contact/, /offscreen contact also had authoritative damage, not rendered-peer far-hit evidence/, /Iron repair evidence remains pre-backend-hit.*post-backend-hit living\/Paralyzed\/nonempty-ledger native recontact remains unobserved/, /Failed opportunities and progress were retained.*external reboots restarted volatile Rooms\/RNG without restoring saved progress/, /Public bow\/Tattered and reconnect checks passed/, /Longer movement trials still produced movement-budget rejections and an unpaid quiver rejection; bounded recovery is not general movement acceptance/, /does not prove earned Steel\/Golden, authenticated history or a complete Archer journey.*Original SWF functional checks remain not-run/]) assert.match(native.qualification, pattern);
+});
+
+test('Steel/Golden evidence changes exactly five complete expanded leaves without promoting other surfaces', () => {
+  const leaf = id => baselineLeaves.find(row => row.id === id);
+  assert.deepEqual(baselineLeaves.filter(row => row.implementationSources.some(ref => paralyzingRefs.includes(ref))).map(row => row.id).sort(), [...paralyzingIds].sort());
+  // These hashes come from the unedited main84 catalogue, not the new evidence values.
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => !paralyzingIds.includes(row.id)))), '057fb9f7f419a558405dbeb8facc3328adc11743ac037c577434abea91594330');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => !paralyzingRefs.includes(id))))), '5dc9e42c6c4024efa0eae2b4ebf438fc926dbbdc45c5cec72621c2721f6c02b4');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => /^object-0a6[123]-/.test(row.id)))), '80d347b4f26551c8126f2852f53fbeb982eb93a048705d8038f6067e65198303');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ['object-0a64-activation-0', 'object-0a65-activation-0'].includes(row.id)))), '21d898b7b976c05a8707598d900ba38554d217f2e28519dda14e0851d60bbd0b');
+  const shoots = paralyzingIds.slice(0, 2).map(leaf);
+  assert.equal(digest(JSON.stringify(shoots.map(({implementation, implementationSources, ...row}) => row))), '9571084be62f947970b0025b1698010de07e1cf684e0bbfff569ccd06cd14fa2');
+  for (const [i, row] of shoots.entries()) {
+    assert.equal(row.implementation, 'partial'); assert.equal(row.valuePath, 'Activate'); assert.ok(row.name.endsWith(': Shoot'));
+    assert.deepEqual(row.implementationSources, ['impl-world', ...paralyzingRefs]);
+    assert.deepEqual(JSON.parse(leaf(`object-0a6${i + 4}-activation-0`).binding).attributes, {stat: '28', amount: String(i ? 5 : 3)});
+  }
+  const projectile = owner => baseline.occurrences.projectile.find(row => row.owner === owner);
+  for (const [owner, min, max, mp, visual, continues] of [['object-0a64', '110', '130', '80', 'Blue Arrow', false], ['object-0a65', '130', '170', '100', 'Gold Arrow', true]]) {
+    const fields = baseline.members.find(row => row.id === owner).fields, p = projectile(owner);
+    assert.deepEqual(p.attrs, {});
+    for (const [tag, value] of [['MinDamage', min], ['MaxDamage', max]]) {
+      assert.equal(fields.find(f => f[0] === tag)[1], value); assert.equal(p.fields.find(f => f[0] === tag)[1], value);
+    }
+    assert.equal(fields.find(f => f[0] === 'MpCost')[1], mp);
+    assert.equal(p.fields.find(f => f[0] === 'ObjectId')[1], visual);
+    assert.deepEqual(p.fields.find(f => f[0] === 'ConditionEffect'), ['ConditionEffect', 'Paralyzed', {duration: '3'}]);
+    assert.equal(p.fields.some(f => f[0] === 'Continues'), continues);
+    assert.deepEqual(p.fields.slice(-1)[0][0], continues ? 'Continues' : 'ConditionEffect');
+    for (const patch of [{name: 'HealNova'}, {path: 'ActivateOnEquip'}, {owner: 'object-0a66'}]) {
+      const d = catalogue(), row = d.occurrences.activation.find(r => r.owner === owner && r.path === 'Activate');
+      const ordinal = row.ordinal; Object.assign(row, patch);
+      assert.ok(!expandCatalogue(d).find(r => r.id === `${patch.owner ?? owner}-activation-${ordinal}`).implementationSources.some(ref => paralyzingRefs.includes(ref)));
+    }
+  }
+  const systems = baseline.systems.filter(row => paralyzingIds.includes(row.id));
+  assert.equal(digest(JSON.stringify(systems.map(({check, unknowns, implementationSources, implementation, ...row}) => row))), 'efefcdcc39c09faa4a041cf8686bdf6b78d736e3e739b414c0f9182dd9442771');
+  for (const id of ['condition-14-wire', 'condition-14-lifecycle']) {
+    assert.equal(leaf(id).implementation, 'partial'); assert.deepEqual(leaf(id).implementationSources, paralyzingRefs);
+    assert.match(leaf(id).check, /Enemy-only/); assert.match(leaf(id).unknowns.join(' '), /Player.*Unknown/);
+  }
+  assert.match(leaf('condition-14-wire').check, /enum14\/duration3.*stat29 mask8192, not selector29.*8192\/8\/8200\/0.*explicit zero/);
+  assert.match(leaf('condition-14-lifecycle').check, /whole positive-on-entry step.*aging\/clamp\/equality clear.*next advance.*shortening.*independently aging.*Attack\/target\/age\/world\/state clocks unchanged/);
+  assert.equal(leaf('condition-14-client').implementation, 'not-inspected'); assert.deepEqual(leaf('condition-14-client').implementationSources, []);
+  assert.equal(leaf('combat-collision-matrix').implementation, 'partial');
+  assert.match(leaf('combat-collision-matrix').check, /Steel0a64 retains ordinary first-hit retirement\/cover and positive real-ID Damage9/);
+  assert.match(leaf('combat-collision-matrix').unknowns.join(' '), /Golden SAME gold arrow.*post9Status13 and ordinal-matched Move5.*authoritative141 hit but was offscreen, not a rendered peer far hit/);
+  const roadmap = structuredClone(baseline.roadmap);
+  for (const area of roadmap) for (const row of area.requirements) if (area.id === 'combat' && ['Weapons, spells and projectiles', 'Conditions and their lifecycle'].includes(row.title)) row.current = null;
+  assert.equal(digest(JSON.stringify(roadmap)), '82c16a69ed7468c92c7f67f8948a40f4d04ab3cb172142533ee84e84f08cfe9a');
   assert.deepEqual(baseline.results, {});
   for (const variant of ['original', 'repaired']) {
     assert.deepEqual(countChecks(baseline, baselineLeaves, variant).functional, {'not-run': 10888, passed: 0, failed: 0});
@@ -615,6 +693,8 @@ test('unknown deep links fail visibly instead of opening an arbitrary nearby che
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
+  assert.equal(digest(bytes), '50d4b2f958206aa71f799d4623fdff0511ce9b616659f6d18432e3ed0cb2292e');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '471c6e5fd0e93e678c71771829ea7a67982a1e4699934761fa0892267bbe5c36');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
