@@ -471,15 +471,13 @@
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
-        "differences": [
-          "Only Well Equipped is awarded. The other named death bonuses still need implementation.",
-          "God kills, Oryx kills and level-up assists are still returned as zero in death statistics."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original edge cases, counter eligibility and rounding must be checked when implementing the remaining bonuses."
+          "Fresh final-head normal-client combat, death, archived Legends reopening and a complete native backup-restore journey are deferred.",
+          "Long-history and dungeon-condition cases have regression-fixture coverage, not complete historical or native acceptance. Unknown legacy history is preserved rather than reconstructed as zero."
         ],
         "sources": [
           {
@@ -501,7 +499,7 @@
             "name": "Lifetime counters and death statistics",
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
             "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
             "unknowns": [],

@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "fame-shipment-regression-8647a46": {
+      "kind": "regression",
+      "revision": "8647a4673e26229d881470396d6dab7a541b2a1c",
+      "date": "2026-10-23",
+      "method": "Executed 18 affected Rust cases and five backup cases after the pinned community/Fame integration, including source-sensitive potion tracking, earned-exit finalization, inventory-credit atomicity, nonempty canonical 16 to 17 migration and receipt corruption rejection. A fresh export/restore/reload contract passed on the same exact-revision release binary; earlier feature regressions retain their original source bindings.",
+      "limitations": "Engineering regression evidence, not a fresh full-feature normal-client journey. The attached native death screenshots are historical c36df89 evidence. Final-head combat/death, archived Legends reopening and the complete native backup-restore journey remain deferred; gameplay and historical acceptance are not promoted.",
+      "checks": ["heroes:fame-bonuses", "heroes:lifetime-combat-statistics", "heroes:equipment-fame-bonus"],
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/375#issuecomment-6372045816"
+    },
     "sand-castle-source-0e3f09d": {
       "kind": "source",
       "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
@@ -1039,9 +1048,9 @@
     "heroes:choose-and-unlock-classes": {"status":"not-run","evidence":[]},
     "heroes:level-to-20": {"status":"not-run","evidence":[]},
     "heroes:living-fame": {"status":"not-run","evidence":[]},
-    "heroes:fame-bonuses": {"status":"not-run","evidence":[]},
-    "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":[]},
-    "heroes:equipment-fame-bonus": {"status":"not-run","evidence":[]},
+    "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
+    "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
+    "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:class-stars": {"status":"not-run","evidence":[]},
     "heroes:legends-highscores": {"status":"not-run","evidence":[]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
