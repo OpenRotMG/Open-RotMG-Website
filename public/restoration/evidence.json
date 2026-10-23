@@ -1,6 +1,42 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "mana-text-source-65dd762": {
+      "kind": "source",
+      "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/65dd762251b65368c40a3c3e383145f6d734a83a/src/world/consumables.rs",
+      "method": "The shared consumable Mana completion sends cyan0xff00ffff for actual positive restoration; HP remains green and the native text/outline/lifetime and white particles are unchanged.",
+      "limitations": "Implements explicit issue322 color request, not an authenticated original palette. Trapped white, realm-src purple and later FSoD blue conflict. No gameplay amount, Quiet/full policy or full-feature acceptance change.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-text-regression-65dd762": {
+      "kind": "regression",
+      "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/343#issuecomment-6362663744",
+      "method": "All342 Rust tests passed with four threads, formatting and warning-denied all-target Clippy passed. Wire-level completion test checks full100/partial25 MP cyan notifications, no positive number at full MP/Quiet, actual resource gain, exact recipient and unchanged HP green.",
+      "limitations": "World-level completion test, not a new full consumable transaction or multiplayer journey. Native is bound separately to4759ff7. Prior ENOSPC, failed native one-cast deficit assertion and serial timeout are retained as failures.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-text-native-4759ff7": {
+      "kind": "native",
+      "revision": "4759ff7474edb34f0652ac0b9c88217f26cd186f",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/343#issuecomment-6362663744",
+      "method": "Real native Wizard casts twice then consumes one Magic Potion. Before009109e shows purple+100; after4759ff7 shows cyan+100. Both pass actual mana spending/restoration, once-only slot/revision change, same living character and cleanup. Identical pinned client21f5c7f/runtime0.7.1-openrotmg.12 bundle22c2756ae1d738ca3f8cdde8af0d0437e3c1615c043e548906f2f1fcb1d7ab4a.",
+      "limitations": "Prepared Level20 gear in separate isolated runs, not earned progression or multiplayer. Final65dd762 consumable module is byte-identical; integrated peer Realm/encounter work is not native-qualified here. One color fix does not accept the broader feedback bundle or certify target hue.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
     "snake-cover-regression-3778af2": {
       "kind": "regression",
       "revision": "3778af2b3146d7bc20a504131f1769c01cf005ad",
@@ -895,9 +931,9 @@
     "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
-    "gear:magic-potions": {"status":"not-run","evidence":[]},
+    "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:stat-potions": {"status":"not-run","evidence":[]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":[]},
+    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
