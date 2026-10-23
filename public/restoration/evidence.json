@@ -1129,7 +1129,7 @@
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/391#issuecomment-6373486497",
       "method": "Eleven Snake-filtered Rust tests and the exact prepared-world seed/restoration test passed. Durable coverage checks reachable complete room encounters across 128 seeds, single-use/local activation, immunity, selected Guard stats and volley/motor semantics, capacity failure and unchanged Stheno reward pools without clear credit. The actual generator completed 4096 seeds with 0-3 rooms and unobstructed treasure floors; all 1144 treasure-free maps matched frozen 82b8caf byte-for-byte. Strict all-target Clippy, formatting and 150 JavaScript tests passed.",
-      "limitations": "Prepared implementation regressions do not recover official room probabilities, AI timings or reward rates. The integrated full suite was not green: 636 passed, 5 failed, 1 pre-existing ignored. Full-suite failure details and baseline comparisons are tracked in the linked PR. No whole-dungeon acceptance.",
+      "limitations": "Prepared implementation regressions do not recover official room probabilities, AI timings or reward rates. The integrated full suite was not green: 636 passed, 5 failed, 1 pre-existing ignored. All five failures reproduced individually on untouched 8733abd in fresh owned state, with the same assertions. No clean full-suite pass or whole-dungeon acceptance is claimed; exact bindings are in the linked PR.",
       "checks": [
         "dungeons:snake-pit"
       ]
