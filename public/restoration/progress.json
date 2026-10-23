@@ -1476,7 +1476,7 @@
         "historical": "partial",
         "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
         "differences": [
-          "The family runs, but Shambling Sludge and Sludget item drops are not configured."
+          "Sludge equipment and Sludget consumables are reconstructed from the older community table; original 123.5.1 probabilities remain unverified."
         ],
         "unknowns": [
           "Original child counts, throw delays, health thresholds and drops.",
@@ -1563,6 +1563,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1613,6 +1617,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1638,6 +1646,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1712,6 +1724,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1734,6 +1750,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -1948,10 +1968,11 @@
         "historical": "partial",
         "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
         "differences": [
-          "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue335 and exhaustive native combat/loot-return acceptance remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+          "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue335 and exhaustive native combat/loot-return acceptance remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification."
         ],
         "unknowns": [
-          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability and loot rates."
+          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability, loot pools, eligibility, minimum counts and rates."
         ],
         "sources": [
           {
@@ -1961,6 +1982,18 @@
           {
             "url": "https://web.archive.org/web/20120429072116id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
             "label": "April 2012 Hermit wiki: lake in mountain and forest terrain"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Hermit.cs",
+            "label": "Modified-7 comparator: private Dex, Vit and Juggernaut; required potion counts"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/loot/Loots.cs",
+            "label": "Comparator allocation engine: independent rolls and shared private minima"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
+            "label": "June 2012 guide: soulbound loot and a broader pool, without numerical minima"
           }
         ]
       }
@@ -2129,6 +2162,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2284,6 +2321,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2330,6 +2371,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2373,6 +2418,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2844,7 +2893,7 @@
           "The procedural generator adds candles to ordinary rooms and random walls, but does not explicitly mark the entrance and end with candles."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius and chase policy remain unrecovered; the archived guide describes following players without numeric motor parameters."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
         ],
         "sources": [
           {
@@ -2862,6 +2911,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs",
             "label": "Modified 7.0: conflicting stationary spiral, not an official 2012 specification"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Follow.cs",
+            "label": "Modified 7.0 comparator: independent steering jitter, not original spawn-spacing evidence"
           },
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
@@ -2929,6 +2982,14 @@
         ],
         "sources": [
           {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/DungeonGen/Templates/Abyss/StartRoom.cs",
+            "label": "Empty generated start-room comparator, not a runtime safety barrier or original generator"
+          },
+          {
+            "url": "https://bluenosersguide.weebly.com/abyss-of-demons.html",
+            "label": "Mixed-era guide: doorway arrivals and demons chasing into the starting area"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
           },
@@ -2972,7 +3033,7 @@
         ],
         "unknowns": [
           "Exact target geometry, random distributions and differences between period healing/timing accounts.",
-          "Native full-three-boss clear, durable clear-exit/reconnect, earned Sphinx-to-Tomb journey and complete phase/artifact imagery remain open."
+          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open."
         ],
         "sources": [
           {
@@ -3036,7 +3097,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact period loot probabilities and native three-boss/clear-exit/reconnect acceptance remain unverified."
+              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified."
             ],
             "sources": [
               {
@@ -3898,8 +3959,8 @@
           {
             "id": "gear:consumable-result-feedback",
             "name": "Actual restoration and rejected-use feedback",
-            "expected": "Visible results must reflect actual committed restoration/stat changes, not an unclipped advertised amount.",
-            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no fictitious gain or success feedback on rejected consumption; review existing native evidence.",
+            "expected": "Stat potions update committed stats without a success chat message. HP/MP restoration feedback reflects the actual gain, not an unclipped advertised amount.",
+            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no stat-potion success chat, fictitious gain or success feedback on rejected consumption; review revision-bound native evidence.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
@@ -5983,6 +6044,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6004,6 +6069,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6025,6 +6094,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6050,6 +6123,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6076,6 +6153,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6103,6 +6184,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Juvenile%20White%20Dragon",
             "label": "Juvenile White Dragon wiki page (date unconfirmed)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }

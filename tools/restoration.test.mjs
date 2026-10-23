@@ -20,6 +20,14 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Hermit loot regressions do not certify full native or historical acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:hermit-god',ref='hermit-loot-regression-22ecae7';
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert(evidence.results[id].evidence.includes(ref));
+  assert.equal(data.features.find(f=>f.id===id).audit.historical,'partial');
+  assert.match(evidence.sources[ref].limitations,/not a full native Hermit loot clear/);
+});
+
 test('Tomb release records source restoration without inventing full acceptance',()=>{
   const data=catalogue(),evidence=ledger(),ids=['realm:grand-sphinx','dungeons:tomb-of-the-ancients',...['sarcophagus-awakening','trap-switch-and-quicksand','treasure-and-three-boss-completion','ordinary-encounters'].map(x=>'dungeons:tomb-of-the-ancients:'+x)];
   validateEvidence(data,evidence);
@@ -29,6 +37,13 @@ test('Tomb release records source restoration without inventing full acceptance'
     assert.equal(accepted(row.feature,evidence),false,id);assert.equal(matches(row,evidence,'verification'),true,id);
   }
   assert.match(evidence.sources['tomb-native-partial-99451ac'].limitations,/One boss, not a complete Tomb acceptance/);
+  const ref='tomb-native-clear-933375f',clear=evidence.sources[ref],bound=Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([id])=>id);
+  assert.equal(clear.kind,'native');assert.equal(clear.revision,'933375f9f3795358f07882da54be84fb3b16c58e');
+  assert.deepEqual(bound,clear.checks);assert.deepEqual(bound,[ids[1],ids[4]]);
+  assert.match(clear.method,/exact identity\/kind death logs.*one committed Tomb counter.*normal0x704 exit.*same account\/character/);
+  assert.match(clear.limitations,/Arena companions were born after objectives and before boss DPS/);
+  assert.match(clear.limitations,/not the combined treasure\/individual-loot\/artifact acceptance/);
+  assert.match(data.features.find(f=>f.id===ids[1]).audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
 });
 
 test('Snake Pit cover evidence does not accept the full route',()=>{
