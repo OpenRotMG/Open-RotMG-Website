@@ -14,7 +14,8 @@ for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-te
       const nodes = {'#game': {dataset: {mode}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
       const player = {addEventListener() {}, ruffle: () => ({load: async value => {options = value;}})};
       await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
-        document: {baseURI, querySelector: key => nodes[key]}, URL, AbortSignal, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}},
+        document: {baseURI, querySelector: key => nodes[key]}, URL, AbortSignal,
+        OpenRotMGBackend: {url: path => new URL(path, baseURI), fetch: async () => ({ok: true})}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}},
         fetch: async () => ({ok: true, json: async () => ({tab: 'a'.repeat(64)})}), setInterval: () => 1, clearInterval() {}, addEventListener() {}});
       const origin = new URL(baseURI).origin;
       assert.equal(options.url, origin + path);
@@ -33,7 +34,8 @@ test('unknown or absent mode fails visibly without loading arbitrary content', a
     const nodes = {'#game': {dataset: {mode}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
     const player = {addEventListener() {}, ruffle: () => ({load: async () => {loads++;}})};
     await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
-      document: {baseURI: 'https://example.test/draw/', querySelector: key => nodes[key]}, URL, console: {error() {}}});
+      document: {baseURI: 'https://example.test/draw/', querySelector: key => nodes[key]}, URL,
+      OpenRotMGBackend: {url: path => new URL(path, 'https://game.example.test')}, console: {error() {}}});
     assert.equal(loads, 0);
     assert.equal(nodes['#load-error'].hidden, false);
     assert.match(nodes['#load-error'].textContent, /Unknown client mode/);
@@ -64,7 +66,7 @@ test('local build rejects dirty tracked and untracked client state before prepar
     for (const name of ['untracked', 'tracked']) {
       writeFileSync(join(directory, name), 'dirty');
       const result = spawnSync(process.execPath, ['tools/build.mjs'], {cwd: new URL('../', import.meta.url),
-        env: {...process.env, CLIENT_DIR: directory, SITE_URL: 'http://127.0.0.1/', LOCAL_CLIENT_BUILD: '1'}, encoding: 'utf8'});
+        env: {...process.env, CLIENT_DIR: directory, SITE_URL: 'http://127.0.0.1/', API_ORIGIN: 'http://127.0.0.1', LOCAL_CLIENT_BUILD: '1'}, encoding: 'utf8'});
       assert.notEqual(result.status, 0);
       assert.doesNotMatch(result.stdout, /Prepared/);
       if (name === 'untracked') assert.match(result.stderr, /clean exact client HEAD\/tree/);

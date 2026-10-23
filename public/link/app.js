@@ -1,12 +1,12 @@
 async function request(path, token, fetchImpl) {
   if (!/^[a-f0-9]{64}$/.test(token)) throw new Error('Run /link in Discord again.');
   // CORS mode preserves Origin under no-referrer: https://fetch.spec.whatwg.org/#append-a-request-origin-header
-  const response = await fetchImpl(path, {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token}), credentials: 'same-origin', mode: 'cors', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(15000)});
+  const response = await fetchImpl(path, {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token}), credentials: 'include', mode: 'cors', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(15000)});
   const result = await response.json();
   if (!response.ok) throw new Error(typeof result.error === 'string' ? result.error : `Linking unavailable (${response.status})`);
   return result;
 }
-export async function startLink(token, origin, fetchImpl = fetch) {
+export async function startLink(token, origin, fetchImpl = globalThis.OpenRotMGBackend.fetch) {
   const result = await request('/api/account/link/start', token, fetchImpl);
   if (result.state === 'signed_out') return result;
   if (result.state !== 'authorize') throw new Error('Invalid linking response');
@@ -14,7 +14,7 @@ export async function startLink(token, origin, fetchImpl = fetch) {
   if (url.origin !== 'https://discord.com' || url.pathname !== '/oauth2/authorize' || url.username || url.password || url.hash || url.searchParams.get('redirect_uri') !== origin + '/api/account/link/callback' || url.searchParams.get('scope') !== 'identify' || !/^[a-f0-9]{64}$/.test(url.searchParams.get('state'))) throw new Error('Invalid Discord authorization response');
   return {state: 'authorize', url: url.href};
 }
-export async function completeLink(token, fetchImpl = fetch) {
+export async function completeLink(token, fetchImpl = globalThis.OpenRotMGBackend.fetch) {
   const result = await request('/api/account/link/complete', token, fetchImpl);
   if (typeof result.name !== 'string' || !result.name) throw new Error('Link completion could not be confirmed.');
   return result.name;

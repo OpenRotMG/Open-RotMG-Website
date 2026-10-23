@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+<meta charset="utf-8">
+  <meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+  <script src="{{BASE}}backend.js" defer></script>
 <title>Hiscores · Open RotMG</title><meta name="description" content="Open RotMG fame records and drop collections.">
 <link rel="canonical" href="{{SITE_URL}}hiscores/"><link rel="icon" href="/amulet-of-resurrection.png">
 <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script>
