@@ -61,6 +61,24 @@ test('Snake Pit cover evidence does not accept the full route',()=>{
   assert.match(evidence.sources['snake-cover-native-3778af2'].limitations,/not earned.*grate.*minimap/);
 });
 
+test('Oryx count announcements do not accept complete closure or chat',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['realm:realm-closure','social:chat'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const row=records(data).find(r=>r.id===id);
+    assert.equal(evidence.results[id].status,'not-run');
+    assert.equal(accepted(row.feature,evidence),false);
+    assert(evidence.results[id].evidence.includes('oryx-count-regression-41e462f'));
+    assert(evidence.results[id].evidence.includes('oryx-count-native-829a4c1'));
+  }
+  for(const [ref,revision] of [['oryx-count-regression-41e462f','41e462f6fcb58f70a22ceb3447d9270cd63b5614'],['oryx-count-native-829a4c1','829a4c1e0d9afe08e2cb31c59be01667517baf67']]){
+    assert.equal(evidence.sources[ref].revision,revision);
+    assert.deepEqual(evidence.sources[ref].checks,ids);
+  }
+  const row=records(data).find(r=>r.id===ids[0]);
+  assert.match(row.rule.unknowns.join(' '),/two-minute.*20 seconds.*unverified/);
+});
+
 test('present features remain visible for gameplay and historical work',()=>{
   const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);
