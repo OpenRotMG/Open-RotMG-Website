@@ -3911,8 +3911,8 @@
           {
             "id": "gear:consumable-result-feedback",
             "name": "Actual restoration and rejected-use feedback",
-            "expected": "Visible results must reflect actual committed restoration/stat changes, not an unclipped advertised amount.",
-            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no fictitious gain or success feedback on rejected consumption; review existing native evidence.",
+            "expected": "Stat potions update committed stats without a success chat message. HP/MP restoration feedback reflects the actual gain, not an unclipped advertised amount.",
+            "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no stat-potion success chat, fictitious gain or success feedback on rejected consumption; review revision-bound native evidence.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
