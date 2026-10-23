@@ -1,6 +1,44 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "portal-position-regression-78d8151": {
+      "kind": "regression",
+      "revision": "78d81515a226503fc5c4fceb8d75580709a2f2f6",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/357#issuecomment-6368814004",
+      "method": "537 Rust tests passed with two threads,0fail,1existing ignored; formatting and strict all-target Clippy passed. Ghost God regression executes64 normal damage/defeat seeds and natural UDL requests, exact clear death-position placement, unchanged RNG/binding/lifetime. Existing loot/portal clearance and Manor boss-exit spacing regressions passed.",
+      "limitations": "World-level behavior, not a native earned-kill journey or full historical acceptance. Earlier source integrations had bot failures and a shared-helper Manor displacement; final code includes owner fixes and preserves boss exits.",
+      "checks": [
+        "realm:ghost-god",
+        "dungeons:undead-lair",
+        "gear:loot-and-ownership"
+      ]
+    },
+    "portal-position-source-78d8151": {
+      "kind": "source",
+      "revision": "78d81515a226503fc5c4fceb8d75580709a2f2f6",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/78d81515a226503fc5c4fceb8d75580709a2f2f6/src/world.rs",
+      "method": "Earned Realm portals test requested death position before deterministic clearance candidates. Boss-exit spacing, loot, chance, RNG, ownership, bindings and lifetimes remain; logs add requested coordinates and displacement.",
+      "limitations": "Source inspection, not historical acceptance. Occupied death points still require project clearance. Comparator corpse-center portals and jittered loot do not certify original geometry.",
+      "checks": [
+        "realm:ghost-god",
+        "dungeons:undead-lair",
+        "gear:loot-and-ownership"
+      ]
+    },
+    "portal-position-native-d7c39b1": {
+      "kind": "native",
+      "revision": "d7c39b1fa8edbdc25d4082f56060703db0a032d4",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/357#issuecomment-6368814004",
+      "method": "Actual native before/after passed authoritative requested-versus-placed coordinates:2tiles before,0after; same living Wizard and cleanup. Identical client21f5c7f/runtime.12 and prepared normal UDL allocation at safe Realm spawn. Final code restricts origin preference to Realm-earned portals, retaining boss exits.",
+      "limitations": "Dirty scratch d7c39b1 plus temporary constructor allocation and after placement change. Not earned Ghost God kill or dungeon entry. Fixture and diagnostic transport changes not shipped. CDP transport deadline60s after renderer timeouts; ACK/lease/death/save/input gates unchanged. Failed retries retained.",
+      "checks": [
+        "realm:ghost-god",
+        "dungeons:undead-lair"
+      ]
+    },
     "abyss-entrance-regression-4cbe7bc": {
       "kind": "regression",
       "revision": "4cbe7bc884c13304aadc5e9cde4b985ee8672bdc",
@@ -946,7 +984,7 @@
     "realm:beholder": {"status":"not-run","evidence":[]},
     "realm:flying-brain": {"status":"not-run","evidence":[]},
     "realm:slime-god": {"status":"not-run","evidence":[]},
-    "realm:ghost-god": {"status":"not-run","evidence":[]},
+    "realm:ghost-god": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "realm:djinn": {"status":"not-run","evidence":[]},
     "realm:leviathan": {"status":"not-run","evidence":[]},
     "realm:white-demon": {"status":"not-run","evidence":[]},
@@ -961,7 +999,7 @@
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":[]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":[]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -1017,7 +1055,7 @@
     "gear:heavy-armor": {"status":"not-run","evidence":[]},
     "gear:robes": {"status":"not-run","evidence":[]},
     "gear:rings": {"status":"not-run","evidence":[]},
-    "gear:loot-and-ownership": {"status":"not-run","evidence":[]},
+    "gear:loot-and-ownership": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-regression-78d8151"]},
     "gear:loot-bag-presentation": {"status":"not-run","evidence":[]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
