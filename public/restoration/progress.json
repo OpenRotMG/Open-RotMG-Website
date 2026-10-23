@@ -471,15 +471,13 @@
       "category": "heroes",
       "icon": "assets/player/gravestone.png",
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
-        "differences": [
-          "Only Well Equipped is awarded. The other named death bonuses still need implementation.",
-          "God kills, Oryx kills and level-up assists are still returned as zero in death statistics."
-        ],
+        "differences": [],
         "unknowns": [
-          "Original edge cases, counter eligibility and rounding must be checked when implementing the remaining bonuses."
+          "Fresh final-head normal-client combat, death, archived Legends reopening and a complete native backup-restore journey are deferred.",
+          "Long-history and dungeon-condition cases have regression-fixture coverage, not complete historical or native acceptance. Unknown legacy history is preserved rather than reconstructed as zero."
         ],
         "sources": [
           {
@@ -501,7 +499,7 @@
             "name": "Lifetime counters and death statistics",
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
             "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
             "unknowns": [],
@@ -1769,12 +1767,20 @@
         "expected": "Level8 quest0xdc2,900 HP/16 DEF; Snake Shot50/speed65/lifetime16000ms and Ghost Shot40. Egg0xdc1→Temple Snake0xdc0 lifecycle belongs here; exact hatching/rings/placement/portal policy qualified.",
         "differences": [],
         "unknowns": [
-          "Original temple placement/distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
+          "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/great-coil-snake",
+            "label": "Wild Shadow Great Coil Snake guide (April 2012 archive): ruins near the lowland/midland grass border and their treasure chest"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
+            "label": "Community temple-placement comparison: MidForest/MidPlains (2013), not a target-date population count"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
@@ -4424,7 +4430,8 @@
         "historical": "partial",
         "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
         "differences": [
-          "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+          "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+        "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability. Revision-bound regression and native after evidence do not establish the broader historical name/capacity or full/locked obligations: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998"
         ],
         "unknowns": [
           "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."

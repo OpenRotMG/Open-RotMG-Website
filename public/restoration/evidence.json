@@ -1,6 +1,64 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "coil-habitat-source-578c4c3": {
+      "kind": "source",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/578c4c30d2150b98bd1b4db66497c326964e18a2/src/world/coil.rs",
+      "method": "Coil temple anchors use MidPlains (6) and MidForest (7) instead of admitting highlands and midland sand. Existing two encounters, ruin templates, stocked chests, selected stats, AI, loot rules and portal chance remain unchanged.",
+      "limitations": "Source inspection, not acceptance. Exact count, variant mix and spatial distribution are unresolved; no claim to reproduce the original generator or enforce a precise border distance.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
+    "coil-habitat-regression-578c4c3": {
+      "kind": "regression",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/387#issuecomment-6372573504",
+      "method": "Old filter genuinely fails realm-fsod-2 at original habitat 5. Corrected test passes all six catalog layouts at Rust seed 315: two temples, original anchors in terrain 6 or 7, walkable snake positions, stocked co-located chests and real temple walls/columns/bricks. Integrated suite: 559 passed, 0 failed, 1 existing ignored campaign. Clippy, formatting, 154 Python and 74 JavaScript tests passed.",
+      "limitations": "One declared seed per layout, not a population-distribution study, exhaustive approach-path test or full landmark acceptance. The ignored test requires three separately retained 60-minute ordinary campaigns and was not run or credited.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
+    "coil-habitat-native-578c4c3": {
+      "kind": "native",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/387#issuecomment-6372573504",
+      "method": "Clean candidate native-after1 passed five checks with client f3c7b49/runtime 0.7.1-openrotmg.14: actual generated 900-HP Coil, living Knight, normal native lease, captured temple/chest scene and same living character after 4.25s active gameplay; cleanupErrors empty. Source-hash-bound world03 anchor 1632,1518 is MidPlains (6).",
+      "limitations": "Prepared level-20 position/gear, not earned traversal, a Coil kill, chest collection, portal qualification or complete feature acceptance. Baseline b942870 world01 anchor 1391,1335 is HighForest (4); its capture is retained from a lease-failed run, not an overall pass. Separate fresh Realms/random variants, not a matched-world or performance comparison.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
+    "fame-shipment-regression-8647a46": {
+      "kind": "regression",
+      "revision": "8647a4673e26229d881470396d6dab7a541b2a1c",
+      "date": "2026-10-23",
+      "method": "Executed 18 affected Rust cases and five backup cases after the pinned community/Fame integration, including source-sensitive potion tracking, earned-exit finalization, inventory-credit atomicity, nonempty canonical 16 to 17 migration and receipt corruption rejection. A fresh export/restore/reload contract passed on the same exact-revision release binary; earlier feature regressions retain their original source bindings.",
+      "limitations": "Engineering regression evidence, not a fresh full-feature normal-client journey. The attached native death screenshots are historical c36df89 evidence. Final-head combat/death, archived Legends reopening and the complete native backup-restore journey remain deferred; gameplay and historical acceptance are not promoted.",
+      "checks": ["heroes:fame-bonuses", "heroes:lifetime-combat-statistics", "heroes:equipment-fame-bonus"],
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/375#issuecomment-6372045816"
+    },
+    "crowd-entry-regression-460dfdc": {
+      "kind": "regression",
+      "revision": "460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0/src/bots/realm_tests.rs",
+      "method": "23 focused Rust tests passed, including four new crowd-choice regressions, bot/social behavior, reserved capacity and exact consumed-grant destinations. The ordinary-view regression fails before the fix at 0/512 choices for the populated second entrance; fixed-seed policy checks cover 34000 draws, order reversal, ties, commitment, unavailable entrances and malformed public counters. 74 Node and 41 Python tests, formatting, strict all-target Clippy and Build storage CI passed.",
+      "limitations": "Modern issue365 bot policy, not an original-server probability or guaranteed population split. Focused tests, not a fresh full Rust suite or complete native Full/Locked/name-pool acceptance.",
+      "checks": [
+        "home:browse-realm-portals"
+      ]
+    },
+    "crowd-entry-native-460dfdc": {
+      "kind": "native",
+      "revision": "460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
+      "method": "The unmodified prepared native runner passed six assertions: one actual gameplay controller observed public counts0/3 and used the bound entrance to Realm1, producing0/4; the controller, three prepared crowd anchors and same native observer remained alive, with no cleanup errors. Separate ordinary level1 Wizard sessions walked from tutorial/Nexus to live portals; startup snapshots were2/4 before and5/1 after. Published client images were downloaded and byte-verified.",
+      "limitations": "Prepared starting context and one observed choice, not earned progression, multiplayer-human or statistical ratio acceptance. Ordinary screenshots are independent live examples, not matched-seed counterfactuals. Rejected attempts are not passes; original capacity, name pool and full/locked equivalence remain unresolved.",
+      "checks": [
+        "home:browse-realm-portals"
+      ]
+    },
     "sand-castle-source-0e3f09d": {
       "kind": "source",
       "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
@@ -1083,9 +1141,9 @@
     "heroes:choose-and-unlock-classes": {"status":"not-run","evidence":[]},
     "heroes:level-to-20": {"status":"not-run","evidence":[]},
     "heroes:living-fame": {"status":"not-run","evidence":[]},
-    "heroes:fame-bonuses": {"status":"not-run","evidence":[]},
-    "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":[]},
-    "heroes:equipment-fame-bonus": {"status":"not-run","evidence":[]},
+    "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
+    "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
+    "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:class-stars": {"status":"not-run","evidence":[]},
     "heroes:legends-highscores": {"status":"not-run","evidence":[]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
@@ -1110,8 +1168,8 @@
     "realm:water-network": {"status":"not-run","evidence":[]},
     "realm:road-network": {"status":"not-run","evidence":[]},
     "realm:godlands-terrain": {"status":"not-run","evidence":[]},
-    "realm:setpiece-sites": {"status":"not-run","evidence":[]},
-    "realm:minor-landmarks": {"status":"not-run","evidence":[]},
+    "realm:setpiece-sites": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
+    "realm:minor-landmarks": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
     "realm:scenery-placement": {"status":"not-run","evidence":[]},
     "realm:scenery-interactions": {"status":"not-run","evidence":[]},
     "realm:coastal-arrivals": {"status":"not-run","evidence":[]},
@@ -1158,7 +1216,7 @@
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:goblin-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:great-coil-snake": {"status":"not-run","evidence":[]},
+    "realm:great-coil-snake": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},
@@ -1288,7 +1346,7 @@
     "home:vault": {"status":"not-run","evidence":[]},
     "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
-    "home:browse-realm-portals": {"status":"not-run","evidence":[]},
+    "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
     "home:realm-gold-offers": {"status":"not-run","evidence":[]},
