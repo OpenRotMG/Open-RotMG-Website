@@ -20,9 +20,13 @@
         "realm:orcs",
         "realm:werecats",
         "realm:sprites",
-        "realm:blobs",
         "realm:flamers",
-        "realm:urgles"
+        "realm:urgles",
+        "realm:white-dragons",
+        "realm:sand-phantoms",
+        "realm:sand-devils",
+        "realm:enraged-bunnies",
+        "realm:forest-nymphs"
       ]
     },
     "hermit-loot-regression-22ecae7": {
@@ -899,7 +903,7 @@
     "realm:golems": {"status":"not-run","evidence":[]},
     "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:wargs": {"status":"not-run","evidence":[]},
-    "realm:sand-phantoms": {"status":"not-run","evidence":[]},
+    "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:cubes": {"status":"not-run","evidence":[]},
     "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f"]},
     "realm:ent-god": {"status":"not-run","evidence":[]},
@@ -1079,16 +1083,16 @@
     "access:character-news": {"status":"not-run","evidence":[]},
     "realm:sumo-family": {"status":"not-run","evidence":[]},
     "realm:construct-trio": {"status":"not-run","evidence":[]},
-    "realm:blobs": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896","starter-rewards-native-be37896","realm-loot-regression-e222284"]},
+    "realm:blobs": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896","starter-rewards-native-be37896"]},
     "realm:green-slimes": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896"]},
     "realm:red-spiders": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896"]},
     "realm:black-bats": {"status":"not-run","evidence":["starter-rewards-source-be37896","starter-rewards-regression-be37896","starter-rewards-native-be37896"]},
-    "realm:sand-devils": {"status":"not-run","evidence":[]},
-    "realm:enraged-bunnies": {"status":"not-run","evidence":[]},
-    "realm:forest-nymphs": {"status":"not-run","evidence":[]},
+    "realm:sand-devils": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
+    "realm:enraged-bunnies": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
+    "realm:forest-nymphs": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:flamers": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:urgles": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:white-dragons": {"status":"not-run","evidence":[]},
+    "realm:white-dragons": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:minotaurs": {"status":"not-run","evidence":[]}
   }
 }

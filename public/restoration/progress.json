@@ -2414,6 +2414,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -5921,10 +5925,6 @@
           {
             "url": "https://web.archive.org/web/20120519154640id_/http://forums.wildshadow.com/wiki/realm-mad-god/gray-blob",
             "label": "May 2012 Gray Blob rewards and 1-in-200 Mushroom report; private mechanics unspecified"
-          },
-          {
-            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Shore.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6032,6 +6032,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6053,6 +6057,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6074,6 +6082,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -6160,6 +6172,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Juvenile%20White%20Dragon",
             "label": "Juvenile White Dragon wiki page (date unconfirmed)"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
+            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
