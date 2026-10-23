@@ -646,7 +646,8 @@
         "historical": "partial",
         "expected": "Island terrain with coast-to-interior difficulty, central mountains, water, vegetation, roads and terrain-associated populations. Exact production layout, dimensions, biome thresholds and population rules remain unresolved.",
         "differences": [
-          "Server PR272 preserves destructible prepared-map scenery and explicit Palm/Cherry sizes, with regression coverage. This is implementation evidence, not acceptance of original map layouts or population rules. Revision: https://github.com/OpenRotMG/Open-RotMG-Server/commit/c2decb23b58665590903f4f17e34b544a40aef48"
+          "Server PR272 preserves destructible prepared-map scenery and explicit Palm/Cherry sizes, with regression coverage. This is implementation evidence, not acceptance of original map layouts or population rules. Revision: https://github.com/OpenRotMG/Open-RotMG-Server/commit/c2decb23b58665590903f4f17e34b544a40aef48",
+          "Server PR334 (009109ea) adds complete engineering reconstructions for Worlds 1, 2 and 3, alongside the three FSOD entries. Revision-bound prepared native smoke evidence is linked in that PR. Original identity, hidden fields, registration, provenance and rights remain unverified; historical and gameplay acceptance are unchanged. Worlds 4 through 13 remain incomplete."
         ],
         "unknowns": [
           "Original terrain and population inventory, placement, biome thresholds and map dimensions.",
@@ -668,7 +669,7 @@
             "name": "Classic World 1 identity",
             "expected": "Identify the documented Classic World 1 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur.",
-            "implementation": "missing",
+            "implementation": "partial",
             "historical": "unreviewed",
             "differences": [],
             "unknowns": [],
