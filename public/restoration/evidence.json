@@ -23,8 +23,8 @@
       "kind": "regression",
       "revision": "89b554072124bf7ab087490dfc874a21f6684f3d",
       "date": "2026-10-23",
-      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369289338",
-      "method": "Four bag tests passed locally and on merged eb18fe8: packaging, privacy/reservation, insertion and durable replacement failures. Formatting, Clippy and required PR CI passed.",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6371362246",
+      "method": "Four bag tests passed locally, on merged eb18fe8 and deployed ae6c34b (full normal gate: 553 passed/0 failed/1 ignored). Formatting, Clippy and required PR CI passed.",
       "limitations": "Local full suite failed the Lab wall-budget gate. No new native/adversarial or simultaneous durable-store race pass.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
