@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "abyss-entrance-regression-4cbe7bc": {
+      "kind": "regression",
+      "revision": "4cbe7bc884c13304aadc5e9cde4b985ee8672bdc",
+      "date": "2026-10-23",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/4cbe7bc884c13304aadc5e9cde4b985ee8672bdc/src/dungeon/abyss.rs",
+      "method": "The entrance guard checks every cell of 128 generated start rooms for enemy objects and confirms that Cowardice and the ordinary spawn remain inside the start room. No initial enemy was found. This is cfg(test)-only coverage; production generation is unchanged.",
+      "limitations": "Not the reported instance, a permanent runtime sanctuary, an earned entry or full-dungeon acceptance. The report captured Nexus. The comparator leaves the start room empty, while a mixed-era guide warns of nearby demons chasing into it. Original entry safety rules and generation distributions remain unverified. Native entrance context is not a pursuit demonstration. Package optimization 0 was used for the test build; assertions were unchanged.",
+      "checks": ["dungeons:abyss-of-demons"]
+    },
     "realm-loot-regression-e222284": {
       "kind": "regression",
       "revision": "e2222847f7af0794f56c7a9e7bb503b18717f501",
@@ -968,7 +977,7 @@
         "udl-dressing-native-4ecd4de"
       ]
     },
-    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
+    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
     "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
