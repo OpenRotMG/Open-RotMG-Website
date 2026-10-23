@@ -71,7 +71,7 @@ window.OpenRotMGDiagnostics = {
         since = now; frames = 0; maxGap = 0; hiddenDuringInterval = document.hidden;
         if (longTasks !== null) { longTasks = 0; longTaskMs = 0; }
         try {
-          const response = await fetch(new URL(`/api/diagnostics/${key}`, document.baseURI), {
+          const response = await OpenRotMGBackend.fetch(`/api/diagnostics/${key}`, {
             method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify(sample),
             signal: AbortSignal.timeout(3000), redirect: 'error'
           });

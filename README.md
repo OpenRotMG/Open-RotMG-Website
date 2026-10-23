@@ -11,7 +11,7 @@ Before researching a feature's era, check the [historical feature ledger](docs/h
 Requires Node 22, Python 3, and a clean sibling `client` checkout.
 
 ```sh
-SITE_URL=http://127.0.0.1:18924/ CLIENT_DIR=../client npm run build
+SITE_URL=http://127.0.0.1:18924/ API_ORIGIN=http://127.0.0.1:18924 CLIENT_DIR=../client npm run build
 ```
 
 Output is in `dist/`. Serving the playable site with the backend is described in `docs/operations.md`.
