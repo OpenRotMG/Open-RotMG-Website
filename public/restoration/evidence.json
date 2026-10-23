@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "tomb-native-clear-933375f": {
+      "kind": "native",
+      "revision": "933375f9f3795358f07882da54be84fb3b16c58e",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/328#issuecomment-6361576273",
+      "method": "Run242 passed on the merged build, retained executable467712bfd2c6b19a5acaa2424bbcc42b0e65befd9c1e79c0bd18fd24625ee429. Original Nut137499, Geb137500 and Bes137501 began at80000/90000/100000HP. The same native Priest contributed209/143/119 damage before support combat; exact identity/kind death logs establish all three defeats. The character survived at850HP, received one committed Tomb counter, walked to the normal0x704 exit and reconnected to Realm as the same account/character. Its retained database still records one completion. Runner cleanup was empty and exit0. The two published native images show the exit panel and Realm reconnect; logs and database, not the images alone, prove deaths and credit.",
+      "limitations": "Prepared gear, base stats, positions, resources and map knowledge were not native-earned. Four unchanged ordinary Pixl objective squads of five plus40 initial arena companions and the native total61 actors. Arena companions were born after objectives and before boss DPS, not before all objective damage. No replacements, NPC edits or guard/cap changes. This proves the clear/exit/reconnect journey, not the combined treasure/individual-loot/artifact acceptance, earned Sphinx entry, full readable mechanics gallery, late join or historical precision. All six Tomb/Sphinx acceptance results remain not-run.",
+      "checks": ["dungeons:tomb-of-the-ancients", "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion"]
+    },
     "hermit-loot-regression-22ecae7": {
       "kind": "regression",
       "revision": "22ecae71dfa23f7108ba7597a8d0e8d9913422e4",
@@ -933,10 +942,10 @@
     },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
-    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac"]},
+    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
-    "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac"]},
+    "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:ordinary-encounters": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
     "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":[]},
