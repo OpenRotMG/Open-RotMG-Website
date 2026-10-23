@@ -1,6 +1,51 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "loot-bag-expiry-native-764fad1": {
+      "kind": "native",
+      "revision": "764fad14b08d5b2f6d973e3a762591964ca492ed",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369592555",
+      "method": "Original bags present at 0ms were absent by 60450ms; a newer replacement remained.",
+      "limitations": "Nominal 60000-ms expiry, not exact timing. Placement run remains failed after outliving its bags; lifetime, clock and guards unchanged.",
+      "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
+    },
+    "loot-bag-contract-source-eb18fe8": {
+      "kind": "source",
+      "revision": "eb18fe802df4c00d051cd50fe7711f7305ae97e6",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/eb18fe802df4c00d051cd50fe7711f7305ae97e6/src/world.rs",
+      "method": "Source-only: five rarity appearances, eight-slot chunks, owner visibility, expiry and durable replacement publication. Production bodies match tested base; PR364 adds tests only.",
+      "limitations": "Historical generation, rates, lifetimes and appearance allocation unknown; not whole-feature acceptance.",
+      "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
+    },
+    "loot-bag-contract-regression-89b5540": {
+      "kind": "regression",
+      "revision": "89b554072124bf7ab087490dfc874a21f6684f3d",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369289338",
+      "method": "Four focused Rust tests and formatting passed: packaging, privacy/reservation, insertion and durable replacement failures. Unchanged tests; current-head required CI passed.",
+      "limitations": "Local Clippy pending at publication. No full-suite, new native/adversarial or simultaneous durable-store race pass.",
+      "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
+    },
+    "loot-bag-glyphs-native-764fad1": {
+      "kind": "native",
+      "revision": "764fad14b08d5b2f6d973e3a762591964ca492ed",
+      "date": "2026-10-22",
+      "url": "https://github.com/user-attachments/assets/de8cd300-3d20-4401-88b4-21e62c4f0186",
+      "method": "Reused October 22 client21f/runtime.12 fixture: five distinct glyphs, production packaging, unchanged contents; run completed.",
+      "limitations": "Not current .13 native, earned drops or historical rates/allocation proof. Earlier visual failures remain failed.",
+      "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
+    },
+    "loot-bag-collection-privacy-native-2d6bf14": {
+      "kind": "native",
+      "revision": "2d6bf141683cad46b0bb60729af21d926591efe3",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369520367",
+      "method": "Reused October 22 fixture: nine collections, three-client privacy/public controls, one recipient; server/known-object/SQLite corroboration. Current World bodies unchanged; durable failures tested separately.",
+      "limitations": "Not current .13 native or earned progression. Old private-rejection classifier is not current logging proof. Placement remains failed; tests do not finish its matrix.",
+      "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
+    },
     "lair-room-space-native-89bc191": {
       "kind": "native",
       "revision": "89bc1919964d65870671f218e6ae5c853afe4497",
@@ -1059,8 +1104,8 @@
     "gear:heavy-armor": {"status":"not-run","evidence":[]},
     "gear:robes": {"status":"not-run","evidence":[]},
     "gear:rings": {"status":"not-run","evidence":[]},
-    "gear:loot-and-ownership": {"status":"not-run","evidence":[]},
-    "gear:loot-bag-presentation": {"status":"not-run","evidence":[]},
+    "gear:loot-and-ownership": {"status":"not-run","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
+    "gear:loot-bag-presentation": {"status":"passed","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
