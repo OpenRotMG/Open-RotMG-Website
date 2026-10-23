@@ -21,7 +21,7 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
 });
 
 test('Hermit loot regressions do not certify full native or historical acceptance',()=>{
-  const data=catalogue(),evidence=ledger(),id='realm:hermit-god',ref='hermit-loot-regression-29898ed';
+  const data=catalogue(),evidence=ledger(),id='realm:hermit-god',ref='hermit-loot-regression-22ecae7';
   validateEvidence(data,evidence);
   assert.equal(evidence.results[id].status,'not-run');assert(evidence.results[id].evidence.includes(ref));
   assert.equal(data.features.find(f=>f.id===id).audit.historical,'partial');
