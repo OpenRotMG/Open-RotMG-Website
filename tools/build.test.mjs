@@ -8,7 +8,7 @@ import { runInNewContext } from 'node:vm';
 import { validateEvidence, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
 const browserTab = 'a'.repeat(64);
-const browserGlobals = {fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}};
+const browserGlobals = {OpenRotMGBackend: {url: path => new URL(path, 'https://game.example.test'), fetch: async () => ({ok: true})}, fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}};
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
   cwd: root, env: { ...process.env, ...overrides }, encoding: 'utf8'
@@ -201,7 +201,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const runtimeLock = JSON.parse(readFileSync(`${process.env.CLIENT_DIR}/ruffle/lock.json`, 'utf8'));
   assert.equal(provenance.runtime_version, runtimeLock.version);
   assert.equal(provenance.runtime_bundle_sha256, runtimeLock.bundleSha256);
-  assert.ok(home.includes(`connect-src 'self' ${site.origin.replace(/^http/, 'ws')};`));
+  const api = new URL(process.env.API_ORIGIN);
+  assert.ok(home.includes(`connect-src 'self' ${api.origin} ${api.origin.replace(/^http/, 'ws')};`));
   assert.ok(home.includes(`src="${site.pathname}vendor/ruffle.js?v=${provenance.client}"`));
   assert.doesNotMatch(home, /iframe|runtime\/ruffle/);
   assert.equal(existsSync(new URL('../dist/client.swf', import.meta.url)), false);
@@ -225,22 +226,25 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   let finish;
   let options;
   const ready = new Promise(resolve => { finish = resolve; });
-  const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
-  let loaded;
+  const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false }, '#load-error': {hidden: true} };
+  let loaded, poll;
   const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
     window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
-    document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals
+    document: { baseURI: 'https://example.test/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals,
+    setInterval: callback => {poll = callback; return 1;},
+    OpenRotMGBackend: {...browserGlobals.OpenRotMGBackend, fetch: async path => {if (path === '/health') return {ok: true}; throw new Error('Backend unavailable');}}
   });
   await new Promise(setImmediate);
   assert.equal(options.splashScreen, false);
   assert.equal(options.openUrlMode, 'confirm');
   assert.equal(options.url, 'https://example.test/client.swf');
-  assert.equal(options.socketProxy[0].proxyUrl, 'wss://example.test/game?diagnostics=test-session');
+  assert.equal(options.socketProxy[0].proxyUrl, 'wss://game.example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
   assert.equal(options.socketProxy[0].port, 2050);
-  assert.equal(options.urlRewriteRules[0][1], `https://example.test/legacy-api/char/list?browser=${browserTab}`);
-  assert.equal(options.urlRewriteRules[1][1], 'https://example.test/legacy-api/');
+  assert.equal(options.urlRewriteRules[0][1], `https://game.example.test/legacy-api/char/list?browser=${browserTab}`);
+  assert.equal(options.urlRewriteRules[1][1], 'https://game.example.test/legacy-api/');
+  assert.deepEqual(Array.from(options.credentialAllowList), ['https://game.example.test']);
   assert.equal(options.urlRewriteRules[2][1], 'https://example.test/sfx/');
   assert.equal(nodes['#startup'].hidden, false);
   finish();
@@ -249,6 +253,10 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   loaded();
   assert.equal(nodes['#startup'].hidden, true);
   assert.equal(nodes['#game'].dataset.loaded, 'true');
+  poll();
+  await new Promise(setImmediate);
+  assert.equal(nodes['#load-error'].hidden, false);
+  assert.match(nodes['#load-error'].textContent, /Game connection failed: Backend unavailable.*website and client are still available/);
 });
 
 test('legacy API rewrites leave same-origin game assets alone on port 8080', async () => {
@@ -259,7 +267,8 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
     const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },
-      document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals
+      document: { baseURI: origin + '/', querySelector: selector => nodes[selector] }, URL, ...browserGlobals,
+      OpenRotMGBackend: {url: path => new URL(path, origin), fetch: async () => ({ok: true})}
     });
     const rewrite = url => options.urlRewriteRules.reduce((url, [pattern, replacement]) => url.replace(pattern, replacement), url);
     for (const path of ['client.swf', 'native-texture-editor.swf', 'draw/', 'game.js', 'vendor/ruffle.js', 'legacy-api/char/list', 'game', 'health']) {

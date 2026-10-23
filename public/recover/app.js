@@ -2,7 +2,7 @@ export function passwordValid(password) {
   const bytes = new TextEncoder().encode(password).length;
   return bytes >= 5 && bytes <= 128 && !/\p{Cc}/u.test(password);
 }
-export async function submitReset(token, password, fetchImpl = fetch) {
+export async function submitReset(token, password, fetchImpl = globalThis.OpenRotMGBackend.fetch) {
   if (!/^[a-f0-9]{64}$/.test(token) || !passwordValid(password)) throw new Error('Invalid reset link or password');
   const response = await fetchImpl('/api/account/recover', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({token, password}), credentials: 'omit', mode: 'cors', cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(25000)});
   const result = await response.json();

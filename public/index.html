@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="openrotmg-api" content="{{API_ORIGIN}}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' {{SOCKET_ORIGIN}}; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' {{API_ORIGIN}} {{SOCKET_ORIGIN}}; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'">
+  <script src="{{BASE}}backend.js" defer></script>
   <title>Open RotMG | 2012 Realm of the Mad God reconstruction</title>
   <meta name="description" content="Open RotMG is an open-source reconstruction of 2012 Realm of the Mad God, targeting build 123.5.1. Play the development build in your browser.">
   <meta name="theme-color" content="#000000">
