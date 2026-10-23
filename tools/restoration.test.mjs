@@ -20,6 +20,17 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Tomb release records source restoration without inventing full acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['realm:grand-sphinx','dungeons:tomb-of-the-ancients',...['sarcophagus-awakening','trap-switch-and-quicksand','treasure-and-three-boss-completion','ordinary-encounters'].map(x=>'dungeons:tomb-of-the-ancients:'+x)];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const row=records(data).find(r=>r.id===id);assert.equal(row.rule.implementation,'present',id);assert.notEqual(row.rule.historical,'verified',id);
+    assert.equal(evidence.results[id].status,'not-run',id);assert(evidence.results[id].evidence.includes('tomb-regression-99451ac'));
+    assert.equal(accepted(row.feature,evidence),false,id);assert.equal(matches(row,evidence,'verification'),true,id);
+  }
+  assert.match(evidence.sources['tomb-native-partial-99451ac'].limitations,/One boss, not a complete Tomb acceptance/);
+});
+
 test('present features remain visible for gameplay and historical work',()=>{
   const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);
