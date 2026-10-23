@@ -29,6 +29,15 @@
         "realm:forest-nymphs"
       ]
     },
+    "tomb-native-clear-933375f": {
+      "kind": "native",
+      "revision": "933375f9f3795358f07882da54be84fb3b16c58e",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/328#issuecomment-6361576273",
+      "method": "Run242 passed on the merged build, retained executable467712bfd2c6b19a5acaa2424bbcc42b0e65befd9c1e79c0bd18fd24625ee429. Original Nut137499, Geb137500 and Bes137501 began at80000/90000/100000HP. The same native Priest contributed209/143/119 damage before support combat; exact identity/kind death logs establish all three defeats. The character survived at850HP, received one committed Tomb counter, walked to the normal0x704 exit and reconnected to Realm as the same account/character. Its retained database still records one completion. Runner cleanup was empty and exit0. The two published native images show the exit panel and Realm reconnect; logs and database, not the images alone, prove deaths and credit.",
+      "limitations": "Prepared gear, base stats, positions, resources and map knowledge were not native-earned. Four unchanged ordinary Pixl objective squads of five plus40 initial arena companions and the native total61 actors. Arena companions were born after objectives and before boss DPS, not before all objective damage. No replacements, NPC edits or guard/cap changes. This proves the clear/exit/reconnect journey, not the combined treasure/individual-loot/artifact acceptance, earned Sphinx entry, full readable mechanics gallery, late join or historical precision. All six Tomb/Sphinx acceptance results remain not-run.",
+      "checks": ["dungeons:tomb-of-the-ancients", "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion"]
+    },
     "hermit-loot-regression-22ecae7": {
       "kind": "regression",
       "revision": "22ecae71dfa23f7108ba7597a8d0e8d9913422e4",
@@ -113,6 +122,24 @@
       "checks": [
         "dungeons:snake-pit:diggable-route-and-cover"
       ]
+    },
+    "potion-chat-regression-ee3d1fc": {
+      "kind": "regression",
+      "revision": "ee3d1fcf055ba2813bbcf3a120ea3f8b411bb04d",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/346#issuecomment-6363618685",
+      "method": "Executed the release World regression for all eight stat potions: expected base-stat changes, one consumed item, one revision increment, successful inventory result and no TEXT packet. The same regression failed before the fix. Formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Only stat-potion success chat is qualified here. This does not accept the broader cap, failure, HP/MP restoration or boost-expiry contract. The full suite has community runtime failures and is not claimed green. The 2013 comparator is silent, but original July2012 server chat policy remains unproven.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
+    "potion-chat-native-ee3d1fc": {
+      "kind": "native",
+      "revision": "ee3d1fcf055ba2813bbcf3a120ea3f8b411bb04d",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/346#issuecomment-6363618685",
+      "method": "Prepared Wizard used normal native hotkeys in Tutorial. Before e0662d5 and after ee3d1fc both changed Speed30 to31 and maximum HP500 to505, consumed each item once and advanced revision1 to3. Closed SQLite records agree. Before shows the stat-potion chat line; after does not. Selected client f4e2781 and Ruffle .13 were unchanged; captures and cleanup passed.",
+      "limitations": "Prepared Speed/Life consumption, not earned acquisition, all-eight native coverage, reconnect or historical sign-off. Earlier startup, CDP and control failures remain failed. The accepted after run explicitly selected ANGLE/OpenGL; not a performance comparison. Parent and broader feedback acceptance remain not-run.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
     },
     "abyss-regression-5a5502f": {
       "kind": "regression",
@@ -943,10 +970,10 @@
     },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f"]},
-    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac"]},
+    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
-    "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac"]},
+    "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:ordinary-encounters": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
     "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":[]},
@@ -987,8 +1014,8 @@
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
     "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
-    "gear:stat-potions": {"status":"not-run","evidence":[]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
+    "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
+    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
