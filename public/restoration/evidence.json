@@ -42,8 +42,8 @@
       "revision": "f16ad170b53354cc62778b8ffee189e8c757a4e2",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/374#issuecomment-6370346225",
-      "method": "Five focused tests passed: doses/SQL/DB reopen, metadata/quarantine, multiplayer eligibility/caps, stationarity/timers/cleanup, permanent-pet preservation. Formatting/strict Clippy passed.",
-      "limitations": "Local suite: 537 passed/3 failed/1 ignored (crowd, Lab, Oryx-Castle failures); no independent baseline or full-suite pass.",
+      "method": "Five focused tests passed: doses/SQL/DB reopen, metadata/quarantine, multiplayer eligibility/caps, stationarity/timers/cleanup, permanent-pet preservation. Formatting/Clippy passed; all five also passed in deployed ae6c34b's 553-test gate.",
+      "limitations": "Local suite: 537 passed/3 failed/1 ignored (crowd, Lab, Oryx-Castle failures); no independent baseline or local full-suite pass.",
       "checks": ["gear:seasonal-toys"]
     },
     "sand-castle-native-f16ad17": {
@@ -69,8 +69,8 @@
       "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
-      "method": "Two tests passed: complete-map color normalization, 48-seed topology/connectivity. Formatting/strict Clippy/release passed; source unchanged after integration.",
-      "limitations": "Broad run stopped; failures retained. No full-suite pass or historical acceptance.",
+      "method": "Two tests passed: complete-map color normalization, 48-seed topology/connectivity. Formatting/Clippy/release passed; both also passed in deployed ae6c34b's 553-test gate. Source unchanged after integration.",
+      "limitations": "Broad local run stopped; failures retained. No local full-suite pass or historical acceptance.",
       "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
     },
     "sprite-floor-pattern-native-42d4c7a": {
@@ -104,8 +104,8 @@
       "kind": "regression",
       "revision": "89b554072124bf7ab087490dfc874a21f6684f3d",
       "date": "2026-10-23",
-      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6369289338",
-      "method": "Four bag tests passed locally and on merged eb18fe8: packaging, privacy/reservation, insertion and durable replacement failures. Formatting, Clippy and required PR CI passed.",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/364#issuecomment-6371362246",
+      "method": "Four bag tests passed locally, on merged eb18fe8 and deployed ae6c34b (full normal gate: 553 passed/0 failed/1 ignored). Formatting, Clippy and required PR CI passed.",
       "limitations": "Local full suite failed the Lab wall-budget gate. No new native/adversarial or simultaneous durable-store race pass.",
       "checks": ["gear:loot-bag-presentation", "gear:loot-and-ownership"]
     },
@@ -1025,6 +1025,28 @@
       "method": "Three ordinary native Human guests, stock Rogue cloak uses, current two-name tooltip/menu and a strict-interior Teleport letter-core click. With both targets Invisible, new exact No players are eligible for teleporting feedback appeared while the viewer stayed put. Actions, capture trigger and post samples preceded MIN(cast.before_ms + 5500). Original images and negative controls were independently reviewed. Client21f5c7f/runtime12; served bytes and EXT loader/core/WASM disk-cache bindings in all three owned profiles were retained.",
       "limitations": "Bounded negative client-menu support only, not backend refusal or whole minimap/Invisible acceptance. The later positive backend destination was correct but its original still showed the initial shoreline, so rendered movement remains blocked. Guild colors, historical fidelity and screenshot presentation timing are unproved. Two real permanent +5 MaxMP potion consumptions, item/revision changes and chat/sound make this instrumented activity, not passive or noise-free evidence.",
       "checks": ["access:minimap-player-menu", "social:teleport-to-players", "condition:13"]
+    },
+    "snake-guardians-regression-49335a6": {
+      "kind": "regression",
+      "revision": "49335a6d41320ecd1683196093e8290e3f1e5efe",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/378#issuecomment-6371257619",
+      "method": "Five relevant Rust tests, 41 Python tests, 74 Node tests, formatting and strict all-target Clippy passed. Over 120 50-ms NPC movement steps around generated cover, guardians changed from a minimum radius of 2.1398 tiles and 48 reversals to 9.9999-10.0001 tiles and zero reversals. Tests also cover finite positions, motor budget, replenishment to four, Slowed and Paralyzed.",
+      "limitations": "Scoped implementation regression with explicit test-profile optimization 0 and the pinned compiler/cache, not a full 550-test-suite pass or complete dungeon acceptance. Exact original guardian speed, direction, variance and activation remain unresolved; the modified 7.0 engine is a comparator, not an authenticated 123.5.1 script.",
+      "checks": [
+        "dungeons:snake-pit"
+      ]
+    },
+    "snake-guardians-native-49335a6": {
+      "kind": "native",
+      "revision": "49335a6d41320ecd1683196093e8290e3f1e5efe",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/378#issuecomment-6371257619",
+      "method": "Accepted native-before-2 at b942870 sampled a minimum radius of 2.4800 tiles. Native-after at 49335a6 kept all 19 recorded samples within 9.9999-10.0001 tiles and all four guardians moved. Each retained the same living Wizard, with no player shots/kills and empty cleanup errors. Both used client f3c7b49, runtime 0.7.1-openrotmg.14 and stock release-profile backends; published before/after PNG bytes were verified.",
+      "limitations": "Prepared legal stats/gear and boss-side placement, not a full Snake Pit clear, earned entry or multiplayer acceptance. The temporary spawn marker was removed. Separate fresh layouts; the requested 3000-ms input produced active-game reports of 5900 and 6300 ms, while sampled traces end around 2000 ms. No matched-duration performance claim. Outer guardians can be outside the centered viewport; stills alone do not prove motion. Failed CDP setup and optional closer-capture attempts are not accepted. Deployment is unverified.",
+      "checks": [
+        "dungeons:snake-pit"
+      ]
     }
   },
   "results": {
@@ -1161,7 +1183,7 @@
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
-    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc"]},
+    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
