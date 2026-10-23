@@ -1,6 +1,30 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "oryx-count-regression-41e462f": {
+      "kind": "regression",
+      "revision": "41e462f6fcb58f70a22ceb3447d9270cd63b5614",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/348#issuecomment-6364383216",
+      "method": "Baseline regression atd7c39b1 plus the fixture failed at120000ms: two Red Demons remained but no count packet was emitted. Both focused tests passed at829a4c1: exact boundary/cadence, singular and plural counts, two same-Realm recipients, isolation from another Realm/Nexus, closure suppression, all14 families, transformation deduplication, follower/admin exclusions and unchanged gameplay RNG. All five endgame tests and three event-admission tests passed at41e462f, including the upstream test-only reserved-admission fixture correction. Runtime code is unchanged from accepted native829a4c1. Python42 and Node74 tests also passed.",
+      "limitations": "This is a remaining-announcement check, not complete native Realm closure or chat acceptance. The documented two-minute cadence conflicts with related modified servers'20-second cadence; exact original phase, selection weights and complete phrase pools remain unresolved.",
+      "checks": [
+        "realm:realm-closure",
+        "social:chat"
+      ]
+    },
+    "oryx-count-native-829a4c1": {
+      "kind": "native",
+      "revision": "829a4c1e0d9afe08e2cb31c59be01667517baf67",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/348#issuecomment-6364383216",
+      "method": "Accepted native-after at clean829a4c1 used clientf4e2781/runtime0.7.1-openrotmg.13. Normal Realm gameplay reached120000ms and the guest Wizard displayed the logged one-remaining Ent Ancient announcement. The same character stayed alive and cleanupErrors were empty.",
+      "limitations": "Prepared legal stats, equipment and spawn, not earned progression or a full Realm clear. The before image is a shorter baseline scene; missing periodic output is proved by the deterministic reproduction, not a claimed complete baseline wait. Longer baseline and extra two-client attempts failed control/CDP/setup guards and were not accepted; no native multiplayer pass is claimed. No clock, ACK or deadline guard was relaxed.",
+      "checks": [
+        "realm:realm-closure",
+        "social:chat"
+      ]
+    },
     "mana-text-source-65dd762": {
       "kind": "source",
       "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
@@ -785,7 +809,7 @@
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":[]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":[]},
     "realm:find-your-next-quest": {"status":"not-run","evidence":[]},
-    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":[]},
@@ -956,7 +980,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
     "home:realm-gold-offers": {"status":"not-run","evidence":[]},
-    "social:chat": {"status":"not-run","evidence":[]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988"]},

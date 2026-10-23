@@ -359,7 +359,7 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
   assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced and Iron.*PREPARED private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*Tattered, Reinforced and Iron.*public HP5 deaths do not prove duration.*Player conditions.*history.*full class journeys.*unverified/);
   // A changing legacy ledger must not change the frozen July surface above.
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '74422d5090ee8a5579a1c0e235da3bb58db6638af0accbc99cf1e14d1db3966c');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '0b6f77644119d7ed236770c9c7cadb4531e3a30c51824d5c6a411c7e336a973e');
 });
 
 test('Iron citations pin executed tests and prepared native scope without historical or public acceptance', () => {

@@ -1038,12 +1038,16 @@
         ],
         "unknowns": [
           "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
-          "Original ongoing encounter-count, spawn/death and entry taunts need period transcripts; copied comparator strings are not enough."
+          "Recurring per-family counts use the gameplay documentation's two-minute cadence rather than modified forks' 20 seconds. Exact target-era phase, selection weights and complete spawn/death/entry phrase pools remain unverified."
         ],
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/Oryx.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
+            "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
           }
         ],
         "checks": [
