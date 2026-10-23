@@ -603,6 +603,24 @@
         "realm:blobs",
         "realm:black-bats"
       ]
+    },
+    "teleport-output-regression-c1ccadf": {
+      "kind": "regression",
+      "revision": "c1ccadf0ca8dccd5a17cf6045880423de1bb451c",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/326#issuecomment-6354902675",
+      "method": "Actual Human receiver output requires destination terrain UPDATE before one own GOTO, exact sender/x/y/EOF decoding through server/client codecs, and tracked acknowledgement. Invisible-target rejection preserves position and the complete cooldown registry and emits no output. Two focused tests and 215 full Rust tests passed, with formatting, strict Clippy and 11+24 mandatory Python tests. Independently reviewed and bound to 437 source and 158 compilation inputs.",
+      "limitations": "Test-only coverage; production behavior is unchanged. Missing GOTO, wrong ID, swapped coordinates and trailing-byte controls mutate received unit packets, not a genuine product RED. Queue/wire/FIFO checks do not establish client application, rendered movement or historical fidelity. Whole-row acceptance remains unrecorded.",
+      "checks": ["social:teleport-to-players", "condition:13"]
+    },
+    "minimap-both-invisible-native-9ad87c2": {
+      "kind": "native",
+      "revision": "9ad87c2664ea58debf2bb134ed5d6848538f9dd0",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/326#issuecomment-6355044697",
+      "method": "Three ordinary native Human guests, stock Rogue cloak uses, current two-name tooltip/menu and a strict-interior Teleport letter-core click. With both targets Invisible, new exact No players are eligible for teleporting feedback appeared while the viewer stayed put. Actions, capture trigger and post samples preceded MIN(cast.before_ms + 5500). Original images and negative controls were independently reviewed. Client21f5c7f/runtime12; served bytes and EXT loader/core/WASM disk-cache bindings in all three owned profiles were retained.",
+      "limitations": "Bounded negative client-menu support only, not backend refusal or whole minimap/Invisible acceptance. The later positive backend destination was correct but its original still showed the initial shoreline, so rendered movement remains blocked. Guild colors, historical fidelity and screenshot presentation timing are unproved. Two real permanent +5 MaxMP potion consumptions, item/revision changes and chat/sound make this instrumented activity, not passive or noise-free evidence.",
+      "checks": ["access:minimap-player-menu", "social:teleport-to-players", "condition:13"]
     }
   },
   "results": {
@@ -837,7 +855,7 @@
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "social:lock-players": {"status":"not-run","evidence":[]},
     "social:ignore-players": {"status":"not-run","evidence":[]},
-    "social:teleport-to-players": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f"]},
+    "social:teleport-to-players": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2"]},
     "social:create-and-join-a-guild": {"status":"not-run","evidence":[]},
     "social:guild-invitations-and-removal": {"status":"not-run","evidence":[]},
     "social:guild-ranks": {"status":"not-run","evidence":[]},
@@ -861,7 +879,7 @@
     "access:world-loading-presentation": {"status":"not-run","evidence":[]},
     "access:controls-and-display": {"status":"not-run","evidence":[]},
     "access:character-status-panel": {"status":"not-run","evidence":[]},
-    "access:minimap-player-menu": {"status":"not-run","evidence":[]},
+    "access:minimap-player-menu": {"status":"not-run","evidence":["minimap-both-invisible-native-9ad87c2"]},
     "access:keybinding-input-lifecycle": {"status":"passed","evidence":["keybinding-conflict-persistence-reset-native-eb85988","text-options-input-release-native-eb85988","window-deactivation-input-release-native-eb85988"]},
     "access:sound-and-music": {"status":"not-run","evidence":[]},
     "access:player-art-gallery": {"status":"not-run","evidence":[]},
@@ -877,7 +895,7 @@
     "condition:10": {"status":"not-run","evidence":[]},
     "condition:11": {"status":"not-run","evidence":[]},
     "condition:12": {"status":"not-run","evidence":[]},
-    "condition:13": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f"]},
+    "condition:13": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2"]},
     "condition:14": {"status":"not-run","evidence":[]},
     "condition:15": {"status":"not-run","evidence":[]},
     "condition:16": {"status":"not-run","evidence":[]},

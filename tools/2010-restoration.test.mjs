@@ -359,8 +359,8 @@ test('quivers change exactly four expanded leaves while every other aspect, jour
   assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Tattered.*normal public native.*Reinforced.*prepared private.*not earned.*Other abilities\/projectiles and original server rules remain unverified/);
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*public HP5 deaths do not prove duration.*Player Slowed.*unverified/);
   assert.equal(digest(readFileSync(new URL('../public/restoration/progress.json', import.meta.url))), 'dbc075b80800540345728a72cda332bf60a03035b1757aaf85b15ecc1b0a50c0');
-  // The legacy ledger now includes its separately verified idle-lifecycle increment.
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'a79d6e2ca80f7c10cfa62e7449ad1e6674c70edf04dc8767e99a07d7e00740ca');
+  // Scoped teleport evidence changes the legacy ledger, not the frozen July surface above.
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'b599ffe7f75a9c00519e0b0633f59e09af155ff75ce1bc679bc8a7fe5a6858f1');
 });
 
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
