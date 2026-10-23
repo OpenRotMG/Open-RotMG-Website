@@ -1122,6 +1122,28 @@
       "checks": [
         "dungeons:snake-pit"
       ]
+    },
+    "snake-treasure-regression-e837b9d": {
+      "kind": "regression",
+      "revision": "e837b9d50fa4f7227ea0a72bda2fca494d330f19",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/391#issuecomment-6373486497",
+      "method": "Eleven Snake-filtered Rust tests and the exact prepared-world seed/restoration test passed. Durable coverage checks reachable complete room encounters across 128 seeds, single-use/local activation, immunity, selected Guard stats and volley/motor semantics, capacity failure and unchanged Stheno reward pools without clear credit. The actual generator completed 4096 seeds with 0-3 rooms and unobstructed treasure floors; all 1144 treasure-free maps matched frozen 82b8caf byte-for-byte. Strict all-target Clippy, formatting and 150 JavaScript tests passed.",
+      "limitations": "Prepared implementation regressions do not recover official room probabilities, AI timings or reward rates. The integrated full suite was not green: 636 passed, 5 failed, 1 pre-existing ignored. Full-suite failure details and baseline comparisons are tracked in the linked PR. No whole-dungeon acceptance.",
+      "checks": [
+        "dungeons:snake-pit"
+      ]
+    },
+    "snake-treasure-native-e837b9d": {
+      "kind": "native",
+      "revision": "e837b9d50fa4f7227ea0a72bda2fca494d330f19",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/391#issuecomment-6373486497",
+      "method": "Shared native runner, seeded Snake Pit 0, one prepared selected-stat Priest and selected native client/Ruffle13. Ordinary movement activated one 5500-HP Guard and local darts; wand/tome inputs defeated actual kind0xe26, normal bag drag collected Speed, and returning to the switch produced no new Guard. Same account/character/player/world before and after, one kill, 51 shots, Snake Pit clear count0 unchanged, and cleanup errors0. Original Guard and inventory screenshots were inspected. Immutable scenario SHA256 827765ebee3e3325b94febeb0b69b1db785241ab43d9a3dad008f358c06ff61b.",
+      "limitations": "Prepared initial room access, selected gear/stats, finite carried Greater Health Potions and ordinary tome healing, not earned admission. 61450ms active scene time was split by QA pauses. Does not accept a complete route, Stheno defeat, exit durability or historical fidelity. Earlier failures, including three real permanent QA-character deaths, remain separate and were not replayed as successes.",
+      "checks": [
+        "dungeons:snake-pit"
+      ]
     }
   },
   "results": {
@@ -1258,7 +1280,7 @@
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
-    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6"]},
+    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
