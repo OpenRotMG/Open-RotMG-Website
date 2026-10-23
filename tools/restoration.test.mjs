@@ -61,6 +61,17 @@ test('Snake Pit cover evidence does not accept the full route',()=>{
   assert.match(evidence.sources['snake-cover-native-3778af2'].limitations,/not earned.*grate.*minimap/);
 });
 
+test('Guardian orbit evidence does not accept the full Snake Pit',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:snake-pit',row=records(data).find(r=>r.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(row.rule.historical,'partial');assert.equal(accepted(row.feature,evidence),false);
+  for(const ref of ['snake-guardians-regression-49335a6','snake-guardians-native-49335a6']){
+    assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].revision,'49335a6d41320ecd1683196093e8290e3f1e5efe');assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  assert.match(row.rule.unknowns.join(' '),/guardian orbit.*activation/);
+  assert.match(evidence.sources['snake-guardians-native-49335a6'].limitations,/not a full Snake Pit clear/);
+});
+
 test('Oryx count announcements do not accept complete closure or chat',()=>{
   const data=catalogue(),evidence=ledger(),ids=['realm:realm-closure','social:chat'];
   validateEvidence(data,evidence);
