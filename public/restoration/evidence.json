@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "coil-habitat-source-578c4c3": {
+      "kind": "source",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/578c4c30d2150b98bd1b4db66497c326964e18a2/src/world/coil.rs",
+      "method": "Coil temple anchors use MidPlains (6) and MidForest (7) instead of admitting highlands and midland sand. Existing two encounters, ruin templates, stocked chests, selected stats, AI, loot rules and portal chance remain unchanged.",
+      "limitations": "Source inspection, not acceptance. Exact count, variant mix and spatial distribution are unresolved; no claim to reproduce the original generator or enforce a precise border distance.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
+    "coil-habitat-regression-578c4c3": {
+      "kind": "regression",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/387#issuecomment-6372573504",
+      "method": "Old filter genuinely fails realm-fsod-2 at original habitat 5. Corrected test passes all six catalog layouts at Rust seed 315: two temples, original anchors in terrain 6 or 7, walkable snake positions, stocked co-located chests and real temple walls/columns/bricks. Integrated suite: 559 passed, 0 failed, 1 existing ignored campaign. Clippy, formatting, 154 Python and 74 JavaScript tests passed.",
+      "limitations": "One declared seed per layout, not a population-distribution study, exhaustive approach-path test or full landmark acceptance. The ignored test requires three separately retained 60-minute ordinary campaigns and was not run or credited.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
+    "coil-habitat-native-578c4c3": {
+      "kind": "native",
+      "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/387#issuecomment-6372573504",
+      "method": "Clean candidate native-after1 passed five checks with client f3c7b49/runtime 0.7.1-openrotmg.14: actual generated 900-HP Coil, living Knight, normal native lease, captured temple/chest scene and same living character after 4.25s active gameplay; cleanupErrors empty. Source-hash-bound world03 anchor 1632,1518 is MidPlains (6).",
+      "limitations": "Prepared level-20 position/gear, not earned traversal, a Coil kill, chest collection, portal qualification or complete feature acceptance. Baseline b942870 world01 anchor 1391,1335 is HighForest (4); its capture is retained from a lease-failed run, not an overall pass. Separate fresh Realms/random variants, not a matched-world or performance comparison.",
+      "checks": ["realm:great-coil-snake", "realm:setpiece-sites", "realm:minor-landmarks"]
+    },
     "sand-castle-source-0e3f09d": {
       "kind": "source",
       "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
@@ -1066,8 +1093,8 @@
     "realm:water-network": {"status":"not-run","evidence":[]},
     "realm:road-network": {"status":"not-run","evidence":[]},
     "realm:godlands-terrain": {"status":"not-run","evidence":[]},
-    "realm:setpiece-sites": {"status":"not-run","evidence":[]},
-    "realm:minor-landmarks": {"status":"not-run","evidence":[]},
+    "realm:setpiece-sites": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
+    "realm:minor-landmarks": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
     "realm:scenery-placement": {"status":"not-run","evidence":[]},
     "realm:scenery-interactions": {"status":"not-run","evidence":[]},
     "realm:coastal-arrivals": {"status":"not-run","evidence":[]},
@@ -1114,7 +1141,7 @@
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:goblin-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:great-coil-snake": {"status":"not-run","evidence":[]},
+    "realm:great-coil-snake": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},

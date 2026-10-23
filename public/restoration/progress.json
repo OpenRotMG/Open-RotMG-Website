@@ -1769,12 +1769,20 @@
         "expected": "Level8 quest0xdc2,900 HP/16 DEF; Snake Shot50/speed65/lifetime16000ms and Ghost Shot40. Egg0xdc1→Temple Snake0xdc0 lifecycle belongs here; exact hatching/rings/placement/portal policy qualified.",
         "differences": [],
         "unknowns": [
-          "Original temple placement/distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
+          "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/great-coil-snake",
+            "label": "Wild Shadow Great Coil Snake guide (April 2012 archive): ruins near the lowland/midland grass border and their treasure chest"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
+            "label": "Community temple-placement comparison: MidForest/MidPlains (2013), not a target-date population count"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
