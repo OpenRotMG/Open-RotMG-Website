@@ -2766,17 +2766,33 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Snake Pit entrance, traversable snake-filled dungeon, Stheno with stable circling guardians, rewards and completion; investigate target button/guard/dart treasure-room group. Original maze distribution, treasure-room deployment and exact phase/reward policies are not settled.",
+        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
         "differences": [],
         "unknowns": [
-          "Was the Snakepit button, guard and dart-controller group the second production treasure room?",
-          "Original phase timings, entrance probability and reward rates.",
+          "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
+          "Original phase timings, entrance probability, Guard damage eligibility and reward rates.",
           "Exact original guardian orbit speed, direction, initial variance and activation range."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
+            "label": "June 2012 production notes: treasure rooms in two unnamed dungeons"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Snake%20Pit",
+            "label": "Updated Snake Pit wiki; 2012 image metadata is not an archived page snapshot"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SnakePit.cs",
+            "label": "Modified 7.0 button/Guard comparator, not official 2012 AI"
+          },
+          {
+            "url": "https://realmofthemadblogger.blogspot.com/2013/06/3-treasure-room-snake-pit.html",
+            "label": "June 2013 room description, later corroboration only"
           },
           {
             "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
