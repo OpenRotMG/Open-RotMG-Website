@@ -360,7 +360,7 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
   assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Enemy Slowed is partial.*Tattered, Reinforced and Iron.*public HP5 deaths do not prove duration.*Player conditions.*history.*full class journeys.*unverified/);
   // Legacy progress evolves independently; restoration.test.mjs validates that ledger.
   // Scoped Tomb evidence changes the legacy ledger, not the frozen July surface above.
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '47162c4b55176fb116f513b51f0c45489d7917a929d1b7f81936588ae42e5031');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'c4274d04252f5079ad935ae7d31154f3d1abe678a883d1db7ebc31c4ba1a965f');
 });
 
 test('Iron citations pin executed tests and prepared native scope without historical or public acceptance', () => {

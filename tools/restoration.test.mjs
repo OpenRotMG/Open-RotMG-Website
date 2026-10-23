@@ -20,6 +20,14 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Hermit loot regressions do not certify full native or historical acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:hermit-god',ref='hermit-loot-regression-29898ed';
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert(evidence.results[id].evidence.includes(ref));
+  assert.equal(data.features.find(f=>f.id===id).audit.historical,'partial');
+  assert.match(evidence.sources[ref].limitations,/not a full native Hermit loot clear/);
+});
+
 test('Tomb release records source restoration without inventing full acceptance',()=>{
   const data=catalogue(),evidence=ledger(),ids=['realm:grand-sphinx','dungeons:tomb-of-the-ancients',...['sarcophagus-awakening','trap-switch-and-quicksand','treasure-and-three-boss-completion','ordinary-encounters'].map(x=>'dungeons:tomb-of-the-ancients:'+x)];
   validateEvidence(data,evidence);

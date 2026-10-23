@@ -1940,9 +1940,11 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
-        "differences": [],
+        "differences": [
+          "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification."
+        ],
         "unknowns": [
-          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability and loot rates."
+          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability, loot pools, eligibility, minimum counts and rates."
         ],
         "sources": [
           {
@@ -1952,6 +1954,18 @@
           {
             "url": "https://web.archive.org/web/20120429072116id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
             "label": "April 2012 Hermit wiki: lake in mountain and forest terrain"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Hermit.cs",
+            "label": "Modified-7 comparator: private Dex, Vit and Juggernaut; required potion counts"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/loot/Loots.cs",
+            "label": "Comparator allocation engine: independent rolls and shared private minima"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
+            "label": "June 2012 guide: soulbound loot and a broader pool, without numerical minima"
           }
         ]
       }
