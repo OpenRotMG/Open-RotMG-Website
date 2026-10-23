@@ -2859,7 +2859,7 @@
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
-          "The painter provides one tiled floor motif; a non-tiled variant is not represented. Its exact target-era selection policy still needs corroboration."
+          "Alternate white/yellow stationary checker: engineering reconstruction, not authenticated historical non-tiled rendering/selection."
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
@@ -2879,7 +2879,7 @@
             "id": "dungeons:sprite-world:floor-and-native-variants",
             "name": "Floor variants, trees and native gods",
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
-            "acceptance": "Exercise every push direction and stationary floor, tree destruction and documented variant seeds. The current painter does not provide a non-tiled variant; exact original probabilities remain unverified.",
+            "acceptance": "Exercise all push directions, tree destruction and both stationary-pattern seeds; historical non-tiled rendering/selection probabilities remain unverified.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [],
@@ -4191,14 +4191,12 @@
       "category": "gear",
       "icon": "assets/player/sand-pail-5.png",
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
-        "differences": [
-          "Small and Large Firecrackers work, but Sand Pail cannot summon a healing Sand Castle."
-        ],
+        "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and castle healing/range/lifetime remain unestablished."
+          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
         ],
         "sources": [
           {

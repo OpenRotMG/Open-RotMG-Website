@@ -1,6 +1,60 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "sand-castle-source-0e3f09d": {
+      "kind": "source",
+      "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8/src/world/companions.rs",
+      "method": "Versioned SQL guards five-dose publication. Stationary Castle: 10HP/<3 tiles/1000ms; first pulse +1000ms, expiry +30000ms from publication.",
+      "limitations": "Numeric/recipient/stacking rules are engineering reconstruction; not historical acquisition or whole-seasonal-toy acceptance.",
+      "checks": ["gear:seasonal-toys"]
+    },
+    "sand-castle-regression-f16ad17": {
+      "kind": "regression",
+      "revision": "f16ad170b53354cc62778b8ffee189e8c757a4e2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/374#issuecomment-6370346225",
+      "method": "Five focused tests passed: doses/SQL/DB reopen, metadata/quarantine, multiplayer eligibility/caps, stationarity/timers/cleanup, permanent-pet preservation. Formatting/Clippy passed; all five also passed in deployed ae6c34b's 553-test gate.",
+      "limitations": "Local suite: 537 passed/3 failed/1 ignored (crowd, Lab, Oryx-Castle failures); no independent baseline or local full-suite pass.",
+      "checks": ["gear:seasonal-toys"]
+    },
+    "sand-castle-native-f16ad17": {
+      "kind": "native",
+      "revision": "f16ad170b53354cc62778b8ffee189e8c757a4e2",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/374#issuecomment-6370346225",
+      "method": "24 assertions passed: prepared Wizard (HP-ring injury), Pail5→4/one revision, healing above measured regeneration, radius, stationarity/expiry. Client f4e2781/runtime .13; cleanup clean.",
+      "limitations": "Five earlier attempts failed setup; no native before/after. One actor; no native multiplayer/Sick, earned acquisition or .14 acceptance. Tooltip occludes HUD; exact HP from read-only inspect.",
+      "checks": ["gear:seasonal-toys"]
+    },
+    "sprite-floor-pattern-source-cb37add": {
+      "kind": "source",
+      "revision": "cb37add940ad5e1a00d033817764dc4d36603143",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/cb37add940ad5e1a00d033817764dc4d36603143/src/dungeon/sprite.rs",
+      "method": "Seed parity selects white or white/yellow stationary tiles; no extra RNG draws or layout/conveyor/object/population changes.",
+      "limitations": "Recipe/per-world scope/parity are engineering reconstruction, not historical non-tiled rendering or original probabilities.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-floor-pattern-regression-42d4c7a": {
+      "kind": "regression",
+      "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
+      "method": "Two tests passed: complete-map color normalization, 48-seed topology/connectivity. Formatting/Clippy/release passed; both also passed in deployed ae6c34b's 553-test gate. Source unchanged after integration.",
+      "limitations": "Broad local run stopped; failures retained. No local full-suite pass or historical acceptance.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-floor-pattern-native-42d4c7a": {
+      "kind": "native",
+      "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
+      "method": "Eight assertions passed: both patterns rendered, stationary arrivals, ordinary movement, living actors/no kills. Normal selection: client f3c7b49/runtime .14; cleanup clean.",
+      "limitations": "Prepared arrivals/gear; no earned entry, boss clear, exhaustive push/tree/native-god acceptance or same-seed before/after. Broader checks remain unrecorded.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
     "loot-bag-expiry-native-764fad1": {
       "kind": "native",
       "revision": "764fad14b08d5b2f6d973e3a762591964ca492ed",
@@ -1106,8 +1160,8 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":[]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
+    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
     "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
@@ -1181,7 +1235,7 @@
     "gear:xp-booster": {"status":"not-run","evidence":[]},
     "gear:dungeon-keys": {"status":"not-run","evidence":[]},
     "gear:amulet-of-resurrection": {"status":"not-run","evidence":[]},
-    "gear:seasonal-toys": {"status":"not-run","evidence":[]},
+    "gear:seasonal-toys": {"status":"not-run","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17"]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
     "style:summon-a-drake": {"status":"not-run","evidence":[]},
     "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
