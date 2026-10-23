@@ -3845,7 +3845,8 @@
         "expected": "Minor/normal/Greater Magic restore 50/100/200 MP; consumable, Greater soulbound; permitted ground use.",
         "differences": [],
         "unknowns": [
-          "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size."
+          "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
+          "MP restoration text now uses cyan as requested in issue 322; original server hue is not established by conflicting modified comparators."
         ],
         "sources": [
           {
