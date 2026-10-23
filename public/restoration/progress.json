@@ -2942,6 +2942,14 @@
         ],
         "sources": [
           {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/DungeonGen/Templates/Abyss/StartRoom.cs",
+            "label": "Empty generated start-room comparator, not a runtime safety barrier or original generator"
+          },
+          {
+            "url": "https://bluenosersguide.weebly.com/abyss-of-demons.html",
+            "label": "Mixed-era guide: doorway arrivals and demons chasing into the starting area"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
           },
