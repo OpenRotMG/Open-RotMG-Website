@@ -37,6 +37,13 @@ test('Tomb release records source restoration without inventing full acceptance'
     assert.equal(accepted(row.feature,evidence),false,id);assert.equal(matches(row,evidence,'verification'),true,id);
   }
   assert.match(evidence.sources['tomb-native-partial-99451ac'].limitations,/One boss, not a complete Tomb acceptance/);
+  const ref='tomb-native-clear-933375f',clear=evidence.sources[ref],bound=Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([id])=>id);
+  assert.equal(clear.kind,'native');assert.equal(clear.revision,'933375f9f3795358f07882da54be84fb3b16c58e');
+  assert.deepEqual(bound,clear.checks);assert.deepEqual(bound,[ids[1],ids[4]]);
+  assert.match(clear.method,/exact identity\/kind death logs.*one committed Tomb counter.*normal0x704 exit.*same account\/character/);
+  assert.match(clear.limitations,/Arena companions were born after objectives and before boss DPS/);
+  assert.match(clear.limitations,/not the combined treasure\/individual-loot\/artifact acceptance/);
+  assert.match(data.features.find(f=>f.id===ids[1]).audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
 });
 
 test('Snake Pit cover evidence does not accept the full route',()=>{
