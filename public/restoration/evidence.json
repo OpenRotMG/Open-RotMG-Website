@@ -15,8 +15,8 @@
       "revision": "f16ad170b53354cc62778b8ffee189e8c757a4e2",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/374#issuecomment-6370346225",
-      "method": "Five focused tests passed: doses/SQL/DB reopen, metadata/quarantine, multiplayer eligibility/caps, stationarity/timers/cleanup, permanent-pet preservation. Formatting/strict Clippy passed.",
-      "limitations": "Local suite: 537 passed/3 failed/1 ignored (crowd, Lab, Oryx-Castle failures); no independent baseline or full-suite pass.",
+      "method": "Five focused tests passed: doses/SQL/DB reopen, metadata/quarantine, multiplayer eligibility/caps, stationarity/timers/cleanup, permanent-pet preservation. Formatting/Clippy passed; all five also passed in deployed ae6c34b's 553-test gate.",
+      "limitations": "Local suite: 537 passed/3 failed/1 ignored (crowd, Lab, Oryx-Castle failures); no independent baseline or local full-suite pass.",
       "checks": ["gear:seasonal-toys"]
     },
     "sand-castle-native-f16ad17": {
@@ -42,8 +42,8 @@
       "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
       "date": "2026-10-23",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
-      "method": "Two tests passed: complete-map color normalization, 48-seed topology/connectivity. Formatting/strict Clippy/release passed; source unchanged after integration.",
-      "limitations": "Broad run stopped; failures retained. No full-suite pass or historical acceptance.",
+      "method": "Two tests passed: complete-map color normalization, 48-seed topology/connectivity. Formatting/Clippy/release passed; both also passed in deployed ae6c34b's 553-test gate. Source unchanged after integration.",
+      "limitations": "Broad local run stopped; failures retained. No local full-suite pass or historical acceptance.",
       "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
     },
     "sprite-floor-pattern-native-42d4c7a": {
