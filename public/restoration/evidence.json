@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "sprite-floor-pattern-source-cb37add": {
+      "kind": "source",
+      "revision": "cb37add940ad5e1a00d033817764dc4d36603143",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/cb37add940ad5e1a00d033817764dc4d36603143/src/dungeon/sprite.rs",
+      "method": "Seed parity selects white or white/yellow stationary tiles without extra RNG draws or layout, conveyor, object or population changes.",
+      "limitations": "Recipe, per-world scope and parity are engineering reconstruction, not historical non-tiled rendering or original probabilities.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-floor-pattern-regression-42d4c7a": {
+      "kind": "regression",
+      "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
+      "method": "Two Sprite tests passed: complete-map color normalization and 48-seed topology/connectivity. Formatting, strict Clippy and release build passed; source unchanged after integration.",
+      "limitations": "Broad local suite was stopped with unrelated community failures retained, not a full-suite pass. No historical acceptance.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-floor-pattern-native-42d4c7a": {
+      "kind": "native",
+      "revision": "42d4c7a0922d6e220b6fe24d7011f719054f66db",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/370#issuecomment-6370117516",
+      "method": "Eight assertions passed: both generated patterns rendered, stationary arrivals, ordinary movement and living actors without kills. Normal deployed selection used client f3c7b49/runtime .14; cleanup was clean.",
+      "limitations": "Prepared arrivals/gear, not earned entry, boss clear, exhaustive push/tree/native-god acceptance or same-seed before/after. Broader checks remain not recorded.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
     "loot-bag-expiry-native-764fad1": {
       "kind": "native",
       "revision": "764fad14b08d5b2f6d973e3a762591964ca492ed",
@@ -1084,8 +1111,8 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":[]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
+    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
     "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
