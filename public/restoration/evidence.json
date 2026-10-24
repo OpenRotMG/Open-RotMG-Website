@@ -1,6 +1,17 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "kage-phase-clock-integration-f27fc4c": {
+      "kind": "regression",
+      "revision": "f27fc4ce8afd16a7242fb8a0d964075608bbd0ac",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/455#issuecomment-6381813290",
+      "method": "Final integration includes normally merged fixture repair 9ecf049. Both formerly failing population seeds, 730 and 1093, retain two Kage graveyards and 17–24 Ent Groves; only cfg(test) fixture/generator bounds change. All 121 Rust tests passed with none ignored/filtered, plus formatting, warning-denied all-target Clippy, 18 controller JavaScript and 2 launcher Python tests. Server PR455 merged as 6b4d1af with the exact tested f27fc4c tree.",
+      "limitations": "Native evidence remains bound to its actual tested 20c2493 revision. Clock implementation, Manor entry, attack definitions, selected objects and runner/controller blobs are identical in the integration, and the intervening world.rs diff is test-only; this is narrow source equivalence, not another whole-tree native run or historical acceptance. Production placement/counts/habitat and native/lifecycle guards were not relaxed.",
+      "checks": [
+        "realm:kage-kami"
+      ]
+    },
     "kage-phase-clock-source-20c2493": {
       "kind": "source",
       "revision": "20c2493dbfe735309ec58ec1c2c24f9b6850c98e",
@@ -1563,7 +1574,7 @@
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
-    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493"]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
     "realm:pirates": {"status":"not-run","evidence":[]},
     "realm:night-elves": {"status":"not-run","evidence":[]},
     "realm:undead-dwarves": {"status":"not-run","evidence":[]},
