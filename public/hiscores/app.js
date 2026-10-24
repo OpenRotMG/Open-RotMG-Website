@@ -15,6 +15,17 @@ export function ranked(players, board) {
   let rank = 0, previous;
   return sorted.map((player, i) => {if (previous !== player[board]) rank = i + 1; previous = player[board]; return {...player, rank};});
 }
+// Keep English names in natural order regardless of browser locale: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
+const itemNames = new Intl.Collator('en', {numeric: true, sensitivity: 'base'});
+export function collectionOrder(items, found, order) {
+  const modes = {
+    name: () => 0,
+    missing: (a, b) => Number(found.has(a.id)) - Number(found.has(b.id)),
+    recent: (a, b) => Number(found.has(b.id)) - Number(found.has(a.id)) || (found.has(a.id) && found.has(b.id) ? found.get(b.id) - found.get(a.id) : 0)
+  };
+  if (!Object.hasOwn(modes, order)) throw new Error('Unknown collection sort');
+  return [...items].sort((a, b) => modes[order](a, b) || itemNames.compare(a.name, b.name) || a.id - b.id);
+}
 async function json(path) {
   const target = path.startsWith('/api/') ? OpenRotMGBackend.url(path) : path;
   const response = await fetch(target, {cache: 'no-store', redirect: 'error'});
@@ -38,15 +49,17 @@ async function start() {
     document.querySelector('#scores').hidden = true;document.querySelector('#collection').hidden = false;
     document.querySelector('#description').textContent = boards.collection.description;
     document.querySelector('#collected').textContent = `${found.size} / ${items.length} items obtained`;
-    const grid = document.querySelector('#items');
+    const grid = document.querySelector('#items'), tiles = new Map(), sort = document.querySelector('#sort');
     for (const item of items) {
       const tile = document.createElement('div'), sprite = document.createElement('span'), name = document.createElement('span'), state = document.createElement('span');
       tile.className = 'item';tile.dataset.name = item.name.toLowerCase();name.textContent = item.name;
       sprite.className = found.has(item.id) ? 'sprite' : 'sprite missing';sprite.setAttribute('aria-hidden', 'true');
       sprite.style.backgroundPosition = `${-item.x}px ${-item.y}px`;
       state.textContent = found.has(item.id) ? `Obtained ${new Date(found.get(item.id) * 1000).toLocaleDateString()}` : 'Not obtained';
-      tile.append(sprite, name, state);grid.append(tile);
+      tile.append(sprite, name, state);tiles.set(item.id, tile);
     }
+    const render = () => grid.replaceChildren(...collectionOrder(items, found, sort.value).map(item => tiles.get(item.id)));
+    sort.addEventListener('change', render);render();
     search.addEventListener('input', () => {for (const tile of grid.children) tile.hidden = !tile.dataset.name.includes(search.value.toLowerCase());});
     status.textContent = 'Black silhouettes are items not yet obtained.';
     return;
