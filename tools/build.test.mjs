@@ -56,7 +56,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /<h2>One-time Gold<\/h2>/);
   assert.match(gold, /<h2>Repeatable Gold<\/h2>/);
   assert.match(gold, /Link Discord - use <code>\/link<\/code> in Discord/);
-  assert.match(gold, /Submit your first bug report - type <code>\/bug<\/code> in game/);
+  assert.match(gold, /Submit your first bug report - use <a href="\/#bug-report">Report bug<\/a> on the website/);
   assert.match(gold, /top 50%.*hiscores\/\?board=collection/);
   assert.match(gold, /Make a YouTube video about Open RotMG/);
   assert.equal((gold.match(/Per 1,000 views/g) ?? []).length, 2);
@@ -68,7 +68,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /Each star-rank reward is paid once per account\. Existing ranks count, too\./);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
-  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Updates', 'Restoration', 'Gold', 'Pixel editor', '2010 Preview']);
+  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Source Code', 'Updates', 'Restoration', 'Gold', 'Pixel editor', '2010 Preview']);
   assert.ok(about.includes('href="https://www.openrotmg.org/2010/">2010 Preview</a>'));
   assert.ok(!home.includes('href="https://www.openrotmg.org/2010/"'));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
@@ -90,7 +90,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   }
   const footer = home.match(/<footer class="site-footer">(.*?)<\/footer>/s)[1];
   assert.ok(footer.includes('2012 Realm of the Mad God reimplementation<br>'));
-  assert.ok(footer.includes('Report bugs and missing content on Discord.</p>'));
+  assert.ok(footer.includes('Report bugs and missing content with the link below.</p>'));
   assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
@@ -98,6 +98,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const requirements = validateEvidence(progress, evidence);
   assert.doesNotMatch(footerNav, />Gold<|>Updates<|>Restoration<|>Branding</);
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
+  assert.ok(footerNav.includes('href="/#bug-report">Report bug</a>'));
+  assert.doesNotMatch(footerNav, />Source</);
+  assert.ok(about.includes('href="https://github.com/OpenRotMG">Source Code</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = home.match(/<meta name="description" content="([^"]+)"/)[1];
   assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
@@ -106,7 +109,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.ok(html.includes('Open RotMG'));
     assert.doesNotMatch(html.replaceAll('https://github.com/OpenRotMG', ''), /OpenRotMG/);
   }
-  assert.ok(home.includes('href="https://github.com/OpenRotMG">Source</a>'));
+  assert.ok(home.includes('href="/#bug-report">Report bug</a>'));
   assert.equal(home.match(/Powered by Ruffle/g)?.length, 1);
   assert.match(home, /<p class="alpha-warning" role="note">Open RotMG is in early alpha\. Saves will be reset before Beta release\.<\/p>\s*<div id="game"/);
   assert.equal(home.match(/class="alpha-warning"/g)?.length, 1);
@@ -159,8 +162,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
     assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}hiscores/`]);
-    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['https://github.com/OpenRotMG', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Hiscores', 'Source', 'Discord']);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/#bug-report', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Hiscores', 'Report bug', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
