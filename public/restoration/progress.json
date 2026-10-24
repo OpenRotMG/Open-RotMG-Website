@@ -3083,7 +3083,7 @@
         "historical": "known-differences",
         "expected": "Key and earned Sphinx entry, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
         "differences": [
-          "The original map generator was not recovered; connected room geometry, pack distribution and loot probabilities are disclosed reconstructions.",
+          "The original map generator was not recovered. Room geometry, pack distribution and loot probabilities remain reconstructed; footage-informed floor bands and pillar offsets are not a tile-exact official template.",
           "Nut's peer healing and phase timing follow source-qualified community behavior, not a certified original server rate."
         ],
         "unknowns": [
@@ -3102,6 +3102,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
             "label": "Pinned community Tomb mechanics comparator, not official server code"
+          },
+          {
+            "url": "https://archive.org/details/youtube-Igu8lFDRHg0",
+            "label": "Cubes169 archived Tomb gameplay, visible build 123.4.4, earlier than selected 123.5.1"
           }
         ],
         "checks": [

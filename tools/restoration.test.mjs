@@ -43,7 +43,13 @@ test('Tomb release records source restoration without inventing full acceptance'
   assert.match(clear.method,/exact identity\/kind death logs.*one committed Tomb counter.*normal0x704 exit.*same account\/character/);
   assert.match(clear.limitations,/Arena companions were born after objectives and before boss DPS/);
   assert.match(clear.limitations,/not the combined treasure\/individual-loot\/artifact acceptance/);
-  assert.match(data.features.find(f=>f.id===ids[1]).audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
+  for(const name of ['tomb-layout-regression-40d990f','tomb-layout-native-40d990f']){
+    const source=evidence.sources[name];assert.equal(source.revision,'40d990f0c2dbbd39577d4e5fcb418a38bd36c76a');
+    assert.deepEqual(source.checks,[ids[1],ids[3]]);for(const id of source.checks)assert(evidence.results[id].evidence.includes(name));
+  }
+  assert.match(evidence.sources['tomb-layout-native-40d990f'].limitations,/regression-only.*not matched seeds/);
+  const tomb=data.features.find(f=>f.id===ids[1]);assert(tomb.audit.sources.some(s=>s.url==='https://archive.org/details/youtube-Igu8lFDRHg0'&&s.label.includes('123.4.4')));
+  assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
 });
 
 test('Snake Pit cover evidence does not accept the full route',()=>{
