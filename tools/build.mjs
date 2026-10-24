@@ -19,7 +19,7 @@ for (const icon of new Set([...progress.categories, ...progress.features].map(ro
   if (!/^assets\/player\/[a-z0-9-]+\.png$/.test(icon)) throw new Error(`Invalid restoration asset: ${icon}`);
   await readFile(join(root, 'public/restoration', icon));
 }
-for (const name of ['SITE_URL', 'CLIENT_DIR']) {
+for (const name of ['SITE_URL', 'CLIENT_DIR', 'API_ORIGIN']) {
   if (!process.env[name]) throw new Error(`${name} is required; see the setup instructions.`);
 }
 const site = new URL(process.env.SITE_URL);
@@ -33,7 +33,13 @@ if (local !== undefined && local !== '1') throw new Error('LOCAL_CLIENT_BUILD mu
 if (local && !(site.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(site.hostname))) {
   throw new Error('LOCAL_CLIENT_BUILD requires a loopback HTTP SITE_URL.');
 }
-const socketOrigin = site.origin.replace(/^http/, 'ws');
+const api = new URL(process.env.API_ORIGIN);
+if (api.username || api.password || api.search || api.hash || api.pathname !== '/' ||
+    (api.protocol !== 'https:' && !(api.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(api.hostname)))) {
+  throw new Error('API_ORIGIN must be an HTTPS origin, or loopback HTTP for development.');
+}
+if (local && api.origin !== site.origin) throw new Error('Local client build requires matching loopback API_ORIGIN.');
+const socketOrigin = api.origin.replace(/^http/, 'ws');
 const client = resolve(process.env.CLIENT_DIR);
 const revision = execFileSync('git', ['-C', client, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 execFileSync('git', ['-C', client, 'diff', '--exit-code', 'HEAD']);
@@ -65,7 +71,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       await writeFile(path, socialMetadata(html, site.href + socialImage));
     }
@@ -80,4 +86,4 @@ await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
 await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.href}</loc></url><url><loc>${site.href}about/</loc></url><url><loc>${site.href}restoration/</loc></url><url><loc>${site.href}restoration/2010/</loc></url><url><loc>${site.href}branding/</loc></url><url><loc>${site.href}hiscores/</loc></url><url><loc>${site.href}gold/</loc></url><url><loc>${site.href}updates/</loc></url></urlset>\n`);
-console.log(`Built ${site.href} for client ${revision}. Rust must serve /client.swf, /vendor/, /sfx/, /legacy-api/ and /game.`);
+console.log(`Built ${site.href} for client ${revision}. Game API: ${api.origin}. Pages publication must add the patched client, runtime and audio assets.`);

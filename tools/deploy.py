@@ -24,7 +24,7 @@ STATE = Path('/var/lib/openrotmg-site-deploy')
 LOCK = Path('/run/lock/openrotmg-deploy.lock')
 REPO = 'https://github.com/OpenRotMG/Open-RotMG-Website.git'
 CLIENT_REPO = 'https://github.com/OpenRotMG/Open-RotMG-Client.git'
-ORIGIN = 'https://openrotmg.org/'
+ORIGIN = 'https://game.openrotmg.org/'
 LIMIT = 96 * 1024 * 1024
 
 

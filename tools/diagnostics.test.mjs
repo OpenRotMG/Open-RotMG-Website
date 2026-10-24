@@ -29,8 +29,9 @@ function fixture({longTasks = true, graphicsError = false, loaded = true, baseUR
       uploads.push({url: url.href, options}); return new Response(null, {status});
     }
   };
+  context.OpenRotMGBackend = {fetch: (path, options) => context.fetch(new URL(path, 'https://game.example.test'), options)};
   runInNewContext(readFileSync(new URL('../public/diagnostics.js', import.meta.url), 'utf8'), context);
-  const endpoint = new URL('wss://example.test/game');
+  const endpoint = new URL('wss://game.example.test/game');
   let load;
   const player = {addEventListener(event, callback, options) {assert.equal(event, 'loadeddata'); assert.equal(options.once, true); load = callback;}};
   context.window.OpenRotMGDiagnostics.start(endpoint, player);
@@ -43,7 +44,7 @@ test('nested editor page looks up the same root build identity and telemetry API
   const f = fixture({baseURI: 'https://example.test/draw/'});
   assert.deepEqual(f.lookups, ['https://example.test/diagnostics-build.json']);
   await f.sample();
-  assert.match(f.uploads[0].url, /^https:\/\/example\.test\/api\/diagnostics\/[a-f0-9]{32}$/);
+  assert.match(f.uploads[0].url, /^https:\/\/game\.example\.test\/api\/diagnostics\/[a-f0-9]{32}$/);
 });
 
 test('startup sends no build lookup or telemetry and starts only after the movie loads', async () => {
@@ -64,7 +65,7 @@ test('wrapper uses a random per-page socket key, bounded telemetry and no identi
   f.frame(0); f.frame(16); f.frame(216); f.task(80);
   await f.sample();
   const upload = f.uploads[0];
-  assert.equal(upload.url, `https://example.test/api/diagnostics/${f.endpoint.searchParams.get('diagnostics')}`);
+  assert.equal(upload.url, `https://game.example.test/api/diagnostics/${f.endpoint.searchParams.get('diagnostics')}`);
   assert.equal(upload.options.redirect, 'error');
   const sample = JSON.parse(upload.options.body);
   assert.deepEqual(sample, {build: JSON.stringify(identity), renderer: null,

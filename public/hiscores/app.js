@@ -16,7 +16,8 @@ export function ranked(players, board) {
   return sorted.map((player, i) => {if (previous !== player[board]) rank = i + 1; previous = player[board]; return {...player, rank};});
 }
 async function json(path) {
-  const response = await fetch(path, {cache: 'no-store', redirect: 'error'});
+  const target = path.startsWith('/api/') ? OpenRotMGBackend.url(path) : path;
+  const response = await fetch(target, {cache: 'no-store', redirect: 'error'});
   if (!response.ok) throw new Error(`Hiscores request failed (${response.status})`);
   return response.json();
 }
