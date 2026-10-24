@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "stat-panel-native-eb85988": {
+      "kind": "native",
+      "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/379#issuecomment-6384165145",
+      "method": "Actual native HP/MP current and effective maxima, injury/recovery, spell MP spend/regeneration, six-stat totals and base-cap/positive/zero colors. Normal equip/unequip changed real items and revisions. Selected Life/Mana/Dexterity consumables rendered positive effects and naturally expired; measured Life game interval was 30050ms. Genuine stat cards used HUD left-click followed by pointer rest. Original images, state brackets, executable attribution and complete selected browser-cache JS/WASM bodies were reviewed.",
+      "limitations": "Prepared unearned Wizards, client 9904a0b and Ruffle .8. Not a .15 rerun, runtime-equivalence, current-main or historical-fidelity claim. Damage-capped01 remains failed; only valid individual injury/recovery/capped-color frames count. Failed capped-rest01 supplies no scenario proof. Other initialization, CDP and ENOSPC failures remain retained. Image/state reads are not atomic; this is not hover-only input.",
+      "checks": ["access:character-status-panel"]
+    },
+    "stat-panel-signed-native-b21f4cb": {
+      "kind": "native",
+      "revision": "b21f4cba1f3e5180fb3289e1a61bbc612da24f56",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/379#issuecomment-6384165145",
+      "method": "One actual native signed-modifier run exited 0 with two outcome assertions, eight independently opened originals and empty cleanup errors. Speed showed neutral20, red15(-5), expired neutral20, green25(+5), expired neutral20, gold50, gold45(-5), expired gold50. Three real bounded prepared effects expired naturally during ordinary native actions, preserving living identity, inventory and revision. Full-original-contract review combined this with the older HP/MP/equip/30-second positive-expiry matrix; independent five-image review resolved the precise remaining visual gap.",
+      "limitations": "Historical b21f4cb with recorded diagnostic-runner change and exact executed v3 case graph, client be57de7 and Ruffle .15. Explicit unearned prepared modifiers, not acquired negative equipment or earned progression. Does not rerun older .8 HP/MP/equipment observations on .15 or prove advanced current main. Earlier readiness/CDP, lease, incorrect private assertions and reviewer timeout/BLOCK are not retroactively passes. Cropped public comparison uses unchanged 2x nearest-neighbor gameplay pixels with external labels.",
+      "checks": ["access:character-status-panel"]
+    },
     "snake-layout-regression-6f35dab": {
       "kind": "regression",
       "revision": "6f35dab366669aac2a00b75cf3744df0e08bffb8",
@@ -1768,7 +1786,7 @@
     "access:idle-disconnect": {"status":"passed","evidence":["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808","idle-warnings-resets-native-b693808","idle-first-return-durable-native-b693808"]},
     "access:world-loading-presentation": {"status":"not-run","evidence":[]},
     "access:controls-and-display": {"status":"not-run","evidence":[]},
-    "access:character-status-panel": {"status":"not-run","evidence":[]},
+    "access:character-status-panel": {"status":"passed","evidence":["stat-panel-native-eb85988","stat-panel-signed-native-b21f4cb"]},
     "access:minimap-player-menu": {"status":"not-run","evidence":["minimap-both-invisible-native-9ad87c2"]},
     "access:keybinding-input-lifecycle": {"status":"passed","evidence":["keybinding-conflict-persistence-reset-native-eb85988","text-options-input-release-native-eb85988","window-deactivation-input-release-native-eb85988"]},
     "access:sound-and-music": {"status":"not-run","evidence":[]},
