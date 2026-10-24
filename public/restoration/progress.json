@@ -1878,13 +1878,18 @@
         "expected": "At most one Sphinx per Realm, setting, combat and Horrid Reapers; Reapers disappear after boss death and are Stasis-susceptible at123.5.1.",
         "differences": [
           "The Sphinx site's center motif and placement geometry are reconstructed, not recovered official map data.",
-          "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579"
+          "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "PR417 restores the community comparator's encounter-wide Vitality/Wisdom floor and inclusive 1% boundary. Prepared final-hit, drop and pickup evidence is recorded, not an earned full-fight acceptance."
         ],
         "unknowns": [
           "Exact period setting/distribution and loot probabilities.",
           "Native earned-Sphinx defeat, portal entry and subsequent dungeon journey remain unverified."
         ],
         "sources": [
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Sphinx.cs",
+            "label": "Community Sphinx potion-floor comparator, not official 123.5.1 probabilities"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
             "label": "Build 121.0.0 release notes"
@@ -2884,7 +2889,7 @@
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
-          "Alternate white/yellow stationary checker: engineering reconstruction, not authenticated historical non-tiled rendering/selection."
+          "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415."
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
@@ -2904,7 +2909,7 @@
             "id": "dungeons:sprite-world:floor-and-native-variants",
             "name": "Floor variants, trees and native gods",
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
-            "acceptance": "Exercise all push directions, tree destruction and both stationary-pattern seeds; historical non-tiled rendering/selection probabilities remain unverified.",
+            "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [],
@@ -4532,8 +4537,7 @@
         "expected": "World chat includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players and /yell reaches all Nexus players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration.",
-          "Does the current launcher-pinned runtime display chat-star badges? Earlier native QA confirmed star transport but did not display badges."
+          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
         ],
         "sources": [
           {

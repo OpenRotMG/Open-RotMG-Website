@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {boards,ranked} from '../public/hiscores/app.js';
+import * as hiscores from '../public/hiscores/app.js';
+const {boards,ranked}=hiscores;
 test('living fame keeps existing board links and labels the living-only metric',async()=>{
  assert.equal(boards.base_fame.title,'Living fame');
  assert.equal(boards.base_fame.description,'Highest fame of an alive character per account.');
@@ -15,6 +16,19 @@ test('one account per row, stable competition ties and no mutating sort',()=>{
  assert.equal(players[0].account,3);assert.throws(()=>ranked(players,'wallet'),/Unknown/);
  assert.throws(()=>ranked([{account:1,name:'Bad',base_fame:-1}],'base_fame'),/Malformed/);
  assert.throws(()=>ranked([players[0],players[0]],'base_fame'),/Malformed/);
+});
+test('collection sorts names naturally, groups missing items and uses first-obtained dates without mutation',()=>{
+ const items=[{id:9,name:'Sword 10'},{id:4,name:'sword 2'},{id:8,name:'A Wand'},{id:5,name:'a wand'}];
+ const found=new Map([[9,0],[8,200]]),original=structuredClone(items),dates=[...found];
+ const ids=mode=>hiscores.collectionOrder(items,found,mode).map(i=>i.id);
+ assert.deepEqual(ids('name'),[5,8,4,9]);
+ assert.deepEqual(ids('missing'),[5,4,8,9]);
+ assert.deepEqual(ids('recent'),[8,9,5,4]);
+ assert.deepEqual(items,original);assert.deepEqual([...found],dates);
+ found.set(5,200);assert.deepEqual(ids('recent'),[5,8,9,4]);
+ assert.deepEqual(hiscores.collectionOrder([],new Map(),'recent'),[]);
+ assert.deepEqual(hiscores.collectionOrder(items,new Map(),'missing').map(i=>i.id),[5,8,4,9]);
+ for(const mode of ['unknown','__proto__'])assert.throws(()=>ids(mode),/Unknown collection sort/);
 });
 test('current drop sprites are unique, named, in the exact bounded atlas',async()=>{
  const items=JSON.parse(await readFile(new URL('../public/hiscores/items.json',import.meta.url),'utf8'));
