@@ -5,7 +5,7 @@
       "kind": "source",
       "revision": "f5f739831809a47568e4165d37ccc25fae533043",
       "date": "2026-10-24",
-      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/443#issuecomment-6381095363",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/f5f739831809a47568e4165d37ccc25fae533043/src/world/realm_quests.rs",
       "method": "Issue #434 replaces the singleton Ent Ancient allocation with 17–24 finite startup Groves using existing habitat, spacing, spawning and independent quest identities. The 20 May 2012 guide says up to 25 per Realm; pinned Trapped uses upper-exclusive Next(17,25). Other named counts, AI, loot, follower caps and ordinary refill are unchanged.",
       "limitations": "The period guide corroborates multiple Groves, not an exact minimum or distribution. Related server forks are not independent historical votes. Strict placement-or-error is retained rather than copying silent failed-position skips; original placement/RNG remain unresolved. Extra RNG consumption can move later setpieces.",
       "checks": ["realm:ent-ancient"]
