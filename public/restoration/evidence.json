@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "ghost-throw-source-3016fe7": {
+      "kind": "source",
+      "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3016fe7203f9c66ad328ddee8ac55c6a03d914a7/src/world/realm_quests.rs",
+      "method": "Ghost King 0x928 schedules each complete wave on one circular ring through existing bounded named_toss. Type-4 gold throw effects precede owned Ghost Master/Small/Medium/Large Ghost creation by 1500ms; child movement and activation start at landing. Existing four-tile radius, tier composition and ownership remain unchanged.",
+      "limitations": "Scoped throw restoration, not full Ghost King acceptance. Older Trapped uses radius five; readable realm-src uses four and differs in some angles/branches. Exact original range, branch timing, population and reward policy remain unresolved.",
+      "checks": ["realm:ghost-king"]
+    },
+    "ghost-throw-regression-3016fe7": {
+      "kind": "regression",
+      "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/430",
+      "method": "The old wave genuinely fails with five live minions before landing. One wire/world regression covers all four tiers and both ordinary/company waves: throw owner/color/destination, one evenly spaced ring across kinds, no early actors, 1499/1500ms boundary, then exact landings, ownership, activation and invulnerability. All 71 feature-revision Rust tests, formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Prepared walkable map and explicitly known packet observer, not earned gameplay or complete encounter acceptance. Historical behavior is not established by engineering tests.",
+      "checks": ["realm:ghost-king"]
+    },
+    "ghost-throw-native-3016fe7": {
+      "kind": "native",
+      "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/430",
+      "method": "Actual Chromium native before/after runs passed five assertions each with identical case hash and local client/runtime 0.7.1-openrotmg.14, bundle 44ec18cb9050bf726e96ebf5e8f4d65d2fe042178e18ec9c84c8f9cf2d85545d. An ordinary Priest wand hit triggers the full-health generated King's first wave. At wave age 400ms the old server has five ghosts, while the clean feature has zero and visible gold throw arcs; five ghosts subsequently land. Same living character and King retained, cleanupErrors empty.",
+      "limitations": "Prepared level, legal equipment and position, not earned traversal or a full fight. Separate generated Realms, not matched coordinates or a performance comparison. Native evidence covers the first five-member wave; higher tiers/company waves are regression-only. Parent result stays not-run; historical acceptance is not promoted.",
+      "checks": ["realm:ghost-king"]
+    },
     "chat-badge-native-86e55e4": {
       "kind": "native",
       "revision": "86e55e4d10b7cec83adc06279731915befed46bc",
@@ -1300,7 +1327,7 @@
     "realm:travel-between-worlds": {"status":"not-run","evidence":[]},
     "realm:ent-ancient": {"status":"not-run","evidence":[]},
     "realm:lich": {"status":"not-run","evidence":[]},
-    "realm:ghost-king": {"status":"not-run","evidence":[]},
+    "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7"]},
     "realm:deathmage": {"status":"not-run","evidence":[]},
     "realm:red-demon": {"status":"not-run","evidence":[]},
     "realm:oasis-giant": {"status":"not-run","evidence":[]},
