@@ -360,6 +360,24 @@
         "realm:forest-nymphs"
       ]
     },
+    "tomb-layout-regression-40d990f": {
+      "kind": "regression",
+      "revision": "40d990f0c2dbbd39577d4e5fcb418a38bd36c76a",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/436#issuecomment-6380135245",
+      "method": "One 32-seed generator regression verifies selected floor speeds, hollow pillar centres, wall connections, unchanged objective/population counts, floor reachability and two-tile passages. All 80 integrated Rust tests, formatting, warning-denied all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed.",
+      "limitations": "Engineering regression, not historical authentication or full gameplay acceptance. Footage visibly uses 123.4.4, earlier than selected 123.5.1 definitions. The rounded band and pillar offsets are reconstructed; the original generator and exact floor raster remain unknown. No community map data was imported.",
+      "checks": ["dungeons:tomb-of-the-ancients", "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand"]
+    },
+    "tomb-layout-native-40d990f": {
+      "kind": "native",
+      "revision": "40d990f0c2dbbd39577d4e5fcb418a38bd36c76a",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/436#issuecomment-6380135245",
+      "method": "Clean native before 27e8e05 and after 40d990f each passed 13 assertions and five captures with cleanupErrors empty. Frozen client 1c38acb and Ruffle 0.7.1-openrotmg.14 used normal key consumption, portal entry and walking. Reviewed viewport crops show the changed arena floor and hollow pillar. The same living character finishes each tour at 720 HP with the key consumed and no shots or kills.",
+      "limitations": "Prepared legal max-stat level-20 Rogue, empty equipment and provided key, not earned entry, full combat/switch acceptance or a new full clear. Passage width and Sarcophagus interiors are regression-only here. Fresh independent dungeons, not matched seeds; pillar framing follows the pillar three tiles west. Missing Tile identity is a texture inference. The first direct-Tomb bootstrap failed before gameplay and is not credited. All existing statuses remain unchanged.",
+      "checks": ["dungeons:tomb-of-the-ancients", "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand"]
+    },
     "tomb-native-clear-933375f": {
       "kind": "native",
       "revision": "933375f9f3795358f07882da54be84fb3b16c58e",
@@ -1462,9 +1480,9 @@
     },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7"]},
-    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
+    "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f","tomb-layout-regression-40d990f","tomb-layout-native-40d990f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
-    "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
+    "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-layout-regression-40d990f","tomb-layout-native-40d990f"]},
     "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:ordinary-encounters": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
