@@ -2884,7 +2884,7 @@
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
-          "Alternate white/yellow stationary checker: engineering reconstruction, not authenticated historical non-tiled rendering/selection."
+          "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415."
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
@@ -2904,7 +2904,7 @@
             "id": "dungeons:sprite-world:floor-and-native-variants",
             "name": "Floor variants, trees and native gods",
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
-            "acceptance": "Exercise all push directions, tree destruction and both stationary-pattern seeds; historical non-tiled rendering/selection probabilities remain unverified.",
+            "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [],
