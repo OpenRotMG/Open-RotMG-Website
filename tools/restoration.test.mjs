@@ -151,6 +151,31 @@ test('protected projectile contrast supports a seam without accepting whole cond
   assert.equal(pair.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081');assert.match(pair.method,/four-line corrective edit/);assert.match(pair.limitations,/not-run/);assert.match(pair.limitations,/not new native journeys/);
 });
 
+test('minimap menu passes only its cross-revision functional scope and preserves prior evidence',()=>{
+  const data=catalogue(),evidence=ledger(),id='access:minimap-player-menu',old='minimap-both-invisible-native-9ad87c2';
+  validateEvidence(data,evidence);
+  const receipts=[
+    ['minimap-ordinary-native-d283e22','d283e227da0094f94161e2204e0a281b27b99804','2026-10-21'],
+    ['minimap-guild-edge-native-d9f3eb2','d9f3eb27dd8d78a5049cff4b2cecb3a45c6abfed','2026-10-24'],
+    ['minimap-guild-pause-native-21b5980','21b5980f2ccd057ddf5f53c10a472d774b6126a8','2026-10-24']
+  ];
+  assert.deepEqual(evidence.results[id],{status:'passed',evidence:[old,...receipts.map(([ref])=>ref)]});
+  for(const [ref,revision,date] of receipts){
+    const source=evidence.sources[ref];assert.equal(source.kind,'native');assert.equal(source.revision,revision);assert.equal(source.date,date);
+    assert.equal(source.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018');assert.deepEqual(source.checks,[id]);
+    assert.deepEqual(Object.entries(evidence.results).filter(([,result])=>result.evidence.includes(ref)).map(([check])=>check),[id]);
+    assert.match(source.limitations,/cross-revision/);
+  }
+  assert.match(evidence.sources[receipts[0][0]].limitations,/completed-partial.*not a whole-run pass/);
+  assert.match(evidence.sources[receipts[1][0]].limitations,/prepared and unearned/);
+  assert.match(evidence.sources[receipts[2][0]].limitations,/not formal Build Storage CI/);
+  for(const check of ['social:teleport-to-players','condition:13','condition:22','condition:24','condition:25'])assert.equal(evidence.results[check].status,'not-run');
+  // Freeze every pre-existing source/result, including the old negative and projectile evidence.
+  for(const [ref] of receipts)delete evidence.sources[ref];
+  evidence.results[id]={status:'not-run',evidence:[old]};
+  assert.equal(digest(evidence),'e4a0b9a9caba844768308ffd5c3e7eff03116744b1957029ae5ea2491a9b837b');
+});
+
 test('present features remain visible for gameplay and historical work',()=>{
   const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);
