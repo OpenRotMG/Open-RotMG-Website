@@ -28,6 +28,33 @@
       "limitations": "Prepared local phase observation, not earned entry, a full combat clear, production gameplay or original timing certification. Earlier CDP startup failures, invalid case input and prepared-healer deaths remain failed runs, including one startup failure with cleanup errors. No timeout, native readiness, ACK, pause, lease or durability guard was relaxed. Overall functional status stays not-run and historical status stays partial.",
       "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
     },
+    "ent-groves-source-f5f7398": {
+      "kind": "source",
+      "revision": "f5f739831809a47568e4165d37ccc25fae533043",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/f5f739831809a47568e4165d37ccc25fae533043/src/world/realm_quests.rs",
+      "method": "Issue #434 replaces the singleton Ent Ancient allocation with 17–24 finite startup Groves using existing habitat, spacing, spawning and independent quest identities. The 20 May 2012 guide says up to 25 per Realm; pinned Trapped uses upper-exclusive Next(17,25). Other named counts, AI, loot, follower caps and ordinary refill are unchanged.",
+      "limitations": "The period guide corroborates multiple Groves, not an exact minimum or distribution. Related server forks are not independent historical votes. Strict placement-or-error is retained rather than copying silent failed-position skips; original placement/RNG remain unresolved. Extra RNG consumption can move later setpieces.",
+      "checks": ["realm:ent-ancient"]
+    },
+    "ent-groves-regression-f5f7398": {
+      "kind": "regression",
+      "revision": "f5f739831809a47568e4165d37ccc25fae533043",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/443#issuecomment-6381095363",
+      "method": "Original code fails with one Ent root. All six active catalog layouts, two normal Realm constructions each, pass count, living/published roots, separate quest tags, spacing, no ordinary camp ownership and finite closure membership. Transforming one root preserves its identity without changing another family. Full 108-test suite, strict all-target Clippy, formatting, two Python and 18 Node controls passed.",
+      "limitations": "Seeded startup and direct transformation controls, not all seeds, all historical layouts, earned clears, reward probabilities or full encounter acceptance. Coverage is limited to the six active sources and 12 Realm constructions.",
+      "checks": ["realm:ent-ancient"]
+    },
+    "ent-groves-native-f5f7398": {
+      "kind": "native",
+      "revision": "f5f739831809a47568e4165d37ccc25fae533043",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/443",
+      "method": "Clean base c4bfc49 has one actual startup Ent; clean tested head has 19. Two native level-one guests see distinct startup Ent IDs in separate Groves in the same Realm while their quest arrows select another kind. Three before and six after checks pass; both characters remain alive, no kills, cleanups empty. Same fixture, layout, stock client 1c38acb / Ruffle .14 and managed Chrome 156; captions are outside each unchanged 800×600 gameplay capture.",
+      "limitations": "Prepared arrivals, not earned travel, all-Ent combat, complete family/reward acceptance, Windows or FPS certification. First before attempt failed cold-build readiness; normal prebuild and a fresh unchanged-case retry passed without relaxing guards. Exact reported instance and original distribution remain unverified.",
+      "checks": ["realm:ent-ancient"]
+    },
     "kage-cover-source-820e341": {
       "kind": "source",
       "revision": "820e34150059f18a589a74c60966c35a9029d60d",
@@ -1470,7 +1497,7 @@
     },
     "realm:environmental-hazards": {"status":"not-run","evidence":[]},
     "realm:travel-between-worlds": {"status":"not-run","evidence":[]},
-    "realm:ent-ancient": {"status":"not-run","evidence":[]},
+    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398"]},
     "realm:lich": {"status":"not-run","evidence":[]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7"]},
     "realm:deathmage": {"status":"not-run","evidence":[]},
