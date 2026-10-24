@@ -10,6 +10,13 @@ test('living fame keeps existing board links and labels the living-only metric',
  assert.match(index,/href="\?board=base_fame">Living fame<\/a>/);
  assert.ok(!index.includes('Base fame'));
 });
+test('star count uses the same stable ranks and rejects missing or invalid scores',async()=>{
+ assert.equal(boards.stars.title,'Stars');
+ const players=[{account:3,name:'Nova',stars:0},{account:2,name:'Lyra',stars:6},{account:1,name:'Orion',stars:6}];
+ assert.deepEqual(ranked(players,'stars').map(p=>[p.account,p.rank,p.stars]),[[1,1,6],[2,1,6],[3,3,0]]);
+ for(const stars of [undefined,-1,1.5,NaN])assert.throws(()=>ranked([{account:1,name:'Bad',stars}],'stars'),/Malformed/);
+ const index=await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8');assert.match(index,/href="\?board=stars">Stars<\/a>/);
+});
 test('one account per row, stable competition ties and no mutating sort',()=>{
  const players=[{account:3,name:'Third',base_fame:10},{account:2,name:'Second',base_fame:10},{account:1,name:'First',base_fame:20}];
  assert.deepEqual(ranked(players,'base_fame').map(p=>[p.account,p.rank]),[[1,1],[2,2],[3,2]]);

@@ -78,6 +78,15 @@ test('Guardian orbit evidence does not accept the full Snake Pit',()=>{
   assert.match(evidence.sources['snake-guardians-native-49335a6'].limitations,/not a full Snake Pit clear/);
 });
 
+test('Stars hiscores do not accept original Legends or all class-star rules',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  const ids=['heroes:class-stars','heroes:legends-highscores'];
+  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
+    for(const ref of ['star-hiscores-api-cc09377','star-hiscores-browser-f7f6c60']){assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);}}
+  assert.equal(evidence.sources['star-hiscores-api-cc09377'].revision,'cc093771d27f1b930ffa08e613021c0698c4c1ca');
+  assert.equal(evidence.sources['star-hiscores-browser-f7f6c60'].revision,'f7f6c605aea2f751c3e7df22146a5e1d34f1328e');
+});
+
 test('Native Dexterity reconciliation does not accept whole combat or inventory',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   const ids=['realm:shoot-and-take-damage','gear:inventory-and-equipment'];
