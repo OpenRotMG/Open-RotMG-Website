@@ -52,17 +52,24 @@ test('Tomb release records source restoration without inventing full acceptance'
   assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
 });
 
-test('Snake Pit cover evidence does not accept the full route',()=>{
+test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:snake-pit:diggable-route-and-cover';
   validateEvidence(data,evidence);
   const row=records(data).find(r=>r.id===id),result=evidence.results[id];
   assert.equal(row.rule.historical,'partial');assert.equal(result.status,'not-run');
   assert.equal(accepted(row.feature,evidence),false);
-  assert.deepEqual(result.evidence,['snake-cover-regression-3778af2','snake-cover-native-3778af2']);
-  for(const ref of result.evidence){
+  const cover=['snake-cover-regression-3778af2','snake-cover-native-3778af2'],layout=['snake-layout-regression-6f35dab','snake-layout-native-6f35dab'];
+  assert.deepEqual(result.evidence,[...cover,...layout]);
+  for(const ref of cover){
     assert.equal(evidence.sources[ref].revision,'3778af2b3146d7bc20a504131f1769c01cf005ad');
     assert.deepEqual(evidence.sources[ref].checks,[id]);
   }
+  for(const ref of layout){
+    assert.equal(evidence.sources[ref].revision,'6f35dab366669aac2a00b75cf3744df0e08bffb8');
+    assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
+    for(const check of evidence.sources[ref].checks)assert(evidence.results[check].evidence.includes(ref));
+  }
+  assert.match(evidence.sources['snake-layout-native-6f35dab'].limitations,/Not earned entry, entire-corridor excavation, full clear/);
   assert.match(row.rule.unknowns.join(' '),/not the original generator/);
   assert.match(evidence.sources['snake-cover-native-3778af2'].limitations,/not earned.*grate.*minimap/);
 });
