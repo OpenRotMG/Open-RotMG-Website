@@ -1298,6 +1298,24 @@
         "dungeons:davy-jones-s-locker:ship-trash-and-objects"
       ]
     },
+    "udl-endpoint-regression-3bdaddb": {
+      "kind": "regression",
+      "revision": "3bdaddb834b37ca671d7a885ea09b9089812c072",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/489#issuecomment-6386582295",
+      "method": "One 32-seed regression checks dark endpoint crosses, the boss ring and eight Small Candles, unique boss/return portal, unchanged spawn identity, bounded coherent room families and connected positive-ground floor. All 161 integrated Rust tests, formatting, warning-denied all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed. A source-bound geometry probe retains identical dimensions, spawn, floor mask and room regions over 32 seeds.",
+      "limitations": "The September 15, 2012 upload shows the motifs, not an authenticated exact 123.5.1 template. Numeric 0x65 is a texture inference corroborated by a later active community map. The exact raster and entrance candle pair remain reconstructed; no map data was imported. Family placement rules are unchanged, not identical per-seed RNG outcomes. Corridor carving already clears some edge placements, so six is not a final population minimum.",
+      "checks": ["dungeons:undead-lair", "dungeons:undead-lair:entrance-end-dressing"]
+    },
+    "udl-endpoint-native-3bdaddb": {
+      "kind": "native",
+      "revision": "3bdaddb834b37ca671d7a885ea09b9089812c072",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/489#issuecomment-6386582295",
+      "method": "Clean native before 52243b3 and after 3bdaddb use frozen client be57de7 with Ruffle 0.7.1-openrotmg.15. Entrance pairs pass four assertions each; centred boss pairs pass three each. Case/runner/controller hashes, fixtures and initial positions match within each pair. Reviewed screenshots show the dark entrance motif and eight-candle boss ring. Each run finishes alive with zero shots/kills, empty cleanup errors and original owned process identities absent.",
+      "limitations": "Not earned traversal or a boss clear. Entrance uses one prepared legal max-stat Rogue with empty equipment; boss uses one legal max-stat Knight with Acropolis Armor and Ring of Exalted Health, empty weapon/ability/backpack and initial position one tile from the original boss centre. Known seed12351, no NPC edits or post-entry relocation. Natural combat leaves 476 HP before and 544 after; not a damage/timing comparison. Initial loading capture and earlier clipped Rogue boss framing are excluded from the primary images. Exact raster remains reconstructed; existing statuses are unchanged.",
+      "checks": ["dungeons:undead-lair", "dungeons:undead-lair:entrance-end-dressing"]
+    },
     "udl-dressing-source-4ecd4de": {
       "kind": "source",
       "revision": "4ecd4de2503ed3ade6084641e99a275728197092",
@@ -1671,7 +1689,7 @@
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -1684,7 +1702,9 @@
       "evidence": [
         "udl-dressing-source-4ecd4de",
         "udl-dressing-regression-4ecd4de",
-        "udl-dressing-native-4ecd4de"
+        "udl-dressing-native-4ecd4de",
+        "udl-endpoint-regression-3bdaddb",
+        "udl-endpoint-native-3bdaddb"
       ]
     },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98"]},

@@ -52,6 +52,18 @@ test('Tomb release records source restoration without inventing full acceptance'
   assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
 });
 
+test('Undead endpoint footage keeps scoped evidence and existing acceptance separate',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['dungeons:undead-lair','dungeons:undead-lair:entrance-end-dressing'];
+  validateEvidence(data,evidence);assert.equal(evidence.results[ids[0]].status,'not-run');assert.equal(evidence.results[ids[1]].status,'passed');
+  for(const ref of ['udl-endpoint-regression-3bdaddb','udl-endpoint-native-3bdaddb']){
+    const source=evidence.sources[ref];assert.equal(source.revision,'3bdaddb834b37ca671d7a885ea09b9089812c072');assert.deepEqual(source.checks,ids);
+    for(const id of ids)assert(evidence.results[id].evidence.includes(ref));
+  }
+  const feature=data.features.find(f=>f.id===ids[0]);assert.equal(accepted(feature,evidence),false);assert.equal(feature.audit.historical,'partial');
+  assert(feature.audit.sources.some(s=>s.url==='https://www.youtube.com/watch?v=SXTEcrN4bII'&&s.label.includes('exact build unverified')));
+  assert.match(evidence.sources['udl-endpoint-native-3bdaddb'].limitations,/Not earned traversal or a boss clear/);
+});
+
 test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:snake-pit:diggable-route-and-cover';
   validateEvidence(data,evidence);
