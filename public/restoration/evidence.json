@@ -28,6 +28,33 @@
       "limitations": "Prepared local phase observation, not earned entry, a full combat clear, production gameplay or original timing certification. Earlier CDP startup failures, invalid case input and prepared-healer deaths remain failed runs, including one startup failure with cleanup errors. No timeout, native readiness, ACK, pause, lease or durability guard was relaxed. Overall functional status stays not-run and historical status stays partial.",
       "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
     },
+    "kage-cover-source-820e341": {
+      "kind": "source",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/820e34150059f18a589a74c60966c35a9029d60d/src/world/realm_setpieces.rs",
+      "method": "Kage Kami graveyards admit sparse Death Tree cover inside the 19-tile grave field instead of restricting all trees to the outer ring. Existing outer tree draw, 65-tile footprint, grave allocation, paths and cleared boss square remain. The referenced realm-src prototype contains Death Trees on both Blue Grass and Grey Dirt among the graves; selected Death Tree occupancy flags provide actual obstacles.",
+      "limitations": "The inner 1/30 draw is reconstructed tuning, not a proven original probability. This does not restore the complete prototype, authenticate original shape/distribution or change Kage AI, stats, reveal, loot or Manor chance. Parent historical acceptance is unchanged.",
+      "checks": ["realm:kage-kami"]
+    },
+    "kage-cover-regression-820e341": {
+      "kind": "regression",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/820e34150059f18a589a74c60966c35a9029d60d/src/world/realm_setpieces.rs",
+      "method": "The original stencil genuinely fails at seed 0 with no inner tree cover. Across 64 fixed seeds, the corrected stencil has inner trees, one cleared boss square and 24 remaining graves; flood-fill treating trees and graves as obstacles reaches an approach to every grave and all four path arms. All 90 feature-source Rust tests, formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Stencil regression, not exhaustive seed coverage or a native combat/Manor journey. Does not claim that every randomly generated layout is historically exact.",
+      "checks": ["realm:kage-kami"]
+    },
+    "kage-cover-native-820e341": {
+      "kind": "native",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/441",
+      "method": "Actual Chromium native before-native and after-native4 pass with the same local client/runtime 0.7.1-openrotmg.14, bundle 44ec18cb9050bf726e96ebf5e8f4d65d2fe042178e18ec9c84c8f9cf2d85545d. A living Wizard walks near an ordinary generated hidden, undamaged 7000-HP Kage Kami without attacks. The observed neighborhood contains zero inner-field Death Trees before versus 30 after; screenshots show cover among the graves. Native cleanup succeeds.",
+      "limitations": "Prepared position, level and legal equipment, not earned traversal, reveal/combat or Manor entry. Separate generated Realms and revised case routing around observed obstacles, not matched coordinates/performance. After-run dirty flag is a retained external AGENTS.md-only update; product code matches the feature. Startup/CDP failures and an initially blocked scripted walk are retained failures, not acceptance. Parent stays not-run.",
+      "checks": ["realm:kage-kami"]
+    },
     "ghost-throw-source-3016fe7": {
       "kind": "source",
       "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
@@ -1476,7 +1503,7 @@
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
-    "realm:kage-kami": {"status":"not-run","evidence":[]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341"]},
     "realm:pirates": {"status":"not-run","evidence":[]},
     "realm:night-elves": {"status":"not-run","evidence":[]},
     "realm:undead-dwarves": {"status":"not-run","evidence":[]},
