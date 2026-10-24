@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "protected-projectile-source-c4854b8": {
+      "kind": "source",
+      "revision": "c4854b88261f5aa8005b0d0dcca58791cbd6b970",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/c4854b88261f5aa8005b0d0dcca58791cbd6b970/src/world.rs",
+      "method": "Hostile non-Human recipient eligibility excludes Invincible and Stasis before hit registration and single-hit removal. Invulnerable remains a collision target. The narrow filter shipped separately from the later prepared/native evidence.",
+      "limitations": "Implementation support for one collision seam, not complete condition semantics or historical authority. The recorded source audit remains an earlier snapshot; this evidence does not silently rewrite its broader dispositions.",
+      "checks": ["condition:22", "condition:24", "condition:25"]
+    },
+    "protected-projectile-native-pair-ef94d41": {
+      "kind": "native",
+      "revision": "ef94d412c8ea470b1f29cb5d2f00592319d95f34",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081",
+      "method": "New normal-client reconstruction: qualified pre-fix-behavior run, actual four-line corrective edit, then fresh After. Seven phases per run use the unchanged real Tutorial gun. Active Invincible/Stasis change the selected recipient from upstream 0 damage to downstream 5; Invulnerable remains upstream 0 and natural expiry restores upstream 5. Full actor/HP controls, actual Rust inputs and selected JS/WASM cache bodies were bound; originals were independently opened. Client be57de7 / Ruffle .15.",
+      "limitations": "Prepared unearned direct/Qa targets and single-hit native shots. Autonomous/multi-hit and Human ACK/ENEMYHIT remain separate retained controls, not new native journeys or global Human Bullet consumption. New Before-edit-After chronology does not change old shipment history. Pixels alone do not identify bullets or recipient HP. Broader condition rows remain not-run; no all-world, historical or current-main-runtime equivalence.",
+      "checks": ["condition:22", "condition:24", "condition:25"]
+    },
     "stat-panel-native-eb85988": {
       "kind": "native",
       "revision": "eb8598893b49e6379aee908c443e0a5471fb7f83",
@@ -1838,10 +1856,10 @@
         "paused-area-native-a886831"
       ]
     },
-    "condition:22": {"status":"not-run","evidence":[]},
+    "condition:22": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
     "condition:23": {"status":"not-run","evidence":[]},
-    "condition:24": {"status":"not-run","evidence":[]},
-    "condition:25": {"status":"not-run","evidence":[]},
+    "condition:24": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
+    "condition:25": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
     "condition:26": {"status":"not-run","evidence":[]},
     "condition:27": {"status":"not-run","evidence":[]},
     "condition:28": {"status":"not-run","evidence":[]},
