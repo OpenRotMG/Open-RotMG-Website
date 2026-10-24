@@ -1209,7 +1209,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
-        "differences": [],
+        "differences": [
+          "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495"
+        ],
         "unknowns": [
           "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
           "Original Grove count distribution and placement probabilities, rewards and follower lifetime/cap policy.",
