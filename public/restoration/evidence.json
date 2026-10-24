@@ -10,6 +10,15 @@
       "limitations": "Prepared zero-star display, not earned progression, every rank/color, Windows, private/guild chat or whole-chat acceptance. Existing FTE atom/ligature limitations remain. Parent implementation/historical dispositions and gameplay status are unchanged.",
       "checks": ["social:chat"]
     },
+    "sphinx-potions-d39f73e": {
+      "kind": "native",
+      "revision": "d39f73ecf883a47109360a15fc58bc05eafd55e1",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/417#issuecomment-6378896843",
+      "method": "Before the fix, seed 0 produced no rewards. Regression covers 32 seeds each for solo credit, the inclusive 550-damage boundary and insufficient damage; all 69 Rust tests and strict Clippy passed. Chromium/Linux with runtime 0.7.1-openrotmg.14 showed a private Vitality/Wisdom bag after the normal final shot, then normal pickup of both by the same living character, ending at 599 HP. Actual live pixels were reviewed.",
+      "limitations": "Separate fresh prepared sessions, not an earned full fight: a 1-HP Sphinx, 700 prior damage credited to character 1, legal Priest equipment and unrelated actors removed. Temporary init hooks were removed; tested loot-handler bytes match the clean revision. Normal placement, full combat/Reaper behavior, portal journey and official period probabilities remain unverified. Parent result stays not-run.",
+      "checks": ["realm:grand-sphinx"]
+    },
     "coil-habitat-source-578c4c3": {
       "kind": "source",
       "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
@@ -1273,7 +1282,7 @@
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
