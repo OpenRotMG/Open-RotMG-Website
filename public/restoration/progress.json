@@ -4537,8 +4537,7 @@
         "expected": "World chat includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players and /yell reaches all Nexus players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration.",
-          "Does the current launcher-pinned runtime display chat-star badges? Earlier native QA confirmed star transport but did not display badges."
+          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
         ],
         "sources": [
           {

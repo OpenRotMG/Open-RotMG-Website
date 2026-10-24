@@ -72,6 +72,15 @@ test('Guardian orbit evidence does not accept the full Snake Pit',()=>{
   assert.match(evidence.sources['snake-guardians-native-49335a6'].limitations,/not a full Snake Pit clear/);
 });
 
+test('Native Dexterity reconciliation does not accept whole combat or inventory',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  const ids=['realm:shoot-and-take-damage','gear:inventory-and-equipment'];
+  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
+    for(const ref of ['native-dex-regression-c531740','native-dex-native-e736c05']){assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);}}
+  assert.equal(evidence.sources['native-dex-regression-c531740'].revision,'c531740f75ffc977c55dfaa31bca5b509fc8469b');
+  assert.equal(evidence.sources['native-dex-native-e736c05'].revision,'e736c0573a644947566dcd206abac5f23fcd5fa6');
+});
+
 test('Ability cooldown evidence does not accept complete classes',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   for(const [id,ref] of [['heroes:wizard','ability-cooldown-regression-ef5686e'],['heroes:rogue','ability-cooldown-native-ef5686e']]){
