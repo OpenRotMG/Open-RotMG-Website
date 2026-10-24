@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "manor-coffin-window-source-3f7b17b": {
+      "kind": "source",
+      "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3f7b17b346985ced7fe5f9b960f725f962d579c7/src/world/manor.rs#L183-L190",
+      "method": "Restores only the missing nominal 1000ms damageable interval at the end of the existing coffin phase, leaving its first 750ms, protected bursts, total cycle, tosses, bats, selected stats, life steal, layout and rewards unchanged. The pinned Phoenix queue explicitly unsets Invulnerable before waiting 1000ms and starting Invincible bats.",
+      "limitations": "Qualified reconstruction comparator, not official 2012 server timing. The May 2012 wiki and December 2012 TwoYetis guide establish the repeating fight but do not measure this numeric schedule. Full motion could not be retrieved; representative stills and narration are not a full video review.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
+    "manor-coffin-window-regression-3f7b17b": {
+      "kind": "regression",
+      "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/445#issuecomment-6381120640",
+      "method": "One maintained Rust world regression checks eight exact phase boundaries, including both sides of the missing opening and the subsequent bat immunity. It fails on f9fbad2 at 15750ms with Invulnerable still set, then passes at this revision. All 90 Rust tests, strict all-target Clippy, formatting, 18 Node tests, two Python wrapper tests and the release build passed.",
+      "limitations": "Engineering state-boundary regression, not original timing authentication or full Manor acceptance. The broad suite belongs to this tested head, not automatically to a different moving-main merge.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
+    "manor-coffin-window-native-3f7b17b": {
+      "kind": "native",
+      "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/445#issuecomment-6381120640",
+      "method": "Normal managed native-client window case observed encounter ages 15800ms before and 15750ms after. The baseline fails the damageable assertion with its shield set; the fixed head passes three assertions with cleanupErrors empty. Frozen client f3c7b49 and Ruffle 0.7.1-openrotmg.14 use the same legal level-20 unarmed Knight fixture and layout seed 12351. The fixed case retains the same living character with no player shots or kills.",
+      "limitations": "Prepared local phase observation, not earned entry, a full combat clear, production gameplay or original timing certification. Earlier CDP startup failures, invalid case input and prepared-healer deaths remain failed runs, including one startup failure with cleanup errors. No timeout, native readiness, ACK, pause, lease or durability guard was relaxed. Overall functional status stays not-run and historical status stays partial.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
     "ghost-throw-source-3016fe7": {
       "kind": "source",
       "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
@@ -1512,9 +1539,9 @@
     "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
     "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":[]},
     "dungeons:ocean-trench:wounded-thessal-response": {"status":"not-run","evidence":[]},
-    "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":[]},
+    "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b"]},
     "dungeons:manor-of-the-immortals:secret-shelves-and-coffins": {"status":"not-run","evidence":[]},
-    "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech": {"status":"not-run","evidence":[]},
+    "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b"]},
     "dungeons:davy-jones-s-locker": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:colored-key-door-chain": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle": {"status":"passed","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
