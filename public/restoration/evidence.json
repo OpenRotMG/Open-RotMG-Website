@@ -1184,6 +1184,30 @@
       "checks": [
         "heroes:rogue"
       ]
+    },
+    "native-dex-regression-c531740": {
+      "kind": "regression",
+      "revision": "c531740f75ffc977c55dfaa31bca5b509fc8469b",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/426#issuecomment-6379577453",
+      "method": "All 70 Rust tests, 2 Python script tests, 18 Node tests, formatting and strict all-target Clippy passed. The shared World regression checks advertised-DEX native/correcting-shot admission with no extra authoritative projectile, one RNG draw and counter advance, strict scripted cadence, ACK expiry of old views, true too-fast rejection and excess-projectile rejection.",
+      "limitations": "Current-stat damaging cadence, item definitions and ACK/correction/lifecycle bounds are unchanged. Shared protocol regression, not complete combat, inventory or historical anti-cheat acceptance. Failed fixture attempts are retained and not passes.",
+      "checks": [
+        "realm:shoot-and-take-damage",
+        "gear:inventory-and-equipment"
+      ]
+    },
+    "native-dex-native-e736c05": {
+      "kind": "native",
+      "revision": "e736c0573a644947566dcd206abac5f23fcd5fa6",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/426#issuecomment-6379577453",
+      "method": "Native-before-2 FAILED with the reproduced attack-too-fast disconnect after a ring moved to the backpack: the 338-ms client gap was valid for still-displayed DEX 18 (326-ms period) but below newly committed DEX 10 (422 ms). Native-after passed 25 normal I/autofire/drag equipment swaps with the same living Warrior: 153 SHOOT packets, 6 suppressed stale predictions, 147 authoritative shots and inventory revision 26. Empty cleanup errors and verified public PNG bytes; client 1c38acb/runtime 0.7.1-openrotmg.14.",
+      "limitations": "Baseline is an expected failed runner, not a qualified pass. Finite prepared starter stats/real ring, no runtime fault injection or guard relaxation. Final c531740 differs only in cfg(test), with identical production prefix/all other files; native was not rerun on that test-only head. Not earned unlock, multiplayer/full combat, complete inventory or a matched-duration performance test. Exact reporter item/DEX and live deployment remain unverified.",
+      "checks": [
+        "realm:shoot-and-take-damage",
+        "gear:inventory-and-equipment"
+      ]
     }
   },
   "results": {
@@ -1244,7 +1268,7 @@
     "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
-    "realm:shoot-and-take-damage": {"status":"not-run","evidence":[]},
+    "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05"]},
     "access:combat-status-feedback": {"status":"not-run","evidence":[]},
     "realm:area-damage-feedback": {
       "status": "not-run",
@@ -1384,7 +1408,7 @@
     "gear:rings": {"status":"not-run","evidence":[]},
     "gear:loot-and-ownership": {"status":"not-run","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151"]},
     "gear:loot-bag-presentation": {"status":"passed","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
-    "gear:inventory-and-equipment": {"status":"not-run","evidence":[]},
+    "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05"]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
     "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
