@@ -104,6 +104,24 @@
       "limitations": "Five earlier attempts failed setup; no native before/after. One actor; no native multiplayer/Sick, earned acquisition or .14 acceptance. Tooltip occludes HUD; exact HP from read-only inspect.",
       "checks": ["gear:seasonal-toys"]
     },
+    "sprite-floor-correction-regression-474c2b5": {
+      "kind": "regression",
+      "revision": "474c2b5d8aad742a5be7d0b81e2b948ff21e20b5",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/428#issuecomment-6379562760",
+      "method": "Yellow stationary tile regression fails before and passes after removal. Sixteen seeds retain white stationary floors, all four conveyor types and void; complete map hashes match after only yellow-to-white normalization. Full 70-test suite, formatting and strict all-target Clippy passed; merged Sprite source matches tested head.",
+      "limitations": "Retires the checker reconstruction under issue #415, not proof of every historical floor appearance. Temporary checksum instrumentation was removed before committing; the original procedural recipe and historical second-style selector remain unrecovered.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-floor-correction-native-474c2b5": {
+      "kind": "native",
+      "revision": "474c2b5d8aad742a5be7d0b81e2b948ff21e20b5",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/428",
+      "method": "Matched prepared Knight arrivals on world seed 1, clean base 8d03c85 versus tested head, visibly remove the yellow checker. Four checks per run: living Sprite arrival, stationary spawn floor, native movement and same living character/no kills. Stock client 1c38acb / Ruffle .14, managed Chrome 156 and unchanged settings; both cleanups completed without errors.",
+      "limitations": "Prepared arrival, not reporter's unknown seed, earned entry, boss clear, Windows/performance certification or full conveyor/tree/native-god/second-style acceptance. First after setup failed a CDP deadline; fresh same-case retry passed with unchanged guards. Older checker receipts remain revision-specific, not current behavior.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
     "sprite-floor-pattern-source-cb37add": {
       "kind": "source",
       "revision": "cb37add940ad5e1a00d033817764dc4d36603143",
@@ -1348,8 +1366,8 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
-    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a"]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
+    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
     "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
