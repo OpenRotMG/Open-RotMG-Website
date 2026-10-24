@@ -25,6 +25,50 @@
         "dungeons:snake-pit:diggable-route-and-cover"
       ]
     },
+    "kage-phase-clock-integration-f27fc4c": {
+      "kind": "regression",
+      "revision": "f27fc4ce8afd16a7242fb8a0d964075608bbd0ac",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/455#issuecomment-6381813290",
+      "method": "Final integration includes normally merged fixture repair 9ecf049. Both formerly failing population seeds, 730 and 1093, retain two Kage graveyards and 17–24 Ent Groves; only cfg(test) fixture/generator bounds change. All 121 Rust tests passed with none ignored/filtered, plus formatting, warning-denied all-target Clippy, 18 controller JavaScript and 2 launcher Python tests. Server PR455 merged as 6b4d1af with the exact tested f27fc4c tree.",
+      "limitations": "Native evidence remains bound to its actual tested 20c2493 revision. Clock implementation, Manor entry, attack definitions, selected objects and runner/controller blobs are identical in the integration, and the intervening world.rs diff is test-only; this is narrow source equivalence, not another whole-tree native run or historical acceptance. Production placement/counts/habitat and native/lifecycle guards were not relaxed.",
+      "checks": [
+        "realm:kage-kami"
+      ]
+    },
+    "kage-phase-clock-source-20c2493": {
+      "kind": "source",
+      "revision": "20c2493dbfe735309ec58ec1c2c24f9b6850c98e",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/20c2493dbfe735309ec58ec1c2c24f9b6850c98e/src/world/npc_attacks.rs#L138-L151",
+      "method": "Kage and Specter Mine schedule age now uses the activation timestamp after encounter mechanics, with explicit missing/future clock errors. Preserved vanilla-7.0 Shoot.Enter resets its rotation counter on entry; passing the previous phase age selected the wrong first human volley. Selected stats/effects, movement, phase durations, geometry/cadence, mines and portal/reward policies are unchanged.",
+      "limitations": "Engineering phase-entry correction, not authenticated original timing. LoE's accepted rotation parameter is unused for shooting; related scripts are not independent historical votes. Modified-7.0 actor stats differ from the selected client and were not imported. Exact target-era movement, timings and policies remain unresolved.",
+      "checks": [
+        "realm:kage-kami"
+      ]
+    },
+    "kage-phase-clock-regression-20c2493": {
+      "kind": "regression",
+      "revision": "20c2493dbfe735309ec58ec1c2c24f9b6850c98e",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/455#issuecomment-6381524627",
+      "method": "The maintained world/scheduler regression genuinely failed before production edits: phase 1 first angle 1.0471975 radians instead of 0. It now covers both human entries, projectile identity and opposite directions, no extra 50-ms volley and the next 300-ms rotating pair. Integrated main 37ca601 plus this change passed all 113 current Rust tests with none ignored/filtered, 18 controller JavaScript and 2 launcher Python tests, formatting and warning-denied all-target Clippy.",
+      "limitations": "Prepared flat test map and controlled phase clocks, not earned traversal, historical timing authentication or whole-feature acceptance. The earlier blocked-spawn test-fixture failure is retained and is not counted as reproduction of the clock defect. The separate main Directory procedural-fixture placement failure is not waived by this local pass.",
+      "checks": [
+        "realm:kage-kami"
+      ]
+    },
+    "kage-phase-clock-native-20c2493": {
+      "kind": "native",
+      "revision": "20c2493dbfe735309ec58ec1c2c24f9b6850c98e",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/455#issuecomment-6381524627",
+      "method": "Identical case/runner/controller inputs and clean be57de7 client with Ruffle .15 passed 16 assertions before and after over 13.85 and 14.4 active seconds. Ordinary native weapon shots broke an original full-7,000-HP generated grave; human, ghost and human re-entry were observed, and the same living connected Warrior remained. Both cleanup receipts are empty. Owned private-X-server Chrome-window captures wait for actual Ruffle playback and two animation frames; published 800x600 client pixels are unchanged below separate captions.",
+      "limitations": "Prepared position, legal stats/gear and finite supplies, not earned traversal, a kill, portal/drop qualification, multiplayer/restart or complete historical acceptance. Before c4bfc49 has only the compiled-out regression added; after is the clean revision above. Independent Realms and incoming tree-cover/queue changes are not matched geometry or phase-entry-angle frames. Thirteen earlier native failures and an additional functional pass with rejected play-overlay images are retained. Both .14 and .15 had startup stalls; no runtime-15 regression is established.",
+      "checks": [
+        "realm:kage-kami"
+      ]
+    },
     "manor-coffin-window-source-3f7b17b": {
       "kind": "source",
       "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
@@ -1554,7 +1598,7 @@
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
-    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341"]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
     "realm:pirates": {"status":"not-run","evidence":[]},
     "realm:night-elves": {"status":"not-run","evidence":[]},
     "realm:undead-dwarves": {"status":"not-run","evidence":[]},
