@@ -142,6 +142,15 @@ test('Oryx count announcements do not accept complete closure or chat',()=>{
   assert.match(row.rule.unknowns.join(' '),/two-minute.*20 seconds.*unverified/);
 });
 
+test('protected projectile contrast supports a seam without accepting whole conditions',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['condition:22','condition:24','condition:25'],refs=['protected-projectile-source-c4854b8','protected-projectile-native-pair-ef94d41'];
+  validateEvidence(data,evidence);
+  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,refs);}
+  for(const ref of refs)assert.deepEqual(evidence.sources[ref].checks,ids);
+  const pair=evidence.sources[refs[1]];assert.equal(pair.kind,'native');assert.equal(pair.revision,'ef94d412c8ea470b1f29cb5d2f00592319d95f34');
+  assert.equal(pair.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081');assert.match(pair.method,/four-line corrective edit/);assert.match(pair.limitations,/not-run/);assert.match(pair.limitations,/not new native journeys/);
+});
+
 test('present features remain visible for gameplay and historical work',()=>{
   const data=catalogue(),evidence=untestedLedger(),rows=records(data),kage=rows.find(r=>r.id==='realm:kage-kami');
   assert.equal(matches(kage,evidence,'implementation'),false);
