@@ -1416,6 +1416,33 @@
       "limitations": "Test-only coverage; production behavior is unchanged. Missing GOTO, wrong ID, swapped coordinates and trailing-byte controls mutate received unit packets, not a genuine product RED. Queue/wire/FIFO checks do not establish client application, rendered movement or historical fidelity. Whole-row acceptance remains unrecorded.",
       "checks": ["social:teleport-to-players", "condition:13"]
     },
+    "minimap-ordinary-native-d283e22": {
+      "kind": "native",
+      "revision": "d283e227da0094f94161e2204e0a281b27b99804",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018",
+      "method": "Historical normal04 / Ruffle .8: three genuine native Human guests establish overlap tooltip/menu names. Ordinary target movement updates the resting-pointer tooltip; an already-open menu retains its snapshot and a reopened menu recomputes membership. Ordinary /pause skips the first target for the second; both paused gives refusal with unchanged viewer. Separate originals establish ordinary yellow, paused gray, enemy red and portal blue.",
+      "limitations": "Qualified bounded scenes from a raw completed-partial run, not a whole-run pass. Then-missing guild, edge-overlap and active-Invisible gates are supplied separately below, not retroactively accepted here. Combined menu coverage is cross-revision, not one current-main matrix rerun or historical sign-off; earlier failures remain failures.",
+      "checks": ["access:minimap-player-menu"]
+    },
+    "minimap-guild-edge-native-d9f3eb2": {
+      "kind": "native",
+      "revision": "d9f3eb27dd8d78a5049cff4b2cecb3a45c6abfed",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018",
+      "method": "Client be57de7 / Ruffle .15. A02 native viewer with prepared direct targets shows guild green marker/name/crown and an actual two-name menu; moving only the other target then reopening leaves the first name. B02 uses three genuine native Human guests, two independently visible yellow edge marks, named tooltip/menu and real Rogue cloaks. Both Invisible gives exact refusal and unchanged viewer; first Invisible / second visible gives the rendered positive second-target destination. MP cost, ordinary cooldown/regeneration and final samples strictly inside the original 5500ms fence are retained.",
+      "limitations": "A02 guild setup is prepared and unearned, not native chat entry. No dynamic refresh of an already-open menu or two separately resolved dots in A02's initial tiny cluster. B02 is real-cloak native evidence, not fake time or backend coordinates alone. This supplies missing gates within cross-revision menu coverage, not complete teleport/Invisible, historical or current-main-runtime acceptance. Earlier failed attempts remain failures.",
+      "checks": ["access:minimap-player-menu"]
+    },
+    "minimap-guild-pause-native-21b5980": {
+      "kind": "native",
+      "revision": "21b5980f2ccd057ddf5f53c10a472d774b6126a8",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018",
+      "method": "Fresh C05 at actual merged source / client be57de7 / Ruffle .15: same prepared direct/Qa target changes yellow-green-gray-green while guild/name/crown persist. Actual Paused mask 1048576 lasts 2150ms, then resumes to 0; full character, identity, session, world, position, verification and lifecycle controls hold. Separate typed Store tests cover Characters, Presentations, full guild/wallet/board and account-bound memberships. OS0 / 28.9409s, four originals, no cleanup errors, all 13 identities closed. Eight executed inputs, 490 source inputs, 155 compiled inputs, actual Rust descendant/ELF f98fd133100d1fa80e03e7074bd37478d4ca0a5f6a67e575895a431282441bfb and whole selected fresh-cache JS/WASM are bound. Fresh local validation passed Rust181, focused Pause/Guild, formatting, build and strict Clippy.",
+      "limitations": "Prepared unearned guild and direct/Qa target, not earned guild acquisition or native chat entry. OwnCharacter alone is not Store persistence proof; state assertions do not replace independently reviewed pixels. Local Rust181 is not formal Build Storage CI, which runs Python wrappers only. C05 adopts this merged gray-over-guild seam, not A02/B02 or the whole cross-revision matrix at 21b, later-source equivalence, all-world behavior, performance or historical acceptance. Earlier failures remain failures.",
+      "checks": ["access:minimap-player-menu"]
+    },
     "minimap-both-invisible-native-9ad87c2": {
       "kind": "native",
       "revision": "9ad87c2664ea58debf2bb134ed5d6848538f9dd0",
@@ -1825,7 +1852,7 @@
     "access:world-loading-presentation": {"status":"not-run","evidence":[]},
     "access:controls-and-display": {"status":"not-run","evidence":[]},
     "access:character-status-panel": {"status":"passed","evidence":["stat-panel-native-eb85988","stat-panel-signed-native-b21f4cb"]},
-    "access:minimap-player-menu": {"status":"not-run","evidence":["minimap-both-invisible-native-9ad87c2"]},
+    "access:minimap-player-menu": {"status":"passed","evidence":["minimap-both-invisible-native-9ad87c2","minimap-ordinary-native-d283e22","minimap-guild-edge-native-d9f3eb2","minimap-guild-pause-native-21b5980"]},
     "access:keybinding-input-lifecycle": {"status":"passed","evidence":["keybinding-conflict-persistence-reset-native-eb85988","text-options-input-release-native-eb85988","window-deactivation-input-release-native-eb85988"]},
     "access:sound-and-music": {"status":"not-run","evidence":[]},
     "access:player-art-gallery": {"status":"not-run","evidence":[]},
