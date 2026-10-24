@@ -1329,7 +1329,8 @@
         "historical": "partial",
         "expected": "Lava-site boss with wander/pursue/return movement, distinct attacks and Imp/Demon/Demon Warrior summons; boss, minion and setpiece-chest rewards are separate.",
         "differences": [
-          "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471"
+          "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
+          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501"
         ],
         "unknowns": [
           "Target population count/distribution, exact attack timing/prediction and summon caps/lifetimes.",
@@ -1355,7 +1356,8 @@
         "differences": [
           "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
-          "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467"
+          "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467",
+          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501"
         ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
@@ -1378,7 +1380,8 @@
         "historical": "partial",
         "expected": "Moated-castle boss with Cyclops/Warrior/Noble/Prince/King family, replenishment, changing attack modes and follower pursuit/retraction. Exact target branch conditions and rewards unresolved.",
         "differences": [
-          "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471"
+          "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
+          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501"
         ],
         "unknowns": [
           "Target attack-mode predicates, timing and alternative ring behavior.",
@@ -1793,7 +1796,7 @@
         "differences": [
           "Ruin masonry now preserves generated grass or unwritten original ground, matching the community generator's independent ground/object writes. Boss clearing remains intentional; original generation and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/482",
           "Community TempleA/B plant strips now use their distinct bounds across the full grid, restoring excluded edge plants without planting through masonry. Extra random draws can alter later placement; original 123.5.1 vegetation distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/487",
-          "Temple chests now sample a success ceiling of 3 through 7 instead of 5 through 7, matching the community call rather than guaranteeing a minimum item count. Grouped tier rolls still differ from the source per-item trials; original ordering and RNG remain unverified. Changed RNG consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/499"
+          "Temple chests sample a success ceiling of 3 through 7 rather than 5 through 7, not a guaranteed item minimum: https://github.com/OpenRotMG/Open-RotMG-Server/pull/499. Tier rows now roll each selected item independently at p/n: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501. Numeric candidate order remains an adaptation; original 123.5.1 item corpus, ordering, truncated distribution and RNG remain unverified. Changed consumption can affect later placement."
         ],
         "unknowns": [
           "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
