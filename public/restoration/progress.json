@@ -1326,7 +1326,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Lava-site boss with wander/pursue/return movement, distinct attacks and Imp/Demon/Demon Warrior summons; boss, minion and setpiece-chest rewards are separate.",
-        "differences": [],
+        "differences": [
+          "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471"
+        ],
         "unknowns": [
           "Target population count/distribution, exact attack timing/prediction and summon caps/lifetimes.",
           "Target chest and separate boss/minion reward probabilities."
@@ -1373,7 +1375,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Moated-castle boss with Cyclops/Warrior/Noble/Prince/King family, replenishment, changing attack modes and follower pursuit/retraction. Exact target branch conditions and rewards unresolved.",
-        "differences": [],
+        "differences": [
+          "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471"
+        ],
         "unknowns": [
           "Target attack-mode predicates, timing and alternative ring behavior.",
           "Target population, summon lifetime/caps and chest/rewards."
