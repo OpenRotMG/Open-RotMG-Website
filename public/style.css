@@ -32,6 +32,12 @@ p { margin: 0 0 15px; }
 .about-copy { max-width: 68ch; }
 .about-copy h2 { margin: 25px 0 9px; font: 700 14px Verdana, sans-serif; }
 .notice { padding: 10px; color: #d9a0a0; }
+#bug-report { margin-top: 16px; text-align: left; font-size: 13px; }
+#bug-report > summary { cursor: pointer; color: #cb8585; }
+#bug-form { display: grid; gap: 10px; padding: 12px 0; }
+#bug-description { width: 100%; resize: vertical; font: inherit; padding: 8px; }
+#bug-screenshot { width: 100%; height: auto; border: 1px solid #303030; }
+#bug-form button { justify-self: start; }
 .screen-reader { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 [hidden] { display: none !important; }
 @media (max-width: 600px) {

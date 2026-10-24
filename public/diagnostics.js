@@ -3,6 +3,7 @@ window.OpenRotMGDiagnostics = {
     const bytes = crypto.getRandomValues(new Uint8Array(16));
     const key = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
     socketEndpoint.searchParams.set('diagnostics', key);
+    if (window.OpenRotMGBugReport) window.OpenRotMGBugReport.start(key, player);
     // Startup downloads must not compete with telemetry for the same connection.
     player.addEventListener('loadeddata', () => {
       let build = 'pending';
