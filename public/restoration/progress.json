@@ -1902,7 +1902,8 @@
         "differences": [
           "PR451 matches the community sand-star stencil; outer flooring, placement and original fidelity remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/451",
           "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "PR417 restores the community comparator's encounter-wide Vitality/Wisdom floor and inclusive 1% boundary. Prepared final-hit, drop and pickup evidence is recorded, not an earned full-fight acceptance."
+          "PR417 restores the community comparator's encounter-wide Vitality/Wisdom floor and inclusive 1% boundary. Prepared final-hit, drop and pickup evidence is recorded, not an earned full-fight acceptance.",
+          "PR493 matches the community outer-floor radius origin (40.5 in tile-index space), not boss-centering. Star/boss positions and local draw counts stay unchanged; placement, RNG parity and original 123.5.1 flooring remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/493"
         ],
         "unknowns": [
           "Exact period setting/distribution and loot probabilities.",
