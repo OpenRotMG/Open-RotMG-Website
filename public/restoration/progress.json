@@ -1792,7 +1792,8 @@
         "expected": "Level8 quest0xdc2,900 HP/16 DEF; Snake Shot50/speed65/lifetime16000ms and Ghost Shot40. Egg0xdc1→Temple Snake0xdc0 lifecycle belongs here; exact hatching/rings/placement/portal policy qualified.",
         "differences": [
           "Ruin masonry now preserves generated grass or unwritten original ground, matching the community generator's independent ground/object writes. Boss clearing remains intentional; original generation and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/482",
-          "Community TempleA/B plant strips now use their distinct bounds across the full grid, restoring excluded edge plants without planting through masonry. Extra random draws can alter later placement; original 123.5.1 vegetation distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/487"
+          "Community TempleA/B plant strips now use their distinct bounds across the full grid, restoring excluded edge plants without planting through masonry. Extra random draws can alter later placement; original 123.5.1 vegetation distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/487",
+          "Temple chests now sample a success ceiling of 3 through 7 instead of 5 through 7, matching the community call rather than guaranteeing a minimum item count. Grouped tier rolls still differ from the source per-item trials; original ordering and RNG remain unverified. Changed RNG consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/499"
         ],
         "unknowns": [
           "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
