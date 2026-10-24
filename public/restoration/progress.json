@@ -1208,14 +1208,22 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A forest encounter with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
+        "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
         "differences": [],
         "unknowns": [
           "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
-          "Target population, rewards and follower lifetime/cap policy.",
+          "Original Grove count distribution and placement probabilities, rewards and follower lifetime/cap policy.",
           "Whether0x921/922 exhaust intended ordinary-ent scope; target growth/summon counts, timing and rewards."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120520010940id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-ancient",
+            "label": "May 2012 guide: up to 25 Ent Ancients per Realm"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
+            "label": "Community Grove allocation: upper-exclusive Next(17, 25)"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.EntAncient.cs#L100-L215",
             "label": "Community server comparison: rotmg_svr (2013)"
