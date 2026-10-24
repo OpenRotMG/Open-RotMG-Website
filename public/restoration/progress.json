@@ -3020,9 +3020,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Earned Abyss entry, varied lava rooms, bridges and demons, Malphas, Idol treasure rooms, rewards and durable completion/exit. Build 122 documents bones along paths and a lava moat with two bridge rings around Malphas.",
-        "differences": [],
+        "differences": [
+          "Malphas and Abyss Idol guarantee paired private Vitality and Defense potions for eligible contributors under the previously published server contract, not an authenticated target-era allocation rule."
+        ],
         "unknowns": [
-          "Original layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities."
+          "Original layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities.",
+          "Whether Defense was present by the target build, and the original recipient guarantees."
         ],
         "sources": [
           {
