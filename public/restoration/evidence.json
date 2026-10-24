@@ -1320,6 +1320,30 @@
       "method": "Fresh prepared seed 5, selected-cap Warrior and explicit gear/supplies. Native attacks defeated the original 25,000-HP Idol, the actual private bag held DEF and VIT, and the same living character walked to it without disconnecting. Runtime 15 local-mode run passed 7 assertions over 25.15 seconds of active gameplay, with empty cleanup errors; runtime 14 compatibility run passed 10 over 32.8 seconds. Public client crops are byte/pixel qualified with captions outside gameplay.",
       "limitations": "Before 3be9597 legitimately defeated the Idol but failed on output queue 64; its image shows the resulting character menu, not a bag inspection or passing run. Both selected images use be57/runtime 15, but deployed-before/local-after are not matched timing/performance runs. Two additional deployed-mode first-shot failures remain a reported startup/mode risk, not a proven runtime-15 regression. No earned clear, multiplayer, restart or full historical acceptance.",
       "checks": ["dungeons:abyss-of-demons", "dungeons:abyss-of-demons:idol-and-treasure-lifecycle"]
+    },
+    "star-hiscores-api-cc09377": {
+      "kind": "regression",
+      "revision": "cc093771d27f1b930ffa08e613021c0698c4c1ca",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/440#issuecomment-6380742451",
+      "method": "All 90 Rust tests, 2 Python script tests, 18 Node tests, formatting and strict all-target Clippy passed. Real Store regression verifies summed retained class bests, lower duplicate classes, immutable death snapshots, wallet independence, uncommitted live-fame exclusion and existing registration eligibility. Actual API returned 6/6/0 stars matching legacy ClassStats, with all prior player fields and collectibles unchanged.",
+      "limitations": "Reuses existing canonical class-star earning rules and thresholds; no schema, wallet, reward or eligibility changes. Explicit prepared fixture, not earned progression or proof of original class-star timing. The new website ranking is not original Legends periods, character appearance/equipment or full leaderboard acceptance. Executed working-tree source was SHA256-matched to this commit; deployment unverified.",
+      "checks": [
+        "heroes:class-stars",
+        "heroes:legends-highscores"
+      ]
+    },
+    "star-hiscores-browser-f7f6c60": {
+      "kind": "regression",
+      "revision": "f7f6c605aea2f751c3e7df22146a5e1d34f1328e",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/440#issuecomment-6380742451",
+      "method": "Managed headful Chrome on private Xvfb exercised actual website and real local backend through an owned read-only response relay. Clicked Stars, checked 6/6/0 values and 1/1/3 ties, filtered Nova without changing rank, reloaded the Stars URL and captured the page. Baseline showed no Stars category; final browser checks and cleanup passed. All 146 website tests and build passed; uploaded PNG bytes verified.",
+      "limitations": "Browser regression, not native combat or earned class stars. Three registered profiles were explicitly prepared by the real Store fixture; no mocked API or frontend data injection. UI source was byte-matched to this commit; later evidence-only metadata does not imply another browser run. No original-server Stars leaderboard, full Legends/class-star acceptance, performance or live deployment claim.",
+      "checks": [
+        "heroes:class-stars",
+        "heroes:legends-highscores"
+      ]
     }
   },
   "results": {
@@ -1342,8 +1366,8 @@
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
-    "heroes:class-stars": {"status":"not-run","evidence":[]},
-    "heroes:legends-highscores": {"status":"not-run","evidence":[]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
+    "heroes:legends-highscores": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status":"not-run","evidence":[]},
     "heroes:gravestones": {"status":"not-run","evidence":[]},
