@@ -72,6 +72,15 @@ test('Guardian orbit evidence does not accept the full Snake Pit',()=>{
   assert.match(evidence.sources['snake-guardians-native-49335a6'].limitations,/not a full Snake Pit clear/);
 });
 
+test('Ability cooldown evidence does not accept complete classes',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  for(const [id,ref] of [['heroes:wizard','ability-cooldown-regression-ef5686e'],['heroes:rogue','ability-cooldown-native-ef5686e']]){
+    const row=records(data).find(r=>r.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
+    assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,[id]);assert.equal(evidence.sources[ref].revision,'ef5686e5f8e20960d4687e889fcd815d9d9d2eb4');
+  }
+});
+
 test('Oryx count announcements do not accept complete closure or chat',()=>{
   const data=catalogue(),evidence=ledger(),ids=['realm:realm-closure','social:chat'];
   validateEvidence(data,evidence);
@@ -122,7 +131,7 @@ test('partial implementation, research and verification can all be outstanding',
 
 test('executed acceptance requires an exact ID, revision and test/native receipt',()=>{
   const data=catalogue(),evidence=ledger(),id='heroes:rogue';
-  evidence.results[id].status='passed';assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
+  evidence.results[id]={status:'passed',evidence:[]};assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test={kind:'source',revision:'a'.repeat(40),date:'2026-10-21',method:'Read the handler',limitations:'No execution',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs'};
   evidence.results[id].evidence=['test'];assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test.kind='regression';evidence.sources.test.method='Executed scenario and asserted the saved result';validateEvidence(data,evidence);
