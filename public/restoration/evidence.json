@@ -46,6 +46,28 @@
       "limitations": "Separate fresh prepared sessions, not an earned full fight: a 1-HP Sphinx, 700 prior damage credited to character 1, legal Priest equipment and unrelated actors removed. Temporary init hooks were removed; tested loot-handler bytes match the clean revision. Normal placement, full combat/Reaper behavior, portal journey and official period probabilities remain unverified. Parent result stays not-run.",
       "checks": ["realm:grand-sphinx"]
     },
+    "abyss-malphas-potions-native-1b59f98": {
+      "kind": "native",
+      "revision": "1b59f98b6dbb29f5a1572c5aff07e901b0604ede",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/433#issuecomment-6380073113",
+      "method": "The same prepared level 20 Wizard case, seed 12351, equipment, client be57de7 and Ruffle .15 normally killed a full-health 10,000-HP generated Malphas. Before: private Vitality with no Defense. After: both private potions, followed by ordinary walking and native Defense pickup committed at inventory revision 5 to 6. Six before and seven after assertions passed; both characters remained alive and both cleanup receipts were empty. Published images retain unchanged native pixels below their captions.",
+      "limitations": "Prepared starting position, stats, equipment and finite healing supplies, not earned dungeon entry. Independent executions of matched seeded geometry, not frame/entity replay or historical allocation proof. Rejected and terminal runs remain failures. Native evidence is bound to 1b59f98; later integration is separately qualified by source-region equality and regression tests. Parent gameplay status and historical disposition are not promoted.",
+      "checks": [
+        "dungeons:abyss-of-demons"
+      ]
+    },
+    "abyss-malphas-potions-regression-78c1941": {
+      "kind": "regression",
+      "revision": "78c1941904c932fd5db53246719c6340f791bc1f",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/433#issuecomment-6380073113",
+      "method": "The Malphas paired-potion regression failed before the fix and passed afterward across 64 seeds. The retained upstream Idol regression also covers 64 seeds. Final integrated source passed all 85 tests in the current retained Rust suite, 18 Node tests, 2 Python tests, formatting and warning-denied all-target Clippy. The merged tree equals that tested source. PR 432 supplied Idol Defense separately; PR 433 changes only Malphas's reward entry, one comment and one test. Eligibility and ownership code is unchanged.",
+      "limitations": "A server reward contract, not authenticated target-era probabilities or recipient guarantees. The May 2012 capture omits Defense; later sources include it, but its introduction date remains unresolved. This supersedes the older Vitality-only implementation without changing that revision's receipt. Not earned-entry, multiplayer or durable-clear acceptance.",
+      "checks": [
+        "dungeons:abyss-of-demons"
+      ]
+    },
     "coil-habitat-source-578c4c3": {
       "kind": "source",
       "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
@@ -1438,7 +1460,7 @@
         "udl-dressing-native-4ecd4de"
       ]
     },
-    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7"]},
+    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7"]},
     "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
