@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "chat-badge-native-86e55e4": {
+      "kind": "native",
+      "revision": "86e55e4d10b7cec83adc06279731915befed46bc",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/18",
+      "method": "The same prepared fresh zero-star Wizard sent ordinary native chat on unchanged server dfa6f85. Client 1c38acb with Ruffle .14 omitted the badge and rendered thin lettering; client 86e55e4 with Ruffle .15 displayed the badge and thicker lettering requested by the unchanged 123.5.1 SWF. Each message was delivered once; both runs and cleanup passed.",
+      "limitations": "Prepared zero-star display, not earned progression, every rank/color, Windows, private/guild chat or whole-chat acceptance. Existing FTE atom/ligature limitations remain. Parent implementation/historical dispositions and gameplay status are unchanged.",
+      "checks": ["social:chat"]
+    },
     "sphinx-potions-d39f73e": {
       "kind": "native",
       "revision": "d39f73ecf883a47109360a15fc58bc05eafd55e1",
@@ -1403,7 +1412,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
     "home:realm-gold-offers": {"status":"not-run","evidence":[]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281"]},
