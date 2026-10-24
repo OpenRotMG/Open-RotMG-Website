@@ -1,4 +1,5 @@
 export const boards = {
+  stars: {title: 'Stars', description: 'Class stars earned from each class’s best fame.'},
   collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
   total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'},
   base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'}

@@ -28,6 +28,33 @@
       "limitations": "Prepared arrivals, not earned travel, all-Ent combat, complete family/reward acceptance, Windows or FPS certification. First before attempt failed cold-build readiness; normal prebuild and a fresh unchanged-case retry passed without relaxing guards. Exact reported instance and original distribution remain unverified.",
       "checks": ["realm:ent-ancient"]
     },
+    "kage-cover-source-820e341": {
+      "kind": "source",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/820e34150059f18a589a74c60966c35a9029d60d/src/world/realm_setpieces.rs",
+      "method": "Kage Kami graveyards admit sparse Death Tree cover inside the 19-tile grave field instead of restricting all trees to the outer ring. Existing outer tree draw, 65-tile footprint, grave allocation, paths and cleared boss square remain. The referenced realm-src prototype contains Death Trees on both Blue Grass and Grey Dirt among the graves; selected Death Tree occupancy flags provide actual obstacles.",
+      "limitations": "The inner 1/30 draw is reconstructed tuning, not a proven original probability. This does not restore the complete prototype, authenticate original shape/distribution or change Kage AI, stats, reveal, loot or Manor chance. Parent historical acceptance is unchanged.",
+      "checks": ["realm:kage-kami"]
+    },
+    "kage-cover-regression-820e341": {
+      "kind": "regression",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/820e34150059f18a589a74c60966c35a9029d60d/src/world/realm_setpieces.rs",
+      "method": "The original stencil genuinely fails at seed 0 with no inner tree cover. Across 64 fixed seeds, the corrected stencil has inner trees, one cleared boss square and 24 remaining graves; flood-fill treating trees and graves as obstacles reaches an approach to every grave and all four path arms. All 90 feature-source Rust tests, formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Stencil regression, not exhaustive seed coverage or a native combat/Manor journey. Does not claim that every randomly generated layout is historically exact.",
+      "checks": ["realm:kage-kami"]
+    },
+    "kage-cover-native-820e341": {
+      "kind": "native",
+      "revision": "820e34150059f18a589a74c60966c35a9029d60d",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/441",
+      "method": "Actual Chromium native before-native and after-native4 pass with the same local client/runtime 0.7.1-openrotmg.14, bundle 44ec18cb9050bf726e96ebf5e8f4d65d2fe042178e18ec9c84c8f9cf2d85545d. A living Wizard walks near an ordinary generated hidden, undamaged 7000-HP Kage Kami without attacks. The observed neighborhood contains zero inner-field Death Trees before versus 30 after; screenshots show cover among the graves. Native cleanup succeeds.",
+      "limitations": "Prepared position, level and legal equipment, not earned traversal, reveal/combat or Manor entry. Separate generated Realms and revised case routing around observed obstacles, not matched coordinates/performance. After-run dirty flag is a retained external AGENTS.md-only update; product code matches the feature. Startup/CDP failures and an initially blocked scripted walk are retained failures, not acceptance. Parent stays not-run.",
+      "checks": ["realm:kage-kami"]
+    },
     "ghost-throw-source-3016fe7": {
       "kind": "source",
       "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
@@ -1347,6 +1374,30 @@
       "method": "Fresh prepared seed 5, selected-cap Warrior and explicit gear/supplies. Native attacks defeated the original 25,000-HP Idol, the actual private bag held DEF and VIT, and the same living character walked to it without disconnecting. Runtime 15 local-mode run passed 7 assertions over 25.15 seconds of active gameplay, with empty cleanup errors; runtime 14 compatibility run passed 10 over 32.8 seconds. Public client crops are byte/pixel qualified with captions outside gameplay.",
       "limitations": "Before 3be9597 legitimately defeated the Idol but failed on output queue 64; its image shows the resulting character menu, not a bag inspection or passing run. Both selected images use be57/runtime 15, but deployed-before/local-after are not matched timing/performance runs. Two additional deployed-mode first-shot failures remain a reported startup/mode risk, not a proven runtime-15 regression. No earned clear, multiplayer, restart or full historical acceptance.",
       "checks": ["dungeons:abyss-of-demons", "dungeons:abyss-of-demons:idol-and-treasure-lifecycle"]
+    },
+    "star-hiscores-api-cc09377": {
+      "kind": "regression",
+      "revision": "cc093771d27f1b930ffa08e613021c0698c4c1ca",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/440#issuecomment-6380742451",
+      "method": "All 90 Rust tests, 2 Python script tests, 18 Node tests, formatting and strict all-target Clippy passed. Real Store regression verifies summed retained class bests, lower duplicate classes, immutable death snapshots, wallet independence, uncommitted live-fame exclusion and existing registration eligibility. Actual API returned 6/6/0 stars matching legacy ClassStats, with all prior player fields and collectibles unchanged.",
+      "limitations": "Reuses existing canonical class-star earning rules and thresholds; no schema, wallet, reward or eligibility changes. Explicit prepared fixture, not earned progression or proof of original class-star timing. The new website ranking is not original Legends periods, character appearance/equipment or full leaderboard acceptance. Executed working-tree source was SHA256-matched to this commit; deployment unverified.",
+      "checks": [
+        "heroes:class-stars",
+        "heroes:legends-highscores"
+      ]
+    },
+    "star-hiscores-browser-f7f6c60": {
+      "kind": "regression",
+      "revision": "f7f6c605aea2f751c3e7df22146a5e1d34f1328e",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/440#issuecomment-6380742451",
+      "method": "Managed headful Chrome on private Xvfb exercised actual website and real local backend through an owned read-only response relay. Clicked Stars, checked 6/6/0 values and 1/1/3 ties, filtered Nova without changing rank, reloaded the Stars URL and captured the page. Baseline showed no Stars category; final browser checks and cleanup passed. All 146 website tests and build passed; uploaded PNG bytes verified.",
+      "limitations": "Browser regression, not native combat or earned class stars. Three registered profiles were explicitly prepared by the real Store fixture; no mocked API or frontend data injection. UI source was byte-matched to this commit; later evidence-only metadata does not imply another browser run. No original-server Stars leaderboard, full Legends/class-star acceptance, performance or live deployment claim.",
+      "checks": [
+        "heroes:class-stars",
+        "heroes:legends-highscores"
+      ]
     }
   },
   "results": {
@@ -1369,8 +1420,8 @@
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
-    "heroes:class-stars": {"status":"not-run","evidence":[]},
-    "heroes:legends-highscores": {"status":"not-run","evidence":[]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
+    "heroes:legends-highscores": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status":"not-run","evidence":[]},
     "heroes:gravestones": {"status":"not-run","evidence":[]},
@@ -1452,7 +1503,7 @@
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
-    "realm:kage-kami": {"status":"not-run","evidence":[]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341"]},
     "realm:pirates": {"status":"not-run","evidence":[]},
     "realm:night-elves": {"status":"not-run","evidence":[]},
     "realm:undead-dwarves": {"status":"not-run","evidence":[]},
