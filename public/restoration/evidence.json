@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "trench-oxygen-source-51ce3df": {
+      "kind": "source",
+      "revision": "51ce3df974cebcb1632459e61e0ea079f5f4b425",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/51ce3df974cebcb1632459e61e0ea079f5f4b425/src/world.rs",
+      "method": "Existing own oxygen and Trench/vent markers exposed through privileged read-only diagnostics; no mechanics, persistence, protocol or controller change.",
+      "limitations": "Source inspection, not historical parameters, deployed-revision verification or whole-dungeon acceptance.",
+      "checks": ["dungeons:ocean-trench", "dungeons:ocean-trench:oxygen-route-and-air-pockets"]
+    },
+    "trench-oxygen-regression-5975233": {
+      "kind": "regression",
+      "revision": "5975233aa3560ab8f777fc10f6725ba576098f6e",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/377#issuecomment-6373605841",
+      "method": "Four tests passed on head 5975233 (merge tree 51ce3df): depletion/drowning, strict vent/refill/real defeat dispatch, self-only stat64/diagnostic, connected route. Formatting/strict Clippy passed.",
+      "limitations": "Four focused tests, not a full-suite or native Thessal pass. Earlier full suite on 51962c5: 537 passed, 2 failed, 1 ignored. Synthetic dispatch is not native completion.",
+      "checks": ["dungeons:ocean-trench", "dungeons:ocean-trench:oxygen-route-and-air-pockets"]
+    },
+    "trench-oxygen-native-51962c5": {
+      "kind": "native",
+      "revision": "51962c594b693a0d42df1d81ac8ec71afa6350ce",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/377#issuecomment-6371001671",
+      "method": "A: seven assertions passed, f3c7b49/runtime .14: full/low/empty oxygen, nonlethal drowning, ordinary return/refill, second corridor vent; cleanup clean.",
+      "limitations": "Prepared Priest/gear/entry. Run0301d03+dirty: exact case/test bytes+retained ELF bind to 51962c5; later commit unexecuted. Scalar/pixels are not independent wire decoding. Native B/Thessal-death pocket pending; no whole-Trench acceptance.",
+      "checks": ["dungeons:ocean-trench", "dungeons:ocean-trench:oxygen-route-and-air-pockets"]
+    },
     "ghost-throw-source-3016fe7": {
       "kind": "source",
       "revision": "3016fe7203f9c66ad328ddee8ac55c6a03d914a7",
@@ -1418,8 +1445,8 @@
     "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
     "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:ordinary-encounters": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
-    "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
-    "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":[]},
+    "dungeons:ocean-trench": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5"]},
+    "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5"]},
     "dungeons:ocean-trench:wounded-thessal-response": {"status":"not-run","evidence":[]},
     "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":[]},
     "dungeons:manor-of-the-immortals:secret-shelves-and-coffins": {"status":"not-run","evidence":[]},
