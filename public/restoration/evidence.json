@@ -1,6 +1,30 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "snake-layout-regression-6f35dab": {
+      "kind": "regression",
+      "revision": "6f35dab366669aac2a00b75cf3744df0e08bffb8",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/459#issuecomment-6382005241",
+      "method": "A 32-seed generator regression checks four-tile soft-wall components, boss/portal/button/spawner invariants, Python/grate population bounds and positive-speed non-permanent-wall floor connectivity after hypothetical digging. Genuine old-band RED measured nine instead of four. All 121 integrated Rust tests, formatting, warning-denied all-target Clippy and normal release build passed; two Python and 18 Node wrapper tests passed on unchanged wrapper sources.",
+      "limitations": "Engineering regression, not historical authentication or exhaustive NPC collision acceptance. Four comes from the later 27.3.2 embedded map: 19 of 25 soft components have four-tile short-axis bounds, with six shorter fragments retained in analysis. April 2012 footage has no established build; the edited 2015 guide shows 27.3.1 at 11:00. Fog and partial digging do not establish full initial width. Original generator/distribution remains unresolved; no map/source code imported.",
+      "checks": [
+        "dungeons:snake-pit",
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
+    "snake-layout-native-6f35dab": {
+      "kind": "native",
+      "revision": "6f35dab366669aac2a00b75cf3744df0e08bffb8",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/459#issuecomment-6382005241",
+      "method": "Clean native before b21f4cb and after 6f35dab each passed eight assertions and two reviewed screenshots, with cleanup errors empty and all 13 original owned process identities closed. Same client be57de7/Ruffle .15, declared seed 12350 and initial placement. Observed soft-wall face changes nine to four. Each run records 11 real native wand shots, removal of the original near block without moving, and ordinary walking past that original blocked tile with the same living character/world.",
+      "limitations": "Prepared level-20 Priest with selected legal maxima [670,385,50,25,50,50,40,75], provided Wand of Recompense, other equipment/backpack empty and known seed/initial placement. Default guest 100 Gold unused; HP 670, MP 385, stats and inventory unchanged, clear count zero. No helpers, NPC HP/state/RNG edits, refills or post-entry relocation. Not earned entry, entire-corridor excavation, full clear, matched-duration performance or shared-bootstrap-fix acceptance. Earlier camera/readiness failures are not credited; existing statuses remain unchanged.",
+      "checks": [
+        "dungeons:snake-pit",
+        "dungeons:snake-pit:diggable-route-and-cover"
+      ]
+    },
     "manor-coffin-window-source-3f7b17b": {
       "kind": "source",
       "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
@@ -1561,8 +1585,8 @@
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
-    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d"]},
-    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2"]},
+    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
+    "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
