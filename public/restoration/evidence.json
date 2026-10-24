@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
   "sources": {
+    "chat-badge-native-86e55e4": {
+      "kind": "native",
+      "revision": "86e55e4d10b7cec83adc06279731915befed46bc",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/18",
+      "method": "The same prepared fresh zero-star Wizard sent ordinary native chat on unchanged server dfa6f85. Client 1c38acb with Ruffle .14 omitted the badge and rendered thin lettering; client 86e55e4 with Ruffle .15 displayed the badge and thicker lettering requested by the unchanged 123.5.1 SWF. Each message was delivered once; both runs and cleanup passed.",
+      "limitations": "Prepared zero-star display, not earned progression, every rank/color, Windows, private/guild chat or whole-chat acceptance. Existing FTE atom/ligature limitations remain. Parent implementation/historical dispositions and gameplay status are unchanged.",
+      "checks": ["social:chat"]
+    },
+    "sphinx-potions-d39f73e": {
+      "kind": "native",
+      "revision": "d39f73ecf883a47109360a15fc58bc05eafd55e1",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/417#issuecomment-6378896843",
+      "method": "Before the fix, seed 0 produced no rewards. Regression covers 32 seeds each for solo credit, the inclusive 550-damage boundary and insufficient damage; all 69 Rust tests and strict Clippy passed. Chromium/Linux with runtime 0.7.1-openrotmg.14 showed a private Vitality/Wisdom bag after the normal final shot, then normal pickup of both by the same living character, ending at 599 HP. Actual live pixels were reviewed.",
+      "limitations": "Separate fresh prepared sessions, not an earned full fight: a 1-HP Sphinx, 700 prior damage credited to character 1, legal Priest equipment and unrelated actors removed. Temporary init hooks were removed; tested loot-handler bytes match the clean revision. Normal placement, full combat/Reaper behavior, portal journey and official period probabilities remain unverified. Parent result stays not-run.",
+      "checks": ["realm:grand-sphinx"]
+    },
     "coil-habitat-source-578c4c3": {
       "kind": "source",
       "revision": "578c4c30d2150b98bd1b4db66497c326964e18a2",
@@ -1282,7 +1300,7 @@
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
@@ -1412,7 +1430,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
     "home:realm-gold-offers": {"status":"not-run","evidence":[]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281"]},
