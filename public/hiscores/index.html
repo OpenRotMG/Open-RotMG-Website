@@ -16,7 +16,10 @@
 <label for="search">Search</label> <input id="search" type="search" maxlength="80">
 <p id="status" role="status">Loading…</p>
 <div class="scores"><table id="scores"><thead><tr><th>Rank</th><th>Player</th><th id="metric">Collection</th></tr></thead><tbody></tbody></table></div>
-<section id="collection" hidden><p id="collected"></p><div id="items"></div></section>
+<section id="collection" hidden><p id="collected"></p>
+<p><label for="sort">Sort by</label> <select id="sort">
+<option value="name">Name A–Z</option><option value="missing">Not obtained first</option><option value="recent">Recently obtained</option>
+</select></p><div id="items"></div></section>
 </main><footer class="site-footer">
 <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
 <p>2012 Realm of the Mad God reimplementation<br>Report bugs and missing content on Discord.</p>
