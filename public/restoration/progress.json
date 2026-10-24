@@ -1350,7 +1350,8 @@
         "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, replenishment and movement roles; no transformation established. Target setpiece/chest and rewards remain unresolved.",
         "differences": [
           "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464"
+          "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
+          "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467"
         ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
