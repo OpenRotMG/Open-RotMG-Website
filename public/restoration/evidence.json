@@ -1171,12 +1171,34 @@
       "checks": [
         "dungeons:snake-pit"
       ]
+    },
+    "ability-cooldown-regression-ef5686e": {
+      "kind": "regression",
+      "revision": "ef5686e5f8e20960d4687e889fcd815d9d9d2eb4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/411#issuecomment-6378639532",
+      "method": "All 66 Rust tests passed with the configured test profile and serial execution, plus 2 Python script tests, 15 Node tests, formatting and strict all-target Clippy. The shared 500-ms Wizard cooldown now expires after unpaused elapsed time without physics steps; immediate repeats, mana preservation and explicit global-pause exclusion remain checked.",
+      "limitations": "Shared cooldown-gate regression, not complete Wizard spell/class acceptance. Item values, global physics timing and authority guards are unchanged. The unoptimized full-suite stack-overflow attempt is retained but not counted; targeted red/green also ran with matching optimization 0.",
+      "checks": [
+        "heroes:wizard"
+      ]
+    },
+    "ability-cooldown-native-ef5686e": {
+      "kind": "native",
+      "revision": "ef5686e5f8e20960d4687e889fcd815d9d9d2eb4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/411#issuecomment-6378639532",
+      "method": "Accepted native-before-2 rejected a second 6500-ms Cloak of Endless Twilight after a 7000-ms active wait: simulation time was 4550 against deadline 6900. Native-after correctly projected readiness at 4650 and accepted both casts with zero cooldown rejections. Both retained the same living Rogue within each run, finite mana and empty cleanup errors; client f3c7b49/runtime 0.7.1-openrotmg.14. Public PNG bytes were verified.",
+      "limitations": "Prepared Nexus fixture with identical private 100-ms actor-tick fault injection, removed from shipping source. Not a minimum-boundary timing test, real-world performance benchmark, earned unlock, multiplayer or complete Rogue acceptance. The report lacks class/item and per-cast history. Queueing, mana/status delays and other lag effects remain outside this fix; deployment is unverified.",
+      "checks": [
+        "heroes:rogue"
+      ]
     }
   },
   "results": {
-    "heroes:rogue": {"status":"not-run","evidence":[]},
+    "heroes:rogue": {"status":"not-run","evidence":["ability-cooldown-native-ef5686e"]},
     "heroes:archer": {"status":"not-run","evidence":[]},
-    "heroes:wizard": {"status":"not-run","evidence":[]},
+    "heroes:wizard": {"status":"not-run","evidence":["ability-cooldown-regression-ef5686e"]},
     "heroes:priest": {"status":"not-run","evidence":[]},
     "heroes:warrior": {"status":"not-run","evidence":[]},
     "heroes:knight": {"status":"not-run","evidence":[]},
