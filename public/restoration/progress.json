@@ -4545,12 +4545,12 @@
           {
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
-            "expected": "The project deliberately uses a Gold guide/rewards instead of historical payment offers.",
+            "expected": "The project deliberately replaces historical payment offers with a Gold guide and rewards. Each account receives 75 Gold for Blue (13 stars), 150 for Red (26), 250 for Orange (39), 750 for Yellow (52) and 2500 for White (65), once per rank.",
             "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "The project intentionally replaces historical payment processors with a Gold guide and rewards."
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards."
             ],
             "unknowns": [],
             "sources": [],

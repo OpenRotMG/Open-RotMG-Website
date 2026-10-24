@@ -69,6 +69,24 @@
         "realm:kage-kami"
       ]
     },
+    "class-star-gold-regression-3cf9c2e": {
+      "kind": "regression",
+      "revision": "3cf9c2efcb8fe0dfd50a1db62a3df2ee2e8c5cbc",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/460#issuecomment-6382323742",
+      "method": "Issue #421's project rewards pay 75/150/250/750/2500 Gold at 13/26/39/52/65 canonical account stars. Four maintained Rust regressions cover all boundaries, read-only ranking, concurrent account reads, catch-up, overflow rollback, bot exclusion, notification acknowledgement, schema17 preservation and a live progress executor crossing 12 to 13 stars. All 133 Rust tests, strict Clippy and eight matching-binary backup/restore tests passed.",
+      "limitations": "These payments are a deliberate project extension, not historical-game restoration. Current canonical star scoring is reused without changing the recently corrected paid-death-bonus treatment. Backend coverage is not native acceptance of every colour or the whole Gold/Fame contract.",
+      "checks": ["heroes:class-stars", "home:gold-and-fame-balances", "home:realm-gold-offers"]
+    },
+    "class-star-gold-native-3cf9c2e": {
+      "kind": "native",
+      "revision": "3cf9c2efcb8fe0dfd50a1db62a3df2ee2e8c5cbc",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/460#issuecomment-6382323742",
+      "method": "Same-case normal original-client LOAD on clean parent 50bb82f and fix 3cf9c2e shows 13 blue stars with 100 Gold before, then 175 Gold and one 75-Gold notice after. Both runs passed three assertions with empty cleanup errors. The pinned .15 client ZIP hash is 25a35b602855671a8ae91640b17313ee793e85d15b785d7989b3140392ca0d41. The actual native wallet archive was restored and reopened with the matching binary, preserving 175 Gold and its notified Blue receipt field-for-field.",
+      "limitations": "13 deleted-character histories at 20 Fame were prepared, not earned; the living Wizard's bytes were preserved during setup. This checks Blue-rank catch-up through normal entry, not earning 65 stars, native higher-colour payouts, original payments or production gameplay. Earlier native failures and one rejected transition-overlay image remain retained. Overall acceptance stays not-run and historical status stays partial.",
+      "checks": ["heroes:class-stars", "home:gold-and-fame-balances", "home:realm-gold-offers"]
+    },
     "manor-coffin-window-source-3f7b17b": {
       "kind": "source",
       "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
@@ -1515,7 +1533,7 @@
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
-    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
     "heroes:legends-highscores": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status":"not-run","evidence":[]},
@@ -1719,8 +1737,8 @@
     "home:choose-your-name": {"status":"not-run","evidence":[]},
     "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
-    "home:gold-and-fame-balances": {"status":"not-run","evidence":[]},
-    "home:realm-gold-offers": {"status":"not-run","evidence":[]},
+    "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
+    "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
     "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
