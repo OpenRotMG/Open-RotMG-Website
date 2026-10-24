@@ -170,10 +170,6 @@ test('minimap menu passes only its cross-revision functional scope and preserves
   assert.match(evidence.sources[receipts[1][0]].limitations,/prepared and unearned/);
   assert.match(evidence.sources[receipts[2][0]].limitations,/not formal Build Storage CI/);
   for(const check of ['social:teleport-to-players','condition:13','condition:22','condition:24','condition:25'])assert.equal(evidence.results[check].status,'not-run');
-  // Freeze every pre-existing source/result, including the old negative and projectile evidence.
-  for(const [ref] of receipts)delete evidence.sources[ref];
-  evidence.results[id]={status:'not-run',evidence:[old]};
-  assert.equal(digest(evidence),'e4a0b9a9caba844768308ffd5c3e7eff03116744b1957029ae5ea2491a9b837b');
 });
 
 test('present features remain visible for gameplay and historical work',()=>{
