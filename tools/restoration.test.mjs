@@ -26,9 +26,14 @@ test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   for(const ref of ['pirate-exit-regression-d19287c','pirate-exit-native-d19287c']){
     assert.equal(evidence.sources[ref].revision,'d19287c44d7b2bac88e9b132302c31be431129d9');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
+  for(const ref of ['pirate-exit-regression-f879fb7','pirate-exit-native-f879fb7']){
+    assert.equal(evidence.sources[ref].revision,'f879fb781035bd713c6a2f1010275739fe3c57ed');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
   const feature=data.features.find(f=>f.id===id);assert.equal(accepted(feature,evidence),false);assert.equal(feature.audit.historical,'partial');
   assert(feature.audit.sources.some(s=>s.url==='https://www.youtube.com/watch?v=JMZXtUNZ96s'&&s.label.includes('exact build unverified')));
-  assert.match(evidence.sources['pirate-exit-native-d19287c'].limitations,/not earned traversal/);
+  assert.match(evidence.sources['pirate-exit-native-d19287c'].limitations,/supporting evidence only/);
+  assert.match(evidence.sources['pirate-exit-native-f879fb7'].limitations,/not earned traversal/);
+  assert.match(evidence.sources['pirate-exit-regression-f879fb7'].limitations,/not a real death or durable commit/);
 });
 
 test('Hermit loot regressions do not certify full native or historical acceptance',()=>{

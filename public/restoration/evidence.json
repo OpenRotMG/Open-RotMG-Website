@@ -1,6 +1,28 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "pirate-exit-regression-f879fb7": {
+      "kind": "regression",
+      "revision": "f879fb781035bd713c6a2f1010275739fe3c57ed",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6399179563",
+      "method": "On the clean integrated head, all 232 Rust tests, formatting, strict all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed with each exit code 0. The focused Dreadstump test directly calls drop_loot, checks queued clear credit and Realm Portal 0x704, then explicitly publishes the exit to check source-Realm routing. The bot regression selects 0x704 rather than 0x71d.",
+      "limitations": "Unit evidence is the queued-credit/routing seam, not a real death or durable commit. Earlier RED on 59634bd remains revision-bound. The old shared-supervision failure and unchanged 210-test rerun on 3ddee057 remain historical; neither is relabeled. No map, population, AI, loot or Snake delta. Broad cave and roster statuses stay unchanged.",
+      "checks": [
+        "dungeons:pirate-cave"
+      ]
+    },
+    "pirate-exit-native-f879fb7": {
+      "kind": "native",
+      "revision": "f879fb781035bd713c6a2f1010275739fe3c57ed",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6399179563",
+      "method": "The existing qualified baseline 59634bd was not rerun. Exactly one new-head after passed four assertions and the strengthened audit using identical frozen case 6b47f9563d5c28ab7e1006e4ef0fade520f6906ade61baddddfccaf1c5730097, runner/controller/SDK source, client be57de7, Ruffle 0.7.1-openrotmg.15 and seed 12351. Baseline: 45 shots/11 kills, five stationary firing actions, minimum actual firing fence 1500 ms, Nexus 0x71d. New after: 24 shots/8 kills, three stationary firing actions, minimum firing fence 1500 ms and walking fence 150 ms, Realm Portal 0x704. Each has credit 0 to 1 and exactly one boss defeat, queued/staged/published clear; cleanup errors are empty and original process identities are absent. After executable matches the gated release.",
+      "limitations": "Prepared legal max-stat Knight with Archon Sword, Acropolis Armor, Ring of Exalted Health and empty ability/backpack starts four tiles south of Dreadstump; not earned traversal, portal entry, reconnect, a full-cave clear or natural roster acceptance. Ordinary short key-only approach, stationary 1500 ms sword fire and walking; no helpers, NPC edits, refills or relocation. Adaptive positions, aim, framing and combat totals differ. Nearby survivors overlap the after portal sprite; its Realm Portal / Enter panel is legible. Every firing fence is at least 700 ms and walking fence at least 120 ms. Earlier low-fence footage stays supporting only; failed and terminal-incomplete startup, controller, acknowledgement, deadline and ENOSPC attempts remain uncredited. The earlier 3ddee057 recovery stays attributed there. The interrupted delivery workflow failed, but its seven completed gate passes survived and were not rerun. No startup root cause/fix, original map ancestry or exact historical build is established. Statuses stay unchanged.",
+      "checks": [
+        "dungeons:pirate-cave"
+      ]
+    },
     "pirate-exit-regression-d19287c": {
       "kind": "regression",
       "revision": "d19287c44d7b2bac88e9b132302c31be431129d9",
@@ -2673,7 +2695,7 @@
     "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65"]},
-    "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c"]},
+    "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7"]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
