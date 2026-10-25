@@ -20,6 +20,22 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Leviathan cadence receipts do not accept the whole encounter',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:leviathan',revision='9f79c958f5cf9a33877692d303ac3793d1ecbda3';
+  const refs=['leviathan-cadence-source-9f79c95','leviathan-cadence-regression-9f79c95','leviathan-cadence-native-9f79c95'];
+  validateEvidence(data,evidence);
+  for(const [i,ref] of refs.entries()){
+    assert.equal(evidence.sources[ref].revision,revision);assert.equal(evidence.sources[ref].kind,['source','regression','native'][i]);
+    assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+    assert.deepEqual(Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([key])=>key),[id]);
+  }
+  const feature=data.features.find(f=>f.id===id);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.match(evidence.sources[refs[2]].limitations,/prepared island/);
+  evidence.results[id]={status:'passed',evidence:[refs[0]]};
+  assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
+});
+
 test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
   validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.deepEqual(evidence.results[roster],{status:'not-run',evidence:[]});

@@ -2666,6 +2666,39 @@
         "dungeons:spider-den",
         "dungeons:spider-den:egg-and-cover-environment"
       ]
+    },
+    "leviathan-cadence-source-9f79c95": {
+      "kind": "source",
+      "revision": "9f79c958f5cf9a33877692d303ac3793d1ecbda3",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/9f79c958f5cf9a33877692d303ac3793d1ecbda3/src/encounter/attacks.rs#L462-L475",
+      "checks": [
+        "realm:leviathan"
+      ],
+      "method": "Fresh original 123.5.1 embedded Leviathan XML is structurally identical to selected definitions. Compared pinned Trapped/NR/FSoD and their engines; decoded verified November 2012 Knight footage and the April 2014 Leviathan guide chapter. Trapped and its Cooldown implementation establish a nominal 300-ms blue pair, matching the prior local legacy profile; the independent scheduler had introduced 100 ms.",
+      "limitations": "Source comparison and qualitative historical footage, not exact original-server timing. Trapped startup/repeat jitter, early chase completion, acquisition and prediction differ or remain unauthenticated. Later forks are not independent historical votes. No reference code or footage committed."
+    },
+    "leviathan-cadence-regression-9f79c95": {
+      "kind": "regression",
+      "revision": "9f79c958f5cf9a33877692d303ac3793d1ecbda3",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/583#issuecomment-6401598356",
+      "checks": [
+        "realm:leviathan"
+      ],
+      "method": "A real World NPC regression failed on unchanged cadence: 30 paired blue emissions over two blue phases instead of 10. After correction it checks every deadline over two full attack cycles, 9/12/2 projectile counts and selected speeds. All 233 Rust tests (zero ignored), formatting, warning-denied all-target Clippy, two Python and 18 Node wrapper tests passed.",
+      "limitations": "The unit fixture uses paralysis to isolate weapon scheduling, not to certify movement. Nominal deterministic simulation cadence, not exact original jitter. Clippy initially failed ENOSPC with empty receipts; those were retained and not credited, and only failed/unstarted gates were retried. Not full historical or native multiplayer acceptance."
+    },
+    "leviathan-cadence-native-9f79c95": {
+      "kind": "native",
+      "revision": "9f79c958f5cf9a33877692d303ac3793d1ecbda3",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/583#issuecomment-6401598356",
+      "checks": [
+        "realm:leviathan"
+      ],
+      "method": "Guarded native before 259455f1 and after 9f79c95, same case and client 953a374/Ruffle .16: three assertions each, cleanup errors empty, all original children gone. First blue phase has 15 versus five paired emissions; two observed phases have 60 versus 20 projectiles. Every measured within-phase interval is 100 versus 300 simulation ms, derived from native-visible server positions. Each prepared Warrior survives its own run, uses ordinary finite-mana Juggernaut and fires/kills nothing.",
+      "limitations": "Explicit private prepared island and supplied legal max-stat gear, not a naturally found encounter or earned entry. Only catalogue/map data overlays were dirty; no uncommitted production code. Independent Realm RNG; actor seed 12351 is not a world seed. Requested 6500 ms produced 11900/9250 active simulation ms, not matched performance or damage evidence. Stills alone do not prove cadence. No population/loot/audio, full AI, multiplayer, exact 123.5.1 fidelity or deployment acceptance."
     }
   },
   "results": {
@@ -2795,7 +2828,7 @@
     "realm:slime-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ghost-god": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:djinn": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","leviathan-cadence-source-9f79c95","leviathan-cadence-regression-9f79c95","leviathan-cadence-native-9f79c95"]},
     "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7"]},
