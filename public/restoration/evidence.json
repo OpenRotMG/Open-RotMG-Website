@@ -1610,6 +1610,189 @@
         "heroes:class-stars",
         "heroes:legends-highscores"
       ]
+    },
+    "white-demon-range-regression-40a227b": {
+      "kind": "regression",
+      "revision": "40a227b2d24c7d8f93d1bd3c3232e75ff61215f4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/413#issuecomment-6378686926",
+      "method": "Server PR413 tested head. A profile regression failed before at White Demon firing radius 12 (inherited from Medusa) and passes at 10, with Medusa, Flying Brain and Ghost God kept at 12. All 66 retained Rust tests, 17 Node and 2 Python tests, formatting and warning-denied all-target Clippy passed.",
+      "limitations": "Firing radius only; pursuit 9 and stop 4 are unchanged. Values follow the 2013 community table, not recovered 123.5.1 AI. Not combat, reward or population acceptance.",
+      "checks": [
+        "realm:white-demon",
+        "realm:enemy-pursuit-and-collision"
+      ]
+    },
+    "white-demon-range-native-271002f": {
+      "kind": "native",
+      "revision": "271002fcf19131c5611052443c4ff1e54a3860e3",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/413#issuecomment-6378686926",
+      "method": "Normal native client, natural White Demon and a stationary living Wizard. Before (clean dfa6f85) the Demon emitted six projectiles while a conservative distance lower bound stayed above 10.49 tiles over 105 observations. After (271002f) it emitted none with the bound above 10.10 tiles over 106 observations. Each run passed five assertions with empty cleanup errors.",
+      "limitations": "Independent naturally populated Realms with the same class, gear and starting band, not a replay or an earned journey. The final tested head 40a227b keeps both gameplay files byte-identical but was not rerun natively. Excluded earlier attempts are not passes.",
+      "checks": [
+        "realm:white-demon",
+        "realm:enemy-pursuit-and-collision"
+      ]
+    },
+    "trade-range-source-7ad5d05": {
+      "kind": "source",
+      "revision": "7ad5d054646d956c95272b9829346e58b113eeb7",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/7ad5d054646d956c95272b9829346e58b113eeb7/src/world/trade.rs",
+      "method": "Server PR427 merge source. Player trade requests resolve a unique name in the same world and no longer require the players within 2 tiles; acceptance has no distance check, and the interruption sweep cancels only on departure or death.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The PR records no executed test counts or native run; the bound trade natives were recorded before this change. Follows a 2013 community handler, not a recovered 123.5.1 distance rule.",
+      "checks": [
+        "social:trade-with-players"
+      ]
+    },
+    "dungeon-return-regression-456ab72": {
+      "kind": "regression",
+      "revision": "456ab72854f2b83b7d462f802140f42f861b79b4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/438#issuecomment-6380279350",
+      "method": "Server PR438 tested head integrated with main ffa430f. Unfiltered Rust suite 87 passed, 0 failed, 0 ignored; locked all-target Clippy and formatting passed. Initial versions of the two new regressions failed on unchanged production code. Coverage includes Realm-drop and Realm-key origins, expired entrances, full, closed and missing origins, nested and fresh policies, explicit Random Realm and Nexus exits, and a real-socket exit that asserts the exact original Realm and once-only exit credit.",
+      "limitations": "Engineering regression of this project's return policy; 123.5.1 full or closed Realm return semantics were not recovered.",
+      "checks": [
+        "realm:travel-between-worlds",
+        "dungeons:snake-pit"
+      ]
+    },
+    "dungeon-return-native-456ab72": {
+      "kind": "native",
+      "revision": "456ab72854f2b83b7d462f802140f42f861b79b4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/438#issuecomment-6380279350",
+      "method": "Shared native runner with the identical external case (SHA256 220384f000f542d70218ab95682a37fcb35b8c676479636a86ded5f94ee5bd9c). Before (clean 27e8e05) the same living character returned to source Realm 1 four times, then to Realm -3 on the fifth Snake Pit exit. After, it returned to Realm 1 on all six exits. Both runs had zero cleanup errors.",
+      "limitations": "Prepared selected-stat Priest with six provided Snake Pit keys used through normal inventory and portal inputs. Not earned keys, mob-drop entry, boss clear or whole-dungeon acceptance. Three rejected mob-entry attempts, including a permanent Priest death, are not passes.",
+      "checks": [
+        "realm:travel-between-worlds",
+        "dungeons:snake-pit"
+      ]
+    },
+    "class-star-death-total-regression-ca50d79": {
+      "kind": "regression",
+      "revision": "ca50d797d92c5755feffad7195395f0650d28bd3",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/452#issuecomment-6381418238",
+      "method": "Server PR452 tested head. Two evaluator-backed regressions failed before and pass after: an 18 base, 34 total Rogue death moves from zero to one star with next goal 150. They also cover living base Fame, the best single character rather than summed lives or wallet, spent Fame, immutable snapshots and invalid-receipt rejection. Unfiltered Rust suite 113 passed, 0 failed, 0 ignored; all-target Clippy and formatting passed.",
+      "limitations": "Comparator-based rule, not recovered 123.5.1 BestFame timing. Merge 381927d keeps the three task files blob-identical; the suite result belongs to the tested head. The PR's client archive check followed a real permanent death with failed action reports and is not bound.",
+      "checks": [
+        "heroes:class-stars"
+      ]
+    },
+    "fame-swap-source-8f5d3d7": {
+      "kind": "source",
+      "revision": "8f5d3d7598a959977e206201b5a07b36b039e02a",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/8f5d3d7598a959977e206201b5a07b36b039e02a/src/store/gold.rs",
+      "method": "Server PR483 merge source. Store::swap_fame requires a positive even amount, rejects insufficient spendable Fame, then debits account_fame.balance and credits accounts.credits by half in one transaction. The /swap chat handler in src/server.rs requires a registered account and publishes the new live balances.",
+      "limitations": "Deliberate project extension, not historical restoration. Source inspection only; the PR records no executed test result. No native wallet or UI acceptance.",
+      "checks": [
+        "home:gold-and-fame-balances"
+      ]
+    },
+    "sprite-god-aim-source-a21b869": {
+      "kind": "source",
+      "revision": "a21b869f6617dbee84489c2bfe15354aed3c4c16",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/a21b869f6617dbee84489c2bfe15354aed3c4c16/src/encounter/attacks.rs",
+      "method": "Server PR337 merge source. Sprite God 0x652 aims its four-shot Purple Magic fan at the target's current position; only projectile 1, the Quiet Grey Boomerang, leads movement, in both the scheduled attacks and the legacy path in src/world/gods.rs.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The added world test has no recorded execution. The rationale is a September 2013 Steam guide, not recovered server code. Cadence, Sprite Children and rewards are unchanged.",
+      "checks": [
+        "realm:sprite-god"
+      ]
+    },
+    "realm-road-rounding-source-84f9ec1": {
+      "kind": "source",
+      "revision": "84f9ec1f3c97e9696e497f1650707ce750a5f58c",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/84f9ec1f3c97e9696e497f1650707ce750a5f58c/scripts/realm_roads.py",
+      "method": "Server PR340 merge source. The FSOD baseline import smooths sharp road bends along skeleton paths of at least 40 cells, restores vacated cells from the nearest plain biome, clears scenery only in the new road footprint and raises errors if components, loops, river crossings, water, beach, mountain or set-piece floors or region markers would change. Catalogue hashes changed for realm-fsod-1 to 3 only.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Alters private-server layouts, not the World 1 to 3 reconstructions; the mapgen2 spline rationale does not establish target-era roads. The added road test has no recorded execution. Not road-circuit or crossing acceptance.",
+      "checks": [
+        "realm:road-network",
+        "realm:realm-generation"
+      ]
+    },
+    "limon-center-source-b942870": {
+      "kind": "source",
+      "revision": "b94287083790d987ace58db1358af4f9ed7412b0",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b94287083790d987ace58db1358af4f9ed7412b0/src/encounter.rs",
+      "method": "Server PR363 merge source. Limon 0xd06 holds her home point at distance 0.1 and speed 1.4 during the box phase instead of freezing where her orbit ended, and src/world/mechanics.rs places element markers 0xd07 to 0xd0a at radii 6 and 10 instead of 9.5 and 14.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The two added world tests have no recorded execution. FSoD is a later community server; original radii, phase timing and boss acceptance are not recovered.",
+      "checks": [
+        "dungeons:sprite-world"
+      ]
+    },
+    "activation-radius-source-3c9a23a": {
+      "kind": "source",
+      "revision": "3c9a23a3e3735e32dab22ffa1eca364af189dd07",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3c9a23a3e3735e32dab22ffa1eca364af189dd07/src/world.rs",
+      "method": "Server PR257 merge source. Enemies without a per-kind wake radius target players within 12 tiles instead of 20, activated enemies keep their wake radius instead of widening to 20, and src/encounter.rs cuts the firing ranges of kinds 0x953, 0x954, 0x619 and 0x61a to their sight.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The PR records no tests. The 12-tile default is an engineering choice, not a recovered per-family value; later PRs add other per-kind radii.",
+      "checks": [
+        "realm:enemy-pursuit-and-collision"
+      ]
+    },
+    "void-background-source-15c1e17": {
+      "kind": "source",
+      "revision": "15c1e17525afdc4b86ab23d55461a43afc391db7",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/15c1e17525afdc4b86ab23d55461a43afc391db7/src/world.rs",
+      "method": "Server PR304 merge source. MAPINFO background is 2 for the nexus and vault templates and 0 for every other world.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Matches the 2013 community server and the client's background dispatch; modified 7.0 settings choose 0. Not authenticated backend policy, layout or fountain coverage.",
+      "checks": [
+        "home:nexus",
+        "home:vault"
+      ]
+    },
+    "septavius-move-source-8a98415": {
+      "kind": "source",
+      "revision": "8a98415574cf9c5603f21cb91b39166b1830fba1",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/8a98415574cf9c5603f21cb91b39166b1830fba1/src/encounter.rs",
+      "method": "Server PR309 merge source. Removes the spiral-phase override that stopped Septavius 0xd90, so his 0.5-speed wandering runs through all attack phases; activation, attacks, summons and rewards are unchanged.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Restores the older community comparator's continuous wandering, not authenticated chase, radius or timing.",
+      "checks": [
+        "dungeons:undead-lair"
+      ]
+    },
+    "quest-window-source-d32bba3": {
+      "kind": "source",
+      "revision": "d32bba3571263d2202bd3b55d73e5119896bdc9a",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d32bba3571263d2202bd3b55d73e5119896bdc9a/src/quest.rs",
+      "method": "Server PR262 merge source. WINDOWS gives 34 quest kinds a character-level window, and quest selection in src/world.rs skips quests outside it; kinds without a window stay eligible from level 1 to 20. Selection order (closest quest level, then nearest, then lowest id) is unchanged.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Windows come from a later wiki table and a 2013 community comparator with partly different bounds, not recovered 123.5.1 policy.",
+      "checks": [
+        "realm:find-your-next-quest"
+      ]
+    },
+    "quest-boss-source-7c4b974": {
+      "kind": "source",
+      "revision": "7c4b974129677a36152f921ce246acf4e0ab4f66",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/7c4b974129677a36152f921ce246acf4e0ab4f66/src/world.rs",
+      "method": "Server PR306 merge source. Quest objects without a Level (Archdemon Malphas, Davy Jones, Oryx the Mad God 1) are indexed and treated as an exact level match for every character.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The PR records no executed test counts; it does not cover native quest-arrow guidance.",
+      "checks": [
+        "realm:find-your-next-quest"
+      ]
+    },
+    "visible-npc-simulation-source-b066eae": {
+      "kind": "source",
+      "revision": "b066eae4d0d46b7397e730bf3f36b95890e8882b",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b066eae4d0d46b7397e730bf3f36b95890e8882b/src/world.rs",
+      "method": "Server PR383 merge source. Non-quest or already-activated enemies keep simulating while a living, unpaused, non-departing player is within the larger of their wake radius and 20 tiles, without extending targeting; unactivated quests still wake only inside their own radius.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The PR records no executed counts, and its npc_visibility_tests.rs is absent on current main. The realm-src active-chunk comparator is not 123.5.1 policy.",
+      "checks": [
+        "realm:enemy-pursuit-and-collision",
+        "realm:encounter-clock-semantics"
+      ]
     }
   },
   "results": {
@@ -1632,12 +1815,12 @@
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
-    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","class-star-death-total-regression-ca50d79"]},
     "heroes:legends-highscores": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status":"not-run","evidence":[]},
     "heroes:gravestones": {"status":"not-run","evidence":[]},
-    "realm:realm-generation": {"status":"not-run","evidence":[]},
+    "realm:realm-generation": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1"]},
     "realm:map-world-01": {"status":"not-run","evidence":[]},
     "realm:map-world-02": {"status":"not-run","evidence":[]},
     "realm:map-world-03": {"status":"not-run","evidence":[]},
@@ -1654,7 +1837,7 @@
     "realm:map-registration": {"status":"not-run","evidence":[]},
     "realm:biome-zones": {"status":"not-run","evidence":[]},
     "realm:water-network": {"status":"not-run","evidence":[]},
-    "realm:road-network": {"status":"not-run","evidence":[]},
+    "realm:road-network": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1"]},
     "realm:godlands-terrain": {"status":"not-run","evidence":[]},
     "realm:setpiece-sites": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
     "realm:minor-landmarks": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
@@ -1664,9 +1847,9 @@
     "realm:population-ecology": {"status":"not-run","evidence":[]},
     "realm:population-recovery": {"status":"not-run","evidence":[]},
     "realm:terrain-encounter-navigation": {"status":"not-run","evidence":[]},
-    "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":[]},
-    "realm:encounter-clock-semantics": {"status":"not-run","evidence":[]},
-    "realm:find-your-next-quest": {"status":"not-run","evidence":[]},
+    "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","activation-radius-source-3c9a23a","visible-npc-simulation-source-b066eae"]},
+    "realm:encounter-clock-semantics": {"status":"not-run","evidence":["visible-npc-simulation-source-b066eae"]},
+    "realm:find-your-next-quest": {"status":"not-run","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974"]},
     "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
@@ -1681,7 +1864,7 @@
       ]
     },
     "realm:environmental-hazards": {"status":"not-run","evidence":[]},
-    "realm:travel-between-worlds": {"status":"not-run","evidence":[]},
+    "realm:travel-between-worlds": {"status":"not-run","evidence":["dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
     "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398"]},
     "realm:lich": {"status":"not-run","evidence":[]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7"]},
@@ -1740,19 +1923,19 @@
     "realm:ghost-god": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151"]},
     "realm:djinn": {"status":"not-run","evidence":[]},
     "realm:leviathan": {"status":"not-run","evidence":[]},
-    "realm:white-demon": {"status":"not-run","evidence":[]},
-    "realm:sprite-god": {"status":"not-run","evidence":[]},
+    "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f"]},
+    "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":[]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
-    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
+    "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -1834,18 +2017,18 @@
     "style:summon-a-drake": {"status":"not-run","evidence":[]},
     "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
-    "home:nexus": {"status":"not-run","evidence":[]},
-    "home:vault": {"status":"not-run","evidence":[]},
+    "home:nexus": {"status":"not-run","evidence":["void-background-source-15c1e17"]},
+    "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17"]},
     "home:tutorial-and-kitchen": {"status":"failed","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
     "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
-    "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
+    "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
     "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
-    "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281"]},
+    "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05"]},
     "social:lock-players": {"status":"not-run","evidence":[]},
     "social:ignore-players": {"status":"not-run","evidence":[]},
     "social:teleport-to-players": {"status":"not-run","evidence":["invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2"]},

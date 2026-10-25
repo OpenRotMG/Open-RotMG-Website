@@ -530,7 +530,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Five inclusive per-class BestFame thresholds: 20,150,400,800,2000. Account stars sum completed class quests; next goal exceeds max(best,current), or -1. Authoritative BestFame timing remains unresolved.",
-        "differences": [],
+        "differences": [
+          "Server PR452 scores each class by its best committed death total, including death bonuses, while living characters count base Fame. This follows the modified 7.0 comparator's greater-of-current-and-final rule; a 2021 base-only rule is later, and 123.5.1 BestFame timing is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/452"
+        ],
         "unknowns": [
           "Whether target BestFame uses living, base or death-total Fame and when stars are awarded."
         ],
@@ -538,6 +540,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L458-L476",
+            "label": "Modified 7.0 comparator: BestFame keeps the greater of current and final Fame, not official 2012 code"
           }
         ]
       }
@@ -645,7 +651,8 @@
         "expected": "Island terrain with coast-to-interior difficulty, central mountains, water, vegetation, roads and terrain-associated populations. Exact production layout, dimensions, biome thresholds and population rules remain unresolved.",
         "differences": [
           "Server PR272 preserves destructible prepared-map scenery and explicit Palm/Cherry sizes, with regression coverage. This is implementation evidence, not acceptance of original map layouts or population rules. Revision: https://github.com/OpenRotMG/Open-RotMG-Server/commit/c2decb23b58665590903f4f17e34b544a40aef48",
-          "Server PR334 (009109ea) adds complete engineering reconstructions for Worlds 1, 2 and 3, alongside the three FSOD entries. Revision-bound prepared native smoke evidence is linked in that PR. Original identity, hidden fields, registration, provenance and rights remain unverified; historical and gameplay acceptance are unchanged. Worlds 4 through 13 remain incomplete."
+          "Server PR334 (009109ea) adds complete engineering reconstructions for Worlds 1, 2 and 3, alongside the three FSOD entries. Revision-bound prepared native smoke evidence is linked in that PR. Original identity, hidden fields, registration, provenance and rights remain unverified; historical and gameplay acceptance are unchanged. Worlds 4 through 13 remain incomplete.",
+          "Server PR340 rounds sharp road bends in the three FSOD baseline layouts at import. It restores vacated cells from nearby biome ground and refuses changes to road connectivity, loops, river crossings, water, beach, mountains, set-piece floors or region markers. This moves private-server geometry toward mapgen-style splines; it is not recovered road data, and the World 1 to 3 reconstructions are untouched: https://github.com/OpenRotMG/Open-RotMG-Server/pull/340"
         ],
         "unknowns": [
           "Original terrain and population inventory, placement, biome thresholds and map dimensions.",
@@ -981,7 +988,9 @@
             "acceptance": "Exercise entry/exit from sight, invisible/paused/dead targets, corners, reacquisition and owner loss. Do not impose one universal historical radius.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Server PR257 makes most enemies target players only within a per-kind wake radius, defaulting to 12 tiles, and keeps that radius after activation instead of widening it to 20. It also cut four kinds' firing ranges to their sight radius. These are engineering defaults, not recovered per-family values: https://github.com/OpenRotMG/Open-RotMG-Server/pull/257"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "populations"
@@ -993,7 +1002,9 @@
             "acceptance": "Trace reacquisition, dormancy, Stasis and Paralyzed. Check once-only bursts/rewards and invocation-relative timers rather than restarting from global encounter age.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Server PR383 keeps non-quest or already-activated enemies simulating while a living, unpaused player is within the larger of their wake radius and 20 tiles, without extending targeting; unactivated quests wake only inside their own radius. A later community server's active-chunk simulation is the comparator, not 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/383"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "populations"
@@ -1010,7 +1021,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Level-oriented quest selection and delayed client directional guidance, with completion/reselection distinct from XP and realm closure.",
-        "differences": [],
+        "differences": [
+          "Server PR262 offers each quest monster only inside a per-kind character-level window: mostly within 5 levels of the quest level for low-level wandering quests, as RealmEye's later wiki states, and from a per-kind minimum up to level 20 for bosses. The pinned 2013 community comparator's windows are similar but not identical. Server PR306 treats level-less quest bosses (Archdemon Malphas, Davy Jones, Oryx the Mad God 1) as matching every character level (https://github.com/OpenRotMG/Open-RotMG-Server/pull/306). Neither is recovered 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/262"
+        ],
         "unknowns": [
           "Original tie-breaking and evaluation cadence, and exact client/server completion and reselection timing."
         ],
@@ -1018,6 +1031,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/quest-monsters",
+            "label": "RealmEye quest-monster table: later wiki, quest level plus or minus 5"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Leveling.cs",
+            "label": "2013 community quest windows comparator, not official server code"
           }
         ]
       }
@@ -1184,9 +1205,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Nexus escape and portals reconnect the same living character to the chosen destination. Unavailable, private or full destinations must reject entry without losing progress.",
-        "differences": [],
+        "differences": [
+          "Server PR438 returns ordinary dungeon exits to the Realm whose drop or key opened the dungeon, and nested keys inherit that Realm. If that Realm has closed, the exit refuses and directs the player to the Nexus instead of choosing another Realm. Explicit Random Realm Portals and Nexus exits are unchanged. This is project policy; a later community handler is only a comparator: https://github.com/OpenRotMG/Open-RotMG-Server/pull/438"
+        ],
         "unknowns": [
-          "Original world capacity, escape/death interactions, transfer timeouts and reconnection behavior."
+          "Original world capacity, escape/death interactions, transfer timeouts and reconnection behavior.",
+          "Original dungeon-exit destination, including when the opening Realm is full or closed."
         ],
         "sources": [
           {
@@ -1196,6 +1220,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/networking/handlers/UsePortalHandler.cs",
+            "label": "Later community portal handler: explicit instance preferred, random Realm for unbound exits; comparator only"
           }
         ]
       }
@@ -2683,9 +2711,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Mountain flying White Demon HP1000/DEF12, armor-piercing MultiHit45-damage shot.122.0.1 paired-swipes wording is qualified by intervening122.3.2 nerf; continuity to123.5.1 is unproven.",
-        "differences": [],
+        "differences": [
+          "Server PR413 gives White Demon its own 10-tile firing acquisition, with pursuit 9 and stop 4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413"
+        ],
         "unknowns": [
-          "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy."
+          "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy.",
+          "Original firing-acquisition and pursuit radii."
         ],
         "sources": [
           {
@@ -2695,6 +2726,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "2013 community White Demon: Chasing(6, 9, 4) and a 10-tile predictive attack, not official server code"
           }
         ]
       }
@@ -2708,7 +2743,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Include Sprite Child lifecycle, not constructs; original child counts/regeneration/cleanup remain qualified.",
-        "differences": [],
+        "differences": [
+          "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337"
+        ],
         "unknowns": [
           "Original child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
         ],
@@ -2716,6 +2753,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=181796604",
+            "label": "September 2013 Steam Godlands guide, updated 2018: only the Quiet boomerang predicts movement; later than 123.5.1"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "2013 community Sprite God: predictive fan and boomerang, not official server code"
           }
         ]
       }
@@ -2927,7 +2972,8 @@
         "historical": "partial",
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
-          "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415."
+          "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
+          "Server PR363 returns Limon to her home point at speed 1.4 for the box phase and places the element markers at radii 6 and 10 instead of 9.5 and 14. This follows the later FSoD community server, not recovered 123.5.1 timing or geometry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363"
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
@@ -2940,6 +2986,10 @@
           {
             "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
             "label": "May 2012 Sprite World guide: floor variants, trees and native gods"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.SpriteWorld.cs#L45-L58",
+            "label": "Later FSoD community Limon: returns to spawn, then elements at radii 6 and 10; comparator only"
           }
         ],
         "checks": [
@@ -2968,7 +3018,8 @@
         "historical": "partial",
         "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
-          "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered."
+          "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
+          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -4403,7 +4454,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+        ],
         "unknowns": [
           "Original 123.5.1 layout, spawn points and destination bindings.",
           "Fountain timing, MP healing and recipient rules.",
@@ -4438,7 +4491,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each. The older community server selects blue background 2, also visible in the linked Vault tutorial's thumbnail; modified 7.0 settings instead select 0.",
-        "differences": [],
+        "differences": [
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+        ],
         "unknowns": [
           "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
         ],
@@ -4563,7 +4618,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
+        ],
         "unknowns": [
           "Original initial balances, complete Fame/death-bonus formulas, earnings timing and complete spending contract."
         ],
@@ -4673,7 +4730,8 @@
         "historical": "partial",
         "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
-          "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum."
+          "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
+          "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
         ],
         "unknowns": [
           "Original server-side name/rank restrictions, distance, request timeout, item eligibility and confirmation delay."
@@ -4686,6 +4744,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TradeButton.as",
             "label": "Readable modified-7 TradeButton elapsed countdown; selected SWF checked separately"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Trade.cs#L42-L75",
+            "label": "2013 community trade handler: name-resolved requests with no distance check, not official server code"
           }
         ]
       }
