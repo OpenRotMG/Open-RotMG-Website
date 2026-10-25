@@ -4678,15 +4678,21 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "World chat includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players and /yell reaches all Nexus players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
-        "differences": [],
+        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
+        "differences": [
+          "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525"
+        ],
         "unknowns": [
-          "Original ordinary-chat radius, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original Nexus boundary metric, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120509232008/http://forums.wildshadow.com/node/2587",
+            "label": "April 2011 Build 114: Nexus chat local to 15 squares; /yell global in Nexus"
           }
         ]
       }

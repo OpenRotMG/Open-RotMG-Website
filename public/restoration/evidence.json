@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "chat-scope-regression-b5b1542": {
+      "kind": "regression",
+      "revision": "b5b1542aaaed190179755ccfc8877969ea10cdba",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
+      "method": "The directory regression fails before the fix because a far Realm listener receives no ordinary chat. Afterward, sender echo and recipients at 14.9 and 60 tiles match Nexus-local versus Realm-wide scope. Both focused chat tests, formatting and strict all-target Clippy passed.",
+      "limitations": "Scope regression, not complete chat UI, every command, filtering preference or announcement acceptance. Nexus uses the existing strict Euclidean 15-tile boundary; original boundary metric remains unverified.",
+      "checks": ["social:chat"]
+    },
+    "chat-scope-native-b5b1542": {
+      "kind": "native",
+      "revision": "b5b1542aaaed190179755ccfc8877969ea10cdba",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
+      "method": "Same case and stock client be57de7/Ruffle .15 with two actual native clients in one Realm. Before, clean 6879e964 at 1126 tiles separation: speaker sees echo, listener does not; server records one recipient. After, at 869 tiles: both see the message and the server records two recipients. Both runs passed with clean cleanup.",
+      "limitations": "Prepared characters on ordinary arrival points in separate fresh owned states; map layouts and distances differ. Not earned progression, cross-Realm relay, full command or Windows coverage. Initial arrival-distance case and disk-full build failures are retained as rejected attempts.",
+      "checks": ["social:chat"]
+    },
     "chase-jitter-source-ddc478b": {"kind": "source", "revision": "ddc478b431827e5519e095f9674595667ab76b45", "date": "2026-10-25", "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/ddc478b431827e5519e095f9674595667ab76b45/src/world.rs", "method": "Chase motion re-aims each tick at the target plus an independent {-1,-0.5,0,+0.5} tile offset per axis, as the pinned Trapped Chasing behavior that Abyss demons and Brutes use. Stop distance still measures the true target; collision, speeds, sight and wall sliding are unchanged.", "limitations": "Shared engine change for every Chase enemy, matching the reference engine rather than adding pathfinding. Enemies can still press against walls far from an opening, which period reports also describe. realm-src Follow uses the same offsets with the opposite sign; Trapped's bias is retained deliberately. Not historical acceptance.", "checks": ["dungeons:abyss-of-demons"]},
     "chase-jitter-regression-ddc478b": {"kind": "regression", "revision": "ddc478b431827e5519e095f9674595667ab76b45", "date": "2026-10-25", "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/ddc478b431827e5519e095f9674595667ab76b45/src/world/chase_tests.rs", "method": "A doorway copied from a generated Abyss genuinely fails before the fix: both Brutes pin 0.01 tiles apart behind the wall. After the fix, both Brutes clear the doorway within 20 seconds in all 64 fixed seeds (median about 3 seconds). All feature-revision Rust tests, formatting and warning-denied all-target Clippy passed.", "limitations": "Fixed local geometry and seeds, not exhaustive layouts or a performance study.", "checks": ["dungeons:abyss-of-demons"]},
     "chase-jitter-native-ddc478b": {"kind": "native", "revision": "ddc478b431827e5519e095f9674595667ab76b45", "date": "2026-10-25", "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/523#issuecomment-6394004969", "method": "Actual Chromium native before-native9 and after-native1 use the same case, same generated Abyss seed 481 and local runtime 0.7.1-openrotmg.14, bundle 44ec18cb9050bf726e96ebf5e8f4d65d2fe042178e18ec9c84c8f9cf2d85545d. A Knight stands still below a doorway. After 4 seconds the two selected Brutes are 0.01 tiles apart behind the wall before, versus 0.49 tiles apart within 1 tile of the Knight after. Same living Knight, no attacks, clean cleanup.", "limitations": "Prepared level, stats, legal gear and scout-selected position, not earned traversal or a full clear. Other demons also attack during the window. Earlier startup/CDP/lease timeouts under host load are retained failures. Parent stays not-run.", "checks": ["dungeons:abyss-of-demons"]},
@@ -2526,7 +2544,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05"]},
