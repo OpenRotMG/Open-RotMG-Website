@@ -20,7 +20,9 @@ export function viewMessage(event, origin, source, bot) {
 
 function llm(status) {
   if (!status.enabled) return 'Disabled on this server.';
-  return `${status.model}: ${status.status}. Today ${status.daily_requests} of ${status.daily_limit} requests (${status.automatic_remaining} left for bot-initiated speech), ${status.successes} succeeded, ${status.failures} failed, ${status.in_flight} in flight.` +
+  if (status.budget_scope !== 'process-local' || status.budget_resets_on_restart !== true || status.budget_window_seconds !== 86400 || status.provider_quota !== 'unknown' ||
+      !['daily_requests', 'daily_limit', 'requests_remaining', 'automatic_limit', 'automatic_remaining', 'budget_window_resets_in_seconds'].every(key => Number.isInteger(status[key]) && status[key] >= 0) || status.budget_window_resets_in_seconds > status.budget_window_seconds) throw new Error('malformed language-model allowance');
+  return `${status.model}: ${status.status}. Process-local fixed 24 h allowance: ${status.daily_requests} of ${status.daily_limit} requests used, ${status.requests_remaining} remaining (${status.automatic_remaining} of ${status.automatic_limit} left for bot-initiated speech). Resets in ${status.budget_window_resets_in_seconds} s and on server restart. Actual provider quota: unknown. ${status.successes} succeeded, ${status.failures} failed, ${status.in_flight} in flight.` +
     (status.last_latency_ms === null ? '' : ` Last reply took ${status.last_latency_ms} ms.`) + (status.last_error ? ` Last error: ${status.last_error}.` : '');
 }
 

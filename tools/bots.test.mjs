@@ -153,9 +153,16 @@ test('empty server and native bootstrap failure are explicit; model budgets/erro
   const h = harness(t);await flush();
   h.iframe().listeners.error();assert.match(h.nodes['#view-status'].textContent, /error.*failed to load/);
   h.choose('Alpha');await flush();await h.advance(16000);assert.match(h.nodes['#view-status'].textContent, /error.*no native status/);
-  const list = bots([]);list.llm = {enabled: true, model: 'test-model', status: 'limited', daily_requests: 9, daily_limit: 10, automatic_remaining: 0, successes: 7, failures: 2, in_flight: 0, last_latency_ms: 300, last_error: 'quota exhausted'};
+  const list = bots([]);list.llm = {enabled: true, model: 'test-model', status: 'limited', budget_scope: 'process-local', budget_resets_on_restart: true, budget_window_seconds: 86400, budget_window_resets_in_seconds: 3600, provider_quota: 'unknown', daily_requests: 9, daily_limit: 1000, requests_remaining: 991, automatic_limit: 800, automatic_remaining: 0, successes: 7, failures: 2, in_flight: 0, last_latency_ms: 300, last_error: 'quota exhausted'};
   h.lists.push(json(list));await h.advance(10000);
-  assert.match(h.nodes['#llm'].textContent, /9 of 10 requests.*0 left.*7 succeeded, 2 failed.*quota exhausted/);
+  const text = h.nodes['#llm'].textContent;
+  assert.match(text, /Process-local fixed 24 h allowance: 9 of 1000 requests used, 991 remaining \(0 of 800 left for bot-initiated speech\)/);
+  assert.match(text, /Resets in 3600 s and on server restart\. Actual provider quota: unknown\./);
+  assert.match(text, /7 succeeded, 2 failed, 0 in flight\. Last reply took 300 ms\. Last error: quota exhausted\./);
+  assert.doesNotMatch(text, /Today|rolling|free provider|provider limit/i);
+  list.llm.budget_scope = 'provider';h.lists.push(json(list));await h.advance(10000);
+  assert.match(h.nodes['#status'].textContent, /Bot list error: malformed language-model allowance/);
+  assert.equal(h.nodes['#llm'].textContent, text);
 });
 
 test('initial empty population and encoded query selection never invent a live feed', async t => {
