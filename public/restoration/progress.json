@@ -3009,12 +3009,13 @@
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
-          "Server PR363 returns Limon to her home point at speed 1.4 for the box phase and places the element markers at radii 6 and 10 instead of 9.5 and 14. This follows the later FSoD community server, not recovered 123.5.1 timing or geometry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363",
+          "Server PR363 returns Limon to her home point at speed 1.4 for the box phase, following later FSoD return behavior rather than recovered 123.5.1 timing: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363",
           "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519",
+          "After the platform enlargement, the turret ranges return from 6/10 to the modified 7.0 comparator's 9.5/14. The inner square is 13.435 tiles between turret centers instead of 8.485, approximately the reported 14 instead of 9. The wider outer box preserves the gap. Later FSoD conflicts at 6/10; no numeric Limon behavior was located in the primary Kithio compiled tables, and exact original dimensions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/571",
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
         ],
         "sources": [
           {
@@ -3027,7 +3028,19 @@
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.SpriteWorld.cs#L45-L58",
-            "label": "Later FSoD community Limon: returns to spawn, then elements at radii 6 and 10; comparator only"
+            "label": "Later FSoD community Limon: returns to spawn, then elements at radii 6 and 10; conflicting geometry comparator only"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SpriteWorld.cs#L126-L134",
+            "label": "Modified 7.0 community Limon: radial corner ranges 9.5 and 14, not authenticated original dimensions"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023618/http://forums.wildshadow.com/wiki/realm-mad-god/limon-sprite-god",
+            "label": "June 2012 official guide capture: eight turrets form two squares around Limon; no numeric dimensions"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Limon%20Element",
+            "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
           }
         ],
         "checks": [
