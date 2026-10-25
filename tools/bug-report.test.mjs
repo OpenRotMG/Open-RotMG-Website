@@ -34,6 +34,7 @@ test('report preserves rejected input and shows the validated GitHub receipt, no
 test('publication failures retry only the saved report lookup and reject untrusted links',async()=>{
  const f=fixture();await f.open();f.description.value='Do not duplicate';let sending=f.send();f.respond(true,{id:'b'.repeat(24)});await new Promise(setImmediate);f.respond(false,{error:'offline'});await sending;
  assert.match(f.status.textContent,/Your report is saved/);assert.equal(f.submit.textContent,'Check report link');assert.equal(f.description.value,'Do not duplicate');
+ await f.open();assert.equal(f.submit.disabled,false);assert.match(f.status.textContent,/Your report is saved/);
  sending=f.send();assert.equal(f.requests.filter(r=>r.options.method==='POST').length,1);f.respond(true,{url:'javascript:alert(1)'});await sending;assert.match(f.status.textContent,/Invalid GitHub issue link/);assert.equal(f.description.value,'Do not duplicate');
  sending=f.send();f.respond(true,{url:null});await new Promise(setImmediate);await new Promise(setImmediate);assert.equal(f.requests.at(-1).path,`/api/bug-reports/${'b'.repeat(24)}/status`);f.respond(true,{url:'https://github.com/OpenRotMG/Open-RotMG-Server/issues/529'});await sending;
  assert.equal(f.requests.filter(r=>r.options.method==='POST').length,1);assert.equal(f.status.children[0].href,'https://github.com/OpenRotMG/Open-RotMG-Server/issues/529');

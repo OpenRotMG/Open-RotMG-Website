@@ -10,7 +10,7 @@ window.OpenRotMGBugReport = {
     const link = document.querySelector('a[href="/#bug-report"]');
     let screenshot, reportId, submitting = false;
     async function capture() {
-      if (submitting) return;
+      if (submitting || reportId) return;
       submit.disabled = true;
       status.textContent = 'Capturing your game…';
       try {
