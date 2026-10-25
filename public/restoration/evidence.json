@@ -18,7 +18,7 @@
       "date": "2026-10-25",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/551#issuecomment-6397970910",
       "method": "Same maintained assertion fails baseline with Master gone 90500ms into the invulnerable wait. Fix passes and retains Master through the exact 140000ms King timeout, then checks cleanup and one Actual Ghost King replacement.",
-      "limitations": "Deterministic mechanics test, not native combat or Realm closure. Full-suite first run: 224 passed, 1 failed in unrelated drop-cause reporting; focused same-ELF rerun passed, original failure retained.",
+      "limitations": "Deterministic mechanics test, not native combat or Realm closure. Complete same-head rerun: 225 Rust tests passed, plus strict Clippy, formatting, 18 Node and 2 Python tests. Earlier 224-pass/1-fail drop-cause run retained. Actual merge 6f875beb passed both Ghost tests, formatting and strict Clippy; no fresh full merged-tree Rust run.",
       "checks": [
         "realm:ghost-king"
       ]
