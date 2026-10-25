@@ -39,19 +39,18 @@
     <p>2012 Realm of the Mad God reimplementation<br>
     Report bugs and missing content with the link below.</p>
     <nav aria-label="Project">{{PROJECT_NAV}}</nav>
-    <details id="bug-report">
-      <summary>Report Bug</summary>
+    <section id="bug-report" aria-label="Bug report" hidden>
       <form id="bug-form">
         <label for="bug-description">Describe the bug</label>
         <textarea id="bug-description" rows="5" maxlength="4000" required placeholder="Describe the bug here (link references appreciated!)"></textarea>
         <p>Reports, game diagnostics and screenshots are public. Do not include passwords or personal information.</p>
-        <p>Game logs and diagnostics from the last two minutes are attached when you submit. Only your game canvas is captured, never your desktop.</p>
+        <p>Recent game diagnostics are attached when a character is connected. You can also report without signing in. Only your game canvas is captured, never your desktop.</p>
         <img id="bug-screenshot" alt="Game screenshot attached to this report" hidden>
         <button id="bug-refresh" type="button">Refresh screenshot</button>
         <button type="submit" disabled>Submit bug report</button>
         <p id="bug-status" role="status" aria-live="polite"></p>
       </form>
-    </details>
+    </section>
   </footer>
 </div>
 </body>
