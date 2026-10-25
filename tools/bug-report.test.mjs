@@ -8,20 +8,22 @@ function fixture(hash='',ready=true){
  const panel=element(),form=element(),description=element(),image=element(),status=element(),submit=element(),refresh=element(),link=element();
  form.querySelector=()=>submit;
  const nodes={'#bug-report':panel,'#bug-form':form,'#bug-description':description,'#bug-screenshot':image,'#bug-status':status,'#bug-refresh':refresh,'a[href="/#bug-report"]':link};
- let captureError=false,resolveRequest,onLoaded,now=0;const requests=[];
+ let captureError=false,resolveRequest,onLoaded,draws=0,now=0;const requests=[];
  const context={window:{},location:{hash},AbortSignal,Date:{now:()=>now},setTimeout:fn=>{now+=2000;setImmediate(fn);},requestAnimationFrame:fn=>fn(),document:{querySelector:selector=>{assert(selector in nodes,selector);return nodes[selector];},createElement:tag=>{
-  if(tag==='a')return element();assert.equal(tag,'canvas');return {getContext:()=>({drawImage(){if(captureError)throw Error('frame unavailable');}}),toDataURL:()=> 'data:image/png;base64,cG5n'};
+  if(tag==='a')return element();assert.equal(tag,'canvas');return {getContext:()=>({drawImage(){draws++;if(captureError)throw Error('frame unavailable');}}),toDataURL:()=> 'data:image/png;base64,cG5n'};
  }},OpenRotMGBackend:{fetch:async(path,options)=>{requests.push({path,options});return new Promise(resolve=>{resolveRequest=resolve;});}}};
  runInNewContext(source,context);
- context.window.OpenRotMGBugReport.start('a'.repeat(32),{addEventListener(type,fn){assert.equal(type,'loadeddata');onLoaded=fn;},shadowRoot:{querySelector:selector=>{assert.equal(selector,'canvas');return ready?{width:800,height:600}:null;}}});
- return {panel,description,image,status,submit,requests,refresh,link,load:async()=>{ready=true;onLoaded();await new Promise(setImmediate);},failCapture:()=>{captureError=true;},respond:(ok,value)=>resolveRequest({ok,status:ok?200:400,json:async()=>value}),open:async()=>{link.listeners.click({preventDefault(){}});await new Promise(setImmediate);},send:()=>form.listeners.submit({preventDefault(){}})};
+ context.window.OpenRotMGBugReport.start('a'.repeat(32),{addEventListener(type,fn){assert.equal(type,'loadeddata');onLoaded=fn;},shadowRoot:{querySelector:selector=>{assert.equal(selector,'canvas');return {width:800,height:600};}}});
+ if(ready)onLoaded();
+ return {panel,description,image,status,submit,requests,refresh,link,drawCount:()=>draws,load:async()=>{onLoaded();await new Promise(setImmediate);},failCapture:()=>{captureError=true;},respond:(ok,value)=>resolveRequest({ok,status:ok?200:400,json:async()=>value}),open:async()=>{link.listeners.click({preventDefault(){}});await new Promise(setImmediate);},send:()=>form.listeners.submit({preventDefault(){}})};
 }
 test('footer link opens one hidden form and captures the game without another disclosure',async()=>{
  const html=readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
  assert.match(html,/<section id="bug-report"[^>]* hidden>/);assert.doesNotMatch(html,/<summary>Report Bug/);
  const f=fixture();assert.equal(f.panel.hidden,true);await f.open();assert.equal(f.panel.hidden,false);assert.equal(f.link.attributes['aria-expanded'],'true');assert.equal(f.link.attributes['aria-controls'],'bug-report');assert.equal(f.submit.disabled,false);assert.match(f.image.src,/^data:image\/png/);
- const direct=fixture('#bug-report',false);await new Promise(setImmediate);assert.equal(direct.panel.hidden,false);assert.equal(direct.submit.disabled,true);
- await direct.load();assert.equal(direct.submit.disabled,false);assert.equal(direct.image.hidden,false);
+ const direct=fixture('#bug-report',false);await new Promise(setImmediate);assert.equal(direct.panel.hidden,false);assert.equal(direct.submit.disabled,true);assert.equal(direct.drawCount(),0,'a pre-load canvas must not be captured');
+ const loading=direct.load();assert.equal(direct.drawCount(),0,'startup capture must wait until loadeddata dispatch finishes');
+ await loading;assert.equal(direct.submit.disabled,false);assert.equal(direct.image.hidden,false);
 });
 test('report preserves rejected input and shows the validated GitHub receipt, not an internal ID',async()=>{
  const f=fixture();await f.open();f.description.value='First line\nReferences appreciated';let sending=f.send();assert.equal(f.requests.length,1);await f.refresh.listeners.click();await f.send();assert.equal(f.requests.length,1);
