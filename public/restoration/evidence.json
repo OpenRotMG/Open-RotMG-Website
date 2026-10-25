@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "pirate-exit-regression-d19287c": {
+      "kind": "regression",
+      "revision": "d19287c44d7b2bac88e9b132302c31be431129d9",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6395088599",
+      "method": "One regression clears a Pirate Cave through Dreadstump's death, checks queued clear credit, a Realm Portal 0x704 exit and return to the source Realm; a second checks Pirate Cave bots choose 0x704, not 0x71d. Both fail on clean 59634bd and pass here. All 207 Rust tests, formatting, warning-denied all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed.",
+      "limitations": "Exit kind only. November 2012 and July 2013 YouTube auto-thumbnails show the Realm Portal panel; the build number is not visible and frames are thumbnails, not decoded video. Static map layout, populations, AI, loot and reward rates are unchanged and remain unverified.",
+      "checks": ["dungeons:pirate-cave"]
+    },
+    "pirate-exit-native-d19287c": {
+      "kind": "native",
+      "revision": "d19287c44d7b2bac88e9b132302c31be431129d9",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6395088599",
+      "method": "Native before 59634bd and after d19287c use the same case, seed 12351, client be57de7 and Ruffle 0.7.1-openrotmg.15. Each passed three assertions with empty cleanup errors: a legal max-stat Knight kills Dreadstump with ordinary sword fire, Pirate Cave credit rises by one, and he walks onto the exit. Before shows Portal to Nexus; after shows Realm Portal.",
+      "limitations": "Prepared Knight with Archon Sword, Acropolis Armor and Ring of Exalted Health, starting four tiles south of Dreadstump; not earned traversal, a full cave clear or natural roster acceptance. One stationary case and ten load, disk or deadline runner failures are retained and not credited. Statuses are unchanged.",
+      "checks": ["dungeons:pirate-cave"]
+    },
     "sprite-defense-source-c6b4925": {
       "kind": "source",
       "revision": "c6b4925d5eaf170ff74a920b3058040ceb821a05",
@@ -2461,7 +2479,7 @@
     "realm:leviathan": {"status":"not-run","evidence":[]},
     "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f"]},
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869"]},
-    "dungeons:pirate-cave": {"status":"not-run","evidence":[]},
+    "dungeons:pirate-cave": {"status":"not-run","evidence":["pirate-exit-regression-d19287c","pirate-exit-native-d19287c"]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},

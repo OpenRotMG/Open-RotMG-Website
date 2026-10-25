@@ -20,6 +20,17 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
+  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.deepEqual(evidence.results[roster],{status:'not-run',evidence:[]});
+  for(const ref of ['pirate-exit-regression-d19287c','pirate-exit-native-d19287c']){
+    assert.equal(evidence.sources[ref].revision,'d19287c44d7b2bac88e9b132302c31be431129d9');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  const feature=data.features.find(f=>f.id===id);assert.equal(accepted(feature,evidence),false);assert.equal(feature.audit.historical,'partial');
+  assert(feature.audit.sources.some(s=>s.url==='https://www.youtube.com/watch?v=JMZXtUNZ96s'&&s.label.includes('exact build unverified')));
+  assert.match(evidence.sources['pirate-exit-native-d19287c'].limitations,/not earned traversal/);
+});
+
 test('Hermit loot regressions do not certify full native or historical acceptance',()=>{
   const data=catalogue(),evidence=ledger(),id='realm:hermit-god',ref='hermit-loot-regression-22ecae7';
   validateEvidence(data,evidence);

@@ -2774,15 +2774,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Coastal entrance, traversable cave populated by cave pirates, Dreadstump, rewards, clear credit and exit. Selected Dreadstump is 800 HP/3 DEF; original layout distribution, entrance/drop rates and reward policy are unresolved.",
+        "expected": "Coastal entrance, traversable cave populated by cave pirates, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF; original layout distribution, entrance/drop rates and reward policy are unresolved.",
         "differences": [],
         "unknowns": [
-          "Original layout and population distribution, boss timing, entrance probability and reward eligibility/rates."
+          "Original layout and population distribution, boss timing, entrance probability and reward eligibility/rates. Period minimaps differ between runs, so the static map is a community comparator layout, not a recovered original."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=JMZXtUNZ96s",
+            "label": "TwoYetis Pirate Cave guide, upload metadata 2012-11-06: Realm Portal at Dreadstump's death; exact build unverified"
           }
         ],
         "checks": [
