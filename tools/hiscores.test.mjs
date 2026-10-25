@@ -17,6 +17,10 @@ test('star count uses the same stable ranks and rejects missing or invalid score
  for(const stars of [undefined,-1,1.5,NaN])assert.throws(()=>ranked([{account:1,name:'Bad',stars}],'stars'),/Malformed/);
  const index=await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8');assert.match(index,/href="\?board=stars">Stars<\/a>/);
 });
+test('quests completed board is linked and ranks the server quest total',async()=>{
+ assert.deepEqual(ranked([{account:1,name:'Orion',quests:2},{account:2,name:'Lyra',quests:9}],'quests').map(p=>[p.account,p.rank]),[[2,1],[1,2]]);
+ assert.match(await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8'),/href="\?board=quests">Quests completed<\/a>/);
+});
 test('one account per row, stable competition ties and no mutating sort',()=>{
  const players=[{account:3,name:'Third',base_fame:10},{account:2,name:'Second',base_fame:10},{account:1,name:'First',base_fame:20}];
  assert.deepEqual(ranked(players,'base_fame').map(p=>[p.account,p.rank]),[[1,1],[2,2],[3,2]]);

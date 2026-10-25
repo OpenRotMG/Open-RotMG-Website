@@ -1239,7 +1239,8 @@
         "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
         "differences": [
           "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495",
-          "Generated Cherry Tree sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507"
+          "Generated Cherry Tree sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
+          "PR544 binds ordinary Ents to 19/24/21 registered groves in the image-guided classic World1/2/3 reconstructions instead of adding unrelated random groves. Hash-pinned full-site protection preserves source cells; invalid bindings fail instead of choosing random replacements. The FSoD random 17..24 path remains. These are engineered bindings, not recovered original actor coordinates/configuration; historical acceptance is unchanged. https://github.com/OpenRotMG/Open-RotMG-Server/pull/544"
         ],
         "unknowns": [
           "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
@@ -1307,7 +1308,8 @@
         "historical": "partial",
         "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Target timers, branches and rewards remain unresolved.",
         "differences": [
-          "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464"
+          "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
+          "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551"
         ],
         "unknowns": [
           "Target timeout-release/cleanup policy, wave branches and phase timings.",
@@ -1416,7 +1418,8 @@
           "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
           "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504",
           "Castle chest markers now leave input ground, objects and configuration unchanged instead of clearing a Rock tile. Placement checks native chest walkability while retaining whole-site guards and boss-floor clearing. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/505",
-          "Bridge and destructible-wall markers now retain native objects and configuration while changing ground, with walls spawned separately. Those markers require native walkability and eligible unowned scenery without relaxing whole-site guards. Boss and chest policies stay unchanged; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/506"
+          "Bridge and destructible-wall markers now retain native objects and configuration while changing ground, with walls spawned separately. Those markers require native walkability and eligible unowned scenery without relaxing whole-site guards. Boss and chest policies stay unchanged; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/506",
+          "Castle boss markers now retain all five input cell fields and native scenery instead of forcing Rock and clearing objects/configuration. Native boss walkability and eligible unowned scenery are required without relaxing whole-site guards. This supersedes earlier boss-floor clearing; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/542"
         ],
         "unknowns": [
           "Target attack-mode predicates, timing and alternative ring behavior.",
@@ -2748,12 +2751,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Include Sprite Child lifecycle, not constructs; original child counts/regeneration/cleanup remain qualified.",
+        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified.",
         "differences": [
-          "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337"
+          "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
+          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553"
         ],
         "unknowns": [
-          "Original child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
+          "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
         ],
         "sources": [
           {
@@ -2766,7 +2770,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
-            "label": "2013 community Sprite God: predictive fan and boomerang, not official server code"
+            "label": "2013 community Sprite God/Child: predictive fan and boomerang, catch-up yielding to wandering; not official server code"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sprite%20Child",
+            "label": "Sprite Child page last modified January 2013: wanders without pursuing players and stays close to Sprite Gods"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/how-to-get-healed-by-necromancer.html",
+            "label": "May 2012 healing guide: Sprite Gods with children form useful clustered groups"
           }
         ]
       }
@@ -2896,6 +2908,14 @@
           {
             "url": "https://realmofthemadblogger.blogspot.com/2013/06/3-treasure-room-snake-pit.html",
             "label": "June 2013 room description, later corroboration only"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=o90GtXTf9Mw&t=720",
+            "label": "2015 classic guide: grey floor rails, button alcove and narrowed passage; not target-build authentication"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/maps/wmap%27s/snakepit%20treasure%20test.wmap",
+            "label": "Inactive later treasure-test template: walkable rails and wooden button platform, not the embedded production map"
           },
           {
             "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
@@ -4012,10 +4032,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Distinguish bag ownership from Soulbound item restrictions. Exact historical tables/rates/thresholds/lifetimes remain unresolved reconstruction policies.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction.",
         "differences": [],
         "unknowns": [
-          "Original drops, probabilities, participation thresholds, attribution and expiry.",
+          "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
           "When private bags become public, who can see them, and what survives reconnecting."
         ],
         "sources": [
@@ -4692,12 +4712,14 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Original death, level-20, taunt and class-unlock announcements remain unresolved.",
+        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
         "differences": [
-          "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525"
+          "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
+          "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540",
+          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553"
         ],
         "unknowns": [
-          "Original Nexus boundary metric, announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original Nexus boundary metric, death-notice audience boundaries and killer grammar, other announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
         ],
         "sources": [
           {
@@ -4707,6 +4729,10 @@
           {
             "url": "https://web.archive.org/web/20120509232008/http://forums.wildshadow.com/node/2587",
             "label": "April 2011 Build 114: Nexus chat local to 15 squares; /yell global in Nexus"
+          },
+          {
+            "url": "https://media.gdcvault.com/gdceurope2012/Presentations/Social%20%26%20Online%20Games%20Summit/Ethan_Levy_Social%26Online_GameDesignIs.pdf#page=54",
+            "label": "August 2012 GDC Europe screenshot: yellow name, level and killer death notices below level 20"
           }
         ]
       }
