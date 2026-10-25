@@ -1925,7 +1925,8 @@
         "historical": "known-differences",
         "expected": "Lord of the Lost Lands was introduced in build 121.0.0; build 122.0.1 fixed kill awards and increased health. The encounter includes activation, protection, combatants and rewards.",
         "differences": [
-          "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. Full native encounter completion and original reward-rate fidelity are not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+          "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. Full native encounter completion and original reward-rate fidelity are not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "PR601 adds the same guard to the Lord's transparent native cell. This is a local safety invariant, not authenticated original placement; Kithio's event registry comments the Lord out. Native checks are prepared, not earned encounters: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
         ],
         "unknowns": [
           "Original phase timings, health, spawning and reward probabilities."
@@ -2007,7 +2008,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Cube God, Overseers, Defenders and Blasters with coordinated movement, attacks, replenishment and rewards; exact target policy remains unresolved.",
-        "differences": [],
+        "differences": [
+          "PR601 rechecks the Cube God's untouched birth cell before delayed admission. Blockers and live or owned occupants postpone admission without clearing native terrain or scenery. Prepared checks are not original spawn-selection proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
+        ],
         "unknowns": [
           "Target spawn selection, choreography, counts and reward distribution."
         ],
