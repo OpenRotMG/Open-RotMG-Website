@@ -1440,7 +1440,8 @@
         "historical": "partial",
         "expected": "Connected Lord→Egg→Reborn encounter with Birdman/Birdman Chief, egg shielding and distinct reborn attacks; intermediate forms are not separate completed features.",
         "differences": [
-          "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464"
+          "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
+          "Pyres now create one public treasure chest at their existing center. GPL-based item rolls use a 5-7 success ceiling and can be empty; the older comparator fills its chest differently. Original contents, order and RNG remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/517"
         ],
         "unknowns": [
           "Target egg shielding: older comparator1500ms versus later2000ms.",
