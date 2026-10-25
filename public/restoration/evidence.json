@@ -1865,6 +1865,28 @@
         "dungeons:sprite-world:floor-and-native-variants"
       ]
     },
+    "limon-arena-regression-fa2e550": {
+      "kind": "regression",
+      "revision": "fa2e5500543792de0c84816631846d4347b57272",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/519#issuecomment-6393699979",
+      "method": "Server PR519 tested head. The new arena regression failed on f47a2b5 at seed 0 and passes for 256 seeds: a full 31x31 floor around Limon and a void ring crossed only by the one two-tile bridge. The full 198-test Rust suite, formatting and strict all-target Clippy passed.",
+      "limitations": "The 30-tile size comes from a later community map, not a recovered generator. Does not cover Limon AI, turret timing or rewards.",
+      "checks": [
+        "dungeons:sprite-world"
+      ]
+    },
+    "limon-arena-native-fa2e550": {
+      "kind": "native",
+      "revision": "fa2e5500543792de0c84816631846d4347b57272",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/519#issuecomment-6393699979",
+      "method": "Same case on clean base f47a2b5 and the tested head, client be57de7 with Ruffle .15, Sprite World template seed 509: a prepared Warrior spawned 6 tiles south of Limon. Before, the minimap shows a small boss platform with void behind the player; after, a much wider arena. Both runs passed with clean cleanup.",
+      "limitations": "Prepared placement, not an earned entrance or boss clear. Layouts differ between runs because the generator changed. An earlier after-run failed while building on a full disk and is not counted.",
+      "checks": [
+        "dungeons:sprite-world"
+      ]
+    },
     "void-background-regression-2e116c1": {
       "kind": "regression",
       "revision": "2e116c135616e9ea7f3a18ee9d4eb57331d155c3",
@@ -2378,7 +2400,7 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f"]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f"]},
     "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
