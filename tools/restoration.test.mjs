@@ -84,8 +84,16 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const cover=['snake-cover-regression-3778af2','snake-cover-native-3778af2'],layout=['snake-layout-regression-6f35dab','snake-layout-native-6f35dab'];
   const room=['snake-boss-room-source-684eff6','snake-boss-room-regression-684eff6','snake-boss-room-native-b84d963'];
   const treasure=['source','regression','native'].map(kind=>'snake-treasure-layout-'+kind+'-daf0c68');
-  assert.deepEqual(result.evidence,[...cover,...layout,...room,...treasure]);
-  for(const ref of [...room,...treasure])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
+  const neck=['snake-necks-source-e016a63','snake-necks-regression-e016a63','snake-necks-native-e016a63'];
+  assert.deepEqual(result.evidence,[...cover,...layout,...room,...treasure,...neck]);
+  for(const ref of [...room,...treasure,...neck])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
+  assert.equal(evidence.results['dungeons:snake-pit'].status,'not-run');
+  assert.match(evidence.sources[neck[0]].limitations,/not an authenticated exact length formula/);
+  assert.match(evidence.sources[neck[1]].limitations,/Not a full224-test-suite pass/);
+  assert.equal(evidence.sources[neck[2]].revision,'e016a633d9abafcbdc2e8ed182a8a72e8d1b2840');
+  assert.match(evidence.sources[neck[2]].limitations,/not earned entry, actual excavation\/traversal, full clear/);
+  const sourceOnly=ledger();sourceOnly.results[id]={status:'passed',evidence:[neck[0]]};
+  assert.throws(()=>validateEvidence(data,sourceOnly),/without test\/native evidence/);
   for(const ref of treasure){
     assert.equal(evidence.sources[ref].revision,'daf0c68c870940983cde9dd334acd25be1731e3b');
     assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));

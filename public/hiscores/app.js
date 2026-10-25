@@ -2,7 +2,8 @@ export const boards = {
   stars: {title: 'Stars', description: 'Class stars earned from each class’s best fame.'},
   collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
   total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'},
-  base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'}
+  base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'},
+  quests: {title: 'Quests completed', description: 'Assigned quests completed by all of an account’s characters, alive or dead.'}
 };
 export function ranked(players, board) {
   if (!Object.hasOwn(boards, board)) throw new Error('Unknown hiscore category');
