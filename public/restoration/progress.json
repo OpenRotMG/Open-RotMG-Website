@@ -2979,7 +2979,8 @@
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
           "Server PR363 returns Limon to her home point at speed 1.4 for the box phase and places the element markers at radii 6 and 10 instead of 9.5 and 14. This follows the later FSoD community server, not recovered 123.5.1 timing or geometry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363",
-          "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519"
+          "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519",
+          "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
           "Original terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
