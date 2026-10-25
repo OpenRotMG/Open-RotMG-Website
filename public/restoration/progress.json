@@ -1382,7 +1382,8 @@
         "differences": [
           "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
           "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
-          "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504"
+          "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504",
+          "Castle chest markers now leave input ground, objects and configuration unchanged instead of clearing a Rock tile. Placement checks native chest walkability while retaining whole-site guards and boss-floor clearing. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/505"
         ],
         "unknowns": [
           "Target attack-mode predicates, timing and alternative ring behavior.",
