@@ -1249,7 +1249,8 @@
         "expected": "A ruined-site Lich encounter with damage evaluation, Phylactery Bearer and Haunted Spirit branches, support and vulnerability windows, and Actual Lich. The mummy family includes Mummy, Mummy King and Mummy Pharaoh with distinct projectiles.",
         "differences": [
           "Community requests 4-6 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
-          "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Destructible-wall markers still replace native scenery; original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510"
+          "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510",
+          "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
