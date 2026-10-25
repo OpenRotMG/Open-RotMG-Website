@@ -1279,7 +1279,8 @@
         "differences": [
           "Community requests 4-6 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510",
-          "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512"
+          "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512",
+        "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
