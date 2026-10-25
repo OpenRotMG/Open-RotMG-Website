@@ -1,6 +1,39 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "hermit-leash-source-cf5976f": {
+      "kind": "source",
+      "revision": "cf5976f54236c6d6c4158bdd12d398aee94990ff",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/cf5976f54236c6d6c4158bdd12d398aee94990ff",
+      "method": "Hermit alone is restricted to actual dark-water188 cells, including blocking the generic land-walkability bypass in collision movement. Its active-state home-return threshold changes5to3. The April2012 WildShadow guide lists Setpiece Range3; pinned modified7 uses5 and FSoD has differing wander policy. Selected definitions and readable7 server-position handling were checked, followed by the actual StayCloseToSpawn engine and decoded SP_Hermit prototype.",
+      "limitations": "Qualified engineering correction, not original-AI certification. Tile-index painting and an off-centre home make a continuous-radius-only bound insufficient. Geometry, other aquatic movement, speeds, phases, stats, drops and earned admission remain unchanged.",
+      "checks": [
+        "realm:hermit-god"
+      ]
+    },
+    "hermit-leash-regression-cf5976f": {
+      "kind": "regression",
+      "revision": "cf5976f54236c6d6c4158bdd12d398aee94990ff",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/558#issuecomment-6398913625",
+      "method": "Clean integration4229ad73babac31d48e3fc0fb785a9feb88fc40c: 231 release Rust tests, formatting and warning-denied all-target Clippy passed. hermit_attack_leash_fits_the_central_dark_water_pool checks64angles at six radii in both active stages, unchanged speed/targetless behavior, and actual colliding movement over360outward headings times80steps per stage. Every reached tile must be dark water; other aquatic kinds retain land/deep movement.",
+      "limitations": "An initial baseline regression failed at3.2tiles; the radius-only candidate then failed its geometric pool assumption at190degrees. Final verification executes collision rather than weakening that requirement. Plain-land generated fixture and controlled outward intents, not native gameplay or historical acceptance. An independent disconnect-reason race encountered in full gates is fixed by inherited upstream PR552, with its strict test, limits and deadlines unchanged; this feature ships no unrelated server.rs edits.",
+      "checks": [
+        "realm:hermit-god"
+      ]
+    },
+    "hermit-leash-context-native-cf5976f": {
+      "kind": "native",
+      "revision": "cf5976f54236c6d6c4158bdd12d398aee94990ff",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/558#issuecomment-6398913625",
+      "method": "Lake context only: before/after local native cases each keep the same living prepared Priest, consume an Effusion and use a Holy Protection Tome while the original55000HP Hermit remains in its initial invulnerable cycle. Three observed assertions per run and clean owned-child cleanup. Public figures label the configured range and fixture tile mask as diagrams, not observed trajectories.",
+      "limitations": "Before sourceafc7445, after local snapshot92f6d2cd6cd0e381ebe388c4a2877da1201fbe9f; exact ocean, geometry and collision source matches final tested integration4229ad73babac31d48e3fc0fb785a9feb88fc40c, not a whole-final-main native signoff. Separate Realms, prepared level/gear/position. A disclosed temporary constructor patch retained the normally born initial encounter instead of reserving it; it was never shipped. Not earned event admission, active Hermit movement, tentacle defeat, boss clear, matched-layout performance or production evidence. An optional assisted fight failed when helpers died; earlier ENOSPC/CDP failures remain failures. Active movement verification is the Rust collision regression, not these frames.",
+      "checks": [
+        "realm:hermit-god"
+      ]
+    },
     "sprite-child-idle-regression-277bc65": {
       "kind": "regression",
       "revision": "277bc65fdeb8ea3360e8f5d9d3e50642a3829160",
@@ -2625,7 +2658,7 @@
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d"]},
+    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
