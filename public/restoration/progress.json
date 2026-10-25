@@ -3180,11 +3180,15 @@
         "expected": "Key and earned Sphinx entry, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
         "differences": [
           "The original map generator was not recovered. Room geometry, pack distribution and loot probabilities remain reconstructed; footage-informed floor bands and pillar offsets are not a tile-exact official template.",
-          "Nut's peer healing and phase timing follow source-qualified community behavior, not a certified original server rate."
+          "Nut's peer healing and phase timing follow source-qualified community behavior, not a certified original server rate.",
+          "Completion credit is queued at the final boss death for a nearby living contributor. An edited April 2012 archived article instead describes Tunnel Rat credit through the ordinary Realm Portal without attending the boss death; its archive date does not authenticate every sentence for 123.5.1: https://github.com/OpenRotMG/Open-RotMG-Server/pull/328#issuecomment-6360068351",
+          "Normal and yellow worshipper pulses can restore the Sarcophagus's full 15,000 HP each second. A May 2013 forum-wiki capture labelled 123.0.0 describes 200 HP per second, without saying whether that is per priest or in total: https://github.com/OpenRotMG/Open-RotMG-Server/pull/328#issuecomment-6360068351",
+          "In his rage phase Geb only holds position or backs away. The May 2013 capture also describes him charging forward about every eight seconds while a player is in range, which is not implemented: https://github.com/OpenRotMG/Open-RotMG-Server/pull/328#issuecomment-6360068351"
         ],
         "unknowns": [
           "Exact target geometry, random distributions and differences between period healing/timing accounts.",
-          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open."
+          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open.",
+          "Objective count: the September 2012 guide's 3 to 5 objectives plus a guaranteed treasure room (implemented) conflicts with the May 2013 capture's five event rooms of 1 to 5 objectives."
         ],
         "sources": [
           {
@@ -3202,6 +3206,18 @@
           {
             "url": "https://archive.org/details/youtube-Igu8lFDRHg0",
             "label": "Cubes169 archived Tomb gameplay, visible build 123.4.4, earlier than selected 123.5.1"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/",
+            "label": "April 2012 blog archive: Tunnel Rat credit through the Realm Portal; edited and partly outdated"
+          },
+          {
+            "url": "https://web.archive.org/web/20130502034124/http://forums.wildshadow.com/wiki/realm-mad-god/tomb-ancients",
+            "label": "May 2013 Wild Shadow forum-wiki capture labelled 123.0.0: Sarcophagus healing, event rooms and Geb charge"
+          },
+          {
+            "url": "https://geegamers.blogspot.com/2012/09/tomb-of-ancients-rotmg-guide-english.html",
+            "label": "September 2012 Tomb guide: 3 to 5 objectives plus a treasure room"
           }
         ],
         "checks": [

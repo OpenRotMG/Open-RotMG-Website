@@ -548,7 +548,7 @@
       "kind": "regression",
       "revision": "4cbe7bc884c13304aadc5e9cde4b985ee8672bdc",
       "date": "2026-10-23",
-      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/4cbe7bc884c13304aadc5e9cde4b985ee8672bdc/src/dungeon/abyss.rs",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/4cbe7bc884c13304aadc5e9cde4b985ee8672bdc/src/dungeon/abyss.rs",
       "method": "The entrance guard checks every cell of 128 generated start rooms for enemy objects and confirms that Cowardice and the ordinary spawn remain inside the start room. No initial enemy was found. This is cfg(test)-only coverage; production generation is unchanged.",
       "limitations": "Not the reported instance, a permanent runtime sanctuary, an earned entry or full-dungeon acceptance. The report captured Nexus. The comparator leaves the start room empty, while a mixed-era guide warns of nearby demons chasing into it. Original entry safety rules and generation distributions remain unverified. Native entrance context is not a pursuit demonstration. Package optimization 0 was used for the test build; assertions were unchanged.",
       "checks": ["dungeons:abyss-of-demons"]
@@ -612,7 +612,7 @@
       "kind": "regression",
       "revision": "22ecae71dfa23f7108ba7597a8d0e8d9913422e4",
       "date": "2026-10-23",
-      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/22ecae71dfa23f7108ba7597a8d0e8d9913422e4/src/world/hermit_loot_tests.rs",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/22ecae71dfa23f7108ba7597a8d0e8d9913422e4/src/world/hermit_loot_tests.rs",
       "method": "Final integration passed all 344 Rust, 74 Node and 42 Python tests, warning-denied all-target Clippy and formatting. Initial head 29898ed passed 337 Rust tests with byte-identical Hermit tables, allocator, reward position and maintained tests. Seed 0 reproduced no bags in the old World reward path. Regressions cover 128 seeded solo terminal deaths with exactly one private Vitality and Dexterity potion, unchanged reachable Trench portal requests, independent rare-item rolls, shared group minima, one-damage eligibility and zero-damage/departing-player exclusions.",
       "limitations": "Constructed World fixtures, not a full native Hermit loot clear or an earned Realm journey. Native lake-context screenshots are not loot acceptance. The modified-7 comparator supplies allocation semantics; period documentation supports soulbound loot but does not establish original numeric eligibility, pools, rates or minima. No functional result is promoted to passed.",
       "checks": ["realm:hermit-god"]
@@ -999,7 +999,7 @@
       "kind": "source",
       "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
       "date": "2026-10-23",
-      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
       "method": "The authoritative trade deadline uses the existing pause-aware Clock for a full 3000ms after creation and every offer change. Exact masks, participants, revisions, pending commits, terms and atomic settlement remain authoritative. Bots retain their tick minimum and also wait for an elapsed deadline, restarted after acknowledged own changes and received peer changes.",
       "limitations": "Source inspection does not establish gameplay acceptance or the original server's delay. Selected 123.5.1 SWF and readable modified-7 TradeButton agree on getTimer and 2999ms, not an official server policy. Controller Instants are process-local, omitted from serialized views and market memory; recorded views cannot reconstruct them.",
       "checks": [
@@ -1010,7 +1010,7 @@
       "kind": "regression",
       "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
       "date": "2026-10-23",
-      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/world/trade.rs",
       "method": "Four maintained World/Store tests cover a stopped-tick world, a pause longer than three seconds that cannot fund settling, the exact 3000ms reset, cleared acceptances, stale masks, pending-commit exclusion and owner/slot/revision persistence. Advancing only the simulation timestamp does not fund the elapsed guard. The canonical-profile suite at this revision passed 560 tests with one existing ignored test, using two test threads.",
       "limitations": "This reproduces the clock failure class, not the reporter's ephemeral instance or missing acceptance packet. It does not certify the original server's delay. Earlier browser/setup failures and broader failed attempts are retained separately, not counted as passes.",
       "checks": [
@@ -1021,7 +1021,7 @@
       "kind": "regression",
       "revision": "b45c2810a1509acae17f72b94c508b22c6dcd529",
       "date": "2026-10-23",
-      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/bots/runtime/market_consent_tests.rs",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b45c2810a1509acae17f72b94c508b22c6dcd529/src/bots/runtime/market_consent_tests.rs",
       "method": "Four controller/World/Store ordering cases and four gift/revocation cases passed. A negative counterfactual forces only the local tick predicate before elapsed readiness, observes no acceptance, restores the original predicate and then waits for the real latch. Second-installment, executor-stall, pending-exchange, revocation and replay checks keep their original limits. Paid and gift controllers retain the tick minimum and start their own elapsed minimum after acknowledged offer changes.",
       "limitations": "Fixture-level adapter integration is not ordinary actor culture, two physical players, live-server QA or a replay of serialized views. Instants are process-local and are not reconstructed from exported state. Historical trading restrictions and delay policy remain partial.",
       "checks": [
@@ -1064,7 +1064,7 @@
       "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319796833",
       "method": "Separate genuinely normal original Guest2/Guest3 profiles/accounts2/3/characters2/3 natively exchanged two owned Health Potions for a backpack spell. One new commit advanced revisions2/1→3/2 with exact multiset conservation. Both ordinary reload→Play→same Wizard selector→Play reconnects visibly retained nondefault items; live owner/slot/revision state and SQLite matched before/after reconnect and final close. Original gameplay server HTTP bodies matched during reconnect; owned resources closed.",
       "limitations": "Same-profile guest durability, not prepared-actor reconnect or credential login. Public native-chat teleport used normal eligibility/cooldown, not dev mutation. Earlier separate A Nexus transfer FAILED ACK64 and stays retained; no all-world success or causal fix is implied. No source/harness/guard/security changes.",
-      "checks": ["social:trade-with-players"]
+      "checks": ["social:trade-with-players", "access:guest-accounts"]
     },
     "keybinding-conflict-persistence-reset-native-eb85988": {
       "kind": "native",
@@ -1522,7 +1522,8 @@
       "method": "All 66 Rust tests passed with the configured test profile and serial execution, plus 2 Python script tests, 15 Node tests, formatting and strict all-target Clippy. The shared 500-ms Wizard cooldown now expires after unpaused elapsed time without physics steps; immediate repeats, mana preservation and explicit global-pause exclusion remain checked.",
       "limitations": "Shared cooldown-gate regression, not complete Wizard spell/class acceptance. Item values, global physics timing and authority guards are unchanged. The unoptimized full-suite stack-overflow attempt is retained but not counted; targeted red/green also ran with matching optimization 0.",
       "checks": [
-        "heroes:wizard"
+        "heroes:wizard",
+        "gear:ability-activation-contract"
       ]
     },
     "ability-cooldown-native-ef5686e": {
@@ -1533,7 +1534,8 @@
       "method": "Accepted native-before-2 rejected a second 6500-ms Cloak of Endless Twilight after a 7000-ms active wait: simulation time was 4550 against deadline 6900. Native-after correctly projected readiness at 4650 and accepted both casts with zero cooldown rejections. Both retained the same living Rogue within each run, finite mana and empty cleanup errors; client f3c7b49/runtime 0.7.1-openrotmg.14. Public PNG bytes were verified.",
       "limitations": "Prepared Nexus fixture with identical private 100-ms actor-tick fault injection, removed from shipping source. Not a minimum-boundary timing test, real-world performance benchmark, earned unlock, multiplayer or complete Rogue acceptance. The report lacks class/item and per-cast history. Queueing, mana/status delays and other lag effects remain outside this fix; deployment is unverified.",
       "checks": [
-        "heroes:rogue"
+        "heroes:rogue",
+        "gear:ability-activation-contract"
       ]
     },
     "native-dex-regression-c531740": {
@@ -1793,6 +1795,449 @@
         "realm:enemy-pursuit-and-collision",
         "realm:encounter-clock-semantics"
       ]
+    },
+    "udl-room-groups-regression-a072dbd": {
+      "kind": "regression",
+      "revision": "a072dbdb1fe122dc7f617fd1e7d3fe7d34e9ec92",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/256",
+      "method": "Server PR256. New regression lair_rooms_hold_one_enemy_group fails on the previous generator (seed 0, room 3 mixes seven kinds from four groups) and passes over 64 seeds while all fifteen lair kinds still appear. cargo test --bin openrotmg: 917 passed, 0 failed, 3 ignored; clippy and fmt clean. A running-server inspection of one prepared lair found 32 populated rooms, each holding a single group.",
+      "limitations": "The PR names no revision; a072dbd is its only commit. Groups follow the server's earlier FSoD-derived map, not a recovered original generator. The native attempt failed because the client never rendered character select, so there is no native evidence.",
+      "checks": [
+        "dungeons:undead-lair",
+        "dungeons:undead-lair:room-family-and-split-lifecycle"
+      ]
+    },
+    "quest-window-regression-a92ae06": {
+      "kind": "regression",
+      "revision": "a92ae06bf48ec49621e3b11e0adccefe6d51d87f",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/262#issuecomment-6283634595",
+      "method": "Server PR262. Two new quest tests fail on the previous selection (a level 20 character was offered the Scorpion Queen; a level 1 character was offered a Lich) and pass after. Full Rust suite on the combined head: 98 tests, 0 failures, 3 ignored benchmarks; fmt, strict all-target Clippy and 22 and 7 Python tests passed.",
+      "limitations": "The comment names no revision for the combined head; a92ae06 is the PR's only commit. Fixture-level selection checks, not native quest-arrow guidance, cadence or tie timing. The windows are not recovered 123.5.1 policy.",
+      "checks": [
+        "realm:find-your-next-quest"
+      ]
+    },
+    "hermit-inland-regression-ffd8a45": {
+      "kind": "regression",
+      "revision": "ffd8a452fbcc846f81a3bb5d4787ee4c9cedddad",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/266#issuecomment-6287294336",
+      "method": "Server PR266 tested head. The new regression failed before on terrain 11 (ShoreSand) and passes on all five production Realm layouts across two seeds with one Hermit, eight owned spawners and spawn/setpiece separation; a shore-only map fails explicitly. 111 Rust, 134 Python and 53 Node tests, formatting, strict all-target Clippy, release build and packaging passed locally.",
+      "limitations": "Placement only. The Mountains to MidForest range follows a modified 7.0 comparator and an April 2012 wiki location list; the original placement distribution is not recovered. No combat or reward coverage.",
+      "checks": [
+        "realm:hermit-god"
+      ]
+    },
+    "hermit-inland-native-ffd8a45": {
+      "kind": "native",
+      "revision": "ffd8a452fbcc846f81a3bb5d4787ee4c9cedddad",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/266#issuecomment-6287294336",
+      "method": "Unmodified shared native runner walked the same living prepared Knight at each generated Hermit site with no kills: before on coastal terrain 11 in FSoD2, after on inland Mountains 1 in FSoD3.",
+      "limitations": "Separate randomly selected Realms, not a same-seed comparison. Prepared stats, gear and position; not earned travel or a boss fight. An earlier 400 ms capture attempt failed and is retained.",
+      "checks": [
+        "realm:hermit-god"
+      ]
+    },
+    "sprite-platforms-regression-ce58c7f": {
+      "kind": "regression",
+      "revision": "ce58c7f746c89be46d5d10591041efbfbc7436a6",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/275#issuecomment-6302122250",
+      "method": "Server PR275 tested head. RED: the old generator failed at seed 0 with an oversized ordinary platform. GREEN over 48 seeds: deterministic replay, 7 to 11 tile platforms, two-wide bridges, separation of unlinked neighbors, connected floor and boss, and population bounds. 153 Rust, 134 Python and 53 Node tests, formatting, strict Clippy, release build and packaging passed locally.",
+      "limitations": "Dimensions follow measurements of a later community map, not a recovered generator. Does not cover push directions, trees or tiled variants.",
+      "checks": [
+        "dungeons:sprite-world",
+        "dungeons:sprite-world:floor-and-native-variants"
+      ]
+    },
+    "sprite-platforms-native-ce58c7f": {
+      "kind": "native",
+      "revision": "ce58c7f746c89be46d5d10591041efbfbc7436a6",
+      "date": "2026-10-20",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/275#issuecomment-6302122250",
+      "method": "Shared native runner on the clean base and this head with the same deployed client and case: a prepared max-stat Knight consumed a prepared Sprite World Key, entered through the normal portal UI and walked a populated dungeon. Both runs ended alive at 910 HP with zero kills.",
+      "limitations": "Server-selected layouts differ between runs. Not earned key acquisition, a boss clear or Windows parity. An earlier attempt stopped before building (Cargo missing from PATH) and is not counted.",
+      "checks": [
+        "dungeons:sprite-world",
+        "dungeons:sprite-world:floor-and-native-variants"
+      ]
+    },
+    "void-background-regression-2e116c1": {
+      "kind": "regression",
+      "revision": "2e116c135616e9ea7f3a18ee9d4eb57331d155c3",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/304#issuecomment-6329919033",
+      "method": "Server PR304 tested head. All 201 Rust tests passed; the new packet regression checks MAPINFO background 2 for Nexus and Vault and 0 for five other world templates, including packet alignment and renamed worlds. 42 Python tests, formatting, diff checks and strict all-target Clippy passed.",
+      "limitations": "Packet-level check of a qualified comparator choice, not rendered Vault, layout or fountain acceptance.",
+      "checks": [
+        "home:nexus",
+        "home:vault"
+      ]
+    },
+    "void-background-native-bde9a38": {
+      "kind": "native",
+      "revision": "bde9a380102a542c0797bb1f57022c114b7b50fc",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/304#issuecomment-6329919033",
+      "method": "Normal native Nexus shoreline movement passed before (38f3ecf, black background) and after (bde9a38, blue) on separate disposable prepared states with the same character, seed, equipment and position; both stayed alive with zero shots and kills.",
+      "limitations": "Nexus only; no native Vault walkthrough. The final head 2e116c1 differs only in two test corrections, and the production part of world.rs is byte-identical. Prepared placement, not earned progression.",
+      "checks": [
+        "home:nexus"
+      ]
+    },
+    "septavius-move-regression-a776877": {
+      "kind": "regression",
+      "revision": "a77687752fff6b2d1876c3cdabe40ec03b33772e",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/309#issuecomment-6330827053",
+      "method": "Server PR309 tested head. 204 Rust and 42 Python tests, strict all-target Clippy, formatting and diff checks passed; the maintained regression covers movement during all four attack phases and zero movement under paralysis.",
+      "limitations": "Restores the older comparator's continuous wandering, not authenticated chase, radius or timing.",
+      "checks": [
+        "dungeons:undead-lair"
+      ]
+    },
+    "septavius-move-native-a776877": {
+      "kind": "native",
+      "revision": "a77687752fff6b2d1876c3cdabe40ec03b33772e",
+      "date": "2026-10-22",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/309#issuecomment-6330827053",
+      "method": "Shared-runner cases with the same prepared native Priest, a living character, zero weapon shots and kills, and unmodified full-health enemies. Before (clean 15c1e17): 23 observations from 4.0 to 11.8 game seconds, maximum Septavius displacement 0.000 tiles. After (this head): 28 observations from 4.0 to 11.05 seconds, maximum displacement 1.082 tiles.",
+      "limitations": "Prepared boss-room scenes in independently generated worlds, located with a non-attacking Direct helper; not earned entry or a dungeon run. Failed setup attempts are excluded, not passes.",
+      "checks": [
+        "dungeons:undead-lair"
+      ]
+    },
+    "chat-colors-regression-439a741": {
+      "kind": "regression",
+      "revision": "439a74100f87b9f5878a012dc72b0f144408f459",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/16#issuecomment-6367503987",
+      "method": "Client PR16 head. The new mixed-color TextLine regression fails on the old renderer and passes with the fix, covering nested groups, continuation lines, UTF-16 prefixes and a single-format control. Full pinned CI passed 140 core, 55 renderer and 4 WGPU tests, all configured SWF regression groups and both WASM variants; the official release build and fork CI produced the same bundle checksum.",
+      "limitations": "Renderer fidelity to the AIR text-engine contract, not an authenticated original palette or every chat channel. The official build ran at c2cbb01; 439a741 only records its bundle checksum in ruffle/lock.json.",
+      "checks": [
+        "social:chat"
+      ]
+    },
+    "chat-colors-native-439a741": {
+      "kind": "native",
+      "revision": "439a74100f87b9f5878a012dc72b0f144408f459",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/16#issuecomment-6367503987",
+      "method": "Ordinary native guest chat showed an all-green message on runtime .13 and a green name with a white message body on runtime .14, which carries this patch.",
+      "limitations": "Different scenes (Tutorial before, Realm after), not a matched comparison. The final native wrapper exited 1 when an unrelated global cleanup sweep failed; that is retained as a cleanup failure, not a passing wrapper. Runtime .14 was built at c2cbb01; 439a741 only adds its bundle checksum.",
+      "checks": [
+        "social:chat"
+      ]
+    },
+    "ground-cooldown-regression-58f4a08": {
+      "kind": "regression",
+      "revision": "58f4a08439b3d39a37bafc34127ddd280d2fb35a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/373#issuecomment-6372792753",
+      "method": "Server PR373 tested head. World regressions ground_damage_waits_past_500ms_per_square and server_ground_steps_observe_the_native_strict_cooldown failed at exactly 500 ms before the fix and pass at this revision, covering separate squares, ignored human-report RNG draws and ordinary 50 ms server ground steps.",
+      "limitations": "The PR records no full-suite count. Same-square cooldown boundary only, following the selected client's Player.update rule, not recovered server policy. No tile inventory, Sinking, Push or protective-object coverage.",
+      "checks": [
+        "realm:environmental-hazards"
+      ]
+    },
+    "ground-cooldown-native-58f4a08": {
+      "kind": "native",
+      "revision": "58f4a08439b3d39a37bafc34127ddd280d2fb35a",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/373#issuecomment-6372792753",
+      "method": "Prepared native before and after runs each passed five assertions: actual World 1 loading, legal placement, source-bound positive ground damage, observed movement and accepted firing after ground damage with the same living character, without an RNG validation failure. Both used the same pinned Ruffle .13; clock, ACK, ownership and security guards were unchanged.",
+      "limitations": "Shows ordinary-client compatibility, not the 500 ms boundary or reduced damage. NPC encounters differed between runs. Prepared fixtures, not earned progression. Earlier attempts failed in browser setup before any gameplay assertion.",
+      "checks": [
+        "realm:environmental-hazards"
+      ]
+    },
+    "realm-loot-native-1fa1986": {
+      "kind": "native",
+      "revision": "1fa19863f5a73a11af4603c1cda5189081f3c068",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/350#issuecomment-6364635243",
+      "method": "Before (baseline 009109e): a native Wizard killed a full-health natural Shambling Sludge and no bag dropped; four assertions passed. After (1fa1986): six assertions passed; the same living character killed a natural Sludge, walked to its equipment bag and dragged Robe of the Acolyte (T3, 0xa5d) into inventory, advancing the inventory revision from 1 to 2. No enemy was spawned, damaged or edited by a test API. Client f4e2781, Ruffle .13; no cleanup errors.",
+      "limitations": "Prepared gear, level, stats, start position and map knowledge. Separate fresh worlds, not a matched-seed frequency test. One family only; not drop rates, multiplayer or historical acceptance.",
+      "checks": [
+        "realm:shambling-sludge"
+      ]
+    },
+    "scenery-preservation-regression-c2decb2": {
+      "kind": "regression",
+      "revision": "c2decb23b58665590903f4f17e34b544a40aef48",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/272#issuecomment-6356687268",
+      "method": "Server PR272 tested revision. 223 Rust tests, Clippy and formatting passed, and Build storage passed. Scope: passive scenery stays visible and damageable without actor simulation, timed expiry and orphan cleanup still run, and quest indexing is preserved.",
+      "limitations": "The PR names no individual tests. Its gameplay images are earlier prepared fixtures, not a native run of this revision. Not original-map fidelity.",
+      "checks": [
+        "realm:realm-generation"
+      ]
+    },
+    "classic-worlds-regression-923e502": {
+      "kind": "regression",
+      "revision": "923e5022ca3a89b71fdafea111975412efb78333",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/334#issuecomment-6357993588",
+      "method": "Server PR334 tested revision (tree e48c5fc). 295 Rust tests, Clippy and formatting passed; the unchanged script suites passed 42 Python and 73 Node tests. A focused test reproduced a Hermit corner regression before its fix.",
+      "limitations": "Engineering reconstructions, not authenticated original maps; hidden fields, registration, provenance and rights are unverified. Worlds 4 to 13 are incomplete.",
+      "checks": [
+        "realm:realm-generation",
+        "realm:map-world-01",
+        "realm:map-world-02",
+        "realm:map-world-03"
+      ]
+    },
+    "classic-worlds-native-f27ecee": {
+      "kind": "native",
+      "revision": "f27ecee45c984d7d28fb953f78c59e6977e8a459",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/334#issuecomment-6357993588",
+      "method": "Prepared native arrival, movement and normal weapon fire passed on each of the three reconstructed World 1 to 3 maps.",
+      "limitations": "Prepared smoke runs at f27ecee, before the later Hermit admission fix, which leaves map data unchanged; not post-fix native runs, earned progression or map-identity acceptance.",
+      "checks": [
+        "realm:realm-generation",
+        "realm:map-world-01",
+        "realm:map-world-02",
+        "realm:map-world-03"
+      ]
+    },
+    "realm-completion-regression-a972cb3": {
+      "kind": "regression",
+      "revision": "a972cb349d7bf970568f64a84b461b4d4d830682",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/380#issuecomment-6374736618",
+      "method": "Server PR380 exact head. Full Rust suite: 649 passed, 0 failed, 1 pre-existing ignored campaign, including four new Realm-completion regressions; real-World reward tests deny foreign pickup, commit through SQLite, then reload and re-enter the same living character with the item. Strict Clippy, formatting, release build, 150 Node and 150 Python tests passed. The merged-head Deploy repeated the 649-pass suite.",
+      "limitations": "Engineering regressions. The 25% trigger and lifetime caps are an approved operational reconstruction, not 123.5.1 probability. No native Lost Lands, Ship, Hermit or finale clear. realm_completion_tests.rs is absent on current main.",
+      "checks": [
+        "realm:lord-of-the-lost-lands",
+        "realm:ghost-ship",
+        "realm:event-admission",
+        "realm:realm-closure"
+      ]
+    },
+    "realm-welcome-native-9051115": {
+      "kind": "native",
+      "revision": "9051115474b99d7ae3127d3d9339fa015764347c",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/380#issuecomment-6375408857",
+      "method": "Canonical native run on clean merged server 9051115 with deployed client 1c38acb and Ruffle .14: normal two-Realm startup with twenty reserved event roots, prepared Realm entry, a visible Oryx welcome and an unchanged living identity; owned exits observed with no cleanup errors.",
+      "limitations": "Prepared Wizard; startup and welcome only. Not an earned event, Lost Lands, Ship, Hermit or Chamber journey. A separate bounded Chamber attempt failed its SHOOT acknowledgement guard and remains failed.",
+      "checks": [
+        "realm:event-admission",
+        "realm:realm-closure"
+      ]
+    },
+    "sphinx-star-regression-8ec141d": {
+      "kind": "regression",
+      "revision": "8ec141d1b423d4b63a5f3d8cc47ed85b19c7b384",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/451#issuecomment-6381449113",
+      "method": "Server PR451 integration head. An actual World-placement regression checks Sand Tile membership across all 81x81 cells and the 24 walls; it fails on the old diamond at local tile (40,30) and passes with the 133-cell star. Formatting and all 113 Rust tests passed.",
+      "limitations": "Follows a GPL community stencil that Trapped shares by lineage, not recovered 123.5.1 map data. Outer-floor generation and original placement are unverified.",
+      "checks": [
+        "realm:grand-sphinx"
+      ]
+    },
+    "sphinx-floor-regression-bb1e9bb": {
+      "kind": "regression",
+      "revision": "bb1e9bb9aa8bd87f63df7d0d2c4ad1d00a05d666",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/493#issuecomment-6387422746",
+      "method": "Server PR493 head. RED rejected seed 0 at local (37,4); GREEN checks 16 fixed-seed floor masks, dimensions, boss and eight subsequent RNG values, and the placed-World test distinguishes Gold Sand from BlueGrass underlay with all 24 walls. Formatting, four focused tests and one full all-targets run (170/170) passed.",
+      "limitations": "Feature-head coverage, not a combined-main suite. Follows the community 40.5 radius parameter; f32 and RNG adaptations are not C# parity, and the original outer floor is unverified.",
+      "checks": [
+        "realm:grand-sphinx"
+      ]
+    },
+    "quest-site-counts-regression-52da19c": {
+      "kind": "regression",
+      "revision": "52da19c13805ad378ad56036be5b245dc6e18548",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/464#issuecomment-6382760803",
+      "method": "Server PR464 head. The focused regression passes on all six published layouts, including explicit 24/6/14/0/0 factory requests, actual root identities, direct cycle closure with both optional families absent, and independent followers. The remaining 143 Rust tests passed separately at the same head (144 distinct tests).",
+      "limitations": "Community ranges (4 to 6 Lich, 8 to 14 Ghost King, 0 to 4 Phoenix and Oasis sites), not authenticated 123.5.1 densities; the allocator fulfils each request or errors where the reference may skip. Controlled boundary placement, not sampled maxima or completed fights.",
+      "checks": [
+        "realm:lich",
+        "realm:ghost-king",
+        "realm:phoenix-lord",
+        "realm:oasis-giant"
+      ]
+    },
+    "hero-site-counts-regression-50cd0fc": {
+      "kind": "regression",
+      "revision": "50cd0fc64a62d4c19fde48f5fe35b11e56c692bf",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/471#issuecomment-6384051340",
+      "method": "Server PR471 head. Compiled RED found three Cyclops Gods where the range requires 4 to 6. Controlled factories exercise minima [3,4] and maxima [4,6] on all six catalogue layouts with closure checks, and sampled Directory construction checks the ranges. Formatting, focused tests and one full all-targets run (153/153) passed.",
+      "limitations": "Community requests (3 to 4 Red Demon, 4 to 6 Cyclops sites), not authenticated 123.5.1 densities. Concurrent maxima are untested; hero-child ceilings rise from 72 to 126 under the shared 256 guard.",
+      "checks": [
+        "realm:red-demon",
+        "realm:cyclops-god"
+      ]
+    },
+    "oasis-palms-regression-4dc7761": {
+      "kind": "regression",
+      "revision": "4dc7761b06e27e04394916c5fd018cf070f836ee",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/467#issuecomment-6383596093",
+      "method": "Server PR467 head. Compiled RED: seed 0 produced 37 palms instead of 40. GREEN covers 16 fixed seeds, every floor cell, both borders, the footprint, boss position and clear cardinal approaches; sampled Directory construction across six layouts checks 40 published blocking palms per Oasis. One full all-targets run passed 152 tests.",
+      "limitations": "Matches the community total of 40, not its unrestricted placement distribution; original density and configuration are unverified.",
+      "checks": [
+        "realm:oasis-giant"
+      ]
+    },
+    "temple-ground-regression-52cb11f": {
+      "kind": "regression",
+      "revision": "52cb11f599eba237d9577d2ef7c23666bad378e0",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/482#issuecomment-6385992624",
+      "method": "Server PR482 head. Compiled RED found no dark grass beneath placed ruin masonry. Tests cover all three masonry types, both variants, four rotations, boss clearing, actual map, object and config writes, collision and publication. A fresh full all-targets run passed 156/156.",
+      "limitations": "An earlier full run passed 154/155 (a Kage fixture failure, later repaired test-only) and is retained. Original ground fields are unverified.",
+      "checks": [
+        "realm:great-coil-snake"
+      ]
+    },
+    "temple-plants-regression-48bd41d": {
+      "kind": "regression",
+      "revision": "48bd41dc59fbf2a9da46239a9613dec3018a7637",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/487#issuecomment-6386477539",
+      "method": "Server PR487 head. Compiled RED rejected seed 3 TempleB's plant at 26,16. GREEN covers 16 fixed seeds, both variants, every plant's predicate, grass and type, coordinate 54 and strips outside 6..54; placed-World tests require all three plant kinds with blocking trees and walkable flowers and grass. One full all-targets run passed 160/160.",
+      "limitations": "Extra random draws can shift later placement; not C# RNG parity or the 123.5.1 plant distribution.",
+      "checks": [
+        "realm:great-coil-snake"
+      ]
+    },
+    "ent-anchor-regression-4bd1817": {
+      "kind": "regression",
+      "revision": "4bd1817856485bceb418ef3133ba8217b34bbb5a",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/495#issuecomment-6388831986",
+      "method": "Server PR495 head. Compiled RED: a controlled boundary fixture got (64.5,64.5) where (64,64) was expected. GREEN covers exact 32-unit admission, 31.75 rejection, destination habitat, position and home, publication, indexing and rejection without map mutation. One all-targets run passed 183/183.",
+      "limitations": "Modified 7.0 community anchor, not 123.5.1 authentication; original placement is unverified.",
+      "checks": [
+        "realm:ent-ancient"
+      ]
+    },
+    "coil-chest-ceiling-regression-31ac67b": {
+      "kind": "regression",
+      "revision": "31ac67b06932d2c414cff12f0e46b34a8885feb4",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/499#issuecomment-6389729907",
+      "method": "Server PR499 head. Compiled RED: the selected-Content chest factory produced five occupied slots where three were expected. GREEN covers a Coil ceiling floor of 3, the other three landmarks at 5, fixed eight-slot inventories and zero successful rolls without minimum filling. One full all-targets run passed 184/184.",
+      "limitations": "A sampled success ceiling, not a minimum. Community engine parameters; original item ordering and RNG are unverified.",
+      "checks": [
+        "realm:great-coil-snake"
+      ]
+    },
+    "landmark-chest-trials-regression-09eb8b7": {
+      "kind": "regression",
+      "revision": "09eb8b74f159ce71e5a64bf933ffd736e2dc6885",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/501#issuecomment-6390079126",
+      "method": "Server PR501 head. Compiled RED: the old helper selected non-armor 0xa6e for Coil under constant input. GREEN checks three same-tier armors for Coil and multiple armor tiers for the other chests through the actual helper and selected data. Four focused loot tests and one full all-targets run (185/185) passed.",
+      "limitations": "Selected numeric item order is retained and source slots 24 and 25 are absent. Not the source's truncated distribution, original item order or System.Random.",
+      "checks": [
+        "realm:great-coil-snake",
+        "realm:oasis-giant",
+        "realm:cyclops-god",
+        "realm:red-demon"
+      ]
+    },
+    "temple-anchor-regression-ecb7064": {
+      "kind": "regression",
+      "revision": "ecb7064390ffce13372ec0d5128224008fac9e48",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/502#issuecomment-6390717754",
+      "method": "Server PR502 head. Actual populate_coil_snakes over 64 fixed flat-map fixtures covers both variants and four orientations, births, co-location, cleared ground and config, and landing cells; controlled cases cover exact 32-unit acceptance, 31.75 rejection, wrong habitat, FullOccupy, authored lava and protected enemies. Five focused tests and one full all-targets run (187/187) passed.",
+      "limitations": "The initial RED was a small coordinate test (seed 0 at (29.5,29.5) versus (30,30)) removed as redundant; the shipped population test is not claimed RED. Community anchors, not original placement.",
+      "checks": [
+        "realm:great-coil-snake"
+      ]
+    },
+    "castle-anchor-regression-ee30ed8": {
+      "kind": "regression",
+      "revision": "ee30ed89f1d321ce1d577fc334d07fe4194b94f1",
+      "date": "2026-10-24",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/504#issuecomment-6391093507",
+      "method": "Server PR504 head. Six-layout factory RED at (1013.5,1459.5) versus (1013,1459), then GREEN over all four boss and chest orientations with position, home, index, publication, habitat and closure; 16 controlled seeds check exact 32-unit acceptance, 31.75 rejection and invalid destinations before writes. One all-targets suite passed 188/188.",
+      "limitations": "That suite ran before a final test-only chest-fraction assertion; the PR claims a changed-test recheck, not a final full-suite rerun. Community Castle anchor, not authenticated placement.",
+      "checks": [
+        "realm:cyclops-god"
+      ]
+    },
+    "castle-chest-cells-regression-5cd8ecf": {
+      "kind": "regression",
+      "revision": "5cd8ecf0205a1d5798646e4f6fe250240a016eb1",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/505#issuecomment-6391418541",
+      "method": "Server PR505 head. Factory RED: seed 0 wrote Rock, no object and empty config where native ground, Bush and config were expected. GREEN covers sixteen synthetic worlds and four rotations for five retained fields, original scenery identity and one centered chest; guards reject unwalkable chest squares before writes. Formatting, three focused tests and one all-targets suite (189/189) passed.",
+      "limitations": "Review removed one implied test assertion after that suite; no final full-suite rerun is claimed. Original tile fields are unverified.",
+      "checks": [
+        "realm:cyclops-god"
+      ]
+    },
+    "castle-ground-writes-regression-f176964": {
+      "kind": "regression",
+      "revision": "f176964b0c7fe31ab4564085b7bbb80a88fa9473",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/506#issuecomment-6391744483",
+      "method": "Server PR506 head. Factory RED: at seed 0 a wall replaced native Bush and config. GREEN covers sixteen worlds and four orientations: ground-only field masks, original scenery identity, wall collision, damage and removal without removing underlying scenery, and walkable actor-free bridges. Formatting, four focused tests and one all-targets suite (189/189) passed at the final source hashes.",
+      "limitations": "No native wall combat or bridge traversal. Rotation, RNG and original fields are unverified.",
+      "checks": [
+        "realm:cyclops-god"
+      ]
+    },
+    "tree-size-config-regression-e75cf97": {
+      "kind": "regression",
+      "revision": "e75cf97ad3e276f02e89b3598f79d5b8671c0b34",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/507#issuecomment-6391976307",
+      "method": "Server PR507 head. Compiled actual-World RED: Grove seed 0 had empty config instead of size:120. GREEN covers 16 seeds per habitat, exact ground, object and config, both sizes for both kinds, and native scenery reconstruction from the same map with matching count, positions, home, size and publication. Formatting, three focused tests and one all-targets suite (190/190) passed.",
+      "limitations": "The follow-up comment names the tested source \"finaldac45\", which matches the SHA-256 prefix of src/world/realm_setpieces.rs at e75cf97, the PR's only commit and only changed file. Map configuration consistency only, not DB, restart or WMAP persistence.",
+      "checks": [
+        "realm:ent-ancient",
+        "realm:oasis-giant"
+      ]
+    },
+    "trench-oxygen-source-51ce3df": {
+      "kind": "source",
+      "revision": "51ce3df974cebcb1632459e61e0ea079f5f4b425",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/51ce3df974cebcb1632459e61e0ea079f5f4b425/src/world.rs",
+      "method": "Server PR377 merge source. Exposes the existing per-player oxygen and Trench vent and Thessal markers through privileged read-only diagnostics; no mechanics, persistence, protocol or controller change.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Not historical parameters, deployed-revision verification or whole-dungeon acceptance.",
+      "checks": [
+        "dungeons:ocean-trench",
+        "dungeons:ocean-trench:oxygen-route-and-air-pockets"
+      ]
+    },
+    "trench-oxygen-regression-5975233": {
+      "kind": "regression",
+      "revision": "5975233aa3560ab8f777fc10f6725ba576098f6e",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/377#issuecomment-6373605841",
+      "method": "Four oxygen tests passed on head 5975233 (merge tree 51ce3df): depletion and drowning, strict vent refill with a real Thessal defeat dispatch, self-only stat and diagnostic, and a connected route. Formatting and strict Clippy passed.",
+      "limitations": "Four focused tests, not a full-suite or native Thessal pass; the earlier full suite on 51962c5 was 537 passed, 2 failed, 1 ignored. The synthetic defeat dispatch is not native completion. src/world/ocean_tests.rs is absent on current main after server PR395, so this is revision-bound history.",
+      "checks": [
+        "dungeons:ocean-trench",
+        "dungeons:ocean-trench:oxygen-route-and-air-pockets"
+      ]
+    },
+    "trench-oxygen-native-51962c5": {
+      "kind": "native",
+      "revision": "51962c594b693a0d42df1d81ac8ec71afa6350ce",
+      "date": "2026-10-23",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/377#issuecomment-6371001671",
+      "method": "Native case A passed seven assertions on client f3c7b49 and runtime .14: full, low and empty oxygen, nonlethal drowning, ordinary return and refill at a vent, and a short corridor to a second vent; cleanup was clean.",
+      "limitations": "Prepared Priest gear, stats and entry. The run recorded 0301d03+dirty; committed case and test bytes and the retained executable hash bind it to 51962c5. That revision is unpublished; PR377 comment 6372255257 states that ten critical source, definition and case files are byte-identical in published head 73733d7. Diagnostics and pixels are not independent wire decoding. Every native Thessal death-pocket attempt failed, so there is no whole-Trench acceptance.",
+      "checks": [
+        "dungeons:ocean-trench",
+        "dungeons:ocean-trench:oxygen-route-and-air-pockets"
+      ]
     }
   },
   "results": {
@@ -1820,10 +2265,10 @@
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status":"not-run","evidence":[]},
     "heroes:gravestones": {"status":"not-run","evidence":[]},
-    "realm:realm-generation": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1"]},
-    "realm:map-world-01": {"status":"not-run","evidence":[]},
-    "realm:map-world-02": {"status":"not-run","evidence":[]},
-    "realm:map-world-03": {"status":"not-run","evidence":[]},
+    "realm:realm-generation": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1","scenery-preservation-regression-c2decb2","classic-worlds-regression-923e502","classic-worlds-native-f27ecee"]},
+    "realm:map-world-01": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee"]},
+    "realm:map-world-02": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee"]},
+    "realm:map-world-03": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee"]},
     "realm:map-world-04": {"status":"not-run","evidence":[]},
     "realm:map-world-05": {"status":"not-run","evidence":[]},
     "realm:map-world-06": {"status":"not-run","evidence":[]},
@@ -1849,9 +2294,9 @@
     "realm:terrain-encounter-navigation": {"status":"not-run","evidence":[]},
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","activation-radius-source-3c9a23a","visible-npc-simulation-source-b066eae"]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":["visible-npc-simulation-source-b066eae"]},
-    "realm:find-your-next-quest": {"status":"not-run","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974"]},
-    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1"]},
-    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
+    "realm:find-your-next-quest": {"status":"not-run","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974","quest-window-regression-a92ae06"]},
+    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
+    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":[]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05"]},
     "access:combat-status-feedback": {"status":"not-run","evidence":[]},
@@ -1863,20 +2308,20 @@
         "paused-area-native-a886831"
       ]
     },
-    "realm:environmental-hazards": {"status":"not-run","evidence":[]},
+    "realm:environmental-hazards": {"status":"not-run","evidence":["ground-cooldown-regression-58f4a08","ground-cooldown-native-58f4a08"]},
     "realm:travel-between-worlds": {"status":"not-run","evidence":["dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
-    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398"]},
-    "realm:lich": {"status":"not-run","evidence":[]},
-    "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7"]},
+    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97"]},
+    "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c"]},
+    "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c"]},
     "realm:deathmage": {"status":"not-run","evidence":[]},
-    "realm:red-demon": {"status":"not-run","evidence":[]},
-    "realm:oasis-giant": {"status":"not-run","evidence":[]},
-    "realm:cyclops-god": {"status":"not-run","evidence":[]},
-    "realm:phoenix-lord": {"status":"not-run","evidence":[]},
+    "realm:red-demon": {"status":"not-run","evidence":["hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7"]},
+    "realm:oasis-giant": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","oasis-palms-regression-4dc7761","landmark-chest-trials-regression-09eb8b7","tree-size-config-regression-e75cf97"]},
+    "realm:cyclops-god": {"status":"not-run","evidence":["hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","castle-anchor-regression-ee30ed8","castle-chest-cells-regression-5cd8ecf","castle-ground-writes-regression-f176964"]},
+    "realm:phoenix-lord": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c"]},
     "realm:evil-chicken-god": {"status":"not-run","evidence":[]},
     "realm:great-lizard": {"status":"not-run","evidence":["midland-rewards-source-bf5425c","midland-rewards-regression-bf5425c","midland-rewards-native-bf5425c"]},
     "realm:wasp-queen": {"status":"not-run","evidence":["midland-rewards-source-bf5425c","midland-rewards-regression-bf5425c","midland-rewards-native-bf5425c"]},
-    "realm:shambling-sludge": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
+    "realm:shambling-sludge": {"status":"not-run","evidence":["realm-loot-regression-e222284","realm-loot-native-1fa1986"]},
     "realm:swarm": {"status":"not-run","evidence":[]},
     "realm:dwarf-king": {"status":"not-run","evidence":[]},
     "realm:horned-drake": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
@@ -1887,16 +2332,16 @@
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:goblin-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:great-coil-snake": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3"]},
+    "realm:great-coil-snake": {"status":"not-run","evidence":["coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":[]},
-    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":[]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e"]},
+    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
-    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7"]},
-    "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425"]},
+    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45"]},
+    "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
     "realm:pirates": {"status":"not-run","evidence":[]},
@@ -1933,16 +2378,17 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870"]},
-    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415"]},
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f"]},
+    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
         "lair-traps-regression-d3ed388",
         "lair-traps-native-2f9f272",
         "septavius-spacing-regression-580a65c",
-        "septavius-spacing-native-580a65c"
+        "septavius-spacing-native-580a65c",
+        "udl-room-groups-regression-a072dbd"
       ]
     },
     "dungeons:undead-lair:entrance-end-dressing": {
@@ -1962,8 +2408,8 @@
     "dungeons:tomb-of-the-ancients:trap-switch-and-quicksand": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-layout-regression-40d990f","tomb-layout-native-40d990f"]},
     "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f"]},
     "dungeons:tomb-of-the-ancients:ordinary-encounters": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
-    "dungeons:ocean-trench": {"status":"not-run","evidence":[]},
-    "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":[]},
+    "dungeons:ocean-trench": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5"]},
+    "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5"]},
     "dungeons:ocean-trench:wounded-thessal-response": {"status":"not-run","evidence":[]},
     "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b"]},
     "dungeons:manor-of-the-immortals:secret-shelves-and-coffins": {"status":"not-run","evidence":[]},
@@ -1998,7 +2444,7 @@
     "gear:loot-and-ownership": {"status":"not-run","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151"]},
     "gear:loot-bag-presentation": {"status":"passed","evidence":["loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05"]},
-    "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c"]},
+    "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
     "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
@@ -2017,15 +2463,15 @@
     "style:summon-a-drake": {"status":"not-run","evidence":[]},
     "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
-    "home:nexus": {"status":"not-run","evidence":["void-background-source-15c1e17"]},
-    "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17"]},
+    "home:nexus": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1","void-background-native-bde9a38"]},
+    "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1"]},
     "home:tutorial-and-kitchen": {"status":"failed","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
     "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05"]},
@@ -2040,8 +2486,8 @@
     "social:guild-hall": {"status":"not-run","evidence":[]},
     "social:share-a-living-world": {"status":"not-run","evidence":[]},
     "access:client": {"status":"not-run","evidence":[]},
-    "access:guest-accounts": {"status":"not-run","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988"]},
-    "access:registration": {"status":"not-run","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
+    "access:guest-accounts": {"status":"passed","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
+    "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
     "access:login": {"status":"not-run","evidence":["registered-credential-login-native-eb85988"]},
     "access:email-verification": {"status":"not-run","evidence":[]},
     "access:account-recovery": {"status":"not-run","evidence":[]},

@@ -120,7 +120,7 @@ test('Ability cooldown evidence does not accept complete classes',()=>{
   for(const [id,ref] of [['heroes:wizard','ability-cooldown-regression-ef5686e'],['heroes:rogue','ability-cooldown-native-ef5686e']]){
     const row=records(data).find(r=>r.id===id);
     assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
-    assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,[id]);assert.equal(evidence.sources[ref].revision,'ef5686e5f8e20960d4687e889fcd815d9d9d2eb4');
+    assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,[id,'gear:ability-activation-contract']);assert.equal(evidence.sources[ref].revision,'ef5686e5f8e20960d4687e889fcd815d9d9d2eb4');
   }
 });
 
