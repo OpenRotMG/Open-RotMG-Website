@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "sprite-child-idle-regression-277bc65": {
+      "kind": "regression",
+      "revision": "277bc65fdeb8ea3360e8f5d9d3e50642a3829160",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/553#issuecomment-6398182407",
+      "method": "The genuine pre-fix NPC-motor regression leaves a caught-up child at the overlap point. Afterward, the real movement path verifies independent wandering, paralysis, unchanged HP and reserved population, far catch-up, surviving orphans and the retained home leash. Final locked unfiltered Rust suite: 225 passed; strict all-target Clippy and formatting passed.",
+      "limitations": "Controlled coincident children and a stationary parent isolate the missing idle branch. This does not require permanent separation or authenticate original nearest-parent acquisition, count, regrowth, cleanup, XP or every AI engine timing.",
+      "checks": ["realm:sprite-god"]
+    },
+    "sprite-child-idle-native-277bc65": {
+      "kind": "native",
+      "revision": "277bc65fdeb8ea3360e8f5d9d3e50642a3829160",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/553#issuecomment-6398182407",
+      "method": "Identical case/runner/controller/client hashes, client be57de7/Ruffle .15. A prepared legal-max Knight observes a naturally populated 2000-HP Sprite God and its original three 50-HP children using ordinary potion input. Before clean 8e59f828, all three caught-up children have zero last steps. After, all three within two tiles take approximately 0.133-tile steps toward distinct goals. Both clear captures passed with zero cleanup errors.",
+      "limitations": "Seven paused scout fixtures discover the family in fresh randomized Realm layouts. Short two-second encounter context, not matched poses, earned progression, endurance or all population cycles. Natural overlaps remain possible. Earlier API, empty-discovery, lease, death and ENOSPC attempts remain rejected; an initial loading-overlay photo was superseded without altering SDK guards or deadlines.",
+      "checks": ["realm:sprite-god"]
+    },
     "ghost-master-source-e7ab45c": {
       "kind": "source",
       "revision": "e7ab45c26bd0efe583b02934ccdaa49ad4171311",
@@ -2636,7 +2654,7 @@
     "realm:djinn": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df"]},
