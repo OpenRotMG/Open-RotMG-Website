@@ -83,8 +83,15 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   assert.equal(accepted(row.feature,evidence),false);
   const cover=['snake-cover-regression-3778af2','snake-cover-native-3778af2'],layout=['snake-layout-regression-6f35dab','snake-layout-native-6f35dab'];
   const room=['snake-boss-room-source-684eff6','snake-boss-room-regression-684eff6','snake-boss-room-native-b84d963'];
-  assert.deepEqual(result.evidence,[...cover,...layout,...room]);
-  for(const ref of room)assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
+  const treasure=['source','regression','native'].map(kind=>'snake-treasure-layout-'+kind+'-daf0c68');
+  assert.deepEqual(result.evidence,[...cover,...layout,...room,...treasure]);
+  for(const ref of [...room,...treasure])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
+  for(const ref of treasure){
+    assert.equal(evidence.sources[ref].revision,'daf0c68c870940983cde9dd334acd25be1731e3b');
+    assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));
+  }
+  assert.match(evidence.sources[treasure[0]].limitations,/inactive test template/);
+  assert.match(evidence.sources[treasure[2]].limitations,/not earned entry.*full Snake Pit acceptance/);
   for(const ref of cover){
     assert.equal(evidence.sources[ref].revision,'3778af2b3146d7bc20a504131f1769c01cf005ad');
     assert.deepEqual(evidence.sources[ref].checks,[id]);
