@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "abyss-teleport-regression-014a02e": {
+      "kind": "regression",
+      "revision": "014a02e6b5937145cfffd8fc09121f961c8519cd",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/604#issuecomment-6404665341",
+      "method": "The real Directory teleport first fails with Cannot teleport in this world. After adding only the Abyss allowlist entry, it verifies arrival, MAPINFO/player-view flags, own GOTO/ACK, lifetime tracking, ten-second cooldown and paused-target refusal. Ocean Trench, Tomb and Castle remain disabled. Locked unfiltered Rust: 285 passed, zero failed, one existing provider-dependent test ignored; strict all-target Clippy and formatting passed.",
+      "limitations": "Prepared generated dungeon and controlled players, not earned entry or authenticated original eligibility. Primary compiled World defaults to teleport enabled but supplies no recovered Abyss-specific class; the April 2012-dated guide explicitly includes Abyss teleport tactics but visibly contains later edits.",
+      "checks": ["dungeons:abyss-of-demons"]
+    },
+    "abyss-teleport-native-014a02e": {
+      "kind": "native",
+      "revision": "014a02e6b5937145cfffd8fc09121f961c8519cd",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/604#issuecomment-6404665341",
+      "method": "Two living known native players, seeded Abyss entrance, stock-client /teleport Guest2. Before clean 673edd66 the visible/logged denial leaves the sender at (27.5,139.5). After, the same character/world reaches the target at (29.5,141.5). Both players survive with no shots/kills and zero cleanup errors. Case/controller/client953a374/Ruffle .16 match; the explicit after storage adapter verifies its original runner hash against the before runner and records adapted runner/helper/scope identities.",
+      "limitations": "Prepared entrance context, not earned entry, a clear or exact reporter replay; submitted diagnostics capture one player without identifying the intended peer. Runner bytes differ only through the qualified storage adapter, not claimed identical. Initial feature-case identity error retained. No gameplay/ACK/lease/death/ownership/deadline guard change.",
+      "checks": ["dungeons:abyss-of-demons"]
+    },
     "limon-box-regression-7d5d1c8": {
       "kind": "regression",
       "revision": "7d5d1c8c5ce7a34932115778ad37827687a82a95",
@@ -2862,7 +2880,7 @@
         "udl-endpoint-native-3bdaddb"
       ]
     },
-    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98","chase-jitter-source-ddc478b","chase-jitter-regression-ddc478b","chase-jitter-native-ddc478b","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98","chase-jitter-source-ddc478b","chase-jitter-regression-ddc478b","chase-jitter-native-ddc478b","period-loot-source-1f488df","period-loot-regression-1f488df","abyss-teleport-regression-014a02e","abyss-teleport-native-014a02e"]},
     "dungeons:abyss-of-demons:idol-and-treasure-lifecycle": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7"]},
     "dungeons:tomb-of-the-ancients": {"status":"not-run","evidence":["tomb-regression-99451ac","tomb-native-partial-99451ac","tomb-native-clear-933375f","tomb-layout-regression-40d990f","tomb-layout-native-40d990f"]},
     "dungeons:tomb-of-the-ancients:sarcophagus-awakening": {"status":"not-run","evidence":["tomb-regression-99451ac"]},
