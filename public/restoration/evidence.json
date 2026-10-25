@@ -1340,6 +1340,24 @@
       "limitations": "Prepared gear, not earned acquisition. Early reverse refusal is client-local consistency, not a received server rejection or packet-capture proof. Exact-ms equality is tested directly, not inferred from native timing. Original rejection/reconnect/transfer policy and the full activation umbrella remain unaccepted. Failed stale-cache and timing attempts are excluded; PR before image is separately pinned to clean e7d09bc.",
       "checks": ["gear:ability-activation-contract"]
     },
+    "spider-footage-regression-85886d9": {
+      "kind": "regression",
+      "revision": "85886d92f26ab422029810fdf32031dc9fbae983",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/commit/85886d92f26ab422029810fdf32031dc9fbae983",
+      "method": "A 32-seed selected-data regression retains spawn, boss, five live sacs, 26 generated actors, 10 existing props and connected walkable floor around four blocking wall columns. Thirty static wall webs occupy empty Spider Dirt adjacent to real walls. An ID-only exact-generator comparison across 32 seeds preserves every other object identity/position plus all ground/config/terrain/regions.",
+      "limitations": "Map/selected-flag checks, not full-World combat/LOS or natural egg/cover lifecycle acceptance. Four offsets and 30 web sites are reconstructed. FullOccupy and BlocksSight intentionally follow selected Spider Dirt Wall rather than Grey Pillar. No generator RNG draws added.",
+      "checks": ["dungeons:spider-den", "dungeons:spider-den:egg-and-cover-environment"]
+    },
+    "spider-footage-source-85886d9": {
+      "kind": "source",
+      "revision": "85886d92f26ab422029810fdf32031dc9fbae983",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/85886d92f26ab422029810fdf32031dc9fbae983/src/dungeon/spider.rs",
+      "method": "MrJakeBills1 at 01:50.037 shows an isolated brown/black-topped wall column and attached decorative web. Continuous 01:47-01:55 frames, Arachna web emitters and terminal-room minimap progression establish boss-chamber context. Selected Wall 0x1e8 and static Spider Web 0x732 are strong model/texture identifications, not IDs encoded in video. The recording shows Build 123.4.4 at 02:20.",
+      "limitations": "August 2012 upload metadata differs by one day between watch page and yt-dlp. This is not exact 123.5.1 authentication. Column count/coordinates and web placement/count remain reconstructed; source inspection is not gameplay acceptance. Pinned community maps are later comparators only, with no imported code/maps.",
+      "checks": ["dungeons:spider-den", "dungeons:spider-den:egg-and-cover-environment"]
+    },
     "spider-pillars-regression-7019e28": {
       "kind": "regression",
       "revision": "7019e28b1d528e3611fa6b72f85c61858faa03dd",
@@ -2472,8 +2490,8 @@
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":[]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
-    "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28"]},
-    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
+    "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-footage-regression-85886d9","spider-footage-source-85886d9"]},
+    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28","spider-footage-regression-85886d9","spider-footage-source-85886d9"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","dungeon-return-regression-456ab72","dungeon-return-native-456ab72","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},

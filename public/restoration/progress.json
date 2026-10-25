@@ -2828,6 +2828,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes: aesthetic eggs and boss pillars"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
+            "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
           }
         ],
         "checks": [
@@ -2840,12 +2844,16 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original pillar model, count and placement. Current choices are a bounded reconstruction."
+              "Build 123.4.4 footage supports Spider Dirt Wall material, not exact 123.5.1 column count/spacing. Four cover offsets and decorative-web sites remain a bounded reconstruction."
             ],
             "sources": [
               {
                 "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
                 "label": "Build 122.0.1 release notes: aesthetic eggs and boss pillars"
+              },
+              {
+                "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
+                "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
               }
             ],
             "group": "layout"
