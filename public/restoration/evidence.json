@@ -6,7 +6,7 @@
       "revision": "d19287c44d7b2bac88e9b132302c31be431129d9",
       "date": "2026-10-25",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6395088599",
-      "method": "One regression clears a Pirate Cave through Dreadstump's death, checks queued clear credit, a Realm Portal 0x704 exit and return to the source Realm; a second checks Pirate Cave bots choose 0x704, not 0x71d. Both fail on clean 59634bd and pass here. All 207 Rust tests, formatting, warning-denied all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed.",
+      "method": "One regression calls the Dreadstump completion seam directly and checks queued clear credit, a Realm Portal 0x704 exit and routing of that explicitly published exit back to the source Realm; it does not exercise a real death or durable credit commit. A second checks Pirate Cave bots choose 0x704, not 0x71d. Both fail on clean 59634bd and pass here. All 207 Rust tests, formatting, warning-denied all-target Clippy, release build, two Python wrapper tests and 18 Node tests passed.",
       "limitations": "Exit kind only. November 2012 and July 2013 YouTube auto-thumbnails show the Realm Portal panel; the build number is not visible and frames are thumbnails, not decoded video. Static map layout, populations, AI, loot and reward rates are unchanged and remain unverified.",
       "checks": ["dungeons:pirate-cave"]
     },
@@ -16,7 +16,7 @@
       "date": "2026-10-25",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/533#issuecomment-6395088599",
       "method": "Native before 59634bd and after d19287c use the same case, seed 12351, client be57de7 and Ruffle 0.7.1-openrotmg.15. Each passed three assertions with empty cleanup errors: a legal max-stat Knight kills Dreadstump with ordinary sword fire, Pirate Cave credit rises by one, and he walks onto the exit. Before shows Portal to Nexus; after shows Realm Portal.",
-      "limitations": "Prepared Knight with Archon Sword, Acropolis Armor and Ring of Exalted Health, starting four tiles south of Dreadstump; not earned traversal, a full cave clear or natural roster acceptance. One stationary case and ten load, disk or deadline runner failures are retained and not credited. Statuses are unchanged.",
+      "limitations": "Prepared Knight with Archon Sword, Acropolis Armor and Ring of Exalted Health, starting four tiles south of Dreadstump; not earned traversal, a full cave clear or natural roster acceptance. Its moving-fire steps lasted 600 to 606 ms, below the 700 ms shooting fence, so this pair is supporting evidence only until a fenced replacement pair passes. One stationary case and ten load, disk or deadline runner failures are retained and not credited. Statuses are unchanged.",
       "checks": ["dungeons:pirate-cave"]
     },
     "sprite-defense-source-c6b4925": {
