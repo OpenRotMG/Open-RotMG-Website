@@ -434,6 +434,24 @@
       "limitations": "Prepared level, legal equipment and position, not earned traversal or a full fight. Separate generated Realms, not matched coordinates or a performance comparison. Native evidence covers the first five-member wave; higher tiers/company waves are regression-only. Parent result stays not-run; historical acceptance is not promoted.",
       "checks": ["realm:ghost-king"]
     },
+    "chat-star-transform-regression-0277516": {
+      "kind": "regression",
+      "revision": "0277516be629cd437234ab7d1ba622c3321dba4d",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553",
+      "method": "Nine transform, holder, replacement and recreation assertions were executed in Adobe Flash32 on a synthetic fixture. The same fixture failed all nine on runtime15 and passed on runtime16. Local and official full builds passed 141 core, 55 renderer, 4 WGPU and 13 TextLine tests, other existing SWF groups and 26 advancement tests. All 27 client Python tests passed. The original and readable-7 chat builders both set the icon y to 3; the fix retains it without changing the game SWF or packets.",
+      "limitations": "Flash32 reference execution establishes this synthetic API behavior, not complete historical Flash-player parity. Two existing ignored core doctests and unrelated FTE atom/metric limitations remain. Passing this fixture does not accept the whole chat feature.",
+      "checks": ["social:chat"]
+    },
+    "chat-star-transform-native-0277516": {
+      "kind": "native",
+      "revision": "0277516be629cd437234ab7d1ba622c3321dba4d",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Client/pull/19",
+      "method": "Matched prepared Nexus runs on clean server dc8a64a used identical server executable, case, runner and controller. Each normal native chat message was delivered exactly once; the living character was retained and cleanup had no errors. Unmodified capture crops show the icon 3 pixels lower with runtime16, preserving the client's authored offset. Official tag build 40188128994 produced the exact native-tested ZIP 579236cd5a97edd3ee82c82e7e6c96976178bdc8941bfb2a64b6693f05160435.",
+      "limitations": "Prepared fresh zero-star Wizard, Chromium/Linux and local chat only, not earned ranks, all colors, Firefox/Windows or complete chat acceptance. Startup, queue, native-ACK and real ENOSPC failures are retained separately; no readiness, lease, ACK or ownership guard was changed. Temporary rendering settings do not establish a cause for those earlier startup failures.",
+      "checks": ["social:chat"]
+    },
     "chat-badge-native-86e55e4": {
       "kind": "native",
       "revision": "86e55e4d10b7cec83adc06279731915befed46bc",
@@ -2687,7 +2705,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30","chat-star-transform-regression-0277516","chat-star-transform-native-0277516"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05"]},
