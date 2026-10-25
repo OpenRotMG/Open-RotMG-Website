@@ -71,7 +71,9 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   assert.equal(row.rule.historical,'partial');assert.equal(result.status,'not-run');
   assert.equal(accepted(row.feature,evidence),false);
   const cover=['snake-cover-regression-3778af2','snake-cover-native-3778af2'],layout=['snake-layout-regression-6f35dab','snake-layout-native-6f35dab'];
-  assert.deepEqual(result.evidence,[...cover,...layout]);
+  const room=['snake-boss-room-source-684eff6','snake-boss-room-regression-684eff6','snake-boss-room-native-b84d963'];
+  assert.deepEqual(result.evidence,[...cover,...layout,...room]);
+  for(const ref of room)assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
   for(const ref of cover){
     assert.equal(evidence.sources[ref].revision,'3778af2b3146d7bc20a504131f1769c01cf005ad');
     assert.deepEqual(evidence.sources[ref].checks,[id]);
