@@ -31,6 +31,7 @@ window.OpenRotMGBugReport = {
         status.textContent = '';
       } catch (error) {
         screenshot = undefined;
+        submit.disabled = true;
         image.hidden = true;
         status.textContent = 'Screenshot failed: ' + error.message + ' Use Refresh screenshot to try again.';
       }
@@ -42,6 +43,9 @@ window.OpenRotMGBugReport = {
       panel.scrollIntoView({block: 'nearest'});
     }
     refresh.addEventListener('click', () => void capture());
+    player.addEventListener('loadeddata', () => {
+      if (!panel.hidden && !screenshot) void capture();
+    }, {once: true});
     link.setAttribute('aria-controls', 'bug-report');
     link.setAttribute('aria-expanded', 'false');
     link.addEventListener('click', event => { event.preventDefault(); open(); });
