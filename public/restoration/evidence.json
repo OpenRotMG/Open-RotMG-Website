@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "death-chat-regression-bf18a30": {
+      "kind": "regression",
+      "revision": "bf18a3087968e4cbca97b5056055c392bf2c0a7b",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/540#issuecomment-6396080009",
+      "method": "The pre-fix witness inbox is empty despite a successful Store death transaction. Afterward the regression verifies a durable death/Fame record, exact system TEXT fields at 60 tiles, notice-before-DEATH packet order and suppression of premature, failed or duplicate notices. Full 210 Rust tests, strict all-target Clippy and formatting passed.",
+      "limitations": "Permanent-death announcement coverage, not acceptance of every chat command, announcement or preference. Current-world scope follows pinned community implementations; the 2012 screenshot corroborates visible wording and low-level notices, not original audience boundaries or commit timing.",
+      "checks": ["social:chat"]
+    },
+    "death-chat-native-bf18a30": {
+      "kind": "native",
+      "revision": "bf18a3087968e4cbca97b5056055c392bf2c0a7b",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/540#issuecomment-6396080009",
+      "method": "Same case, runner, controller and stock client be57de7/Ruffle .15. A prepared 1-HP level-1 nonnative scout dies to an authored South Tutorial Gun while a living native witness stands 33 tiles away. Read-only canonical death rows agree. Before c3c38568 the witness has no notice; after, its screenshot shows yellow name, level and killer text. Both runs passed with zero cleanup errors.",
+      "limitations": "A real native witness of a prepared scout death, not a native victim death-screen, earned progression or all-world acceptance. No testing SDK or semantic guards changed. Unrelated upstream integrations between revisions are recorded in the PR; rejected ENOSPC and test-setup attempts remain separate.",
+      "checks": ["social:chat"]
+    },
     "sprite-defense-source-c6b4925": {
       "kind": "source",
       "revision": "c6b4925d5eaf170ff74a920b3058040ceb821a05",
@@ -2571,7 +2589,7 @@
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},
     "home:gold-and-fame-balances": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30"]},
     "social:whispers": {"status":"not-run","evidence":[]},
     "social:guild-chat": {"status":"not-run","evidence":[]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05"]},
