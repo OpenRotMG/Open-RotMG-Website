@@ -1058,7 +1058,7 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten prebuilt reserves, sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
             ],
             "unknowns": [
               "Exact 123.5.1 trigger probability, type distribution and site selection remain qualified. Related server comparators disagree on the roll."
@@ -2019,7 +2019,7 @@
         "historical": "partial",
         "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
         "differences": [
-          "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue335 and exhaustive native combat/loot-return acceptance remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue 335 was closed after server PR342 restored private Hermit loot; exhaustive native combat/loot-return acceptance remains separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579 https://github.com/OpenRotMG/Open-RotMG-Server/pull/342#issuecomment-6363681911",
           "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification."
         ],
         "unknowns": [
@@ -2086,7 +2086,7 @@
         "historical": "known-differences",
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
-          "Crystal activation and Prisoner combat support exists, but normal Realm placement and item drops still need implementation."
+          "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat. Crystal Prisoner kinds use the landmark roster's empty loot table, so no item drops are configured: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293"
         ],
         "unknowns": [
           "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
@@ -3465,11 +3465,12 @@
       "category": "dungeons",
       "icon": "assets/player/horrific-creation.png",
       "audit": {
-        "implementation": "missing",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools and secret activation remain unresolved.",
         "differences": [
-          "Playable Mad Lab absent."
+          "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
+          "No Tesla Coil or secret boss is placed."
         ],
         "unknowns": [
           "Green-pool effects and blue cure mask; secret boss trigger; encounter choreography and loot."
@@ -3490,9 +3491,11 @@
             "name": "Ordinary lab rooms, gas and cages",
             "expected": "Ordinary cages, gas, turrets and robots are not replaced by a successful first-boss fight.",
             "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility.",
-            "implementation": "missing",
+            "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Each of the four middle rooms holds four robots drawn at random from five kinds. Red gas spawners and monster cages exist only in Dr Terrible's room as boss-phase fixtures, Automated Defense Turrets are not placed, and only Dr Terrible has rewards."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "population"
@@ -3502,9 +3505,11 @@
             "name": "Coils, secret boss and transformation pools",
             "expected": "Secret admission, melee-accessible coils, green transformation and blue cure need independent checks.",
             "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing.",
-            "implementation": "missing",
+            "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Two green Hexxer and blue DeHexxer pool pairs exist: green applies Hexed, Speedy and Stunned, and blue clears them and wins overlaps. No Tesla Coil or secret boss is placed, so the coil/secret predicate and optional boss are absent."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "boss"
@@ -3518,11 +3523,11 @@
       "category": "dungeons",
       "icon": "assets/player/masked-party-god.png",
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Historically available beach-party destination, party encounter and consumables; distinguish event/calendar access from permanent access and contest prizes from drops.",
         "differences": [
-          "No playable Beachzone destination; target availability policy remains unresolved rather than an asserted permanent-access mismatch."
+          "Server PR278 adds a reconstructed Beachzone. Each new Realm has a 1-in-200 chance of an announced inland Beach Bum whose defeat opens the portal 50% of the time. The island layout, the non-attacking Masked Party God's silent full-health recovery every 5 seconds unless Stunned, and its four drinks at 10% each are reconstructions. Permanent rare-spawn access stands in for the unresolved target event/calendar availability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/278"
         ],
         "unknowns": [
           "Target calendar/key distribution; layout; Party God lifecycle and actual drop policy."
@@ -5809,14 +5814,13 @@
       "category": "conditions",
       "icon": null,
       "audit": {
-        "implementation": "partial",
-        "historical": "known-differences",
+        "implementation": "present",
+        "historical": "partial",
         "expected": "Invincible excludes client projectile collision, not merely damage, and suppresses local ground damage.",
-        "differences": [
-          "Friendly shots now pass through Invincible targets, but hostile shots can still be consumed by Invincible non-human-controlled players."
-        ],
+        "differences": [],
         "unknowns": [
-          "Other original damage categories, enemy targeting and sources of Invincible."
+          "Other original damage categories, enemy targeting and sources of Invincible.",
+          "Human-recipient collision is client/ACK authoritative; native evidence covers only prepared non-Human single-hit shots, so Human and multi-hit behavior is not natively verified."
         ],
         "sources": [
           {

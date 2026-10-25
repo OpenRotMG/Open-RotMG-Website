@@ -203,13 +203,19 @@ test('partial implementation, research and verification can all be outstanding',
 });
 
 test('executed acceptance requires an exact ID, revision and test/native receipt',()=>{
-  const data=catalogue(),evidence=ledger(),id='heroes:rogue';
+  const data=catalogue(),evidence=ledger(),id='heroes:warrior';
   evidence.results[id]={status:'passed',evidence:[]};assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test={kind:'source',revision:'a'.repeat(40),date:'2026-10-21',method:'Read the handler',limitations:'No execution',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs'};
   evidence.results[id].evidence=['test'];assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test.kind='regression';evidence.sources.test.method='Executed scenario and asserted the saved result';validateEvidence(data,evidence);
   evidence.sources.test.checks=['heroes:wizard'];assert.throws(()=>validateEvidence(data,evidence),/Invalid result binding/);
   evidence.sources.test.checks=[id];evidence.sources.test.revision='main';assert.throws(()=>validateEvidence(data,evidence),/Invalid execution evidence/);
+});
+
+test('evidence sources must be bound by every ID they check',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:undead-lair',ref='lair-room-space-native-89bc191';
+  validateEvidence(data,evidence);evidence.results[id].evidence=evidence.results[id].evidence.filter(r=>r!==ref);
+  assert.throws(()=>validateEvidence(data,evidence),new RegExp(`Unbound execution evidence: ${ref}$`));
 });
 
 test('missing and orphan results fail explicitly instead of assuming untested',()=>{
@@ -220,12 +226,12 @@ test('missing and orphan results fail explicitly instead of assuming untested',(
 test('one component pass cannot accept its whole feature or historical rules',()=>{
   const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
   evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
-  evidence.results[id]={status:'passed',evidence:['test']};validateEvidence(data,evidence);
+  evidence.results[id]={status:'passed',evidence:[...evidence.results[id].evidence,'test']};validateEvidence(data,evidence);
   assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'unreviewed');
   for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
   assert.equal(accepted(f,evidence),false);
   evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];
-  for(const check of evidence.sources.test.checks)evidence.results[check]={status:'passed',evidence:['test']};
+  for(const check of evidence.sources.test.checks)evidence.results[check]={status:'passed',evidence:[...new Set([...evidence.results[check].evidence,'test'])]};
   validateEvidence(data,evidence);assert.equal(accepted(f,evidence),true);
   f.audit.checks[0].historical='known-differences';f.audit.checks[0].differences=['Deliberately substituted behavior'];
   assert.equal(accepted(f,evidence),false);

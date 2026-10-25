@@ -1,6 +1,24 @@
 {
-  "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"Implementation dispositions are carried forward from the recorded source audit at this server snapshot, not a fresh gameplay test. Existing unbound PR/test claims have not been converted to passes."},
+  "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "beachzone-source-b587298": {
+      "kind": "source",
+      "revision": "b587298eb1bf9118d7b0f02db81736314b93146b",
+      "date": "2026-10-21",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/b587298eb1bf9118d7b0f02db81736314b93146b/src/world/beach.rs",
+      "method": "Server PR278 merge source. A new Realm rolls gen_ratio(1, 200) for one Beach Bum on HighPlains to MidForest terrain, announced to the Realm; its defeat requests the Beachzone portal at 0.5. The dungeon map is generated, and the stationary, non-attacking Masked Party God silently restores full HP every 5000 ms unless Stunned and drops each of four drinks at 0.1. A per-character Beachzone clear counter is stored.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. The PR body's native screenshots have no recorded runner, revision or assertions and are not bound. Spawn odds, portal and drop rates, the recovery timer and the layout are reconstructions; target event/calendar access remains unresolved.",
+      "checks": ["dungeons:beachzone"]
+    },
+    "mad-lab-source-69806e2": {
+      "kind": "source",
+      "revision": "69806e2878a126fe9bd7e1fa7fa4adb3e1f746b6",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/69806e2878a126fe9bd7e1fa7fa4adb3e1f746b6/src/dungeon/lab.rs",
+      "method": "Server main source. src/dungeon.rs registers mad-lab and opens it from Flying Brain 0x657 at 0.17. src/dungeon/lab.rs builds a fixed six-room map: an entrance Portal of Cowardice, four random robots in each middle room, two Hexxer/DeHexxer pool pairs, and Dr Terrible's room with four red gas spawners, four monster cages and a bubble. src/world/lab.rs applies Hexed, Speedy and Stunned in green pools and clears them in blue pools, runs Dr Terrible's phases, cage releases, gas and tosses, and gives each damaging account a private reward bag.",
+      "limitations": "Source inspection only, so it cannot pass gameplay. Added by commit 8aa35c1 and merged through server PR329 (bot activities); no Mad Lab regression or native receipt is bound. The layout is reconstructed and the encounter is adapted from the later realm-src comparator. No Tesla Coil, secret boss or turret placement exists.",
+      "checks": ["dungeons:mad-lab", "dungeons:mad-lab:ordinary-lab-and-gas", "dungeons:mad-lab:coil-secret-and-pool-chain"]
+    },
     "protected-projectile-source-c4854b8": {
       "kind": "source",
       "revision": "c4854b88261f5aa8005b0d0dcca58791cbd6b970",
@@ -1734,12 +1752,14 @@
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
         "lair-traps-regression-d3ed388",
-        "lair-traps-native-2f9f272"
+        "lair-traps-native-2f9f272",
+        "septavius-spacing-regression-580a65c",
+        "septavius-spacing-native-580a65c"
       ]
     },
     "dungeons:undead-lair:entrance-end-dressing": {
@@ -1769,10 +1789,10 @@
     "dungeons:davy-jones-s-locker:colored-key-door-chain": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle": {"status":"passed","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:ship-trash-and-objects": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
-    "dungeons:mad-lab": {"status":"not-run","evidence":[]},
-    "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":[]},
-    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":[]},
-    "dungeons:beachzone": {"status":"not-run","evidence":[]},
+    "dungeons:mad-lab": {"status":"not-run","evidence":["mad-lab-source-69806e2"]},
+    "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["mad-lab-source-69806e2"]},
+    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2"]},
+    "dungeons:beachzone": {"status":"not-run","evidence":["beachzone-source-b587298"]},
     "dungeons:oryx-s-castle": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"not-run","evidence":[]},
@@ -1816,7 +1836,7 @@
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
     "home:nexus": {"status":"not-run","evidence":[]},
     "home:vault": {"status":"not-run","evidence":[]},
-    "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
+    "home:tutorial-and-kitchen": {"status":"failed","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f"]},
     "home:choose-your-name": {"status":"not-run","evidence":[]},
     "home:browse-realm-portals": {"status":"not-run","evidence":["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":[]},

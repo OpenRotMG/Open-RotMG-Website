@@ -73,6 +73,7 @@ export function validateEvidence(data,evidence) {
     require(result && Object.keys(result).every(key=>['status','evidence'].includes(key)) && Object.hasOwn(functionalLabels,result.status) && strings(result.evidence) && result.evidence.every(ref=>Object.hasOwn(evidence.sources,ref) && evidence.sources[ref].checks.includes(row.id)),`Invalid result binding: ${row.id}`);
     if(result.status!=='not-run') require(result.evidence.some(ref=>evidence.sources[ref].kind!=='source'),`Executed result without test/native evidence: ${row.id}`);
   }
+  for(const [key,s] of Object.entries(evidence.sources)) require(s.checks.every(id=>evidence.results[id].evidence.includes(key)),`Unbound execution evidence: ${key}`);
   return rows;
 }
 export function accepted(f,evidence) {
