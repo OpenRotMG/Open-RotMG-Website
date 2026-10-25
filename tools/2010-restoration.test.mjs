@@ -11,6 +11,27 @@ const digest = value => createHash('sha256').update(value).digest('hex');
 const baseline = catalogue(), baselineLeaves = validateCatalogue(baseline);
 const paralyzingRefs = ['impl-paralyzing-tests', 'impl-paralyzing-native'];
 const paralyzingIds = ['object-0a64-activation-1', 'object-0a65-activation-1', 'condition-14-wire', 'condition-14-lifecycle', 'combat-collision-matrix'];
+const woodenRefs = ['impl-wooden-tests', 'impl-wooden-native'];
+const woodenIds = ['object-0a08-activation-1', 'condition-7-wire', 'condition-7-lifecycle', 'combat-collision-matrix'];
+// Reverse only this increment so earlier freeze hashes still test their exact original surfaces.
+const beforeWooden = structuredClone(baseline);
+for (const ref of woodenRefs) delete beforeWooden.sources[ref];
+for (const row of beforeWooden.systems) {
+  if (['condition-7-wire', 'condition-7-lifecycle'].includes(row.id)) {
+    row.implementation = 'not-inspected'; row.implementationSources = [];
+    row.check = row.id.endsWith('-wire')
+      ? 'Roundtrip index 7 and mask 64; damage/set-condition bytes versus stat29 mask, duration255/256 narrowing.'
+      : 'Apply/refresh shorter and longer, exact expiry with shot/heal, transfer/death/reconnect and stacked sources; trace authoritative state.';
+    row.unknowns = ['Authoritative application, expiry, stacking and full native acceptance remain Unknown.'];
+  }
+  if (row.id === 'combat-collision-matrix') {
+    row.check = row.check.slice(0, row.check.indexOf(' Wooden0a08 continuing Shield'));
+    row.unknowns.pop();
+    row.implementationSources = row.implementationSources.filter(ref => !woodenRefs.includes(ref));
+  }
+}
+const beforeWoodenLeaves = expandCatalogue(beforeWooden).map(row => row.id === woodenIds[0]
+  ? {...row, implementation: 'missing', implementationSources: ['impl-world']} : row);
 const counts = rows => rows.reduce((out, row) => (out[row.kind] = (out[row.kind] ?? 0) + 1, out), {});
 
 test('July100 exact member sets and every ordered occurrence/parameter match the independently derived original inventory', () => {
@@ -275,13 +296,13 @@ test('prediction repair stays scoped alongside the quiver increments without pas
   assert.deepEqual(scoped.map(row => row.id).sort(), Object.keys(priorRefs).sort());
   for (const row of scoped) {
     assert.equal(row.implementation, 'partial');
-    assert.deepEqual(row.implementationSources, [...priorRefs[row.id], ...refs, ...(row.id === 'combat-collision-matrix' ? ['impl-iron-tests', 'impl-iron-native', ...paralyzingRefs] : [])]);
+    assert.deepEqual(row.implementationSources, [...priorRefs[row.id], ...refs, ...(row.id === 'combat-collision-matrix' ? ['impl-iron-tests', 'impl-iron-native', ...paralyzingRefs, ...woodenRefs] : [])]);
     assert.deepEqual(row.sources, ['artifact']);
   }
-  assert.equal(digest(JSON.stringify(baseline.systems.filter(row => !Object.hasOwn(priorRefs, row.id) && !['condition-4-wire', 'condition-4-lifecycle', 'condition-14-wire', 'condition-14-lifecycle'].includes(row.id)))), '3b753f84ca58978520a1c43fe836a2373ad5259e082bd44d5c3918ac92fca9e9');
-  const frozen = structuredClone(baseline); delete frozen.sources; delete frozen.systems; delete frozen.roadmap;
+  assert.equal(digest(JSON.stringify(beforeWooden.systems.filter(row => !Object.hasOwn(priorRefs, row.id) && !['condition-4-wire', 'condition-4-lifecycle', 'condition-14-wire', 'condition-14-lifecycle'].includes(row.id)))), '3b753f84ca58978520a1c43fe836a2373ad5259e082bd44d5c3918ac92fca9e9');
+  const frozen = structuredClone(beforeWooden); delete frozen.sources; delete frozen.systems; delete frozen.roadmap;
   assert.equal(digest(JSON.stringify(frozen)), '8746920f0778d190e098747ca3edbe691ad593676811e0c9ceff8477a70e1b50');
-  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => ![...refs, 'impl-quiver-tests', 'impl-quiver-native', 'impl-iron-tests', 'impl-iron-native', ...paralyzingRefs].includes(id))))), 'fc95d0b220e1d715f101985c59cca6ba66a3ff8da4a151042282ad5dad97c237');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(beforeWooden.sources).filter(([id]) => ![...refs, 'impl-quiver-tests', 'impl-quiver-native', 'impl-iron-tests', 'impl-iron-native', ...paralyzingRefs].includes(id))))), 'fc95d0b220e1d715f101985c59cca6ba66a3ff8da4a151042282ad5dad97c237');
   const roadmap = baseline.roadmap.map(area => ({...area, requirements: area.requirements.map(row => (area.id === 'combat' && ['Weapons, spells and projectiles', 'Conditions and their lifecycle'].includes(row.title)) || (area.id === 'multiplayer' && row.title === 'Identity, saves and world transitions') ? {...row, current: null} : row)}));
   assert.equal(digest(JSON.stringify(roadmap)), '63a4a090465819bdbf657dba0b64c84ed3c47f84cca1c56306e23f1c6366a2e6');
   const leaf = id => baselineLeaves.find(row => row.id === id);
@@ -301,7 +322,7 @@ test('prediction repair stays scoped alongside the quiver increments without pas
   assert.ok(baselineLeaves.filter(row => row.id.endsWith('-journey')).every(row => row.implementation === 'partial' && !row.implementationSources.some(ref => refs.includes(ref))));
   for (const variant of ['original', 'repaired']) {
     const totals = countChecks(baseline, baselineLeaves, variant);
-    assert.deepEqual(totals.implementation, {present: 892, partial: 5600, missing: 1753, 'not-inspected': 2643});
+    assert.deepEqual(totals.implementation, {present: 892, partial: 5603, missing: 1752, 'not-inspected': 2641});
     assert.deepEqual(totals.functional, {'not-run': 10888, passed: 0, failed: 0});
     assert.deepEqual(totals.historical, {unresolved: 10864, verified: 0, differences: 24});
     assert.equal(totals.complete, false);
@@ -337,7 +358,7 @@ test('two-quiver evidence stays frozen alongside the scoped Iron increment', () 
     assert.deepEqual(leaf.implementationSources, [...(leaf.id.startsWith('object-') ? ['impl-world'] : []), ...refs]);
   }
   // These digests freeze the pre-increment expanded surface, not just the inventory counts.
-  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ![...scopedIds, 'object-0a63-activation-1', ...paralyzingIds].includes(row.id)))), 'e40513b5c35e3ac9ad832726bc95c9705c4db8a1c81d60fc3cf8fc011a8fccd7');
+  assert.equal(digest(JSON.stringify(beforeWoodenLeaves.filter(row => ![...scopedIds, 'object-0a63-activation-1', ...paralyzingIds].includes(row.id)))), 'e40513b5c35e3ac9ad832726bc95c9705c4db8a1c81d60fc3cf8fc011a8fccd7');
   assert.equal(digest(JSON.stringify(scoped.map(({implementation, implementationSources, check, unknowns, ...row}) => row))), '56a9176ab72bda4e4295bfb1c20953f41719e1d2ac47809132b9a723fbcea9c8');
   assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => row.id.endsWith('-journey')))), 'e4ada9b5a32ff09e32be427e6d9ae438fbd1310d686a40423ddb05d9148b5d71');
   const leaf = id => baselineLeaves.find(row => row.id === id);
@@ -385,7 +406,7 @@ test('Iron evidence remains frozen alongside the five-leaf Steel/Golden incremen
   const leaf = id => baselineLeaves.find(row => row.id === id);
   const changedIds = ['object-0a63-activation-1', 'combat-collision-matrix'];
   assert.deepEqual(baselineLeaves.filter(row => row.implementationSources.some(ref => refs.includes(ref))).map(row => row.id), changedIds);
-  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ![...changedIds, ...paralyzingIds].includes(row.id)))), 'e5377351941214d444eb3d66e020d77d58b6786cf0f38f3ffe6c1d803ab7338f');
+  assert.equal(digest(JSON.stringify(beforeWoodenLeaves.filter(row => ![...changedIds, ...paralyzingIds].includes(row.id)))), 'e5377351941214d444eb3d66e020d77d58b6786cf0f38f3ffe6c1d803ab7338f');
   const iron = leaf(changedIds[0]), matrix = leaf(changedIds[1]);
   assert.equal(iron.implementation, 'partial');
   assert.equal(iron.valuePath, 'Activate');
@@ -401,7 +422,7 @@ test('Iron evidence remains frozen alongside the five-leaf Steel/Golden incremen
     assert.deepEqual(leaf(id).implementationSources, ['impl-world', ...paralyzingRefs]);
   }
   assert.equal(matrix.implementation, 'partial');
-  assert.deepEqual(matrix.implementationSources, ['impl-combat', 'impl-prediction-repair-tests', 'impl-prediction-repair-native', ...refs, ...paralyzingRefs]);
+  assert.deepEqual(matrix.implementationSources, ['impl-combat', 'impl-prediction-repair-tests', 'impl-prediction-repair-native', ...refs, ...paralyzingRefs, ...woodenRefs]);
   const {check, unknowns, implementationSources: matrixRefs, ...matrixFixed} = matrix;
   assert.equal(digest(JSON.stringify(matrixFixed)), '77f1b565d75d03818b5f096bb91c1845d61b23166aab82a0299bb8c3ec532652');
   assert.match(check, /Iron0a63 and Golden0a65.*stable Room numeric IDs at discovery through retirement.*view repair\/removal and earlier buffered kills.*entry then lower ID without global ordinary bullet\/reward reordering/);
@@ -409,9 +430,9 @@ test('Iron evidence remains frozen alongside the five-leaf Steel/Golden incremen
   assert.match(unknowns.join(' '), /recontacts preceded backend collision, not a post-hit living\/Slowed\/nonempty-ledger test/);
   assert.match(unknowns.join(' '), /later native-only\/offscreen contact, not an additional authoritative or rendered peer hit/);
   assert.match(unknowns.join(' '), /lifetimes retire independently.*no synchronized retirement or delivery guarantee.*not establish an original historical bullet0 sentinel/);
-  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => ![...refs, ...paralyzingRefs].includes(id))))), 'b06180da12d36b61b8422d6df6743184a2e5a69794325c3ecc32e45511f1ee9e');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(beforeWooden.sources).filter(([id]) => ![...refs, ...paralyzingRefs].includes(id))))), 'b06180da12d36b61b8422d6df6743184a2e5a69794325c3ecc32e45511f1ee9e');
   // Mask only the approved prose fields; every other parsed data value stays frozen.
-  const frozen = structuredClone(baseline);
+  const frozen = structuredClone(beforeWooden);
   for (const ref of [...refs, ...paralyzingRefs]) delete frozen.sources[ref];
   frozen.systems = frozen.systems.filter(row => !['condition-14-wire', 'condition-14-lifecycle'].includes(row.id));
   const collision = frozen.systems.find(row => row.id === matrix.id);
@@ -450,8 +471,8 @@ test('Steel/Golden evidence changes exactly five complete expanded leaves withou
   const leaf = id => baselineLeaves.find(row => row.id === id);
   assert.deepEqual(baselineLeaves.filter(row => row.implementationSources.some(ref => paralyzingRefs.includes(ref))).map(row => row.id).sort(), [...paralyzingIds].sort());
   // These hashes come from the unedited main84 catalogue, not the new evidence values.
-  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => !paralyzingIds.includes(row.id)))), '057fb9f7f419a558405dbeb8facc3328adc11743ac037c577434abea91594330');
-  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(baseline.sources).filter(([id]) => !paralyzingRefs.includes(id))))), '5dc9e42c6c4024efa0eae2b4ebf438fc926dbbdc45c5cec72621c2721f6c02b4');
+  assert.equal(digest(JSON.stringify(beforeWoodenLeaves.filter(row => !paralyzingIds.includes(row.id)))), '057fb9f7f419a558405dbeb8facc3328adc11743ac037c577434abea91594330');
+  assert.equal(digest(JSON.stringify(Object.fromEntries(Object.entries(beforeWooden.sources).filter(([id]) => !paralyzingRefs.includes(id))))), '5dc9e42c6c4024efa0eae2b4ebf438fc926dbbdc45c5cec72621c2721f6c02b4');
   assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => /^object-0a6[123]-/.test(row.id)))), '80d347b4f26551c8126f2852f53fbeb982eb93a048705d8038f6067e65198303');
   assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => ['object-0a64-activation-0', 'object-0a65-activation-0'].includes(row.id)))), '21d898b7b976c05a8707598d900ba38554d217f2e28519dda14e0851d60bbd0b');
   const shoots = paralyzingIds.slice(0, 2).map(leaf);
@@ -500,6 +521,79 @@ test('Steel/Golden evidence changes exactly five complete expanded leaves withou
     assert.deepEqual(countChecks(baseline, baselineLeaves, variant).historical, {unresolved: 10864, verified: 0, differences: 24});
     assert.equal(countChecks(baseline, baselineLeaves, variant).complete, false);
   }
+});
+
+test('Wooden citations pin executed tests versus prepared native evidence without widening acceptance', () => {
+  const pin = 'b70d95ff30fae59864f6271417ad997c918ff0f4';
+  const [tests, native] = woodenRefs.map(ref => baseline.sources[ref]);
+  for (const [source, mode, file, words] of [[tests, 'test', 'shield_runtime_tests.rs', 160], [native, 'native', 'world.rs', 210]]) {
+    assert.equal(source.kind, 'implementation'); assert.equal(source.mode, mode);
+    assert.equal(source.url, `https://github.com/dginovker/Open-RotMG-Server/blob/${pin}/src/build100/${file}`);
+    assert.ok(source.qualification.split(/\s+/).length <= words);
+    assert.doesNotMatch(JSON.stringify(source), /\u2014|\.local\/|\/home\/|guid=|credential|profile\/|\.db\b/i);
+    validateSource(source, 'wooden');
+    assert.throws(() => validateSource({...source, mode: 'source-only'}, 'probe'), /evidence mode/);
+    assert.throws(() => validateSource({...source, url: source.url.replace(pin, 'a'.repeat(40))}, 'probe'), /Wrong implementation pin/);
+    for (const kind of ['artifact', 'contemporary-production', 'contemporary-testing', 'earlier/later-comparator']) assert.throws(() => validateSource({...source, kind, mode: undefined}, 'probe'), /not history/);
+  }
+  for (const symbol of ['shield_runtime_original_repaired_exact_represented_shape_and_context_fail_closed', 'shield_runtime_mp_readiness_signed_carry_unscaled_rng_and_no_player_stun', 'shield_runtime_native_geometry_ids_wrapping_pending_weapons_and_receipts', 'shield_runtime_actual_pirate_and_turret_fire_suppression_clocks_existing_bullets_and_resume', 'shield_runtime_contact_after_ai_next_advance_overwrites_and_independent_timer_unions_clear', 'shield_runtime_continued_contacts_repair_reentry_tombstones_then_new_paid_projectile', 'shield_runtime_200ms_terminal_and_delayed_advances_retire_without_final_sweep', 'shield_actor_contact_begin_write_rollback_full_authority_and_fatal_dispatcher', 'quiver_actor_sql_begin_at_each_phase_and_write_at8_preserve_actual_prephase', 'quiver_and_wooden_shield_transport_encrypted_split_coalesced_serial_awaited_replies_no_adjacency_or_deadlock']) assert.ok(tests.selector.includes(symbol));
+  for (const pattern of [/387 July tests, 15 real Cargo guards.*no automated PR checks/, /DEF\+2 already worked/, /typed canonical shape is not exhaustive raw-XML validation/, /one cloned root-unscaled RNG roll.*shared ID1\.\.96/, /nonpaying15, 500ms readiness, signed carry.*candidate->commit->install->publication/, /Actor BEGIN\/write failures.*never refund\/replay/, /Stunned7\/mask64.*whole positive-on-entry step/, /Protected\/absent-HP turret tests inject timers, not living damage eligibility/, /200ms lifetime retires terminal\/delayed advances without a final sweep/, /No Player Stunned, Iron\/higher shields/]) assert.match(tests.qualification, pattern);
+  for (const symbol of ['Room::handle_at packet8/9/15', 'Room::use_ability', 'Room::advance_shore', 'Room::advance', 'Room::entity_wire_stats', 'Room::repairable_enemy', 'Room::publication']) assert.ok(native.selector.includes(symbol));
+  for (const pattern of [/PREPARED PirateHP500, normal Knight starter gear and unchanged repaired SWF/, /genuinely earned Archer10\/client Knight unlock.*not ordinary acquisition/, /failed pre-cast permanent death and normal replacement/, /Living BEFORE preceded edits.*without saved restore\/refill\/reroll/, /Silver chevrons rendered in both views.*one80MP8->15.*native46 ignored\/server58/, /Both full streams.*18 mask64 samples, no new NPC shots, 1\.0664 tiles of movement, explicit0 and resumed fire/, /original live checker failed.*independent retained-stream decoding.*without replay/, /Load25\/lowMP\/sword-camera.*retained screenshot-name failure/, /Five native quivers regressed.*Reinforced paid80MP.*failed manifest checker/, /volatile Rooms\/NPC\/RNG, not saved progress/, /ordinary public bow\/Tattered.*not public Wooden, Knight unlock or condition-duration acceptance/, /No native post-backend-hit living\/nonempty-ledger recontact or later rendered contact/, /movement-budget Error20 remains unresolved.*not movement acceptance/, /Original SWF functional checks remain not-run.*history and full Knight\/game acceptance remain unverified/]) assert.match(native.qualification, pattern);
+});
+
+test('Wooden changes exactly four complete leaves and two source objects on fresh official main', () => {
+  const leaf = id => baselineLeaves.find(row => row.id === id);
+  assert.deepEqual(baselineLeaves.filter(row => row.implementationSources.some(ref => woodenRefs.includes(ref))).map(row => row.id).sort(), [...woodenIds].sort());
+  assert.deepEqual(baselineLeaves.filter((row, i) => JSON.stringify(row) !== JSON.stringify(beforeWoodenLeaves[i])).map(row => row.id).sort(), [...woodenIds].sort());
+  // Independently captured before editing: complete objects, including all prior refs and prose.
+  assert.equal(digest(JSON.stringify(beforeWoodenLeaves)), 'b9a05e6fd8c1a4551a314e6e5e5dfb8a8fe6126697e2206b8f453cefcd989b0d');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => !woodenIds.includes(row.id)))), '872c889196ffa707b3359241de819c837b9620e2accc148ecb1e42225c2c241b');
+  assert.equal(digest(JSON.stringify(beforeWooden.sources)), '52d0cd2d988f200ce1bfb52a2379dc0f1bb7cb530aa648726071743645eb5ee2');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => woodenIds.includes(row.id)).map(({implementation, implementationSources, check, unknowns, ...row}) => row))), 'fb4f4cff2cf658b2d5029797973798d4cc5ac5fd9b8b42be518f2d1b28986f2f');
+  const reversed = structuredClone(beforeWooden);
+  for (const area of reversed.roadmap) for (const row of area.requirements) if (area.id === 'combat' && ['Weapons, spells and projectiles', 'Conditions and their lifecycle'].includes(row.title)) row.current = null;
+  assert.equal(digest(JSON.stringify(reversed)), 'fbd8ec0637de814721435753770fb7498a796c65b0977ad2349e250324fdf8ca');
+  assert.equal(digest(JSON.stringify(leaf('object-0a08-activation-0'))), 'fc48fe84bfa23609043aa9d4e92496140e5d982ad585ac79caf8b84c399e33b5');
+  assert.deepEqual(leaf('object-0a08-activation-0').implementationSources, ['impl-world']);
+  assert.equal(digest(JSON.stringify(leaf('condition-7-client'))), 'a784195852cde4b776c5acd6a6476852e5efd0b85688183e0cd3e9d771cd80ca');
+  assert.equal(digest(JSON.stringify(baselineLeaves.filter(row => /^object-0a6[12345]-/.test(row.id)))), 'ad49ce5b2bf59454038cb4f7d62ece7c6dfb2c95bc698cf916cd166b0d9860e2');
+  for (const id of woodenIds) assert.equal(leaf(id).implementation, 'partial');
+  assert.deepEqual(leaf(woodenIds[0]).implementationSources, ['impl-world', ...woodenRefs]);
+  for (const id of ['condition-7-wire', 'condition-7-lifecycle']) assert.deepEqual(leaf(id).implementationSources, woodenRefs);
+  assert.deepEqual(leaf('combat-collision-matrix').implementationSources, [...beforeWooden.systems.find(row => row.id === 'combat-collision-matrix').implementationSources, ...woodenRefs]);
+  assert.equal(leaf('combat-collision-matrix').check.split(' Wooden0a08 continuing Shield').length, 2);
+  assert.match(leaf('combat-collision-matrix').unknowns.at(-1), /no post-backend-hit living\/nonempty-ledger recontact or later rendered contact.*200ms terminal\/delayed non-sweep.*not fixed/);
+  assert.match(leaf('condition-7-wire').check, /enum7\/duration3.*mask64, not Dazed6\/mask32.*64\/72\/8256\/8264\/0.*explicit zero/);
+  assert.match(leaf('condition-7-lifecycle').check, /NEW Pirate.*tutorial-turret.*positive-on-entry.*next advance.*Movement.*continue.*no catch-up shots.*shortening.*independently/);
+  assert.match(leaf('condition-7-lifecycle').unknowns.join(' '), /not a new living damage target.*timer-injection.*Player.*Unknown/);
+  assert.deepEqual(baseline.results, {});
+  for (const variant of ['original', 'repaired']) {
+    const totals = countChecks(baseline, baselineLeaves, variant);
+    assert.deepEqual(totals.functional, {'not-run': 10888, passed: 0, failed: 0});
+    assert.deepEqual(totals.historical, {unresolved: 10864, verified: 0, differences: 24});
+    assert.equal(totals.complete, false);
+  }
+});
+
+test('Wooden activation binding admits only its exact owner, root path and Shoot action', () => {
+  for (const patch of [{name: 'HealNova'}, {path: 'ActivateOnEquip'}, {path: 'Projectile/ActivateOnEquip'}, {owner: 'object-0a09'}]) {
+    const d = catalogue(), row = d.occurrences.activation.find(r => r.owner === 'object-0a08' && r.path === 'Activate');
+    const ordinal = row.ordinal; Object.assign(row, patch);
+    assert.ok(!expandCatalogue(d).find(r => r.id === `${patch.owner ?? 'object-0a08'}-activation-${ordinal}`).implementationSources.some(ref => woodenRefs.includes(ref)));
+  }
+  const shield = baseline.members.find(row => row.id === 'object-0a08');
+  const projectile = baseline.occurrences.projectile.find(row => row.owner === shield.id);
+  assert.deepEqual(projectile.attrs, {});
+  assert.deepEqual(projectile.fields.slice(-2), [['ConditionEffect', 'Stunned', {duration: '3'}], ['Continues', '', {}]]);
+  for (const fields of [shield.fields, projectile.fields]) for (const [tag, value] of [['MinDamage', '30'], ['MaxDamage', '70']]) assert.equal(fields.find(f => f[0] === tag)[1], value);
+  assert.equal(shield.fields.find(f => f[0] === 'NumProjectiles')[1], '1');
+  assert.equal(shield.fields.some(f => f[0] === 'ArcGap'), false);
+  assert.equal(projectile.fields.find(f => f[0] === 'LifetimeMS')[1], '200');
+  assert.equal(projectile.fields.find(f => f[0] === 'Speed')[1], '160');
+  const combat = baseline.roadmap.find(area => area.id === 'combat').requirements;
+  assert.match(combat.find(row => row.title === 'Weapons, spells and projectiles').current, /Wooden0a08 alone.*PREPARED.*not ordinary acquisition or public Knight acceptance.*DEF\+2 already worked.*Iron\/higher shields remain unsupported.*200ms.*movement-budget diagnosis/);
+  assert.match(combat.find(row => row.title === 'Conditions and their lifecycle').current, /Stunned7\/mask64.*new NPC shots suppressed while movement and clocks continue, unlike Slowed\/Paralyzed.*not ordinary public Wooden proof/);
 });
 
 test('archived healing testimony stays approximate testing evidence, not server authority', () => {
@@ -617,7 +711,7 @@ test('native DOM seam renders every group with safe text, exact filters, details
   const mounted=await mountCatalogue(env.document,success(d),env.window,{error:e=>errors.push(e)});
   assert.ok(mounted);assert.equal(errors.length,0);assert.equal(env.nodes.filters.disabled,false);
   assert.equal(env.nodes['check-dialog'].open,true);assert.match(env.nodes['check-content'].textContent, /-y,-x,-rotation/);
-  assert.match(env.nodes['questions-summary'].textContent,/Global gates: 4 · category gates: 10 · repaired variant gates: 1 · leaf-local question bindings: 10889/);
+  assert.match(env.nodes['questions-summary'].textContent,/Global gates: 4 · category gates: 10 · repaired variant gates: 1 · leaf-local question bindings: 10890/);
   assert.equal(env.nodes.variant.value,'repaired');assert.match(env.nodes['visible-count'].textContent,/10888 \/ 10888/);
   assert.equal(descendants(env.nodes.checks).filter(n=>n.tagName==='details').length,new Set(baselineLeaves.map(l=>l.domain+':'+l.group)).size);
   assert.ok(env.nodes.checks.textContent.includes(hostile));assert.equal(descendants(env.nodes.checks).filter(n=>n.tagName==='img').length,0);
