@@ -4004,10 +4004,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Distinguish bag ownership from Soulbound item restrictions. Exact historical tables/rates/thresholds/lifetimes remain unresolved reconstruction policies.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction.",
         "differences": [],
         "unknowns": [
-          "Original drops, probabilities, participation thresholds, attribution and expiry.",
+          "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
           "When private bags become public, who can see them, and what survives reconnecting."
         ],
         "sources": [
