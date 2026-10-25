@@ -1210,7 +1210,8 @@
         "historical": "partial",
         "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
         "differences": [
-          "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495"
+          "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495",
+          "Generated Cherry Tree sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507"
         ],
         "unknowns": [
           "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
@@ -1357,7 +1358,8 @@
           "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501"
+          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
+          "Generated Oasis Palm sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507"
         ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
