@@ -1,6 +1,39 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "ghost-master-source-e7ab45c": {
+      "kind": "source",
+      "revision": "e7ab45c26bd0efe583b02934ccdaa49ad4171311",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/e7ab45c26bd0efe583b02934ccdaa49ad4171311/src/world/realm_quests.rs",
+      "method": "Removes Ghost Master's generic 90-second expiry. Pinned realm-src has only ordered Decay/Suicide terminal states; the King's 140-second timeout/cleanup and ordinary ghosts' 160-second lifetimes remain unchanged.",
+      "limitations": "Later community comparator, not recovered official 123.5.1 AI. No stats, thresholds, toss or reward change; exact original report's permanence is unproven.",
+      "checks": [
+        "realm:ghost-king"
+      ]
+    },
+    "ghost-master-regression-e7ab45c": {
+      "kind": "regression",
+      "revision": "e7ab45c26bd0efe583b02934ccdaa49ad4171311",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/551#issuecomment-6397970910",
+      "method": "Same maintained assertion fails baseline with Master gone 90500ms into the invulnerable wait. Fix passes and retains Master through the exact 140000ms King timeout, then checks cleanup and one Actual Ghost King replacement.",
+      "limitations": "Deterministic mechanics test, not native combat or Realm closure. Complete same-head rerun: 225 Rust tests passed, plus strict Clippy, formatting, 18 Node and 2 Python tests. Earlier 224-pass/1-fail drop-cause run retained. Actual merge 6f875beb passed both Ghost tests, formatting and strict Clippy; no fresh full merged-tree Rust run.",
+      "checks": [
+        "realm:ghost-king"
+      ]
+    },
+    "ghost-master-native-576d885d": {
+      "kind": "native",
+      "revision": "576d885d0592818bdbbdd9d2fb794896722a07bb",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/551#issuecomment-6397970910",
+      "method": "Native before8/after1 each passed 4 assertions, living non-attacking Sorcerer, same case, seed12351, client be57de7 and Ruffle15. At 96.5s baseline Master is absent; at 96.2s fixed Master remains with King. Cleanup errors empty.",
+      "limitations": "Explicit stage 7/sole-Master setup on cleared Tutorial map, prepared stats/gear. Runs record 6879e964+dirty, with fixture/regression and After lifetime patch matching 576d885d mechanics. Not earned entry, exact reporter replay, native defeat, original timing certification or Realm-closure acceptance. Earlier ENOSPC/startup/controller failures remain rejected; overall status stays not-run.",
+      "checks": [
+        "realm:ghost-king"
+      ]
+    },
     "snake-necks-native-e016a63": {
       "kind": "native",
       "revision": "e016a633d9abafcbdc2e8ed182a8a72e8d1b2840",
@@ -2546,7 +2579,7 @@
     "realm:travel-between-worlds": {"status":"not-run","evidence":["dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
     "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a"]},
     "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c"]},
-    "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c"]},
+    "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c","ghost-master-source-e7ab45c","ghost-master-regression-e7ab45c","ghost-master-native-576d885d"]},
     "realm:deathmage": {"status":"not-run","evidence":[]},
     "realm:red-demon": {"status":"not-run","evidence":["hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:oasis-giant": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","oasis-palms-regression-4dc7761","landmark-chest-trials-regression-09eb8b7","tree-size-config-regression-e75cf97","period-loot-source-1f488df","period-loot-regression-1f488df"]},
