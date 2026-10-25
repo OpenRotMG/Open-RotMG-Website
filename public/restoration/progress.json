@@ -4697,7 +4697,8 @@
         "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
         "differences": [
           "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
-          "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540"
+          "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540",
+          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553"
         ],
         "unknowns": [
           "Original Nexus boundary metric, death-notice audience boundaries and killer grammar, other announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
