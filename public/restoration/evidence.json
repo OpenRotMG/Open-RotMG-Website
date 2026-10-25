@@ -7,7 +7,7 @@
       "date": "2026-10-25",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/c6b4925d5eaf170ff74a920b3058040ceb821a05/src/loot.rs#L601-L611",
       "method": "Appends an independent 5% Defense potion 0xa20 roll to Limon 0xd06 without replacing guaranteed Dexterity 0xa4c. Uses the existing private per-eligible-contributor reward path; preceding item entries, eligibility, bag ownership/capacity, boss AI, selected items and client are unchanged.",
-      "limitations": "5% follows the much later FSoD comparator, not recovered original123.5.1 odds. Modified7.0 uses10%; May/June2012 guides omit Defense; an August1,2013 player account explicitly mentions occasional Defense. Exact original availability and probability remain unresolved.",
+      "limitations": "5% follows the much later FSoD comparator, not recovered original 123.5.1 odds. Modified 7.0 uses 10%; May/June 2012 guides omit Defense; an August 1, 2013 player account explicitly mentions occasional Defense. Exact original availability and probability remain unresolved.",
       "checks": ["dungeons:sprite-world"]
     },
     "sprite-defense-regression-c6b4925": {
@@ -15,7 +15,7 @@
       "revision": "c6b4925d5eaf170ff74a920b3058040ceb821a05",
       "date": "2026-10-25",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/529#issuecomment-6394897258",
-      "method": "One maintained reward regression fails on the test-only baseline because Limon Defense is missing, then passes at this revision. It checks private classification, exact 0.05 entry, RNG values immediately below/at its probability boundary, and 1024 fixed-seed ordinary rewards retaining exactly one Dexterity with optional nonduplicate Defense. All 205 Rust tests, strict all-target Clippy, formatting,18 Node tests,two Python wrapper tests and release build passed.",
+      "method": "One maintained reward regression fails on the test-only baseline because Limon Defense is missing, then passes at this revision. It checks private classification, exact 0.05 entry, RNG values immediately below/at its probability boundary, and 1024 fixed-seed ordinary rewards retaining exactly one Dexterity with optional nonduplicate Defense. All 205 Rust tests, strict all-target Clippy, formatting, 18 Node tests, two Python wrapper tests and release build passed.",
       "limitations": "Engineering loot-roll evidence, not earned gameplay, a production rare-drop observation, a complete Sprite World clear or historical certification. Native context captures show living full-health Limon only and do not demonstrate a drop. An earlier constant-RNG harness stalled in tier rejection sampling and was identity-checked stopped; that interrupted attempt is retained and not credited. Overall functional status stays not-run and historical status partial.",
       "checks": ["dungeons:sprite-world"]
     },
