@@ -1310,7 +1310,8 @@
         "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Target timers, branches and rewards remain unresolved.",
         "differences": [
           "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
-          "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551"
+          "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551",
+        "Compiled Kithio primary uses raw (19,13) after rotation without painting the birth cell. Current native fields/scenery survive strict habitat, walkability and ownership admission. Regression and prepared native checks are not earned combat or original placement/field authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/584"
         ],
         "unknowns": [
           "Target timeout-release/cleanup policy, wave branches and phase timings.",
