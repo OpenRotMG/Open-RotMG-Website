@@ -2050,7 +2050,8 @@
         "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
         "differences": [
           "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue 335 was closed after server PR342 restored private Hermit loot; exhaustive native combat/loot-return acceptance remains separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579 https://github.com/OpenRotMG/Open-RotMG-Server/pull/342#issuecomment-6363681911",
-          "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification."
+          "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification.",
+          "Server PR524 distributes private bags across eight tentacle-spawner sites without changing rates, shared potion minima or the Trench portal. The release-7 loot guide describes eight drop locations; pinned realm-src/Valor maps instead contain four drop markers. Exact target-era allocation remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/524#issuecomment-6394267838"
         ],
         "unknowns": [
           "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability, loot pools, eligibility, minimum counts and rates."
@@ -2075,6 +2076,10 @@
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
             "label": "June 2012 guide: soulbound loot and a broader pool, without numerical minima"
+          },
+          {
+            "url": "https://www.realmeye.com/forum/t/guide-to-loot-and-drop-rates/60740",
+            "label": "Retrospective release-7 loot guide: eight Hermit drop locations, not target-era rate certification"
           }
         ]
       }
