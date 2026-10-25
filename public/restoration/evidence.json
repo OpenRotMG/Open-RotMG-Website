@@ -680,6 +680,15 @@
       "limitations": "Prepared gear, base stats, positions, resources and map knowledge were not native-earned. Four unchanged ordinary Pixl objective squads of five plus40 initial arena companions and the native total61 actors. Arena companions were born after objectives and before boss DPS, not before all objective damage. No replacements, NPC edits or guard/cap changes. This proves the clear/exit/reconnect journey, not the combined treasure/individual-loot/artifact acceptance, earned Sphinx entry, full readable mechanics gallery, late join or historical precision. All six Tomb/Sphinx acceptance results remain not-run.",
       "checks": ["dungeons:tomb-of-the-ancients", "dungeons:tomb-of-the-ancients:treasure-and-three-boss-completion"]
     },
+    "hermit-drop-sites-regression-bf7475d": {
+      "kind": "regression",
+      "revision": "bf7475dbd48aeb6c1c92fc9d00503243ab9f2c89",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/524#issuecomment-6394267838",
+      "method": "Parent rule reproduced a fixed bag offset. On the reviewed head, 64 seeded solo World drop_loot calls reach all eight tentacle-spawner sites, keep every bag on those sites and retain both potion minima. All 204 Rust tests, strict release all-target Clippy and formatting passed. Normal merged deployment also passed 204 tests and the matching-binary backup/restore contract.",
+      "limitations": "Flat prepared World fixture with assigned damage, not native combat, earned progression or multiplayer loot-return acceptance. PR images are diagrams, not gameplay captures. The release-7 guide describes eight sites, but realm-src/Valor maps have four drop markers. Rates, shared minima and the portal are unchanged; historical allocation and native acceptance remain unverified.",
+      "checks": ["realm:hermit-god"]
+    },
     "hermit-loot-regression-22ecae7": {
       "kind": "regression",
       "revision": "22ecae71dfa23f7108ba7597a8d0e8d9913422e4",
@@ -2434,7 +2443,7 @@
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425"]},
-    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45"]},
+    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":[]},
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
