@@ -2751,12 +2751,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Include Sprite Child lifecycle, not constructs; original child counts/regeneration/cleanup remain qualified.",
+        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified.",
         "differences": [
-          "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337"
+          "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
+          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553"
         ],
         "unknowns": [
-          "Original child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
+          "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
         ],
         "sources": [
           {
@@ -2769,7 +2770,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
-            "label": "2013 community Sprite God: predictive fan and boomerang, not official server code"
+            "label": "2013 community Sprite God/Child: predictive fan and boomerang, catch-up yielding to wandering; not official server code"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sprite%20Child",
+            "label": "Sprite Child page last modified January 2013: wanders without pursuing players and stays close to Sprite Gods"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/how-to-get-healed-by-necromancer.html",
+            "label": "May 2012 healing guide: Sprite Gods with children form useful clustered groups"
           }
         ]
       }
