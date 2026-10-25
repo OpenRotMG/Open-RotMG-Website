@@ -2618,6 +2618,54 @@
       "checks": [
         "dungeons:pirate-cave"
       ]
+    },
+    "spider-footage-regression-52ef54d": {
+      "kind": "regression",
+      "revision": "52ef54d303e2a59b1a47b2e7807a75d691036a5f",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/commit/52ef54d303e2a59b1a47b2e7807a75d691036a5f",
+      "method": "The unchanged Spider-only generator regression passes on the clean integrated head across 32 seeds: selected cover/web flags, four wall columns, 30 nonblocking static webs, spawn/boss, five live sacs, 26 generated actors, 10 existing props and connected walkable floor. Normalized delta against recorded main remains only src/dungeon/spider.rs and is byte-identical to the earlier reviewed patch.",
+      "limitations": "Map and selected-data evidence, not full-World combat, collision, LOS, historical generator geometry or natural egg/cover lifecycle acceptance. Four offsets and web sites/counts remain reconstructed. Earlier exact-generator comparison and source evidence retain their old revisions.",
+      "checks": [
+        "dungeons:spider-den",
+        "dungeons:spider-den:egg-and-cover-environment"
+      ]
+    },
+    "spider-footage-native-52ef54d": {
+      "kind": "native",
+      "revision": "52ef54d303e2a59b1a47b2e7807a75d691036a5f",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/commit/52ef54d303e2a59b1a47b2e7807a75d691036a5f",
+      "method": "One ordinary integrated-head after-native passes four assertions and retains two genuine rendered captures with empty cleanup errors. Same case, SDK/runner/controller, client be57de7342331db787cbf9bb67cb7a7e3ae47dcb, Ruffle 0.7.1-openrotmg.15, worldSeed 12351 and legal prepared Knight as qualified clean c5740e2 baseline. Empty weapon/ability/backpack, Acropolis Armor and Ring of Exalted Health, initial (65.5,23.5), three 1500ms idles and one 400ms A walk. Zero shots or kills; same living character remains in the original dungeon.",
+      "limitations": "The boss image shows a dirt-wall cap, but the Quest tooltip occludes the lower column and natural Arachna graphics obscure other details. The wall-detail pair is context, not proof that all four columns or all web sites are visible. Image evidence does not establish original geometry, collision, combat or LOS coverage. Prepared positions, not earned entry/traversal or a clear. No whole-layout, combat, collision, LOS or egg-lifecycle acceptance. Prior readiness, ACK, ENOSPC and two parent bootstrap failures remain failed; earlier 85886d9 recovery remains scoped to that revision. Startup root cause is unestablished.",
+      "checks": [
+        "dungeons:spider-den",
+        "dungeons:spider-den:egg-and-cover-environment"
+      ]
+    },
+    "spider-footage-regression-85886d9": {
+      "kind": "regression",
+      "revision": "85886d92f26ab422029810fdf32031dc9fbae983",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/commit/85886d92f26ab422029810fdf32031dc9fbae983",
+      "method": "A 32-seed selected-data regression retains spawn, boss, five live sacs, 26 generated actors, 10 existing props and connected walkable floor around four blocking wall columns. Thirty static wall webs occupy empty Spider Dirt adjacent to real walls. An ID-only exact-generator comparison across 32 seeds preserves every other object identity/position plus all ground/config/terrain/regions.",
+      "limitations": "Map/selected-flag checks, not full-World combat/LOS or natural egg/cover lifecycle acceptance. Four offsets and 30 web sites are reconstructed. FullOccupy and BlocksSight intentionally follow selected Spider Dirt Wall rather than Grey Pillar. No generator RNG draws added.",
+      "checks": [
+        "dungeons:spider-den",
+        "dungeons:spider-den:egg-and-cover-environment"
+      ]
+    },
+    "spider-footage-source-85886d9": {
+      "kind": "source",
+      "revision": "85886d92f26ab422029810fdf32031dc9fbae983",
+      "date": "2026-10-25",
+      "url": "https://github.com/dginovker/Open-RotMG-Server/blob/85886d92f26ab422029810fdf32031dc9fbae983/src/dungeon/spider.rs",
+      "method": "MrJakeBills1 at 01:50.037 shows an isolated brown/black-topped wall column and attached decorative web. Continuous 01:47-01:55 frames, Arachna web emitters and terminal-room minimap progression establish boss-chamber context. Selected Wall 0x1e8 and static Spider Web 0x732 are strong model/texture identifications, not IDs encoded in video. The recording shows Build 123.4.4 at 02:20.",
+      "limitations": "August 2012 upload metadata differs by one day between watch page and yt-dlp. This is not exact 123.5.1 authentication. Column count/coordinates and web placement/count remain reconstructed; source inspection is not gameplay acceptance. Pinned community maps are later comparators only, with no imported code/maps.",
+      "checks": [
+        "dungeons:spider-den",
+        "dungeons:spider-den:egg-and-cover-environment"
+      ]
     }
   },
   "results": {
@@ -2752,8 +2800,8 @@
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7"]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
-    "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28"]},
+    "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d"]},
+    "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","dungeon-return-regression-456ab72","dungeon-return-native-456ab72","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","period-loot-source-1f488df","period-loot-regression-1f488df","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
