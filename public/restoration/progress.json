@@ -2027,7 +2027,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Five towers, Eyes, corpses/revival, attacks, all-five completion, once-only credit and rewards. Period test's central large tower has unresolved production continuity.",
-        "differences": [],
+        "differences": [
+          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields, placement and the period test's large central tower's production fate remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
+        ],
         "unknowns": [
           "Central tower's final production fate; target revival, geometry, grenade and reward parameters."
         ],
