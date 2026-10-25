@@ -8,10 +8,11 @@ window.OpenRotMGBugReport = {
     const submit = form.querySelector('button[type="submit"]');
     const refresh = document.querySelector('#bug-refresh');
     const link = document.querySelector('a[href="/#bug-report"]');
-    let screenshot, reportId, submitting = false;
+    let screenshot, reportId, loaded = false, submitting = false;
     async function capture() {
       if (submitting || reportId) return;
       submit.disabled = true;
+      if (!loaded) { status.textContent = 'Waiting for the game image…'; return; }
       status.textContent = 'Capturing your game…';
       try {
         screenshot = await new Promise((resolve, reject) => requestAnimationFrame(() => {
@@ -44,7 +45,10 @@ window.OpenRotMGBugReport = {
     }
     refresh.addEventListener('click', () => void capture());
     player.addEventListener('loadeddata', () => {
-      if (!panel.hidden && !screenshot) void capture();
+      loaded = true;
+      setTimeout(() => {
+        if (!panel.hidden && !screenshot) void capture();
+      }, 0);
     }, {once: true});
     link.setAttribute('aria-controls', 'bug-report');
     link.setAttribute('aria-expanded', 'false');
