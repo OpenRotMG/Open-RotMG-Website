@@ -3038,10 +3038,11 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [
+              "North/south boss cover mixes breakable blocks with permanent shelter; side cover stays permanent. The material split remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/673",
               "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
             ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not an original generator.",
+              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not the original generator.",
               "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
