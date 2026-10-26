@@ -1483,7 +1483,8 @@
         "expected": "Connected Lord→Egg→Reborn encounter with Birdman/Birdman Chief, egg shielding and distinct reborn attacks; intermediate forms are not separate completed features.",
         "differences": [
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
-          "Pyres now create one public treasure chest at their existing center. GPL-based item rolls use a 5-7 success ceiling and can be empty; the older comparator fills its chest differently. Original contents, order and RNG remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/517"
+          "PR517 added public chest loot at the Pyre center with a 5-7 success ceiling. Later overrides in PR535 use independent tier trials and two guaranteed potion rolls instead of that ceiling. Original contents, order and RNG remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/517 https://github.com/OpenRotMG/Open-RotMG-Server/pull/535",
+        "Painted Pyre cells retain native raw configuration, matching the compiled Kithio clone. This does not configure the empty cell or separate chest, or authenticate original map data or RNG: https://github.com/OpenRotMG/Open-RotMG-Server/pull/623"
         ],
         "unknowns": [
           "Target egg shielding: older comparator1500ms versus later2000ms.",
@@ -4298,12 +4299,16 @@
         "differences": [],
         "unknowns": [
           "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
-          "MP restoration text now uses cyan as requested in issue 322; original server hue is not established by conflicting modified comparators."
+          "Exact original MP-restoration text hue remains unrecovered; Kithio purple and Trapped white conflict. Light blue 6084e0 is a later-reference reconstruction, not authenticated 123.5.1 RGB."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/entities/player/Player.UseItem.cs#L140",
+            "label": "Later FSoD light-blue 6084e0 comparator; reconstruction, not original 123.5.1 hue"
           }
         ]
       }
@@ -5711,7 +5716,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Sick disables healing, not merely Vitality. Natural regeneration, Healing-over-time, direct/party heals, consumables and drain-heals need separate cases; individual exceptions and cleanse/heal ordering are not fully established.",
-        "differences": [],
+        "differences": [
+          "Native map eff configuration uses decimal or lowercase 0x numbers; eff:16 no longer gains Quiet/Weak bits. This corrects numeric ingestion, not Sick healing behavior or authenticated original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/626"
+        ],
         "unknowns": [
           "Historical per-source exceptions, blocked-potion consumption, cleanse/heal ordering and complete removal matrix."
         ],
