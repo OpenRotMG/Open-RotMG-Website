@@ -2831,10 +2831,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified. Bounded ordinary god self-reproduction now uses active clocks, local density, capacity and 12-tile safety guards;family regrowth remains separate reconstruction.",
+        "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified.",
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
-          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553"
+          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
         ],
         "unknowns": [
           "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
