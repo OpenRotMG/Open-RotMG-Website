@@ -5067,6 +5067,7 @@
         "differences": [],
         "unknowns": [
           "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
           "Whether the original server also rejected direct requests targeting invisible players."
         ],
         "sources": [
@@ -5077,6 +5078,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.0.0",
             "label": "Build 123.0.0 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 Wild Shadow FAQ: same-map player teleporting; no explicit Nexus permission or prohibition"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/World.cs#L26-L36",
+            "label": "Primary community World defaults AllowTeleport to true; Nexus does not override it, not authenticated 2012 server behavior"
+          },
+          {
+            "url": "https://rotmgstart.weebly.com/controls.html",
+            "label": "Undated later guide explicitly excludes Nexus player teleports; its pet/backpack UI is not 123.5.1 evidence"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
+            "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
           }
         ]
       }
