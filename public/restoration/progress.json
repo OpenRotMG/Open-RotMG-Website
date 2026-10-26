@@ -215,7 +215,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
+        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. In the community reconstruction, Invulnerable blocks HP loss but not stun; Invincible, Stasis and Stun Immune still block stun. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
         "differences": [],
         "unknowns": [
           "Original stun and Armor Broken immunity lists, multi-hit accounting and untiered-shield acquisition."
@@ -224,6 +224,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community hit rule: invulnerability preserves HP, not immunity to projectile effects"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/GameObject.as",
+            "label": "Modified 7.0 client: invulnerability zeros damage but remains targetable"
           }
         ]
       }
@@ -1264,7 +1272,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
+        "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Invulnerable growth/shield windows should still permit shield stun without HP loss under the community hit rules. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
         "differences": [
           "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495",
           "Generated Cherry Tree sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
@@ -1291,6 +1299,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.EntAncient.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
           }
         ]
       }
@@ -3155,7 +3167,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309"
@@ -3195,6 +3207,10 @@
           {
             "url": "https://www.youtube.com/watch?v=SXTEcrN4bII",
             "label": "bickuribox12 Undead Lair footage, upload metadata 2012-09-15; exact build unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
           }
         ],
         "checks": [
@@ -5768,12 +5784,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Stunned prevents ordinary weapon shooting. Do not require a blanket class-ability lock: target client ability entry does not check Stunned, while original server exceptions remain unresolved.",
+        "expected": "Stunned prevents ordinary weapon shooting. The community enemy hit rule permits projectile stun through Invulnerable without HP loss. Do not require a blanket class-ability lock: target client ability entry does not check Stunned, while original server exceptions remain unresolved.",
         "differences": [],
         "unknowns": [
           "Original server ability-specific acceptance, already-existing projectile behavior, complete duration/cleanse policy."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -6150,13 +6170,17 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Invulnerable zeroes calculated projectile damage but remains a projectile collision target. Do not infer condition immunity or universal damage immunity from this client rule.",
+        "expected": "Invulnerable zeroes calculated projectile damage but remains a projectile collision target. The community enemy hit rule still applies projectile conditions; player hit handling is separate. Do not infer universal damage immunity or authenticated original condition semantics from this reconstruction.",
         "differences": [],
         "unknowns": [
-          "Whether shot conditions still apply when projectile damage is zero.",
+          "Original production condition acceptance when projectile damage is zero; community enemy semantics do not authenticate player behavior.",
           "Original ground damage, area damage, poison and Bleeding exceptions."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"

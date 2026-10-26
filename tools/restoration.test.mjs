@@ -194,10 +194,20 @@ test('Oryx count announcements do not accept complete closure or chat',()=>{
 test('protected projectile contrast supports a seam without accepting whole conditions',()=>{
   const data=catalogue(),evidence=ledger(),ids=['condition:22','condition:24','condition:25'],refs=['protected-projectile-source-c4854b8','protected-projectile-native-pair-ef94d41'];
   validateEvidence(data,evidence);
-  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,refs);}
+  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,id==='condition:25'?[...refs,'shield-stun-regression-06b5675','shield-stun-native-545f79e']:refs);}
   for(const ref of refs)assert.deepEqual(evidence.sources[ref].checks,ids);
   const pair=evidence.sources[refs[1]];assert.equal(pair.kind,'native');assert.equal(pair.revision,'ef94d412c8ea470b1f29cb5d2f00592319d95f34');
   assert.equal(pair.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081');assert.match(pair.method,/four-line corrective edit/);assert.match(pair.limitations,/not-run/);assert.match(pair.limitations,/not new native journeys/);
+});
+
+test('shield stun receipts do not accept complete classes, bosses or conditions',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['heroes:knight','realm:ent-ancient','dungeons:undead-lair','condition:7','condition:25'];
+  validateEvidence(data,evidence);
+  const regression=evidence.sources['shield-stun-regression-06b5675'],native=evidence.sources['shield-stun-native-545f79e'];
+  assert.equal(regression.revision,'06b56753fa9919dd36511a5e210fc72933c5da20');assert.deepEqual(regression.checks,ids);
+  assert.equal(native.revision,'545f79edd51e718d1efddd975a41d4a2814f6394');assert.deepEqual(native.checks,ids.filter(id=>id!=='realm:ent-ancient'));
+  assert.match(native.limitations,/No native Ent acceptance/);
+  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);}
 });
 
 test('minimap menu passes only its cross-revision functional scope and preserves prior evidence',()=>{
