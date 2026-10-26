@@ -2966,7 +2966,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
+        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms span 11 tiles including both rails and use target assets; their original distribution and exact AI/reward policies remain unsettled.",
         "differences": [],
         "unknowns": [
           "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
@@ -3000,7 +3000,7 @@
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/maps/wmap%27s/snakepit%20treasure%20test.wmap",
-            "label": "Inactive later treasure-test template: walkable rails and wooden button platform, not the embedded production map"
+            "label": "Inactive later treasure-test template: 11 tiles including both rails and a wooden button platform, not the embedded production map"
           },
           {
             "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
