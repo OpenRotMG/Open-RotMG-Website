@@ -1125,10 +1125,12 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
-        "differences": [],
+        "differences": [
+          "Native client movement is checked only for an active character, a non-regressing clock, finite coordinates and a walkable destination. The speed, time-budget and intervening-path checks exist only for server-driven movement, so a client can report a position beyond its speed or past blocked tiles between two updates."
+        ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
           "Original lag tolerance and pause/options interactions."

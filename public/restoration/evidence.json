@@ -87,7 +87,7 @@
       "revision": "499244541ab1e6f794cd6a7ec3a6bcd29f833b8a",
       "date": "2026-10-26",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/499244541ab1e6f794cd6a7ec3a6bcd29f833b8a/src/world.rs",
-      "method": "Player speed (world.rs:629-639) and movement validation (3917-4008) apply stat speed, Slowed, Speedy, Paralyzed, ground speed and push, a server time budget and blocked tiles along the path. Firing cadence covers Dexterity, Berserk and Dazed (4338-4365); projectiles support wavy, parametric and boomerang paths and MultiHit (content.rs:44-80, 327); damage applies Armored, Armor Broken and the 15% floor (condition.rs:53-66).",
+      "method": "Player speed (world.rs:629-639) combines stat speed, Slowed, Speedy, Paralyzed, ground speed and push. Server-driven movement (validate_move_at, 3917-4006) also enforces a time budget and blocked tiles along the path. Native client MOVE packets (server.rs:1098-1125, world.rs:4008-4052) pass only validate_native_position (world/reconciliation.rs:212-232): active character, non-regressing clock, finite coordinates and a walkable destination, with no speed, time-budget or path check. Firing cadence covers Dexterity, Berserk and Dazed (4338-4365); projectiles support wavy, parametric and boomerang paths and MultiHit (content.rs:44-80, 327); damage applies Armored, Armor Broken and the 15% floor (condition.rs:53-66).",
       "limitations": "Source inspection only, not native acceptance. Original lag tolerance, RNG and acknowledgement arbitration remain open.",
       "checks": ["realm:walk-and-dodge", "realm:shoot-and-take-damage"]
     },
