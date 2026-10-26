@@ -9,8 +9,8 @@
       "checks": [
         "dungeons:snake-pit:diggable-route-and-cover"
       ],
-      "method": "Three Snake Pit generator tests pass: eight seeds assert each cover group's outer bound11 against rim16, and 512 seeds each check treasure layout and post-dig connectivity. Original placement fails the spacing assertion; formatting passes.",
-      "limitations": "Not a full server-suite run or historical authentication. Cover materials/footprints are unchanged here; separate issues633/634 address those. Final69f9e333 only removes the one-off native fixture from Git."
+      "method": "Three Snake Pit generator tests pass: eight seeds assert each cover group's outer bound of 11 against the rim at 16, and 512 seeds each check treasure layout and post-dig connectivity. Original placement fails the spacing assertion; formatting passes.",
+      "limitations": "Not a full server-suite run or historical authentication. Cover materials/footprints are unchanged here; separate issues 633/634 address those. Final head 69f9e333 only removes the one-off native fixture from Git."
     },
     "snake-cover-spacing-native-8f490a1": {
       "kind": "native",
@@ -20,7 +20,7 @@
       "checks": [
         "dungeons:snake-pit:diggable-route-and-cover"
       ],
-      "method": "Matched before542499cf onfc88c8b5 (test/case-only dirty tree) and clean after30034790 on8f490a18 pass three assertions each. Identical case/controller/client4f855c11/Ruffle.16, seed0 and position143.5,33.5. Inspected north cover-to-wall clearance changes8 to4 tiles; ordinary native walking preserves the same living character and dungeon. Screenshot crops retain original captures; process sets closed with no cleanup errors.",
+      "method": "Matched before run 542499cf on fc88c8b5 (test/case-only dirty tree) and clean after run 30034790 on 8f490a18 pass three assertions each. Identical case/controller/client 4f855c11/Ruffle .16, seed 0 and position (143.5,33.5). Inspected north cover-to-wall clearance changes from eight to four tiles; ordinary native walking preserves the same living character and dungeon. Screenshot crops retain original captures; process sets closed with no cleanup errors.",
       "limitations": "Prepared legal max-stat Priest with one legal wand, not earned entry, destruction, all-side native gap checks or a full Snake Pit clear. Earlier coordinate/camera fixture failures are retained and excluded. Later FSoD bounds inform spacing; exact original generator and footprints remain unrecovered."
     },
     "snake-width-source-4514010": {
