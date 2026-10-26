@@ -4202,11 +4202,11 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
-            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/wServer/logic/loot/LootDefs.cs#L76-L111",
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/LootDefs.cs#L76-L111",
             "label": "Compiled Kithio independent tier candidates and inclusive thresholds; reconstruction comparator"
           },
           {
-            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/wServer/logic/loot/Loots.cs#L50-L99",
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L50-L99",
             "label": "Compiled Kithio contributor allocation; bound duplication/leak deliberately not retained"
           }
         ],
@@ -4219,9 +4219,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
-            "unknowns": [
-              "Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."
-            ],
+            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
             "sources": [],
             "group": "behavior"
           }
