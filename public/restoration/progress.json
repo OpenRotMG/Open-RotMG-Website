@@ -676,7 +676,9 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -688,7 +690,9 @@
             "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks, safe-lava visuals and scenery substitutions.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -700,7 +704,9 @@
             "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions; a generated recipe is not recovered elevation data.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -832,7 +838,9 @@
             "acceptance": "Register independent landmarks and routes at native scale. Do not assume every source image has the same dimensions or that padding proves original geography.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -844,7 +852,9 @@
             "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -856,7 +866,9 @@
             "acceptance": "Check connected components, widths, outlets and crossings, then walk representative supports. Do not infer depth or passability from blue pixels alone.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -868,7 +880,9 @@
             "acceptance": "Follow the first-road circuit and inland routes against source evidence. Verify crossing continuity and terrain speed on actual mapped roads.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -880,7 +894,9 @@
             "acceptance": "Compare rock/snow boundaries and disconnected components. Test routes from every arrival and population on both terrain types.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -892,7 +908,9 @@
             "acceptance": "Check footprint, rotation, non-overlap, roads/water and reachable bosses/chests. Research fixed sites versus randomized buildings rather than choosing a comparator by default.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "scenery"
@@ -904,7 +922,9 @@
             "acceptance": "Inspect each map before and after augmentation. Verify entrances, walls, cover and period-supported occupants/rewards; do not assume every comparator variant was deployed.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "scenery"
@@ -916,7 +936,9 @@
             "acceptance": "Compare palette, density and size by region. Reopen the same layout to distinguish fixed geography from variable scenery; avoid treating source pixels as complete metadata.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "scenery"
@@ -928,7 +950,9 @@
             "acceptance": "Shoot mapped ordinary/destructible pairs with two observers. Check removal, shared collision updates, zero-XP behavior and protective floors, not only map colors.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Covers only the six registered layouts, three FSOD private-server maps and image-guided reconstructions of Worlds 1 to 3. Worlds 4 to 13 are absent, and no layout is recovered original map data."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "scenery"
@@ -952,7 +976,9 @@
             "acceptance": "Measure region areas, eligible sites, species/group/body distributions and route encounter spacing. Research original probabilities and group-versus-body accounting.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "populations"
@@ -1099,7 +1125,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
         "differences": [],
@@ -1121,7 +1147,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
         "differences": [],
@@ -1331,11 +1357,12 @@
       "category": "realm",
       "icon": "assets/player/deathmage.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
         "differences": [
-          "Deathmage combat scripts exist, but a normal Realm spawn route and item drops are not configured."
+          "Server PR586 places 5 to 9 Graveyards per Realm on Low Sand and Low Plains, each with Crosses, grey and destructible walls and a Treasure Chest beside the Deathmage. A June 2012 wiki supplies the Low Plains site, chest tiers, skeleton item lists and the Deathmage's lack of drops; rates, site count, Low Sand and the yard layout come from a later community server: https://github.com/OpenRotMG/Open-RotMG-Server/pull/586",
+          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King."
         ],
         "unknowns": [
           "Original graveyard or setpiece placement and ordinary Skeleton population.",
@@ -1350,6 +1377,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073636id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/deathmage",
+            "label": "Wild Shadow wiki Deathmage, June 2012 capture: Low Plains Graveyard, chest tiers, no Deathmage drops"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/setpieces/Graveyard.cs",
+            "label": "Later community Graveyard layout and chest-rate comparator"
           }
         ]
       }
@@ -1473,7 +1508,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Tutorial encounter with Evil Chicken Minions and instructional progression, not a proven Realm closure boss. Target combat/progression details remain qualified.",
-        "differences": [],
+        "differences": [
+          "The Tutorial does not run encounters, so the Evil Chicken God and the Tutorial's Evil Chickens stand inert: they never move or attack, and the God never summons Evil Chicken Minions. Server PR526's Kitchen Portal fix does not change this."
+        ],
         "unknowns": [
           "Target God attacks/minion spawning and instructional/reward policy.",
           "Whether any target progression depended on active versus stationary tutorial enemies."
@@ -2130,11 +2167,12 @@
       "category": "realm",
       "icon": "assets/player/crystal-prisoner.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
-          "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat. Crystal Prisoner kinds use the landmark roster's empty loot table, so no item drops are configured: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293"
+          "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293",
+          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555"
         ],
         "unknowns": [
           "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
@@ -2143,6 +2181,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613203408id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/crystal-prisoner",
+            "label": "Wild Shadow wiki Crystal Prisoner, June 2012 capture: stat potion drops at ??% and no drop credit for Crystal-form damage"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
+            "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
           }
         ]
       }
@@ -2388,17 +2434,37 @@
       "category": "realm",
       "icon": "assets/player/ghost-master.png",
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "partial",
-        "expected": "Ghost Archer/Warrior/Mage/Rogue/Paladin/Knight0x662–667, not Ghost God or different Ghost King identities.",
+        "expected": "Ghost Archer/Warrior/Mage/Rogue/Paladin/Knight0x662–667 are retired Ghost King escorts and should not spawn in 123.5.1. Wiki stat blocks last updated at build 115 still list them as Ghost King reproduction, while the same 2012 page text describes the later large-ghost evaluation fight and pinned comparators use Ghost Master and Small/Medium/Large Ghosts.",
         "differences": [],
         "unknowns": [
-          "Whether these definitions were deployed in target production; owner/variant mapping, lifecycle and rewards."
+          "The exact retirement build: official Build 117 notes (June 2011) list new Ghost King behaviors, and a modern RealmEye page names Build 118 (July 2011). No 2012 capture directly proves their absence."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519002828/http://forums.wildshadow.com:80/wiki/realm-mad-god/ghost-king",
+            "label": "Wild Shadow wiki Ghost King, May 2012 capture: stat block last updated 115 lists the six escorts; page text describes the large-ghost evaluation boss"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "2013 Trapped comparator: Ghost King tosses only Ghost Master and Small/Medium/Large Ghosts"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Later FSoD comparator: same replacement roster"
+          },
+          {
+            "url": "https://web.archive.org/web/20241212192722/https://www.realmeye.com/wiki/release-history-2011",
+            "label": "Official 2011 release notes mirrored on RealmEye: Build 117 (June 18) adds new Ghost King behaviors"
+          },
+          {
+            "url": "https://web.archive.org/web/20250212161750/https://www.realmeye.com/wiki/archived-enemies",
+            "label": "Modern RealmEye archived enemies: Build 118 replaced the six escorts with Ghost Master and Small/Medium/Large Ghosts"
           }
         ]
       }
@@ -3067,7 +3133,9 @@
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Directional and stationary floors, compact platforms and destructible Sprite Trees exist, but every room uses one tiled White floor pattern; the historical non-tiled variant is not restored."
+            ],
             "unknowns": [],
             "sources": [],
             "group": "layout"
@@ -3611,13 +3679,13 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools and secret activation remain unresolved.",
+        "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools remain unresolved; a page last edited 2012-08-30 ties the secret room to destroying every coil and defeating Dr Terrible.",
         "differences": [
           "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
-          "No Tesla Coil or secret boss is placed."
+          "Server PR603 adds a Tesla Coil to each middle room, one acid room with West and East Automated Defense Turrets, and the Horrific Creation behind Lab Emergency Walls that open once every coil is destroyed and Dr Terrible is dead. All geometry and timings are reconstructed; the Creation has only its Hexxer pet loop and three-wave attack, with no other phases or loot: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603"
         ],
         "unknowns": [
-          "Green-pool effects and blue cure mask; secret boss trigger; encounter choreography and loot."
+          "Green-pool effects and blue cure mask; Horrific Creation phases beyond its pet loop; encounter choreography and loot."
         ],
         "sources": [
           {
@@ -3632,16 +3700,21 @@
         "checks": [
           {
             "id": "dungeons:mad-lab:ordinary-lab-and-gas",
-            "name": "Ordinary lab rooms, gas and cages",
-            "expected": "Ordinary cages, gas, turrets and robots are not replaced by a successful first-boss fight.",
+            "name": "Ordinary lab rooms and turrets",
+            "expected": "Ordinary robots, acid rooms and turrets are not replaced by a successful first-boss fight. No period source places gas spawners or cages outside Dr Terrible's room.",
             "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Each of the four middle rooms holds four robots drawn at random from five kinds. Red gas spawners and monster cages exist only in Dr Terrible's room as boss-phase fixtures, Automated Defense Turrets are not placed, and only Dr Terrible has rewards."
+              "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures, and only Dr Terrible has rewards."
             ],
             "unknowns": [],
-            "sources": [],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20261025211742/https://wikiwiki.jp/rmd/Mad%20Lab",
+                "label": "Mixed-era Japanese wiki Mad Lab page (images 2012-08-30, text 2013-01-30, header 2018-03-28; archived 2026-10-25): acid rooms and turrets"
+              }
+            ],
             "group": "population"
           },
           {
@@ -3652,10 +3725,23 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Two green Hexxer and blue DeHexxer pool pairs exist: green applies Hexed, Speedy and Stunned, and blue clears them and wins overlaps. No Tesla Coil or secret boss is placed, so the coil/secret predicate and optional boss are absent."
+              "Each middle room has one Tesla Coil. Destroying every coil and defeating Dr Terrible opens six Lab Emergency Walls to a sealed room. There the invincible Horrific Creation becomes a damageable random pet in the left Hexxer and reverts after 10 seconds in the right DeHexxer. Positions, door size and timings are reconstructed; its other phases, loot and the slowed-pet revert are absent. The two green Hexxer and blue DeHexxer pool pairs still apply and clear Hexed, Speedy and Stunned."
             ],
             "unknowns": [],
-            "sources": [],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20261025211723/https://wikiwiki.jp/rmd/Tesla%20Coil",
+                "label": "Japanese wiki Tesla Coil page last edited 2012-08-30 (archived 2026-10-25): every coil and Dr Terrible open the Horrific Creation room"
+              },
+              {
+                "url": "https://web.archive.org/web/20261025211809/https://wikiwiki.jp/rmd/Horrific%20Creation",
+                "label": "Mixed-era Japanese wiki Horrific Creation page edited to 2019 (archived 2026-10-25): Hexxer pet loop and phases"
+              },
+              {
+                "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+                "label": "Build 123.5.0 test-server notes: secret boss Horrific Creation"
+              }
+            ],
             "group": "boss"
           }
         ]
@@ -3694,7 +3780,7 @@
       "category": "dungeons",
       "icon": "assets/player/oryx-stone-guardian-right.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Mandatory Castle traversal, anti-rush bridges/wall/quiet towers, paired guardians and Chamber; teleport disabled, respawning armours grant no XP/fame.",
         "differences": [],
@@ -3745,7 +3831,7 @@
       "category": "dungeons",
       "icon": "assets/player/oryx-the-mad-god-1.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Chamber access, Oryx1 phases/summons/rewards, locked Cellar and Incantation unlock; teleport disabled; target minions stasis-susceptible and give small XP.",
         "differences": [],
@@ -3792,12 +3878,12 @@
       "category": "dungeons",
       "icon": "assets/player/oryx-the-mad-god-2.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
         "differences": [
-          "The active map has no Wine Barrels, and the encounter roster has no Wine Barrel handler.",
-          "Bile and Purple Goo are not placed or normally summoned, so the persistent Slowed/Sick trail is not available through ordinary gameplay."
+          "Server PR581 places a Wine Barrel on each of 38 free inside room corners. Barrels block movement, fall to ordinary shots and give no loot or XP; the corner rule and count are reconstructions: https://github.com/OpenRotMG/Open-RotMG-Server/pull/581",
+          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit."
         ],
         "unknowns": [
           "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
@@ -3819,11 +3905,22 @@
             "name": "Destructible Wine Barrels",
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
             "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
-            "implementation": "missing",
+            "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Barrel placement on every free inside room corner, 38 on the current map, is a reconstruction; no period source gives barrel positions or density."
+            ],
             "unknowns": [],
-            "sources": [],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20130605124909/forums.wildshadow.com/node/41768",
+                "label": "Build 122 notes, February 2012: destructible barrels"
+              },
+              {
+                "url": "https://web.archive.org/web/20130627235632/http://gaming.stackexchange.com/questions/92083/where-is-the-wine",
+                "label": "November 2012 answer: barrels hold nothing"
+              }
+            ],
             "group": "layout"
           },
           {
@@ -3831,11 +3928,31 @@
             "name": "Persistent Bile/Goo trail and wine attacks",
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
             "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
-            "implementation": "missing",
+            "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Bile speed, one Goo per second and the 20-Goo cap come from a commented-out line in a later community server, and the 6-second Goo life reuses its projectile lifetime. A Japanese wiki says Bile circles its Henchman; random wandering follows a 2016 RealmEye page.",
+              "Purple Goo stays an ordinary hittable, killable enemy with no XP or loot, a chosen simplification: a 2015 RealmEye snapshot already says it cannot be hit or damaged except by poison."
+            ],
             "unknowns": [],
-            "sources": [],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20130605124909/forums.wildshadow.com/node/41768",
+                "label": "Build 122 notes, February 2012: slime trail that Slows and Sickens; wine-throwing Drunk enemy"
+              },
+              {
+                "url": "https://web.archive.org/web/20261025114348/https://wikiwiki.jp/rmd/Wine%20Cellar",
+                "label": "Japanese wiki Wine Cellar (page modified 2016-12-13, archived 2026-10-25): Henchman spawns Bile"
+              },
+              {
+                "url": "https://web.archive.org/web/20160522054322/http://www.realmeye.com/wiki/bile-of-oryx",
+                "label": "RealmEye Bile, May 2016 snapshot: random movement and fading Goo trail"
+              },
+              {
+                "url": "https://web.archive.org/web/20150726201317/http://www.realmeye.com:80/wiki/purple-goo",
+                "label": "RealmEye Purple Goo, July 2015 snapshot: cannot be hit except by poison"
+              }
+            ],
             "group": "layout"
           },
           {
@@ -4102,7 +4219,7 @@
       "category": "gear",
       "icon": "assets/player/vault-chest.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Four equipment slots and eight carried slots support class-compatible equipment, reversible bonuses, swaps, pickup and drops. Native controls include hotkeys, ground use, contextual clicks, equipment comparison, tier/UT/dose labels and unusable-item highlighting. The pre-124 contextual-click rules also cover equipping or using a container item with a full inventory.",
         "differences": [],
@@ -4334,7 +4451,7 @@
       "category": "gear",
       "icon": "assets/player/transformation-potion.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Remove Invisible, apply Hexed for 30s; target announcement explicitly fixes Mad Lab blue pools removing pet transformation.",
         "differences": [],
@@ -4622,15 +4739,22 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
+          "Tutorial and Kitchen enemies, including the Evil Chicken God, Kitchen Guards, Butchers and Bonegrind the Butcher, stand inert because neither world runs encounters, and Kitchen enemies drop nothing."
+        ],
         "unknowns": [
           "Full instructional script, first-run completion fidelity, encounter sequence and portal destinations.",
-          "Whether and how the recovered separate Kitchen branch was deployed and admitted in target production."
+          "A May 2012 wiki page describes the Kitchen escape and Bonegrind; the target Kitchen layout, instance sharing, enemy behavior and admission remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519003024id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/tutorial",
+            "label": "Wild Shadow wiki Tutorial page, May 2012 capture (last updated build 120): Kitchen escape and Bonegrind"
           }
         ]
       }
@@ -4689,7 +4813,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Stock, currency/price/rank presentation and validated purchases; include supported remaining-count, discount/expiry states and failure responses. Complete target stock/prices/restocking are unresolved. Atomic debit/delivery is a restoration integrity requirement.",
-        "differences": [],
+        "differences": [
+          "Merchant stock is a fixed recovered snapshot: no merchant shows a discount, every expiry is shown as none, and stock without a sourced price is logged as unavailable and refused at purchase. Remaining count, star-rank checks, failure replies and reserve-then-commit purchases exist."
+        ],
         "unknowns": [
           "Target price/rank/stock matrix, restock/discount policy and deployment of all advertised states."
         ],
@@ -4746,7 +4872,7 @@
       "category": "social",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
         "differences": [
@@ -5057,7 +5183,7 @@
       "category": "social",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Guild-shared hall with membership-gated access, Board/Chronicle and Leader+ Guild-Fame upgrade merchant. Selected binary has upgrade prices10000/100000/250000. Exact deployed target layouts/facilities remain unresolved.",
         "differences": [],
@@ -5389,7 +5515,7 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request.",
         "differences": [],
@@ -5448,13 +5574,13 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Music, Sound Effects and Weapon Sounds each have a saved on/off toggle. The splash screen also has mute; no original volume sliders are established.",
         "differences": [],
         "unknowns": [
           "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions."
+          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified."
         ],
         "sources": [
           {
@@ -6067,7 +6193,7 @@
       "category": "conditions",
       "icon": "assets/player/condition-hexed.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Hexed displays a form selected from the target client's Hexable group and restores normal appearance on removal. Target blue pools remove Pet Transformation; exact equivalence to the Hexed bit remains unresolved. No inferred ability lockout.",
         "differences": [],
@@ -6123,7 +6249,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Character-screen news has icons, text, relative dates and external links. Fame links open a saved character’s Fame details. The original personal feed’s production, ordering and retention rules remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Character-screen news carries only up to ten Discord update posts with a generic news icon linking to the updates page. No personal or Fame-link items are produced, so Fame links never appear."
+        ],
         "unknowns": [
           "Original personal-news producer, deployment, retention, ordering, deletion and Fame-link behavior."
         ],
@@ -6141,11 +6269,12 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "One Sumo Master7f00/Lil Sumo7f01 family. Production Build121 introduces Master; original summon, spawn and reward policy remains unresolved.",
         "differences": [
-          "Sumo Master does not appear in ordinary Realm gameplay."
+          "Server PR605 adds Low Plains Sumo Master camps following the compiled Kithio behavior table: the Master sleeps until hit, releases five Lil Sumos, then enters a faster-firing Super-Mode below half health: https://github.com/OpenRotMG/Open-RotMG-Server/pull/605",
+          "All five Lil Sumos arrive at once on reserved ring slots, while Kithio releases two then one every 200 ms with random orbit spacing; the May 2012 wiki's 2.5-second refill is not modeled. Loot uses Trapped's 2013 tables, which are not authenticated 123.5.1 rates and differ from the May 2012 wiki pool."
         ],
         "unknowns": [
           "Target Master-to-Lil summon mechanics, habitat/density, attack scheduling and loot; production deployment details of Lil Sumo."
@@ -6158,6 +6287,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L157-L214",
+            "label": "Kithio compiled Sumo Master behavior table"
+          },
+          {
+            "url": "https://web.archive.org/web/20120509105306/http://forums.wildshadow.com:80/wiki/realm-mad-god/sumo-master",
+            "label": "Wild Shadow wiki Sumo Master, May 2012 capture (last updated 122.3.2): sleep, Lil Sumos (Max 5), drop pool without rates"
           }
         ]
       }
@@ -6311,7 +6448,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "LowSand Sand Devil0x6c7 with wavy Confused projectile and circling movement.",
         "differences": [],
@@ -6336,7 +6473,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "One passive-following Easily Enraged Bunny0x6c8 to attacking Enraged Bunny0x6c9 encounter.",
         "differences": [],
@@ -6361,7 +6498,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "LowForest Forest Nymph0x6d1 with single Purple and six-shot Blue boomerang alternatives.",
         "differences": [],
@@ -6386,7 +6523,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "One HighSand Flamer King0x903/Flamer0x904 group with approach, expansion/fire, shrink and wounded burst.",
         "differences": [],
@@ -6415,7 +6552,7 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "One HighPlains Urgle0x957 encounter with four directional temporary trap forms; preserve2s versus2.4s Armor Broken conflict.",
         "differences": [],
@@ -6445,10 +6582,12 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "The original client defines Dragon Eggs and White Dragon forms. Their original hatch probabilities and growth lifecycle remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Every destroyed Dragon Egg hatches a Whelp, Whelps and Juveniles each grow after 60 seconds, and a living Adult re-lays up to two eggs every 60 seconds. These are reconstruction choices, not the 30%/20% outcomes on the Whelp and Juvenile wiki pages."
+        ],
         "unknowns": [
           "Original egg hatch probabilities and whether timed growth existed.",
           "September 2012 Whelp/Juvenile pages describe 30%/20% egg outcomes and two-shot attacks; their applicability to 123.5.1 remains unresolved.",
@@ -6479,7 +6618,9 @@
         "implementation": "partial",
         "historical": "partial",
         "expected": "Distinct HighSand Minotaur0x646 with pursuit/charge and blade repertoire; target shot patterns unresolved.",
-        "differences": [],
+        "differences": [
+          "The Minotaur only chases, with no charge, and only fires its first Blade: aimed single shots with a 20-shot ring every third volley. Its two short-range Blade projectiles are never used."
+        ],
         "unknowns": [
           "Exact target patterns, charge/reproduction, quest status, density and reward probabilities."
         ],
