@@ -5716,7 +5716,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Sick disables healing, not merely Vitality. Natural regeneration, Healing-over-time, direct/party heals, consumables and drain-heals need separate cases; individual exceptions and cleanse/heal ordering are not fully established.",
-        "differences": [],
+        "differences": [
+          "Native map eff configuration uses decimal or lowercase 0x numbers; eff:16 no longer gains Quiet/Weak bits. This corrects numeric ingestion, not Sick healing behavior or authenticated original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/626"
+        ],
         "unknowns": [
           "Historical per-source exceptions, blocked-potion consumption, cleanse/heal ordering and complete removal matrix."
         ],
