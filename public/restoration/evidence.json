@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "castle-protocol-native-ece8d95": {
+      "kind": "native",
+      "revision": "ece8d9539dd54519e17cdc8784f11eb0b96752b5",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/682#issuecomment-6429993931",
+      "checks": ["realm:realm-closure"],
+      "method": "QA d6b84cc176c44ecb9b165dbb44f2bb1e passes native final-quest shooting, closure, RECONNECT/LOAD and live same-account/character Castle arrival: Realm-3/player705183 to Castle2/player708762, account1/character1. Replacement admission publishes after departure; cleanup passes. Dirty fixture patch65c9c7fd877a99a4aa7591855c1b495e46d0dad7ed1e76465d343a229a41ebbb and source bytes are retained separately from the verification commit.",
+      "limitations": "Controlled downstream protocol only: passive1HP Cyclops, other quests/future events omitted, full replacement Realm prebuilt before native enrollment. Not clean-main native acceptance, earned clearing, boss combat, historical timing or normal replacement-generation latency. Normal-make native bba5788baa064c79a28e3c8fae111d33 failed:3.09s coordinator creation blocked the guarded1.5s lease renewal and stopped the cohort before Castle arrival. That stall remains unresolved in the performance investigation; no lease/ACK/durability guard was relaxed. Whole-feature status remains not-run and historical partial."
+    },
+    "castle-arrival-regression-ece8d95": {
+      "kind": "regression",
+      "revision": "ece8d9539dd54519e17cdc8784f11eb0b96752b5",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/682#issuecomment-6429257521",
+      "checks": ["realm:realm-closure"],
+      "method": "Extends the final-Hermit reward-error fixture through no early Castle route, earthquake at120000ms and transfer at128000ms. Checks RECONNECT destination/key fields, durable departure and same-account/character Castle admission, preserved HP/items/XP/revision, new tile discovery and once-only grant consumption. QA2790db39910e4bb79f1df194eff00b40 passes.",
+      "limitations": "Controlled server-level fixture, not earned Realm clearing or native acceptance. Verification-only commit uses PR682 lifecycle code; an inactive local prepared-only hook was present and disabled. Not the reporter's exact session, Hermit reward-site correctness or historical countdown certification. Whole-feature status remains not-run and historical partial."
+    },
     "closure-reward-regression-ebf04d1": {
       "kind": "regression",
       "revision": "ebf04d1c83a94d83d4af0fe5cb444e5e875f4a74",
@@ -3167,7 +3185,7 @@
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","activation-radius-source-3c9a23a","visible-npc-simulation-source-b066eae"]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":["visible-npc-simulation-source-b066eae"]},
     "realm:find-your-next-quest": {"status":"not-run","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974","quest-window-regression-a92ae06"]},
-    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115","closure-reward-regression-ebf04d1"]},
+    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115","closure-reward-regression-ebf04d1","castle-arrival-regression-ece8d95","castle-protocol-native-ece8d95"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":["movement-combat-source-4992445","selected-client-ui-source-2bf948c"]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445"]},
