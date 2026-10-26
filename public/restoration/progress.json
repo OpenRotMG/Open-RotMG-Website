@@ -2834,7 +2834,8 @@
         "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified.",
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
-          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553"
+          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
         ],
         "unknowns": [
           "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
@@ -3163,7 +3164,8 @@
         "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
-          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309"
+          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
+          "Arrival class now uses the existing round primitive before safe placement. Its 17-cell diameter stays reconstruction; historical size and #599 remain open. Later seeded placements may shift; other generator/return rules retain their contracts: https://github.com/OpenRotMG/Open-RotMG-Server/pull/654"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -3200,6 +3202,14 @@
           {
             "url": "https://www.youtube.com/watch?v=SXTEcrN4bII",
             "label": "bickuribox12 Undead Lair footage, upload metadata 2012-09-15; exact build unverified"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=f7aEwFicmjk",
+            "label": "rotmgLukep visible122.0.1 entrance:rounded arrival class,not measured diameter"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=hLD0VPGf41w",
+            "label": "DelPlays visible123.1.2 entrance:rounded arrival/three-wide passage,not authenticated size"
           }
         ],
         "checks": [
@@ -5062,6 +5072,7 @@
         "differences": [],
         "unknowns": [
           "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
           "Whether the original server also rejected direct requests targeting invisible players."
         ],
         "sources": [
@@ -5072,6 +5083,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.0.0",
             "label": "Build 123.0.0 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 Wild Shadow FAQ: same-map player teleporting; no explicit Nexus permission or prohibition"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/World.cs#L26-L36",
+            "label": "Primary community World defaults AllowTeleport to true; Nexus does not override it, not authenticated 2012 server behavior"
+          },
+          {
+            "url": "https://rotmgstart.weebly.com/controls.html",
+            "label": "Undated later guide explicitly excludes Nexus player teleports; its pet/backpack UI is not 123.5.1 evidence"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
+            "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
           }
         ]
       }
