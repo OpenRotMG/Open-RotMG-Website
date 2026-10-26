@@ -41,7 +41,12 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
   const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');
-  for (const html of [home, about, branding, gold]) {
+  const bots = readFileSync(new URL('../dist/bots/index.html', import.meta.url), 'utf8');
+  for (const file of ['app.js', 'style.css']) {
+    const version = createHash('sha256').update(readFileSync(new URL(`../dist/bots/${file}`, import.meta.url))).digest('hex');
+    assert.ok(bots.includes(`${file}?v=${version}`), `CCTV ${file} must change its URL with its contents`);
+  }
+  for (const html of [home, about, branding, gold, bots]) {
     assert.match(html, /<html lang="en">/);
     assert.match(html, /<h1[ >]/);
     assert.match(html, /name="description"/);
