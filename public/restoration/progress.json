@@ -3033,13 +3033,16 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
-            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
+            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
-            "differences": [],
+            "differences": [
+              "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
+            ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator."
+              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator.",
+              "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
               {
@@ -3057,6 +3060,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
                 "label": "April 2012 run: notched-square Stheno room on the minimap; exact build unestablished"
+              },
+              {
+                "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=30",
+                "label": "April 2012 run: unexplored continuation stays black until excavation; exact build and sight algorithm unestablished"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/Sight.cs",
+                "label": "Modified 7.0 room-sight comparator: reveal the blocking boundary without expanding through it, not an official 2012 algorithm"
               }
             ],
             "group": "layout"
