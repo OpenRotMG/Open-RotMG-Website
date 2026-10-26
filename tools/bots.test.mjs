@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {events, viewMessage, start} from '../public/bots/app.js';
+import {events, viewMessage, selectionMessage, intentionRows, start} from '../public/bots/app.js';
 
 test('bot stream parser keeps partial messages and skips keep-alive comments', () => {
   const [first, rest] = events('data: {"a":1}\n\n:\n\ndata: {"b"');
@@ -39,12 +39,13 @@ class Node {
 }
 const flush = () => new Promise(setImmediate);
 const deferred = () => {let resolve;const promise = new Promise(done => {resolve = done;});return {promise, resolve};};
-const frame = {level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null};
+const intent = {goal: {id: 1, label: 'Max permanent Speed', current: 30, target: 50, unit: 'Speed'}, plan: 'Earn Speed potions in Snake Pits', step: 'Reach the observed Snake Pit', mode: 'progress', reason: 'A known entrance is available', resume: null};
+const frame = {level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null, intent};
 const bots = names => ({bots: names.map(name => ({name, frame})), llm: {enabled: false}});
 const json = value => new Response(JSON.stringify(value), {headers: {'content-type': 'application/json'}});
 function harness(t, query = '', initial = bots(['Alpha', 'Beta'])) {
   let clock = 0, nextTimer = 0;
-  const nodes = Object.fromEntries(['bot', 'status', 'view', 'view-status', 'telemetry-status', 'vitals', 'thoughts', 'llm'].map(id => [`#${id}`, new Node(id === 'bot' ? 'select' : '')]));
+  const nodes = Object.fromEntries(['bot', 'status', 'view', 'view-status', 'telemetry-status', 'vitals', 'thoughts', 'llm', 'intention', 'intention-status'].map(id => [`#${id}`, new Node(id === 'bot' ? 'select' : '')]));
   const listeners = {}, timers = new Map(), calls = [], lists = [json(initial)], streams = [], feeds = [];
   const window = {location: {search: query}, history: {replaceState(...args) {window.path = args[2];}},
     addEventListener(type, callback) {listeners[type] = callback;}, removeEventListener(type) {delete listeners[type];},
@@ -180,6 +181,49 @@ test('initial empty population and encoded query selection never invent a live f
   const encoded = harness(t, '?bot=Alpha%20%26%20Beta', bots(['Alpha & Beta']));await flush();
   assert.equal(encoded.iframe().src, 'https://game.test/api/bots/Alpha%20%26%20Beta/view');
   assert.equal(encoded.calls[1].path, '/api/bots/Alpha%20%26%20Beta/stream');
+});
+
+test('perspective-selection messages admit only the current native window and a listed other bot', async t => {
+  const source = {}, available = new Set(['Alpha', 'Beta']), data = {type: 'openrotmg-bot-select', bot: 'Alpha', target: 'Beta'};
+  const event = {origin: 'https://game.test', source, data};
+  assert.equal(selectionMessage(event, event.origin, source, 'Alpha', available), true);
+  for (const change of [
+    {origin: 'https://evil.test'}, {source: {}}, {data: null}, {data: []},
+    ...[{type: 'openrotmg-bot-view'}, {bot: 'old'}, {target: 'Human'}, {target: 'Alpha'}, {target: null}, {status: 'live'}].map(patch => ({data: {...data, ...patch}})),
+  ]) assert.equal(selectionMessage({...event, ...change}, event.origin, source, 'Alpha', available), false);
+  const h = harness(t);await flush();const old = h.iframe(), signal = h.calls[1].options.signal;
+  h.send({}, {data, origin: 'https://evil.test'});assert.equal(h.iframe(), old);
+  h.send({}, {data: {...data, target: 'Human'}});assert.equal(h.iframe(), old);
+  h.send({}, {data});await flush();
+  assert.notEqual(h.iframe(), old);assert.match(h.iframe().src, /Beta\/view$/);assert.equal(h.window.path, '?bot=Beta');assert.equal(signal.aborted, true);
+  const next = h.iframe();h.send({}, {data: {...data, bot: 'Beta', target: 'Alpha'}, source: old.contentWindow});assert.equal(h.iframe(), next);
+});
+
+test('intention list keeps the goal above progress, safety and optional detours without invented numbers', () => {
+  assert.deepEqual(intentionRows(intent).slice(0, 2), [['Trying to', 'Max permanent Speed'], ['Progress', '30 / 50 Speed']]);
+  const recovery = {...intent, mode: 'necessary', step: 'Back off to recover', reason: 'HP crossed the recovery threshold', resume: 'Continue toward the observed entrance'};
+  assert.deepEqual(intentionRows(recovery)[0], intentionRows(intent)[0]);assert.match(intentionRows(recovery)[3][0], /Required interruption/);
+  assert.match(intentionRows({...recovery, mode: 'optional', step: 'Inspect a useful staff'})[3][0], /Optional detour/);
+  const uncounted = {...intent, goal: {...intent.goal, current: null, target: null, unit: null}};
+  assert(!intentionRows(uncounted).some(([label]) => label === 'Progress'));
+  assert.deepEqual(intentionRows({...intent, goal: null})[0], ['Trying to', 'No main goal selected.']);
+  for (const value of [undefined, {}, {...intent, mode: 'guessed'}, {...intent, reason: ''}, {...intent, private: true},
+    ...[{id: 0}, {id: 2**53}, {current: null}, {target: -1}, {unit: undefined}, {account: 2}].map(goal => ({...intent, goal: {...intent.goal, ...goal}})),
+  ]) assert.throws(() => intentionRows(value), /missing or malformed|malformed main goal/);
+});
+
+test('live intent transitions are separate from transport and clear on switching or missing state', async t => {
+  const h = harness(t);await flush();h.send();
+  const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
+  await h.emit({frame, age_ms: 0, thoughts: []});assert.match(visible(), /Trying to \| Max permanent Speed.*30 \/ 50 Speed/);
+  await h.emit({frame: {...frame, intent: {...intent, mode: 'necessary', step: 'Recover HP', resume: 'Continue the trip'}}, age_ms: 0, thoughts: []});
+  assert.match(visible(), /Max permanent Speed.*Required interruption \| Recover HP.*Continue the trip/);
+  await h.emit({frame: {...frame, intent: undefined}, age_ms: 0, thoughts: []});
+  assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /Intentions unavailable/);
+  assert.equal(h.nodes['#view-status'].textContent, 'Native view: live.');assert.match(h.nodes['#telemetry-status'].textContent, /receiving/);
+  await h.emit({frame, age_ms: 0, thoughts: []});assert.equal(h.nodes['#intention-status'].textContent, '');assert.match(visible(), /Max permanent Speed/);
+  h.choose('Beta');await flush();assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /No decision intention/);
+  await h.emit({frame: null, age_ms: 0, thoughts: []});assert.equal(visible(), '');
 });
 
 test('page allows only backend frames, preserves native 4:3 mobile layout and accessible statuses without diagram', async () => {
