@@ -1093,6 +1093,42 @@
       "limitations": "Prepared gear and position use a current-world Direct location probe, not earned progression. Independently generated worlds and different observation times are not a same-seed or timing comparison. The setup's world-ID discovery was corrected after integration. Earlier CDP and protected-teleport failures remain rejected. Replacement summons are regression coverage, not this native check. No whole-dungeon, multiplayer or historical acceptance is promoted.",
       "checks": ["dungeons:undead-lair:room-family-and-split-lifecycle"]
     },
+    "mana-light-blue-source-c19c48f": {
+      "kind": "source",
+      "revision": "c19c48f678d8fe7101eb156c94d605206412262f",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/c19c48f678d8fe7101eb156c94d605206412262f/src/world/consumables.rs#L307",
+      "method": "Positive MP-restoration notification uses full-alpha ff6084e0. Health green, white particles and potion mechanics are unchanged.",
+      "limitations": "Approved later-FSoD light-blue reconstruction for issue600, not recovered original123.5.1 RGB. Kithio purple and Trapped white conflict remains unresolved.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-light-blue-regression-c19c48f": {
+      "kind": "regression",
+      "revision": "c19c48f678d8fe7101eb156c94d605206412262f",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/620#issuecomment-6408430882",
+      "method": "Repaired final packet regression against baseline cyan fails its color assertion:0passed/1failed/319filtered. Candidate:1passed/319filtered; full inventory320:319passed/0failed/1ignored. Formatting and strict all-target Clippy pass.",
+      "limitations": "The obsolete original Quiet expectation was invalid red evidence and was repaired before execution. Packet test supplies a simulated inventory commit receipt, not database durability or full feedback acceptance.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
+    "mana-light-blue-native-c19c48f": {
+      "kind": "native",
+      "revision": "c19c48f678d8fe7101eb156c94d605206412262f",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/620",
+      "method": "Ordinary native spell and potion keys: MP297 to268 to297; potion consumed once, inventory revision1 to2, same living Wizard. Before/after each pass5 assertions and clean cleanup; candidate repeat also passes5. Timely floating+28 changes cyan00ffff to light-blue6083df, with black outline and white particles. Client2bf948c/runtime0.7.1-openrotmg.16.",
+      "limitations": "Prepared local level20 fixture, not earned progression, multiplayer or rendered-public gameplay. Source6084e0 rasterizes6083df, a channel delta0,-1,-1. Initial unsupported Canvas-renderer failures remain rejected. Broader potion/feedback statuses and historical fidelity are not promoted.",
+      "checks": [
+        "gear:magic-potions",
+        "gear:consumable-result-feedback"
+      ]
+    },
     "mana-text-source-65dd762": {
       "kind": "source",
       "revision": "65dd762251b65368c40a3c3e383145f6d734a83a",
@@ -3051,9 +3087,9 @@
     "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
-    "gear:magic-potions": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
+    "gear:magic-potions": {"status":"not-run","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
+    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
