@@ -227,8 +227,8 @@ test('present features remain visible for gameplay and historical work',()=>{
   for(const view of ['work','verification','research','all'])assert.equal(matches(kage,evidence,view),true,view);
   assert.equal(matches(kage,evidence,'accepted'),false);
   const recovery=rows.find(r=>r.id==='access:account-recovery');assert.equal(matches(recovery,evidence,'differences'),true);
-  assert.equal(matches(rows.find(r=>r.id==='dungeons:wine-cellar:barrel-destruction'),evidence,'implementation','BARREL'),true);
-  assert.equal(matches(kage,evidence,'all','barrel'),false);
+  assert.equal(matches(rows.find(r=>r.id==='dungeons:mad-lab:coil-secret-and-pool-chain'),evidence,'implementation','TESLA'),true);
+  assert.equal(matches(kage,evidence,'all','tesla'),false);
   assert.throws(()=>matches(kage,evidence,'unknown'),/Unknown restoration view/);
   assert.equal(workCounts(data.features,evidence).verification,211);
 });
@@ -244,10 +244,10 @@ test('a passed parent leaves gameplay work without implying historical acceptanc
 });
 
 test('partial implementation, research and verification can all be outstanding',()=>{
-  const data=catalogue(),evidence=ledger(),row=records(data).find(r=>r.id==='dungeons:wine-cellar');
+  const data=catalogue(),evidence=ledger(),row=records(data).find(r=>r.id==='dungeons:mad-lab');
   assert.equal(row.rule.implementation,'partial');
   for(const view of ['implementation','verification','research','differences'])assert.equal(matches(row,evidence,view),true,view);
-  assert.match(row.rule.differences.join(' '),/no Wine Barrels.*persistent Slowed\/Sick trail/);
+  assert.match(row.rule.differences.join(' '),/Tesla Coil.*Horrific Creation/);
   assert.equal(data.features.find(f=>f.id==='dungeons:wine-cellar').audit.checks.find(c=>c.id.endsWith('barrel-destruction')).group,'layout');
 });
 
