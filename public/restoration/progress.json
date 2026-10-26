@@ -859,12 +859,18 @@
             "expected": "Ground appearance and habitat tiers are separate map properties.",
             "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
-              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns."
+              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns.",
+              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665"
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Whether other classic ground/tier assignments match the target."],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/%E5%9C%B0%E5%BD%A2",
+                "label": "Period Low Forest and Low Plains screenshots; palette matches do not recover original map metadata"
+              }
+            ],
             "group": "geography"
           },
           {
@@ -2978,7 +2984,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
+        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms span 11 tiles including both rails and use target assets; their original distribution and exact AI/reward policies remain unsettled.",
         "differences": [],
         "unknowns": [
           "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
@@ -3012,7 +3018,7 @@
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/maps/wmap%27s/snakepit%20treasure%20test.wmap",
-            "label": "Inactive later treasure-test template: walkable rails and wooden button platform, not the embedded production map"
+            "label": "Inactive later treasure-test template: 11 tiles including both rails and a wooden button platform, not the embedded production map"
           },
           {
             "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
@@ -3027,13 +3033,16 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable tunnels and mixed boss cover retain permanent shelter around Stheno; grates spawn snakes.",
-            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
+            "expected": "Diggable tunnels and mixed boss cover retain permanent shelter around Stheno; grates spawn snakes. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
-            "differences": [],
+            "differences": [
+              "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
+            ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not an original generator."
+              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not an original generator.",
+              "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
               {
@@ -3051,6 +3060,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
                 "label": "April 2012 run: notched-square Stheno room on the minimap; exact build unestablished"
+              },
+              {
+                "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=30",
+                "label": "April 2012 run: unexplored continuation stays black until excavation; exact build and sight algorithm unestablished"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/Sight.cs",
+                "label": "Modified 7.0 room-sight comparator: reveal the blocking boundary without expanding through it, not an official 2012 algorithm"
               }
             ],
             "group": "layout"
