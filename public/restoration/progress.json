@@ -3033,7 +3033,7 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Each boss-cover group leaves four clear tiles to the outer wall. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
             "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
