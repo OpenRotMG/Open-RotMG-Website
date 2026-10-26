@@ -30,6 +30,31 @@
         "condition:25"
       ]
     },
+    "udl-compact-arrival-regression-0f9d8db": {
+      "kind": "regression",
+      "revision": "0f9d8dbb4a26af8ec3422d1c2167ccf4ac018ec8",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/664#issuecomment-6425443474",
+      "checks": [
+        "dungeons:undead-lair",
+        "dungeons:undead-lair:entrance-end-dressing"
+      ],
+      "method": "Both generator regressions pass 32 seeds each: 11-wide reconstructed mask, four Grey Pillars, eight Big/four Small candles, spawn and metadata, three-wide doorway and whole-map connectivity accounting for selected object collision flags.",
+      "limitations": "Generator checks, not earned dungeon traversal or proof of original dimensions/raster. Ordinary-room and boss policies remain reconstructed; sequential RNG can shift later placements."
+    },
+    "udl-compact-arrival-native-0f9d8db": {
+      "kind": "native",
+      "revision": "0f9d8dbb4a26af8ec3422d1c2167ccf4ac018ec8",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/664#issuecomment-6425443474",
+      "checks": [
+        "dungeons:undead-lair",
+        "dungeons:undead-lair:entrance-end-dressing"
+      ],
+      "method": "Matched before on 98185e73 (07b12cfe) and after on clean 0f9d8db (bcc10cc9), four checks each with identical case/runner/controller/client4f855c11/Ruffle.16 and worldSeed12351. Rendered captures show the smaller furnished entrance; ordinary walking preserves the same living gearless Rogue, dungeon and 720HP with zero shots. Candidate log reports 11x11 rounded arrival; cleanup arrays empty and all recorded process identities absent.",
+      "limitations": "Prepared legal max-stat Rogue and unearned independent local dungeons, not earned entry, a boss clear or public gameplay. Eleven-wide size and exact furnishing raster are later-comparator/video-informed reconstructions, not authenticated 123.5.1 geometry. Existing central cross retained. Initial shared-build-lock startup timeout is preserved separately, not counted as gameplay evidence."
+    },
+
     "kitchen-transfer-native-f319c16": {
       "kind": "native",
       "revision": "f319c166a6de2801f51b7d5b9cd7dd568019ae83",
@@ -851,6 +876,33 @@
       "method": "24 assertions passed: prepared Wizard (HP-ring injury), Pail5→4/one revision, healing above measured regeneration, radius, stationarity/expiry. Client f4e2781/runtime .13; cleanup clean.",
       "limitations": "Five earlier attempts failed setup; no native before/after. One actor; no native multiplayer/Sick, earned acquisition or .14 acceptance. Tooltip occludes HUD; exact HP from read-only inspect.",
       "checks": ["gear:seasonal-toys"]
+    },
+    "sprite-conveyor-source-ef6dc1b": {
+      "kind": "source",
+      "revision": "ef6dc1bf66a680a1ecdfc11919da5f04101247f1",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/ef6dc1bf66a680a1ecdfc11919da5f04101247f1/src/dungeon/sprite.rs",
+      "method": "Replaces the coordinate-only eight-tile grid with seeded overlapping conveyor bands of varied widths, lengths and colors. The pinned later FSoD static map supplies irregular-band evidence; selected and modified 7.0 XML agree on white stationary tiles and four push directions. Coloring follows all layout/population randomness, touches existing floors only and preserves a white entrance.",
+      "limitations": "A source-informed reconstruction, not the original generator, pattern probabilities or historical non-tiled appearance. The May 2012 guide does not specify the algorithm; no Sprite generator was recovered from the inspected Kithio inventory. No community map, assets or source code imported.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-conveyor-regression-ef6dc1b": {
+      "kind": "regression",
+      "revision": "ef6dc1bf66a680a1ecdfc11919da5f04101247f1",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/662#issuecomment-6424744865",
+      "method": "Before fails because all 16 seeds produce the same entrance pattern. After verifies seed variation, deterministic full-map replay, stationary entrance and the selected palette. Full Rust suite passes 358 tests with one existing ignored test; formatting and strict all-target Clippy pass. Existing 256-seed arena coverage remains intact.",
+      "limitations": "Deterministic local generation checks, not historical fidelity, original pattern probabilities or complete native acceptance.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
+    },
+    "sprite-conveyor-native-ef6dc1b": {
+      "kind": "native",
+      "revision": "ef6dc1bf66a680a1ecdfc11919da5f04101247f1",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/662",
+      "method": "Identical prepared Knight case, runner/controller hashes, Sprite seed 1 and client4f855c1/Ruffle.16 pass four checks before and after: living arrival, stationary entrance, ordinary native movement and same living character. Active gameplay3950/4500ms; both cleanupErrors arrays empty. Matched screenshots visibly replace the repeating grid; original gameplay pixels remain unchanged beneath external captions.",
+      "limitations": "Prepared arrival, not earned entry, boss clear, all-direction push/tree destruction, Windows or full restoration acceptance. Jobs launched on7034f210 plus the tested changes; after production blob5d4cb3f1196c8246e663c262c5cd5f5ad4dc83a4 is committed at the bound revision. One earlier setup failed while waiting for the shared build lock; paired successful runs use the same longer startup deadline.",
+      "checks": ["dungeons:sprite-world", "dungeons:sprite-world:floor-and-native-variants"]
     },
     "sprite-floor-correction-regression-474c2b5": {
       "kind": "regression",
@@ -2911,7 +2963,13 @@
     },
     "reward-allocation-source-1b051cc": {"revision":"1b051cc9e1034ecc093a74a0abbc3a610addcfa1","date":"2026-10-26","kind":"source","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/1b051cc9e1034ecc093a74a0abbc3a610addcfa1/src/loot.rs#L1092-L1153","method":"Doom alone requires inclusive 15% of 8000 HP; .001 and other >800 gates remain. God equipment candidates roll independently at p/N once per death, with contributor-group access excluding private recipients. Private potion rules and period coefficients remain.","limitations":"Qualified compiled-Kithio reconstruction, not authenticated original XML/behavior. Bound successes are removed from shared loot to prevent the reference duplication/leak.","checks":["gear:loot-and-ownership","gear:bows","dungeons:undead-lair"]},
     "reward-allocation-regression-1b051cc": {"revision":"1b051cc9e1034ecc093a74a0abbc3a610addcfa1","date":"2026-10-26","kind":"regression","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/635","method":"Meaningful baseline 0 passed/2 failed/319 filtered. Candidate reward 5, period 2, loot 17; full 326 passed/1 unchanged ignored from 327. Covers 800/801/1199/1200/1201, one/two/five contributors, ownership, 128-bag exhaustion, committed once-only collection and failed-receipt quarantine. Formatting, strict Clippy and Python 22+1 pass.","limitations":"Backend controlled RNG is not a naturally rendered rare Doom drop. Failed-receipt test models publication failure, not injected SQL rollback. Occupied-slot and QA-controller fixture errors were repaired before final acceptance.","checks":["gear:loot-and-ownership","gear:bows","dungeons:undead-lair"]},
-    "reward-allocation-native-1b051cc": {"revision":"1b051cc9e1034ecc093a74a0abbc3a610addcfa1","date":"2026-10-26","kind":"native","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/635","method":"Before and Candidate each pass 10 assertions with 2 ordinary cooperative god kills. Before gear is private to one recipient; Candidate both contributors see the same naturally rolled bag while outsider UI cannot collect. Authorized pickup commits once, revision 1 to 2; normal reload retains living character and item.","limitations":"Prepared local capped Knights, not earned progression/full clear/rendered-public gameplay. Independent maps; playable SWF/index/.16 runtime 10 files byte-equal. Candidate first capture rolled no bags and remains failed. No native rare Doom or private-potion acceptance claimed.","checks":["gear:loot-and-ownership"]}
+    "reward-allocation-native-1b051cc": {"revision":"1b051cc9e1034ecc093a74a0abbc3a610addcfa1","date":"2026-10-26","kind":"native","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/635","method":"Before and Candidate each pass 10 assertions with 2 ordinary cooperative god kills. Before gear is private to one recipient; Candidate both contributors see the same naturally rolled bag while outsider UI cannot collect. Authorized pickup commits once, revision 1 to 2; normal reload retains living character and item.","limitations":"Prepared local capped Knights, not earned progression/full clear/rendered-public gameplay. Independent maps; playable SWF/index/.16 runtime 10 files byte-equal. Candidate first capture rolled no bags and remains failed. No native rare Doom or private-potion acceptance claimed.","checks":["gear:loot-and-ownership"]},
+    "god-reproduction-source-aa7997f": {"revision":"aa7997f4d6b781e14f7ef6aa47719c36eee3dd73","date":"2026-10-26","kind":"source","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/aa7997f4d6b781e14f7ef6aa47719c36eee3dd73/src/world/population.rs#L179-L287","method":"Eight unconditional ordinary god species use active-only 60000 ms clocks, next-tick evaluation, strict 10-tile same-kind density including parent and bounded safe births. Every root/family member retains 12-tile player/arrival clearance and existing capacity/family ownership. Regional refill and family reinforcement remain separate.","limitations":"Independent compiled-Kithio reconstruction, not authenticated original behavior. Project 20-tile simulation, habitat/setpiece safety and bounded Sprite-family policy remain. Djinn Idle-only reproduction is excluded; no reference code imported.","checks":["realm:white-demon","realm:sprite-god","realm:medusa","realm:ent-god","realm:beholder","realm:flying-brain","realm:slime-god","realm:ghost-god"]},
+    "god-reproduction-regression-aa7997f": {"revision":"aa7997f4d6b781e14f7ef6aa47719c36eee3dd73","date":"2026-10-26","kind":"regression","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/652","method":"Original RED 0 passed/1 failed/319 filtered;12-tile clearance RED against unchanged pre-repair production 0 passed/1 failed/327 filtered. Final 9 focused and327 full pass,1 unchanged provider-dependent ignored from328. Density/range, isolation/replay, active/stasis clocks, refusal/capacity, family ownership, clearance, death and refill covered. Fmt,strict Clippy,Python22+1 and three9-test repeats pass.","limitations":"Controlled backend fixtures establish boundary and admission guards,not public gameplay,original population density or historical fidelity.","checks":["realm:white-demon","realm:sprite-god","realm:medusa","realm:ent-god","realm:beholder","realm:flying-brain","realm:slime-god","realm:ghost-god"]},
+    "god-reproduction-native-aa7997f": {"revision":"aa7997f4d6b781e14f7ef6aa47719c36eee3dd73","date":"2026-10-26","kind":"native","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/652","method":"Before3/After5 assertions pass using same protocol and client4f855c11/.16. Before72400 game_ms/74 actions with no new local Sprite root;After72000/77 actions. Parent284466 logs Born(589011);first local child distance18.1053 tiles;normal close capture renders two large Sprite Gods. Same living Knight,no firing/kills,cleanup[].","limitations":"Prepared unearned independent local contexts. Cumulative game_ms across paused boundaries and sampled eligible endpoints,not uninterrupted walltime/every-tick eligibility. First local distance is not admission coordinates;screenshots alone do not attribute birth. Earlier128MiB fixture failure retained. Initial parent captures were loading placeholders and excluded;only later one-vs-two-god captures support rendered acceptance. No other god species,earned clear,live public,god-wall scale or historical acceptance.","checks":["realm:sprite-god"]},
+    "udl-arrival-class-source-5e70c60": {"revision":"5e70c60f303109e8b3d224dc1e30a908b3f1bccd","date":"2026-10-26","kind":"source","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/5e70c60f303109e8b3d224dc1e30a908b3f1bccd/src/dungeon/undead.rs","method":"Arrival frontier selects the existing round primitive before safe placement. Independent visible122.0.1/123.1.2 entrances support a rounded arrival class and existing three-wide passage. Connector/gap,boss/ordinary populations,motifs,terrain/config/spawn and return policies retain their rules.","limitations":"CLASS-only correction.17x17/radius8 stays reconstruction,not historical measurement;exact size/bevel/template probabilities and599remain OPEN. RNG draws can shift later seeded placements;no original map bank/setpieces or unrelated595/597/598/lava fix.","checks":["dungeons:undead-lair"]},
+    "udl-arrival-class-regression-5e70c60": {"revision":"5e70c60f303109e8b3d224dc1e30a908b3f1bccd","date":"2026-10-26","kind":"regression","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/654","method":"Meaningful RED1passed/1failed/318filtered:seed1 inherited rectangle. Candidate2focused/full319pass+1unchanged ignored from320inventory;fmt/strictClippy/Python22+1 pass. Private test-only32to256seed loops preserve production bytes;2tests/512real generations seeds0-255 validate arrivalmask/center/portal/candles/metadata/doorway plus endpoint/family/globalconnectivity.","limitations":"Public loops remain32;private wider sweep does not establish original size/distributions or identical later per-seed populations.","checks":["dungeons:undead-lair"]},
+    "udl-arrival-class-native-5e70c60": {"revision":"5e70c60f303109e8b3d224dc1e30a908b3f1bccd","date":"2026-10-26","kind":"native","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/654","method":"Before6/After6checks pass with same protocol,worldSeed12351 and identical client4f855c11/.16. Actual native rectangular/circular arrival minimaps render. Ordinary measured connector cross/back,Cowardice Enter UI,Nexus return preserve same living character/loadout/inventory;no firing/forcedclear,cleanup[].","limitations":"Prepared unearned independent local dungeons;one initial paused bounded map read only,not live gameplay oracle. Not earned entry/full clear,durable reconnect,public gameplay or historical dimensions.17diameter reconstruction;599OPEN.","checks":["dungeons:undead-lair"]}
   },
   "results": {
     "heroes:rogue": {"status":"not-run","evidence":["ability-cooldown-native-ef5686e"]},
@@ -2919,13 +2977,7 @@
     "heroes:wizard": {"status":"not-run","evidence":["ability-cooldown-regression-ef5686e"]},
     "heroes:priest": {"status":"not-run","evidence":[]},
     "heroes:warrior": {"status":"not-run","evidence":[]},
-    "heroes:knight": {
-      "status": "not-run",
-      "evidence": [
-        "shield-stun-regression-06b5675",
-        "shield-stun-native-545f79e"
-      ]
-    },
+    "heroes:knight": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "heroes:paladin": {"status":"not-run","evidence":[]},
     "heroes:assassin": {"status":"not-run","evidence":[]},
     "heroes:necromancer": {"status":"not-run","evidence":[]},
@@ -2989,20 +3041,7 @@
     },
     "realm:environmental-hazards": {"status":"not-run","evidence":["ground-cooldown-regression-58f4a08","ground-cooldown-native-58f4a08"]},
     "realm:travel-between-worlds": {"status":"not-run","evidence":["dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
-    "realm:ent-ancient": {
-      "status": "not-run",
-      "evidence": [
-        "ent-groves-source-f5f7398",
-        "ent-groves-regression-f5f7398",
-        "ent-groves-native-f5f7398",
-        "ent-anchor-regression-4bd1817",
-        "tree-size-config-regression-e75cf97",
-        "authored-groves-source-fc0831a",
-        "authored-groves-regression-fc0831a",
-        "authored-groves-native-fc0831a",
-        "shield-stun-regression-06b5675"
-      ]
-    },
+    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a","shield-stun-regression-06b5675"]},
     "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c"]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c","ghost-master-source-e7ab45c","ghost-master-regression-e7ab45c","ghost-master-native-576d885d"]},
     "realm:deathmage": {"status":"not-run","evidence":["deathmage-graveyard-native-957e273"]},
@@ -3052,16 +3091,16 @@
     "realm:wargs": {"status":"not-run","evidence":[]},
     "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:cubes": {"status":"not-run","evidence":[]},
-    "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:ent-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:beholder": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:flying-brain": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:slime-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:ghost-god": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:ent-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:beholder": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:flying-brain": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:slime-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:ghost-god": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
     "realm:djinn": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","leviathan-cadence-source-9f79c95","leviathan-cadence-regression-9f79c95","leviathan-cadence-native-9f79c95"]},
-    "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65"]},
+    "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f","god-reproduction-native-aa7997f"]},
     "dungeons:pirate-cave": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7"]},
     "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d"]},
@@ -3070,33 +3109,9 @@
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63"]},
     "dungeons:forbidden-jungle": {"status":"not-run","evidence":[]},
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
-    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550","sprite-defense-source-c6b4925","sprite-defense-regression-c6b4925","period-loot-source-1f488df","period-loot-regression-1f488df","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","limon-box-regression-7d5d1c8","limon-box-native-7d5d1c8"]},
-    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","partial-differences-source-4992445"]},
-    "dungeons:undead-lair": {
-      "status": "not-run",
-      "evidence": [
-        "portal-position-source-78d8151",
-        "portal-position-native-d7c39b1",
-        "portal-position-regression-78d8151",
-        "udl-endpoint-regression-3bdaddb",
-        "udl-endpoint-native-3bdaddb",
-        "lair-room-space-native-89bc191",
-        "lair-room-space-regression-89bc191",
-        "septavius-move-source-8a98415",
-        "udl-room-groups-regression-a072dbd",
-        "septavius-move-regression-a776877",
-        "septavius-move-native-a776877",
-        "lair-spacing-source-6e7bf4d",
-        "lair-spacing-regression-6e7bf4d",
-        "lair-spacing-native-6e7bf4d",
-        "period-loot-source-1f488df",
-        "period-loot-regression-1f488df",
-        "reward-allocation-source-1b051cc",
-        "reward-allocation-regression-1b051cc",
-        "shield-stun-regression-06b5675",
-        "shield-stun-native-545f79e"
-      ]
-    },
+    "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550","sprite-defense-source-c6b4925","sprite-defense-regression-c6b4925","period-loot-source-1f488df","period-loot-regression-1f488df","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","limon-box-regression-7d5d1c8","limon-box-native-7d5d1c8"]},
+    "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","partial-differences-source-4992445"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db","shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -3114,7 +3129,9 @@
         "udl-dressing-regression-4ecd4de",
         "udl-dressing-native-4ecd4de",
         "udl-endpoint-regression-3bdaddb",
-        "udl-endpoint-native-3bdaddb"
+        "udl-endpoint-native-3bdaddb",
+        "udl-compact-arrival-regression-0f9d8db",
+        "udl-compact-arrival-native-0f9d8db"
       ]
     },
     "dungeons:abyss-of-demons": {"status":"not-run","evidence":["abyss-regression-5a5502f","abyss-entrance-regression-4cbe7bc","abyss-idol-defense-source-83ec8d7","abyss-idol-defense-regression-83ec8d7","abyss-idol-defense-native-83ec8d7","abyss-malphas-potions-regression-78c1941","abyss-malphas-potions-native-1b59f98","chase-jitter-source-ddc478b","chase-jitter-regression-ddc478b","chase-jitter-native-ddc478b","period-loot-source-1f488df","period-loot-regression-1f488df","abyss-teleport-regression-014a02e","abyss-teleport-native-014a02e"]},
@@ -3227,13 +3244,7 @@
     "condition:4": {"status":"not-run","evidence":[]},
     "condition:5": {"status":"not-run","evidence":[]},
     "condition:6": {"status":"not-run","evidence":[]},
-    "condition:7": {
-      "status": "not-run",
-      "evidence": [
-        "shield-stun-regression-06b5675",
-        "shield-stun-native-545f79e"
-      ]
-    },
+    "condition:7": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "condition:8": {"status":"not-run","evidence":[]},
     "condition:9": {"status":"not-run","evidence":[]},
     "condition:10": {"status":"not-run","evidence":[]},
@@ -3257,15 +3268,7 @@
     "condition:22": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
     "condition:23": {"status":"not-run","evidence":[]},
     "condition:24": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
-    "condition:25": {
-      "status": "not-run",
-      "evidence": [
-        "protected-projectile-source-c4854b8",
-        "protected-projectile-native-pair-ef94d41",
-        "shield-stun-regression-06b5675",
-        "shield-stun-native-545f79e"
-      ]
-    },
+    "condition:25": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41","shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "condition:26": {"status":"not-run","evidence":[]},
     "condition:27": {"status":"not-run","evidence":[]},
     "condition:28": {"status":"not-run","evidence":["selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},

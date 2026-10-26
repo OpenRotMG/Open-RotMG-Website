@@ -2846,7 +2846,8 @@
         "expected": "Mountain flying Sprite God HP2000/DEF12; Purple Magic100 and zero-damage Quiet10s Grey Boomerang. Sprite Children follow their God and wander independently when caught up; include their lifecycle, not constructs. Original child counts/regeneration/cleanup remain qualified.",
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
-          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553"
+          "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
         ],
         "unknowns": [
           "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
@@ -3107,6 +3108,7 @@
         "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
+          "Issue #618 replaces the repeating eight-tile conveyor grid with seeded overlapping bands of varied widths and lengths, informed by a later community map. The original generator and pattern probabilities remain unrecovered.",
           "Server PR363 returns Limon to her home point at speed 1.4 for the box phase, following later FSoD return behavior rather than recovered 123.5.1 timing: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363",
           "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519",
           "After the platform enlargement, the turret ranges return from 6/10 to the modified 7.0 comparator's 9.5/14. The inner square is 13.435 tiles between turret centers instead of 8.485, approximately the reported 14 instead of 9. The wider outer box preserves the gap. Later FSoD conflicts at 6/10; no numeric Limon behavior was located in the primary Kithio compiled tables, and exact original dimensions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/571",
@@ -3123,6 +3125,10 @@
           {
             "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
             "label": "May 2012 Sprite World guide: floor variants, trees and native gods"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/spriteworld.wmap",
+            "label": "Later static community map: irregular overlapping conveyor bands, not an original procedural generator"
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.SpriteWorld.cs#L45-L58",
@@ -3150,7 +3156,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Directional and stationary floors, compact platforms and destructible Sprite Trees exist, but every room uses one tiled White floor pattern; the historical non-tiled variant is not restored."
+              "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
             "unknowns": [],
             "sources": [],
@@ -3170,7 +3176,8 @@
         "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
-          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309"
+          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
+          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -3211,6 +3218,22 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
             "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=f7aEwFicmjk",
+            "label": "rotmgLukep visible122.0.1 entrance:rounded arrival class,not measured diameter"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=hLD0VPGf41w",
+            "label": "DelPlays visible123.1.2 entrance:rounded arrival/three-wide passage,not authenticated size"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/UDL1.wmap",
+            "label": "Later 27.3.2 comparator: 11-wide rounded arrival, not original target dimensions"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=7Ajp4rlzC6A&t=57s",
+            "label": "2015 guide: clearer pillar/candle groups, later comparator rather than target authentication"
           }
         ],
         "checks": [
@@ -3246,7 +3269,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "The September 2012 footage supports dark endpoint motifs and eight boss candles, but does not authenticate an exact 123.5.1 template. The entrance candle pair, precise raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
+              "September 2012 footage supports dark endpoint motifs, four entrance pillars with candle groups and eight boss candles, but does not authenticate a 123.5.1 template. The 11-wide entrance, exact furnishing raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
             ],
             "sources": [
               {
@@ -5073,6 +5096,7 @@
         "differences": [],
         "unknowns": [
           "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
           "Whether the original server also rejected direct requests targeting invisible players."
         ],
         "sources": [
@@ -5083,6 +5107,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.0.0",
             "label": "Build 123.0.0 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 Wild Shadow FAQ: same-map player teleporting; no explicit Nexus permission or prohibition"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/World.cs#L26-L36",
+            "label": "Primary community World defaults AllowTeleport to true; Nexus does not override it, not authenticated 2012 server behavior"
+          },
+          {
+            "url": "https://rotmgstart.weebly.com/controls.html",
+            "label": "Undated later guide explicitly excludes Nexus player teleports; its pet/backpack UI is not 123.5.1 evidence"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
+            "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
           }
         ]
       }
