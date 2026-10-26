@@ -4298,12 +4298,16 @@
         "differences": [],
         "unknowns": [
           "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
-          "MP restoration text now uses cyan as requested in issue 322; original server hue is not established by conflicting modified comparators."
+          "Exact original MP-restoration text hue remains unrecovered; Kithio purple and Trapped white conflict. Light blue 6084e0 is a later-reference reconstruction, not authenticated 123.5.1 RGB."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/entities/player/Player.UseItem.cs#L140",
+            "label": "Later FSoD light-blue 6084e0 comparator; reconstruction, not original 123.5.1 hue"
           }
         ]
       }
