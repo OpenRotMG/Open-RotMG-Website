@@ -23,6 +23,35 @@
         "realm:biome-zones"
       ]
     },
+    "shield-stun-regression-06b5675": {
+      "kind": "regression",
+      "revision": "06b56753fa9919dd36511a5e210fc72933c5da20",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/666#issuecomment-6426101245",
+      "method": "359 Rust tests passed, 1 existing test ignored. A new matrix covers Septavius and Actual Ent Ancient with unprotected, Invulnerable, Invincible, Stasis and Stun Immune flags, using selected Mithril Shield effects. Invulnerable hits retain zero HP loss and damage credit but stun for 3000ms; attacks stop and resume after expiry. The original-code matrix failed on invulnerable Septavius. Managed Cargo helper SHA256 a6e8d34f5e656c06386db2a60f9252dab6ad03e7618524a3bdacbbf5913ac34a.",
+      "limitations": "Controlled flat-map actors and explicit protection flags, not an earned Knight journey, native Ent clear, complete condition/loot acceptance or original-server authentication. Player hit handling is unchanged.",
+      "checks": [
+        "heroes:knight",
+        "realm:ent-ancient",
+        "dungeons:undead-lair",
+        "condition:7",
+        "condition:25"
+      ]
+    },
+    "shield-stun-native-545f79e": {
+      "kind": "native",
+      "revision": "545f79edd51e718d1efddd975a41d4a2814f6394",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/666#issuecomment-6426101245",
+      "method": "Fresh two-client native case passed 7 assertions, exit 0 and no cleanup errors. The caster's ordinary Space cast spent mana against invulnerable Septavius. Boss HP remained 8000; Stunned was recorded for 2400-5400 ms, projectile counter remained 0 at 4900 ms and reached 30 at 6950 ms; the same Knight lived. Native receipt 7f8f9489, client 4f855c11 and runtime 0.7.1-openrotmg.16. Rust source is unchanged from 06b5675; only case timing assertions changed.",
+      "limitations": "Prepared level-20 guest, Mithril Shield and seed 12351 Undead Lair, not earned entry or a complete class/dungeon clear. The first client stayed at the entrance; nearby observer publication was not tested. No native Ent acceptance. The Before image precedes a later fixture death, and the earlier after-run assertion extended past expiry; neither failed run is counted as passing. Historical dispositions and whole-feature results remain unchanged.",
+      "checks": [
+        "heroes:knight",
+        "dungeons:undead-lair",
+        "condition:7",
+        "condition:25"
+      ]
+    },
     "udl-compact-arrival-regression-0f9d8db": {
       "kind": "regression",
       "revision": "0f9d8dbb4a26af8ec3422d1c2167ccf4ac018ec8",
@@ -2970,7 +2999,7 @@
     "heroes:wizard": {"status":"not-run","evidence":["ability-cooldown-regression-ef5686e"]},
     "heroes:priest": {"status":"not-run","evidence":[]},
     "heroes:warrior": {"status":"not-run","evidence":[]},
-    "heroes:knight": {"status":"not-run","evidence":[]},
+    "heroes:knight": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "heroes:paladin": {"status":"not-run","evidence":[]},
     "heroes:assassin": {"status":"not-run","evidence":[]},
     "heroes:necromancer": {"status":"not-run","evidence":[]},
@@ -3034,7 +3063,7 @@
     },
     "realm:environmental-hazards": {"status":"not-run","evidence":["ground-cooldown-regression-58f4a08","ground-cooldown-native-58f4a08"]},
     "realm:travel-between-worlds": {"status":"not-run","evidence":["dungeon-return-regression-456ab72","dungeon-return-native-456ab72"]},
-    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a"]},
+    "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a","shield-stun-regression-06b5675"]},
     "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c"]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c","ghost-master-source-e7ab45c","ghost-master-regression-e7ab45c","ghost-master-native-576d885d"]},
     "realm:deathmage": {"status":"not-run","evidence":["deathmage-graveyard-native-957e273"]},
@@ -3104,7 +3133,7 @@
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550","sprite-defense-source-c6b4925","sprite-defense-regression-c6b4925","period-loot-source-1f488df","period-loot-regression-1f488df","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","limon-box-regression-7d5d1c8","limon-box-native-7d5d1c8"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","partial-differences-source-4992445"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db","shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -3237,7 +3266,7 @@
     "condition:4": {"status":"not-run","evidence":[]},
     "condition:5": {"status":"not-run","evidence":[]},
     "condition:6": {"status":"not-run","evidence":[]},
-    "condition:7": {"status":"not-run","evidence":[]},
+    "condition:7": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "condition:8": {"status":"not-run","evidence":[]},
     "condition:9": {"status":"not-run","evidence":[]},
     "condition:10": {"status":"not-run","evidence":[]},
@@ -3261,7 +3290,7 @@
     "condition:22": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
     "condition:23": {"status":"not-run","evidence":[]},
     "condition:24": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
-    "condition:25": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41"]},
+    "condition:25": {"status":"not-run","evidence":["protected-projectile-source-c4854b8","protected-projectile-native-pair-ef94d41","shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
     "condition:26": {"status":"not-run","evidence":[]},
     "condition:27": {"status":"not-run","evidence":[]},
     "condition:28": {"status":"not-run","evidence":["selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
