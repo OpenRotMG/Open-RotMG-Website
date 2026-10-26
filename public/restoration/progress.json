@@ -215,7 +215,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
+        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. In the community reconstruction, Invulnerable blocks HP loss but not stun; Invincible, Stasis and Stun Immune still block stun. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
         "differences": [],
         "unknowns": [
           "Original stun and Armor Broken immunity lists, multi-hit accounting and untiered-shield acquisition."
@@ -224,6 +224,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community hit rule: invulnerability preserves HP, not immunity to projectile effects"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/GameObject.as",
+            "label": "Modified 7.0 client: invulnerability zeros damage but remains targetable"
           }
         ]
       }
@@ -851,12 +859,18 @@
             "expected": "Ground appearance and habitat tiers are separate map properties.",
             "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
-              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns."
+              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns.",
+              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665"
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Whether other classic ground/tier assignments match the target."],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/%E5%9C%B0%E5%BD%A2",
+                "label": "Period Low Forest and Low Plains screenshots; palette matches do not recover original map metadata"
+              }
+            ],
             "group": "geography"
           },
           {
@@ -1264,7 +1278,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
+        "expected": "Multiple finite forest Groves with damage evaluation, growth, saplings, sprite support and vulnerability windows. Invulnerable growth/shield windows should still permit shield stun without HP loss under the community hit rules. Ent and Ent Sapling are part of this family; their independent spawning rules remain unresolved.",
         "differences": [
           "PR495 matches the pinned GPL community Grove's Ent anchor at local (13,13), replacing (12.5,12.5), and uses that point for 32-unit spacing and destination habitat checks. Stencils, materials, local stencil RNG calls, counts, size and AI are unchanged, but eligible sites and later world generation can change. Controlled World and six-catalogue-entry tests passed; prepared native checks are functional evidence, not exact-anchor or original 123.5.1 authentication. https://github.com/OpenRotMG/Open-RotMG-Server/pull/495",
           "Generated Cherry Tree sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
@@ -1291,6 +1305,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.EntAncient.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
           }
         ]
       }
@@ -3015,13 +3033,16 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
-            "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
+            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
-            "differences": [],
+            "differences": [
+              "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
+            ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator."
+              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator.",
+              "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
               {
@@ -3039,6 +3060,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
                 "label": "April 2012 run: notched-square Stheno room on the minimap; exact build unestablished"
+              },
+              {
+                "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=30",
+                "label": "April 2012 run: unexplored continuation stays black until excavation; exact build and sight algorithm unestablished"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/Sight.cs",
+                "label": "Modified 7.0 room-sight comparator: reveal the blocking boundary without expanding through it, not an official 2012 algorithm"
               }
             ],
             "group": "layout"
@@ -3161,11 +3190,11 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
-          "Arrival class now uses the existing round primitive before safe placement. Its 17-cell diameter stays reconstruction; historical size and #599 remain open. Later seeded placements may shift; other generator/return rules retain their contracts: https://github.com/OpenRotMG/Open-RotMG-Server/pull/654"
+          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -3204,12 +3233,24 @@
             "label": "bickuribox12 Undead Lair footage, upload metadata 2012-09-15; exact build unverified"
           },
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
+          {
             "url": "https://www.youtube.com/watch?v=f7aEwFicmjk",
             "label": "rotmgLukep visible122.0.1 entrance:rounded arrival class,not measured diameter"
           },
           {
             "url": "https://www.youtube.com/watch?v=hLD0VPGf41w",
             "label": "DelPlays visible123.1.2 entrance:rounded arrival/three-wide passage,not authenticated size"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/UDL1.wmap",
+            "label": "Later 27.3.2 comparator: 11-wide rounded arrival, not original target dimensions"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=7Ajp4rlzC6A&t=57s",
+            "label": "2015 guide: clearer pillar/candle groups, later comparator rather than target authentication"
           }
         ],
         "checks": [
@@ -3245,7 +3286,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "The September 2012 footage supports dark endpoint motifs and eight boss candles, but does not authenticate an exact 123.5.1 template. The entrance candle pair, precise raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
+              "September 2012 footage supports dark endpoint motifs, four entrance pillars with candle groups and eight boss candles, but does not authenticate a 123.5.1 template. The 11-wide entrance, exact furnishing raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
             ],
             "sources": [
               {
@@ -5800,12 +5841,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Stunned prevents ordinary weapon shooting. Do not require a blanket class-ability lock: target client ability entry does not check Stunned, while original server exceptions remain unresolved.",
+        "expected": "Stunned prevents ordinary weapon shooting. The community enemy hit rule permits projectile stun through Invulnerable without HP loss. Do not require a blanket class-ability lock: target client ability entry does not check Stunned, while original server exceptions remain unresolved.",
         "differences": [],
         "unknowns": [
           "Original server ability-specific acceptance, already-existing projectile behavior, complete duration/cleanse policy."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -6182,13 +6227,17 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Invulnerable zeroes calculated projectile damage but remains a projectile collision target. Do not infer condition immunity or universal damage immunity from this client rule.",
+        "expected": "Invulnerable zeroes calculated projectile damage but remains a projectile collision target. The community enemy hit rule still applies projectile conditions; player hit handling is separate. Do not infer universal damage immunity or authenticated original condition semantics from this reconstruction.",
         "differences": [],
         "unknowns": [
-          "Whether shot conditions still apply when projectile damage is zero.",
+          "Original production condition acceptance when projectile damage is zero; community enemy semantics do not authenticate player behavior.",
           "Original ground damage, area damage, poison and Bleeding exceptions."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
+            "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
