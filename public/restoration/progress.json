@@ -4026,11 +4026,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern.",
+        "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility is inclusive 1200/8000 at unchanged .001; other Septavius rewards retain the generic >800 gate.",
         "differences": [],
         "unknowns": [
           "Original availability of Thousand Shot and upper-tier bows.",
-          "Each bow’s original spread and collision behavior."
+          "Each bow’s original spread and collision behavior.",
+          "The attributed 15% Doom fragment and original threshold engine are not authenticated."
         ],
         "sources": [
           {
@@ -4189,7 +4190,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death and shares unbound gear among contributors without private awards; private potion ownership remains separate.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
@@ -4199,6 +4200,14 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/wServer/logic/loot/LootDefs.cs#L76-L111",
+            "label": "Compiled Kithio independent tier candidates and inclusive thresholds; reconstruction comparator"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/wServer/logic/loot/Loots.cs#L50-L99",
+            "label": "Compiled Kithio contributor allocation; bound duplication/leak deliberately not retained"
           }
         ],
         "checks": [
@@ -4210,7 +4219,9 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
-            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
+            "unknowns": [
+              "Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."
+            ],
             "sources": [],
             "group": "behavior"
           }
