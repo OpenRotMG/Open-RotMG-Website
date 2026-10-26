@@ -1987,7 +1987,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Shrine, setting, red/blue skull attacks, movement, replenishment, ownership, completion and rewards; exact target rates and geometry remain qualified.",
-        "differences": [],
+        "differences": [
+          "PR607 keeps erosion-selected Skull Shrine birth cells unchanged and rechecks their current floor and occupants before placement or delayed admission. Surviving stone still paints normally. Prepared checks and community-source erosion semantics do not establish original layouts or noise/RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/607"
+        ],
         "unknowns": [
           "Independent target counts, timing, geometry, cleanup and reward probabilities."
         ],
