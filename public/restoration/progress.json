@@ -3038,6 +3038,7 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [
+              "Boss cover at 5eec5726 has twelve-cell tapered shoulders and a recessed outer face instead of rectangular bars. Four-tile rim clearance and the separate material policy remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/commit/5eec5726be7b22ce9e50c54f3c9b4f33e247a502",
               "North/south boss cover mixes breakable blocks with permanent shelter; side cover stays permanent. The material split remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/673",
               "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
             ],
@@ -3056,7 +3057,7 @@
               },
               {
                 "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/snakepit.wmap",
-                "label": "Active later community map: mixed north/south boss cover and permanent side cover, not an original generator"
+                "label": "Active later community map: twelve-cell notched cover, mixed north/south blocks and permanent sides, not an original generator"
               },
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
