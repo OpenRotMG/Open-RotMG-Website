@@ -13,12 +13,10 @@
 <h1>Bot CCTV</h1>
 <p>Pick a live bot to watch what it sees, where it aims and moves, and why.</p>
 <p><label for="bot">Bot</label> <select id="bot"></select></p>
-<p id="status" role="status">Loading bots…</p>
 <div class="cctv">
-<div><div id="view"></div><p id="view-status" role="status">Native view: disconnected.</p></div>
-<div><p id="telemetry-status" role="status">Telemetry: disconnected. No decision received.</p><p id="vitals"></p><h2>Intentions</h2><p id="intention-status" role="status">No decision intention received.</p><div id="intention"></div><details><summary>Thoughts and chat history</summary><ol id="thoughts" reversed></ol></details></div>
+<div class="game-view"><div id="view"></div><p id="status" role="status">Loading bots…</p><p id="view-status" role="status"></p></div>
+<aside class="intentions"><h2>Intentions</h2><div class="intention-body"><p id="telemetry-status" role="status"></p><p id="intention-status" role="status">No decision intention received.</p><div id="intention"></div></div></aside>
 </div>
-<h2>Language model</h2><p id="llm"></p>
 </main><footer class="site-footer">
 <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
 <p>2012 Realm of the Mad God reimplementation<br>Report bugs and missing content with the link below.</p>
