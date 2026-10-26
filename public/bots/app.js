@@ -50,14 +50,6 @@ export function intentionRows(intent) {
   ];
 }
 
-function llm(status) {
-  if (!status.enabled) return 'Disabled on this server.';
-  if (status.budget_scope !== 'process-local' || status.budget_resets_on_restart !== true || status.budget_window_seconds !== 86400 || status.provider_quota !== 'unknown' ||
-      !['daily_requests', 'daily_limit', 'requests_remaining', 'automatic_limit', 'automatic_remaining', 'budget_window_resets_in_seconds', 'local_capacity_denials'].every(key => Number.isInteger(status[key]) && status[key] >= 0) || status.budget_window_resets_in_seconds > status.budget_window_seconds) throw new Error('malformed language-model allowance');
-  return `${status.model}: ${status.status}. Process-local fixed 24 h allowance: ${status.daily_requests} of ${status.daily_limit} requests used, ${status.requests_remaining} remaining (${status.automatic_remaining} of ${status.automatic_limit} left for bot-initiated speech). Resets in ${status.budget_window_resets_in_seconds} s and on server restart. Actual provider quota: unknown. ${status.successes} succeeded, ${status.failures} failed, ${status.in_flight} in flight. Local capacity denials since restart: ${status.local_capacity_denials} (no provider requests).` +
-    (status.last_latency_ms === null ? '' : ` Last reply took ${status.last_latency_ms} ms.`) + (status.last_error ? ` Last error: ${status.last_error}.` : '');
-}
-
 export function start({document, window, backend, now = Date.now}) {
   const $ = selector => document.querySelector(selector);
   const origin = backend.url('/api/bots').origin;
@@ -65,27 +57,24 @@ export function start({document, window, backend, now = Date.now}) {
   const current = session => active === session && !session.controller.signal.aborted;
   function nativeStatus(session, status, error) {
     session.native = status;session.nativeAt = now();
-    $('#view-status').textContent = `Native view: ${status}${error ? ` — ${error}` : '.'}`;
+    $('#view-status').textContent = status === 'live' ? '' : status === 'connecting' ? 'Loading game view…' : `Game view ${status}${error ? `: ${error}` : '.'}`;
   }
   function telemetryStatus(session) {
     const elapsed = session.received === undefined ? 0 : now() - session.received;
     const state = session.telemetry === 'receiving' && elapsed > 5000 ? 'stale' : session.telemetry;
-    const age = session.age === undefined ? 'No decision received.' : `Last decision ${Math.round((session.age + elapsed) / 1000)} s ago.`;
-    $('#telemetry-status').textContent = `Telemetry: ${state}. ${age}`;
+    $('#telemetry-status').textContent = ['receiving', 'connecting'].includes(state) ? '' : `Intentions ${state}.`;
   }
   function stop() {
     active?.controller.abort();active = undefined;
-    $('#view').replaceChildren();$('#thoughts').replaceChildren();$('#vitals').textContent = '';
+    $('#view').replaceChildren();
     $('#intention').replaceChildren();$('#intention-status').textContent = 'No decision intention received.';
-    $('#view-status').textContent = 'Native view: disconnected.';
-    $('#telemetry-status').textContent = 'Telemetry: disconnected. No decision received.';
+    $('#view-status').textContent = '';
+    $('#telemetry-status').textContent = '';
   }
   function show(session, update) {
-    const {frame, age_ms: age, thoughts} = update;
-    if (!(frame === null || (frame && typeof frame === 'object')) || !Array.isArray(thoughts) || !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
-    session.age = frame === null ? undefined : age;session.received = now();session.telemetry = 'receiving';
-    if (frame === null) $('#vitals').textContent = `${session.name} has not made a decision since the server started.`;
-    else $('#vitals').textContent = `${session.name}, level ${frame.level} ${frame.class} in ${frame.world}. HP ${frame.hp}/${frame.max_hp}, MP ${frame.mp}/${frame.max_mp}. ${frame.reason[0].toUpperCase()}${frame.reason.slice(1)}.${frame.aim === null ? '' : frame.fired ? ' Shooting.' : ' Aiming.'}`;
+    const {frame, age_ms: age} = update;
+    if (!(frame === null || (frame && typeof frame === 'object')) || !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
+    session.received = now();session.telemetry = 'receiving';
     $('#intention').replaceChildren();
     if (frame === null) $('#intention-status').textContent = 'No decision intention received.';
     else {
@@ -101,11 +90,6 @@ export function start({document, window, backend, now = Date.now}) {
         $('#intention-status').textContent = `Intentions unavailable: ${error.message}.`;console.error(error);
       }
     }
-    for (const thought of thoughts) {
-      const item = document.createElement('li');
-      item.textContent = `${new Date(thought.at).toLocaleTimeString()} ${thought.text}`;$('#thoughts').prepend(item);
-    }
-    while ($('#thoughts').children.length > 50) $('#thoughts').lastChild.remove();
     telemetryStatus(session);
   }
   async function watch(session) {
@@ -118,8 +102,6 @@ export function start({document, window, backend, now = Date.now}) {
         if (!response.ok) throw new Error(`stream refused (HTTP ${response.status}): ${await response.text()}`);
         if (!response.body) throw new Error('stream response has no body');
         reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
-        // Reconnection replays the server's bounded thought history.
-        $('#thoughts').replaceChildren();
         let buffer = '';
         while (current(session)) {
           const {value, done} = await reader.read();
@@ -130,7 +112,7 @@ export function start({document, window, backend, now = Date.now}) {
         }
       } catch (error) {
         if (!current(session)) return;
-        session.telemetry = `error — ${error.message}. Retrying in 5 s`;telemetryStatus(session);console.error(error);
+        session.telemetry = `unavailable: ${error.message}. Reconnecting in 5 s`;telemetryStatus(session);console.error(error);
       } finally {
         if (reader) await reader.cancel().catch(error => {if (current(session)) console.error(error);});
       }
@@ -170,22 +152,21 @@ export function start({document, window, backend, now = Date.now}) {
       if (!response.ok) throw new Error(`bot list failed (HTTP ${response.status}): ${await response.text()}`);
       const list = await response.json();
       if (id !== refreshId) return;
-      if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length) || !list.llm || typeof list.llm !== 'object') throw new Error('malformed bot list');
-      $('#llm').textContent = llm(list.llm);
+      if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length)) throw new Error('malformed bot list');
       available = new Set(list.bots.map(bot => bot.name));
       if (available.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
       const picker = $('#bot');
       selected ??= list.bots[0]?.name;
       picker.replaceChildren(...list.bots.map(bot => {
         const option = document.createElement('option');option.value = bot.name;
-        option.textContent = bot.frame ? `${bot.name} (level ${bot.frame.level} ${bot.frame.class}, ${bot.frame.reason})` : bot.name;
+        option.textContent = bot.name;
         return option;
       }));
       picker.value = selected ?? '';picker.disabled = !list.bots.length;
       if (!list.bots.some(bot => bot.name === selected)) {
         stop();$('#status').textContent = selected ? `Bot ${selected} is offline or unavailable. Pick another bot.` : 'No bots are running on this server.';return;
       }
-      $('#status').textContent = `Selected ${selected}.`;
+      $('#status').textContent = '';
       if (active?.name !== selected) select(selected);
     } catch (error) {
       if (id !== refreshId) return;
@@ -195,7 +176,7 @@ export function start({document, window, backend, now = Date.now}) {
   function change(event) {
     selected = event.target.value;
     window.history.replaceState(null, '', `?bot=${encodeURIComponent(selected)}`);
-    $('#status').textContent = `Selected ${selected}.`;select(selected);
+    $('#status').textContent = '';select(selected);
   }
   $('#bot').addEventListener('change', change);window.addEventListener('message', message);
   const tick = window.setInterval(() => {
