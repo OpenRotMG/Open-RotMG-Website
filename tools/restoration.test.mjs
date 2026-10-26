@@ -106,7 +106,8 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const room=['snake-boss-room-source-684eff6','snake-boss-room-regression-684eff6','snake-boss-room-native-b84d963'];
   const treasure=['source','regression','native'].map(kind=>'snake-treasure-layout-'+kind+'-daf0c68');
   const neck=['snake-necks-source-e016a63','snake-necks-regression-e016a63','snake-necks-native-e016a63'];
-  assert.deepEqual(result.evidence,[...cover,...layout,...room,...treasure,...neck]);
+  const spacing=['snake-cover-spacing-regression-8f490a1','snake-cover-spacing-native-8f490a1'];
+  assert.deepEqual(result.evidence,[...cover,...layout,...room,...treasure,...neck,...spacing]);
   for(const ref of [...room,...treasure,...neck])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
   assert.equal(evidence.results['dungeons:snake-pit'].status,'not-run');
   assert.match(evidence.sources[neck[0]].limitations,/not an authenticated exact length formula/);

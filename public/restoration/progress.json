@@ -3015,7 +3015,7 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
+            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Each boss-cover group leaves four clear tiles to the outer wall.",
             "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
