@@ -2819,7 +2819,8 @@
         "historical": "partial",
         "expected": "Mountain flying White Demon HP1000/DEF12, armor-piercing MultiHit45-damage shot.122.0.1 paired-swipes wording is qualified by intervening122.3.2 nerf; continuity to123.5.1 is unproven.",
         "differences": [
-          "Server PR413 gives White Demon its own 10-tile firing acquisition, with pursuit 9 and stop 4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413"
+          "Server PR413 originally introduced a 10-tile firing acquisition with pursuit9/stop4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413",
+          "Selected White Demon reconstruction now uses compiled-Kithio immediate attempts,500ms argument/550ms fixed-tick intervals,20-degree gaps,Follow10/7/8 and angular-history aim. Trapped1000ms/15-degree comparator conflicts;exact123.5.1 is not certified. Abyss and selected projectile definitions remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/blob/86437418f9a5b888b0ce8cae04ce6292a9add41c/src/world/gods.rs"
         ],
         "unknowns": [
           "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy.",
@@ -2837,6 +2838,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
             "label": "2013 community White Demon: Chasing(6, 9, 4) and a 10-tile predictive attack, not official server code"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "Compiled Kithio White Demon comparator;engine timing/history semantics qualified,not official123.5.1"
           }
         ]
       }
