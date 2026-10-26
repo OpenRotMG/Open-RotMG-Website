@@ -3027,13 +3027,13 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles.",
+            "expected": "Diggable tunnels and mixed boss cover retain permanent shelter around Stheno; grates spawn snakes.",
             "acceptance": "Open a natural route with ordinary damage. Check collision/minimap updates, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator."
+              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not an original generator."
             ],
             "sources": [
               {
@@ -3046,7 +3046,7 @@
               },
               {
                 "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/snakepit.wmap",
-                "label": "Active later community map: permanent boss-cover walls, not an original generator"
+                "label": "Active later community map: mixed north/south boss cover and permanent side cover, not an original generator"
               },
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
