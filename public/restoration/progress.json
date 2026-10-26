@@ -3033,15 +3033,16 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Each boss-cover group leaves four clear tiles to the outer wall. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "expected": "Diggable tunnels and mixed boss cover retain permanent shelter around Stheno; grates spawn snakes. Each boss-cover group leaves four clear tiles to the outer wall. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
             "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
             "differences": [
+              "North/south boss cover mixes breakable blocks with permanent shelter; side cover stays permanent. The material split remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/673",
               "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
             ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator.",
+              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not the original generator.",
               "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
@@ -3055,7 +3056,7 @@
               },
               {
                 "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/snakepit.wmap",
-                "label": "Active later community map: permanent boss-cover walls, not an original generator"
+                "label": "Active later community map: mixed north/south boss cover and permanent side cover, not an original generator"
               },
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
