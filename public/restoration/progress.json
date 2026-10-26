@@ -3159,7 +3159,8 @@
         "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
-          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309"
+          "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
+          "Arrival class now uses the existing round primitive before safe placement. Its 17-cell diameter stays reconstruction; historical size and #599 remain open. Later seeded placements may shift; other generator/return rules retain their contracts: https://github.com/OpenRotMG/Open-RotMG-Server/pull/654"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -3196,6 +3197,14 @@
           {
             "url": "https://www.youtube.com/watch?v=SXTEcrN4bII",
             "label": "bickuribox12 Undead Lair footage, upload metadata 2012-09-15; exact build unverified"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=f7aEwFicmjk",
+            "label": "rotmgLukep visible122.0.1 entrance:rounded arrival class,not measured diameter"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=hLD0VPGf41w",
+            "label": "DelPlays visible123.1.2 entrance:rounded arrival/three-wide passage,not authenticated size"
           }
         ],
         "checks": [
