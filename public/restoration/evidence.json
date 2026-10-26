@@ -1,6 +1,28 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "classic-lowland-native-39778f0": {
+      "kind": "native",
+      "revision": "39778f06ea4dc8c02944360b2ac6263059a9cea2",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/665#issuecomment-6426663577",
+      "method": "Before case 775c28a2 confirmed both wrong habitats, with an accepted LowPlains image showing Sandsmen. After case 7422cf03 passed six assertions on Classic World 2: LowForest Forest Nymph and LowPlains Undead Hobbits, both native characters alive, with gameplay screenshots of both supports.",
+      "limitations": "Prepared stat-capped unarmed Wizards and privileged scouting, not earned discovery or full biome acceptance. The forest before loading-screen image is excluded. Initial invalid-stat and generated-map-only setup failures are retained; capture timing differs before and after.",
+      "checks": [
+        "realm:biome-zones"
+      ]
+    },
+    "classic-lowland-regression-39778f0": {
+      "kind": "regression",
+      "revision": "39778f06ea4dc8c02944360b2ac6263059a9cea2",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40389943024",
+      "method": "CI passed 382 tests with one ignored, including the new regression checking LowForest/LowPlains tags and ordinary population in all three classic reconstructions. Separate semantic comparison of all 13,230,000 cells found only the intended two terrain-tag changes; all three rebuilt maps passed producer --check.",
+      "limitations": "Covers only Dark Grass and Blue Grass in Worlds 1 to 3, not complete biome mapping, original coordinates, population rates or generated-map ecology.",
+      "checks": [
+        "realm:biome-zones"
+      ]
+    },
     "udl-compact-arrival-regression-0f9d8db": {
       "kind": "regression",
       "revision": "0f9d8dbb4a26af8ec3422d1c2167ccf4ac018ec8",
@@ -2982,7 +3004,7 @@
     "realm:map-world-12": {"status":"not-run","evidence":[]},
     "realm:map-world-13": {"status":"not-run","evidence":[]},
     "realm:map-registration": {"status":"not-run","evidence":["partial-differences-source-4992445"]},
-    "realm:biome-zones": {"status":"not-run","evidence":["partial-differences-source-4992445"]},
+    "realm:biome-zones": {"status":"not-run","evidence":["partial-differences-source-4992445","classic-lowland-regression-39778f0","classic-lowland-native-39778f0"]},
     "realm:water-network": {"status":"not-run","evidence":["partial-differences-source-4992445"]},
     "realm:road-network": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1","partial-differences-source-4992445"]},
     "realm:godlands-terrain": {"status":"not-run","evidence":["partial-differences-source-4992445"]},
