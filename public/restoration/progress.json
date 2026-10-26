@@ -3165,7 +3165,7 @@
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
-          "Arrival class now uses the existing round primitive before safe placement. Its 17-cell diameter stays reconstruction; historical size and #599 remain open. Later seeded placements may shift; other generator/return rules retain their contracts: https://github.com/OpenRotMG/Open-RotMG-Server/pull/654"
+          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664"
         ],
         "unknowns": [
           "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
@@ -3210,6 +3210,14 @@
           {
             "url": "https://www.youtube.com/watch?v=hLD0VPGf41w",
             "label": "DelPlays visible123.1.2 entrance:rounded arrival/three-wide passage,not authenticated size"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/UDL1.wmap",
+            "label": "Later 27.3.2 comparator: 11-wide rounded arrival, not original target dimensions"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=7Ajp4rlzC6A&t=57s",
+            "label": "2015 guide: clearer pillar/candle groups, later comparator rather than target authentication"
           }
         ],
         "checks": [
@@ -3245,7 +3253,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "The September 2012 footage supports dark endpoint motifs and eight boss candles, but does not authenticate an exact 123.5.1 template. The entrance candle pair, precise raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
+              "September 2012 footage supports dark endpoint motifs, four entrance pillars with candle groups and eight boss candles, but does not authenticate a 123.5.1 template. The 11-wide entrance, exact furnishing raster and inherited 1-in-32 blood-floor frequency remain reconstructed."
             ],
             "sources": [
               {
