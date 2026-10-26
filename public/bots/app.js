@@ -18,6 +18,38 @@ export function viewMessage(event, origin, source, bot) {
     (data.status !== 'error' || (typeof data.error === 'string' && data.error.trim().length > 0));
 }
 
+export function selectionMessage(event, origin, source, bot, available) {
+  const data = event.data;
+  return event.origin === origin && source != null && event.source === source &&
+    data !== null && typeof data === 'object' && !Array.isArray(data) &&
+    Object.keys(data).length === 3 && Object.keys(data).every(key => ['type', 'bot', 'target'].includes(key)) &&
+    data.type === 'openrotmg-bot-select' && data.bot === bot &&
+    typeof data.target === 'string' && data.target !== bot && available.has(data.target);
+}
+
+export function intentionRows(intent) {
+  const text = value => typeof value === 'string' && value.trim().length > 0 && value.length <= 512;
+  if (!intent || typeof intent !== 'object' || Array.isArray(intent) ||
+      Object.keys(intent).length !== 6 || !Object.keys(intent).every(key => ['goal', 'plan', 'step', 'mode', 'reason', 'resume'].includes(key)) ||
+      !['progress', 'necessary', 'optional'].includes(intent.mode) ||
+      !['plan', 'step', 'reason'].every(key => text(intent[key])) ||
+      !(intent.resume === null || text(intent.resume))) throw new Error('missing or malformed decision intention');
+  const goal = intent.goal;
+  if (goal !== null && (!goal || typeof goal !== 'object' || Array.isArray(goal) ||
+      Object.keys(goal).length !== 5 || !Object.keys(goal).every(key => ['id', 'label', 'current', 'target', 'unit'].includes(key)) ||
+      !Number.isSafeInteger(goal.id) || goal.id <= 0 || !text(goal.label) ||
+      !(goal.current === null && goal.target === null && goal.unit === null ||
+        Number.isFinite(goal.current) && goal.current >= 0 && Number.isFinite(goal.target) && goal.target > 0 && text(goal.unit)))) throw new Error('malformed main goal');
+  return [
+    ['Trying to', goal === null ? 'No main goal selected.' : goal.label],
+    ...(goal !== null && goal.current !== null ? [['Progress', `${goal.current} / ${goal.target} ${goal.unit}`]] : []),
+    ['How', intent.plan],
+    [{progress: 'Current step', necessary: 'Required interruption', optional: 'Optional detour'}[intent.mode], intent.step],
+    ['Why', intent.reason],
+    ...(intent.resume === null ? [] : [['Then', intent.resume]]),
+  ];
+}
+
 function llm(status) {
   if (!status.enabled) return 'Disabled on this server.';
   if (status.budget_scope !== 'process-local' || status.budget_resets_on_restart !== true || status.budget_window_seconds !== 86400 || status.provider_quota !== 'unknown' ||
@@ -29,7 +61,7 @@ function llm(status) {
 export function start({document, window, backend, now = Date.now}) {
   const $ = selector => document.querySelector(selector);
   const origin = backend.url('/api/bots').origin;
-  let selected = new URLSearchParams(window.location.search).get('bot'), active, refreshId = 0;
+  let selected = new URLSearchParams(window.location.search).get('bot'), active, refreshId = 0, available = new Set();
   const current = session => active === session && !session.controller.signal.aborted;
   function nativeStatus(session, status, error) {
     session.native = status;session.nativeAt = now();
@@ -44,6 +76,7 @@ export function start({document, window, backend, now = Date.now}) {
   function stop() {
     active?.controller.abort();active = undefined;
     $('#view').replaceChildren();$('#thoughts').replaceChildren();$('#vitals').textContent = '';
+    $('#intention').replaceChildren();$('#intention-status').textContent = 'No decision intention received.';
     $('#view-status').textContent = 'Native view: disconnected.';
     $('#telemetry-status').textContent = 'Telemetry: disconnected. No decision received.';
   }
@@ -53,6 +86,21 @@ export function start({document, window, backend, now = Date.now}) {
     session.age = frame === null ? undefined : age;session.received = now();session.telemetry = 'receiving';
     if (frame === null) $('#vitals').textContent = `${session.name} has not made a decision since the server started.`;
     else $('#vitals').textContent = `${session.name}, level ${frame.level} ${frame.class} in ${frame.world}. HP ${frame.hp}/${frame.max_hp}, MP ${frame.mp}/${frame.max_mp}. ${frame.reason[0].toUpperCase()}${frame.reason.slice(1)}.${frame.aim === null ? '' : frame.fired ? ' Shooting.' : ' Aiming.'}`;
+    $('#intention').replaceChildren();
+    if (frame === null) $('#intention-status').textContent = 'No decision intention received.';
+    else {
+      try {
+        const rows = intentionRows(frame.intent), list = document.createElement('dl');
+        list.setAttribute('data-mode', frame.intent.mode);
+        list.replaceChildren(...rows.flatMap(([label, value]) => {
+          const term = document.createElement('dt'), description = document.createElement('dd');
+          term.textContent = label;description.textContent = value;return [term, description];
+        }));
+        $('#intention').replaceChildren(list);$('#intention-status').textContent = '';
+      } catch (error) {
+        $('#intention-status').textContent = `Intentions unavailable: ${error.message}.`;console.error(error);
+      }
+    }
     for (const thought of thoughts) {
       const item = document.createElement('li');
       item.textContent = `${new Date(thought.at).toLocaleTimeString()} ${thought.text}`;$('#thoughts').prepend(item);
@@ -108,8 +156,11 @@ export function start({document, window, backend, now = Date.now}) {
     void watch(session);
   }
   function message(event) {
-    if (!active || !viewMessage(event, origin, active.iframe.contentWindow, active.name)) return;
-    nativeStatus(active, event.data.status, event.data.error);
+    if (!active) return;
+    if (selectionMessage(event, origin, active.iframe.contentWindow, active.name, available)) {
+      $('#bot').value = event.data.target;change({target: $('#bot')});return;
+    }
+    if (viewMessage(event, origin, active.iframe.contentWindow, active.name)) nativeStatus(active, event.data.status, event.data.error);
   }
   async function refresh() {
     const id = ++refreshId;
@@ -121,6 +172,8 @@ export function start({document, window, backend, now = Date.now}) {
       if (id !== refreshId) return;
       if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length) || !list.llm || typeof list.llm !== 'object') throw new Error('malformed bot list');
       $('#llm').textContent = llm(list.llm);
+      available = new Set(list.bots.map(bot => bot.name));
+      if (available.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
       const picker = $('#bot');
       selected ??= list.bots[0]?.name;
       picker.replaceChildren(...list.bots.map(bot => {
