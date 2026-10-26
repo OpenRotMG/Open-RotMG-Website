@@ -106,9 +106,10 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const room=['snake-boss-room-source-684eff6','snake-boss-room-regression-684eff6','snake-boss-room-native-b84d963'];
   const treasure=['source','regression','native'].map(kind=>'snake-treasure-layout-'+kind+'-daf0c68');
   const neck=['snake-necks-source-e016a63','snake-necks-regression-e016a63','snake-necks-native-e016a63'];
+  const spacing=['snake-cover-spacing-regression-8f490a1','snake-cover-spacing-native-8f490a1'];
   const sight=['native','regression'].map(kind=>'snake-minimap-'+kind+'-544ff3f');
   const width=['source','regression','native'].map(kind=>'snake-width-'+kind+'-4514010');
-  assert.deepEqual(result.evidence,[...sight,...cover,...layout,...room,...treasure,...neck,...width]);
+  assert.deepEqual(result.evidence,[...sight,...cover,...layout,...room,...treasure,...neck,...width,...spacing]);
   for(const ref of [...sight,...room,...treasure,...neck,...width])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
   for(const ref of width){assert.equal(evidence.sources[ref].revision,'4514010b8e35d45a483e50eaa6e4ad66c61bd99c');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
   for(const ref of sight){assert.equal(evidence.sources[ref].revision,'544ff3f239fef79e531be00919fe3625b38a30d2');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
