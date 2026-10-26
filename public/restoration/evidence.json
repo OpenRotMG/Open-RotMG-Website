@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "closure-reward-regression-ebf04d1": {
+      "kind": "regression",
+      "revision": "ebf04d1c83a94d83d4af0fe5cb444e5e875f4a74",
+      "date": "2026-10-26",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/682",
+      "checks": ["realm:realm-closure"],
+      "method": "A final Hermit is removed before its portal reward-site lookup fails. Baseline delivers zero closure TEXT packets to a witness; the repaired terminal-death accounting delivers exactly one even after a repeated coordinator call, seals Realm admission and leaves the original reward error explicit without inventing a portal. Three endgame regressions pass at this revision.",
+      "limitations": "Controlled server-level fault injection, not native gameplay, earned Realm clearing or proof of the exact issue638 reporter state; report-time production logs expired. Does not certify Castle timing/arrival, Hermit reward-site correctness or historical roster/countdowns. Whole-feature status remains not-run and historical partial."
+    },
     "snake-cover-shape-source-5eec572": {
       "kind": "source",
       "revision": "5eec5726be7b22ce9e50c54f3c9b4f33e247a502",
@@ -3158,7 +3167,7 @@
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","activation-radius-source-3c9a23a","visible-npc-simulation-source-b066eae"]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":["visible-npc-simulation-source-b066eae"]},
     "realm:find-your-next-quest": {"status":"not-run","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974","quest-window-regression-a92ae06"]},
-    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
+    "realm:realm-closure": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115","closure-reward-regression-ebf04d1"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":["movement-combat-source-4992445","selected-client-ui-source-2bf948c"]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445"]},
