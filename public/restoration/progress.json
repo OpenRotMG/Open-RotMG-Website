@@ -859,12 +859,18 @@
             "expected": "Ground appearance and habitat tiers are separate map properties.",
             "acceptance": "Check terrain-by-ground inventories and transects, including visually similar grounds. Verify eligible species and inaccessible habitat fragments without canonizing inferred private-server thresholds.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
-              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns."
+              "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns.",
+              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665"
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Whether other classic ground/tier assignments match the target."],
+            "sources": [
+              {
+                "url": "https://wikiwiki.jp/rmd/%E5%9C%B0%E5%BD%A2",
+                "label": "Period Low Forest and Low Plains screenshots; palette matches do not recover original map metadata"
+              }
+            ],
             "group": "geography"
           },
           {
