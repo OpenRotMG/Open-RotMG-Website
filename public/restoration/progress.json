@@ -2027,7 +2027,8 @@
         "historical": "partial",
         "expected": "Shrine, setting, red/blue skull attacks, movement, replenishment, ownership, completion and rewards; exact target rates and geometry remain qualified.",
         "differences": [
-          "PR607 keeps erosion-selected Skull Shrine birth cells unchanged and rechecks their current floor and occupants before placement or delayed admission. Surviving stone still paints normally. Prepared checks and community-source erosion semantics do not establish original layouts or noise/RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/607"
+          "PR607 keeps erosion-selected Skull Shrine birth cells unchanged and rechecks their current floor and occupants before placement or delayed admission. Surviving stone still paints normally. Prepared checks and community-source erosion semantics do not establish original layouts or noise/RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/607",
+          "PR614 replaces the 2D value-noise erosion field with community-source 3D simplex, retaining source coordinate precision, byte-table construction and normalization. Its deterministic seed adapter does not recover original seeds, historical runtime or whole-engine RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/614"
         ],
         "unknowns": [
           "Independent target counts, timing, geometry, cleanup and reward probabilities."
