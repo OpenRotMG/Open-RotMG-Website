@@ -223,10 +223,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. In the community reconstruction, Invulnerable blocks HP loss but not stun; Invincible, Stasis and Stun Immune still block stun. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
+        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered and Snake Skin shields stun for three seconds; Ogmur applies Armor Broken for four seconds. Shield damage is unscaled by Attack, defense is deducted per pellet, and piercing can hit different enemies without repeatedly hitting the same enemy. In the community reconstruction, Invulnerable blocks HP loss but not conditions; Invincible and Stasis block both, while Stun Immune blocks stun but not Armor Broken.",
         "differences": [],
         "unknowns": [
-          "Original stun and Armor Broken immunity lists, multi-hit accounting and untiered-shield acquisition."
+          "Original stun/Armor Broken immunity rosters and the June 2012 guide's conflict with the reconstructed invulnerability rule remain unresolved.",
+          "Per-projectile target deduplication is client/comparator-supported; exact original multi-hit credit and rounding remain unverified.",
+          "Period sources support Snake Skin from Stheno/Guard and Ogmur from Lord of the Lost Lands, but exact 123.5.1 rates, thresholds and continuity remain unverified."
         ],
         "sources": [
           {
@@ -240,6 +242,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/GameObject.as",
             "label": "Modified 7.0 client: invulnerability zeros damage but remains targetable"
+          },
+          {
+            "url": "https://web.archive.org/web/20120603070630id_/http://forums.wildshadow.com/wiki/realm-mad-god/shields",
+            "label": "June 2012 shield table: per-pellet defense, piercing and separate Ogmur condition"
           }
         ]
       }
