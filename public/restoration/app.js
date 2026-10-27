@@ -60,7 +60,7 @@ export async function mountCatalogue(document,fetch,window,logger=console) {
     function featureRow(f,visible) {
       const li=el('li'),parent=byId.get(f.id),body=el('div');body.append(recordLink(parent,'feature'));
       if(f.audit.differences.length)body.append(el('p',f.audit.differences[0],'work-note'));
-      const children=checks(f);if(children.length)body.append(el('p',`Component work: ${children.filter(c=>c.implementation!=='present').length} implementation · ${children.filter(c=>evidence.results[c.id].status!=='passed').length} gameplay · ${children.filter(c=>c.historical!=='verified').length} history.`,'work-note'));
+      const children=checks(f);if(children.length)body.append(el('p',`Needs research: ${children.filter(c=>c.historical!=='verified').length} → Needs implementation: ${children.filter(c=>c.implementation!=='present').length} → Needs verification: ${children.filter(c=>evidence.results[c.id].status!=='passed').length}`,'work-note'));
       const components=children.filter(c=>visible.some(r=>r.id===c.id));
       const sections=f.category==='dungeons'?Object.keys(dungeonGates):[...new Set(components.map(c=>c.group))];
       for(const key of sections){const members=components.filter(c=>c.group===key);if(!members.length&&$('search').value)continue;const details=el('details',undefined,'component-group');
@@ -89,13 +89,10 @@ export async function mountCatalogue(document,fetch,window,logger=console) {
       if(!visible.length)$('features').append(el('p','No matching requirements. Change the search or work type.'));
     }
     function roadmap() {
-      const counts=workCounts(data.features,evidence);
-      $('overview-summary').textContent=`${data.features.length} feature groups · ${componentCount} component checks · ${data.features.filter(f=>accepted(f,evidence)).length} accepted feature groups · ${all.filter(r=>evidence.results[r.id].status==='passed').length} / ${all.length} records passed gameplay checks, and ${all.filter(r=>evidence.results[r.id].status==='not-run'&&evidence.results[r.id].evidence.length).length} not-run records have bound evidence (scoped receipts, not completion)`;
-      $('work-summary').textContent=`${counts.implementation} groups need implementation · ${counts.verification} need recorded gameplay verification · ${counts.research} need historical research · ${counts.differences} have differences. These overlap; they are not a fidelity percentage. Last whole-catalogue source audit: ${evidence.sourceReview.date} (server ${evidence.sourceReview.revision.slice(0,7)}); later row changes and executed receipts carry their own revisions.`;
       $('roadmap').replaceChildren();
       for(const area of data.categories){const fs=data.features.filter(f=>f.category===area.id),stats=workCounts(fs,evidence),card=el('article',undefined,'roadmap-area');
         const title=el('h3');title.append(icon(area.icon),el('span',area.name));card.append(title,el('p',area.summary));
-        card.append(el('p',`Implementation: ${stats.implementation} · Verification: ${stats.verification} · Research: ${stats.research} · Differences: ${stats.differences}`,'area-counts'));
+        card.append(el('p',`Needs research: ${stats.research} → Needs implementation: ${stats.implementation} → Needs verification: ${stats.verification} | Known differences: ${stats.differences}`,'area-counts'));
         const gaps=fs.flatMap(f=>f.audit.differences.map(text=>`${f.name}: ${text}`));
         if(gaps.length)card.append(section('Current differences',list(gaps.slice(0,2))));
         else card.append(el('p','No known implementation differences are recorded here. This does not establish completed verification.','work-note'));
@@ -119,6 +116,6 @@ export async function mountCatalogue(document,fetch,window,logger=console) {
     window.addEventListener('hashchange',()=>{try{$('error').hidden=true;followHash();}catch(e){error(e);}});
     roadmap();render();followHash();$('filters').disabled=false;
     return {data,evidence,render,openRecord};
-  }catch(exception){$('overview-summary').textContent='Catalogue unavailable';$('roadmap').replaceChildren();$('features').replaceChildren();error(exception);return null;}
+  }catch(exception){$('roadmap').replaceChildren();$('features').replaceChildren();error(exception);return null;}
 }
 if(typeof document!=='undefined')mountCatalogue(document,fetch,window);
