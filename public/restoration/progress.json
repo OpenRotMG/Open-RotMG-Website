@@ -695,7 +695,7 @@
             "id": "realm:map-world-02",
             "name": "Classic World 2 identity",
             "expected": "Identify the documented Classic World 2 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks, safe-lava visuals and scenery substitutions.",
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks and scenery substitutions. Verify the 864 source-bound Lava Blend cells, ground damage and retention during normal Realm construction.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
@@ -709,7 +709,7 @@
             "id": "realm:map-world-03",
             "name": "Classic World 3 identity",
             "expected": "Identify the documented Classic World 3 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
-            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions; a generated recipe is not recovered elevation data.",
+            "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions, including the 629 source-bound Lava Blend cells, ground damage and retention during normal Realm construction; a generated recipe is not recovered elevation data.",
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
