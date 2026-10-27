@@ -685,7 +685,8 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+              "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
             ],
             "unknowns": [],
             "sources": [],
@@ -699,7 +700,8 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+              "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
             ],
             "unknowns": [],
             "sources": [],
@@ -713,7 +715,8 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified."
+              "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
             ],
             "unknowns": [],
             "sources": [],
@@ -1323,10 +1326,10 @@
         "historical": "partial",
         "expected": "A ruined-site Lich encounter with damage evaluation, Phylactery Bearer and Haunted Spirit branches, support and vulnerability windows, and Actual Lich. The mummy family includes Mummy, Mummy King and Mummy Pharaoh with distinct projectiles.",
         "differences": [
-          "Community requests 4-6 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
+          "World1 binds six existing reconstructed blue temples, including one eroded interior, without repainting them. Other layouts still request 4-6 generated sites; original density and actor coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510",
           "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512",
-        "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554"
+          "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
@@ -1357,7 +1360,8 @@
         "differences": [
           "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551",
-        "Compiled Kithio primary uses raw (19,13) after rotation without painting the birth cell. Current native fields/scenery survive strict habitat, walkability and ownership admission. Regression and prepared native checks are not earned combat or original placement/field authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/584"
+          "Compiled Kithio primary uses raw (19,13) after rotation without painting the birth cell. Current native fields/scenery survive strict habitat, walkability and ownership admission. Regression and prepared native checks are not earned combat or original placement/field authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/584",
+          "Ten existing towers across Classic Worlds 1/2/3 now receive Ghost Kings without repainting. Generated sites fill the remaining sampled request. Anchors and eroded-site bindings are engineered, not original placement proof: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
         ],
         "unknowns": [
           "Target timeout-release/cleanup policy, wave branches and phase timings.",
@@ -1367,6 +1371,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.GhostKing.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Tower.cs",
+            "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
           }
         ]
       }
@@ -1420,7 +1428,8 @@
         "expected": "Lava-site boss with wander/pursue/return movement, distinct attacks and Imp/Demon/Demon Warrior summons; boss, minion and setpiece-chest rewards are separate.",
         "differences": [
           "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501"
+          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
+          "Twenty existing fissures across Classic Worlds 1/2/3 now receive Red Demons and independent chests without repainting source-bound lava. Original coordinates and population remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
         ],
         "unknowns": [
           "Target population count/distribution, exact attack timing/prediction and summon caps/lifetimes.",
@@ -1430,6 +1439,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.RedDemon.cs#L17-L89",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/LavaFissure.cs",
+            "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
           }
         ]
       }
@@ -1448,7 +1461,8 @@
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467",
           "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
-          "Generated Oasis Palm sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507"
+          "Generated Oasis Palm sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
+          "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
         ],
         "unknowns": [
           "Original placement, population, attack timing, summon limits, chest and drops."
@@ -1457,6 +1471,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oasis.cs#L17-L92",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Oasis.cs",
+            "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
           }
         ]
       }
@@ -1476,7 +1494,8 @@
           "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504",
           "Castle chest markers now leave input ground, objects and configuration unchanged instead of clearing a Rock tile. Placement checks native chest walkability while retaining whole-site guards and boss-floor clearing. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/505",
           "Bridge and destructible-wall markers now retain native objects and configuration while changing ground, with walls spawned separately. Those markers require native walkability and eligible unowned scenery without relaxing whole-site guards. Boss and chest policies stay unchanged; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/506",
-          "Castle boss markers now retain all five input cell fields and native scenery instead of forcing Rock and clearing objects/configuration. Native boss walkability and eligible unowned scenery are required without relaxing whole-site guards. This supersedes earlier boss-floor clearing; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/542"
+          "Castle boss markers now retain all five input cell fields and native scenery instead of forcing Rock and clearing objects/configuration. Native boss walkability and eligible unowned scenery are required without relaxing whole-site guards. This supersedes earlier boss-floor clearing; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/542",
+          "Sixteen existing castles across Classic Worlds 1/2/3 now receive Cyclops Gods and separate validated chests. Generated castles fill the remaining sampled request; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
         ],
         "unknowns": [
           "Target attack-mode predicates, timing and alternative ring behavior.",
@@ -1486,6 +1505,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Cyclops.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Castle.cs",
+            "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
           }
         ]
       }
@@ -4956,15 +4979,23 @@
         "historical": "partial",
         "expected": "Stock, currency/price/rank presentation and validated purchases; include supported remaining-count, discount/expiry states and failure responses. Complete target stock/prices/restocking are unresolved. Atomic debit/delivery is a restoration integrity requirement.",
         "differences": [
-          "Merchant stock is a fixed recovered snapshot: no merchant shows a discount, every expiry is shown as none, and stock without a sourced price is logged as unavailable and refused at purchase. Remaining count, star-rank checks, failure replies and reserve-then-commit purchases exist. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/722"
+          "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Target price/rank/stock matrix, restock/discount policy and deployment of all advertised states."
+          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Merchant.as",
+            "label": "Modified 7.0 client: New, countdown, low stock and discount display states"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
           }
         ]
       }
@@ -6426,17 +6457,21 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Character-screen news has icons, text, relative dates and external links. Fame links open a saved character’s Fame details. The original personal feed’s production, ordering and retention rules remain unresolved.",
+        "expected": "Character news displays account-owned deaths with class, level, committed Fame and a native archived-character link. Kithio merges personal/public news newest-first and displays ten items; the selected client reads that order and fame:<character-id> payload.",
         "differences": [
-          "Character-screen news carries only up to ten Discord update posts with a generic news icon linking to the updates page. No personal or Fame-link items are produced, so Fame links never appear. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/723"
+          "Personal items are derived from retained death receipts. Modern Discord updates remain labeled and link to /updates/. Same-second ties prefer personal items, then descending character ID; this deterministic tie policy is reconstruction. The existing launcher denies external URLs, so Discord links remain blocked while internal Fame links open normally."
         ],
         "unknowns": [
-          "Original personal-news producer, deployment, retention, ordering, deletion and Fame-link behavior."
+          "Original production deployment, archive retention/deletion, same-second tie ordering and personal event types beyond deaths. Kithio is reconstruction evidence, not authenticated original server source."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs#L42-L88",
+            "label": "Pinned Kithio GetNews: account-owned deaths, awarded Fame, newest-first ten-item display"
           }
         ]
       }
