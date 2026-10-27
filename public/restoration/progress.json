@@ -3817,10 +3817,11 @@
         "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools remain unresolved; a page last edited 2012-08-30 ties the secret room to destroying every coil and defeating Dr Terrible.",
         "differences": [
           "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
-          "Server PR603 adds a Tesla Coil to each middle room, one acid room with West and East Automated Defense Turrets, and the Horrific Creation behind Lab Emergency Walls that open once every coil is destroyed and Dr Terrible is dead. All geometry and timings are reconstructed; the Creation has only its Hexxer pet loop and three-wave attack, with no other phases or loot: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603 Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
+          "Server PR603 adds Tesla Coils, turrets and the Horrific Creation room, opened by destroying every coil and defeating Dr Terrible: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603",
+          "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave and Energy volleys, and an attacking return from the DeHexxer that resumes center blasts. Shapes follow mixed-era descriptions and selected client definitions; choreography and timing are reconstruction. Low-HP variants and rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
         ],
         "unknowns": [
-          "Green-pool effects and blue cure mask; Horrific Creation phases beyond its pet loop; encounter choreography and loot."
+          "Green-pool effects and blue cure mask; original Creation choreography, timing, cloak/range behavior and low-HP thresholds; target-version reward identities and rates."
         ],
         "sources": [
           {
@@ -3860,9 +3861,11 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Each middle room has one Tesla Coil. Destroying every coil and defeating Dr Terrible opens six Lab Emergency Walls to a sealed room. There the invincible Horrific Creation becomes a damageable random pet in the left Hexxer and reverts after 10 seconds in the right DeHexxer. Positions, door size and timings are reconstructed; its other phases, loot and the slowed-pet revert are absent. The two green Hexxer and blue DeHexxer pool pairs still apply and clear Hexed, Speedy and Stunned. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
+              "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants, loot and the slowed-pet revert remain absent. Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
-            "unknowns": [],
+            "unknowns": [
+              "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. Mixed-era loot tables contain later eggs and unknown rates; no Creation rewards are implemented. Native acceptance is separate from historical fidelity."
+            ],
             "sources": [
               {
                 "url": "https://web.archive.org/web/20261025211723/https://wikiwiki.jp/rmd/Tesla%20Coil",
