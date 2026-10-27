@@ -336,16 +336,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Paladins use swords, seals and heavy armor, and unlock at Knight 20 and Priest 20. The original Wisdom cap is 75. Tiered seals grant Healing and Damaging auras, not modern maximum-HP buffs. Seal of Blasphemous Prayer also grants the user Invulnerable for 1.4 seconds.",
+        "expected": "Paladins use swords, seals and heavy armor, and unlock at Knight 20 and Priest 20. Selected Wisdom cap is 75. Seals grant nonstacking Healing and Damaging, not maximum-HP buffs. The April 2012 guide and compiled Kithio engine support 28 additional HP/s. Blasphemous Prayer grants only its caster Invulnerable for 1.4 seconds; the May 2012 Pentaract guide lists it as tower-corpse loot.",
         "differences": [],
         "unknowns": [
-          "Historical aura refresh/overlap and Healing tick policy.",
-          "Blasphemous Prayer target-production obtainability."
+          "Exact 123.5.1 Healing tick phase, overlap shortening, boundary and recipient exceptions remain reconstruction-qualified. Current full XML radius and longer-deadline refresh differ from Kithio's half-radius/replacement semantics.",
+          "Period Pentaract obtainability is supported, but exact target-production continuity, eligibility and Prayer probability remain unverified; the current 0.004 bonus is not historically authenticated."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012: approximately 28 HP/s, tier-independent strength and Prayer values; older caps conflict"
+          },
+          {
+            "url": "https://web.archive.org/web/20120511185740id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "May 2012: Prayer on the tower-corpse drop list after all five towers fall"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Effects.cs#L16-L26",
+            "label": "Compiled community reconstruction: Healing adds 28 HP/s"
           }
         ]
       }
@@ -757,7 +769,7 @@
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7. June2,2012 community measurements cautiously suggest Wizard MP0.5+0.06*WIS and pre-redesign HP1+0.05*VIT; mixed-era wiki later gives HP1+0.12*VIT. Neither settles post-redesign exact rates.",
-          "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
+          "The April 2012 Paladin guide and compiled Kithio engine support +28 Healing HP/s. Exact tick phase, Bleeding rate, Sick+Healing precedence, pause/re-entry fractions and temporary-cap loss remain qualified; broader recovery history is tracked in server issue 782."
         ],
         "sources": [
           {
@@ -775,6 +787,10 @@
           {
             "url": "https://web.archive.org/web/20120602011846id_/http://forums.wildshadow.com/wiki/realm-mad-god/character-stats-explained",
             "label": "June 2, 2012 capture: qualified Wizard measurements before VIT redesign"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012 guide: Healing adds about 28 HP/s independently of seal tier"
           }
         ]
       }
@@ -1517,12 +1533,14 @@
           "Ent Ancient Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP stay vulnerable; 4 admits the existing shield phase. A three-root real-World regression and prepared Ent native encounters cover this admission boundary, not historical entry clocks, full AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
           "During the final growth handoff, quest-owned Greater Nature Sprites now transform only at distance <50; owned Actual Greater Nature Sprites can trigger armor only at distance <30. Equality is excluded, matching the compiled primary community reference's distance limits. Nine real-World cases cover boundaries, multiple owned sprites, foreign-quest exclusion and transformation followed by armor. Ordinary-client images are prepared-encounter context, not native boundary or full-handoff proof. Existing ownership and timing remain; primary global targeting, entry clocks, full runtime equivalence and original placement/configuration are unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/749",
           "Ent Ancient's two evaluation phases now use normal Wander components 0.2/0.3, nominally 1.85/2.405 tiles/s, from the compiled primary community reference instead of the generic 2.96. Five real-World NPC-step cases cover both rates and unchanged Idle, later-phase and Actual Ent controls. Prepared ordinary-client captures cover input/admission context, not native speed measurements or matched inputs. Entry centers, leashes, prioritization, later-phase motion, slowing and full clock/collision/RNG parity remain unresolved; original placement/configuration and authenticity are unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/760",
-          "The initial Ent Ancient now remains stationary in its four post-evaluation form-preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Twelve real-World NPC-step cases cover inside/outside-home positions and unchanged earlier/Actual Ent controls. One prepared ordinary-client witness kept the same living initial Ent at unchanged XY across 1150 game ms. HP, timers, tiers, summons and ownership are unchanged; outgoing-transition movement, deferred entry, full AI/RNG/runtime equivalence and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/924"
+          "The initial Ent Ancient now remains stationary in its four post-evaluation form-preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Twelve real-World NPC-step cases cover inside/outside-home positions and unchanged earlier/Actual Ent controls. One prepared ordinary-client witness kept the same living initial Ent at unchanged XY across 1150 game ms. HP, timers, tiers, summons and ownership are unchanged; outgoing-transition movement, deferred entry, full AI/RNG/runtime equivalence and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/924",
+          "Ent follower loot now follows compiled Kithio: a 2% Tincture of Dexterity roll for Ent, none for Sapling. Forced-success rewards reproduce both former Magic Potion entries and preserve the mummy control. This is not an authenticated original rate or full-family acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/commit/2425fe48d14282546bd5c764e0c9b8f3522f5ddc",
+          "Seventeen native checks cover prepared SmallGroup evaluation through Sprite, Actual Ent, Ent and Sapling defeats, loot pickup and cold saved progress. Supplied legal stats/gear, positioning, protection and resource refills exclude earned progression/survival; one branch does not accept the whole family or its history: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1021#issuecomment-6452236236"
         ],
         "unknowns": [
-          "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
-          "Original Grove count distribution and placement probabilities, rewards and follower lifetime/cap policy.",
-          "Whether0x921/922 exhaust intended ordinary-ent scope; target growth/summon counts, timing and rewards."
+          "May 20, 2012 build-122.3.2 guide/Kithio: nominal 1600ms growth, final stage at 14400ms; Trapped adds a 2000ms opening. Guide sizes imply 140 to 320; compiled Kithio gradually targets 160 to 340; Rust snaps. 123.5.1 continuity, entry ticks and full shield/armor handoff remain unverified.",
+          "Original Grove count distribution/placement probabilities are unknown. Kithio counts lifetime births: 3 saplings/Actual Ent, 2 Ents/Actual Sprite; reconstruction caps living encounter totals at 3/23, with 90000ms sapling expiry. Toss geometry/spawn clocks differ. Retain population/ownership safeguards pending target-policy resolution.",
+          "May 16, 2012 build-118 Ent/Sapling pages identify parents, not independent spawn sites. Selected/modified-7.0 XML matches for 0x91f to 0x924 do not prove exhaustive original family/spawn scope. Actual Sprite rewards, exact probabilities/recipient semantics and full branch coverage remain unresolved."
         ],
         "sources": [
           {
@@ -1544,6 +1562,22 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
             "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.EntAncient.cs",
+            "label": "Compiled reconstruction reference: Ent family, growth and rewards"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Spawn.cs",
+            "label": "Primary Spawn counts births, not surviving children"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516130632id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent",
+            "label": "May 16, 2012 capture, marked build 118: Ent parents, decay and tincture"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516154733id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-sapling",
+            "label": "May 16, 2012 capture, marked build 118: Sapling parent and no drops"
           }
         ]
       }
@@ -1688,14 +1722,28 @@
         "expected": "Lava-site boss with wander/pursue/return movement, distinct attacks and Imp/Demon/Demon Warrior summons; boss, minion and setpiece-chest rewards are separate.",
         "differences": [
           "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
-          "Twenty existing fissures across Classic Worlds 1/2/3 now receive Red Demons and independent chests without repainting source-bound lava. Original coordinates and population remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "PR535 superseded PR501 for this chest: current tiers make one group-probability roll then uniformly select an item, with two T1 potions. Kithio expands p/n per item and caps successes at 5-7; original target rates, corpus/order and truncation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/796#issuecomment-6451400688",
+          "Twenty existing fissures across Classic Worlds 1/2/3 now receive Red Demons and independent chests without repainting source-bound lava. Original coordinates and population remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1020 restores separate Imp/Demon/Demon Warrior equipment pools using Kithio candidate rates, once per death rather than per contributor. Exact original rates remain unknown; boss/chest rates and AI parameters are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1020",
+          "Authored roots' ownership tags previously selected generic quest movement/mechanics, suppressing minion births. The shared PR1019/1020 dispatch repair retains those tags and restores family controllers. Generated-site evidence is separate from authored-site verification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1020#issuecomment-6452049625"
         ],
         "unknowns": [
           "Target population count/distribution, exact attack timing/prediction and summon caps/lifetimes.",
           "Target chest and separate boss/minion reward probabilities."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.RedDemon.cs",
+            "label": "Compiled primary reconstruction: separate minion equipment candidates; timing and summon engine differ"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 comparator: all four complete object definitions match selected 123.5.1, not AI or loot proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613203441id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/red-demon",
+            "label": "June 2012 capture explicitly describing build117.1.3; older definitions and unquantified boss/chest rewards"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.RedDemon.cs#L17-L89",
             "label": "Community server comparison: rotmg_svr (2013)"
@@ -1750,16 +1798,17 @@
         "expected": "Moated-castle boss with Cyclops/Warrior/Noble/Prince/King family, replenishment, changing attack modes and follower pursuit/retraction. Exact target branch conditions and rewards unresolved.",
         "differences": [
           "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
+          "PR535 superseded PR501's per-item p/n chest trials: current Cyclops chests make one independent trial per period-backed tier row, then choose one item, preserving repeated potion attempts and overflow. Original item corpus, RNG and target-era roll policy remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/535",
           "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504",
           "Castle chest markers now leave input ground, objects and configuration unchanged instead of clearing a Rock tile. Placement checks native chest walkability while retaining whole-site guards and boss-floor clearing. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/505",
           "Bridge and destructible-wall markers now retain native objects and configuration while changing ground, with walls spawned separately. Those markers require native walkability and eligible unowned scenery without relaxing whole-site guards. Boss and chest policies stay unchanged; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/506",
           "Castle boss markers now retain all five input cell fields and native scenery instead of forcing Rock and clearing objects/configuration. Native boss walkability and eligible unowned scenery are required without relaxing whole-site guards. This supersedes earlier boss-floor clearing; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/542",
-          "Sixteen existing castles across Classic Worlds 1/2/3 now receive Cyclops Gods and separate validated chests. Generated castles fill the remaining sampled request; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "Sixteen existing castles across Classic Worlds 1/2/3 now receive Cyclops Gods and separate validated chests. Generated castles fill the remaining sampled request; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1019 repairs authored heroes whose quest ownership tag incorrectly selected generic quest AI, suppressing their family and attacks. Ownership remains intact; authored Cyclops Gods inherit the existing generated controller, not a newly authenticated historical attack/population policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1019"
         ],
         "unknowns": [
-          "Target attack-mode predicates, timing and alternative ring behavior.",
-          "Target population, summon lifetime/caps and chest/rewards."
+          "Target attack policy: current five-second halves/no ring versus Kithio proximity/HP phases and 15-blade fixed rings, or Trapped's ten-blade alternative. Exact timers, prediction and movement remain unresolved.",
+          "Target population and rewards: current three-alive/60-second children differ from Kithio five lifetime births and period 5/3/2/1/1 populations. Minion drops, Spider Den continuity and original chest RNG remain unresolved. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/798#issuecomment-6451503874"
         ],
         "sources": [
           {
@@ -1769,6 +1818,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Castle.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Cyclops.cs",
+            "label": "Compiled primary reconstruction table; Spawn/Shoot/Follow engines checked, not authenticated target AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat#L434-L581",
+            "label": "Modified 7.0: all six definitions normalize identically to selected XML; not server AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519212728id_/http://forums.wildshadow.com/wiki/realm-mad-god/cyclops-god",
+            "label": "May 19, 2012 capture, page labelled build 115; older stats/attack and chest weights, not target continuity"
           }
         ]
       }
@@ -1881,16 +1942,30 @@
         "historical": "partial",
         "expected": "Roaming Wasp Queen with Worker/Warrior births and replenishment, owned follower movement and separate role/reward identities; no transformation established.",
         "differences": [
-          "Only Warrior Wasp rewards are reconstructed from a later comparator; original tiers, chances and allocation remain unverified. Queen and Worker rewards are unchanged."
+          "Current owned families use random initial 2–5 Workers/1–2 Warriors, fixed 10-second replenishment checks and 1-second attacks. Primary Kithio instead uses lifetime birth counters at 3400/4400ms, nearest-Queen orbit, 1600ms Queen/4000ms Worker shots and alternating Warrior follow/orbit states.",
+          "The May 30, 2012 Warrior subsection lists public T3/T4 and soulbound T6 weapon/armor rewards, not Queen drops or probabilities. Current Warrior equipment remains a qualified Trapped reconstruction; Queen and Worker retain no-drop reconstruction. Primary Kithio assigns its different equipment/potion table to Queen instead. Period armor labels do not independently establish selected-client candidate tiers."
         ],
         "unknowns": [
-          "Target habitat density, replenishment cadence, probabilities and rewards.",
-          "Warrior loot must not be silently attributed to Queen."
+          "Exact 123.5.1 habitat density and SpawnProb selection, initial population, lifetime-versus-alive caps, replenishment cadence and movement/attack policy. Current area/200 MidPlains density and relative SpawnProb weights are reconstruction, not recovered original policy.",
+          "Original reward probabilities, contributor eligibility/attempts/allocation, Queen/Worker rewards and target continuity of the dated Warrior tier labels. Warrior loot must not be silently attributed to Queen.",
+          "Native private Warrior reward acquisition, surviving-follower lifetime after Queen death and full-feature acceptance remain unverified; bounded prepared encounter evidence is separate from original-history acceptance. Research and exact conflicts: https://github.com/OpenRotMG/Open-RotMG-Server/issues/802#issuecomment-6452521135"
         ],
         "sources": [
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L173-L229",
+            "label": "Compiled primary reconstruction table; Spawn engine counts lifetime births, not living children"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530043951id_/http://forums.wildshadow.com/wiki/realm-mad-god/wasp-queen",
+            "label": "May 2012 Queen page with explicitly named Warrior reward subsection; no rates or target-continuity proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All three complete objects normalize identically to selected definitions; not server AI or historical deployment"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L208-L250",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Alternate behavior and separate Warrior reward comparator; exact original rates remain unverified"
           }
         ]
       }
@@ -6456,10 +6531,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Healing restores HP over time, capped at maximum HP, and is distinct from instant healing. Its original rate and interactions with Sick and Bleeding remain unresolved.",
+        "expected": "Healing restores HP over time, capped at maximum HP, and is distinct from instant healing. The April 2012 Paladin guide and compiled Kithio engine support 28 additional HP/s; exact tick phase and condition interactions remain qualified.",
         "differences": [],
         "unknowns": [
-          "Original healing rate; the community comparison uses 28 HP/s.",
+          "Exact 123.5.1 tick phase and continuity are not authenticated by the approximate period rate or comparator arithmetic.",
           "Interactions with ordinary regeneration, Sick, Bleeding and pause, plus duration and cure rules."
         ],
         "sources": [
@@ -6470,6 +6545,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012 Paladin guide: about 28 HP/s, independent of seal tier"
           }
         ]
       }
