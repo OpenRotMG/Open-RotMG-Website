@@ -94,8 +94,6 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.ok(branding.includes(`href="${file}" download`));
   }
   const footer = home.match(/<footer class="site-footer">(.*?)<\/footer>/s)[1];
-  assert.ok(footer.includes('2012 Realm of the Mad God reimplementation<br>'));
-  assert.ok(footer.includes('Report bugs and missing content with the link below.</p>'));
   assert.doesNotMatch(footer.match(/<p>(.*?)<\/p>/s)[1], /<a[ >]/);
   const footerNav = footer.match(/<nav.*?<\/nav>/s)[0];
   const progress = JSON.parse(readFileSync(new URL('../dist/restoration/progress.json', import.meta.url), 'utf8'));
@@ -160,6 +158,12 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(restorationPage.includes(`rel="canonical" href="${site.href}restoration/"`));
   assert.ok(restorationPage.includes('<script type="module" src="app.js">'));
   assert.ok(restorationPage.includes(`href="${site.pathname}style.css"`));
+  // Keep reporting in navigation, not repeated footer prose: https://github.com/OpenRotMG/Open-RotMG-Server/issues/734
+  for (const html of [home, about, restorationPage, branding, gold, bots, updates, hiscores]) {
+    assert.match(html, /<p>2012 Realm of the Mad God reimplementation<\/p>/);
+    assert.doesNotMatch(html, /Report bugs and missing content with the link below\./);
+    assert.ok(html.includes('href="/#bug-report">Report bug</a>'));
+  }
   for (const html of [home, about, restorationPage, branding, gold]) {
     assert.equal((html.match(/class="site-shell"/g) ?? []).length, 1);
     assert.equal((html.match(/<nav aria-label="Project">/g) ?? []).length, 1);
