@@ -4975,15 +4975,23 @@
         "historical": "partial",
         "expected": "Stock, currency/price/rank presentation and validated purchases; include supported remaining-count, discount/expiry states and failure responses. Complete target stock/prices/restocking are unresolved. Atomic debit/delivery is a restoration integrity requirement.",
         "differences": [
-          "Merchant stock is a fixed recovered snapshot: no merchant shows a discount, every expiry is shown as none, and stock without a sourced price is logged as unavailable and refused at purchase. Remaining count, star-rank checks, failure replies and reserve-then-commit purchases exist. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/722"
+          "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Target price/rank/stock matrix, restock/discount policy and deployment of all advertised states."
+          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Merchant.as",
+            "label": "Modified 7.0 client: New, countdown, low stock and discount display states"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
           }
         ]
       }
