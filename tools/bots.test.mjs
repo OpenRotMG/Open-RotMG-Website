@@ -30,6 +30,7 @@ class Node {
   set value(value) {this.selected = this.tag === 'select' && !this.children.some(child => child.value === value) ? '' : value;}
   get value() {return this.selected;}
   replaceChildren(...children) {this.children = children;for (const child of children) child.parent = this;if (this.tag === 'select') this.value = children[0]?.value ?? '';}
+  appendChild(child) {this.children.push(child);child.parent = this;if (this.tag === 'select' && this.selected === undefined) this.value = child.value;return child;}
   setAttribute(key, value) {this.attributes[key] = value;}
   addEventListener(type, callback) {this.listeners[type] = callback;}
   removeEventListener(type) {delete this.listeners[type];}
@@ -38,7 +39,7 @@ const flush = () => new Promise(setImmediate);
 const deferred = () => {let resolve;const promise = new Promise(done => {resolve = done;});return {promise, resolve};};
 const intent = {goal: {id: 1, label: 'Max permanent Speed', current: 30, target: 50, unit: 'Speed'}, plan: 'Earn Speed potions in Snake Pits', step: 'adventuring: hunting quest Red Demon', mode: 'progress', reason: 'A known entrance is available', resume: null};
 const frame = {character: 1, level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null, intent};
-const bots = names => ({bots: names.map(name => ({name, frame})), llm: {enabled: false}});
+const bots = names => ({bots: names.map(name => ({name, frame, age_ms: 0})), llm: {enabled: false}});
 const json = value => new Response(JSON.stringify(value), {headers: {'content-type': 'application/json'}});
 function harness(t, query = '', initial = bots(['Alpha', 'Beta'])) {
   let clock = 0, nextTimer = 0;
@@ -75,8 +76,8 @@ test('healthy native view and decisions are quiet; actual loading/stale/errors r
   assert.match(h.iframe().title, /Read-only.*Alpha/);
   assert.match(h.nodes['#view-status'].textContent, /Loading game view/);
   assert.equal(h.nodes['#status'].textContent, '');
-  assert.deepEqual(h.nodes['#bot'].children.map(x => x.textContent), ['Alpha', 'Beta']);
-  await h.emit({frame, age_ms: 12000, thoughts: [{at: 0, text: 'Not displayed'}]});
+  assert.deepEqual(h.nodes['#bot'].children.map(x => x.textContent), ['Alpha — Realm', 'Beta — Realm']);
+  await h.emit({frame, age_ms: 0, thoughts: [{at: 0, text: 'Not displayed'}]});
   assert.equal(h.nodes['#telemetry-status'].textContent, '');
   h.send();assert.equal(h.nodes['#view-status'].textContent, '');
   await h.advance(16000);
@@ -146,7 +147,8 @@ test('out-of-order list responses cannot undo picker selection or newer availabi
 test('bootstrap errors stay explicit; unrelated model statistics are not presentation dependencies', async t => {
   const h = harness(t);await flush();
   h.iframe().listeners.error();assert.match(h.nodes['#view-status'].textContent, /error.*failed to load/);
-  h.choose('Alpha');await flush();await h.advance(16000);assert.match(h.nodes['#view-status'].textContent, /error.*no native status/);
+  h.choose('Beta');await flush();h.choose('Alpha');await flush();
+  await h.advance(16000);assert.match(h.nodes['#view-status'].textContent, /error.*no native status/);
   const list = bots(['Alpha', 'Beta']);list.llm = {enabled: true, budget_scope: 'unknown'};
   h.lists.push(json(list));await h.advance(10000);
   assert.equal(h.nodes['#status'].textContent, '');assert.match(h.iframe().src, /Alpha\/view$/);
@@ -159,6 +161,48 @@ test('initial empty population and encoded query selection never invent a live f
   const encoded = harness(t, '?bot=Alpha%20%26%20Beta', bots(['Alpha & Beta']));await flush();
   assert.equal(encoded.iframe().src, 'https://game.test/api/bots/Alpha%20%26%20Beta/view');
   assert.equal(encoded.calls[1].path, '/api/bots/Alpha%20%26%20Beta/stream');
+});
+
+test('locations update in place from SSE and catalogue without selection, URL or native reload churn', async t => {
+  const h = harness(t, '?bot=Alpha');await flush();
+  const picker = h.nodes['#bot'], [alpha, beta] = picker.children, iframe = h.iframe(), signal = h.calls[1].options.signal;
+  picker.replaceChildren = () => assert.fail('refresh must not rebuild an open picker');
+  await h.emit({frame: {...frame, world: 'Snake Pit'}, age_ms: 0});
+  assert.equal(alpha.textContent, 'Alpha — Snake Pit');assert.equal(beta.textContent, 'Beta — Realm');
+  const late = deferred();h.lists.push(late.promise);await h.advance(10000);
+  await h.emit({frame: {...frame, world: 'Nexus'}, age_ms: 0});
+  const catalogue = bots(['Beta', 'Alpha']);catalogue.bots[0].frame = {...frame, world: 'Vault'};
+  late.resolve(json(catalogue));await flush();
+  assert.deepEqual(picker.children, [alpha, beta]);assert.equal(alpha.textContent, 'Alpha — Nexus');assert.equal(beta.textContent, 'Beta — Vault');
+  assert.equal(picker.value, 'Alpha');assert.equal(alpha.value, 'Alpha');assert.equal(h.window.path, undefined);
+  h.choose('Alpha');await flush();
+  assert.equal(h.window.path, '?bot=Alpha');assert.equal(h.iframe(), iframe);assert.equal(signal.aborted, false);
+  assert.equal(h.calls.filter(call => call.path.endsWith('/stream')).length, 1);
+  h.send({}, {data: {type: 'openrotmg-bot-select', bot: 'Alpha', target: 'Beta'}});await flush();
+  assert.equal(h.window.path, '?bot=Beta');assert.equal(picker.value, 'Beta');assert.match(h.iframe().src, /\/Beta\/view$/);
+});
+
+test('location age, missing worlds, catalogue failures and offline bots are explicit, never guessed', async t => {
+  const initial = bots(['Alpha', 'Beta']);initial.bots[0].age_ms = 16000;initial.bots[1].frame = null;
+  const h = harness(t, '?bot=Alpha', initial);await flush();
+  const picker = h.nodes['#bot'], [alpha, beta] = picker.children, iframe = h.iframe();
+  assert.equal(alpha.textContent, 'Alpha — Realm (stale)');assert.equal(beta.textContent, 'Beta — Location unavailable');
+  await h.emit({frame, age_ms: 16000});assert.match(h.nodes['#telemetry-status'].textContent, /stale/);
+  await h.emit({frame: {...frame, world: '<Vault & "Nexus">'}, age_ms: 0});
+  assert.equal(alpha.textContent, 'Alpha — <Vault & "Nexus">');assert.equal(h.nodes['#telemetry-status'].textContent, '');
+  h.lists.push(new Response('unavailable', {status: 503}));await h.advance(16000);
+  assert.equal(alpha.textContent, 'Alpha — <Vault & "Nexus"> (stale)');assert.match(h.nodes['#status'].textContent, /HTTP 503/);assert.equal(h.iframe(), iframe);
+  await h.emit({frame: null, age_ms: 0});assert.equal(alpha.textContent, 'Alpha — Location unavailable');
+  await h.emit({frame: {...frame, world: ''}, age_ms: 0});
+  assert.equal(alpha.textContent, 'Alpha — Location unavailable');assert.match(h.nodes['#telemetry-status'].textContent, /malformed bot location/);
+  const invalid = bots(['Alpha', 'Beta']);invalid.bots[1].frame = {...frame, world: undefined};
+  h.lists.push(json(invalid));await h.advance(10000);assert.match(h.nodes['#status'].textContent, /malformed bot location/);
+  h.lists.push(json(bots(['Beta'])));await h.advance(10000);
+  assert.equal(picker.children[0], alpha);assert.equal(alpha.textContent, 'Alpha — Offline');assert.equal(alpha.disabled, true);
+  assert.equal(picker.value, 'Alpha');assert.equal(h.iframe(), undefined);assert.match(h.nodes['#status'].textContent, /Alpha is offline/);
+  h.lists.push(json(bots(['Alpha', 'Beta'])));await h.advance(10000);
+  assert.equal(picker.children[0], alpha);assert.equal(alpha.disabled, false);assert.equal(alpha.textContent, 'Alpha — Realm');
+  assert.notEqual(h.iframe(), iframe);assert.equal(picker.value, 'Alpha');
 });
 
 test('perspective-selection messages admit only the current native window and a listed other bot', async t => {
@@ -242,5 +286,7 @@ test('page keeps game and intentions, with fixed layout and exceptional-state an
   for (const id of ['status', 'view-status', 'telemetry-status']) assert.match(html, new RegExp(`id="${id}" role="status"`));
   assert.match(css, /aspect-ratio:4\/3/);assert.match(css, /@media \(max-width:700px\)/);
   assert.match(css, /contain:size/);assert.match(css, /scrollbar-gutter:stable/);assert.match(css, /height:32rem/);
+  assert.match(css, /background:#0b0b0b;color:inherit;border:1px solid #303030/);
+  assert.doesNotMatch(css, /#151810|#a4bd8a|border-left|#1b2028|#68717e/);
   assert.doesNotMatch(html, /<canvas|id="(?:vitals|thoughts|llm)"|Language model|Thoughts and chat history|Native view:|Selected /);
 });

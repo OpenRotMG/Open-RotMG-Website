@@ -61,11 +61,29 @@ export function intentionRows(intent) {
   ];
 }
 
+function locationSample({frame, age_ms: age}, received) {
+  if (!(frame === null || (frame && typeof frame === 'object' && !Array.isArray(frame))) ||
+      !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
+  if (frame !== null && (typeof frame.world !== 'string' || !frame.world.trim() || frame.world.length > 512)) throw new Error('missing or malformed bot location');
+  return {world: frame?.world ?? null, at: received - age};
+}
+
 export function start({document, window, backend, now = Date.now}) {
   const $ = selector => document.querySelector(selector);
   const origin = backend.url('/api/bots').origin;
   let selected = new URLSearchParams(window.location.search).get('bot'), active, refreshId = 0, available = new Set();
+  const options = new Map();
   const current = session => active === session && !session.controller.signal.aborted;
+  function label(entry) {
+    const location = !entry.online ? 'Offline' : entry.world === null ? 'Location unavailable'
+      : `${entry.world}${now() - entry.at > 15000 ? ' (stale)' : ''}`;
+    const text = `${entry.option.value} — ${location}`;
+    if (entry.option.textContent !== text) entry.option.textContent = text;
+  }
+  function locate(entry, sample) {
+    if (entry.at === undefined || sample.at >= entry.at) Object.assign(entry, sample);
+    label(entry);
+  }
   function nativeStatus(session, status, error) {
     session.native = status;session.nativeAt = now();
     $('#view-status').textContent = status === 'live' ? '' : status === 'connecting' ? 'Loading game view…' : `Game view ${status}${error ? `: ${error}` : '.'}`;
@@ -83,9 +101,14 @@ export function start({document, window, backend, now = Date.now}) {
     $('#telemetry-status').textContent = '';
   }
   function show(session, update) {
-    const {frame, age_ms: age} = update;
-    if (!(frame === null || (frame && typeof frame === 'object')) || !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
-    session.received = now();session.telemetry = 'receiving';
+    const {frame} = update, entry = options.get(session.name);
+    let sample;
+    try {sample = locationSample(update, now());}
+    catch (error) {
+      Object.assign(entry, {world: null, at: now()});label(entry);throw error;
+    }
+    locate(entry, sample);
+    session.received = sample.at;session.telemetry = 'receiving';
     if (frame === null) {
       // World handoffs briefly clear the feed, but must not restart the overview's sampling window.
       session.rendered = undefined;
@@ -172,7 +195,7 @@ export function start({document, window, backend, now = Date.now}) {
     if (viewMessage(event, origin, active.iframe.contentWindow, active.name)) nativeStatus(active, event.data.status, event.data.error);
   }
   async function refresh() {
-    const id = ++refreshId;
+    const id = ++refreshId, requested = now();
     try {
       const response = await backend.fetch('/api/bots', {cache: 'no-store', redirect: 'error'});
       if (id !== refreshId) return;
@@ -180,16 +203,28 @@ export function start({document, window, backend, now = Date.now}) {
       const list = await response.json();
       if (id !== refreshId) return;
       if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length)) throw new Error('malformed bot list');
-      available = new Set(list.bots.map(bot => bot.name));
-      if (available.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
+      const names = new Set(list.bots.map(bot => bot.name));
+      if (names.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
+      const catalogue = list.bots.map(bot => ({name: bot.name, ...locationSample(bot, requested)}));
+      available = names;
       const picker = $('#bot');
       selected ??= list.bots[0]?.name;
-      picker.replaceChildren(...list.bots.map(bot => {
-        const option = document.createElement('option');option.value = bot.name;
-        option.textContent = bot.name;
-        return option;
-      }));
-      picker.value = selected ?? '';picker.disabled = !list.bots.length;
+      for (const bot of catalogue) {
+        if (!options.has(bot.name)) {
+          const option = document.createElement('option');option.value = bot.name;
+          options.set(bot.name, {option, world: null});picker.appendChild(option);
+        }
+      }
+      for (const [name, entry] of options) {
+        entry.online = available.has(name);entry.option.disabled = !entry.online;label(entry);
+      }
+      for (const bot of catalogue) {
+        // A catalogue request started before the current SSE cannot roll back a world handoff.
+        if (active?.name === bot.name && active.received !== undefined && active.received >= requested) continue;
+        locate(options.get(bot.name), bot);
+      }
+      if (picker.value !== selected) picker.value = selected ?? '';
+      picker.disabled = !list.bots.length;
       if (!list.bots.some(bot => bot.name === selected)) {
         stop();$('#status').textContent = selected ? `Bot ${selected} is offline or unavailable. Pick another bot.` : 'No bots are running on this server.';return;
       }
@@ -203,10 +238,11 @@ export function start({document, window, backend, now = Date.now}) {
   function change(event) {
     selected = event.target.value;
     window.history.replaceState(null, '', `?bot=${encodeURIComponent(selected)}`);
-    $('#status').textContent = '';select(selected);
+    $('#status').textContent = '';if (active?.name !== selected) select(selected);
   }
   $('#bot').addEventListener('change', change);window.addEventListener('message', message);
   const tick = window.setInterval(() => {
+    for (const entry of options.values()) label(entry);
     if (!active) return;
     telemetryStatus(active);
     if (['live', 'connecting'].includes(active.native) && now() - active.nativeAt > 15000) nativeStatus(active, active.native === 'live' ? 'stale' : 'error', 'no native status received for 15 s');
