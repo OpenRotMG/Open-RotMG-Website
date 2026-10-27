@@ -37,6 +37,9 @@ test('client movement trust is intentional policy, not missing restoration or hi
   assert.match(feature.audit.differences.join(' '),/Intentional project policy: native movement trusts finite, in-bounds client positions/);
   assert.match(feature.audit.differences.join(' '),/not missing restoration work or a confirmed historical deviation/);
   assert.doesNotMatch(feature.audit.expected,/unsafe client trust|server validates/);
+  assert.equal(evidence.results[feature.id].status,'not-run');
+  for(const ref of ['walk-dodge-source-5ee46b7','walk-dodge-native-5ee46b7','quicksand-native-5ee46b7','walk-dodge-collision-native-59e9f64'])assert(evidence.results[feature.id].evidence.includes(ref));
+  assert.match(feature.audit.unknowns.join(' '),/#953/);
   assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.implementation,'partial');
   assert.equal(accepted(feature,evidence),false);
 });
