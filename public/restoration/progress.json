@@ -141,13 +141,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Wizards use staves, spells and robes, with no class prerequisite. Tiered spells create bullet novas. The original Wisdom cap is 60; spell damage includes the build 123.3 changes. Whether Penetrating Blast was obtainable remains unresolved.",
+        "expected": "Wizards start unlocked with Energy Staff and Fire Spray, and use staves, spells and robes. Tiered spells emit 20 cursor-centered projectiles; each hit applies DEF separately. Selected 123.5.1 definitions include the 123.3 spell nerf and Wisdom cap 60. Penetrating Blast is defined with MultiHit, not armor piercing; production availability remains unresolved.",
         "differences": [],
         "unknowns": [
-          "Target-production nova count/layout and exact collision policy.",
-          "Penetrating Blast deployment; uniform stat-roll distribution remains historically unproven."
+          "May 2012 documentation corroborates 20 shots and per-shot DEF; equal spacing follows Kithio. Exact 123.5.1 first angle, hitboxes and frame-versus-server collision sampling remain unverified. Kithio scales spell damage with ATT; this server retains selected raw bounds pending target-era evidence.",
+          "Penetrating Blast is labelled unobtainable in January 2012 testing notes and absent from 22 inspected Kithio loot tables (18 compiled); neither proves its 123.5.1 deployment. Uniform inclusive stat-roll distribution remains historically unproven."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June 12, 2012 production announcement; captured June 2013"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142108id_/http://forums.wildshadow.com/wiki/realm-mad-god/spells",
+            "label": "May 27, 2012 spells page: 20 shots and per-shot DEF; pre-nerf damage"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L206-L237",
+            "label": "Compiled Kithio nova reconstruction: cursor origin and 18-degree spacing"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
@@ -167,16 +179,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and grants Armored for four seconds, not Invulnerable. Purification removes conditions.",
+        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and gives only its caster Armored for four seconds, not Invulnerable. Purification's selected order is healing, conditional Speedy removal from Hexed recipients, then cleansing; the comparator Sick check blocks healing before cleansing.",
         "differences": [],
         "unknowns": [
-          "Which conditions does Purification remove, in what order, and how does Sick affect healing and eligible players?",
-          "How were untiered tomes obtained in 123.5.1?"
+          "Original cleanse list, Sick ordering, Quiet timing and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
+          "Period evidence supports Purification from Manor/Ruthven/ordinary Coffins and Holy Protection from Bes; exact 123.5.1 rates, eligibility thresholds and continuity remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516125526id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "May 2012 Manor guide: Purification and loot-bearing Coffins"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516152646id_/http://forums.wildshadow.com/wiki/realm-mad-god/tomb-ancients",
+            "label": "May 2012 Tomb guide: Holy Protection from Bes"
           }
         ]
       }
@@ -232,10 +252,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. In the community reconstruction, Invulnerable blocks HP loss but not stun; Invincible, Stasis and Stun Immune still block stun. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
+        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered and Snake Skin shields stun for three seconds; Ogmur applies Armor Broken for four seconds. Shield damage is unscaled by Attack, defense is deducted per pellet, and piercing can hit different enemies without repeatedly hitting the same enemy. In the community reconstruction, Invulnerable blocks HP loss but not conditions; Invincible and Stasis block both, while Stun Immune blocks stun but not Armor Broken.",
         "differences": [],
         "unknowns": [
-          "Original stun and Armor Broken immunity lists, multi-hit accounting and untiered-shield acquisition."
+          "Original stun/Armor Broken immunity rosters and the June 2012 guide's conflict with the reconstructed invulnerability rule remain unresolved.",
+          "Per-projectile target deduplication is client/comparator-supported; exact original multi-hit credit and rounding remain unverified.",
+          "Period sources support Snake Skin from Stheno/Guard and Ogmur from Lord of the Lost Lands, but exact 123.5.1 rates, thresholds and continuity remain unverified."
         ],
         "sources": [
           {
@@ -249,6 +271,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/GameObject.as",
             "label": "Modified 7.0 client: invulnerability zeros damage but remains targetable"
+          },
+          {
+            "url": "https://web.archive.org/web/20120603070630id_/http://forums.wildshadow.com/wiki/realm-mad-god/shields",
+            "label": "June 2012 shield table: per-pellet defense, piercing and separate Ogmur condition"
           }
         ]
       }
@@ -286,13 +312,17 @@
         "expected": "Assassins use daggers, poisons and leather armor, and unlock at Rogue 20 and Wizard 20. The original Speed cap is 75. Each poison has its own radius, total damage, duration, mana cost and bonuses.",
         "differences": [],
         "unknowns": [
-          "Original poison throw delay, stacking, defense and damage-credit rules.",
-          "What happens when an enemy enters or leaves poison, or its owner changes worlds?"
+          "Continuity of the 119.0.3 delay/defense description into 123.5.1; exact tick cadence, rounding and overlap policy. Comparator stacking is not original-server proof.",
+          "Original damage-credit and soulbound eligibility/thresholds, and owner-departure policy. Current departure cancellation is an authority safeguard, not recovered history."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608004056id_/http://forums.wildshadow.com/wiki/realm-mad-god/poisons",
+            "label": "June 2012 capture, content labelled 119.0.3: 1.5-second landing and defense once; older costs and unresolved target continuity"
           }
         ]
       }
@@ -327,13 +357,23 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Trap damage, radius and condition duration vary by item: T5 lasts 5.5 seconds and T6 lasts six seconds. Coral Venom Trap Paralyzes.",
-        "differences": [],
+        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Tiered traps Slow; Coral Venom Trap Paralyzes. T5 lasts 5.5 seconds and T6 six seconds. The May 2012 guide documents 1.5-second flight and half-radius triggering; compiled Kithio blasts all full-radius enemies with ordinary defense.",
+        "differences": [
+          "Reconstruction uses ten seconds from landing and inclusive radius boundaries. The May 2012 guide says twenty seconds; Kithio's twentieth pulse can expire around 9.5 seconds and its area check is strict. Exact target-build continuity is unproven."
+        ],
         "unknowns": [
-          "Historical generic default condition, arming/trigger geometry, lifetime and owner/world lifecycle.",
-          "Target multiple-enemy trigger semantics."
+          "Exact 123.5.1 lifetime, timer/trigger boundary and owner-disconnect/map-change continuity. Preserve current stricter owner/world cancellation.",
+          "Earned native unlock/progression, reconnect/restart and whole-class acceptance remain unverified; bounded receipts are separate."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Trap.cs",
+            "label": "Compiled Kithio trap reconstruction, not original server proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142113id_/http://forums.wildshadow.com/wiki/realm-mad-god/traps",
+            "label": "May 27, 2012 trap guide, table labelled 122.3.2"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
@@ -379,17 +419,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tricksters use daggers, prisms and leather armor, and unlock at Assassin 20 and Paladin 20. Original caps include Attack 65, Speed 75 and Dexterity 75. Tiered prisms create a decoy and teleport; Ghostly Prism uses a bomb and teleport. Dancing Swords creates two decoys without teleporting, but its original availability is unresolved.",
+        "expected": "Tricksters use daggers, prisms and leather armor, unlocking at Assassin 20 and Paladin 20. The June 12, 2012 update supports caps of 65 Attack, 75 Speed and 75 Dexterity. Tiered prisms teleport and leave a moving decoy; period guidance describes distracting enemies and teleporting behind walls. Selected Ghostly costs 90 MP, adds 3 Dexterity and leaves a spirit bomb. Selected Dancing Swords creates two five-second decoys without teleport; May 2012 guidance calls it unavailable, while September 2014 release notes list its release.",
         "differences": [],
         "unknowns": [
-          "Original decoy movement and enemy targeting, bomb timing and damage.",
-          "Dancing Swords availability and teleport obstruction rules."
+          "Exact 123.5.1 bomb damage, delay, radius and defense handling: modern history mentions an undated single 300-damage form, while a May 2, 2013 capture already lists six 50–100-damage explosions at 65 MP.",
+          "Decoy target-selection exceptions and original movement/collision precision; Kithio overloads use different selection semantics.",
+          "Dancing Swords availability between the May 2012 unavailable report and September 25, 2014 release listing; selected XML presence alone proves neither drops nor obtainability.",
+          "Exact original teleport endpoint restrictions; existing destination validation is retained, not replaced with Kithio's unchecked Move."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url":"reference-data/client-123.5.1.swf","label":"Original 123.5.1 client (SWF reference data)"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Decoy.cs","label":"Compiled Kithio decoy reconstruction"},
+          {"url":"https://web.archive.org/web/20120530044223id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-trickster","label":"May 2012 decoy and teleport guide (pre-buff stats)"},
+          {"url":"https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145","label":"June 12, 2012 class-cap update"},
+          {"url":"https://www.realmeye.com/wiki/release-history-2014#release-24-0-0","label":"September 25, 2014 Dancing Swords release listing"}
         ]
       }
     },
@@ -476,7 +519,8 @@
         "expected": "Level20 HUD shows living Fame/next goal, distinct from account wallet/death awards; XP Booster must not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Target conversion/carry, booster interaction, record timing and terminal goal presentation."
+          "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
+          "Selected client accepts a nonpositive terminal goal without a denominator; original terminal wire sentinel and fresh native terminal-bar rendering remain unverified."
         ],
         "sources": [
           {
@@ -486,6 +530,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L165-L191",
+            "label": "Compiled primary comparator's linear conversion and class goals, not original-server proof"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html",
+            "label": "Later-edited April2012-path guide describes a conflicting curve; individual claims are not dated to123.5.1"
           }
         ]
       }
@@ -1161,18 +1213,22 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
+        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding.",
         "differences": [
-          "Server terrain budgets use tile speed without tracking the client's progressive sinking multiplier."
+          "Intentional project policy: native movement trusts finite, in-bounds client positions, prioritizing responsiveness over server-side speed, timing and path enforcement. This is not missing restoration work or a confirmed historical deviation. Structural, lifecycle, ownership and persistence safeguards remain separate."
         ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
-          "Original lag tolerance and pause/options interactions."
+          "Original server validation policy, lag tolerance and pause/options interactions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
+            "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
           }
         ]
       }
@@ -1351,7 +1407,8 @@
           "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510",
           "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512",
           "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554",
-          "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731"
+          "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
+          "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
@@ -3282,7 +3339,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a Realm Portal after his death. The entrance Portal of Cowardice is distinct. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
@@ -3311,6 +3368,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Follow.cs",
             "label": "Modified 7.0 comparator: independent steering jitter, not original spawn-spacing evidence"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat",
+            "label": "April 2012 community guide, later edited: boss-death Realm Portal, not Portal of Cowardice"
           },
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
