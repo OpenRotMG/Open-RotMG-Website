@@ -26,7 +26,8 @@ test('Priest tome receipts do not accept earned progression or original drop rat
   assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
   assert.match(feature.audit.unknowns.join(' '),/rates.*thresholds.*continuity/);
   const sources=evidence.results[id].evidence.map(ref=>evidence.sources[ref]);
-  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','regression','source']);
+  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','native','regression','source','source']);
+  assert.match(evidence.sources['priest-purification-native-5346d5a'].limitations,/Sick\/Quiet/);
   for(const source of sources)assert.deepEqual(source.checks,[id]);
 });
 
