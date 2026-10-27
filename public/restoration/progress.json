@@ -119,16 +119,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Archers use bows, quivers and leather armor, and unlock at Priest level 5. T0–T2 quivers Slow; T3–T6 Paralyze. Quiver of Thunder Dazes instead. Each quiver has its own projectile, mana cost and bonuses.",
+        "expected": "Archers use bows, quivers and leather armor, and unlock at Priest level 5. T0-T2 quivers Slow for 3 seconds; T3-T6 Paralyze for 3 seconds. Tiered quivers pierce enemies and cover, but not walls. Quiver of Thunder instead Dazes for 4 seconds, does not pierce enemies or cover, costs 100 MP and has a six-second cooldown. Period June 2012 pages document Thunder and its Greater Nature Sprite drop source. Selected projectile collision uses an axis-aligned half-tile radius and remembers each pierced target once.",
         "differences": [],
         "unknowns": [
-          "Was Quiver of Thunder obtainable in 123.5.1?",
-          "Original projectile hitboxes and multi-hit rules."
+          "The May 2012 Archer page lists Vitality cap 75 and growth 0-2, conflicting with selected 123.5.1 cap 40 and growth 0-1; selected definitions remain authoritative.",
+          "Thunder was obtainable by June 2012, but no independently version-labelled 123.5.1 drop or exact original probability was verified. Selected target definitions support continuity; compiled Kithio's 0.002 is reconstruction evidence, not an original rate."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120614024531id_/http://forums.wildshadow.com/wiki/quiver-thunder",
+            "label": "June 14, 2012 capture: Thunder stats and Greater Nature Sprite acquisition; exact target build not shown"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610072150id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-archer",
+            "label": "June 10, 2012 capture: tiered piercing versus Thunder's single-target, cover-blocked projectile"
+          },
+          {
+            "url": "https://web.archive.org/web/20120521013853id_/http://forums.wildshadow.com/wiki/realm-mad-god/archer",
+            "label": "May 21, 2012 capture, last updated 123.0.0: Priest level 5 unlock; conflicting Vitality values"
+          },
+          {
+            "url": "https://web.archive.org/web/20120525080008id_/http://forums.wildshadow.com/node/19766",
+            "label": "Chedd's December 6, 2011 test-server announcement; not production deployment proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Projectile.cs#L132-L169",
+            "label": "Compiled reconstruction engine: half-tile box and hit-target memory; safety policy not imported"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L3921-L4147",
+            "label": "Modified 7.0 comparator: all eight quivers normalize identically to selected definitions; not independent history"
           }
         ]
       }
