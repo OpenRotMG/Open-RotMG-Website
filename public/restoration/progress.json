@@ -1156,6 +1156,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
+            "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
           }
         ]
       }
