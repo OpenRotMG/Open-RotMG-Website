@@ -6797,6 +6797,7 @@
         ],
         "unknowns": [
           "Exact 123.5.1 timing remains unproven: Trapped instead randomly selects single shots, 20-shot rings and locked charges using only projectile0. Kithio is the selected reconstruction reference, not authenticated official AI.",
+          "The May2012 Wild Shadow wiki describes350HP/10DEF, HighForest and a different70-damage Blade; June2013 instead matches850HP/7DEF and desert placement but omits attack timing. Neither establishes the selected target's full AI; selected client definitions remain authoritative.",
           "Reproduction, quest status, density and reward probabilities."
         ],
         "sources": [
@@ -6811,6 +6812,14 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
             "label": "Modified 7.0 comparator has the same three Blade definitions, not AI timing"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519205419/http://forums.wildshadow.com:80/wiki/realm-mad-god/minotaur",
+            "label": "May2012 Wild Shadow-hosted community wiki: incompatible earlier stats/habitat"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605070831/https://forums.wildshadow.com/wiki/realm-mad-god/minotaur",
+            "label": "June2013 Wild Shadow-hosted wiki matches selected HP/DEF and desert placement, not attack timing"
           }
         ]
       }
