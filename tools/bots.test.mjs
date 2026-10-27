@@ -36,8 +36,8 @@ class Node {
 }
 const flush = () => new Promise(setImmediate);
 const deferred = () => {let resolve;const promise = new Promise(done => {resolve = done;});return {promise, resolve};};
-const intent = {goal: {id: 1, label: 'Max permanent Speed', current: 30, target: 50, unit: 'Speed'}, plan: 'Earn Speed potions in Snake Pits', step: 'Reach the observed Snake Pit', mode: 'progress', reason: 'A known entrance is available', resume: null};
-const frame = {level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null, intent};
+const intent = {goal: {id: 1, label: 'Max permanent Speed', current: 30, target: 50, unit: 'Speed'}, plan: 'Earn Speed potions in Snake Pits', step: 'adventuring: hunting quest Red Demon', mode: 'progress', reason: 'A known entrance is available', resume: null};
+const frame = {character: 1, level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null, intent};
 const bots = names => ({bots: names.map(name => ({name, frame})), llm: {enabled: false}});
 const json = value => new Response(JSON.stringify(value), {headers: {'content-type': 'application/json'}});
 function harness(t, query = '', initial = bots(['Alpha', 'Beta'])) {
@@ -177,31 +177,50 @@ test('perspective-selection messages admit only the current native window and a 
   const next = h.iframe();h.send({}, {data: {...data, bot: 'Beta', target: 'Alpha'}, source: old.contentWindow});assert.equal(h.iframe(), next);
 });
 
-test('intention list keeps the goal above progress, safety and optional detours without invented numbers', () => {
+test('overview uses plain broad activities, not per-tick targets or internal policy explanations', () => {
   assert.deepEqual(intentionRows(intent).slice(0, 2), [['Trying to', 'Max permanent Speed'], ['Progress', '30 / 50 Speed']]);
-  const recovery = {...intent, mode: 'necessary', step: 'Back off to recover', reason: 'HP crossed the recovery threshold', resume: 'Continue toward the observed entrance'};
-  assert.deepEqual(intentionRows(recovery)[0], intentionRows(intent)[0]);assert.match(intentionRows(recovery)[3][0], /Required interruption/);
-  assert.match(intentionRows({...recovery, mode: 'optional', step: 'Inspect a useful staff'})[3][0], /Optional detour/);
+  assert.deepEqual(intentionRows(intent).at(-1), ['Recent activity', 'Exploring and fighting']);
+  const supply = {...intent, mode: 'necessary', step: 'restocking: returning to remembered loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan};
+  assert.deepEqual(intentionRows(supply).at(-1), ['Recent activity', 'Getting health potions']);
+  assert(!intentionRows(supply).some(([label]) => ['Why', 'Then', 'Required interruption'].includes(label)));
+  for (const [step, summary] of [['surviving: under threat, dodging', 'Staying safe'], ['socializing: following Someone', 'Meeting other players'], ['banking: storing loot', 'Sorting items in the Vault'], ['Return to Nexus before logout', 'Returning to the Nexus to log out']]) assert.equal(intentionRows({...intent, step}).at(-1)[1], summary);
   const uncounted = {...intent, goal: {...intent.goal, current: null, target: null, unit: null}};
   assert(!intentionRows(uncounted).some(([label]) => label === 'Progress'));
   assert.deepEqual(intentionRows({...intent, goal: null})[0], ['Trying to', 'No main goal selected.']);
+  assert.throws(() => intentionRows({...intent, step: 'unrecognized: action'}), /unknown bot activity/);
   for (const value of [undefined, {}, {...intent, mode: 'guessed'}, {...intent, reason: ''}, {...intent, private: true},
     ...[{id: 0}, {id: 2**53}, {current: null}, {target: -1}, {unit: undefined}, {account: 2}].map(goal => ({...intent, goal: {...intent.goal, ...goal}})),
   ]) assert.throws(() => intentionRows(value), /missing or malformed|malformed main goal/);
 });
 
-test('live intent transitions are separate from transport and clear on switching or missing state', async t => {
+test('recent activity changes at most every ten seconds; unchanged descriptions do not rebuild DOM', async t => {
   const h = harness(t);await flush();h.send();
   const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
-  await h.emit({frame, age_ms: 0, thoughts: []});assert.match(visible(), /Trying to \| Max permanent Speed.*30 \/ 50 Speed/);
-  await h.emit({frame: {...frame, intent: {...intent, mode: 'necessary', step: 'Recover HP', resume: 'Continue the trip'}}, age_ms: 0, thoughts: []});
-  assert.match(visible(), /Max permanent Speed.*Required interruption \| Recover HP.*Continue the trip/);
-  await h.emit({frame: {...frame, intent: undefined}, age_ms: 0, thoughts: []});
-  assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /Intentions unavailable/);
+  await h.emit({frame, age_ms: 0});const first = h.nodes['#intention'].children[0];
+  await h.emit({frame: {...frame, intent: {...intent, step: 'adventuring: fighting Easily Enraged Bunny', reason: 'different internal transition'}}, age_ms: 0});
+  assert.equal(h.nodes['#intention'].children[0], first);
+  const supply = {...frame, intent: {...intent, mode: 'necessary', step: 'restocking: walking to loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan}};
+  await h.emit({frame: supply, age_ms: 0});assert.equal(h.nodes['#intention'].children[0], first);
+  await h.advance(9999);
+  await h.emit({frame: {...supply, intent: {...supply.intent, goal: {...intent.goal, current: 31}}}, age_ms: 0});
+  assert.match(visible(), /31 \/ 50 Speed/);assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Getting health potions|carried health reserve/);
+  await h.advance(1);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  h.send();await h.advance(10000);await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Staying safe/);
+});
+
+test('new goals, characters, selection and unavailable data reset the recent overview immediately', async t => {
+  const h = harness(t);await flush();h.send();
+  const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
+  await h.emit({frame, age_ms: 0});
+  await h.emit({frame: {...frame, intent: {...intent, goal: {...intent.goal, id: 2}, step: 'restocking: waiting'}}, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  await h.emit({frame: {...frame, character: 2, intent: {...intent, goal: {...intent.goal, id: 2}, step: 'trading: waiting'}}, age_ms: 0});assert.match(visible(), /Trading with other players/);
+  await h.emit({frame: {...frame, intent: undefined}, age_ms: 0});assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /Intentions unavailable/);
   assert.equal(h.nodes['#view-status'].textContent, '');assert.equal(h.nodes['#telemetry-status'].textContent, '');
-  await h.emit({frame, age_ms: 0, thoughts: []});assert.equal(h.nodes['#intention-status'].textContent, '');assert.match(visible(), /Max permanent Speed/);
+  await h.emit({frame, age_ms: 0});assert.match(visible(), /Exploring and fighting/);
+  await h.emit({frame: null, age_ms: 0});assert.equal(visible(), '');
+  await h.emit({frame: {...frame, character: 0}, age_ms: 0});assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /invalid character identity/);
   h.choose('Beta');await flush();assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /No decision intention/);
-  await h.emit({frame: null, age_ms: 0, thoughts: []});assert.equal(visible(), '');
 });
 
 test('page keeps game and intentions, with fixed layout and exceptional-state announcements only', async () => {
