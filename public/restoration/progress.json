@@ -1916,16 +1916,30 @@
         "historical": "partial",
         "expected": "Roaming Wasp Queen with Worker/Warrior births and replenishment, owned follower movement and separate role/reward identities; no transformation established.",
         "differences": [
-          "Only Warrior Wasp rewards are reconstructed from a later comparator; original tiers, chances and allocation remain unverified. Queen and Worker rewards are unchanged."
+          "Current owned families use random initial 2–5 Workers/1–2 Warriors, fixed 10-second replenishment checks and 1-second attacks. Primary Kithio instead uses lifetime birth counters at 3400/4400ms, nearest-Queen orbit, 1600ms Queen/4000ms Worker shots and alternating Warrior follow/orbit states.",
+          "The May 30, 2012 Warrior subsection lists public T3/T4 and soulbound T6 weapon/armor rewards, not Queen drops or probabilities. Current Warrior equipment remains a qualified Trapped reconstruction; Queen and Worker retain no-drop reconstruction. Primary Kithio assigns its different equipment/potion table to Queen instead. Period armor labels do not independently establish selected-client candidate tiers."
         ],
         "unknowns": [
-          "Target habitat density, replenishment cadence, probabilities and rewards.",
-          "Warrior loot must not be silently attributed to Queen."
+          "Exact 123.5.1 habitat density and SpawnProb selection, initial population, lifetime-versus-alive caps, replenishment cadence and movement/attack policy. Current area/200 MidPlains density and relative SpawnProb weights are reconstruction, not recovered original policy.",
+          "Original reward probabilities, contributor eligibility/attempts/allocation, Queen/Worker rewards and target continuity of the dated Warrior tier labels. Warrior loot must not be silently attributed to Queen.",
+          "Native private Warrior reward acquisition, surviving-follower lifetime after Queen death and full-feature acceptance remain unverified; bounded prepared encounter evidence is separate from original-history acceptance. Research and exact conflicts: https://github.com/OpenRotMG/Open-RotMG-Server/issues/802#issuecomment-6452521135"
         ],
         "sources": [
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L173-L229",
+            "label": "Compiled primary reconstruction table; Spawn engine counts lifetime births, not living children"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530043951id_/http://forums.wildshadow.com/wiki/realm-mad-god/wasp-queen",
+            "label": "May 2012 Queen page with explicitly named Warrior reward subsection; no rates or target-continuity proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All three complete objects normalize identically to selected definitions; not server AI or historical deployment"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L208-L250",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Alternate behavior and separate Warrior reward comparator; exact original rates remain unverified"
           }
         ]
       }
