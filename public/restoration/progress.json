@@ -2500,16 +2500,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Bandit Leader is level 2 with 280 HP, 2 DEF and a 9-damage Blade, accompanied by ordinary Bandits with distinct Blade forms. Period sources show grenades and retreat; their exact parameters remain unresolved.",
-        "differences": [],
+        "expected": "Selected ShoreSand Leader: level 2, 280 HP/2 DEF, Blade 9/60/800ms; Bandits: 50 HP/1 DEF, Blades 9/600ms and 8/1000ms at speed 60. May 30, 2012 wiki text labelled build 122.0.1 confirms area attacks and low-health retreat, not exact 123.5.1 AI.",
+        "differences": [
+          "Research at server 0e8b12c5: current <=80HP retreat keeps attacks active; compiled Kithio uses strict <45%, attack-free 12s retreat and nearby follower escape orders. Older Trapped uses strict <80 without cease-fire. Neither authenticates original parameters.",
+          "Current three initial/five living followers with 8s refill differ from primary Spawn's two initial/four lifetime births and Trapped's once-only three to five. Current radius-2 grenades on a concurrent 2500ms channel differ from primary radius-1.4 phased throws; both comparators use damage12/range5/1500ms impact delay.",
+          "Current older nominal loot pool uses ordered first-success single-item selection. Primary has additional T2 armor, different potion rates and independent p/n candidate rolls with contributor bag recipients. Identity-only differences separate the modified7.0 follower; both complete selected objects match retained recovered123.5.1 definitions."
+        ],
         "unknowns": [
-          "Original retreat threshold, cease-fire and recovery behavior, orders, grenade parameters, group sizes and drops.",
-          "Later sources disagree on the retreat threshold."
+          "Original123.5.1 retreat boundary, cease-fire/recovery/orders, grenade parameters, follower movement/count/refill and all reward rates/allocation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/816#issuecomment-6454205406 . Prepared gameplay receipts are separate from whole-feature and historical acceptance."
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl2-bandits.jpg",
-            "label": "2012 player screenshot"
+            "label": "June-path screenshot: Leader, Bandits and red throw trail; not numeric AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530183826id_/http://forums.wildshadow.com/wiki/realm-mad-god/bandit-leader",
+            "label": "May30,2012 capture; text labelled122.0.1, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L66-L162",
+            "label": "Compiled primary comparator; engine and historical conflicts remain qualified"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
