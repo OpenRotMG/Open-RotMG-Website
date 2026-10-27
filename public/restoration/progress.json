@@ -2184,12 +2184,27 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowPlains Hobbit Mage is level 3 with 200 HP, 2 DEF and three short-lived 10-damage projectile forms. The family includes Hobbit Archers and Rogues, separate from Undead Hobbits.",
-        "differences": [],
+        "differences": [
+          "Current two/two initial followers and living-slot replenishment differ from compiled Kithio's two/one initial followers and lifetime birth limits of four Archers and three Rogues.",
+          "Current simple follower chase/protection omits Kithio and build-118 Archer's 400/600/400ms Mage-protect, StayBack and nearest-Archer cycle. Current followers also retain Magic Potion drops absent from those period pages and compiled primary."
+        ],
         "unknowns": [
-          "Exact target activation, movement, ring cadence, child caps, deployment corroboration and rewards.",
-          "Target counts/caps, orphan behavior, AI timing and drops."
+          "Build-118 May 2012 text independently supports twelve-tile activation and fifteen-shot rings at 0/8/16 degrees, 400ms apart; exact 123.5.1 deployment, idle/reentry timing and cloak/range semantics remain unverified.",
+          "Resolve target initial counts and lifetime-versus-living caps, protection hysteresis, orphan retargeting, height/leash and follower rewards. Period minimum height11 conflicts with Kithio9; exact reward probabilities and eligibility remain unverified."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L15-L84",
+            "label": "Compiled and registered primary; Spawn lifetime counters and Protect hysteresis inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120502020343id_/http://forums.wildshadow.com/wiki/realm-mad-god/hobbit-mage",
+            "label": "May2,2012 capture, build118 text: twelve-tile activation, ring phases, reproduction and public loot"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531033643id_/http://forums.wildshadow.com/wiki/realm-mad-god/hobbit-archer",
+            "label": "May31,2012 capture, build118 Archer movement cycle and Health Potion-only public reward"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"

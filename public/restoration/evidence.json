@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "hobbit-native-f719980": {
+      "kind": "native",
+      "revision": "f7199802e8bb714d2d880de4a7331089332dfafa",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1037#issuecomment-6453828353",
+      "checks": ["realm:hobbit-mage"],
+      "method": "Clean QAa089f348 passes21 assertions over39,450 game ms with selected client39acbfbf/Ruffle.16: normal fresh guest/LOAD, prepared9.5-tile approach to a naturally populated Realm Mage, activation/movement, three ring offsets and selected projectile speed/lifetime, both follower movements/attacks, two/two to three/three growth within4/3 living bounds, native Mage/follower defeats and XP, four surviving orphans with no new camp IDs/successor or duplicate XP over12.5seconds, same living character and clean process teardown. Mage/collateral XP200→244 remains244 during waiting, later follower kills end256; public bags appear. Actual ELF5eadb060, case86eac900. BaselineQAd633cb6c remains dormant at9.5 and fails the gate assertion.",
+      "limitations": "Prepared level-three Wizard with supplied high stats/gear, direct placement and one60-second Invulnerable interval; not earned entry/survival, reward pickup/reconnect, rate measurement or original deployment. Separate natural encounters, not identical coordinates. Public bags are not uniquely attributed after collateral kills. Earlier loading capture and disabled-NPC unit fixture failures are excluded; QAab485227 passed attacks/growth but failed a later kill assertion because collateral had already killed Mage. Exact movement/cap/orphan-retargeting and loot remainders remain tracked; whole-family gameplay stays not-run and history partial. Undead Hobbits are not covered."
+    },
+    "hobbit-regression-9428377": {
+      "kind": "regression",
+      "revision": "94283770009069339d2b9a8846f9e1e6cf16b54f",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1037#issuecomment-6453828353",
+      "checks": ["realm:hobbit-mage"],
+      "method": "QA0e4fdea1 passes155 Rust tests; QA2718252d passes strict all-target Clippy. The focused enabled-NPC probe checks dormant at the strict12-tile boundary, awake at11.5, and fifteen projectiles with24-degree gaps and0/8/16 offsets at0/400/800/1200ms. Formatting passes on later integrationb158f878. Existing revision-bound public-loot evidence is retained separately.",
+      "limitations": "Synthetic map/clock, not natural placement, target-version AI/deployment proof, exact state reentry/cloak behavior or native reward pickup. Initial probe failures with NPC simulation disabled are fixture failures, not bug corroboration; the native before supplies the valid reproduction. No authority/ownership/persistence/death/ACK/lease guards changed."
+    },
+    "hobbit-source-4ed89f8": {
+      "kind": "source",
+      "revision": "4ed89f832a58da3fb1b1ad8903a3fc4342e99820",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/4ed89f832a58da3fb1b1ad8903a3fc4342e99820/src/world.rs#L6366-L6367",
+      "checks": ["realm:hobbit-mage"],
+      "method": "Selected SWF07ae4fc3 extraction matches all three complete Hobbit XML definitions in current data and pinned modified7.0 LowCXML. Compiled and reflected Kithio Lowland covers Mage/Archer/Rogue; Spawn counts lifetime births, Protect has nearest-type hysteresis and Follow reacquires. May2,2012 Mage capture and May31 Archer/Rogue captures label their text build118: twelve-tile activation, fifteen-shot rings at0/8/16 degrees,400ms states,4/3 child maxima and staged Archer movement. Fixes the independently supported eight-versus-twelve activation defect; Trapped and modified7.0 are qualified comparators, not independent period witnesses.",
+      "limitations": "No original server recovered or comparator code/assets imported. Build118 evidence does not prove123.5.1 deployment. Current two/two initial children, living-slot replenishment, simple Archer movement and follower MP drops differ from compiled primary; exact cap policy, state reentry/cloak semantics, height11-versus9, hysteresis/orphan retargeting and original reward eligibility/rates remain explicitly unresolved. Historical acceptance remains partial; selected stats/projectiles and authority/ownership/permanent-death/ACK/lease policies are unchanged."
+    },
     "sorcerer-native-b50f9cb": {
       "kind": "native",
       "revision": "b50f9cb02289e280edd6f7bf65418e89995744a4",
@@ -3549,7 +3576,7 @@
     "realm:desert-werewolf": {"status":"not-run","evidence":[]},
     "realm:sandsman-king": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:giant-crab": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","hobbit-source-4ed89f8","hobbit-regression-9428377","hobbit-native-f719980"]},
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:goblin-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
