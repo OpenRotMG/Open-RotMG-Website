@@ -3129,7 +3129,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
+        "expected": "Earned entrance, client-rendered star background, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
           "Issue #618 replaces the repeating eight-tile conveyor grid with seeded overlapping bands of varied widths and lengths, informed by a later community map. The original generator and pattern probabilities remain unrecovered.",
@@ -3149,6 +3149,14 @@
           {
             "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
             "label": "May 2012 Sprite World guide: floor variants, trees and native gods"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_H_Z_/Background.as",
+            "label": "Recovered 123.5.1 client: background 1 selects StarBackground; corroborated by modified 7.0"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_17.0.0",
+            "label": "September 2013 release notes: missing Sprite World stars are a known hardware-acceleration bug; later corroboration"
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/spriteworld.wmap",
