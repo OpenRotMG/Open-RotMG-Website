@@ -788,14 +788,24 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Ordinary death ends the character’s life and retains identity, killer, date, statistics and Fame for the death screen. Continue leads back to character creation or selection. The Amulet of Resurrection has separate recovery rules.",
-        "differences": [],
+        "differences": [
+          "Playable inventory is destroyed while immutable death metadata is retained. Full-effective HP/MP amulet recovery is a reconstruction; Kithio doubles base capacities and modified 7.0 restores 1 HP."
+        ],
         "unknowns": [
-          "Original inventory destruction, death-date and killer attribution, record retention and resurrection rules."
+          "Original death-record retention/deletion schedule and exact 123.5.1 continuity beyond the May 2012 death-screen image. Exact post-amulet HP/MP and native equipped-amulet behavior remain in server issue891."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L439-L559",
+            "label": "Compiled Kithio equipped resurrection and ordinary death comparator"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
+            "label": "May 31, 2012 account and actual dated death-screen image"
           }
         ]
       }
