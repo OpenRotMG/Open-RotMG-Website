@@ -661,7 +661,7 @@
           "Server PR452 scores each class by its best committed death total, including death bonuses, while living characters count base Fame. This follows the modified 7.0 comparator's greater-of-current-and-final rule; a 2021 base-only rule is later, and 123.5.1 BestFame timing is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/452"
         ],
         "unknowns": [
-          "Whether target BestFame uses living, base or death-total Fame and when stars are awarded."
+          "Exact 123.5.1 BestFame publication timing (live threshold, save, reconnect or death) remains unrecovered. Kithio/Trapped save CurrentFame without a death-total classstats update; modified 7.0 saves max(current,final). A revised April-2012 blog preserved in April 2014 supports bonus-inclusive stars but cannot date each claim to 123.5.1. See server issue780 for the research disposition."
         ],
         "sources": [
           {
@@ -671,6 +671,22 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L458-L476",
             "label": "Modified 7.0 comparator: BestFame keeps the greater of current and final Fame, not official 2012 code"
+          },
+          {
+            "url": "https://github.com/ViciousFate/rotmg-redis/blob/de251d3e0cfb59b30eb74572e2d8ed87f9e14afa/rotmg_cli_master/src/com/company/assembleegameclient/util/_Z_B_.as#L20-L55",
+            "label": "Recovered client threshold, inclusive comparison and greater-of-best/current goal; agrees with exact selected-SWF extraction"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs#L503-L605",
+            "label": "Compiled primary comparator: SaveCharacter uses CurrentFame; Death computes final Fame for payout but does not update classstats"
+          },
+          {
+            "url": "https://web.archive.org/web/20140419055548id_/http://anticosmic.blogspot.com/2012/04/fame-farming.html",
+            "label": "April 19, 2014 capture of revised April 24, 2012 article: 272 base/802 total toward stars; not a dated 123.5.1 timing specification"
+          },
+          {
+            "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=200210&count=20&maxlength=0&enddate=1625097600",
+            "label": "Official June 29, 2021 Star Ranks announcement introduces base Fame without death bonuses; later than target"
           }
         ]
       }
