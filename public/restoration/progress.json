@@ -335,16 +335,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Necromancers use staves, skulls and robes, and unlock at Wizard 20 and Priest 20. Skulls damage nearby enemies and heal allies. Cracked Crystal Skull costs 140 MP. Whether Endless Torment was obtainable remains unresolved.",
-        "differences": [],
+        "expected": "Necromancers use staves, skulls and robes, and require Wizard 20 and Priest 20. Selected Cracked Crystal Skull costs 140 MP. May 2012 guides corroborate defense-reduced, remaining-HP-capped damage healing each nearby ally in full within the skull radius around the caster. The June 12, 2012 Build 123.3 announcement reduces Vitality from 50 to the selected cap of 30.",
+        "differences": [
+          "Modified 7.0 Crystal costs 120 MP and Endless Torment uses ID 0x911; retain selected 140 MP and 0xc0e. Comparator agreement is not independent historical acceptance."
+        ],
         "unknowns": [
-          "Historical nominal/actual-damage healing, recipient center/radius and overheal/defense rules.",
-          "Endless Torment target deployment."
+          "Exact 123.5.1 boundary/condition exceptions and continuity from the May 2012 guides remain unverified; maximum-HP healing caps are reconstructed from compiled Kithio.",
+          "Endless Torment ordinary acquisition at 123.5.1 remains unresolved. The May 19, 2012 guide calls it unreleased; later documentation dates obtainability to April 2014 Build 20.0.1, not proof of continuous absence."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L433-L445",
+            "label": "Compiled Kithio reconstruction: actual damage heals around caster, not independent historical proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519204924id_/http://forums.wildshadow.com/wiki/realm-mad-god/skulls",
+            "label": "May 19, 2012 capture: DEF, remaining-HP cap, full per-recipient healing and Crystal 140 MP"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519012136id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-necromancer",
+            "label": "May 19, 2012 guide: caster-centered skull radius and unreleased Endless Torment"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 Build 123.3 announcement: Necromancer Vitality cap 30; captured June 2013"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Skull%20of%20Endless%20Torment",
+            "label": "Mixed-era page dates obtainability to Build 20.0.1; not a target-era absence proof"
           }
         ]
       }
