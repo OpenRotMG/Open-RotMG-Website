@@ -1187,7 +1187,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Level-oriented quest guidance. Selected 123.5.1 client: 4s initial delay and randomized 5–15s after completion.",
+        "expected": "Level-oriented quest guidance, distinct from XP and realm closure. Selected 123.5.1 client: 4s initial delay and randomized 5–15s after completion.",
         "differences": [
           "Server PR262 offers each quest monster only inside a per-kind character-level window: mostly within 5 levels of the quest level for low-level wandering quests, as RealmEye's later wiki states, and from a per-kind minimum up to level 20 for bosses. The pinned 2013 community comparator's windows are similar but not identical. Server PR306 treats level-less quest bosses (Archdemon Malphas, Davy Jones, Oryx the Mad God 1) as matching every character level (https://github.com/OpenRotMG/Open-RotMG-Server/pull/306). Neither is recovered 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/262"
         ],
