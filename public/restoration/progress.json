@@ -6791,17 +6791,35 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Distinct HighSand Minotaur0x646 with pursuit/charge and blade repertoire; target shot patterns unresolved.",
+        "expected": "HighSand Minotaur0x646 retains selected stats and all three Blade definitions. Compiled Kithio supports an idle trigger, short fast-follow lunge, six aimed volleys, staggered 12/6-shot rings and a pause; exact target timing remains unverified.",
         "differences": [
-          "The Minotaur only chases, with no charge, and only fires its first Blade: aimed single shots with a 20-shot ring every third volley. Its two short-range Blade projectiles are never used. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/719"
+          "Source-supported combat is restored in server PR729. Current classic maps1–3 have no HighSand habitat, so Minotaurs cannot naturally spawn there; this combat change does not alter habitat or population."
         ],
         "unknowns": [
-          "Exact target patterns, charge/reproduction, quest status, density and reward probabilities."
+          "Exact 123.5.1 timing remains unproven: Trapped instead randomly selects single shots, 20-shot rings and locked charges using only projectile0. Kithio is the selected reconstruction reference, not authenticated official AI.",
+          "The May2012 Wild Shadow wiki describes350HP/10DEF, HighForest and a different70-damage Blade; June2013 instead matches850HP/7DEF and desert placement but omits attack timing. Neither establishes the selected target's full AI; selected client definitions remain authoritative.",
+          "Reproduction, quest status, density and reward probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L15-L57",
+            "label": "Compiled Kithio staged Minotaur reconstruction; related forks are not independent corroboration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
+            "label": "Modified 7.0 comparator has the same three Blade definitions, not AI timing"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519205419/http://forums.wildshadow.com:80/wiki/realm-mad-god/minotaur",
+            "label": "May2012 Wild Shadow-hosted community wiki: incompatible earlier stats/habitat"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605070831/https://forums.wildshadow.com/wiki/realm-mad-god/minotaur",
+            "label": "June2013 Wild Shadow-hosted wiki matches selected HP/DEF and desert placement, not attack timing"
           }
         ]
       }
