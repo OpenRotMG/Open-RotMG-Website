@@ -455,13 +455,17 @@
         "expected": "The chooser has thirteen classes. Availability depends on saved best levels for each prerequisite class; locked choices explain the requirements. Creation uses an available character slot and the original class definitions.",
         "differences": [],
         "unknowns": [
-          "Whether selected starting/unlock definitions exactly match target production deployment and initial account records.",
-          "Original authoritative record-persistence timing and creation placement."
+          "Authenticated production continuity and original initial-account records; the selected thirteen definitions match this server and the June 4, 2012 unlock tree.",
+          "Original server record-commit cadence and exact spawn coordinates/world-zero behavior; the selected client distinguishes first-play/resume flags from chooser CREATE, but the original server mapping is not recovered."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604094747id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/classes",
+            "label": "June 4, 2012 capture: thirteen-class unlock tree"
           }
         ]
       }
