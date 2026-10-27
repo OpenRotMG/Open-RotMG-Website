@@ -141,13 +141,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Wizards use staves, spells and robes, with no class prerequisite. Tiered spells create bullet novas. The original Wisdom cap is 60; spell damage includes the build 123.3 changes. Whether Penetrating Blast was obtainable remains unresolved.",
+        "expected": "Wizards start unlocked with Energy Staff and Fire Spray, and use staves, spells and robes. Tiered spells emit 20 cursor-centered projectiles; each hit applies DEF separately. Selected 123.5.1 definitions include the 123.3 spell nerf and Wisdom cap 60. Penetrating Blast is defined with MultiHit, not armor piercing; production availability remains unresolved.",
         "differences": [],
         "unknowns": [
-          "Target-production nova count/layout and exact collision policy.",
-          "Penetrating Blast deployment; uniform stat-roll distribution remains historically unproven."
+          "May 2012 documentation corroborates 20 shots and per-shot DEF; equal spacing follows Kithio. Exact 123.5.1 first angle, hitboxes and frame-versus-server collision sampling remain unverified. Kithio scales spell damage with ATT; this server retains selected raw bounds pending target-era evidence.",
+          "Penetrating Blast is labelled unobtainable in January 2012 testing notes and absent from 22 inspected Kithio loot tables (18 compiled); neither proves its 123.5.1 deployment. Uniform inclusive stat-roll distribution remains historically unproven."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June 12, 2012 production announcement; captured June 2013"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142108id_/http://forums.wildshadow.com/wiki/realm-mad-god/spells",
+            "label": "May 27, 2012 spells page: 20 shots and per-shot DEF; pre-nerf damage"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L206-L237",
+            "label": "Compiled Kithio nova reconstruction: cursor origin and 18-degree spacing"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
