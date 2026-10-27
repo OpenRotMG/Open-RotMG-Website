@@ -1143,7 +1143,7 @@
         "historical": "partial",
         "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
         "differences": [
-          "Native client movement is checked only for an active character, a non-regressing clock, finite coordinates and a walkable destination. The speed, time-budget and intervening-path checks exist only for server-driven movement, so a client can report a position beyond its speed or past blocked tiles between two updates. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/716"
+          "Server terrain budgets use tile speed without tracking the client's progressive sinking multiplier."
         ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
