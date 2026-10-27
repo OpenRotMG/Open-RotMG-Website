@@ -769,7 +769,7 @@
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7. June2,2012 community measurements cautiously suggest Wizard MP0.5+0.06*WIS and pre-redesign HP1+0.05*VIT; mixed-era wiki later gives HP1+0.12*VIT. Neither settles post-redesign exact rates.",
-          "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
+          "The April 2012 Paladin guide and compiled Kithio engine support +28 Healing HP/s. Exact tick phase, Bleeding rate, Sick+Healing precedence, pause/re-entry fractions and temporary-cap loss remain qualified; broader recovery history is tracked in server issue 782."
         ],
         "sources": [
           {
@@ -787,6 +787,10 @@
           {
             "url": "https://web.archive.org/web/20120602011846id_/http://forums.wildshadow.com/wiki/realm-mad-god/character-stats-explained",
             "label": "June 2, 2012 capture: qualified Wizard measurements before VIT redesign"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012 guide: Healing adds about 28 HP/s independently of seal tier"
           }
         ]
       }
