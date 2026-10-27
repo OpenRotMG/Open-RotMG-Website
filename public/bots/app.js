@@ -216,6 +216,9 @@ export function start({document, window, backend, now = Date.now}) {
         }
       }
       for (const [name, entry] of options) {
+        if (!available.has(name) && name !== selected) {
+          picker.removeChild(entry.option);options.delete(name);continue;
+        }
         entry.online = available.has(name);entry.option.disabled = !entry.online;label(entry);
       }
       for (const bot of catalogue) {
