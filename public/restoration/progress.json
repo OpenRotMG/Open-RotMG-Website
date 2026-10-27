@@ -3581,7 +3581,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Underwater dungeon, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
+        "expected": "Underwater dungeon, same-instance player teleporting, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
         "differences": [],
         "unknowns": [
           "Original topology, oxygen parameters and vent geometry, full target choreography, Hermit entrance probability, reward eligibility/rates and King Alexander target deployment."
@@ -3594,6 +3594,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/ocean-trench#tips-and-strategies",
+            "label": "Trench rusher teleport strategy; later documentation, not exact 123.5.1 certification"
           }
         ],
         "checks": [
@@ -5210,7 +5214,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Eligible map/caller/target teleport; paused/invisible targets rejected and rejection must not activate cooldown. Exact target successful cooldown and landing policy remain unresolved.",
+        "expected": "Eligible same-map player teleporting, including Ocean Trench; paused/invisible targets rejected and rejection must not activate cooldown. Exact target successful cooldown and landing policy remain unresolved.",
         "differences": [],
         "unknowns": [
           "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
@@ -5904,9 +5908,7 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Sick disables healing, not merely Vitality. Natural regeneration, Healing-over-time, direct/party heals, consumables and drain-heals need separate cases; individual exceptions and cleanse/heal ordering are not fully established.",
-        "differences": [
-          "Native map eff configuration uses decimal or lowercase 0x numbers; eff:16 no longer gains Quiet/Weak bits. This corrects numeric ingestion, not Sick healing behavior or authenticated original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/626"
-        ],
+        "differences": [],
         "unknowns": [
           "Historical per-source exceptions, blocked-potion consumption, cleanse/heal ordering and complete removal matrix."
         ],
