@@ -167,16 +167,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and grants Armored for four seconds, not Invulnerable. Purification removes conditions.",
+        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and gives only its caster Armored for four seconds, not Invulnerable. Purification's selected order is healing, conditional Speedy removal from Hexed recipients, then cleansing; the comparator Sick check blocks healing before cleansing.",
         "differences": [],
         "unknowns": [
-          "Which conditions does Purification remove, in what order, and how does Sick affect healing and eligible players?",
-          "How were untiered tomes obtained in 123.5.1?"
+          "Original cleanse list, Sick ordering and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
+          "Period evidence supports Purification from Manor/Ruthven/ordinary Coffins and Holy Protection from Bes; exact 123.5.1 rates, eligibility thresholds and continuity remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516125526id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "May 2012 Manor guide: Purification and loot-bearing Coffins"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516152646id_/http://forums.wildshadow.com/wiki/realm-mad-god/tomb-ancients",
+            "label": "May 2012 Tomb guide: Holy Protection from Bes"
           }
         ]
       }
@@ -1144,18 +1152,22 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
+        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding.",
         "differences": [
-          "Server terrain budgets use tile speed without tracking the client's progressive sinking multiplier."
+          "Intentional project policy: native movement trusts finite, in-bounds client positions, prioritizing responsiveness over server-side speed, timing and path enforcement. This is not missing restoration work or a confirmed historical deviation. Structural, lifecycle, ownership and persistence safeguards remain separate."
         ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
-          "Original lag tolerance and pause/options interactions."
+          "Original server validation policy, lag tolerance and pause/options interactions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
+            "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
           }
         ]
       }
