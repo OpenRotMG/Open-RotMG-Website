@@ -370,12 +370,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tricksters use daggers, prisms and leather armor, unlocking at Assassin 20 and Paladin 20. The June 12, 2012 update supports caps of 65 Attack, 75 Speed and 75 Dexterity. Tiered prisms teleport and leave a moving decoy; period guidance describes distracting enemies and teleporting behind walls. Selected Ghostly costs 90 MP, adds 3 Wisdom and leaves a spirit bomb. Selected Dancing Swords creates two five-second decoys without teleport; May 2012 guidance calls it unavailable, while September 2014 release notes list its release.",
-        "differences": [
-          "The three-second, radius-four, defense-respecting single 300-damage bomb is reconstruction; modern six-explosion Ghostly behavior and later 65-MP cost are not backported."
-        ],
+        "expected": "Tricksters use daggers, prisms and leather armor, unlocking at Assassin 20 and Paladin 20. The June 12, 2012 update supports caps of 65 Attack, 75 Speed and 75 Dexterity. Tiered prisms teleport and leave a moving decoy; period guidance describes distracting enemies and teleporting behind walls. Selected Ghostly costs 90 MP, adds 3 Dexterity and leaves a spirit bomb. Selected Dancing Swords creates two five-second decoys without teleport; May 2012 guidance calls it unavailable, while September 2014 release notes list its release.",
+        "differences": [],
         "unknowns": [
-          "Exact 123.5.1 bomb delay, radius and defense handling; modern historical notes support one 300-damage explosion but do not date these parameters.",
+          "Exact 123.5.1 bomb damage, delay, radius and defense handling: modern history mentions an undated single 300-damage form, while a May 2, 2013 capture already lists six 50–100-damage explosions at 65 MP.",
           "Decoy target-selection exceptions and original movement/collision precision; Kithio overloads use different selection semantics.",
           "Dancing Swords availability between the May 2012 unavailable report and September 25, 2014 release listing; selected XML presence alone proves neither drops nor obtainability.",
           "Exact original teleport endpoint restrictions; existing destination validation is retained, not replaced with Kithio's unchecked Move."
