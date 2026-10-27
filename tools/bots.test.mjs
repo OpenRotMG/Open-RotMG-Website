@@ -209,7 +209,19 @@ test('recent activity changes at most every ten seconds; unchanged descriptions 
   h.send();await h.advance(10000);await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Staying safe/);
 });
 
-test('new goals, characters, selection and unavailable data reset the recent overview immediately', async t => {
+test('world-transfer feed gaps hide unavailable data without bypassing the activity cadence', async t => {
+  const h = harness(t);await flush();
+  const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
+  await h.emit({frame, age_ms: 0});await h.advance(500);
+  await h.emit({frame: null, age_ms: 0});assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /No decision intention/);
+  const supply = {...frame, intent: {...intent, step: 'restocking: returning to remembered loot'}};
+  await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Getting health potions/);
+  await h.emit({frame: {...frame, intent: undefined}, age_ms: 0});assert.equal(visible(), '');
+  await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Exploring and fighting/);
+  await h.advance(9500);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Getting health potions/);
+});
+
+test('new goals, characters and selection reset immediately; unavailable data never stays visible', async t => {
   const h = harness(t);await flush();h.send();
   const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
   await h.emit({frame, age_ms: 0});
