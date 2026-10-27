@@ -20,6 +20,26 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:priest',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.match(feature.audit.unknowns.join(' '),/rates.*thresholds.*continuity/);
+  const sources=evidence.results[id].evidence.map(ref=>evidence.sources[ref]);
+  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','regression','source']);
+  for(const source of sources)assert.deepEqual(source.checks,[id]);
+});
+
+test('client movement trust is intentional policy, not missing restoration or historical sign-off',()=>{
+  const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='realm:walk-and-dodge');
+  validateEvidence(data,evidence);
+  assert.match(feature.audit.differences.join(' '),/Intentional project policy: native movement trusts finite, in-bounds client positions/);
+  assert.match(feature.audit.differences.join(' '),/not missing restoration work or a confirmed historical deviation/);
+  assert.doesNotMatch(feature.audit.expected,/unsafe client trust|server validates/);
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.implementation,'partial');
+  assert.equal(accepted(feature,evidence),false);
+});
+
 test('Trench coral receipts do not accept whole-dungeon geometry or oxygen',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:ocean-trench';
   const refs=['source','regression','native'].map(kind=>'trench-coral-'+kind+'-e1483e3');
