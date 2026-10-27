@@ -2098,15 +2098,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "LowSand level4 King0x60d,270 HP/2 DEF, Blade15; Archer/Sorcerer escorts and distinct Sorcerer projectile forms. Period production supported, exact caps and 'conventions' fix unresolved.",
-        "differences": [],
+        "expected": "LowSand level4 King0x60d,270 HP/2 DEF, Blade15; orbiting Archer and protecting Sorcerer escorts with two distinct Sorcerer projectile forms. Original population and reward policy remain partial.",
+        "differences": [
+          "Nominal Archer orbit inputs3.25/speed8 use the existing bounded collision motor, not exact primary kinematics; the build118-labelled guide says radius6–7. Clear-space circulation and exact radial fidelity are separate checks. Current direct aim omits primary angular-history prediction0.5; nearest-leader acquisition and home/ownership guards also differ.",
+          "Current initial2 Archers/3 Sorcerers and alive-role replenishment at10s/8s differ from primary floor(max*0.5) initialization and lifetime birth counters. King wiki T2 armor normalizes to selected T3 under the existing all39-armor tier+1 audit; it is not a demonstrated item-tier conflict."
+        ],
         "unknowns": [
-          "Target caps, cadence, movement, probability tables and meaning of build121 'conventions' fix."
+          "Exact123.5.1 population/density/SpawnProb policy, orbit radius/variance, prediction/retargeting and King close-range idle/altitude policy (primary StayAbove15 versus period min-height31). Sorcerer5000ms/range10 and400ms/range5 agree with primary and period guide, not authenticated server code.",
+          "Target reward probabilities and eligibility/attempts; December2011 percentages predate build121. Escort sources list Magic Potion only; one native drop cannot establish rates.",
+          "January11,2012 build121 notes say 'Fix to Sandsman King conventions' without explanation. Archer-page Elf Wizard misidentification is a lead, not proof. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/808#issuecomment-6453078555"
         ],
         "sources": [
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L421-L458",
+            "label": "Compiled primary comparator; lifetime births, orbit radius3.25, angular-history prediction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120429185854id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-king",
+            "label": "Build118-labelled King guide: caps2/3, timers10s/8s; wiki T2 armor normalizes to selected T3"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530183934id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-archer",
+            "label": "Additional Archer resource: orbit6–7, aim0.5, MP only and prior Elf Wizard affiliation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531033707id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-sorcerer",
+            "label": "Additional Sorcerer resource: both attack channels,6/5 protection and MP only"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Selected stats/projectiles agree with modified7.0; not original server AI/deployment"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "label": "January11,2012 release-note claim; conventions fix unexplained"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
