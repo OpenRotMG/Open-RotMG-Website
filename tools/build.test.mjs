@@ -78,10 +78,19 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /Each star-rank reward is paid once per account\. Existing ranks count, too\./);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
-  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Source Code', 'OpenEye', 'Updates', 'Restoration', 'Gold', 'Pixel editor', '2010 Preview']);
-  // Use the community tracker's own name: https://openrotmgeye.com/
-  assert.ok(about.includes('href="https://openrotmgeye.com/">OpenEye</a>'));
-  assert.ok(about.includes('href="https://www.openrotmg.org/2010/">2010 Preview</a>'));
+  const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
+  assert.deepEqual(aboutLinks, [
+    [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
+    ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
+    [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
+    [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
+    ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
+    [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
+    [`${site.pathname}draw/`, 'Pixel editor', 'Original Flash editor.'],
+    ['https://www.openrotmg.org/2010/', '2010 Preview', 'Visit an earlier realm.']
+  ]);
+  assert.ok(existsSync(new URL('../dist/about/style.css', import.meta.url)));
+  assert.doesNotMatch(about, /<script|passionate players/);
   assert.ok(!home.includes('href="https://www.openrotmg.org/2010/"'));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
   assert.ok(branding.includes(`value="${site.href}branding/banner.png"`));
@@ -110,7 +119,6 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(footerNav.includes('href="https://discord.gg/EwZWNzzYwP">Discord</a>'));
   assert.ok(footerNav.includes('href="/#bug-report">Report bug</a>'));
   assert.doesNotMatch(footerNav, />Source</);
-  assert.ok(about.includes('href="https://github.com/OpenRotMG">Source Code</a>'));
   assert.doesNotMatch(footer, /<p>2% complete<\/p>/);
   const shareDescription = home.match(/<meta name="description" content="([^"]+)"/)[1];
   assert.ok(home.includes(`property="og:description" content="${shareDescription}"`));
@@ -124,7 +132,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(home, /<p class="alpha-warning" role="note">Open RotMG is in early alpha\. Saves will be reset before Beta release\.<\/p>\s*<div id="game"/);
   assert.equal(home.match(/class="alpha-warning"/g)?.length, 1);
   assert.doesNotMatch(footer, /Powered by Ruffle/);
-  assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012. No custom content, no donations, all open source. Development is from passionate players.'));
+  assert.ok(about.includes('Open RotMG is an authentic recreation of Realm of the Mad God as it was in 2012.'));
+  assert.ok(about.includes('No custom content, no donations, all open source.'));
   assert.doesNotMatch(about, /The client comes first|Reconstructing the game|class="disclaimer"|github.com\/OpenRotMG\/(website|client|server)|multiplayer server is not online/);
   assert.doesNotMatch(about, /supports guest Wizard movement|What works today/);
   assert.equal(JSON.parse(home.match(/type="application\/ld\+json">(.*?)<\/script>/s)[1]).url, site.href);
