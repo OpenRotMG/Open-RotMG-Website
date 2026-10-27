@@ -1673,12 +1673,13 @@
           "Ten existing towers across Classic Worlds 1/2/3 now receive Ghost Kings without repainting. Generated sites fill the remaining sampled request. Anchors and eroded-site bindings are engineered, not original placement proof: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "Ghost King Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. The real-World regression covers losses of 1-3 HP staying vulnerable and 4 admitting at the selected 300000 HP. The shared guard has an Ent native witness, not a Ghost low-damage native pair; historical entry clocks, full AI and original map configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
           "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982",
-          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183"
+          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183",
+          "Three later clean prepared native runs add SmallGroup/Mob/HugeMob, timeout actor cleanup, two-contributor private rewards versus a noncontributor, one committed pickup/no duplicate and Nexus reconnect/cold SQLite retention. Earlier blocked throws admitted fewer ghosts than requested; current walkability/ownership guards remain. These are scene-bound checks, not original populations or whole-feature acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821"
         ],
         "unknowns": [
           "Authenticated 123.5.1 phase clocks, Company vulnerability and Solo toss geometry; primary comparator values are not original certification.",
-          "Original tower population and Master/ordinary-ghost rewards, including eligibility and probabilities.",
-          "Native SmallGroup/Mob/HugeMob, timeout cleanup, multiplayer reward ownership and durable loot pickup remain unverified. Solo combat is a prepared bounded pass, not whole-feature acceptance."
+          "Original tower population and Ghost-family reward policy. Primary Actual King loot is shared and independently rolled per expanded tier candidate; current reconstruction uses private >500-damage eligibility and at most one candidate per successful tier. Nominal tier numbers alone do not establish equal distributions.",
+          "Prepared native evidence now covers all four evaluation branches and the bounded timeout/private-pickup checks. It does not certify every tower's blocked-landing admission, earned progression, unprotected survival, whole-Realm closure or target-era fidelity; no whole-feature grade is promoted."
         ],
         "sources": [
           {
@@ -1704,6 +1705,18 @@
           {
             "url": "https://web.archive.org/web/20120519002828id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-king",
             "label": "May 19, 2012 capture mixes build-115 numbers with evaluation-boss prose; prose revision unknown"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Decay.cs",
+            "label": "Primary Decay leaves the world without a combat death"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/LootDefs.cs",
+            "label": "Primary tier expansion and threshold semantics; nominal rates are not distribution equivalence"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs",
+            "label": "Primary shared/private roll and bag-owner allocation engine"
           }
         ]
       }
