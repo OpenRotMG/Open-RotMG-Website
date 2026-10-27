@@ -794,15 +794,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Week/Month/All Time lists display rank, name, class appearance, equipment and TotalFame; selection opens fame details; own absent character can be an unranked MyFameListElem. Historical periods, eligibility and tie policy unresolved.",
-        "differences": [],
+        "expected": "Week/Month/All Time show ordinal rank, name, class/tints, four equipped items and TotalFame; selecting a row opens its archived fame details. An absent own character can appear unranked as MyFameListElem.",
+        "differences": [
+          "Current reconstruction: 20 death characters, rolling 7/30-day windows, receipt total descending then death time/character ID ascending; multiple characters per account. Kithio's compiled endpoint instead groups by account, limits to 10 and uses a calendar-month interval. Trapped shares that query; modified7 uses 20 and 7/30 days. These are conflicting comparators, not established target deviations."
+        ],
         "unknowns": [
-          "Historical list size, rolling/calendar boundaries, tie policy, live/dead eligibility and retention."
+          "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
+          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/fame/list.cs",
+            "label": "Compiled Kithio death-list comparator; not authenticated original policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L776-L890",
+            "label": "Modified7 DbLegend duration, cap, expiry and Redis ordering"
+          },
+          {
+            "url": "https://konghack.com/post/56666",
+            "label": "September 28, 2011 quote of Build118.7 announcement (earlier version)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
+            "label": "February 8–15, 2013 Tournament of Fame summary; reward cutoff only"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
+            "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
           }
         ]
       }
@@ -2357,11 +2380,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "The LowForest Elf Wizard is level 3 with 200 HP, no DEF and a 5-damage Blue Bolt. Its family includes Archers, Swordsmen and Mages with distinct attacks.",
-        "differences": [],
+        "expected": "LowForest level-3 Wizard: 200 HP, 0 DEF and 5-damage Blue Bolt. Archer: 22 HP/2 DEF/Arrow9; Swordsman: 26/2/Blade13; Mage: 22/0/Cyan Magic4. All four selected definitions match pinned modified 7.0, not proof of original AI.",
+        "differences": [
+          "Primary Archer/Mage player orbit radius3 differs from period circle6. The repair selects nominal3 with the existing motor, no variance and retained camp/home/orphan guards. Native measured radii1.90 to2.64 are not exact primary kinematics; Swordsman protection/buzz/orbit also remain distinct.",
+          "Primary Wizard aim 0.3/0.5 is an angular-history multiplier, not probability. Current random full/no velocity lead, missing escort prediction and simplified cycle/idle/pace remain reconstruction.",
+          "Current full 2/4/1 escorts and living-role replenishment differ from primary initial 1/2/0 and lifetime birth counters. Caps 2/4/1 and 15/7/8-second intervals agree; initial two-tile formation, regional admission and 12-tile home leash are not recovered originals."
+        ],
         "unknowns": [
-          "Target predictive aim probability, movement/cadence, role limits, deployment and reward rates.",
-          "Target formation/radii, replenishment and drops."
+          "Exact 123.5.1 radius/variance, aim/retargeting, idle/altitude, deployment/density/SpawnProb and replenishment policy. November2011 Archer page says unavailable; May2012 lists it. Build118 labels do not establish target continuity.",
+          "Original reward probabilities, eligibility and Wizard attempt policy. Escort candidate pools follow primary HP4%/HP4%/MP3%, corroborated by period item types; one native drop cannot establish rates. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/812#issuecomment-6453769596"
         ],
         "sources": [
           {
@@ -2371,6 +2398,30 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L231-L322",
+            "label": "Compiled primary Elf table; read Orbit/Shoot/Spawn engine semantics separately"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Modified7.0: all four selected definitions normalize identically, not server AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120108050517id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-wizard",
+            "label": "Build118-labelled Wizard guide: stats, cycle, fans, caps and timers"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127225019id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-archer",
+            "label": "Additional earlier resource says unavailable, unlike May2012; deployment conflict"
+          },
+          {
+            "url": "https://web.archive.org/web/20111130070809id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-mage",
+            "label": "Additional build118 Mage resource: circle6 and MP3%; differs from primary radius3"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127225031id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-swordsman",
+            "label": "Period Sword: HP4%, blade13, buzz/circle/protection; not target-version certification"
           }
         ]
       }
