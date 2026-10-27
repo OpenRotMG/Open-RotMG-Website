@@ -6423,17 +6423,21 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Character-screen news has icons, text, relative dates and external links. Fame links open a saved character’s Fame details. The original personal feed’s production, ordering and retention rules remain unresolved.",
+        "expected": "Character news displays account-owned deaths with class, level, committed Fame and a native archived-character link. Kithio merges personal/public news newest-first and displays ten items; the selected client reads that order and fame:<character-id> payload.",
         "differences": [
-          "Character-screen news carries only up to ten Discord update posts with a generic news icon linking to the updates page. No personal or Fame-link items are produced, so Fame links never appear. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/723"
+          "Personal items are derived from retained death receipts. Modern Discord updates remain labeled and link to /updates/. Same-second ties prefer personal items, then descending character ID; this deterministic tie policy is reconstruction. The existing launcher denies external URLs, so Discord links remain blocked while internal Fame links open normally."
         ],
         "unknowns": [
-          "Original personal-news producer, deployment, retention, ordering, deletion and Fame-link behavior."
+          "Original production deployment, archive retention/deletion, same-second tie ordering and personal event types beyond deaths. Kithio is reconstruction evidence, not authenticated original server source."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs#L42-L88",
+            "label": "Pinned Kithio GetNews: account-owned deaths, awarded Fame, newest-first ten-item display"
           }
         ]
       }
