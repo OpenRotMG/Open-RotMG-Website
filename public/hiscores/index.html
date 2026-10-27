@@ -1,26 +1,41 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-  <meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
-  <script src="{{BASE}}backend.js" defer></script>
-<title>Hiscores · Open RotMG</title><meta name="description" content="Open RotMG star ranks, fame records and drop collections.">
+<script src="{{BASE}}backend.js" defer></script>
+<title>Hiscores · Open RotMG</title><meta name="description" content="Open RotMG players, equipment, fame records and collections.">
 <link rel="canonical" href="{{SITE_URL}}hiscores/"><link rel="icon" href="/amulet-of-resurrection.png">
 <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script>
 </head>
 <body><div class="site-shell"><main class="page-main">
-<h1>Hiscores</h1>
-<nav aria-label="Hiscore categories"><a href="?board=collection">Collection</a> · <a href="?board=total_fame">Total fame</a> · <a href="?board=base_fame">Living fame</a> · <a href="?board=stars">Stars</a> · <a href="?board=quests">Quests completed</a></nav>
-<h2 id="title">Collection</h2><p id="description"></p>
-<label for="search">Search</label> <input id="search" type="search" maxlength="80">
+<header class="hall-header">
+<div class="hall-mark" aria-hidden="true"><img src="/restoration/assets/player/knight.png" alt=""><img src="/restoration/assets/player/wizard.png" alt=""><img src="/restoration/assets/player/priest.png" alt=""></div>
+<p class="eyebrow">OPEN ROTMG'S ADVENTURERS</p><h1>Hiscores</h1><p id="population"></p>
+</header>
+<nav class="board-tabs" aria-label="Hiscore categories">
+<a href="?board=collection"><img src="/restoration/assets/player/loot-bag.png" alt="">Collection</a>
+<a href="?board=total_fame"><img src="icons/fame.png" alt="">Total fame</a>
+<a href="?board=base_fame"><img src="/restoration/assets/player/wizard.png" alt="">Living fame</a>
+<a href="?board=stars"><img src="icons/stars.svg" alt="">Stars</a>
+<a href="?board=quests"><img src="/restoration/assets/player/actual-ent-ancient.png" alt="">Quests</a>
+</nav>
 <p id="status" role="status">Loading…</p>
-<div class="scores"><table id="scores"><thead><tr><th>Rank</th><th>Player</th><th id="metric">Collection</th></tr></thead><tbody></tbody></table></div>
-<section id="collection" hidden><p id="collected"></p>
-<p><label for="sort">Sort by</label> <select id="sort">
-<option value="name">Name A–Z</option><option value="missing">Not obtained first</option><option value="recent">Recently obtained</option>
-</select></p><div id="items"></div></section>
+<section id="rankings" hidden>
+<label for="search" class="screen-reader">Search</label><input id="search" type="search" maxlength="80" placeholder="Search players…">
+<div class="scores"><table id="scores"><thead><tr><th scope="col">Rank</th><th scope="col">Player</th><th scope="col"><span class="screen-reader">Equipment</span></th><th scope="col" id="metric">Collection</th></tr></thead><tbody></tbody></table></div>
+</section>
+<section id="collection" hidden>
+<header class="collection-header"><div><a class="all-players" href="?board=collection">← All players</a><h2 id="title"></h2></div><div class="collection-total"><strong id="collected"></strong><progress id="collection-progress" aria-label="Collection progress"></progress></div></header>
+<div id="sets"></div>
+</section>
 </main><footer class="site-footer">
 <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
-<p>2012 Realm of the Mad God reimplementation</p>
-<nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div></body></html>
+<p>2012 Realm of the Mad God reimplementation</p><nav aria-label="Project">{{PROJECT_NAV}}</nav>
+</footer></div>
+<dialog id="item-dialog" aria-labelledby="item-name">
+<button id="item-close" type="button" aria-label="Close item details">×</button>
+<div id="item-preview" aria-hidden="true"></div><h2 id="item-name"></h2>
+<dl><dt>Obtained</dt><dd id="item-date"></dd><dt>Collected by</dt><dd id="item-owners"></dd></dl>
+</dialog>
+</body></html>

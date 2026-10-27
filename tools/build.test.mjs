@@ -37,7 +37,12 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(result.status, 0, result.stderr);
   const site = new URL(SITE_URL);
   if (!site.pathname.endsWith('/')) site.pathname += '/';
+  const customImage = `hiscores/social.png?v=${createHash('sha256').update(readFileSync(new URL('../public/hiscores/social.png', import.meta.url))).digest('hex').slice(0, 12)}`;
+  const sharedHiscores = readFileSync(new URL('../dist/hiscores/index.html', import.meta.url), 'utf8');
+  for (const key of ['og:image', 'twitter:image']) assert.ok(sharedHiscores.includes(`=\"${key}\" content=\"${site.href}${customImage}\"`));
+  assert.match(sharedHiscores, /Knight, Wizard and Priest beside Hiscores/);
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+  assert.ok(!home.includes(customImage));
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
   const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');

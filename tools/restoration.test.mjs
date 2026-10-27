@@ -30,6 +30,36 @@ test('client movement trust is intentional policy, not missing restoration or hi
   assert.equal(accepted(feature,evidence),false);
 });
 
+test('Trench coral receipts do not accept whole-dungeon geometry or oxygen',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:ocean-trench';
+  const refs=['source','regression','native'].map(kind=>'trench-coral-'+kind+'-e1483e3');
+  validateEvidence(data,evidence);
+  for(const [i,ref] of refs.entries()){
+    assert.equal(evidence.sources[ref].revision,'e1483e36bcd6231e89717f0b2bd38a1fc5e4b0a5');
+    assert.equal(evidence.sources[ref].kind,['source','regression','native'][i]);
+    assert.deepEqual(evidence.sources[ref].checks,[id]);
+    assert.deepEqual(Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([key])=>key),[id]);
+  }
+  for(const key of [id,id+':oxygen-route-and-air-pockets',id+':wounded-thessal-response'])assert.equal(evidence.results[key].status,'not-run');
+  const feature=data.features.find(f=>f.id===id);
+  assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+});
+
+test('Davy crate receipts preserve whole-feature and unrelated lamp acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['dungeons:davy-jones-s-locker','dungeons:davy-jones-s-locker:ship-trash-and-objects'];
+  const refs=['davy-crates-source-babcc25','davy-crates-regression-babcc25','davy-crates-native-babcc25'];
+  validateEvidence(data,evidence);
+  for(const [i,ref] of refs.entries()){
+    assert.equal(evidence.sources[ref].revision,'babcc25cb22556b655e8ca29536129dda3b3321a');
+    assert.equal(evidence.sources[ref].kind,['source','regression','native'][i]);
+    assert.deepEqual(evidence.sources[ref].checks,ids);
+    assert.deepEqual(Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([id])=>id),ids);
+  }
+  for(const id of ids)assert.equal(evidence.results[id].status,'not-run');
+  assert.equal(evidence.results['dungeons:davy-jones-s-locker:lantern-vulnerability-cycle'].status,'passed');
+  assert.equal(accepted(data.features.find(f=>f.id===ids[0]),evidence),false);
+});
+
 test('Leviathan cadence receipts do not accept the whole encounter',()=>{
   const data=catalogue(),evidence=ledger(),id='realm:leviathan',revision='9f79c958f5cf9a33877692d303ac3793d1ecbda3';
   const refs=['leviathan-cadence-source-9f79c95','leviathan-cadence-regression-9f79c95','leviathan-cadence-native-9f79c95'];
