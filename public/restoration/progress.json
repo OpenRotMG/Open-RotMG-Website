@@ -97,16 +97,41 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Rogues use daggers, cloaks and leather armor, and unlock at Archer level 5. Tiered cloaks grant timed invisibility; Planewalker also teleports. Each item has its own mana cost, cooldown and bonuses. Original stats and growth are defined in the reference client.",
+        "expected": "Rogues use daggers, cloaks and leather armor, and unlock at Archer level 5. Selected T0-T6 cloaks cost 60-85 MP, last 3-5.5 seconds and have 4-6.5-second cooldowns. Planewalker costs 100 MP, grants 5.5 seconds of invisibility and teleports up to 20 tiles with a 6.5-second cooldown. Stats and growth follow the selected client. Earlier/later guides support Limon acquisition, not an authenticated target-version rate.",
         "differences": [],
         "unknowns": [
-          "When do actions break invisibility or cause enemies to retarget?",
-          "Was Planewalker obtainable in 123.5.1, and how was it acquired?"
+          "Selected shooting code does not cancel invisibility; Kithio reconstructs timed expiry and excludes invisible players from ordinary enemy targeting. Exact 123.5.1 enemy-specific detection, ongoing radial attacks, hazard and transition exceptions remain unverified.",
+          "January/May 2012 and May 2013 guides bracket the target with Planewalker dropping from Limon. No authenticated September 2012 acquisition capture or target-version drop probability was found.",
+          "Earned Archer level-5 unlock and Rogue leveling/stat-growth journey remain outside the prepared cloak checks in issue 763."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Effects.cs",
+            "label": "Kithio IsVisibleToEnemy: reconstruction visibility gate, not authenticated original AI"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Selected-version client shooting and ability cooldown paths"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Modified 7.0 comparator agrees on all eight cloaks' costs, cooldowns, bonuses and activations"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114020015id_/http://forums.wildshadow.com:80/wiki/cloak-planewalker",
+            "label": "January 2012 capture: Planewalker stats and Limon acquisition; earlier than target"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+            "label": "May 2012 Sprite World guide lists Planewalker as a reward"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508120835id_/https://forums.wildshadow.com/wiki/cloak-planewalker",
+            "label": "May 2013 capture: matching Planewalker stats and Limon acquisition; later than target"
           }
         ]
       }
@@ -1556,18 +1581,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Target timers, branches and rewards remain unresolved.",
+        "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Primary branch/timeout parameters are documented; target-era clocks and rewards remain unresolved.",
         "differences": [
           "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551",
           "Compiled Kithio primary uses raw (19,13) after rotation without painting the birth cell. Current native fields/scenery survive strict habitat, walkability and ownership admission. Regression and prepared native checks are not earned combat or original placement/field authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/584",
           "Ten existing towers across Classic Worlds 1/2/3 now receive Ghost Kings without repainting. Generated sites fill the remaining sampled request. Anchors and eroded-site bindings are engineered, not original placement proof: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "Ghost King Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. The real-World regression covers losses of 1-3 HP staying vulnerable and 4 admitting at the selected 300000 HP. The shared guard has an Ent native witness, not a Ghost low-damage native pair; historical entry clocks, full AI and original map configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
-          "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982"
+          "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982",
+          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183"
         ],
         "unknowns": [
-          "Target timeout-release/cleanup policy, wave branches and phase timings.",
-          "Target population and rewards."
+          "Authenticated 123.5.1 phase clocks, Company vulnerability and Solo toss geometry; primary comparator values are not original certification.",
+          "Original tower population and Master/ordinary-ghost rewards, including eligibility and probabilities.",
+          "Native SmallGroup/Mob/HugeMob, timeout cleanup, multiplayer reward ownership and durable loot pickup remain unverified. Solo combat is a prepared bounded pass, not whole-feature acceptance."
         ],
         "sources": [
           {
@@ -1577,6 +1604,22 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Tower.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Compiled primary community table; branch and timeout parameters, not authenticated original clocks"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Shoot.cs#L90-L98",
+            "label": "Primary engine centers fixed-angle fans before emitting arrows"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified 7.0 client: six normalized Ghost-family definitions agree; not AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519002828id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-king",
+            "label": "May 19, 2012 capture mixes build-115 numbers with evaluation-boss prose; prose revision unknown"
           }
         ]
       }
@@ -1592,14 +1635,19 @@
         "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
         "differences": [
           "Server PR586 places 5 to 9 Graveyards per Realm on Low Sand and Low Plains, each with Crosses, grey and destructible walls and a Treasure Chest beside the Deathmage. A June 2012 wiki supplies the Low Plains site, chest tiers, skeleton item lists and the Deathmage's lack of drops; rates, site count, Low Sand and the yard layout come from a later community server: https://github.com/OpenRotMG/Open-RotMG-Server/pull/586",
-          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King."
+          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King.",
+          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics."
         ],
         "unknowns": [
           "Original graveyard or setpiece placement and ordinary Skeleton population.",
           "Deathmage’s relationship to the early Necromancer, population limits, closure eligibility and chest rewards.",
-          "Minion counts, timing, cleanup and drops."
+          "Original formation timing and speeds, minion populations/cleanup and drop rates."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Deathmage.cs#L15-L202",
+            "label": "Primary compiled community reconstruction: Deathmage orders and four skeleton roles, not original server timing"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Deathmage.cs#L17-L96",
             "label": "Community server comparison: rotmg_svr (2013)"
@@ -1768,11 +1816,12 @@
         "historical": "partial",
         "expected": "Tutorial encounter with Evil Chicken Minions and instructional progression, not a proven Realm closure boss. Target combat/progression details remain qualified.",
         "differences": [
-          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) restores wandering/following chickens and delayed Evil Chicken Minions using compiled Kithio as a reconstruction reference. Selected 123.5.1 chickens have no projectiles and do not shoot. Reproduction creates one owned minion per 60050 ms, capped at twelve living children; ownership, whole-instance cap and orphan retirement deliberately strengthen Kithio's unowned local-density behavior. This is not a Realm closure boss."
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) restores wandering/following chickens and delayed Evil Chicken Minions using compiled Kithio as a reconstruction reference. Selected 123.5.1 chickens have no projectiles and do not shoot. Reproduction creates one owned minion per 60050 ms, capped at twelve living children; ownership, whole-instance cap and orphan retirement deliberately strengthen Kithio's unowned local-density behavior. Current minions follow their owned parent to distance one; Kithio instead combines Wander with nearest-God Protect and distance-two/one hysteresis. This is not a Realm closure boss."
         ],
         "unknowns": [
-          "Original minion cadence, density/reset policy and movement details; Trapped instead uses three minions on a 2–5 second timer.",
-          "Exact 123.5.1 instructional/admission/reward fidelity beyond the selected client definitions and preserved tutorial script."
+          "Original minion cadence, density/reset policy and movement details remain unresolved. Trapped SpawnMinion creates one immediately, then one per 2–5 second timer below a local cap of three within radius five. Kithio Reproduce creates one after its default 60000-ms countdown, below twelve within radius ten. Neither authenticates the original server.",
+          "The May 19, 2012 Evil Chicken God page is marked build115 and lists minion HP20, conflicting with selected 123.5.1 and modified7.0 HP30. It corroborates no attacks, no drops and no god-kill credit, not exact 123.5.1 values or summon timing.",
+          "Exact 123.5.1 instructional/admission fidelity remains unverified. The selected six-step script ends at Kitchen Portal; modified7.0 changes coordinates and ends at Nexus Explanation Portal. The period Tutorial page describes solo admission, not proof of the current shared Tutorial policy."
         ],
         "sources": [
           {
@@ -1782,6 +1831,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Tutorial.cs",
             "label": "Compiled Kithio Tutorial behavior; reconstruction reference, not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225250id_/http://forums.wildshadow.com/wiki/realm-mad-god/evil-chicken-god",
+            "label": "May 19, 2012 capture, marked build115: harmless boss/no drops/no god credit; minion HP conflicts with selected XML"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified7.0: all four chicken definitions normalize identically to selected 123.5.1; not server AI evidence"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TutorialScriptCXML.dat",
+            "label": "Modified7.0 script comparator: different UI coordinates and final portal, not a replacement for the selected script"
           },
           {
             "url": "https://web.archive.org/web/20120519003024id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/tutorial",
