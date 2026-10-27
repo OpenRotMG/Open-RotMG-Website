@@ -476,11 +476,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mystics use staves, orbs and robes, and unlock at Huntress 20 and Necromancer 20. Tiered orbs apply Stasis, not the later Curse effect. Orb of Conflict also grants the user Speedy and Damaging. Enemy-specific Stasis immunity needs separate historical confirmation.",
+        "expected": "Mystics use staves, orbs and robes, unlocking at Huntress 20 and Necromancer 20. May 2012 guidance describes radius-3 Stasis and three seconds of immunity after expiry, without chain-Stasis. Selected tiered orbs last 3–8 seconds, without later Curse. Conflict costs 100 MP, applies five-second Stasis and 2.5-second self Speedy/Damaging, with +2 ATT/DEX. Build 123.5.1 removes immunity from Horrid Reapers, Crystal Prisoner Steeds/Clones, Minions of Oryx and Tomb Artifacts.",
         "differences": [],
         "unknowns": [
-          "Original Stasis radius, temporary immunity after Stasis and timer behavior.",
-          "Which enemies lost immunity in 123.5.1, and how was Orb of Conflict acquired?"
+          "Exact-boundary admission and tick/effect ordering in 123.5.1: Kithio uses strict radius comparison; current Rust includes the boundary.",
+          "Conflict acquisition continuity and drop rates: May 19, 2012 item guidance lists Skull Shrine and Phylactery Bearer, while the May 20 Lich guide lists only Orange Drake Egg for the Bearer. Compiled Kithio has no Bearer Conflict roll; its Skull Shrine behavior is not explicitly compiled. Current Shrine probability is reconstruction.",
+          "Earned native unlock, rare-item acquisition and restart journey remain unverified; prepared orb checks are scoped receipts, not whole-class acceptance."
         ],
         "sources": [
           {
@@ -490,6 +491,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528163147id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-mystic",
+            "label": "May 28, 2012 Mystic guide; immunity list predates 123.5.1"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519230012id_/http://forums.wildshadow.com/wiki/orb-conflict",
+            "label": "May 19, 2012 Conflict stats and disputed Bearer drop"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520011139id_/http://forums.wildshadow.com/wiki/realm-mad-god/lich",
+            "label": "May 20, 2012 Lich guide; conflicting Bearer loot list"
           }
         ]
       }
