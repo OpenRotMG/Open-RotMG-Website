@@ -502,7 +502,8 @@
         "expected": "Level20 HUD shows living Fame/next goal, distinct from account wallet/death awards; XP Booster must not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Target conversion/carry, booster interaction, record timing and terminal goal presentation."
+          "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
+          "Selected client accepts a nonpositive terminal goal without a denominator; original terminal wire sentinel and fresh native terminal-bar rendering remain unverified."
         ],
         "sources": [
           {
@@ -512,6 +513,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L165-L191",
+            "label": "Compiled primary comparator's linear conversion and class goals, not original-server proof"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html",
+            "label": "Later-edited April2012-path guide describes a conflicting curve; individual claims are not dated to123.5.1"
           }
         ]
       }
