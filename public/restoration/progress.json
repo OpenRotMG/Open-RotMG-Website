@@ -1317,8 +1317,8 @@
           "Intentional project policy: native movement trusts finite, in-bounds client positions, prioritizing responsiveness over server-side speed, timing and path enforcement. This is not missing restoration work or a confirmed historical deviation. Structural, lifecycle, ownership and persistence safeguards remain separate."
         ],
         "unknowns": [
-          "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
-          "Original server validation policy, lag tolerance and pause/options interactions."
+          "Exact original server validation and lag tolerances remain unauthenticated; community handlers and later player reports do not establish them.",
+          "Bounded movement receipts do not cover every stat/condition, world boundary or death/reconnect transition. Native pause/unpause safety remains tracked by condition:21 (#953)."
         ],
         "sources": [
           {
@@ -1328,6 +1328,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
             "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L504-L582",
+            "label": "123.5.1 mirror: normalized camera-relative input and MOVE-bound sinking"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as#L208-L216",
+            "label": "123.5.1 input: camera rotation requires enabling its ordinary option"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as#L529-L604",
+            "label": "Modified 7.0 comparator, not independent 2012 server evidence"
           }
         ]
       }
