@@ -336,13 +336,23 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Trap damage, radius and condition duration vary by item: T5 lasts 5.5 seconds and T6 lasts six seconds. Coral Venom Trap Paralyzes.",
-        "differences": [],
+        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Tiered traps Slow; Coral Venom Trap Paralyzes. T5 lasts 5.5 seconds and T6 six seconds. The May 2012 guide documents 1.5-second flight and half-radius triggering; compiled Kithio blasts all full-radius enemies with ordinary defense.",
+        "differences": [
+          "Reconstruction uses ten seconds from landing and inclusive radius boundaries. The May 2012 guide says twenty seconds; Kithio's twentieth pulse can expire around 9.5 seconds and its area check is strict. Exact target-build continuity is unproven."
+        ],
         "unknowns": [
-          "Historical generic default condition, arming/trigger geometry, lifetime and owner/world lifecycle.",
-          "Target multiple-enemy trigger semantics."
+          "Exact 123.5.1 lifetime, timer/trigger boundary and owner-disconnect/map-change continuity. Preserve current stricter owner/world cancellation.",
+          "Earned native unlock/progression, reconnect/restart and whole-class acceptance remain unverified; bounded receipts are separate."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Trap.cs",
+            "label": "Compiled Kithio trap reconstruction, not original server proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142113id_/http://forums.wildshadow.com/wiki/realm-mad-god/traps",
+            "label": "May 27, 2012 trap guide, table labelled 122.3.2"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
