@@ -530,7 +530,7 @@
         "expected": "Sorcerers use wands, scepters and robes, and unlock at Necromancer 20 and Assassin 20. Scepters chain Lightning between enemies. Fulmination deals 180 damage to up to seven targets, Slows for three seconds and costs 65 MP.",
         "differences": [],
         "unknowns": [
-          "Original first-target and jump targeting, damage falloff, walls and mana spending when no enemy is found."
+          "Exact 123.5.1 cone/range boundaries, jump radius, wall and immune-target exceptions remain unresolved. The May 24, 2012 guide says nearest enemy in a cursor-direction cone and approximately eight-tile jumps; current reconstruction uses a 90-degree cone, inclusive fourteen-tile first range and ten-tile jumps without line-of-sight checks, closer to modified 7.0 than Kithio's cursor-centered six-tile/angular selection and caster-limited eight-tile jumps. Neither comparator is recovered original server code. Original empty-cast MP spending is supported by the comparators, not independently established by the period particle description."
         ],
         "sources": [
           {
@@ -540,6 +540,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234328id_/http://forums.wildshadow.com/wiki/realm-mad-god/scepters",
+            "label": "May 24, 2012 capture: nearest cone target, unrepeated approximately eight-tile jumps and T0-T6 values; page labels itself Build 119.0.3"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+            "label": "August 25 and September 5, 2012 test notes: Fulmination changes from 80 to 65 MP, not a production targeting specification"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_X15.0.0",
+            "label": "June 21, 2017 rework explicitly introduces chain falloff, Wisdom scaling and a narrower arc; do not backport"
           }
         ]
       }
@@ -589,16 +601,41 @@
         "expected": "Persistent level progression to20 with class growth/caps and XP feedback; preserve production spawn-specific reward exceptions.",
         "differences": [],
         "unknowns": [
-          "Production curve/growth distributions, sharing policy and full Castle/Ship/bat/satellite reward mapping."
+          "Exact 123.5.1 curve, growth RNG/correlation, XP rounding and sharing radius remain unproven. Selected definitions and all thirteen class growth/cap sets agree with pinned modified7.0; compiled Kithio uses contributor-weighted XP, whereas current policy and modified7.0 share nearby XP. The June20,2011 design article supports proximity sharing, not the exact target radius.",
+          "Full spawn-specific reward continuity remains unresolved. June13,2012/build123.3.0 removes Ruthven-bat XP and lists selected VIT caps/scaled growth; August15/build123.4.4 removes respawning Castle armor/Ship skull XP; September7/build123.5.1 restores small Oryx-minion/satellite rewards without exact coefficients. Current Ruthven formations use selected zero-XP forms, while ordinary room bat0x1727 has multiplier1. Preserve spawn distinctions, not blanket summoned-enemy/bat exemptions. Research disposition: server issue777."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
-            "label": "Build 123.5.1 release notes"
+            "label": "September7,2012: small Oryx-minion and Golem-satellite XP, no exact amounts"
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.4",
-            "label": "Build 123.4.4 release notes"
+            "label": "August15,2012: respawning Castle armor/Ship skull rewards removed"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
+            "label": "June13,2012 production: Ruthven bats give no XP; selected VIT caps and scaled growth"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L194-L220",
+            "label": "Compiled reconstruction reference: inclusive growth/caps and HP/MP refill"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PlayersCXML.dat",
+            "label": "Modified7.0 comparator: all thirteen selected starting stat/cap/growth sets match"
+          },
+          {
+            "url": "https://lostgarden.com/2011/06/20/realm-of-the-mad-god-released/",
+            "label": "June20,2011 design article: nearby players receive shared XP"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build108",
+            "label": "November6,2010: ten kills per level except some bosses, not exact123.5.1 parameters"
+          },
+          {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
           }
         ]
       }
@@ -2007,12 +2044,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mobile roaming encounter with charge/orbit movement and ring-versus-directed attacks; name alone does not imply children or transformations.",
-        "differences": [],
+        "expected": "Flying MidPlains level-5 quest: 360 HP, 4 DEF, White Flame 15 damage/6.5 tiles per second/1100ms. Mobile orbit/charge encounter with directed shots and five-shot rings, not dependent minions or transformations.",
+        "differences": [
+          "Kithio alternates circle3000ms/dart1600ms, with two fixed five-shot rings; Trapped randomly selects ring/direct cooldown branches. Current movement uses bounded home-return and simplified charge/orbit clocks rather than exact Kithio Follow/terrain/jitter semantics.",
+          "Current loot retains four ordered first-success 15% tier candidates; compiled Kithio independently expands nine equipment/potion candidates. Kithio Reproduce counts its host toward radius100/density1, so it does not justify dependent births. Our area-budget population/refill and these loot rules remain qualified reconstructions, not original probabilities."
+        ],
         "unknowns": [
-          "Original attack choices and probabilities, timing, movement, habitat density and rewards."
+          "Exact 123.5.1 AI timing/choice frequencies, movement/terrain continuity, density/refill and expanded reward pools/rates remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/804#issuecomment-6452664788"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L305-L339",
+            "label": "Compiled Kithio comparator; Shoot/Follow/Reproduce and compiled LootDefs/Loots inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120429185456id_/http://forums.wildshadow.com/wiki/realm-mad-god/swarm",
+            "label": "April29,2012: orbit/charge, five-shot ring, four drop tiers; no numeric rates/timing"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0: complete Swarm definition matches selected123.5.1; not AI authority"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L284-L304",
             "label": "Community server comparison: rotmg_svr (2013)"
@@ -2050,11 +2102,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying MidForest Horned Drake is level 8 with 1270 HP, 4 DEF and a 30-damage Fire Missile. Its Baby has 700 HP and a 20-damage projectile. This family is distinct from temporary companion drakes and White Dragons.",
-        "differences": [],
+        "expected": "MidForest Flying parent0x945:1270HP/4DEF/level8, Fire Missile30/speed65/1500ms; Baby0x946:700HP/0DEF, Fire Missile20/speed65/1300ms. Selected definitions match recovered123.5.1 and modified7.0 MidCXML. The June2,2012 wiki supports alternating single fire and one40-degree triple, not repeated triple bursts.",
+        "differences": [
+          "Bounded reconstruction keeps one lifetime owned Baby, Trapped-style HP<400 retreat/1000ms fire and no protective-parent response. Compiled Kithio instead uses HP<65%,1500ms unharmed fire, stopped wounded fire, a1500ms call and nearby-type orders; modified7.0 is related evidence, not independent corroboration.",
+          "Current public/private Trapped reward channels differ from compiled Kithio public rates. Neither comparator establishes official123.5.1 probabilities."
+        ],
         "unknowns": [
-          "Did the protective-parent response exist in 123.5.1?",
-          "Original Baby health threshold, attacks, spawn density, parent death/orphan behavior and rewards."
+          "Did protective-parent ordering exist in123.5.1? Original Baby threshold, wounded/orphan behavior, cross-parent search, movement and exact attack timing remain unresolved; the Baby wiki resolves to May25,2013 Release13.2.0, not2012.",
+          "Original family density/SpawnProb selection, XP formula, reward eligibility/allocation and probabilities. Native scoped combat does not certify wounded/orphan response, earned entry or full reward acquisition; remaining work is tracked in server issue806."
         ],
         "sources": [
           {
@@ -2068,6 +2123,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L601-L678",
+            "label": "Compiled primary parent/Baby state machines; exact historical continuity unresolved"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602014200id_/http://forums.wildshadow.com/wiki/realm-mad-god/horned-drake",
+            "label": "June2,2012 capture: single/triple phases, stats and reward categories"
           }
         ]
       }
@@ -2105,15 +2168,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "LowSand level4 King0x60d,270 HP/2 DEF, Blade15; Archer/Sorcerer escorts and distinct Sorcerer projectile forms. Period production supported, exact caps and 'conventions' fix unresolved.",
-        "differences": [],
+        "expected": "LowSand level4 King0x60d,270 HP/2 DEF, Blade15; orbiting Archer and protecting Sorcerer escorts with two distinct Sorcerer projectile forms. Original population and reward policy remain partial.",
+        "differences": [
+          "Nominal Archer orbit inputs3.25/speed8 use the existing bounded collision motor, not exact primary kinematics; the build118-labelled guide says radius6–7. Clear-space circulation and exact radial fidelity are separate checks. Current direct aim omits primary angular-history prediction0.5; nearest-leader acquisition and home/ownership guards also differ.",
+          "Current initial2 Archers/3 Sorcerers and alive-role replenishment at10s/8s differ from primary floor(max*0.5) initialization and lifetime birth counters. King wiki T2 armor normalizes to selected T3 under the existing all39-armor tier+1 audit; it is not a demonstrated item-tier conflict."
+        ],
         "unknowns": [
-          "Target caps, cadence, movement, probability tables and meaning of build121 'conventions' fix."
+          "Exact123.5.1 population/density/SpawnProb policy, orbit radius/variance, prediction/retargeting and King close-range idle/altitude policy (primary StayAbove15 versus period min-height31). Sorcerer5000ms/range10 and400ms/range5 agree with primary and period guide, not authenticated server code.",
+          "Target reward probabilities and eligibility/attempts; December2011 percentages predate build121. Escort sources list Magic Potion only; one native drop cannot establish rates.",
+          "January11,2012 build121 notes say 'Fix to Sandsman King conventions' without explanation. Archer-page Elf Wizard misidentification is a lead, not proof. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/808#issuecomment-6453078555"
         ],
         "sources": [
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L421-L458",
+            "label": "Compiled primary comparator; lifetime births, orbit radius3.25, angular-history prediction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120429185854id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-king",
+            "label": "Build118-labelled King guide: caps2/3, timers10s/8s; wiki T2 armor normalizes to selected T3"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530183934id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-archer",
+            "label": "Additional Archer resource: orbit6–7, aim0.5, MP only and prior Elf Wizard affiliation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531033707id_/http://forums.wildshadow.com/wiki/realm-mad-god/sandsman-sorcerer",
+            "label": "Additional Sorcerer resource: both attack channels,6/5 protection and MP only"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Selected stats/projectiles agree with modified7.0; not original server AI/deployment"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "label": "January11,2012 release-note claim; conventions fix unexplained"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
