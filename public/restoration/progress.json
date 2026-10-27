@@ -601,16 +601,41 @@
         "expected": "Persistent level progression to20 with class growth/caps and XP feedback; preserve production spawn-specific reward exceptions.",
         "differences": [],
         "unknowns": [
-          "Production curve/growth distributions, sharing policy and full Castle/Ship/bat/satellite reward mapping."
+          "Exact 123.5.1 curve, growth RNG/correlation, XP rounding and sharing radius remain unproven. Selected definitions and all thirteen class growth/cap sets agree with pinned modified7.0; compiled Kithio uses contributor-weighted XP, whereas current policy and modified7.0 share nearby XP. The June20,2011 design article supports proximity sharing, not the exact target radius.",
+          "Full spawn-specific reward continuity remains unresolved. June13,2012/build123.3.0 removes Ruthven-bat XP and lists selected VIT caps/scaled growth; August15/build123.4.4 removes respawning Castle armor/Ship skull XP; September7/build123.5.1 restores small Oryx-minion/satellite rewards without exact coefficients. Current Ruthven formations use selected zero-XP forms, while ordinary room bat0x1727 has multiplier1. Preserve spawn distinctions, not blanket summoned-enemy/bat exemptions. Research disposition: server issue777."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
-            "label": "Build 123.5.1 release notes"
+            "label": "September7,2012: small Oryx-minion and Golem-satellite XP, no exact amounts"
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.4",
-            "label": "Build 123.4.4 release notes"
+            "label": "August15,2012: respawning Castle armor/Ship skull rewards removed"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
+            "label": "June13,2012 production: Ruthven bats give no XP; selected VIT caps and scaled growth"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L194-L220",
+            "label": "Compiled reconstruction reference: inclusive growth/caps and HP/MP refill"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PlayersCXML.dat",
+            "label": "Modified7.0 comparator: all thirteen selected starting stat/cap/growth sets match"
+          },
+          {
+            "url": "https://lostgarden.com/2011/06/20/realm-of-the-mad-god-released/",
+            "label": "June20,2011 design article: nearby players receive shared XP"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build108",
+            "label": "November6,2010: ten kills per level except some bosses, not exact123.5.1 parameters"
+          },
+          {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
           }
         ]
       }
