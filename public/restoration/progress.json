@@ -530,7 +530,7 @@
         "expected": "Sorcerers use wands, scepters and robes, and unlock at Necromancer 20 and Assassin 20. Scepters chain Lightning between enemies. Fulmination deals 180 damage to up to seven targets, Slows for three seconds and costs 65 MP.",
         "differences": [],
         "unknowns": [
-          "Original first-target and jump targeting, damage falloff, walls and mana spending when no enemy is found."
+          "Exact 123.5.1 cone/range boundaries, jump radius, wall and immune-target exceptions remain unresolved. The May 24, 2012 guide says nearest enemy in a cursor-direction cone and approximately eight-tile jumps; current reconstruction uses a 90-degree cone, inclusive fourteen-tile first range and ten-tile jumps without line-of-sight checks, closer to modified 7.0 than Kithio's cursor-centered six-tile/angular selection and caster-limited eight-tile jumps. Neither comparator is recovered original server code. Original empty-cast MP spending is supported by the comparators, not independently established by the period particle description."
         ],
         "sources": [
           {
@@ -540,6 +540,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234328id_/http://forums.wildshadow.com/wiki/realm-mad-god/scepters",
+            "label": "May 24, 2012 capture: nearest cone target, unrepeated approximately eight-tile jumps and T0-T6 values; page labels itself Build 119.0.3"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+            "label": "August 25 and September 5, 2012 test notes: Fulmination changes from 80 to 65 MP, not a production targeting specification"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_X15.0.0",
+            "label": "June 21, 2017 rework explicitly introduces chain falloff, Wisdom scaling and a narrower arc; do not backport"
           }
         ]
       }
