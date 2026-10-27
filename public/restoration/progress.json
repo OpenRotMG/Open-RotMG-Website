@@ -5681,12 +5681,17 @@
         "differences": [],
         "unknowns": [
           "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified."
+          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified.",
+          "Original server distance cutoff for damage sounds from quest targets outside local view."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Character.as",
+            "label": "Selected-version Character.damage plays hurt/death audio without a distance check"
           }
         ]
       }
