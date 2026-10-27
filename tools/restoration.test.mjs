@@ -31,6 +31,15 @@ test('Priest tome receipts do not accept earned progression or original drop rat
   for(const source of sources)assert.deepEqual(source.checks,[id]);
 });
 
+test('Mystic receipts preserve unresolved acquisition and whole-class acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:mystic',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.match(feature.audit.expected,/three seconds of immunity/);assert.match(feature.audit.unknowns.join(' '),/Phylactery Bearer.*drop rates|drop rates.*Phylactery Bearer/);
+  assert.deepEqual(evidence.results[id].evidence.map(ref=>evidence.sources[ref].kind).sort(),['native','regression','source']);
+  for(const ref of evidence.results[id].evidence){assert.deepEqual(evidence.sources[ref].checks,[id]);assert.match(evidence.sources[ref].limitations,/not|Not/);}
+});
+
 test('client movement trust is intentional policy, not missing restoration or historical sign-off',()=>{
   const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='realm:walk-and-dodge');
   validateEvidence(data,evidence);
