@@ -2095,11 +2095,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying MidForest Horned Drake is level 8 with 1270 HP, 4 DEF and a 30-damage Fire Missile. Its Baby has 700 HP and a 20-damage projectile. This family is distinct from temporary companion drakes and White Dragons.",
-        "differences": [],
+        "expected": "MidForest Flying parent0x945:1270HP/4DEF/level8, Fire Missile30/speed65/1500ms; Baby0x946:700HP/0DEF, Fire Missile20/speed65/1300ms. Selected definitions match recovered123.5.1 and modified7.0 MidCXML. The June2,2012 wiki supports alternating single fire and one40-degree triple, not repeated triple bursts.",
+        "differences": [
+          "Bounded reconstruction keeps one lifetime owned Baby, Trapped-style HP<400 retreat/1000ms fire and no protective-parent response. Compiled Kithio instead uses HP<65%,1500ms unharmed fire, stopped wounded fire, a1500ms call and nearby-type orders; modified7.0 is related evidence, not independent corroboration.",
+          "Current public/private Trapped reward channels differ from compiled Kithio public rates. Neither comparator establishes official123.5.1 probabilities."
+        ],
         "unknowns": [
-          "Did the protective-parent response exist in 123.5.1?",
-          "Original Baby health threshold, attacks, spawn density, parent death/orphan behavior and rewards."
+          "Did protective-parent ordering exist in123.5.1? Original Baby threshold, wounded/orphan behavior, cross-parent search, movement and exact attack timing remain unresolved; the Baby wiki resolves to May25,2013 Release13.2.0, not2012.",
+          "Original family density/SpawnProb selection, XP formula, reward eligibility/allocation and probabilities. Native scoped combat does not certify wounded/orphan response, earned entry or full reward acquisition; remaining work is tracked in server issue806."
         ],
         "sources": [
           {
@@ -2113,6 +2116,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L601-L678",
+            "label": "Compiled primary parent/Baby state machines; exact historical continuity unresolved"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602014200id_/http://forums.wildshadow.com/wiki/realm-mad-god/horned-drake",
+            "label": "June2,2012 capture: single/triple phases, stats and reward categories"
           }
         ]
       }
