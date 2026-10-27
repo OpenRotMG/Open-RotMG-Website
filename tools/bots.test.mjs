@@ -31,6 +31,7 @@ class Node {
   get value() {return this.selected;}
   replaceChildren(...children) {this.children = children;for (const child of children) child.parent = this;if (this.tag === 'select') this.value = children[0]?.value ?? '';}
   appendChild(child) {this.children.push(child);child.parent = this;if (this.tag === 'select' && this.selected === undefined) this.value = child.value;return child;}
+  removeChild(child) {this.children.splice(this.children.indexOf(child), 1);child.parent = null;return child;}
   setAttribute(key, value) {this.attributes[key] = value;}
   addEventListener(type, callback) {this.listeners[type] = callback;}
   removeEventListener(type) {delete this.listeners[type];}
@@ -180,6 +181,22 @@ test('locations update in place from SSE and catalogue without selection, URL or
   assert.equal(h.calls.filter(call => call.path.endsWith('/stream')).length, 1);
   h.send({}, {data: {type: 'openrotmg-bot-select', bot: 'Alpha', target: 'Beta'}});await flush();
   assert.equal(h.window.path, '?bot=Beta');assert.equal(picker.value, 'Beta');assert.match(h.iframe().src, /\/Beta\/view$/);
+});
+
+test('retired guest options stay bounded without replacing live or selected identities', async t => {
+  const h = harness(t, '?bot=Alpha');await flush();
+  const picker = h.nodes['#bot'], alpha = picker.children[0], iframe = h.iframe();
+  for (let i = 0; i < 20; i++) {
+    h.lists.push(json(bots(['Alpha', `Guest${i}`])));await h.advance(10000);
+    assert.equal(picker.children.length, 2);
+    assert.equal(picker.children[0], alpha);assert.equal(h.iframe(), iframe);
+  }
+  h.lists.push(json(bots(['Guest20'])));await h.advance(10000);
+  assert.equal(picker.children.length, 2);
+  assert.equal(picker.value, 'Alpha');assert.equal(alpha.textContent, 'Alpha — Offline');
+  picker.value = 'Guest20';picker.listeners.change({target: picker});
+  h.lists.push(json(bots(['Guest20'])));await h.advance(10000);
+  assert.deepEqual(picker.children.map(option => option.value), ['Guest20']);
 });
 
 test('location age, missing worlds, catalogue failures and offline bots are explicit, never guessed', async t => {
