@@ -631,7 +631,8 @@
         "expected": "VIT accelerates HP and WIS MP recovery; target follows 123.3 VIT redesign. Sick disables healing. Exact equations and complete condition matrix unresolved.",
         "differences": [],
         "unknowns": [
-          "Historical exact equations, bleeding tick behavior, pause/fraction reset and temporary-stat ceiling interactions."
+          "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7; undated mixed-era wiki gives 0.5+0.06*WIS and HP 1+0.12*VIT rather than comparator 1+VIT/8.",
+          "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
         ],
         "sources": [
           {
