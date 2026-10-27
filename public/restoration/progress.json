@@ -546,7 +546,7 @@
         "differences": [],
         "unknowns": [
           "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
-          "Selected client accepts a nonpositive terminal goal without a denominator; original terminal wire sentinel and fresh native terminal-bar rendering remain unverified."
+          "Selected client uses -1 in its local terminal class-quest helper and accepts nonpositive HUD goals; the original server's terminal wire sentinel remains unverified."
         ],
         "sources": [
           {
