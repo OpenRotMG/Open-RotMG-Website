@@ -212,8 +212,9 @@
         "expected": "Warriors use swords, helms and heavy armor, and unlock at Rogue level 5. Tiered helms grant a nearby Berserk aura and Speedy to the user. Helm of the Juggernaut grants Armored for 4.5 seconds instead of Speedy.",
         "differences": [],
         "unknowns": [
-          "How overlapping buffs refresh and which players are included at an aura’s boundary.",
-          "Original acquisition of each helm."
+          "Original exact-boundary and overlap-refresh policy: the reconstruction includes distance 4 and preserves later expiry, unlike Kithio's strict half-range and replacement timers.",
+          "When the older tier-dependent aura ranges changed to the selected client's uniform range 4.",
+          "Complete 123.5.1 helm acquisition and probabilities. May/June 2012 pages identify tiered boss drops, Oryx 2 for Great General, and Sphinx/Hermit for Juggernaut, but do not prove target-build continuity."
         ],
         "sources": [
           {
@@ -223,6 +224,22 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
+            "label": "January 11, 2012 Build 121: Warrior speed boost becomes self-only"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604224541id_/http://forums.wildshadow.com/wiki/realm-mad-god/helms",
+            "label": "June 4, 2012 capture: older helm ranges, not selected target values"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520004511id_/http://forums.wildshadow.com/wiki/helm-juggernaut",
+            "label": "May 20, 2012 Juggernaut: Sphinx/Hermit drops, before duration reduction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142316id_/http://forums.wildshadow.com/wiki/helm-great-general",
+            "label": "May 27, 2012 Great General: Oryx 2 acquisition"
           }
         ]
       }
