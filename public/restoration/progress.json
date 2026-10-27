@@ -917,12 +917,16 @@
         ],
         "unknowns": [
           "Original terrain and population inventory, placement, biome thresholds and map dimensions.",
-          "A 2048-square export request does not establish the dimensions of deployed maps."
+          "A 2048-square export request does not establish deployed dimensions; the generator author's 2025 seed candidates also leave river/biome variants and downstream processing unresolved."
         ],
         "sources": [
           {
             "url": "https://simblob.blogspot.com/2012/02/polygon-map-generation-faq.html",
             "label": "2012 map-generation notes"
+          },
+          {
+            "url": "https://www.redblobgames.com/x/2544-rotmg-map-seeds/",
+            "label": "Generator author's 2025 candidate-seed investigation; approximate silhouettes, not recovered full maps"
           },
           {
             "url": "https://web.archive.org/web/20130522030032/https://forums.wildshadow.com/wiki/realm-mad-god/maps-builds-106-123",
@@ -1238,7 +1242,9 @@
             "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -1251,7 +1257,8 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule."
+              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule.",
+              "Compiled Kithio Oryx counts initially spawned root bodies, whereas this server budgets ordinary family bodies and birth headroom. Matching area divisors would not establish equivalent encounter density: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
             ],
             "unknowns": [],
             "sources": [],
@@ -1264,7 +1271,9 @@
             "acceptance": "Clear groups near and far from players and compare recovery. Check shared budgets, no spawn on players, and that finite heroes are not resurrected by ordinary refill.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Compiled Kithio refills below 75% and culls above 150% on its population clock. This server shares the refill threshold but uses bounded family-body budgets rather than the same root-body/culling policy. Original recovery parameters and near/far gameplay remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "populations"
@@ -2464,16 +2473,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Bandit Leader is level 2 with 280 HP, 2 DEF and a 9-damage Blade, accompanied by ordinary Bandits with distinct Blade forms. Period sources show grenades and retreat; their exact parameters remain unresolved.",
-        "differences": [],
+        "expected": "Selected ShoreSand Leader: level 2, 280 HP/2 DEF, Blade 9/60/800ms; Bandits: 50 HP/1 DEF, Blades 9/600ms and 8/1000ms at speed 60. May 30, 2012 wiki text labelled build 122.0.1 confirms area attacks and low-health retreat, not exact 123.5.1 AI.",
+        "differences": [
+          "Research at server 0e8b12c5: current <=80HP retreat keeps attacks active; compiled Kithio uses strict <45%, attack-free 12s retreat and nearby follower escape orders. Older Trapped uses strict <80 without cease-fire. Neither authenticates original parameters.",
+          "Current three initial/five living followers with 8s refill differ from primary Spawn's two initial/four lifetime births and Trapped's once-only three to five. Current radius-2 grenades on a concurrent 2500ms channel differ from primary radius-1.4 phased throws; both comparators use damage12/range5/1500ms impact delay.",
+          "Current older nominal loot pool uses ordered first-success single-item selection. Primary has additional T2 armor, different potion rates and independent p/n candidate rolls with contributor bag recipients. Identity-only differences separate the modified7.0 follower; both complete selected objects match retained recovered123.5.1 definitions."
+        ],
         "unknowns": [
-          "Original retreat threshold, cease-fire and recovery behavior, orders, grenade parameters, group sizes and drops.",
-          "Later sources disagree on the retreat threshold."
+          "Original123.5.1 retreat boundary, cease-fire/recovery/orders, grenade parameters, follower movement/count/refill and all reward rates/allocation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/816#issuecomment-6454205406 . Prepared gameplay receipts are separate from whole-feature and historical acceptance."
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl2-bandits.jpg",
-            "label": "2012 player screenshot"
+            "label": "June-path screenshot: Leader, Bandits and red throw trail; not numeric AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530183826id_/http://forums.wildshadow.com/wiki/realm-mad-god/bandit-leader",
+            "label": "May30,2012 capture; text labelled122.0.1, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L66-L162",
+            "label": "Compiled primary comparator; engine and historical conflicts remain qualified"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
