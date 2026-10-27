@@ -336,16 +336,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Paladins use swords, seals and heavy armor, and unlock at Knight 20 and Priest 20. The original Wisdom cap is 75. Tiered seals grant Healing and Damaging auras, not modern maximum-HP buffs. Seal of Blasphemous Prayer also grants the user Invulnerable for 1.4 seconds.",
+        "expected": "Paladins use swords, seals and heavy armor, and unlock at Knight 20 and Priest 20. Selected Wisdom cap is 75. Seals grant nonstacking Healing and Damaging, not maximum-HP buffs. The April 2012 guide and compiled Kithio engine support 28 additional HP/s. Blasphemous Prayer grants only its caster Invulnerable for 1.4 seconds; the May 2012 Pentaract guide lists it as tower-corpse loot.",
         "differences": [],
         "unknowns": [
-          "Historical aura refresh/overlap and Healing tick policy.",
-          "Blasphemous Prayer target-production obtainability."
+          "Exact 123.5.1 Healing tick phase, overlap shortening, boundary and recipient exceptions remain reconstruction-qualified. Current full XML radius and longer-deadline refresh differ from Kithio's half-radius/replacement semantics.",
+          "Period Pentaract obtainability is supported, but exact target-production continuity, eligibility and Prayer probability remain unverified; the current 0.004 bonus is not historically authenticated."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012: approximately 28 HP/s, tier-independent strength and Prayer values; older caps conflict"
+          },
+          {
+            "url": "https://web.archive.org/web/20120511185740id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "May 2012: Prayer on the tower-corpse drop list after all five towers fall"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Effects.cs#L16-L26",
+            "label": "Compiled community reconstruction: Healing adds 28 HP/s"
           }
         ]
       }
@@ -757,7 +769,7 @@
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7. June2,2012 community measurements cautiously suggest Wizard MP0.5+0.06*WIS and pre-redesign HP1+0.05*VIT; mixed-era wiki later gives HP1+0.12*VIT. Neither settles post-redesign exact rates.",
-          "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
+          "The April 2012 Paladin guide and compiled Kithio engine support +28 Healing HP/s. Exact tick phase, Bleeding rate, Sick+Healing precedence, pause/re-entry fractions and temporary-cap loss remain qualified; broader recovery history is tracked in server issue 782."
         ],
         "sources": [
           {
@@ -775,6 +787,10 @@
           {
             "url": "https://web.archive.org/web/20120602011846id_/http://forums.wildshadow.com/wiki/realm-mad-god/character-stats-explained",
             "label": "June 2, 2012 capture: qualified Wizard measurements before VIT redesign"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012 guide: Healing adds about 28 HP/s independently of seal tier"
           }
         ]
       }
@@ -6491,10 +6507,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Healing restores HP over time, capped at maximum HP, and is distinct from instant healing. Its original rate and interactions with Sick and Bleeding remain unresolved.",
+        "expected": "Healing restores HP over time, capped at maximum HP, and is distinct from instant healing. The April 2012 Paladin guide and compiled Kithio engine support 28 additional HP/s; exact tick phase and condition interactions remain qualified.",
         "differences": [],
         "unknowns": [
-          "Original healing rate; the community comparison uses 28 HP/s.",
+          "Exact 123.5.1 tick phase and continuity are not authenticated by the approximate period rate or comparator arithmetic.",
           "Interactions with ordinary regeneration, Sick, Bleeding and pause, plus duration and cure rules."
         ],
         "sources": [
@@ -6505,6 +6521,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
+            "label": "April 2012 Paladin guide: about 28 HP/s, independent of seal tier"
           }
         ]
       }
