@@ -119,16 +119,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Archers use bows, quivers and leather armor, and unlock at Priest level 5. T0–T2 quivers Slow; T3–T6 Paralyze. Quiver of Thunder Dazes instead. Each quiver has its own projectile, mana cost and bonuses.",
+        "expected": "Archers use bows, quivers and leather armor, and unlock at Priest level 5. T0-T2 quivers Slow for 3 seconds; T3-T6 Paralyze for 3 seconds. Tiered quivers pierce enemies and cover, but not walls. Quiver of Thunder instead Dazes for 4 seconds, does not pierce enemies or cover, costs 100 MP and has a six-second cooldown. Period June 2012 pages document Thunder and its Greater Nature Sprite drop source. Selected projectile collision uses an axis-aligned half-tile radius and remembers each pierced target once.",
         "differences": [],
         "unknowns": [
-          "Was Quiver of Thunder obtainable in 123.5.1?",
-          "Original projectile hitboxes and multi-hit rules."
+          "The May 2012 Archer page lists Vitality cap 75 and growth 0-2, conflicting with selected 123.5.1 cap 40 and growth 0-1; selected definitions remain authoritative.",
+          "Thunder was obtainable by June 2012, but no independently version-labelled 123.5.1 drop or exact original probability was verified. Selected target definitions support continuity; compiled Kithio's 0.002 is reconstruction evidence, not an original rate."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120614024531id_/http://forums.wildshadow.com/wiki/quiver-thunder",
+            "label": "June 14, 2012 capture: Thunder stats and Greater Nature Sprite acquisition; exact target build not shown"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610072150id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-archer",
+            "label": "June 10, 2012 capture: tiered piercing versus Thunder's single-target, cover-blocked projectile"
+          },
+          {
+            "url": "https://web.archive.org/web/20120521013853id_/http://forums.wildshadow.com/wiki/realm-mad-god/archer",
+            "label": "May 21, 2012 capture, last updated 123.0.0: Priest level 5 unlock; conflicting Vitality values"
+          },
+          {
+            "url": "https://web.archive.org/web/20120525080008id_/http://forums.wildshadow.com/node/19766",
+            "label": "Chedd's December 6, 2011 test-server announcement; not production deployment proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Projectile.cs#L132-L169",
+            "label": "Compiled reconstruction engine: half-tile box and hit-target memory; safety policy not imported"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L3921-L4147",
+            "label": "Modified 7.0 comparator: all eight quivers normalize identically to selected definitions; not independent history"
           }
         ]
       }
@@ -335,16 +359,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Necromancers use staves, skulls and robes, and unlock at Wizard 20 and Priest 20. Skulls damage nearby enemies and heal allies. Cracked Crystal Skull costs 140 MP. Whether Endless Torment was obtainable remains unresolved.",
-        "differences": [],
+        "expected": "Necromancers use staves, skulls and robes, and require Wizard 20 and Priest 20. Selected Cracked Crystal Skull costs 140 MP. May 2012 guides corroborate defense-reduced, remaining-HP-capped damage healing each nearby ally in full within the skull radius around the caster. The June 12, 2012 Build 123.3 announcement reduces Vitality from 50 to the selected cap of 30.",
+        "differences": [
+          "Modified 7.0 Crystal costs 120 MP and Endless Torment uses ID 0x911; retain selected 140 MP and 0xc0e. Comparator agreement is not independent historical acceptance."
+        ],
         "unknowns": [
-          "Historical nominal/actual-damage healing, recipient center/radius and overheal/defense rules.",
-          "Endless Torment target deployment."
+          "Exact 123.5.1 boundary/condition exceptions and continuity from the May 2012 guides remain unverified; maximum-HP healing caps are reconstructed from compiled Kithio.",
+          "Endless Torment ordinary acquisition at 123.5.1 remains unresolved. The May 19, 2012 guide calls it unreleased; later documentation dates obtainability to April 2014 Build 20.0.1, not proof of continuous absence."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L433-L445",
+            "label": "Compiled Kithio reconstruction: actual damage heals around caster, not independent historical proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519204924id_/http://forums.wildshadow.com/wiki/realm-mad-god/skulls",
+            "label": "May 19, 2012 capture: DEF, remaining-HP cap, full per-recipient healing and Crystal 140 MP"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519012136id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-necromancer",
+            "label": "May 19, 2012 guide: caster-centered skull radius and unreleased Endless Torment"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 Build 123.3 announcement: Necromancer Vitality cap 30; captured June 2013"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Skull%20of%20Endless%20Torment",
+            "label": "Mixed-era page dates obtainability to Build 20.0.1; not a target-era absence proof"
           }
         ]
       }
@@ -472,13 +518,25 @@
         "expected": "The chooser has thirteen classes. Availability depends on saved best levels for each prerequisite class; locked choices explain the requirements. Creation uses an available character slot and the original class definitions.",
         "differences": [],
         "unknowns": [
-          "Whether selected starting/unlock definitions exactly match target production deployment and initial account records.",
-          "Original authoritative record-persistence timing and creation placement."
+          "Authenticated production continuity and original initial-account records; the selected thirteen definitions match this server and the June 4, 2012 unlock tree.",
+          "Original server record-commit cadence and exact spawn coordinates/world-zero behavior; the selected client distinguishes first-play/resume flags from chooser CREATE, but the original server mapping is not recovered."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604094747id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/classes",
+            "label": "June 4, 2012 capture: thirteen-class unlock tree"
+          },
+          {
+            "url": "https://web.archive.org/web/20120521012206id_/http://forums.wildshadow.com/wiki/realm-mad-god/trickster",
+            "label": "May 21, 2012 capture: Assassin20 and Paladin20; earlier stat caps differ"
+          },
+          {
+            "url": "https://web.archive.org/web/20120522024631id_/http://forums.wildshadow.com/wiki/realm-mad-god/sorcerer",
+            "label": "May 22, 2012 capture: Necromancer20 and Assassin20"
           }
         ]
       }
@@ -520,7 +578,7 @@
         "differences": [],
         "unknowns": [
           "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
-          "Selected client accepts a nonpositive terminal goal without a denominator; original terminal wire sentinel and fresh native terminal-bar rendering remain unverified."
+          "Selected client uses -1 in its local terminal class-quest helper and accepts nonpositive HUD goals; the original server's terminal wire sentinel remains unverified."
         ],
         "sources": [
           {
@@ -611,7 +669,7 @@
           "Server PR452 scores each class by its best committed death total, including death bonuses, while living characters count base Fame. This follows the modified 7.0 comparator's greater-of-current-and-final rule; a 2021 base-only rule is later, and 123.5.1 BestFame timing is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/452"
         ],
         "unknowns": [
-          "Whether target BestFame uses living, base or death-total Fame and when stars are awarded."
+          "Exact 123.5.1 BestFame publication timing (live threshold, save, reconnect or death) remains unrecovered. Kithio/Trapped save CurrentFame without a death-total classstats update; modified 7.0 saves max(current,final). A revised April-2012 blog preserved in April 2014 supports bonus-inclusive stars but cannot date each claim to 123.5.1. See server issue780 for the research disposition."
         ],
         "sources": [
           {
@@ -621,6 +679,22 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L458-L476",
             "label": "Modified 7.0 comparator: BestFame keeps the greater of current and final Fame, not official 2012 code"
+          },
+          {
+            "url": "https://github.com/ViciousFate/rotmg-redis/blob/de251d3e0cfb59b30eb74572e2d8ed87f9e14afa/rotmg_cli_master/src/com/company/assembleegameclient/util/_Z_B_.as#L20-L55",
+            "label": "Recovered client threshold, inclusive comparison and greater-of-best/current goal; agrees with exact selected-SWF extraction"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs#L503-L605",
+            "label": "Compiled primary comparator: SaveCharacter uses CurrentFame; Death computes final Fame for payout but does not update classstats"
+          },
+          {
+            "url": "https://web.archive.org/web/20140419055548id_/http://anticosmic.blogspot.com/2012/04/fame-farming.html",
+            "label": "April 19, 2014 capture of revised April 24, 2012 article: 272 base/802 total toward stars; not a dated 123.5.1 timing specification"
+          },
+          {
+            "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=200210&count=20&maxlength=0&enddate=1625097600",
+            "label": "Official June 29, 2021 Star Ranks announcement introduces base Fame without death bonuses; later than target"
           }
         ]
       }
@@ -708,16 +782,20 @@
       "icon": "assets/player/gravestone.png",
       "audit": {
         "implementation": "present",
-        "historical": "unreviewed",
-        "expected": "Deaths leave an in-world gravestone. Original appearance by character tier, labels, contents, placement and lifetime still need historical sources.",
+        "historical": "partial",
+        "expected": "Named gravestones: level 1 lasts 30 seconds, levels 2–19 one minute, level 20 five minutes; one through eight maxed base stats select eight further forms lasting until world reset. Selected definitions specify the eleven textures and name labels.",
         "differences": [],
         "unknowns": [
-          "Original gravestone tiers, labels, placement, contents and expiry."
+          "Independent period corroboration of exact-coordinate placement and empty/nonlootable contents; exact 123.5.1 continuity beyond the February/June 2012 guides. Comparator support is not official-server recovery. Tracked in server issue 784."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/test/build121.4.1",
-            "label": "Build 121.4.1 test-server notes"
+            "url": "https://web.archive.org/web/20120606073802id_/http://forums.wildshadow.com/wiki/realm-mad-god/gravestones",
+            "label": "June 6, 2012 guide: named eleven-tier graves and lifetimes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L466-L531",
+            "label": "Compiled Kithio grave reconstruction, not official server recovery"
           }
         ]
       }
@@ -760,7 +838,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand55,987, MidForest165,843 and LowSand89,202 cells. HighPlains remains unassigned because this reconstruction has no snowy support. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -775,7 +854,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand42,840, HighPlains29,588, MidForest111,439 and LowSand209,576 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -790,7 +870,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand36,173, HighPlains22,117, MidForest139,317 and LowSand165,467 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -939,7 +1020,8 @@
             "historical": "partial",
             "differences": [
               "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns.",
-              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665"
+              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665",
+              "PR997 adds NEW 64-tile cardinal sand bands and 48-tile Light Grass forest fringes away from shore; snowy ground106 supplies HighPlains only in Worlds 2 and 3. Loaded-population checks observe all 13 named family roots across their supported habitats, within existing limits. Ground, object, config, region and all 124 authored sites are preserved. Original boundaries and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": ["Whether other classic ground/tier assignments match the target."],
             "sources": [
@@ -1137,21 +1219,33 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Level-oriented quest selection and delayed client directional guidance, with completion/reselection distinct from XP and realm closure.",
+        "expected": "Level-oriented quest guidance, distinct from XP and realm closure. Selected 123.5.1 client: 4s initial delay and randomized 5–15s after completion.",
         "differences": [
           "Server PR262 offers each quest monster only inside a per-kind character-level window: mostly within 5 levels of the quest level for low-level wandering quests, as RealmEye's later wiki states, and from a per-kind minimum up to level 20 for bosses. The pinned 2013 community comparator's windows are similar but not identical. Server PR306 treats level-less quest bosses (Archdemon Malphas, Davy Jones, Oryx the Mad God 1) as matching every character level (https://github.com/OpenRotMG/Open-RotMG-Server/pull/306). Neither is recovered 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/262"
         ],
         "unknowns": [
-          "Original tie-breaking and evaluation cadence, and exact client/server completion and reselection timing."
+          "Original tie-breaking, cadence and level-less boss priority remain unknown. The period no-other-quests exception is unimplemented; target-build continuity is unverified. See quest-research-source-0af5f97 for Kithio versus current timing."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "label": "2012-02-14 Build 122.0.1: closest level; tie/cadence unspecified"
+          },
+          {
+            "url": "https://web.archive.org/web/20120225084118id_/http://forums.wildshadow.com/wiki/realm-mad-god/quest-monsters",
+            "label": "2012-02-25 guide: one quest"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/map/Quest.as",
+            "label": "123.5.1 Quest.as (client only)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs",
+            "label": "Compiled Kithio comparator: distance penalty"
           },
           {
             "url": "https://www.realmeye.com/wiki/quest-monsters",
-            "label": "RealmEye quest-monster table: later wiki, quest level plus or minus 5"
+            "label": "RealmEye quest-monster table: later wiki, quest level plus or minus 5; not original-policy proof"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Leveling.cs",
@@ -1223,8 +1317,8 @@
           "Intentional project policy: native movement trusts finite, in-bounds client positions, prioritizing responsiveness over server-side speed, timing and path enforcement. This is not missing restoration work or a confirmed historical deviation. Structural, lifecycle, ownership and persistence safeguards remain separate."
         ],
         "unknowns": [
-          "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
-          "Original server validation policy, lag tolerance and pause/options interactions."
+          "Exact original server validation and lag tolerances remain unauthenticated; community handlers and later player reports do not establish them.",
+          "Bounded movement receipts do not cover every stat/condition, world boundary or death/reconnect transition. Native pause/unpause safety remains tracked by condition:21 (#953)."
         ],
         "sources": [
           {
@@ -1234,6 +1328,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
             "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L504-L582",
+            "label": "123.5.1 mirror: normalized camera-relative input and MOVE-bound sinking"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as#L208-L216",
+            "label": "123.5.1 input: camera rotation requires enabling its ordinary option"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as#L529-L604",
+            "label": "Modified 7.0 comparator, not independent 2012 server evidence"
           }
         ]
       }
@@ -1302,10 +1408,11 @@
         "historical": "partial",
         "expected": "Damaging ground, terrain speed, progressive Sinking, Push and protective map objects/bridges. Oxygen belongs to Ocean Trench; distinguish cosmetic liquids and curing pools.",
         "differences": [
-          "Merged PR373 fixes same-square ground-damage cooldown (>500ms); hidden-map-field recovery remains unverified and environmental-hazard acceptance incomplete. https://github.com/OpenRotMG/Open-RotMG-Server/pull/373"
+          "Merged PR373 fixes same-square ground-damage cooldown (>500ms); hidden-map-field recovery remains unverified and environmental-hazard acceptance incomplete. https://github.com/OpenRotMG/Open-RotMG-Server/pull/373",
+          "PR1013 inventories all 173 selected ground definitions and adds native bridge/lava and two-axis Push checks. Prepared Tomb Sinking and Lab curing checks pass separately. Kithio-derived Invulnerable protection conflicts with the modified 7.0 ground handler; original server policy is unresolved. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1013"
         ],
         "unknowns": [
-          "Complete target tile inventory, progressive Sinking/curing pools, protective-equipment exceptions and original-server admission policy."
+          "Original server report admission and Invulnerable exceptions; hidden map fields/placement (#721), non-native progressive Sinking, acid/catwalk combinations and untested reverse-conveyor/whirlpool variants. Native movement authority remains intentional project policy (#757), not a request for rejection caps."
         ],
         "sources": [
           {
@@ -1315,6 +1422,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L542-L580",
+            "label": "Selected-client ground damage, Push and progressive Sinking; not original server admission"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
+            "label": "Build-specific blue-pool transformation fix; calendar date not authenticated"
           }
         ]
       }
@@ -1413,7 +1528,8 @@
           "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512",
           "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554",
           "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
-          "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987"
+          "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987",
+          "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
@@ -6924,11 +7040,12 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "HighSand Minotaur0x646 retains selected stats and all three Blade definitions. Compiled Kithio supports an idle trigger, short fast-follow lunge, six aimed volleys, staggered 12/6-shot rings and a pause; exact target timing remains unverified.",
         "differences": [
-          "Source-supported combat is restored in server PR729. Current classic maps1–3 have no HighSand habitat, so Minotaurs cannot naturally spawn there; this combat change does not alter habitat or population."
+          "Combat implementation accepted in a natural native encounter: https://github.com/OpenRotMG/Open-RotMG-Server/pull/729#issuecomment-6435809300",
+          "NEW HighSand bands restore natural placement in the World 1 to 3 engineering reconstructions; original boundaries and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
         ],
         "unknowns": [
           "Exact 123.5.1 timing remains unproven: Trapped instead randomly selects single shots, 20-shot rings and locked charges using only projectile0. Kithio is the selected reconstruction reference, not authenticated official AI.",
