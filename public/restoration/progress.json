@@ -1780,11 +1780,12 @@
         "historical": "partial",
         "expected": "Tutorial encounter with Evil Chicken Minions and instructional progression, not a proven Realm closure boss. Target combat/progression details remain qualified.",
         "differences": [
-          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) restores wandering/following chickens and delayed Evil Chicken Minions using compiled Kithio as a reconstruction reference. Selected 123.5.1 chickens have no projectiles and do not shoot. Reproduction creates one owned minion per 60050 ms, capped at twelve living children; ownership, whole-instance cap and orphan retirement deliberately strengthen Kithio's unowned local-density behavior. This is not a Realm closure boss."
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) restores wandering/following chickens and delayed Evil Chicken Minions using compiled Kithio as a reconstruction reference. Selected 123.5.1 chickens have no projectiles and do not shoot. Reproduction creates one owned minion per 60050 ms, capped at twelve living children; ownership, whole-instance cap and orphan retirement deliberately strengthen Kithio's unowned local-density behavior. Current minions follow their owned parent to distance one; Kithio instead combines Wander with nearest-God Protect and distance-two/one hysteresis. This is not a Realm closure boss."
         ],
         "unknowns": [
-          "Original minion cadence, density/reset policy and movement details; Trapped instead uses three minions on a 2–5 second timer.",
-          "Exact 123.5.1 instructional/admission/reward fidelity beyond the selected client definitions and preserved tutorial script."
+          "Original minion cadence, density/reset policy and movement details remain unresolved. Trapped SpawnMinion creates one immediately, then one per 2–5 second timer below a local cap of three within radius five. Kithio Reproduce creates one after its default 60000-ms countdown, below twelve within radius ten. Neither authenticates the original server.",
+          "The May 19, 2012 Evil Chicken God page is marked build115 and lists minion HP20, conflicting with selected 123.5.1 and modified7.0 HP30. It corroborates no attacks, no drops and no god-kill credit, not exact 123.5.1 values or summon timing.",
+          "Exact 123.5.1 instructional/admission fidelity remains unverified. The selected six-step script ends at Kitchen Portal; modified7.0 changes coordinates and ends at Nexus Explanation Portal. The period Tutorial page describes solo admission, not proof of the current shared Tutorial policy."
         ],
         "sources": [
           {
@@ -1794,6 +1795,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Tutorial.cs",
             "label": "Compiled Kithio Tutorial behavior; reconstruction reference, not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225250id_/http://forums.wildshadow.com/wiki/realm-mad-god/evil-chicken-god",
+            "label": "May 19, 2012 capture, marked build115: harmless boss/no drops/no god credit; minion HP conflicts with selected XML"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified7.0: all four chicken definitions normalize identically to selected 123.5.1; not server AI evidence"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TutorialScriptCXML.dat",
+            "label": "Modified7.0 script comparator: different UI coordinates and final portal, not a replacement for the selected script"
           },
           {
             "url": "https://web.archive.org/web/20120519003024id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/tutorial",
