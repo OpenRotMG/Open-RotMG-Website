@@ -4261,7 +4261,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. The exact historical winner-selection rule is not recovered.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. Private potion recipients remain eligible for successful equipment drops. The exact historical winner-selection rule is not recovered.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
@@ -4278,7 +4278,7 @@
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L50-L99",
-            "label": "Compiled Kithio contributor allocation; shared purple bags and bound duplication/leak deliberately not retained"
+            "label": "Compiled Kithio allocation; shared purple bags, bound duplication/leak and potion-triggered gear loss deliberately not retained"
           },
           {
             "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
@@ -4287,6 +4287,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
             "label": "Modified 7.0 client: one owner account gates container interaction; not a 123.5.1 allocation specification"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/loot/Loots.cs",
+            "label": "Later 7.0 reconstruction publishes equipment independently of private rewards; not original drop-rate evidence"
           }
         ],
         "checks": [
@@ -4294,7 +4298,7 @@
             "id": "gear:loot-bag-presentation",
             "name": "Bag rarity, packaging and permissions",
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
-            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions.",
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions. Successful equipment must survive simultaneous private potion rolls for solo and grouped contributors.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
