@@ -40,13 +40,24 @@ export function intentionRows(intent) {
       !Number.isSafeInteger(goal.id) || goal.id <= 0 || !text(goal.label) ||
       !(goal.current === null && goal.target === null && goal.unit === null ||
         Number.isFinite(goal.current) && goal.current >= 0 && Number.isFinite(goal.target) && goal.target > 0 && text(goal.unit)))) throw new Error('malformed main goal');
+  // The server prefixes steps with Activity; per-tick targets and reflex details are not useful overview text.
+  const activities = {
+    busy: 'Finishing an action', surviving: 'Staying safe', trading: 'Trading with other players',
+    'sorting gear': 'Sorting equipment', restocking: 'Getting health potions',
+    'at an event': 'Taking part in a realm event', 'using items': 'Using a potion',
+    socializing: 'Meeting other players', banking: 'Sorting items in the Vault',
+    'hanging out in Nexus': 'Spending time in the Nexus',
+    'answering a call': 'Responding to another player', adventuring: 'Exploring and fighting',
+  };
+  const activity = intent.step.split(': ', 1)[0];
+  const summary = intent.step === 'Return to Nexus before logout' ? 'Returning to the Nexus to log out'
+    : Object.hasOwn(activities, activity) ? activities[activity] : null;
+  if (summary === null) throw new Error(`unknown bot activity: ${activity}`);
   return [
     ['Trying to', goal === null ? 'No main goal selected.' : goal.label],
     ...(goal !== null && goal.current !== null ? [['Progress', `${goal.current} / ${goal.target} ${goal.unit}`]] : []),
     ['How', intent.plan],
-    [{progress: 'Current step', necessary: 'Required interruption', optional: 'Optional detour'}[intent.mode], intent.step],
-    ['Why', intent.reason],
-    ...(intent.resume === null ? [] : [['Then', intent.resume]]),
+    ['Recent activity', summary],
   ];
 }
 
@@ -75,18 +86,33 @@ export function start({document, window, backend, now = Date.now}) {
     const {frame, age_ms: age} = update;
     if (!(frame === null || (frame && typeof frame === 'object')) || !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
     session.received = now();session.telemetry = 'receiving';
-    $('#intention').replaceChildren();
-    if (frame === null) $('#intention-status').textContent = 'No decision intention received.';
-    else {
+    if (frame === null) {
+      session.activity = session.rendered = undefined;
+      $('#intention').replaceChildren();$('#intention-status').textContent = 'No decision intention received.';
+    } else {
       try {
-        const rows = intentionRows(frame.intent), list = document.createElement('dl');
-        list.setAttribute('data-mode', frame.intent.mode);
-        list.replaceChildren(...rows.flatMap(([label, value]) => {
-          const term = document.createElement('dt'), description = document.createElement('dd');
-          term.textContent = label;description.textContent = value;return [term, description];
-        }));
-        $('#intention').replaceChildren(list);$('#intention-status').textContent = '';
+        if (!Number.isSafeInteger(frame.character) || frame.character <= 0) throw new Error('invalid character identity');
+        const rows = intentionRows(frame.intent), identity = `${frame.character}:${frame.intent.goal?.id}`;
+        const activity = rows.at(-1);
+        // This is a recent overview, not a per-decision debug readout; goal progress still updates immediately.
+        if (session.activity?.identity !== identity || now() - session.activity.at >= 10000) {
+          session.activity = {identity, at: now(), text: activity[1]};
+        }
+        activity[1] = session.activity.text;
+        const rendered = JSON.stringify([identity, rows]);
+        if (session.rendered !== rendered) {
+          const list = document.createElement('dl');
+          list.setAttribute('data-intention-id', identity);
+          list.setAttribute('data-activity-at', session.activity.at);
+          list.replaceChildren(...rows.flatMap(([label, value]) => {
+            const term = document.createElement('dt'), description = document.createElement('dd');
+            term.textContent = label;description.textContent = value;return [term, description];
+          }));
+          $('#intention').replaceChildren(list);session.rendered = rendered;
+        }
+        $('#intention-status').textContent = '';
       } catch (error) {
+        session.activity = session.rendered = undefined;$('#intention').replaceChildren();
         $('#intention-status').textContent = `Intentions unavailable: ${error.message}.`;console.error(error);
       }
     }
