@@ -631,7 +631,7 @@
         "expected": "VIT accelerates HP and WIS MP recovery; target follows 123.3 VIT redesign. Sick disables healing. Exact equations and complete condition matrix unresolved.",
         "differences": [],
         "unknowns": [
-          "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7; undated mixed-era wiki gives 0.5+0.06*WIS and HP 1+0.12*VIT rather than comparator 1+VIT/8.",
+          "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7. June2,2012 community measurements cautiously suggest Wizard MP0.5+0.06*WIS and pre-redesign HP1+0.05*VIT; mixed-era wiki later gives HP1+0.12*VIT. Neither settles post-redesign exact rates.",
           "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
         ],
         "sources": [
@@ -646,6 +646,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602011846id_/http://forums.wildshadow.com/wiki/realm-mad-god/character-stats-explained",
+            "label": "June 2, 2012 capture: qualified Wizard measurements before VIT redesign"
           }
         ]
       }
