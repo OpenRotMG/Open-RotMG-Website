@@ -2827,7 +2827,8 @@
         "historical": "partial",
         "expected": "Mountain flying White Demon HP1000/DEF12, armor-piercing MultiHit45-damage shot.122.0.1 paired-swipes wording is qualified by intervening122.3.2 nerf; continuity to123.5.1 is unproven.",
         "differences": [
-          "Server PR413 gives White Demon its own 10-tile firing acquisition, with pursuit 9 and stop 4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413"
+          "Server PR413 originally introduced a 10-tile firing acquisition with pursuit9/stop4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413",
+          "Selected White Demon reconstruction now uses compiled-Kithio immediate attempts,500ms argument/550ms fixed-tick intervals,20-degree gaps,Follow10/7/8 and angular-history aim. Trapped1000ms/15-degree comparator conflicts;exact123.5.1 is not certified. Abyss and selected projectile definitions remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/blob/86437418f9a5b888b0ce8cae04ce6292a9add41c/src/world/gods.rs"
         ],
         "unknowns": [
           "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy.",
@@ -2845,6 +2846,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
             "label": "2013 community White Demon: Chasing(6, 9, 4) and a 10-tile predictive attack, not official server code"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "Compiled Kithio White Demon comparator;engine timing/history semantics qualified,not official123.5.1"
           }
         ]
       }
@@ -2992,7 +2997,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms use target assets; their original distribution and exact AI/reward policies remain unsettled.",
+        "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms span 11 tiles including both rails and use target assets; their original distribution and exact AI/reward policies remain unsettled.",
         "differences": [],
         "unknowns": [
           "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
@@ -3026,7 +3031,7 @@
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/maps/wmap%27s/snakepit%20treasure%20test.wmap",
-            "label": "Inactive later treasure-test template: walkable rails and wooden button platform, not the embedded production map"
+            "label": "Inactive later treasure-test template: 11 tiles including both rails and a wooden button platform, not the embedded production map"
           },
           {
             "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
@@ -3041,15 +3046,17 @@
           {
             "id": "dungeons:snake-pit:diggable-route-and-cover",
             "name": "Diggable tunnels, grates and cover",
-            "expected": "Diggable walls, grates, permanent walls and Stheno's cover have different roles. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
+            "expected": "Diggable tunnels and mixed boss cover retain permanent shelter around Stheno; grates spawn snakes. Each boss-cover group leaves four clear tiles to the outer wall. Intact walls hide unopened rooms on the minimap; ordinary digging reveals the route without requiring movement.",
             "acceptance": "Open a natural route with ordinary damage. Check terrain and object discovery, stationary observers, preserved exploration, collision, pit-snake lifecycle, endpoint floors and that no required path becomes an unbreakable dead end.",
             "implementation": "present",
             "historical": "partial",
             "differences": [
+              "Boss cover at 5eec5726 has twelve-cell tapered shoulders and a recessed outer face instead of rectangular bars. Four-tile rim clearance and the separate material policy remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/commit/5eec5726be7b22ce9e50c54f3c9b4f33e247a502",
+              "North/south boss cover mixes breakable blocks with permanent shelter; side cover stays permanent. The material split remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/673",
               "Room-based discovery at 7107bf39 stops terrain and object publication at intact wall faces and void, then refreshes stationary observers after digging. Previously explored terrain, player markers and quest arrows remain. This repairs issue630 without claiming the original visibility algorithm: https://github.com/OpenRotMG/Open-RotMG-Server/commit/7107bf39480361f3d75dcb58a0f9a693977b62df"
             ],
             "unknowns": [
-              "Exact 123.5.1 maze probabilities, boss-room size and cover footprints remain unrecovered. Period maps show a notched-square boss room; the later static community map is a size comparator, not the original generator.",
+              "Exact 123.5.1 maze probabilities, boss-room size, cover footprints and material pattern remain unrecovered. Period maps show a notched-square boss room; the later static community map has mixed north/south cover and permanent sides, not the original generator.",
               "Exact original sight algorithm and discovery radius remain unverified. The room-based reconstruction is scoped to Snake Pit, not every world."
             ],
             "sources": [
@@ -3063,7 +3070,7 @@
               },
               {
                 "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/snakepit.wmap",
-                "label": "Active later community map: permanent boss-cover walls, not an original generator"
+                "label": "Active later community map: twelve-cell notched cover, mixed north/south blocks and permanent sides, not an original generator"
               },
               {
                 "url": "https://www.youtube.com/watch?v=gWLn80rNsxU&t=120",
@@ -3130,7 +3137,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entrance, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
+        "expected": "Earned entrance, client-rendered star background, characteristic traversable terrain/native sprites, Limon/elements, rewards, completion and exit; selected Limon HP9000/DEF16.",
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
           "Issue #618 replaces the repeating eight-tile conveyor grid with seeded overlapping bands of varied widths and lengths, informed by a later community map. The original generator and pattern probabilities remain unrecovered.",
@@ -3150,6 +3157,14 @@
           {
             "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
             "label": "May 2012 Sprite World guide: floor variants, trees and native gods"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_H_Z_/Background.as",
+            "label": "Recovered 123.5.1 client: background 1 selects StarBackground; corroborated by modified 7.0"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_17.0.0",
+            "label": "September 2013 release notes: missing Sprite World stars are a known hardware-acceleration bug; later corroboration"
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/worlds/maps/spriteworld.wmap",
@@ -4254,7 +4269,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death and shares unbound gear among contributors without private awards; private potion ownership remains separate.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. The exact historical winner-selection rule is not recovered.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
@@ -4271,7 +4286,15 @@
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L50-L99",
-            "label": "Compiled Kithio contributor allocation; bound duplication/leak deliberately not retained"
+            "label": "Compiled Kithio contributor allocation; shared purple bags and bound duplication/leak deliberately not retained"
+          },
+          {
+            "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
+            "label": "2012 player account: purple god sacks can only be looted by their owner"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
+            "label": "Modified 7.0 client: one owner account gates container interaction; not a 123.5.1 allocation specification"
           }
         ],
         "checks": [
@@ -4279,7 +4302,7 @@
             "id": "gear:loot-bag-presentation",
             "name": "Bag rarity, packaging and permissions",
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
-            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify per-chunk appearance, lossless contents, ownership, permissions and expiry. Do not infer undocumented bag generation from XML alone.",
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
@@ -5039,13 +5062,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Players request a trade, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
+        "expected": "Players request a trade, receive a private chat confirmation, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
           "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
           "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
         ],
         "unknowns": [
-          "Original server-side name/rank restrictions, distance, request timeout, item eligibility and confirmation delay."
+          "Original server-side name/rank restrictions, distance, request timeout, item eligibility, confirmation delay and exact requester-confirmation wording."
         ],
         "sources": [
           {
@@ -5059,6 +5082,10 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Trade.cs#L42-L75",
             "label": "2013 community trade handler: name-resolved requests with no distance check, not official server code"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
+            "label": "Compiled Kithio reconstruction: separate requester chat confirmation after recipient notification; not official server wording"
           }
         ]
       }
