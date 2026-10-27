@@ -454,6 +454,15 @@
       "limitations": "Prepared invincible level-20 Priest/Rogue fixtures, independent Graveyards rather than matched map seeds; not earned discovery. Native owner isolation between nearby Deathmages was not tested. No original movement/timing or whole-encounter acceptance; failed attempts and queue timeouts remain failed.",
       "checks": ["realm:deathmage"]
     },
+    "deathmage-formations-paired-native-56a6186": {
+      "kind": "native",
+      "revision": "56a618630c216048695440dc29ff02e794eae171",
+      "date": "2026-10-27",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1004#issuecomment-6449887080",
+      "method": "QA03c93898ff8741db88e4bb91fe3a6134 passed nine checks with two native Rogues in one Graveyard. One invisible player leaves the visible companion holding the attacking controller. Supported parallel ordinary cloak inputs make both invisible, returning Deathmage/owned children to Waiting/Protect; ordinary expiry resumes attacking and both characters remain alive. No ERROR events; 46 slow-tick warnings retained.",
+      "limitations": "Prepared invincible fixtures and one Deathmage, not native overlapping-owner or earned-discovery acceptance. Earlier QA452 failed when the first cloak expired before the separately paused second-cast observation; its failure remains retained, not acceptance. No runtime/clock/assertion weakening or historical-fidelity claim.",
+      "checks": ["realm:deathmage"]
+    },
     "deathmage-graveyard-native-957e273": {
       "kind": "native",
       "revision": "957e273f801fd059cedc521d0d3bbfb0026b38c7",
@@ -3410,7 +3419,7 @@
     "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a","shield-stun-regression-06b5675"]},
     "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","lich-sites-source-831ddde","lich-sites-regression-831ddde","lich-sites-native-831ddde"]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c","ghost-master-source-e7ab45c","ghost-master-regression-e7ab45c","ghost-master-native-576d885d","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
-    "realm:deathmage": {"status":"not-run","evidence":["deathmage-formations-source-56a6186","deathmage-formations-regression-56a6186","deathmage-formations-native-56a6186","deathmage-graveyard-native-957e273"]},
+    "realm:deathmage": {"status":"not-run","evidence":["deathmage-formations-source-56a6186","deathmage-formations-regression-56a6186","deathmage-formations-native-56a6186","deathmage-formations-paired-native-56a6186","deathmage-graveyard-native-957e273"]},
     "realm:red-demon": {"status":"not-run","evidence":["hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","period-loot-source-1f488df","period-loot-regression-1f488df","fissure-source-458ccc1","fissure-rebuild-458ccc1","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
     "realm:oasis-giant": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","oasis-palms-regression-4dc7761","landmark-chest-trials-regression-09eb8b7","tree-size-config-regression-e75cf97","period-loot-source-1f488df","period-loot-regression-1f488df","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
     "realm:cyclops-god": {"status":"not-run","evidence":["hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","castle-anchor-regression-ee30ed8","castle-chest-cells-regression-5cd8ecf","castle-ground-writes-regression-f176964","period-loot-source-1f488df","period-loot-regression-1f488df","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
