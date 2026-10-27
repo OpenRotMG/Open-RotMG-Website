@@ -1970,12 +1970,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mobile roaming encounter with charge/orbit movement and ring-versus-directed attacks; name alone does not imply children or transformations.",
-        "differences": [],
+        "expected": "Flying MidPlains level-5 quest: 360 HP, 4 DEF, White Flame 15 damage/6.5 tiles per second/1100ms. Mobile orbit/charge encounter with directed shots and five-shot rings, not dependent minions or transformations.",
+        "differences": [
+          "Kithio alternates circle3000ms/dart1600ms, with two fixed five-shot rings; Trapped randomly selects ring/direct cooldown branches. Current movement uses bounded home-return and simplified charge/orbit clocks rather than exact Kithio Follow/terrain/jitter semantics.",
+          "Current loot retains four ordered first-success 15% tier candidates; compiled Kithio independently expands nine equipment/potion candidates. Kithio Reproduce counts its host toward radius100/density1, so it does not justify dependent births. Our area-budget population/refill and these loot rules remain qualified reconstructions, not original probabilities."
+        ],
         "unknowns": [
-          "Original attack choices and probabilities, timing, movement, habitat density and rewards."
+          "Exact 123.5.1 AI timing/choice frequencies, movement/terrain continuity, density/refill and expanded reward pools/rates remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/804#issuecomment-6452664788"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L305-L339",
+            "label": "Compiled Kithio comparator; Shoot/Follow/Reproduce and compiled LootDefs/Loots inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120429185456id_/http://forums.wildshadow.com/wiki/realm-mad-god/swarm",
+            "label": "April29,2012: orbit/charge, five-shot ring, four drop tiers; no numeric rates/timing"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0: complete Swarm definition matches selected123.5.1; not AI authority"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L284-L304",
             "label": "Community server comparison: rotmg_svr (2013)"
