@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) removed most Rust regressions, so regression receipts are revision-bound history, not guards on current main. Unbound PR/test claims are not passes."},
   "sources": {
+    "purple-bag-native-6de32a7": {
+      "kind": "native",
+      "revision": "6de32a7b8254a304b26cba5d234465c5131d6d51",
+      "date": "2026-10-27",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/691#issuecomment-6430475748",
+      "checks": ["gear:loot-and-ownership", "gear:loot-bag-presentation"],
+      "method": "Private native run052352c8 passes five assertions with client4f855c11/Ruffle.16. Ordinary drop commits once, the owner receives a purple bag while a nearby native peer does not, native pickup restores the item with one additional inventory revision, and both clients remain alive. Tracked code matches6de32a7; only one-off cases were untracked. Cleanup errors are empty.",
+      "limitations": "Prepared supplied Soulbound potion in Nexus, not an earned god drop or autonomous bot journey. The changed god packaging and contributing-bot denial are covered by the separate regression. Godlands runs without colored drops are excluded from ownership acceptance. No whole-feature or historical verdict is upgraded."
+    },
     "purple-god-bag-regression-6de32a7": {
       "kind": "regression",
       "revision": "6de32a7b8254a304b26cba5d234465c5131d6d51",
@@ -3324,8 +3333,8 @@
     "gear:heavy-armor": {"status":"not-run","evidence":[]},
     "gear:robes": {"status":"not-run","evidence":[]},
     "gear:rings": {"status":"not-run","evidence":[]},
-    "gear:loot-and-ownership": {"status":"not-run","evidence":["purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","reward-allocation-native-1b051cc"]},
-    "gear:loot-bag-presentation": {"status":"passed","evidence":["purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
+    "gear:loot-and-ownership": {"status":"not-run","evidence":["purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","reward-allocation-native-1b051cc"]},
+    "gear:loot-bag-presentation": {"status":"passed","evidence":["purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e"]},
     "gear:health-potions": {"status":"not-run","evidence":[]},
