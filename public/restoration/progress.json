@@ -5514,11 +5514,11 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "missing",
+        "implementation": "present",
         "historical": "known-differences",
         "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
         "differences": [
-          "Resending verification emails is not supported. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/720"
+          "Uses modern 24-hour single-use confirmation links and bounded explicit email requests; original token, initial-send and delivery policies are not recovered."
         ],
         "unknowns": [
           "Target external confirmation endpoint/token lifecycle.",
