@@ -1149,21 +1149,33 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Level-oriented quest selection and delayed client directional guidance, with completion/reselection distinct from XP and realm closure.",
+        "expected": "Level-oriented quest guidance. Selected 123.5.1 client: 4s initial delay and randomized 5–15s after completion.",
         "differences": [
           "Server PR262 offers each quest monster only inside a per-kind character-level window: mostly within 5 levels of the quest level for low-level wandering quests, as RealmEye's later wiki states, and from a per-kind minimum up to level 20 for bosses. The pinned 2013 community comparator's windows are similar but not identical. Server PR306 treats level-less quest bosses (Archdemon Malphas, Davy Jones, Oryx the Mad God 1) as matching every character level (https://github.com/OpenRotMG/Open-RotMG-Server/pull/306). Neither is recovered 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/262"
         ],
         "unknowns": [
-          "Original tie-breaking and evaluation cadence, and exact client/server completion and reselection timing."
+          "Original tie-breaking, cadence and level-less boss priority remain unknown. The period no-other-quests exception is unimplemented; target-build continuity is unverified. See quest-research-source-0af5f97 for Kithio versus current timing."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "label": "2012-02-14 Build 122.0.1: closest level; tie/cadence unspecified"
+          },
+          {
+            "url": "https://web.archive.org/web/20120225084118id_/http://forums.wildshadow.com/wiki/realm-mad-god/quest-monsters",
+            "label": "2012-02-25 guide: one quest"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/map/Quest.as",
+            "label": "123.5.1 Quest.as (client only)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs",
+            "label": "Compiled Kithio comparator: distance penalty"
           },
           {
             "url": "https://www.realmeye.com/wiki/quest-monsters",
-            "label": "RealmEye quest-monster table: later wiki, quest level plus or minus 5"
+            "label": "RealmEye quest-monster table: later wiki, quest level plus or minus 5; not original-policy proof"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Leveling.cs",
