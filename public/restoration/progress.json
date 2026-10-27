@@ -1581,18 +1581,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Target timers, branches and rewards remain unresolved.",
+        "expected": "Damage evaluation, escalating ghost transformations and Ghost Master progression release Actual Ghost King; not simply killing ordinary minions. Primary branch/timeout parameters are documented; target-era clocks and rewards remain unresolved.",
         "differences": [
           "Community requests 8-14 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Generic 90-second Ghost Master expiry removed; prepared native retention and 140-second timeout regression verified, not full Realm closure or original timer certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/551",
           "Compiled Kithio primary uses raw (19,13) after rotation without painting the birth cell. Current native fields/scenery survive strict habitat, walkability and ownership admission. Regression and prepared native checks are not earned combat or original placement/field authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/584",
           "Ten existing towers across Classic Worlds 1/2/3 now receive Ghost Kings without repainting. Generated sites fill the remaining sampled request. Anchors and eroded-site bindings are engineered, not original placement proof: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "Ghost King Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. The real-World regression covers losses of 1-3 HP staying vulnerable and 4 admitting at the selected 300000 HP. The shared guard has an Ent native witness, not a Ghost low-damage native pair; historical entry clocks, full AI and original map configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
-          "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982"
+          "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982",
+          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183"
         ],
         "unknowns": [
-          "Target timeout-release/cleanup policy, wave branches and phase timings.",
-          "Target population and rewards."
+          "Authenticated 123.5.1 phase clocks, Company vulnerability and Solo toss geometry; primary comparator values are not original certification.",
+          "Original tower population and Master/ordinary-ghost rewards, including eligibility and probabilities.",
+          "Native SmallGroup/Mob/HugeMob, timeout cleanup, multiplayer reward ownership and durable loot pickup remain unverified. Solo combat is a prepared bounded pass, not whole-feature acceptance."
         ],
         "sources": [
           {
@@ -1602,6 +1604,22 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Tower.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Compiled primary community table; branch and timeout parameters, not authenticated original clocks"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Shoot.cs#L90-L98",
+            "label": "Primary engine centers fixed-angle fans before emitting arrows"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified 7.0 client: six normalized Ghost-family definitions agree; not AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519002828id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-king",
+            "label": "May 19, 2012 capture mixes build-115 numbers with evaluation-boss prose; prose revision unknown"
           }
         ]
       }
