@@ -370,17 +370,22 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tricksters use daggers, prisms and leather armor, and unlock at Assassin 20 and Paladin 20. Original caps include Attack 65, Speed 75 and Dexterity 75. Tiered prisms create a decoy and teleport; Ghostly Prism uses a bomb and teleport. Dancing Swords creates two decoys without teleporting, but its original availability is unresolved.",
-        "differences": [],
+        "expected": "Tricksters use daggers, prisms and leather armor, unlocking at Assassin 20 and Paladin 20. The June 12, 2012 update supports caps of 65 Attack, 75 Speed and 75 Dexterity. Tiered prisms teleport and leave a moving decoy; period guidance describes distracting enemies and teleporting behind walls. Selected Ghostly costs 90 MP, adds 3 Wisdom and leaves a spirit bomb. Selected Dancing Swords creates two five-second decoys without teleport; May 2012 guidance calls it unavailable, while September 2014 release notes list its release.",
+        "differences": [
+          "The three-second, radius-four, defense-respecting single 300-damage bomb is reconstruction; modern six-explosion Ghostly behavior and later 65-MP cost are not backported."
+        ],
         "unknowns": [
-          "Original decoy movement and enemy targeting, bomb timing and damage.",
-          "Dancing Swords availability and teleport obstruction rules."
+          "Exact 123.5.1 bomb delay, radius and defense handling; modern historical notes support one 300-damage explosion but do not date these parameters.",
+          "Decoy target-selection exceptions and original movement/collision precision; Kithio overloads use different selection semantics.",
+          "Dancing Swords availability between the May 2012 unavailable report and September 25, 2014 release listing; selected XML presence alone proves neither drops nor obtainability.",
+          "Exact original teleport endpoint restrictions; existing destination validation is retained, not replaced with Kithio's unchecked Move."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url":"reference-data/client-123.5.1.swf","label":"Original 123.5.1 client (SWF reference data)"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Decoy.cs","label":"Compiled Kithio decoy reconstruction"},
+          {"url":"https://web.archive.org/web/20120530044223id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-trickster","label":"May 2012 decoy and teleport guide (pre-buff stats)"},
+          {"url":"https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145","label":"June 12, 2012 class-cap update"},
+          {"url":"https://www.realmeye.com/wiki/release-history-2014#release-24-0-0","label":"September 25, 2014 Dancing Swords release listing"}
         ]
       }
     },
