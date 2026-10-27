@@ -1219,7 +1219,9 @@
             "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"

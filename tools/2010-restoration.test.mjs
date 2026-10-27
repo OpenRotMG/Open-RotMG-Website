@@ -787,8 +787,8 @@ test('unknown deep links fail visibly instead of opening an arbitrary nearby che
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'd061b7eaf4ba419fc5e9deddf201dfd38bcb5cc3e53679dbb0f2bd0a92117f38');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '67517d2c18c1bd1910728807bae45b2938ea31ba095071d426de8b57373f962d');
+  assert.equal(digest(bytes), '1f8dc077d894220d656dcc1deec456fa112380e3059835f899f5594c71265106');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '1782ea2c23e3de8533d927138fac0d3daccbd3a3849b0b678ba18841a21b6d9f');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
