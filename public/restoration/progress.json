@@ -1507,12 +1507,14 @@
           "Ent Ancient Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP stay vulnerable; 4 admits the existing shield phase. A three-root real-World regression and prepared Ent native encounters cover this admission boundary, not historical entry clocks, full AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
           "During the final growth handoff, quest-owned Greater Nature Sprites now transform only at distance <50; owned Actual Greater Nature Sprites can trigger armor only at distance <30. Equality is excluded, matching the compiled primary community reference's distance limits. Nine real-World cases cover boundaries, multiple owned sprites, foreign-quest exclusion and transformation followed by armor. Ordinary-client images are prepared-encounter context, not native boundary or full-handoff proof. Existing ownership and timing remain; primary global targeting, entry clocks, full runtime equivalence and original placement/configuration are unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/749",
           "Ent Ancient's two evaluation phases now use normal Wander components 0.2/0.3, nominally 1.85/2.405 tiles/s, from the compiled primary community reference instead of the generic 2.96. Five real-World NPC-step cases cover both rates and unchanged Idle, later-phase and Actual Ent controls. Prepared ordinary-client captures cover input/admission context, not native speed measurements or matched inputs. Entry centers, leashes, prioritization, later-phase motion, slowing and full clock/collision/RNG parity remain unresolved; original placement/configuration and authenticity are unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/760",
-          "The initial Ent Ancient now remains stationary in its four post-evaluation form-preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Twelve real-World NPC-step cases cover inside/outside-home positions and unchanged earlier/Actual Ent controls. One prepared ordinary-client witness kept the same living initial Ent at unchanged XY across 1150 game ms. HP, timers, tiers, summons and ownership are unchanged; outgoing-transition movement, deferred entry, full AI/RNG/runtime equivalence and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/924"
+          "The initial Ent Ancient now remains stationary in its four post-evaluation form-preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Twelve real-World NPC-step cases cover inside/outside-home positions and unchanged earlier/Actual Ent controls. One prepared ordinary-client witness kept the same living initial Ent at unchanged XY across 1150 game ms. HP, timers, tiers, summons and ownership are unchanged; outgoing-transition movement, deferred entry, full AI/RNG/runtime equivalence and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/924",
+          "Ent follower loot now follows compiled Kithio: a 2% Tincture of Dexterity roll for Ent, none for Sapling. Forced-success rewards reproduce both former Magic Potion entries and preserve the mummy control. This is not an authenticated original rate or full-family acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/commit/2425fe48d14282546bd5c764e0c9b8f3522f5ddc",
+          "Seventeen native checks cover prepared SmallGroup evaluation through Sprite, Actual Ent, Ent and Sapling defeats, loot pickup and cold saved progress. Supplied legal stats/gear, positioning, protection and resource refills exclude earned progression/survival; one branch does not accept the whole family or its history: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1021#issuecomment-6452236236"
         ],
         "unknowns": [
-          "Trapped starts growth after 2000ms before 1600ms steps; target schedule remains unresolved.",
-          "Original Grove count distribution and placement probabilities, rewards and follower lifetime/cap policy.",
-          "Whether0x921/922 exhaust intended ordinary-ent scope; target growth/summon counts, timing and rewards."
+          "May 20, 2012 build-122.3.2 guide/Kithio: nominal 1600ms growth, final stage at 14400ms; Trapped adds a 2000ms opening. Guide sizes imply 140 to 320; compiled Kithio gradually targets 160 to 340; Rust snaps. 123.5.1 continuity, entry ticks and full shield/armor handoff remain unverified.",
+          "Original Grove count distribution/placement probabilities are unknown. Kithio counts lifetime births: 3 saplings/Actual Ent, 2 Ents/Actual Sprite; reconstruction caps living encounter totals at 3/23, with 90000ms sapling expiry. Toss geometry/spawn clocks differ. Retain population/ownership safeguards pending target-policy resolution.",
+          "May 16, 2012 build-118 Ent/Sapling pages identify parents, not independent spawn sites. Selected/modified-7.0 XML matches for 0x91f to 0x924 do not prove exhaustive original family/spawn scope. Actual Sprite rewards, exact probabilities/recipient semantics and full branch coverage remain unresolved."
         ],
         "sources": [
           {
@@ -1534,6 +1536,22 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
             "label": "Community enemy hit rule: projectile conditions bypass Invulnerable"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.EntAncient.cs",
+            "label": "Compiled reconstruction reference: Ent family, growth and rewards"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Spawn.cs",
+            "label": "Primary Spawn counts births, not surviving children"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516130632id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent",
+            "label": "May 16, 2012 capture, marked build 118: Ent parents, decay and tincture"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516154733id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-sapling",
+            "label": "May 16, 2012 capture, marked build 118: Sapling parent and no drops"
           }
         ]
       }
