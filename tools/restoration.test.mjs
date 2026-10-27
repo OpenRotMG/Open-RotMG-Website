@@ -20,6 +20,16 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('client movement trust is intentional policy, not missing restoration or historical sign-off',()=>{
+  const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='realm:walk-and-dodge');
+  validateEvidence(data,evidence);
+  assert.match(feature.audit.differences.join(' '),/Intentional project policy: native movement trusts finite, in-bounds client positions/);
+  assert.match(feature.audit.differences.join(' '),/not missing restoration work or a confirmed historical deviation/);
+  assert.doesNotMatch(feature.audit.expected,/unsafe client trust|server validates/);
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.implementation,'partial');
+  assert.equal(accepted(feature,evidence),false);
+});
+
 test('Trench coral receipts do not accept whole-dungeon geometry or oxygen',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:ocean-trench';
   const refs=['source','regression','native'].map(kind=>'trench-coral-'+kind+'-e1483e3');
