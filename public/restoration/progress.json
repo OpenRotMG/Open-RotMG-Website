@@ -1476,14 +1476,19 @@
         "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
         "differences": [
           "Server PR586 places 5 to 9 Graveyards per Realm on Low Sand and Low Plains, each with Crosses, grey and destructible walls and a Treasure Chest beside the Deathmage. A June 2012 wiki supplies the Low Plains site, chest tiers, skeleton item lists and the Deathmage's lack of drops; rates, site count, Low Sand and the yard layout come from a later community server: https://github.com/OpenRotMG/Open-RotMG-Server/pull/586",
-          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King."
+          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King.",
+          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics."
         ],
         "unknowns": [
           "Original graveyard or setpiece placement and ordinary Skeleton population.",
           "Deathmage’s relationship to the early Necromancer, population limits, closure eligibility and chest rewards.",
-          "Minion counts, timing, cleanup and drops."
+          "Original formation timing and speeds, minion populations/cleanup and drop rates."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Deathmage.cs#L15-L202",
+            "label": "Primary compiled community reconstruction: Deathmage orders and four skeleton roles, not original server timing"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Deathmage.cs#L17-L96",
             "label": "Community server comparison: rotmg_svr (2013)"
