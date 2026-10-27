@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {validateCatalogue,validateEvidence,validateSources,records,matches,workCounts,accepted} from '../public/restoration/catalogue.js';
+import {validateCatalogue,validateEvidence,validateSources,records,matches,workCounts,accepted,views} from '../public/restoration/catalogue.js';
 const load=file=>JSON.parse(readFileSync(new URL('../public/restoration/'+file,import.meta.url),'utf8'));
 const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
@@ -237,6 +237,15 @@ test('minimap menu passes only its cross-revision functional scope and preserves
   assert.match(evidence.sources[receipts[1][0]].limitations,/prepared and unearned/);
   assert.match(evidence.sources[receipts[2][0]].limitations,/not formal Build Storage CI/);
   for(const check of ['social:teleport-to-players','condition:13','condition:22','condition:24','condition:25'])assert.equal(evidence.results[check].status,'not-run');
+});
+
+test('work filters use workflow order without implying sequential completion',()=>{
+  assert.deepEqual(Object.entries(views),[['work','All unfinished work'],['research','Needs research'],['implementation','Needs implementation'],['verification','Needs verification'],['differences','Known differences'],['accepted','Accepted features'],['all','All features and checks']]);
+  const data=catalogue(),evidence=ledger(),sick=records(data).find(r=>r.id==='condition:5');
+  assert.deepEqual(sick.rule.differences,[]);
+  assert.equal(matches(sick,evidence,'differences'),false);
+  assert.equal(matches(sick,evidence,'research'),true);
+  assert.equal(accepted(sick.feature,evidence),false);
 });
 
 test('present features remain visible for gameplay and historical work',()=>{
