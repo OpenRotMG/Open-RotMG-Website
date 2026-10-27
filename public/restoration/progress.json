@@ -167,16 +167,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and grants Armored for four seconds, not Invulnerable. Purification removes conditions.",
+        "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and gives only its caster Armored for four seconds, not Invulnerable. Purification's selected order is healing, conditional Speedy removal from Hexed recipients, then cleansing; the comparator Sick check blocks healing before cleansing.",
         "differences": [],
         "unknowns": [
-          "Which conditions does Purification remove, in what order, and how does Sick affect healing and eligible players?",
-          "How were untiered tomes obtained in 123.5.1?"
+          "Original cleanse list, Sick ordering and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
+          "Period evidence supports Purification from Manor/Ruthven/ordinary Coffins and Holy Protection from Bes; exact 123.5.1 rates, eligibility thresholds and continuity remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516125526id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "May 2012 Manor guide: Purification and loot-bearing Coffins"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516152646id_/http://forums.wildshadow.com/wiki/realm-mad-god/tomb-ancients",
+            "label": "May 2012 Tomb guide: Holy Protection from Bes"
           }
         ]
       }
@@ -1144,18 +1152,22 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
+        "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding.",
         "differences": [
-          "Server terrain budgets use tile speed without tracking the client's progressive sinking multiplier."
+          "Intentional project policy: native movement trusts finite, in-bounds client positions, prioritizing responsiveness over server-side speed, timing and path enforcement. This is not missing restoration work or a confirmed historical deviation. Structural, lifecycle, ownership and persistence safeguards remain separate."
         ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
-          "Original lag tolerance and pause/options interactions."
+          "Original server validation policy, lag tolerance and pause/options interactions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/MovePacketHandler.cs",
+            "label": "Community server comparison: Kithio trusts MOVE positions, not proof of original server policy"
           }
         ]
       }
@@ -1334,7 +1346,8 @@
           "Liches now keep fixed community local (13,13) after ruin rotation. Protective clearing, habitat and destination-only ownership checks follow that point. Other native holes remain; eligible sites and later generation can change. Original placement and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/510",
           "Destructible-wall markers now write only Blue Floor and spawn separate Blue Walls, preserving native objects, configuration and identity. Native walkability and eligible unowned scenery are required there; whole-site guards remain. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/512",
           "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554",
-          "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731"
+          "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
+          "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
