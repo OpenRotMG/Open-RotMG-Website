@@ -87,7 +87,8 @@ export function start({document, window, backend, now = Date.now}) {
     if (!(frame === null || (frame && typeof frame === 'object')) || !(Number.isFinite(age) && age >= 0)) throw new Error('malformed bot telemetry');
     session.received = now();session.telemetry = 'receiving';
     if (frame === null) {
-      session.activity = session.rendered = undefined;
+      // World handoffs briefly clear the feed, but must not restart the overview's sampling window.
+      session.rendered = undefined;
       $('#intention').replaceChildren();$('#intention-status').textContent = 'No decision intention received.';
     } else {
       try {
@@ -112,7 +113,7 @@ export function start({document, window, backend, now = Date.now}) {
         }
         $('#intention-status').textContent = '';
       } catch (error) {
-        session.activity = session.rendered = undefined;$('#intention').replaceChildren();
+        session.rendered = undefined;$('#intention').replaceChildren();
         $('#intention-status').textContent = `Intentions unavailable: ${error.message}.`;console.error(error);
       }
     }
