@@ -677,16 +677,20 @@
       "icon": "assets/player/gravestone.png",
       "audit": {
         "implementation": "present",
-        "historical": "unreviewed",
-        "expected": "Deaths leave an in-world gravestone. Original appearance by character tier, labels, contents, placement and lifetime still need historical sources.",
+        "historical": "partial",
+        "expected": "Named gravestones: level 1 lasts 30 seconds, levels 2–19 one minute, level 20 five minutes; one through eight maxed base stats select eight further forms lasting until world reset. Selected definitions specify the eleven textures and name labels.",
         "differences": [],
         "unknowns": [
-          "Original gravestone tiers, labels, placement, contents and expiry."
+          "Independent period corroboration of exact-coordinate placement and empty/nonlootable contents; exact 123.5.1 continuity beyond the February/June 2012 guides. Comparator support is not official-server recovery. Tracked in server issue 784."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/test/build121.4.1",
-            "label": "Build 121.4.1 test-server notes"
+            "url": "https://web.archive.org/web/20120606073802id_/http://forums.wildshadow.com/wiki/realm-mad-god/gravestones",
+            "label": "June 6, 2012 guide: named eleven-tier graves and lifetimes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L466-L531",
+            "label": "Compiled Kithio grave reconstruction, not official server recovery"
           }
         ]
       }
