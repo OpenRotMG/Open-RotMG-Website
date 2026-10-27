@@ -2635,7 +2635,7 @@
         "unknowns": [
           "Original production spawn counts/density and use of XML Spawn metadata.",
           "Original cooldown randomization, movement/spread policy and potion/portal probabilities.",
-          "Definitions establish ordinary identities but do not by themselves prove deployment or hidden server policy."
+          "Classic Worlds 1 to 3 use an engineered eight-tile moist coastal band, not recovered original polygon boundaries."
         ],
         "sources": [
           {
@@ -2645,6 +2645,18 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Shore.cs#L128-L156",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/terrain/Biome.cs#L198-L208",
+            "label": "Selected primary: moist lowland polygons next to beach are ShorePlains"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ShoreCXML.dat#L177-L255",
+            "label": "Modified 7.0 client comparison: all three cubes use ShorePlains"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/試験的ページ/モンスター#ShorePlains",
+            "label": "Period Shore Plains listing and September 2012 image"
           }
         ]
       }
@@ -3142,6 +3154,7 @@
         "differences": [
           "Historical tiled/non-tiled distinction is not restored; the unsupported yellow/white checker reconstruction was removed for issue #415.",
           "Issue #618 replaces the repeating eight-tile conveyor grid with seeded overlapping bands of varied widths and lengths, informed by a later community map. The original generator and pattern probabilities remain unrecovered.",
+          "Issue #678 reduces Native Sprite God frequency from uniform zero-to-five counts to five independent 20% rolls (mean one). The 2012 guide supports the zero-to-five range, not this weighting; exact original population odds remain unknown.",
           "Server PR363 returns Limon to her home point at speed 1.4 for the box phase, following later FSoD return behavior rather than recovered 123.5.1 timing: https://github.com/OpenRotMG/Open-RotMG-Server/pull/363",
           "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519",
           "After the platform enlargement, the turret ranges return from 6/10 to the modified 7.0 comparator's 9.5/14. The inner square is 13.435 tiles between turret centers instead of 8.485, approximately the reported 14 instead of 9. The wider outer box preserves the gap. Later FSoD conflicts at 6/10; no numeric Limon behavior was located in the primary Kithio compiled tables, and exact original dimensions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/571",
@@ -4270,7 +4283,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. The exact historical winner-selection rule is not recovered.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. Private potion recipients remain eligible for successful equipment drops. The exact historical winner-selection rule is not recovered.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
@@ -4287,7 +4300,7 @@
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L50-L99",
-            "label": "Compiled Kithio contributor allocation; shared purple bags and bound duplication/leak deliberately not retained"
+            "label": "Compiled Kithio allocation; shared purple bags, bound duplication/leak and potion-triggered gear loss deliberately not retained"
           },
           {
             "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
@@ -4296,6 +4309,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
             "label": "Modified 7.0 client: one owner account gates container interaction; not a 123.5.1 allocation specification"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/loot/Loots.cs",
+            "label": "Later 7.0 reconstruction publishes equipment independently of private rewards; not original drop-rate evidence"
           }
         ],
         "checks": [
@@ -4303,7 +4320,7 @@
             "id": "gear:loot-bag-presentation",
             "name": "Bag rarity, packaging and permissions",
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
-            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions.",
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions. Successful equipment must survive simultaneous private potion rolls for solo and grouped contributors.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
@@ -5706,12 +5723,17 @@
         "differences": [],
         "unknowns": [
           "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified."
+          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified.",
+          "Original server distance cutoff for damage sounds from quest targets outside local view."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Character.as",
+            "label": "Selected-version Character.damage plays hurt/death audio without a distance check"
           }
         ]
       }
