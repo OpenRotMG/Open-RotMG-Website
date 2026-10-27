@@ -20,6 +20,16 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:priest',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.match(feature.audit.unknowns.join(' '),/rates.*thresholds.*continuity/);
+  const sources=evidence.results[id].evidence.map(ref=>evidence.sources[ref]);
+  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','regression','source']);
+  for(const source of sources)assert.deepEqual(source.checks,[id]);
+});
+
 test('client movement trust is intentional policy, not missing restoration or historical sign-off',()=>{
   const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='realm:walk-and-dodge');
   validateEvidence(data,evidence);
