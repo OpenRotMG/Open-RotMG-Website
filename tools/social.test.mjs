@@ -11,6 +11,14 @@ function* pages(dir) {
     else if(entry.name.endsWith('.html'))yield path;
   }
 }
+test('Hiscores artwork has share-card dimensions and supports its own descriptive alt text',()=>{
+ const png=readFileSync(new URL('../public/hiscores/social.png',import.meta.url));
+ assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
+ const original=readFileSync(new URL('../public/hiscores/index.html',import.meta.url),'utf8');
+ const html=socialMetadata(original,'https://openrotmg.org/hiscores/social.png','Custom Hiscores artwork');
+ for(const key of ['og:image:alt','twitter:image:alt'])assert.ok(html.includes(`=\"${key}\" content=\"Custom Hiscores artwork\"`));
+});
+
 test('every public page has one complete preview, using its own title, description and canonical URL',()=>{
   let count=0;
   for(const path of pages(publicRoot.pathname)){
