@@ -182,7 +182,7 @@
         "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and gives only its caster Armored for four seconds, not Invulnerable. Purification's selected order is healing, conditional Speedy removal from Hexed recipients, then cleansing; the comparator Sick check blocks healing before cleansing.",
         "differences": [],
         "unknowns": [
-          "Original cleanse list, Sick ordering and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
+          "Original cleanse list, Sick ordering, Quiet timing and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
           "Period evidence supports Purification from Manor/Ruthven/ordinary Coffins and Holy Protection from Bes; exact 123.5.1 rates, eligibility thresholds and continuity remain unverified."
         ],
         "sources": [
@@ -212,8 +212,9 @@
         "expected": "Warriors use swords, helms and heavy armor, and unlock at Rogue level 5. Tiered helms grant a nearby Berserk aura and Speedy to the user. Helm of the Juggernaut grants Armored for 4.5 seconds instead of Speedy.",
         "differences": [],
         "unknowns": [
-          "How overlapping buffs refresh and which players are included at an aura’s boundary.",
-          "Original acquisition of each helm."
+          "Original exact-boundary and overlap-refresh policy: the reconstruction includes distance 4 and preserves later expiry, unlike Kithio's strict half-range and replacement timers.",
+          "When the older tier-dependent aura ranges changed to the selected client's uniform range 4.",
+          "Complete 123.5.1 helm acquisition and probabilities. May/June 2012 pages identify tiered boss drops, Oryx 2 for Great General, and Sphinx/Hermit for Juggernaut, but do not prove target-build continuity."
         ],
         "sources": [
           {
@@ -223,6 +224,22 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
+            "label": "January 11, 2012 Build 121: Warrior speed boost becomes self-only"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604224541id_/http://forums.wildshadow.com/wiki/realm-mad-god/helms",
+            "label": "June 4, 2012 capture: older helm ranges, not selected target values"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520004511id_/http://forums.wildshadow.com/wiki/helm-juggernaut",
+            "label": "May 20, 2012 Juggernaut: Sphinx/Hermit drops, before duration reduction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142316id_/http://forums.wildshadow.com/wiki/helm-great-general",
+            "label": "May 27, 2012 Great General: Oryx 2 acquisition"
           }
         ]
       }
@@ -235,10 +252,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered shields fire short-range stunning volleys. In the community reconstruction, Invulnerable blocks HP loss but not stun; Invincible, Stasis and Stun Immune still block stun. Snake Skin Shield and Shield of Ogmur have separate parameters; Ogmur applies Armor Broken, not Stunned.",
+        "expected": "Knights use swords, shields and heavy armor, and unlock at Warrior level 20. Tiered and Snake Skin shields stun for three seconds; Ogmur applies Armor Broken for four seconds. Shield damage is unscaled by Attack, defense is deducted per pellet, and piercing can hit different enemies without repeatedly hitting the same enemy. In the community reconstruction, Invulnerable blocks HP loss but not conditions; Invincible and Stasis block both, while Stun Immune blocks stun but not Armor Broken.",
         "differences": [],
         "unknowns": [
-          "Original stun and Armor Broken immunity lists, multi-hit accounting and untiered-shield acquisition."
+          "Original stun/Armor Broken immunity rosters and the June 2012 guide's conflict with the reconstructed invulnerability rule remain unresolved.",
+          "Per-projectile target deduplication is client/comparator-supported; exact original multi-hit credit and rounding remain unverified.",
+          "Period sources support Snake Skin from Stheno/Guard and Ogmur from Lord of the Lost Lands, but exact 123.5.1 rates, thresholds and continuity remain unverified."
         ],
         "sources": [
           {
@@ -252,6 +271,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/GameObject.as",
             "label": "Modified 7.0 client: invulnerability zeros damage but remains targetable"
+          },
+          {
+            "url": "https://web.archive.org/web/20120603070630id_/http://forums.wildshadow.com/wiki/realm-mad-god/shields",
+            "label": "June 2012 shield table: per-pellet defense, piercing and separate Ogmur condition"
           }
         ]
       }
@@ -289,13 +312,17 @@
         "expected": "Assassins use daggers, poisons and leather armor, and unlock at Rogue 20 and Wizard 20. The original Speed cap is 75. Each poison has its own radius, total damage, duration, mana cost and bonuses.",
         "differences": [],
         "unknowns": [
-          "Original poison throw delay, stacking, defense and damage-credit rules.",
-          "What happens when an enemy enters or leaves poison, or its owner changes worlds?"
+          "Continuity of the 119.0.3 delay/defense description into 123.5.1; exact tick cadence, rounding and overlap policy. Comparator stacking is not original-server proof.",
+          "Original damage-credit and soulbound eligibility/thresholds, and owner-departure policy. Current departure cancellation is an authority safeguard, not recovered history."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608004056id_/http://forums.wildshadow.com/wiki/realm-mad-god/poisons",
+            "label": "June 2012 capture, content labelled 119.0.3: 1.5-second landing and defense once; older costs and unresolved target continuity"
           }
         ]
       }
@@ -352,13 +379,23 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Trap damage, radius and condition duration vary by item: T5 lasts 5.5 seconds and T6 lasts six seconds. Coral Venom Trap Paralyzes.",
-        "differences": [],
+        "expected": "Huntresses use bows, traps and leather armor, and unlock at Rogue 20 and Archer 20. Tiered traps Slow; Coral Venom Trap Paralyzes. T5 lasts 5.5 seconds and T6 six seconds. The May 2012 guide documents 1.5-second flight and half-radius triggering; compiled Kithio blasts all full-radius enemies with ordinary defense.",
+        "differences": [
+          "Reconstruction uses ten seconds from landing and inclusive radius boundaries. The May 2012 guide says twenty seconds; Kithio's twentieth pulse can expire around 9.5 seconds and its area check is strict. Exact target-build continuity is unproven."
+        ],
         "unknowns": [
-          "Historical generic default condition, arming/trigger geometry, lifetime and owner/world lifecycle.",
-          "Target multiple-enemy trigger semantics."
+          "Exact 123.5.1 lifetime, timer/trigger boundary and owner-disconnect/map-change continuity. Preserve current stricter owner/world cancellation.",
+          "Earned native unlock/progression, reconnect/restart and whole-class acceptance remain unverified; bounded receipts are separate."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Trap.cs",
+            "label": "Compiled Kithio trap reconstruction, not original server proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120527142113id_/http://forums.wildshadow.com/wiki/realm-mad-god/traps",
+            "label": "May 27, 2012 trap guide, table labelled 122.3.2"
+          },
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.3.2",
             "label": "Build 122.3.2 release notes"
@@ -404,17 +441,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tricksters use daggers, prisms and leather armor, and unlock at Assassin 20 and Paladin 20. Original caps include Attack 65, Speed 75 and Dexterity 75. Tiered prisms create a decoy and teleport; Ghostly Prism uses a bomb and teleport. Dancing Swords creates two decoys without teleporting, but its original availability is unresolved.",
+        "expected": "Tricksters use daggers, prisms and leather armor, unlocking at Assassin 20 and Paladin 20. The June 12, 2012 update supports caps of 65 Attack, 75 Speed and 75 Dexterity. Tiered prisms teleport and leave a moving decoy; period guidance describes distracting enemies and teleporting behind walls. Selected Ghostly costs 90 MP, adds 3 Dexterity and leaves a spirit bomb. Selected Dancing Swords creates two five-second decoys without teleport; May 2012 guidance calls it unavailable, while September 2014 release notes list its release.",
         "differences": [],
         "unknowns": [
-          "Original decoy movement and enemy targeting, bomb timing and damage.",
-          "Dancing Swords availability and teleport obstruction rules."
+          "Exact 123.5.1 bomb damage, delay, radius and defense handling: modern history mentions an undated single 300-damage form, while a May 2, 2013 capture already lists six 50–100-damage explosions at 65 MP.",
+          "Decoy target-selection exceptions and original movement/collision precision; Kithio overloads use different selection semantics.",
+          "Dancing Swords availability between the May 2012 unavailable report and September 25, 2014 release listing; selected XML presence alone proves neither drops nor obtainability.",
+          "Exact original teleport endpoint restrictions; existing destination validation is retained, not replaced with Kithio's unchecked Move."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url":"reference-data/client-123.5.1.swf","label":"Original 123.5.1 client (SWF reference data)"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Decoy.cs","label":"Compiled Kithio decoy reconstruction"},
+          {"url":"https://web.archive.org/web/20120530044223id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-trickster","label":"May 2012 decoy and teleport guide (pre-buff stats)"},
+          {"url":"https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145","label":"June 12, 2012 class-cap update"},
+          {"url":"https://www.realmeye.com/wiki/release-history-2014#release-24-0-0","label":"September 25, 2014 Dancing Swords release listing"}
         ]
       }
     },
@@ -454,13 +494,17 @@
         "expected": "The chooser has thirteen classes. Availability depends on saved best levels for each prerequisite class; locked choices explain the requirements. Creation uses an available character slot and the original class definitions.",
         "differences": [],
         "unknowns": [
-          "Whether selected starting/unlock definitions exactly match target production deployment and initial account records.",
-          "Original authoritative record-persistence timing and creation placement."
+          "Authenticated production continuity and original initial-account records; the selected thirteen definitions match this server and the June 4, 2012 unlock tree.",
+          "Original server record-commit cadence and exact spawn coordinates/world-zero behavior; the selected client distinguishes first-play/resume flags from chooser CREATE, but the original server mapping is not recovered."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604094747id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/classes",
+            "label": "June 4, 2012 capture: thirteen-class unlock tree"
           }
         ]
       }
@@ -501,7 +545,8 @@
         "expected": "Level20 HUD shows living Fame/next goal, distinct from account wallet/death awards; XP Booster must not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Target conversion/carry, booster interaction, record timing and terminal goal presentation."
+          "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
+          "Selected client accepts a nonpositive terminal goal without a denominator; original terminal wire sentinel and fresh native terminal-bar rendering remain unverified."
         ],
         "sources": [
           {
@@ -511,6 +556,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L165-L191",
+            "label": "Compiled primary comparator's linear conversion and class goals, not original-server proof"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html",
+            "label": "Later-edited April2012-path guide describes a conflicting curve; individual claims are not dated to123.5.1"
           }
         ]
       }
@@ -630,7 +683,8 @@
         "expected": "VIT accelerates HP and WIS MP recovery; target follows 123.3 VIT redesign. Sick disables healing. Exact equations and complete condition matrix unresolved.",
         "differences": [],
         "unknowns": [
-          "Historical exact equations, bleeding tick behavior, pause/fraction reset and temporary-stat ceiling interactions."
+          "Exact 123.5.1 constants conflict: Kithio MP 0.6+WIS/125, Trapped 0.6+WIS/16.7, modified 7.0 0.8+WIS/16.7. June2,2012 community measurements cautiously suggest Wizard MP0.5+0.06*WIS and pre-redesign HP1+0.05*VIT; mixed-era wiki later gives HP1+0.12*VIT. Neither settles post-redesign exact rates.",
+          "Original Healing/Bleeding rates and Sick+Healing precedence, tick rounding, pause/re-entry fractions and temporary-cap loss. Current reconstruction is tested separately; unresolved history remains tracked in server issue 782."
         ],
         "sources": [
           {
@@ -644,6 +698,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
             "label": "Build 123.3.0 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602011846id_/http://forums.wildshadow.com/wiki/realm-mad-god/character-stats-explained",
+            "label": "June 2, 2012 capture: qualified Wizard measurements before VIT redesign"
           }
         ]
       }
@@ -676,16 +734,20 @@
       "icon": "assets/player/gravestone.png",
       "audit": {
         "implementation": "present",
-        "historical": "unreviewed",
-        "expected": "Deaths leave an in-world gravestone. Original appearance by character tier, labels, contents, placement and lifetime still need historical sources.",
+        "historical": "partial",
+        "expected": "Named gravestones: level 1 lasts 30 seconds, levels 2–19 one minute, level 20 five minutes; one through eight maxed base stats select eight further forms lasting until world reset. Selected definitions specify the eleven textures and name labels.",
         "differences": [],
         "unknowns": [
-          "Original gravestone tiers, labels, placement, contents and expiry."
+          "Independent period corroboration of exact-coordinate placement and empty/nonlootable contents; exact 123.5.1 continuity beyond the February/June 2012 guides. Comparator support is not official-server recovery. Tracked in server issue 784."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/test/build121.4.1",
-            "label": "Build 121.4.1 test-server notes"
+            "url": "https://web.archive.org/web/20120606073802id_/http://forums.wildshadow.com/wiki/realm-mad-god/gravestones",
+            "label": "June 6, 2012 guide: named eleven-tier graves and lifetimes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L466-L531",
+            "label": "Compiled Kithio grave reconstruction, not official server recovery"
           }
         ]
       }
@@ -728,7 +790,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand55,987, MidForest165,843 and LowSand89,202 cells. HighPlains remains unassigned because this reconstruction has no snowy support. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -743,7 +806,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand42,840, HighPlains29,588, MidForest111,439 and LowSand209,576 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -758,7 +822,8 @@
             "historical": "unreviewed",
             "differences": [
               "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
-              "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+              "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+              "NEW habitat reconstruction yields HighSand36,173, HighPlains22,117, MidForest139,317 and LowSand165,467 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": [],
             "sources": [],
@@ -907,7 +972,8 @@
             "historical": "partial",
             "differences": [
               "Ground and habitat tier are separate cell fields and populations follow the tier, but candidate spawn cells are only checked as walkable and outside setpieces, not reachable, so enclosed habitat fragments can still receive spawns.",
-              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665"
+              "Server PR665 corrects Dark Grass to LowForest and Blue Grass to LowPlains only in the World 1 to 3 engineering reconstructions. Generated-map tags and all other cell fields are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/665",
+              "PR997 adds NEW 64-tile cardinal sand bands and 48-tile Light Grass forest fringes away from shore; snowy ground106 supplies HighPlains only in Worlds 2 and 3. Loaded-population checks observe all 13 named family roots across their supported habitats, within existing limits. Ground, object, config, region and all 124 authored sites are preserved. Original boundaries and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
             ],
             "unknowns": ["Whether other classic ground/tier assignments match the target."],
             "sources": [
@@ -6887,11 +6953,12 @@
       "category": "realm",
       "icon": null,
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "HighSand Minotaur0x646 retains selected stats and all three Blade definitions. Compiled Kithio supports an idle trigger, short fast-follow lunge, six aimed volleys, staggered 12/6-shot rings and a pause; exact target timing remains unverified.",
         "differences": [
-          "Source-supported combat is restored in server PR729. Current classic maps1–3 have no HighSand habitat, so Minotaurs cannot naturally spawn there; this combat change does not alter habitat or population."
+          "Combat implementation accepted in a natural native encounter: https://github.com/OpenRotMG/Open-RotMG-Server/pull/729#issuecomment-6435809300",
+          "NEW HighSand bands restore natural placement in the World 1 to 3 engineering reconstructions; original boundaries and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
         ],
         "unknowns": [
           "Exact 123.5.1 timing remains unproven: Trapped instead randomly selects single shots, 20-shot rings and locked charges using only projectile0. Kithio is the selected reconstruction reference, not authenticated official AI.",

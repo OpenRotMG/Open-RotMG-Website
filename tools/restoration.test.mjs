@@ -26,7 +26,8 @@ test('Priest tome receipts do not accept earned progression or original drop rat
   assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
   assert.match(feature.audit.unknowns.join(' '),/rates.*thresholds.*continuity/);
   const sources=evidence.results[id].evidence.map(ref=>evidence.sources[ref]);
-  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','regression','source']);
+  assert.deepEqual(sources.map(s=>s.kind).sort(),['native','native','regression','source','source']);
+  assert.match(evidence.sources['priest-purification-native-5346d5a'].limitations,/Sick\/Quiet/);
   for(const source of sources)assert.deepEqual(source.checks,[id]);
 });
 
@@ -329,7 +330,8 @@ test('partial implementation, research and verification can all be outstanding',
 });
 
 test('executed acceptance requires an exact ID, revision and test/native receipt',()=>{
-  const data=catalogue(),evidence=ledger(),id='heroes:warrior';
+  const data=catalogue(),evidence=untestedLedger(),id='heroes:warrior';
+  evidence.sources={};for(const result of Object.values(evidence.results))result.evidence=[];
   evidence.results[id]={status:'passed',evidence:[]};assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test={kind:'source',revision:'a'.repeat(40),date:'2026-10-21',method:'Read the handler',limitations:'No execution',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs'};
   evidence.results[id].evidence=['test'];assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
