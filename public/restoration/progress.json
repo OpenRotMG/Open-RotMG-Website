@@ -1696,14 +1696,28 @@
         "expected": "Lava-site boss with wander/pursue/return movement, distinct attacks and Imp/Demon/Demon Warrior summons; boss, minion and setpiece-chest rewards are separate.",
         "differences": [
           "Community requests 3-4 lava sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
-          "Twenty existing fissures across Classic Worlds 1/2/3 now receive Red Demons and independent chests without repainting source-bound lava. Original coordinates and population remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "PR535 superseded PR501 for this chest: current tiers make one group-probability roll then uniformly select an item, with two T1 potions. Kithio expands p/n per item and caps successes at 5-7; original target rates, corpus/order and truncation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/796#issuecomment-6451400688",
+          "Twenty existing fissures across Classic Worlds 1/2/3 now receive Red Demons and independent chests without repainting source-bound lava. Original coordinates and population remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1020 restores separate Imp/Demon/Demon Warrior equipment pools using Kithio candidate rates, once per death rather than per contributor. Exact original rates remain unknown; boss/chest rates and AI parameters are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1020",
+          "Authored roots' ownership tags previously selected generic quest movement/mechanics, suppressing minion births. The shared PR1019/1020 dispatch repair retains those tags and restores family controllers. Generated-site evidence is separate from authored-site verification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1020#issuecomment-6452049625"
         ],
         "unknowns": [
           "Target population count/distribution, exact attack timing/prediction and summon caps/lifetimes.",
           "Target chest and separate boss/minion reward probabilities."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.RedDemon.cs",
+            "label": "Compiled primary reconstruction: separate minion equipment candidates; timing and summon engine differ"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 comparator: all four complete object definitions match selected 123.5.1, not AI or loot proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613203441id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/red-demon",
+            "label": "June 2012 capture explicitly describing build117.1.3; older definitions and unquantified boss/chest rewards"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.RedDemon.cs#L17-L89",
             "label": "Community server comparison: rotmg_svr (2013)"
