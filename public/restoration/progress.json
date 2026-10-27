@@ -1758,16 +1758,17 @@
         "expected": "Moated-castle boss with Cyclops/Warrior/Noble/Prince/King family, replenishment, changing attack modes and follower pursuit/retraction. Exact target branch conditions and rewards unresolved.",
         "differences": [
           "Community requests 4-6 castle sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/471",
-          "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
+          "PR535 superseded PR501's per-item p/n chest trials: current Cyclops chests make one independent trial per period-backed tier row, then choose one item, preserving repeated potion attempts and overflow. Original item corpus, RNG and target-era roll policy remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/535",
           "Cyclops Gods now use raw rotated community Castle markers instead of half-cell centers, with habitat checked at the actual destination. Separate chest placement and protective clearing stay unchanged; original placement and generation remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/504",
           "Castle chest markers now leave input ground, objects and configuration unchanged instead of clearing a Rock tile. Placement checks native chest walkability while retaining whole-site guards and boss-floor clearing. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/505",
           "Bridge and destructible-wall markers now retain native objects and configuration while changing ground, with walls spawned separately. Those markers require native walkability and eligible unowned scenery without relaxing whole-site guards. Boss and chest policies stay unchanged; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/506",
           "Castle boss markers now retain all five input cell fields and native scenery instead of forcing Rock and clearing objects/configuration. Native boss walkability and eligible unowned scenery are required without relaxing whole-site guards. This supersedes earlier boss-floor clearing; original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/542",
-          "Sixteen existing castles across Classic Worlds 1/2/3 now receive Cyclops Gods and separate validated chests. Generated castles fill the remaining sampled request; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "Sixteen existing castles across Classic Worlds 1/2/3 now receive Cyclops Gods and separate validated chests. Generated castles fill the remaining sampled request; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1019 repairs authored heroes whose quest ownership tag incorrectly selected generic quest AI, suppressing their family and attacks. Ownership remains intact; authored Cyclops Gods inherit the existing generated controller, not a newly authenticated historical attack/population policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1019"
         ],
         "unknowns": [
-          "Target attack-mode predicates, timing and alternative ring behavior.",
-          "Target population, summon lifetime/caps and chest/rewards."
+          "Target attack policy: current five-second halves/no ring versus Kithio proximity/HP phases and 15-blade fixed rings, or Trapped's ten-blade alternative. Exact timers, prediction and movement remain unresolved.",
+          "Target population and rewards: current three-alive/60-second children differ from Kithio five lifetime births and period 5/3/2/1/1 populations. Minion drops, Spider Den continuity and original chest RNG remain unresolved. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/798#issuecomment-6451503874"
         ],
         "sources": [
           {
@@ -1777,6 +1778,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Castle.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Cyclops.cs",
+            "label": "Compiled primary reconstruction table; Spawn/Shoot/Follow engines checked, not authenticated target AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat#L434-L581",
+            "label": "Modified 7.0: all six definitions normalize identically to selected XML; not server AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519212728id_/http://forums.wildshadow.com/wiki/realm-mad-god/cyclops-god",
+            "label": "May 19, 2012 capture, page labelled build 115; older stats/attack and chest weights, not target continuity"
           }
         ]
       }
