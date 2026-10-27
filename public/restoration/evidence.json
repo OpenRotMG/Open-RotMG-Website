@@ -2491,6 +2491,24 @@
       "limitations": "Before 3be9597 legitimately defeated the Idol but failed on output queue 64; its image shows the resulting character menu, not a bag inspection or passing run. Both selected images use be57/runtime 15, but deployed-before/local-after are not matched timing/performance runs. Two additional deployed-mode first-shot failures remain a reported startup/mode risk, not a proven runtime-15 regression. No earned clear, multiplayer, restart or full historical acceptance.",
       "checks": ["dungeons:abyss-of-demons", "dungeons:abyss-of-demons:idol-and-treasure-lifecycle"]
     },
+    "class-stars-regression-6491275": {
+      "kind": "regression",
+      "revision": "6491275eed3f8daad44defa7aaad67f22ce06184",
+      "date": "2026-10-27",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1001#issuecomment-6449990412",
+      "method": "Pinned Rust 1.94.1 unfiltered suite: 127 passed, none failed/ignored/filtered; CI full suite, formatting, warning-denied all-target Clippy and launcher/storage/lifecycle checks passed. New tests cover inclusive thresholds/goals, max(best,current), per-class summation, one-XP progression from prepared 19,999 XP, deleted/lower lives, committed death bonuses, duplicate rejection, wallet independence, immutable snapshots, reopen, ClassStats XML and invalid receipts.",
+      "limitations": "Prepared progression/death inputs, not earned class unlocks or a five-star native journey. Initial fixture incorrectly requested another prepared class while a lower Wizard lived; corrected by explicit deletion without bypassing the guard. Earlier system-Rust 1.99 jobs remain separate, not relabeled as pinned results. No gameplay-rule change or historical timing acceptance.",
+      "checks": ["heroes:class-stars"]
+    },
+    "class-stars-source-110230e": {
+      "kind": "source",
+      "revision": "110230ea5156c8067f714f15e0880e7dca01cf01",
+      "date": "2026-10-27",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/110230ea5156c8067f714f15e0880e7dca01cf01/src/store.rs#L66-L96",
+      "method": "Compared exact selected-SWF extraction and recovered/modified-7.0 client inclusive thresholds and max(best,current) goals; traced compiled Kithio Database SaveCharacter/Death against Trapped and modified 7.0 SaveCharacter/DbClassStats.Update. Checked revised April-2012 Anticosmic article in its actual April-2014 capture, RealmEye history and official June 29, 2021 base-only announcement. Reconciled PR189/452/460/440/513 without changing the reconstruction. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/780#issuecomment-6449538635.",
+      "limitations": "Kithio/Trapped persist base CurrentFame; modified 7.0 includes FinalFame. Shared ancestry is not independent corroboration. The blog's revision notice prevents dating every statement to 2012; 2021 is later evidence. Exact 123.5.1 publication cadence remains unresolved. No source/assets imported; source inspection is not gameplay acceptance.",
+      "checks": ["heroes:class-stars"]
+    },
     "star-hiscores-api-cc09377": {
       "kind": "regression",
       "revision": "cc093771d27f1b930ffa08e613021c0698c4c1ca",
@@ -3321,7 +3339,7 @@
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46"]},
-    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","class-star-death-total-regression-ca50d79"]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","class-star-death-total-regression-ca50d79","class-stars-source-110230e","class-stars-regression-6491275"]},
     "heroes:legends-highscores": {"status": "not-run","evidence": ["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","public-character-api-source-794eccf"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":[]},
     "hero:death": {"status": "not-run","evidence": ["public-character-api-source-794eccf"]},
