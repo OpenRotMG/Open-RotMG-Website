@@ -2626,7 +2626,7 @@
         "unknowns": [
           "Original production spawn counts/density and use of XML Spawn metadata.",
           "Original cooldown randomization, movement/spread policy and potion/portal probabilities.",
-          "Definitions establish ordinary identities but do not by themselves prove deployment or hidden server policy."
+          "Classic Worlds 1 to 3 use an engineered eight-tile moist coastal band, not recovered original polygon boundaries."
         ],
         "sources": [
           {
@@ -2636,6 +2636,18 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Shore.cs#L128-L156",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/terrain/Biome.cs#L198-L208",
+            "label": "Selected primary: moist lowland polygons next to beach are ShorePlains"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ShoreCXML.dat#L177-L255",
+            "label": "Modified 7.0 client comparison: all three cubes use ShorePlains"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/試験的ページ/モンスター#ShorePlains",
+            "label": "Period Shore Plains listing and September 2012 image"
           }
         ]
       }
