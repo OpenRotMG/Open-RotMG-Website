@@ -4253,7 +4253,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death and shares unbound gear among contributors without private awards; private potion ownership remains separate.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. The exact historical winner-selection rule is not recovered.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
@@ -4270,7 +4270,15 @@
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L50-L99",
-            "label": "Compiled Kithio contributor allocation; bound duplication/leak deliberately not retained"
+            "label": "Compiled Kithio contributor allocation; shared purple bags and bound duplication/leak deliberately not retained"
+          },
+          {
+            "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
+            "label": "2012 player account: purple god sacks can only be looted by their owner"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
+            "label": "Modified 7.0 client: one owner account gates container interaction; not a 123.5.1 allocation specification"
           }
         ],
         "checks": [
@@ -4278,7 +4286,7 @@
             "id": "gear:loot-bag-presentation",
             "name": "Bag rarity, packaging and permissions",
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
-            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify per-chunk appearance, lossless contents, ownership, permissions and expiry. Do not infer undocumented bag generation from XML alone.",
+            "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions.",
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [],
