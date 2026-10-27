@@ -732,15 +732,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Week/Month/All Time lists display rank, name, class appearance, equipment and TotalFame; selection opens fame details; own absent character can be an unranked MyFameListElem. Historical periods, eligibility and tie policy unresolved.",
-        "differences": [],
+        "expected": "Week/Month/All Time show ordinal rank, name, class/tints, four equipped items and TotalFame; selecting a row opens its archived fame details. An absent own character can appear unranked as MyFameListElem.",
+        "differences": [
+          "Current reconstruction: 20 death characters, rolling 7/30-day windows, receipt total descending then death time/character ID ascending; multiple characters per account. Kithio's compiled endpoint instead groups by account, limits to 10 and uses a calendar-month interval. Trapped shares that query; modified7 uses 20 and 7/30 days. These are conflicting comparators, not established target deviations."
+        ],
         "unknowns": [
-          "Historical list size, rolling/calendar boundaries, tie policy, live/dead eligibility and retention."
+          "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
+          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/fame/list.cs",
+            "label": "Compiled Kithio death-list comparator; not authenticated original policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L776-L890",
+            "label": "Modified7 DbLegend duration, cap, expiry and Redis ordering"
+          },
+          {
+            "url": "https://konghack.com/post/56666",
+            "label": "September 28, 2011 quote of Build118.7 announcement (earlier version)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
+            "label": "February 8–15, 2013 Tournament of Fame summary; reward cutoff only"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
+            "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
           }
         ]
       }
