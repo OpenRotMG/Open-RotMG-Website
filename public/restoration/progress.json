@@ -1530,16 +1530,24 @@
         "historical": "partial",
         "expected": "Tutorial encounter with Evil Chicken Minions and instructional progression, not a proven Realm closure boss. Target combat/progression details remain qualified.",
         "differences": [
-          "The Tutorial does not run encounters, so the Evil Chicken God and the Tutorial's Evil Chickens stand inert: they never move or attack, and the God never summons Evil Chicken Minions. Server PR526's Kitchen Portal fix does not change this. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/717"
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) restores wandering/following chickens and delayed Evil Chicken Minions using compiled Kithio as a reconstruction reference. Selected 123.5.1 chickens have no projectiles and do not shoot. Reproduction creates one owned minion per 60050 ms, capped at twelve living children; ownership, whole-instance cap and orphan retirement deliberately strengthen Kithio's unowned local-density behavior. This is not a Realm closure boss."
         ],
         "unknowns": [
-          "Target God attacks/minion spawning and instructional/reward policy.",
-          "Whether any target progression depended on active versus stationary tutorial enemies."
+          "Original minion cadence, density/reset policy and movement details; Trapped instead uses three minions on a 2–5 second timer.",
+          "Exact 123.5.1 instructional/admission/reward fidelity beyond the selected client definitions and preserved tutorial script."
         ],
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tutorial.cs#L21-L28",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Tutorial.cs",
+            "label": "Compiled Kithio Tutorial behavior; reconstruction reference, not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519003024id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/tutorial",
+            "label": "May 2012 Wild Shadow wiki: Evil Chicken God/minions and guaranteed Minor Health Potion hens"
           }
         ]
       }
@@ -4863,11 +4871,11 @@
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
         "differences": [
           "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
-          "Tutorial and Kitchen enemies, including the Evil Chicken God, Kitchen Guards, Butchers and Bonegrind the Butcher, stand inert because neither world runs encounters, and Kitchen enemies drop nothing. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/717"
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior."
         ],
         "unknowns": [
-          "Full instructional script, first-run completion fidelity, encounter sequence and portal destinations.",
-          "A May 2012 wiki page describes the Kitchen escape and Bonegrind; the target Kitchen layout, instance sharing, enemy behavior and admission remain unverified."
+          "Complete first-adventure layout and instructional/admission fidelity; the May 2012 page describes a solo Tutorial, while this change preserves the existing server admission policy.",
+          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward policy. The mutable enemy wiki describes flee at 100 HP and full potions; selected Kithio uses below 90 HP and Minor Potions. The target Kitchen layout and instance sharing remain unverified."
         ],
         "sources": [
           {
@@ -4877,6 +4885,14 @@
           {
             "url": "https://web.archive.org/web/20120519003024id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/tutorial",
             "label": "Wild Shadow wiki Tutorial page, May 2012 capture (last updated build 120): Kitchen escape and Bonegrind"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Tutorial.cs",
+            "label": "Compiled Kithio Tutorial/Kitchen movement, phases and Minor Potion reconstruction"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Bonegrind%20the%20Butcher",
+            "label": "Mutable enemy wiki: corroborates blades and flee dialogue but conflicts on HP threshold and rewards"
           }
         ]
       }
