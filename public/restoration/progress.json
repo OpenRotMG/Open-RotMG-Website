@@ -2118,7 +2118,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and Trench access. Build 122.0.1 increased its difficulty; exact target combat and portal policy remain qualified.",
+        "expected": "A lake-setpiece encounter in inland terrain, with tentacle-gated vulnerability, associated combatants, rewards and a Trench portal south of the central pool. Build 122.0.1 increased its difficulty; exact target combat and portal probability remain qualified.",
         "differences": [
           "Server PR336 adds initial-group capacity checks and atomic admission rollback, not complete Hermit reward restoration. Reward issue 335 was closed after server PR342 restored private Hermit loot; exhaustive native combat/loot-return acceptance remains separate: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579 https://github.com/OpenRotMG/Open-RotMG-Server/pull/342#issuecomment-6363681911",
           "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification.",
@@ -2152,6 +2152,14 @@
           {
             "url": "https://www.realmeye.com/forum/t/guide-to-loot-and-drop-rates/60740",
             "label": "Retrospective release-7 loot guide: eight Hermit drop locations, not target-era rate certification"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Hermit%20God",
+            "label": "Japanese wiki: Trench portal appears south of the water; mixed-era directional corroboration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/SP_Hermit.jm",
+            "label": "Modified-7 map comparator: stationary portal maker south of the dark pool"
           }
         ]
       }
