@@ -277,13 +277,17 @@
         "expected": "Assassins use daggers, poisons and leather armor, and unlock at Rogue 20 and Wizard 20. The original Speed cap is 75. Each poison has its own radius, total damage, duration, mana cost and bonuses.",
         "differences": [],
         "unknowns": [
-          "Original poison throw delay, stacking, defense and damage-credit rules.",
-          "What happens when an enemy enters or leaves poison, or its owner changes worlds?"
+          "Continuity of the 119.0.3 delay/defense description into 123.5.1; exact tick cadence, rounding and overlap policy. Comparator stacking is not original-server proof.",
+          "Original damage-credit and soulbound eligibility/thresholds, and owner-departure policy. Current departure cancellation is an authority safeguard, not recovered history."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608004056id_/http://forums.wildshadow.com/wiki/realm-mad-god/poisons",
+            "label": "June 2012 capture, content labelled 119.0.3: 1.5-second landing and defense once; older costs and unresolved target continuity"
           }
         ]
       }
