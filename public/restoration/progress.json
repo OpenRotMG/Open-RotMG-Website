@@ -3262,7 +3262,7 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a completion exit. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
+        "expected": "Earned entry, a connected undead dungeon with room-specific enemy groups, Septavius, rewards and a Realm Portal after his death. The entrance Portal of Cowardice is distinct. Selected boss HP8000/DEF12 and projectiles0/1/2/4/5. Invulnerable transitions should still permit shield stun without HP loss under the community hit rules. The older Trapped reference runs slow wandering alongside every attack; modified 7.0 omits wandering during the spiral. Build 122 documents candle markers at spawn and end, plus blood-spattered floors.",
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
@@ -3291,6 +3291,10 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Follow.cs",
             "label": "Modified 7.0 comparator: independent steering jitter, not original spawn-spacing evidence"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat",
+            "label": "April 2012 community guide, later edited: boss-death Realm Portal, not Portal of Cowardice"
           },
           {
             "url": "https://web.archive.org/web/20120610073820id_/http://forums.wildshadow.com/wiki/realm-mad-god/septavius-ghost-god",
