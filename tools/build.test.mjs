@@ -73,7 +73,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /Each star-rank reward is paid once per account\. Existing ranks count, too\./);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
-  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Source Code', 'Updates', 'Restoration', 'Gold', 'Pixel editor', '2010 Preview']);
+  assert.deepEqual([...about.matchAll(/<li><a[^>]*>(.*?)<\/a><\/li>/g)].map(match => match[1]), ['Source Code', 'OpenEye', 'Updates', 'Restoration', 'Gold', 'Pixel editor', '2010 Preview']);
+  // Use the community tracker's own name: https://openrotmgeye.com/
+  assert.ok(about.includes('href="https://openrotmgeye.com/">OpenEye</a>'));
   assert.ok(about.includes('href="https://www.openrotmg.org/2010/">2010 Preview</a>'));
   assert.ok(!home.includes('href="https://www.openrotmg.org/2010/"'));
   assert.ok(branding.includes(`rel="canonical" href="${site.href}branding/"`));
