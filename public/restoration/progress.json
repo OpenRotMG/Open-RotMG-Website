@@ -182,7 +182,7 @@
         "expected": "Priests use wands, tomes and robes, and unlock at Wizard level 5. Tomes heal nearby players. Holy Protection heals 250 HP within six tiles and gives only its caster Armored for four seconds, not Invulnerable. Purification's selected order is healing, conditional Speedy removal from Hexed recipients, then cleansing; the comparator Sick check blocks healing before cleansing.",
         "differences": [],
         "unknowns": [
-          "Original cleanse list, Sick ordering and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
+          "Original cleanse list, Sick ordering, Quiet timing and exact boundary/paused/pending/environmental recipient exceptions remain comparator-qualified, not authenticated 123.5.1 server rules.",
           "Period evidence supports Purification from Manor/Ruthven/ordinary Coffins and Holy Protection from Bes; exact 123.5.1 rates, eligibility thresholds and continuity remain unverified."
         ],
         "sources": [
