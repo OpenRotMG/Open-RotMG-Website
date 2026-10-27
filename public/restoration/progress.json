@@ -97,16 +97,41 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Rogues use daggers, cloaks and leather armor, and unlock at Archer level 5. Tiered cloaks grant timed invisibility; Planewalker also teleports. Each item has its own mana cost, cooldown and bonuses. Original stats and growth are defined in the reference client.",
+        "expected": "Rogues use daggers, cloaks and leather armor, and unlock at Archer level 5. Selected T0-T6 cloaks cost 60-85 MP, last 3-5.5 seconds and have 4-6.5-second cooldowns. Planewalker costs 100 MP, grants 5.5 seconds of invisibility and teleports up to 20 tiles with a 6.5-second cooldown. Stats and growth follow the selected client. Earlier/later guides support Limon acquisition, not an authenticated target-version rate.",
         "differences": [],
         "unknowns": [
-          "When do actions break invisibility or cause enemies to retarget?",
-          "Was Planewalker obtainable in 123.5.1, and how was it acquired?"
+          "Selected shooting code does not cancel invisibility; Kithio reconstructs timed expiry and excludes invisible players from ordinary enemy targeting. Exact 123.5.1 enemy-specific detection, ongoing radial attacks, hazard and transition exceptions remain unverified.",
+          "January/May 2012 and May 2013 guides bracket the target with Planewalker dropping from Limon. No authenticated September 2012 acquisition capture or target-version drop probability was found.",
+          "Earned Archer level-5 unlock and Rogue leveling/stat-growth journey remain outside the prepared cloak checks in issue 763."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Effects.cs",
+            "label": "Kithio IsVisibleToEnemy: reconstruction visibility gate, not authenticated original AI"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Selected-version client shooting and ability cooldown paths"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Modified 7.0 comparator agrees on all eight cloaks' costs, cooldowns, bonuses and activations"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114020015id_/http://forums.wildshadow.com:80/wiki/cloak-planewalker",
+            "label": "January 2012 capture: Planewalker stats and Limon acquisition; earlier than target"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+            "label": "May 2012 Sprite World guide lists Planewalker as a reward"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508120835id_/https://forums.wildshadow.com/wiki/cloak-planewalker",
+            "label": "May 2013 capture: matching Planewalker stats and Limon acquisition; later than target"
           }
         ]
       }
