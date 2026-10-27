@@ -476,11 +476,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mystics use staves, orbs and robes, and unlock at Huntress 20 and Necromancer 20. Tiered orbs apply Stasis, not the later Curse effect. Orb of Conflict also grants the user Speedy and Damaging. Enemy-specific Stasis immunity needs separate historical confirmation.",
+        "expected": "Mystics use staves, orbs and robes, unlocking at Huntress 20 and Necromancer 20. May 2012 guidance describes radius-3 Stasis and three seconds of immunity after expiry, without chain-Stasis. Selected tiered orbs last 3–8 seconds, without later Curse. Conflict costs 100 MP, applies five-second Stasis and 2.5-second self Speedy/Damaging, with +2 ATT/DEX. Build 123.5.1 removes immunity from Horrid Reapers, Crystal Prisoner Steeds/Clones, Minions of Oryx and Tomb Artifacts.",
         "differences": [],
         "unknowns": [
-          "Original Stasis radius, temporary immunity after Stasis and timer behavior.",
-          "Which enemies lost immunity in 123.5.1, and how was Orb of Conflict acquired?"
+          "Exact-boundary admission and tick/effect ordering in 123.5.1: Kithio uses strict radius comparison; current Rust includes the boundary.",
+          "Conflict acquisition continuity and drop rates: May 19, 2012 item guidance lists Skull Shrine and Phylactery Bearer, while the May 20 Lich guide lists only Orange Drake Egg for the Bearer. Compiled Kithio has no Bearer Conflict roll; its Skull Shrine behavior is not explicitly compiled. Current Shrine probability is reconstruction.",
+          "Earned native unlock, rare-item acquisition and restart journey remain unverified; prepared orb checks are scoped receipts, not whole-class acceptance."
         ],
         "sources": [
           {
@@ -490,6 +491,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528163147id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-mystic",
+            "label": "May 28, 2012 Mystic guide; immunity list predates 123.5.1"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519230012id_/http://forums.wildshadow.com/wiki/orb-conflict",
+            "label": "May 19, 2012 Conflict stats and disputed Bearer drop"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520011139id_/http://forums.wildshadow.com/wiki/realm-mad-god/lich",
+            "label": "May 20, 2012 Lich guide; conflicting Bearer loot list"
           }
         ]
       }
@@ -781,15 +794,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Week/Month/All Time lists display rank, name, class appearance, equipment and TotalFame; selection opens fame details; own absent character can be an unranked MyFameListElem. Historical periods, eligibility and tie policy unresolved.",
-        "differences": [],
+        "expected": "Week/Month/All Time show ordinal rank, name, class/tints, four equipped items and TotalFame; selecting a row opens its archived fame details. An absent own character can appear unranked as MyFameListElem.",
+        "differences": [
+          "Current reconstruction: 20 death characters, rolling 7/30-day windows, receipt total descending then death time/character ID ascending; multiple characters per account. Kithio's compiled endpoint instead groups by account, limits to 10 and uses a calendar-month interval. Trapped shares that query; modified7 uses 20 and 7/30 days. These are conflicting comparators, not established target deviations."
+        ],
         "unknowns": [
-          "Historical list size, rolling/calendar boundaries, tie policy, live/dead eligibility and retention."
+          "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
+          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/fame/list.cs",
+            "label": "Compiled Kithio death-list comparator; not authenticated original policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/DbModels.cs#L776-L890",
+            "label": "Modified7 DbLegend duration, cap, expiry and Redis ordering"
+          },
+          {
+            "url": "https://konghack.com/post/56666",
+            "label": "September 28, 2011 quote of Build118.7 announcement (earlier version)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
+            "label": "February 8–15, 2013 Tournament of Fame summary; reward cutoff only"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
+            "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
           }
         ]
       }
@@ -841,14 +877,24 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Ordinary death ends the character’s life and retains identity, killer, date, statistics and Fame for the death screen. Continue leads back to character creation or selection. The Amulet of Resurrection has separate recovery rules.",
-        "differences": [],
+        "differences": [
+          "Playable inventory is destroyed while immutable death metadata is retained. Full-effective HP/MP amulet recovery is a reconstruction; Kithio doubles base capacities and modified 7.0 restores 1 HP."
+        ],
         "unknowns": [
-          "Original inventory destruction, death-date and killer attribution, record retention and resurrection rules."
+          "Original death-record retention/deletion schedule and exact 123.5.1 continuity beyond the May 2012 death-screen image. Exact post-amulet HP/MP and native equipped-amulet behavior remain in server issue891."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L439-L559",
+            "label": "Compiled Kithio equipped resurrection and ordinary death comparator"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/05/31/rotmg-oops-1-snakes-in-a-pit/",
+            "label": "May 31, 2012 account and actual dated death-screen image"
           }
         ]
       }
@@ -894,12 +940,16 @@
         ],
         "unknowns": [
           "Original terrain and population inventory, placement, biome thresholds and map dimensions.",
-          "A 2048-square export request does not establish the dimensions of deployed maps."
+          "A 2048-square export request does not establish deployed dimensions; the generator author's 2025 seed candidates also leave river/biome variants and downstream processing unresolved."
         ],
         "sources": [
           {
             "url": "https://simblob.blogspot.com/2012/02/polygon-map-generation-faq.html",
             "label": "2012 map-generation notes"
+          },
+          {
+            "url": "https://www.redblobgames.com/x/2544-rotmg-map-seeds/",
+            "label": "Generator author's 2025 candidate-seed investigation; approximate silhouettes, not recovered full maps"
           },
           {
             "url": "https://web.archive.org/web/20130522030032/https://forums.wildshadow.com/wiki/realm-mad-god/maps-builds-106-123",
@@ -1215,7 +1265,9 @@
             "acceptance": "Enter from every supported arrival with multiple players. Check layout identity, shoreline placement, separation from threats and a route to representative inland encounters.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "geography"
@@ -1228,7 +1280,8 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule."
+              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule.",
+              "Compiled Kithio Oryx counts initially spawned root bodies, whereas this server budgets ordinary family bodies and birth headroom. Matching area divisors would not establish equivalent encounter density: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
             ],
             "unknowns": [],
             "sources": [],
@@ -1241,7 +1294,9 @@
             "acceptance": "Clear groups near and far from players and compare recovery. Check shared budgets, no spawn on players, and that finite heroes are not resurrected by ordinary refill.",
             "implementation": "present",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": [
+              "Compiled Kithio refills below 75% and culls above 150% on its population clock. This server shares the refill threshold but uses bounded family-body budgets rather than the same root-body/culling policy. Original recovery parameters and near/far gameplay remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
+            ],
             "unknowns": [],
             "sources": [],
             "group": "populations"
@@ -1665,12 +1720,13 @@
           "Ten existing towers across Classic Worlds 1/2/3 now receive Ghost Kings without repainting. Generated sites fill the remaining sampled request. Anchors and eroded-site bindings are engineered, not original placement proof: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "Ghost King Idle now uses the compiled primary community reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. The real-World regression covers losses of 1-3 HP staying vulnerable and 4 admitting at the selected 300000 HP. The shared guard has an Ent native witness, not a Ghost low-damage native pair; historical entry clocks, full AI and original map configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/739",
           "The initial Ghost King now remains stationary in its four preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Wait and later phases retain movement, and Lich is not frozen. Twenty-one real-World NPC-step cases cover Ghost inside/outside-home positions and unchanged Ent, Actual Ent and moving Lich controls. Bound native snapshots verified Solo in both samples: movement before over 550 game ms, unchanged XY after over 450 game ms, with positive HP and surviving actors. Runs differ in inputs, seeds and cases; native does not cover all phases or far-home bounds. Transition clocks, RNG/runtime equivalence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/982",
-          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183"
+          "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183",
+          "Three later clean prepared native runs add SmallGroup/Mob/HugeMob, timeout actor cleanup, two-contributor private rewards versus a noncontributor, one committed pickup/no duplicate and Nexus reconnect/cold SQLite retention. Earlier blocked throws admitted fewer ghosts than requested; current walkability/ownership guards remain. These are scene-bound checks, not original populations or whole-feature acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821"
         ],
         "unknowns": [
           "Authenticated 123.5.1 phase clocks, Company vulnerability and Solo toss geometry; primary comparator values are not original certification.",
-          "Original tower population and Master/ordinary-ghost rewards, including eligibility and probabilities.",
-          "Native SmallGroup/Mob/HugeMob, timeout cleanup, multiplayer reward ownership and durable loot pickup remain unverified. Solo combat is a prepared bounded pass, not whole-feature acceptance."
+          "Original tower population and Ghost-family reward policy. Primary Actual King loot is shared and independently rolled per expanded tier candidate; current reconstruction uses private >500-damage eligibility and at most one candidate per successful tier. Nominal tier numbers alone do not establish equal distributions.",
+          "Prepared native evidence now covers all four evaluation branches and the bounded timeout/private-pickup checks. It does not certify every tower's blocked-landing admission, earned progression, unprotected survival, whole-Realm closure or target-era fidelity; no whole-feature grade is promoted."
         ],
         "sources": [
           {
@@ -1696,6 +1752,18 @@
           {
             "url": "https://web.archive.org/web/20120519002828id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-king",
             "label": "May 19, 2012 capture mixes build-115 numbers with evaluation-boss prose; prose revision unknown"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Decay.cs",
+            "label": "Primary Decay leaves the world without a combat death"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/LootDefs.cs",
+            "label": "Primary tier expansion and threshold semantics; nominal rates are not distribution equivalence"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs",
+            "label": "Primary shared/private roll and bag-owner allocation engine"
           }
         ]
       }
@@ -2100,11 +2168,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying MidForest Horned Drake is level 8 with 1270 HP, 4 DEF and a 30-damage Fire Missile. Its Baby has 700 HP and a 20-damage projectile. This family is distinct from temporary companion drakes and White Dragons.",
-        "differences": [],
+        "expected": "MidForest Flying parent0x945:1270HP/4DEF/level8, Fire Missile30/speed65/1500ms; Baby0x946:700HP/0DEF, Fire Missile20/speed65/1300ms. Selected definitions match recovered123.5.1 and modified7.0 MidCXML. The June2,2012 wiki supports alternating single fire and one40-degree triple, not repeated triple bursts.",
+        "differences": [
+          "Bounded reconstruction keeps one lifetime owned Baby, Trapped-style HP<400 retreat/1000ms fire and no protective-parent response. Compiled Kithio instead uses HP<65%,1500ms unharmed fire, stopped wounded fire, a1500ms call and nearby-type orders; modified7.0 is related evidence, not independent corroboration.",
+          "Current public/private Trapped reward channels differ from compiled Kithio public rates. Neither comparator establishes official123.5.1 probabilities."
+        ],
         "unknowns": [
-          "Did the protective-parent response exist in 123.5.1?",
-          "Original Baby health threshold, attacks, spawn density, parent death/orphan behavior and rewards."
+          "Did protective-parent ordering exist in123.5.1? Original Baby threshold, wounded/orphan behavior, cross-parent search, movement and exact attack timing remain unresolved; the Baby wiki resolves to May25,2013 Release13.2.0, not2012.",
+          "Original family density/SpawnProb selection, XP formula, reward eligibility/allocation and probabilities. Native scoped combat does not certify wounded/orphan response, earned entry or full reward acquisition; remaining work is tracked in server issue806."
         ],
         "sources": [
           {
@@ -2118,6 +2189,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L601-L678",
+            "label": "Compiled primary parent/Baby state machines; exact historical continuity unresolved"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602014200id_/http://forums.wildshadow.com/wiki/realm-mad-god/horned-drake",
+            "label": "June2,2012 capture: single/triple phases, stats and reward categories"
           }
         ]
       }
@@ -2239,12 +2318,27 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowPlains Hobbit Mage is level 3 with 200 HP, 2 DEF and three short-lived 10-damage projectile forms. The family includes Hobbit Archers and Rogues, separate from Undead Hobbits.",
-        "differences": [],
+        "differences": [
+          "Current two/two initial followers and living-slot replenishment differ from compiled Kithio's two/one initial followers and lifetime birth limits of four Archers and three Rogues.",
+          "Current simple follower chase/protection omits Kithio and build-118 Archer's 400/600/400ms Mage-protect, StayBack and nearest-Archer cycle. Current followers also retain Magic Potion drops absent from those period pages and compiled primary."
+        ],
         "unknowns": [
-          "Exact target activation, movement, ring cadence, child caps, deployment corroboration and rewards.",
-          "Target counts/caps, orphan behavior, AI timing and drops."
+          "Build-118 May 2012 text independently supports twelve-tile activation and fifteen-shot rings at 0/8/16 degrees, 400ms apart; exact 123.5.1 deployment, idle/reentry timing and cloak/range semantics remain unverified.",
+          "Resolve target initial counts and lifetime-versus-living caps, protection hysteresis, orphan retargeting, height/leash and follower rewards. Period minimum height11 conflicts with Kithio9; exact reward probabilities and eligibility remain unverified."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L15-L84",
+            "label": "Compiled and registered primary; Spawn lifetime counters and Protect hysteresis inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120502020343id_/http://forums.wildshadow.com/wiki/realm-mad-god/hobbit-mage",
+            "label": "May2,2012 capture, build118 text: twelve-tile activation, ring phases, reproduction and public loot"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531033643id_/http://forums.wildshadow.com/wiki/realm-mad-god/hobbit-archer",
+            "label": "May31,2012 capture, build118 Archer movement cycle and Health Potion-only public reward"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -2290,11 +2384,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "The LowForest Elf Wizard is level 3 with 200 HP, no DEF and a 5-damage Blue Bolt. Its family includes Archers, Swordsmen and Mages with distinct attacks.",
-        "differences": [],
+        "expected": "LowForest level-3 Wizard: 200 HP, 0 DEF and 5-damage Blue Bolt. Archer: 22 HP/2 DEF/Arrow9; Swordsman: 26/2/Blade13; Mage: 22/0/Cyan Magic4. All four selected definitions match pinned modified 7.0, not proof of original AI.",
+        "differences": [
+          "Primary Archer/Mage player orbit radius3 differs from period circle6. The repair selects nominal3 with the existing motor, no variance and retained camp/home/orphan guards. Native measured radii1.90 to2.64 are not exact primary kinematics; Swordsman protection/buzz/orbit also remain distinct.",
+          "Primary Wizard aim 0.3/0.5 is an angular-history multiplier, not probability. Current random full/no velocity lead, missing escort prediction and simplified cycle/idle/pace remain reconstruction.",
+          "Current full 2/4/1 escorts and living-role replenishment differ from primary initial 1/2/0 and lifetime birth counters. Caps 2/4/1 and 15/7/8-second intervals agree; initial two-tile formation, regional admission and 12-tile home leash are not recovered originals."
+        ],
         "unknowns": [
-          "Target predictive aim probability, movement/cadence, role limits, deployment and reward rates.",
-          "Target formation/radii, replenishment and drops."
+          "Exact 123.5.1 radius/variance, aim/retargeting, idle/altitude, deployment/density/SpawnProb and replenishment policy. November2011 Archer page says unavailable; May2012 lists it. Build118 labels do not establish target continuity.",
+          "Original reward probabilities, eligibility and Wizard attempt policy. Escort candidate pools follow primary HP4%/HP4%/MP3%, corroborated by period item types; one native drop cannot establish rates. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/812#issuecomment-6453769596"
         ],
         "sources": [
           {
@@ -2304,6 +2402,30 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L231-L322",
+            "label": "Compiled primary Elf table; read Orbit/Shoot/Spawn engine semantics separately"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Modified7.0: all four selected definitions normalize identically, not server AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120108050517id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-wizard",
+            "label": "Build118-labelled Wizard guide: stats, cycle, fans, caps and timers"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127225019id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-archer",
+            "label": "Additional earlier resource says unavailable, unlike May2012; deployment conflict"
+          },
+          {
+            "url": "https://web.archive.org/web/20111130070809id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-mage",
+            "label": "Additional build118 Mage resource: circle6 and MP3%; differs from primary radius3"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127225031id_/http://forums.wildshadow.com/wiki/realm-mad-god/elf-swordsman",
+            "label": "Period Sword: HP4%, blade13, buzz/circle/protection; not target-version certification"
           }
         ]
       }
@@ -2406,16 +2528,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Bandit Leader is level 2 with 280 HP, 2 DEF and a 9-damage Blade, accompanied by ordinary Bandits with distinct Blade forms. Period sources show grenades and retreat; their exact parameters remain unresolved.",
-        "differences": [],
+        "expected": "Selected ShoreSand Leader: level 2, 280 HP/2 DEF, Blade 9/60/800ms; Bandits: 50 HP/1 DEF, Blades 9/600ms and 8/1000ms at speed 60. May 30, 2012 wiki text labelled build 122.0.1 confirms area attacks and low-health retreat, not exact 123.5.1 AI.",
+        "differences": [
+          "Research at server 0e8b12c5: current <=80HP retreat keeps attacks active; compiled Kithio uses strict <45%, attack-free 12s retreat and nearby follower escape orders. Older Trapped uses strict <80 without cease-fire. Neither authenticates original parameters.",
+          "Current three initial/five living followers with 8s refill differ from primary Spawn's two initial/four lifetime births and Trapped's once-only three to five. Current radius-2 grenades on a concurrent 2500ms channel differ from primary radius-1.4 phased throws; both comparators use damage12/range5/1500ms impact delay.",
+          "Current older nominal loot pool uses ordered first-success single-item selection. Primary has additional T2 armor, different potion rates and independent p/n candidate rolls with contributor bag recipients. Identity-only differences separate the modified7.0 follower; both complete selected objects match retained recovered123.5.1 definitions."
+        ],
         "unknowns": [
-          "Original retreat threshold, cease-fire and recovery behavior, orders, grenade parameters, group sizes and drops.",
-          "Later sources disagree on the retreat threshold."
+          "Original123.5.1 retreat boundary, cease-fire/recovery/orders, grenade parameters, follower movement/count/refill and all reward rates/allocation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/816#issuecomment-6454205406 . Prepared gameplay receipts are separate from whole-feature and historical acceptance."
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl2-bandits.jpg",
-            "label": "2012 player screenshot"
+            "label": "June-path screenshot: Leader, Bandits and red throw trail; not numeric AI evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120530183826id_/http://forums.wildshadow.com/wiki/realm-mad-god/bandit-leader",
+            "label": "May30,2012 capture; text labelled122.0.1, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L66-L162",
+            "label": "Compiled primary comparator; engine and historical conflicts remain qualified"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
