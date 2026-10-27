@@ -726,7 +726,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southern bay and northeastern inland water. The preserved image is 2000 pixels square, not evidence for rescaling game coordinates to 2048.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -738,7 +738,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the deep eastern inlet and southern extensions; distinguish silhouette matching from a recovered river/biome variant.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -750,7 +750,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Preserve the southwestern bay, northeastern projection and bottom extent rather than filling or cropping the source to make construction pass.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -762,7 +762,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the north lake, its river links, elongated southern body and mountain/snow supports.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -774,7 +774,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Resolve the west-central lake/bay system, transparency and image extent. Red/magenta pixels do not by themselves establish damaging lava.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -786,7 +786,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Verify the narrow central/western links, northern lake, roads and terrain bands remain usable after object placement.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -798,7 +798,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the star-like arms and investigate the eastern red/magenta patch before assigning ground damage or native scale.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -810,7 +810,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Compare the northern lake, southwest spur and snow/rock distribution separately from the first road.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -822,7 +822,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Match all five lobes and lake/road joins. A generic blob/logo silhouette is not evidence for this world's interior organization.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -834,7 +834,7 @@
             "acceptance": "Establish the target-era source identity and registration before adding it to the map bank. Apply the geography, ecology and interaction checks independently. Register the paired north/south bodies and central connection. Do not label an approximate radial candidate a recovered original.",
             "implementation": "missing",
             "historical": "unreviewed",
-            "differences": [],
+            "differences": ["No corresponding layout is registered in the current six-layout bank. Target-version continuity and provenance must be established before adding Worlds 4 to 13: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
             "unknowns": [],
             "sources": [],
             "group": "maps"
@@ -1143,7 +1143,7 @@
         "historical": "partial",
         "expected": "Normalized camera-relative client movement, speed/stat/condition/terrain effects, collision and corner sliding; server validates legitimate movement without restoring unsafe client trust.",
         "differences": [
-          "Native client movement is checked only for an active character, a non-regressing clock, finite coordinates and a walkable destination. The speed, time-budget and intervening-path checks exist only for server-driven movement, so a client can report a position beyond its speed or past blocked tiles between two updates."
+          "Server terrain budgets use tile speed without tracking the client's progressive sinking multiplier."
         ],
         "unknowns": [
           "Progressive sinking, corner sliding, camera-relative input and collision at boundaries.",
@@ -1530,7 +1530,7 @@
         "historical": "partial",
         "expected": "Tutorial encounter with Evil Chicken Minions and instructional progression, not a proven Realm closure boss. Target combat/progression details remain qualified.",
         "differences": [
-          "The Tutorial does not run encounters, so the Evil Chicken God and the Tutorial's Evil Chickens stand inert: they never move or attack, and the God never summons Evil Chicken Minions. Server PR526's Kitchen Portal fix does not change this."
+          "The Tutorial does not run encounters, so the Evil Chicken God and the Tutorial's Evil Chickens stand inert: they never move or attack, and the God never summons Evil Chicken Minions. Server PR526's Kitchen Portal fix does not change this. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/717"
         ],
         "unknowns": [
           "Target God attacks/minion spawning and instructional/reward policy.",
@@ -1597,7 +1597,7 @@
       "category": "realm",
       "icon": "assets/player/shambling-sludge.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
         "differences": [
@@ -1605,7 +1605,7 @@
         ],
         "unknowns": [
           "Original child counts, throw delays, health thresholds and drops.",
-          "What happens to Sludgets when the parent dies or a landing location is blocked?"
+          "Original policy for parent death or blocked landing is unresolved. Current admitted tosses can land after parent death, while blocked landings are refused and logged; this is source reading, not native acceptance."
         ],
         "sources": [
           {
@@ -3779,7 +3779,7 @@
         "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools remain unresolved; a page last edited 2012-08-30 ties the secret room to destroying every coil and defeating Dr Terrible.",
         "differences": [
           "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
-          "Server PR603 adds a Tesla Coil to each middle room, one acid room with West and East Automated Defense Turrets, and the Horrific Creation behind Lab Emergency Walls that open once every coil is destroyed and Dr Terrible is dead. All geometry and timings are reconstructed; the Creation has only its Hexxer pet loop and three-wave attack, with no other phases or loot: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603"
+          "Server PR603 adds a Tesla Coil to each middle room, one acid room with West and East Automated Defense Turrets, and the Horrific Creation behind Lab Emergency Walls that open once every coil is destroyed and Dr Terrible is dead. All geometry and timings are reconstructed; the Creation has only its Hexxer pet loop and three-wave attack, with no other phases or loot: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603 Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
         ],
         "unknowns": [
           "Green-pool effects and blue cure mask; Horrific Creation phases beyond its pet loop; encounter choreography and loot."
@@ -3822,7 +3822,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Each middle room has one Tesla Coil. Destroying every coil and defeating Dr Terrible opens six Lab Emergency Walls to a sealed room. There the invincible Horrific Creation becomes a damageable random pet in the left Hexxer and reverts after 10 seconds in the right DeHexxer. Positions, door size and timings are reconstructed; its other phases, loot and the slowed-pet revert are absent. The two green Hexxer and blue DeHexxer pool pairs still apply and clear Hexed, Speedy and Stunned."
+              "Each middle room has one Tesla Coil. Destroying every coil and defeating Dr Terrible opens six Lab Emergency Walls to a sealed room. There the invincible Horrific Creation becomes a damageable random pet in the left Hexxer and reverts after 10 seconds in the right DeHexxer. Positions, door size and timings are reconstructed; its other phases, loot and the slowed-pet revert are absent. The two green Hexxer and blue DeHexxer pool pairs still apply and clear Hexed, Speedy and Stunned. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
             "unknowns": [],
             "sources": [
@@ -4782,7 +4782,7 @@
       "category": "home",
       "icon": "assets/player/nexus-portal.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
         "differences": [
@@ -4863,7 +4863,7 @@
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
         "differences": [
           "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
-          "Tutorial and Kitchen enemies, including the Evil Chicken God, Kitchen Guards, Butchers and Bonegrind the Butcher, stand inert because neither world runs encounters, and Kitchen enemies drop nothing."
+          "Tutorial and Kitchen enemies, including the Evil Chicken God, Kitchen Guards, Butchers and Bonegrind the Butcher, stand inert because neither world runs encounters, and Kitchen enemies drop nothing. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/717"
         ],
         "unknowns": [
           "Full instructional script, first-run completion fidelity, encounter sequence and portal destinations.",
@@ -4936,7 +4936,7 @@
         "historical": "partial",
         "expected": "Stock, currency/price/rank presentation and validated purchases; include supported remaining-count, discount/expiry states and failure responses. Complete target stock/prices/restocking are unresolved. Atomic debit/delivery is a restoration integrity requirement.",
         "differences": [
-          "Merchant stock is a fixed recovered snapshot: no merchant shows a discount, every expiry is shown as none, and stock without a sourced price is logged as unavailable and refused at purchase. Remaining count, star-rank checks, failure replies and reserve-then-commit purchases exist."
+          "Merchant stock is a fixed recovered snapshot: no merchant shows a discount, every expiry is shown as none, and stock without a sourced price is logged as unavailable and refused at purchase. Remaining count, star-rank checks, failure replies and reserve-then-commit purchases exist. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/722"
         ],
         "unknowns": [
           "Target price/rank/stock matrix, restock/discount policy and deployment of all advertised states."
@@ -4955,14 +4955,14 @@
       "category": "home",
       "icon": "assets/player/money-changer.png",
       "audit": {
-        "implementation": "partial",
+        "implementation": "present",
         "historical": "partial",
         "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
         "differences": [
           "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
         ],
         "unknowns": [
-          "Original initial balances, complete Fame/death-bonus formulas, earnings timing and complete spending contract."
+          "Historical starting balances, complete Fame formulas and exact original earnings/spending policy remain unresolved. Current code separately stores Gold and account Fame, credits the committed death award once, and atomically debits the selected wallet for supported purchases; source presence is not a completed native economy journey."
         ],
         "sources": [
           {
@@ -5460,7 +5460,7 @@
         "historical": "known-differences",
         "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
         "differences": [
-          "Resending verification emails is not supported."
+          "Resending verification emails is not supported. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/720"
         ],
         "unknowns": [
           "Target external confirmation endpoint/token lifecycle.",
@@ -6408,7 +6408,7 @@
         "historical": "partial",
         "expected": "Character-screen news has icons, text, relative dates and external links. Fame links open a saved character’s Fame details. The original personal feed’s production, ordering and retention rules remain unresolved.",
         "differences": [
-          "Character-screen news carries only up to ten Discord update posts with a generic news icon linking to the updates page. No personal or Fame-link items are produced, so Fame links never appear."
+          "Character-screen news carries only up to ten Discord update posts with a generic news icon linking to the updates page. No personal or Fame-link items are produced, so Fame links never appear. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/723"
         ],
         "unknowns": [
           "Original personal-news producer, deployment, retention, ordering, deletion and Fame-link behavior."
@@ -6777,7 +6777,7 @@
         "historical": "partial",
         "expected": "Distinct HighSand Minotaur0x646 with pursuit/charge and blade repertoire; target shot patterns unresolved.",
         "differences": [
-          "The Minotaur only chases, with no charge, and only fires its first Blade: aimed single shots with a 20-shot ring every third volley. Its two short-range Blade projectiles are never used."
+          "The Minotaur only chases, with no charge, and only fires its first Blade: aimed single shots with a 20-shot ring every third volley. Its two short-range Blade projectiles are never used. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/719"
         ],
         "unknowns": [
           "Exact target patterns, charge/reproduction, quest status, density and reward probabilities."
