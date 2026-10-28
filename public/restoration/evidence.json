@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "undead-dwarves-native-0716855": {
+      "kind": "native",
+      "revision": "0716855e6e9232a95280432e56bfd2162aada3d4",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1090#issuecomment-6463323567",
+      "checks": ["realm:undead-dwarves"],
+      "method": "Clean QA7ebb5c43 passes23 assertions/48200 game ms with client39acbfbf/Ruffle.16: ordinary Realm's initial9 actors, all six kinds activate/fire selected projectiles and original IDs move through combat/King orphaning, native670to237HP/Confused, current caps and2-to3 escort fills, native King defeat/XP/new King identity, then God defeat with surviving followers and no duplicate XP. Diagnostics expose Health Potion/0xa09 bags. Cold QA1a7adfc2 confirms living saved character/XP18297/revision1, zero God-kill counter,32 complete three-shot7-degree fans, SQLite integrity/foreign keys, no backend ERROR,53 PIDs absent and empty cleanup.",
+      "limitations": "Prepared level20 stats/gear and existing HighPlains family-tile placement; direct scout and renewable protection after observed damage. Not earned progression, unprotected survival, multiplayer item eligibility/acquisition, pickup/reconnect, a rolled Snake Pit journey or probability acceptance. Mage can remain within its7-tile stop until orphaning. Dirty exploratoryae0af852, early-motion315fac0d, unavailable-approach0406c55c/71e7941f/8463af0e and out-of-habitat refill529bb9cb are excluded, not erased. Case7b7c5e10/ELFa368e609; only the case changed. Whole gameplay stays not-run/history partial; no deployment claim."
+    },
+    "undead-dwarves-research-ab3bc32": {
+      "kind": "source",
+      "revision": "ab3bc3253c1fb4026cea272f759d756c8c1cfca8",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/829#issuecomment-6462794075",
+      "checks": ["realm:undead-dwarves"],
+      "method": "All six complete selected objects match pinned modified7.0. Inspected compiled/registered Kithio Highland and Spawn/Shoot/Cooldown/LootDefs/Loots, older Trapped and dated February/May/June2012 captures. Distinguishes direct lifetime births from current King-owned living-cap refills, attack/aim phases and reward-pool/roll differences. Additional Spawn engine and May2012 King document resolve misleading ownership/cap readings.",
+      "limitations": "Community parameters are not original123.5.1 authentication. Period God/follower stats are obsolete; Japanese images do not date numeric claims, backup403, and May2021 RealmEye uses incompatible damage/Unstable. Population/AI/reward continuity stays unresolved. No gameplay policy, licensing grant or deployment change."
+    },
     "skull-shrine-native-0c03248": {
       "kind": "native",
       "revision": "0c032482e2a98bd0c1bc0efdebf02008ef86749a",
@@ -3948,7 +3966,7 @@
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c","kage-research-f897f74","kage-natural-native-5e9ad95"]},
     "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","undead-dwarves-research-ab3bc32","undead-dwarves-native-0716855"]},
     "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ogres": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
