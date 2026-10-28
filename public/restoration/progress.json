@@ -2933,10 +2933,11 @@
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "Issue823 rechecks selected Ship50000HP/DEF60, MineDEF100 and SpectreDEF15 against differing modified7.0 values. Its Reproduce marks every summon no-XP, but the August2012 hotfix only establishes respawn exclusion. No shore Spawner is ordinarily placed. Phase2 parent shielding is not proof of an unreachable comparator transition: child exits clear the same condition timer. https://github.com/OpenRotMG/Open-RotMG-Server/issues/823#issuecomment-6461431871"
         ],
         "unknowns": [
-          "Original phase choreography, initial skull XP eligibility and item-drop allocation still need historical sign-off; the restored portal probability follows community references."
+          "Exact target-era phase order/shield timing, initial skull XP eligibility, shore-spawner placement and item-drop allocation remain unresolved in issue823. Portal and reward probabilities follow community reconstruction, not authenticated original values. Mixed-era wiki text and2012 image dates do not date each gameplay claim."
         ],
         "sources": [
           {
