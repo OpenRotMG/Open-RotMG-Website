@@ -18,6 +18,10 @@ test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics
     for(const ref of ['madlab-verification-source-25a51e6','madlab-room-reward-regression-0e8f429','madlab-room-journey-native-25a51e6'])assert(evidence.results[id].evidence.includes(ref));
   }
   assert.equal(evidence.sources['madlab-room-journey-native-25a51e6'].revision,'25a51e6f7491c055a7303454b7b4c07e2e43c063');
+  const completion='madlab-creation-completion-native-35c8a24';
+  assert.equal(evidence.sources[completion].revision,'35c8a24ce31affe6eb7320447c79f81817319e6b');
+  assert.deepEqual(evidence.sources[completion].checks,[ids[0],ids[2]]);
+  assert(!evidence.results[ids[1]].evidence.includes(completion));
   assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
 });
 
