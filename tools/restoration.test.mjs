@@ -435,7 +435,7 @@ test('one component pass cannot accept its whole feature or historical rules',()
   const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
   evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
   evidence.results[id]={status:'passed',evidence:[...evidence.results[id].evidence,'test']};validateEvidence(data,evidence);
-  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'unreviewed');
+  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'partial');
   for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
   assert.equal(accepted(f,evidence),false);
   evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];
