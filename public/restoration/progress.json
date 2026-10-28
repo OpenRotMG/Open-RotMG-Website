@@ -2830,12 +2830,27 @@
         "expected": "Shrine, setting, red/blue skull attacks, movement, replenishment, ownership, completion and rewards; exact target rates and geometry remain qualified.",
         "differences": [
           "PR607 keeps erosion-selected Skull Shrine birth cells unchanged and rechecks their current floor and occupants before placement or delayed admission. Surviving stone still paints normally. Prepared checks and community-source erosion semantics do not establish original layouts or noise/RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/607",
-          "PR614 replaces the 2D value-noise erosion field with community-source 3D simplex, retaining source coordinate precision, byte-table construction and normalization. Its deterministic seed adapter does not recover original seeds, historical runtime or whole-engine RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/614"
+          "PR614 replaces the 2D value-noise erosion field with community-source 3D simplex, retaining source coordinate precision, byte-table construction and normalization. Its deterministic seed adapter does not recover original seeds, historical runtime or whole-engine RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/614",
+          "Issue819 compares all three selected shrine/skull XML definitions identically with pinned modified7.0. January2012/build115 and June2012/build122.3.2 pages independently describe grouped40-skull/5s replenishment, unlike the current later-source20-per-colour/500ms reconstruction. Older reward percentages corroborate the PR535 table, not exact123.5.1 continuity: https://github.com/OpenRotMG/Open-RotMG-Server/issues/819#issuecomment-6461031749",
+          "PR1078 fixes the demonstrated shared-cap mismatch:32 total owned actors stopped the shrine at16 red/15 blue. Its shrine-only41-actor bound allows20 of each plus the root; other encounters retain32 and the global256 summon limit is unchanged. This repairs the chosen reconstruction, not historical authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1078"
         ],
         "unknowns": [
-          "Independent target counts, timing, geometry, cleanup and reward probabilities."
+          "Exact123.5.1 replenishment cadence and mixed-colour cap, skull aim/acquisition/protection geometry, orphan lifetime/cleanup and original terrain/RNG parity.",
+          "Continuity of build115 reward probabilities into123.5.1; private threshold and Orb/cloth coefficients remain reconstruction."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120117000123id_/http://forums.wildshadow.com/wiki/realm-mad-god/skull-shrine",
+            "label": "January2012 capture, page updated build115: older behavior and reward rates, not123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023618id_/http://forums.wildshadow.com/wiki/realm-mad-god/skull-shrine",
+            "label": "June2012 capture, page updated122.3.2: shrine terrain and Orb; conflicting projectile lifetime"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EncountersCXML.dat",
+            "label": "Modified7.0 comparator: all three selected XML definitions agree, not server AI or official RNG"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SkullShrine.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
