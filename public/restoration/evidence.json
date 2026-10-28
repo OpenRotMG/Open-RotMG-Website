@@ -89,6 +89,24 @@
         "dungeons:wine-cellar:oryx-two-reward-return"
       ]
     },
+    "loot-lifetime-native-e90ef43": {
+      "kind":"native", "revision":"e90ef433c066010da1f4ff6fd1e36e6d38619ac6", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1158#issuecomment-6480556068", "checks":["gear:loot-and-ownership","gear:loot-bag-presentation"],
+      "method":"Clean QA83b6e141 passes17 assertions/82,350game ms with two native Wizards/client0282b3a4/Ruffle.16/case51db021a/ELF8ee3b928. Owner-only supplied tincture drop, earned hen reward visible/picked once by a noncontributor, empty-slot refusal and private expiry without public conversion. Cold QA8fe13121: two living revision2 characters, one saved Minor Health Potion, SQLite/FKs, zero deaths/backend ERRORs/cleanup errors and29 absent owned PIDs.",
+      "limitations":"Prepared gear/tincture and Tutorial exit placement, not earned progression, a god drop, native reconnect, exact expiry-instant measurement or original history. Seven10-second privacy samples. Earlier wrong-response script failure and occupied-starter-slot regression remain failures; cancelled queued runs are excluded. Existing presentation acceptance is retained, not a new full-feature pass."
+    },
+    "loot-reentry-regression-e90ef43": {
+      "kind":"regression", "revision":"e90ef433c066010da1f4ff6fd1e36e6d38619ac6", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40765956003", "checks":["gear:loot-and-ownership"],
+      "method":"Local focused QAc10fbc1b passes1/1; PR1158 CI merge9a586b90 passes261 Rust tests, formatting, strict all-target Clippy and lifecycle checks. New World/Store test denies an outsider without mutation, reenters the same account under a new entity ID without resetting expiry, retains a reserved bag at its deadline, commits pickup once and reloads the item. A fresh World does not restore uncollected bags.",
+      "limitations":"Controlled backend and clock jump, not native reconnect, a process restart or original history. Initial local259/260 failed because the test expected starter-potion slot4 empty; e90ef43 asserts an empty destination at slot11 and retries the stale bag slot into slot10. No gameplay, death, persistence, ownership, ACK or lease guard changed."
+    },
+    "loot-lifetime-research-5738938": {
+      "kind":"source", "revision":"5738938cd52c7c48b1d877b1d2df893d4cccf444", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/5738938cd52c7c48b1d877b1d2df893d4cccf444/examples/testing/loot-ownership.mjs", "checks":["gear:loot-and-ownership","gear:loot-bag-presentation"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/878#issuecomment-6480012951 . Selected123.5.1 and modified7.0 bind interaction to account ID. Six bag definitions agree on eight slots, put flags and textures. Kithio/modified7.0 schedule60-second removal, not conversion. February29,2012 post33073282 independently describes owner-only purple god sacks. Reconciled PR364/691/695/1139; inspected Trapped Container and older Oryx117.1.3 evidence.",
+      "limitations":"Not original server recovery or gameplay acceptance. Client exports contain opaque instructions. Kithio maps rarity1 to0x503, modified7.0 to0x506; definition agreement does not settle appearance allocation. Exact target-version Oryx rates, allocation, expiry/conversion and reconnect history remain unresolved. GameFAQs403 supplies no timing evidence. Current safety/once-only policies override comparator duplication/leak paths."
+    },
     "udl-floor-birth-regression-2bbe128": {
       "kind":"regression", "revision":"2bbe128b8b700b7683b39470c0807bcc0d829572", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1138#issuecomment-6479579703", "checks":["dungeons:undead-lair","dungeons:undead-lair:room-family-and-split-lifecycle"],
@@ -5252,8 +5270,8 @@
     "gear:heavy-armor": {"status":"passed","evidence":["heavy-armor-research-98760408","heavy-armor-fame-0a927423","heavy-armor-native-9f791c1e"]},
     "gear:robes": {"status":"not-run","evidence":[]},
     "gear:rings": {"status":"not-run","evidence":[]},
-    "gear:loot-and-ownership": {"status":"not-run","evidence":["god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","reward-allocation-native-1b051cc"]},
-    "gear:loot-bag-presentation": {"status":"passed","evidence":["god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
+    "gear:loot-and-ownership": {"status":"not-run","evidence":["loot-lifetime-native-e90ef43","loot-reentry-regression-e90ef43","loot-lifetime-research-5738938","god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","reward-allocation-native-1b051cc"]},
+    "gear:loot-bag-presentation": {"status":"passed","evidence":["loot-lifetime-native-e90ef43","loot-lifetime-research-5738938","god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
     "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
     "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e"]},
     "gear:health-potions": {"status":"passed","evidence":["health-potions-research-de39f41","health-potions-native-9faba5a"]},
