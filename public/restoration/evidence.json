@@ -1,6 +1,36 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "inventory-native-c5f52f74": {
+      "kind":"native", "revision":"c5f52f740d78a028999f1265463754cbf234cd93", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1163#issuecomment-6481129567", "checks":["gear:inventory-and-equipment"],
+      "method":"Clean QA07177b80 passes15 assertions: contextual carried swap, class refusal, reversible DEF25/30, full-inventory ground equip/use, once-only hotkey, free-slot pickup and ordinary Nexus reconnect preserving identity/items/revision. Effective stats also match in receipt check QAb8f06f4f. Native T6 red refusal, T2 comparison, UT and Doses3 screenshots inspected. Case3e9c9295/client0282b3a4/Ruffle16; exit0/cleanup[].",
+      "limitations":"Prepared finite level/stats/gear; one explicit carried-item refill constructs full inventory. Labels do not prove item acquisition. Ordinary reconnect, not process restart or earned progression. Initial queue/fixture/input-timing failures retained, not passes. Original server synchronization timing remains unknown; authority/durability guards unchanged."
+    },
+    "ability-contract-native-7a756fca": {
+      "kind":"native", "revision":"7a756fcafe7eec74740c7fff33f91d7f8b78e0bd", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1163#issuecomment-6481129567", "checks":["gear:ability-activation-contract"],
+      "method":"Clean QA3a7ade13 passes10 assertions: authoritative cursor aim, Thunder100MP/6000ms then Magic Quiver swap retaining the deadline, refused early retry, accepted50MP/500ms, incompatible/empty ability slots and insufficient MP. Exact activation costs/cooldowns checked in logs. Case97299044/client0282b3a4/Ruffle16; exit0/cleanup[].",
+      "limitations":"Prepared Archer within252MP cap; not earned gear or original server timing. Native deadline checks are bounded, not millisecond boundary measurements. QAb8f06f4f confirms committed case bytes and identical executed binary across all three PR1163 native cases."
+    },
+    "ability-refusals-native-d6caa5d1": {
+      "kind":"native", "revision":"d6caa5d1d0180d75bbb968d9cda0149e0b7f57e3", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1163#issuecomment-6481129567", "checks":["gear:ability-activation-contract"],
+      "method":"Clean QAd07c55c1 passes7 assertions: normal /pause chat and unpause, paused cast refusal, real blocked-target teleport refusal without MP/cooldown/decoy, natural Living Floor Quiet and native Space refusal with zero MP/no shots/no inventory mutation. Both living identities retained. Casec14e8b6d/client0282b3a4/Ruffle16; exit0/cleanup[].",
+      "limitations":"Prepared wall-adjacent Nexus context and separate Castle actor with finite incoming HP protection. Quiet naturally forces MP to zero each tick; independent positive-MP Quiet server isolation is a Rust matrix check, not native acceptance of that impossible steady state. No full condition/earned-class/multiplayer or historical-server claim."
+    },
+    "ability-refusals-regression-c66da90c": {
+      "kind":"regression", "revision":"c66da90c9a02848aaca1933be756d5fd0a19cdc5", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1163#issuecomment-6481129567", "checks":["gear:ability-activation-contract"],
+      "method":"QA5fe6d895 passes all261 Rust tests. Matrix preserves MP/items/revision/deadline/position/deployments on mana, Quiet, pause, cooldown, wrong class, empty equipped slot and carried-slot refusal, then accepts a valid spend. Blocked teleport additionally preserves deadline0. Rust sources and Cargo manifest/lock are unchanged through d6caa5d1.",
+      "limitations":"Prepared backend isolation, not native controls or historical server reconstruction. No production gameplay change. Earlier invalid fixtures/oracles and launch timeouts remain non-passes; accepted-spend, ownership, persistence, ACK and lease policies retained."
+    },
+    "inventory-era-source-d15f321": {
+      "kind":"source", "revision":"d15f321edcce0ef890001890c6991c25a1b0f718", "date":"2026-10-28",
+      "url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as", "checks":["gear:inventory-and-equipment","gear:ability-activation-contract"],
+      "method":"Selected _E_6 full-carried-slot branch equips/uses directly; with space it picks up. ObjectLibrary matches class SlotTypes without item level. Player shares a per-player 500ms/item override timer before USEITEM. Preserved August4/October5/November2 2012 notes distinguish contextual UI, its Build124 change, and later dedicated nine-potion stacks. Modified7.0 mediator and compiled Kithio handlers were compared, not imported; PR1163 research comment6480576520 pins the paths and date qualifications.",
+      "limitations":"Mirrored client/comparator source and preserved period text, not recovered official server or native acceptance. Original authoritative commit/refusal synchronization and rejection/reconnect/transfer cooldown policy remain unknown; current durability and accepted-spend policy retained."
+    },
     "magic-potions-native-3389a2c": {
       "kind":"native", "revision":"3389a2c3e2f38b6735623429ed0582dfbf90ef03", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1162#issuecomment-6481044945", "checks":["gear:magic-potions"],
@@ -5414,8 +5444,8 @@
     "gear:loot-and-ownership": {"status":"not-run","evidence":["loot-lifetime-native-e90ef43","loot-reentry-regression-e90ef43","loot-lifetime-research-5738938","god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1","portal-position-source-78d8151","portal-position-regression-78d8151","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","reward-allocation-native-1b051cc"]},
     "gear:loot-bag-presentation": {"status":"passed","evidence":["loot-lifetime-native-e90ef43","loot-lifetime-research-5738938","god-potion-gear-regression-83c8a34","god-potion-gear-source-83c8a34","purple-bag-native-6de32a7","purple-god-bag-regression-6de32a7","loot-bag-contract-source-eb18fe8","loot-bag-contract-regression-89b5540","loot-bag-glyphs-native-764fad1","loot-bag-collection-privacy-native-2d6bf14","loot-bag-expiry-native-764fad1"]},
 
-    "gear:inventory-and-equipment": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
-    "gear:ability-activation-contract": {"status":"not-run","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e"]},
+    "gear:inventory-and-equipment": {"status":"passed","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445","inventory-era-source-d15f321","inventory-native-c5f52f74"]},
+    "gear:ability-activation-contract": {"status":"passed","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e","inventory-era-source-d15f321","ability-contract-native-7a756fca","ability-refusals-native-d6caa5d1","ability-refusals-regression-c66da90c"]},
     "gear:health-potions": {"status":"passed","evidence":["health-potions-research-de39f41","health-potions-native-9faba5a"]},
     "gear:magic-potions": {"status":"passed","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","magic-potions-research-3389a2c","magic-potions-regression-62c38f4","magic-potions-native-3389a2c"]},
     "gear:stat-potions": {"status":"passed","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc","stat-potions-source-3725171","stat-potions-regression-a8622fb","stat-potions-native-3725171"]},

@@ -5887,12 +5887,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four equipment slots and eight carried slots support class-compatible equipment, reversible bonuses, swaps, pickup and drops. Native controls include hotkeys, ground use, contextual clicks, equipment comparison, tier/UT/dose labels and unusable-item highlighting. The pre-124 contextual-click rules also cover equipping or using a container item with a full inventory.",
+        "expected": "Four equipment slots and eight ordinary carried slots, without a separate potion belt or stack. Class SlotTypes govern equipment eligibility, not item level. Pre-124 container double-click picks up with space; with full inventory it equips compatible gear or uses a consumable. Build 124.0 (October 5, 2012) changed that full-inventory behavior; dedicated nine-potion stacks arrived in Build 4.0 (October 31 test / November 2 production). Native controls also include reversible bonuses, swaps, drops, hotkeys, ground use, equipment comparison, tier/UT/dose labels and unusable-item highlighting.",
         "differences": [],
         "unknowns": [
-          "Original contextual clicks with full inventory, tooltips and item equip requirements.",
-          "Rules for the later potion-stacking system must not be imported into 123.5.1.",
-          "Was a separate potion belt or stash available, rather than ordinary inventory slots?"
+          "Original authoritative server inventory commit/refusal and synchronization timing is not recovered; current durable atomic policy is retained."
         ],
         "sources": [
           {
@@ -5902,19 +5900,31 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.0",
             "label": "Build 123.4.0 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "October 5, 2012: full-inventory contextual-click change"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012: dedicated potion slots and nine-potion stacks"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as",
+            "label": "Selected-era client mirror: contextual click and full-inventory dispatch"
           }
         ],
         "checks": [
           {
             "id": "gear:ability-activation-contract",
             "name": "Ability validation and cooldown continuity",
-            "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
+            "expected": "Equipped class-compatible ability, enough MP, valid aim, no pause/Quiet and the existing accepted-cast deadline are required. Changing abilities does not replace that deadline; the next accepted cast uses the newly equipped item's cooldown.",
             "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending.",
             "implementation": "present",
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original server policy for starting a cooldown after a rejected cast, reconnect or world transfer. The recreation retains accepted-spend timing."
+              "Selected client starts its per-player timer before USEITEM and initializes it to zero on a new Player. Original server rejection/reconnect/transfer cooldown policy is not recovered; the recreation retains accepted-spend timing."
             ],
             "sources": [
               {
