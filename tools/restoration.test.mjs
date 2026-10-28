@@ -20,6 +20,19 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Spider Den egg and column acceptance does not accept every entrance or original history',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',component=id+':egg-and-cover-environment',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks[0].historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['spider-journey-native-57551f0','spider-cover-native-44b376d']){
+    assert.equal(evidence.sources[ref].kind,'native');assert.deepEqual(evidence.sources[ref].checks,[id,component]);
+    for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  }
+  assert.match(evidence.sources['spider-journey-native-57551f0'].limitations,/shared\/denied admission/);
+  assert.match(feature.audit.unknowns.join(' '),/boss-exit destination/);
+});
+
 test('Ent and Ghost God bounded receipts do not accept original history or acquisition',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   for(const [name,native,regression,research] of [['ent-god','5d43505','5d43505','233f7d8'],['ghost-god','9e258e9','9e258e9','9e258e9']]){
@@ -31,6 +44,17 @@ test('Ent and Ghost God bounded receipts do not accept original history or acqui
     assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
     assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
   }
+});
+
+test('Slime God evidence cannot accept original RNG or the whole encounter',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:slime-god',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['slime-god-native-471824b','native'],['slime-god-reward-regression-ce4394d','regression'],['slime-god-research-fd52882','source']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.match(feature.audit.differences.join(' '),/Toxic Sewers.*October2016/);
+  assert.match(feature.audit.unknowns.join(' '),/prediction\/cooldown/);
 });
 
 test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
@@ -205,7 +229,7 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const width=['source','regression','native'].map(kind=>'snake-width-'+kind+'-4514010');
   const materials=['snake-cover-materials-source-2b28e06','snake-cover-materials-regression-f9ad3e0','snake-cover-materials-native-f9ad3e0'];
   const shape=['source','regression','native'].map(kind=>'snake-cover-shape-'+kind+'-5eec572');
-  assert.deepEqual(result.evidence,[...shape,...materials,...sight,...cover,...layout,...room,...treasure,...neck,...width,...spacing]);
+  assert.deepEqual(result.evidence,['snake-research-e16871e',...shape,...materials,...sight,...cover,...layout,...room,...treasure,...neck,...width,...spacing]);
   for(const ref of [...shape,...materials,...sight,...room,...treasure,...neck,...width])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
   for(const ref of shape){assert.equal(evidence.sources[ref].revision,'5eec5726be7b22ce9e50c54f3c9b4f33e247a502');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
   for(const ref of width){assert.equal(evidence.sources[ref].revision,'4514010b8e35d45a483e50eaa6e4ad66c61bd99c');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
