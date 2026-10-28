@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "staves-native-roster-f79ad1e": {
+      "kind": "native", "revision": "f79ad1e96b6e563754b00874236358895711af7e", "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1161#issuecomment-6480698433", "checks": ["gear:staves"],
+      "method": "Clean single-client QAs ee5441c7/f4643064/89b40252/a2f5d9e9 pass55 checks over132050 game ms. Wizard/Mystic/Necromancer use all18 selected staves, commit15 ordinary swaps, fire whole admitted native volleys and retain mana/stats/inventory/living identity. Three wand refusals and Knight staff refusal are atomic. Four cold checks verify exact saved gear, revisions6/6/6/1, XP18050, shots138/136/135/0, SQLite/FKs, zero deaths/ERRORs and79 unique absent owned process identities; cleanup empty/scratch reclaimed. Same client/runtime/ELF as damage receipt.",
+      "limitations": "Four fresh supplied legal fixtures, selected with required OPENROTMG_STAFF_GROUP0/1/2/3, not a shared or earned journey. Upper tiers are definitions, not production drops. Native maximum cadence, range/cover edges, acquisition, death fame, deployment and historical fidelity remain unaccepted. Ten slow-world-tick WARNs retained. A separate Mystic menu/frame timeout and earlier multi-client/fixture/startup failures remain failed; no guard or permanent test infrastructure changed. Whole-feature not-run/history partial."
+    },
+    "staves-native-damage-f79ad1e": {
+      "kind": "native", "revision": "f79ad1e96b6e563754b00874236358895711af7e", "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1161#issuecomment-6480571002", "checks": ["gear:staves"],
+      "method": "Clean QA06f7acf9 passes19 checks over35700 game ms. Energy/Cosmic/Extreme Prejudice/Crystal Serpent/Anatis native fire lowers the same generated Septavius8000→7969→7415→6592→4914→4806. Four ordinary swaps and unchanged firing inventory/stats. Six minion kills add240XP. Cold QA85a1a0c2 verifies living gear/revision5/XP18290/shots159/kills6, SQLite/FKs, zero deaths/WARNs/ERRORs,29 absent owned PIDs, empty cleanup/reclaimed scratch. Client0282b3a4/Ruffle.16; two passing viewport crops anonymously byte-verified.",
+      "limitations": "One supplied Wizard with legal stats/gear, seed12351 boss-adjacent position and temporary Invulnerable. Not boss defeat, isolated DPS/mana, earned acquisition, ordinary-risk survival, native range/cover, death fame, deployment or original fidelity. Quiet/regeneration remain active. Earlier invalid-stat, Quiet, multiplayer sync, unavailable-marker and startup failures stay failed; single-client final case avoids unrelated late-join synchronization without changing guards. Whole-feature not-run/history partial."
+    },
+    "staves-regression-98758df": {
+      "kind": "regression", "revision": "98758dff91b624669b5ca7d1014d70d21be21198", "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/98758dff91b624669b5ca7d1014d70d21be21198/src/world/combat_tests.rs", "checks": ["gear:staves"],
+      "method": "QA cbedbe0c passes all248 Rust tests with four threads in147.71s. One focused guard covers all18 staff definitions, Attack-scaled damage, selected count/spread/rate,171/428/155/685ms cadence boundaries, rejected early shots, alternating wave extrema, expiry and36 open/covered first-target collision scenes. Strict all-target Clippy QA c98ff1ec and formatting QA6b2a5cb6 pass. Test ELF SHA2563152fbc32032938a03e48da335e9daab9d77f5e06dde3b49ad017b982edbe9d4.",
+      "limitations": "Constructed engine targets, not native range-edge/cover/acquisition or original-server collision/RNG proof. Initial uncredited collision projectile trips the existing lifetime guard; the fixture now records its admitted shot. No gameplay, XML, loot, durability, ACK/lease or shared testing infrastructure change. Cancelled queue jobs are not passes."
+    },
     "staves-source-745b4b8": {
       "kind": "source", "revision": "745b4b8130783bbec6128ebeb05e9e67b15ea8c7", "date": "2026-10-28",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/745b4b8130783bbec6128ebeb05e9e67b15ea8c7/data/objects.xml", "checks": ["gear:staves"],
@@ -5068,7 +5086,7 @@
     "gear:daggers": {"status":"passed","evidence":["daggers-selected-96ca0463","daggers-cadence-d4a7da67","daggers-damage-cd70fbd6","daggers-collision-96ca0463","daggers-final-e466309a"]},
     "gear:bows": {"status":"not-run","evidence":["reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","bows-research-6103c56","bows-regression-1050ad8","bows-native-d9bc8bc"]},
     "gear:wands": {"status":"not-run","evidence":["wand-hit-source-82c3430","wand-hit-regression-82c3430","wand-hit-native-82c3430","wand-research-929e75af","wand-combat-regression-6103c56f","wand-ci-cfb77560","wand-native-a5dc670a"]},
-    "gear:staves": {"status":"not-run","evidence":["staves-source-745b4b8"]},
+    "gear:staves": {"status":"not-run","evidence":["staves-source-745b4b8","staves-regression-98758df","staves-native-damage-f79ad1e","staves-native-roster-f79ad1e"]},
     "gear:leather-armor": {"status":"not-run","evidence":[]},
     "gear:heavy-armor": {"status":"not-run","evidence":[]},
     "gear:robes": {"status":"not-run","evidence":[]},
