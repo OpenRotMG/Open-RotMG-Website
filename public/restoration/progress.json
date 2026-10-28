@@ -5495,13 +5495,21 @@
         "expected": "Evidenced target swords retain individual damage, rate, shot spread, trajectory, class compatibility, equipment bonuses and fame behavior. Embedded upper/admin tiers do not establish production availability.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster, particularly T13/T14 swords and admin items.",
-          "Individual swords’ original firing and collision behavior."
+          "Exact 123.5.1 acquisition/drop/credit policies. The build121 period roster supports T0–T12 and three untiered swords, not ordinary T13/T14/Admin availability.",
+          "Sword-specific earned acquisition, remaining native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Pinned modified7.0 comparator; upper/admin IDs and Tier/Soulbound differ"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/swords",
+            "label": "May24,2012 build121 sword table, not complete target-era acquisition proof"
           }
         ]
       }
@@ -5514,16 +5522,41 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Evidenced slot2 daggers retain individual rate/damage, piercing/wave behavior and bonuses; distinguish Obsidian, Cronus, Bone and Spirit daggers. Novelty/high-tier distribution is separately unresolved.",
+        "expected": "Selected 123.5.1 daggers retain item-specific cadence, damage, range and bonuses: Obsidian 150%, Cronus +4 WIS/short range, Bone enemy piercing, Spirit alternating sinusoidal deflection. Embedded T13/T14 and Chicken Leg definitions do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "All obtainable variants, including novelty items.",
-          "Original dagger collision and firing timing."
+          "Exact 123.5.1 novelty/high-tier acquisition and drop/credit probabilities; prepared inventory does not prove earned availability.",
+          "Original server collision tolerances, sampling and damage RNG endpoints; selected-client and comparator engines differ.",
+          "Exact deployed numbers behind the August 14, 2012 Chicken Leg buff: selected 65–105 damage at 90% is consistent with Obsidian’s unarmored average damage rate, but the announcement gives no numeric definition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Modified 7.0 comparator: 18 matching daggers; T13/T14 renumbered without Tier tags"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L887-L943",
+            "label": "Selected client cadence, attack scaling and muzzle origin"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as#L155-L351",
+            "label": "Selected client parity, MultiHit bookkeeping and sampled collision"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607094909id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/daggers",
+            "label": "June 7, 2012 capture, labelled 122.3.2: dagger roster and pre-buff Obsidian"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 build123.3: Obsidian raised to 35–65"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124640id_/http://forums.wildshadow.com/node/129333",
+            "label": "August 14, 2012 build123.4.4: Chicken Leg buff announcement, no numeric replacement"
           }
         ]
       }
