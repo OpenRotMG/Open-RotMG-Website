@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "lost-lands-followup-48a3be9": {
+      "kind": "native",
+      "revision": "48a3be9ef0c39d5e704303010cd15e4d5ee7c214",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1088#issuecomment-6462195687",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "FAILED QA8d3cab3b at67ba7b7 clears2 Phoenix encounters/admitted Ship, never Lord; FAILED QA67c7e228 at48a3be9 stops in first Phoenix. Only startup-reservation assertions pass. Existing500ms renewal deadline/1500ms lease remain enforced. Cold QA1b4afedf confirms healthy SQLite/FKs, two living revision1 characters per take, no deaths/backendERROR and all24+11 child/guardian PIDs absent.",
+      "limitations": "No Lord combat or reward acceptance. Added natural-roll/private-visibility/native-pickup/duplicate/reconnect assertions are syntax-checked but unexecuted. Prepared gear/stats/protection/+attack/scout/native teleport, not earned progression. Delayed helper bookkeeping is an observation, not a proven root cause or Lord defect. Older failures/death preserved; no expired-session replay or shared policy change. Issue817 remains open."
+    },
+    "lost-lands-source-followup-67ba7b7": {
+      "kind": "source",
+      "revision": "67ba7b757db46fa5186f36719420ecbb75b80657",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/67ba7b757db46fa5186f36719420ecbb75b80657/src/world/lost_lands.rs",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/817#issuecomment-6462045738 . Additional Trapped593e4908 LotLL/LootDef/LootBehavior inspection finds a wandering stub, ordered first-success potion draws and >100 raw-damage encounter-wide distribution, not full encounter evidence. Japanese Protection Crystal page reports eight orbiting crystals/no drops and HP5000, conflicting with selected6000/May2012 capture.",
+      "limitations": "The current Japanese page reports October11,2012 modification, not authenticated period continuity. Neither source resolves original shielding/clocks/populations/replenishment/eligibility/rates or justifies changing selected definitions. No imports or historical promotion."
+    },
     "kage-research-f897f74": {
       "kind":"source", "revision":"f897f745d818360f0e6f3e23d13ab1157d27cab6", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/f897f745d818360f0e6f3e23d13ab1157d27cab6/src/world/manor_entry.rs", "checks":["realm:kage-kami"],
@@ -3892,7 +3910,7 @@
     "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
-    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323"]},
+    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323","lost-lands-source-followup-67ba7b7","lost-lands-followup-48a3be9"]},
     "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
