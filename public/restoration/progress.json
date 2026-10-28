@@ -1591,8 +1591,8 @@
           "Server PR438 returns ordinary dungeon exits to the Realm whose drop or key opened the dungeon, and nested keys inherit that Realm. If that Realm has closed, the exit refuses and directs the player to the Nexus instead of choosing another Realm. Explicit Random Realm Portals and Nexus exits are unchanged. This is project policy; a later community handler is only a comparator: https://github.com/OpenRotMG/Open-RotMG-Server/pull/438"
         ],
         "unknowns": [
-          "Original world capacity, escape/death interactions, transfer timeouts and reconnection behavior.",
-          "Original dungeon-exit destination, including when the opening Realm is full or closed."
+          "Exact 123.5.1 continuity of the independently documented April 3, 2012 85-player Realm capacity and anytime Nexus escape; original escape-versus-fatal-hit ordering and server transfer timeouts remain unverified.",
+          "Original dungeon-exit destination, including full/closed origins. Compiled Kithio maps Cowardice to the account's prior world (or Nexus); modified 7.0 uses a random Realm for unbound exits. Neither authenticates this project's explicit origin-Realm policy."
         ],
         "sources": [
           {
@@ -1606,6 +1606,22 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/networking/handlers/UsePortalHandler.cs",
             "label": "Later community portal handler: explicit instance preferred, random Realm for unbound exits; comparator only"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/UsePortalPacketHandler.cs",
+            "label": "Compiled primary reconstruction reference; prior-world mapping has admitted recycled-world/Vault caveats, not original-server proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/_1f.as#L1207-L1210",
+            "label": "123.5.1 source mirror follows RECONNECT game ID/key with existing character ID; pre-entry retry is one second, not server grant lifetime"
+          },
+          {
+            "url": "https://www.rpgfan.com/review/realm-of-the-mad-god/",
+            "label": "April 3, 2012 independent review: up to 85 players and anytime Nexus escape despite ailments; not exact September-build race semantics"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 capture: portal Enter UI, permanent death, autosave and account-bound Vault; earlier-version corroboration only"
           }
         ]
       }
