@@ -2205,10 +2205,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "MidSand level5 leader0x623,320 HP/3 DEF, two Red Fire forms damage16/20; Tawny/Demon Wargs. Rage and group replenishment are comparator-supported; target threshold/projectile change disputed.",
-        "differences": [],
+        "expected": "MidSand level5 leader0x623,320 HP/3 DEF, size135, Red Fire16/20 and Tawny/Demon Wargs. All three selected definitions match pinned modified7.0. May2012 build122.3.2 guide supports low-health growth, red blinking and roar, not exact123.5.1 numeric behavior.",
+        "differences": [
+          "Current HP<200/size150/unchanged wander speed/projectile switch is qualified reconstruction. Compiled Kithio instead uses HP<75%, growth to170, faster follow/wander and projectile0 throughout; Trapped adds projectile1 alongside projectile0. Neither comparator authenticates the target transition.",
+          "Current random1–3 per kind and owned living cap3 per kind with10s replenishment differ from primary four initial random Wargs/eight lifetime births. Trapped instead counts nearby matching entities, not owned slots. These are comparator differences, not proven historical deviations."
+        ],
         "unknowns": [
-          "Target rage threshold, size/movement, projectile transition, initial distribution, exact Warg caps and rewards; later sources disagree."
+          "Exact123.5.1 rage threshold, size/motion/roar policy, concurrent attacks, initial distribution/cap/refill and reward rates/eligibility, including Warg items. The May2012 guide's18-damage stronger shot predates selected20 damage. Issue807 retains the unresolved historical work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/807#issuecomment-6459714077"
         ],
         "sources": [
           {
@@ -2216,8 +2219,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/test/build115.6",
-            "label": "Build 115.6 test-server notes"
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L793-L846",
+            "label": "Compiled primary comparator, not authenticated target AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120517002923id_/http://forums.wildshadow.com/wiki/realm-mad-god/desert-werewolf",
+            "label": "May17,2012 capture, explicitly build122.3.2"
+          },
+          {
+            "url": "https://web.archive.org/web/20110528160154id_/http://forums.wildshadow.com/node/3269",
+            "label": "Rob's May25,2011 introduction post; location, not numeric AI"
           }
         ]
       }
