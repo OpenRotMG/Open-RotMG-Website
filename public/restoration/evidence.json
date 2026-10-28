@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "hermit-native-partial-9ddc74c": {
+      "kind": "native",
+      "revision": "9ddc74c9d4babdee770538394a30f7958580d813",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1079#issuecomment-6471283943",
+      "checks": ["realm:hermit-god"],
+      "method": "Failed QAb354e3d9 retains five assertions:55000HP, eight tentacles/spawners, native tentacle defeat, exposure/eight whirlpools, retirement/replacement wave. Failed QA92a564ad records48600 boss damage/6400HP at its240-command test bound. Client39acbfbf/Ruffle.16; base plus unshipped retention fixture, full ELF/case/fixture hashes in linked receipt. Cold QAd350a0bb confirms healthy SQLite/FKs, two living revision1 unlooted characters, zero deaths,237 retired PIDs and empty cleanup errors; prior cold QA preserves an earlier prepared death.",
+      "limitations": "Prepared gear/stats/placement and renewed60s Invincible suppress damage/statuses. Fixture removed; no gameplay or authority/ACK/lease/256-receipt cap changes. No defeat, reward/ownership, pickup/duplicate or Trench acceptance. Later duo startup is refused by the managed-browser cgroup guard before gameplay. Failed/cancelled takes stay failed; whole-feature gameplay stays not-run/history partial. Remaining checks stay issue822."
+    },
     "sphinx-native-1ba2972": {
       "kind": "native",
       "revision": "1ba2972612ec473697f5bb4eb6d53896e96d5d2a",
@@ -4160,7 +4169,7 @@
     "realm:skull-shrine": {"status":"passed","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df","skull-shrine-research-3587c31","skull-shrine-cap-regression-8055278","skull-shrine-native-0c03248"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df","cube-research-5dc0694","cube-native-c746788"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f","hermit-research-9ddc74c","hermit-admission-direct-15e9b50"]},
+    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f","hermit-research-9ddc74c","hermit-admission-direct-15e9b50","hermit-native-partial-9ddc74c"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3","ghost-ship-research-33bf0fc","ghost-ship-regression-51cd8d1","ghost-ship-native-prerequisites-f5b580b","ghost-ship-native-initial-57c258e","ghost-ship-native-completion-attempt-9d296c9"]},
     "realm:crystal-prisoner": {"status":"passed","evidence":["crystal-release-native-b98ad3e","crystal-research-3597b3e","crystal-native-a42b982"]},
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c","kage-research-f897f74","kage-natural-native-5e9ad95"]},
