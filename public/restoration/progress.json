@@ -5069,7 +5069,7 @@
         ],
         "unknowns": [
           "Original map distribution, precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
-          "Full ordinary disconnect/reconnect and every whole-dungeon acceptance path still need separately scoped results."
+          "Live-combat interruption and empty-instance retirement remain untested; supplied gear/party are not earned or unprotected-survival evidence."
         ],
         "sources": [
           {
@@ -5091,6 +5091,14 @@
           {
             "url": "https://www.youtube.com/watch?v=DSrzfLhuP4k",
             "label": "2013 video static samples: asymmetric lamps, rug and Realm Portal label; not playback timing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.4.0",
+            "label": "July 2012 testing and access-release poll; not proof of released spawn/chance values"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Maggot",
+            "label": "October 27, 2012 page calls Maggot an unused Locker enemy; does not establish Sack placement"
           }
         ],
         "checks": [
@@ -5103,7 +5111,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Shared discovery and late arrival were executed; a full ordinary disconnect/reconnect is not separately recorded."
+              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated."
             ],
             "sources": [
               {
@@ -5153,12 +5161,16 @@
               "Active selected crew, bounded ghost regrowth, Roger-owned Souls and armor cycles are implemented. Unproven Maggot/Sack content is not spawned."
             ],
             "unknowns": [
-              "Original sack presence, complete collision/destructible/revisit behavior and precise crew timing lack full historical sign-off."
+              "Original Sack placement, prop/room distribution and precise crew timing remain unresolved; no active Sack lifecycle is authenticated."
             ],
             "sources": [
               {
                 "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
                 "label": "Historical Locker guide: shared colored keys and ordinary access"
+              },
+              {
+                "url": "https://wikiwiki.jp/rmd/Maggot",
+                "label": "2012 unused-Maggot lead; does not establish active Sack placement"
               }
             ],
             "group": "population"

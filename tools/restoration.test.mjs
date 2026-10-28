@@ -178,7 +178,7 @@ test('Trench coral receipts do not accept whole-dungeon geometry or oxygen',()=>
   assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
 });
 
-test('Davy crate receipts preserve whole-feature and unrelated lamp acceptance',()=>{
+test('Davy ordinary-route pass is separate from crate and historical acceptance',()=>{
   const data=catalogue(),evidence=ledger(),ids=['dungeons:davy-jones-s-locker','dungeons:davy-jones-s-locker:ship-trash-and-objects'];
   const refs=['davy-crates-source-babcc25','davy-crates-regression-babcc25','davy-crates-native-babcc25'];
   validateEvidence(data,evidence);
@@ -188,7 +188,10 @@ test('Davy crate receipts preserve whole-feature and unrelated lamp acceptance',
     assert.deepEqual(evidence.sources[ref].checks,ids);
     assert.deepEqual(Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([id])=>id),ids);
   }
-  for(const id of ids)assert.equal(evidence.results[id].status,'not-run');
+  assert.equal(evidence.results[ids[0]].status,'passed');assert.equal(evidence.results[ids[1]].status,'not-run');
+  const clear='davy-clear-native-479ccff';assert(evidence.results[ids[0]].evidence.includes(clear));
+  assert.equal(evidence.sources[clear].kind,'native');assert.equal(evidence.sources[clear].revision,'479ccff0d1dd3be484c4a662ee43949262924926');
+  assert.deepEqual(evidence.sources[clear].checks,[ids[0],'dungeons:davy-jones-s-locker:colored-key-door-chain','dungeons:davy-jones-s-locker:lantern-vulnerability-cycle']);
   assert.equal(evidence.results['dungeons:davy-jones-s-locker:lantern-vulnerability-cycle'].status,'passed');
   assert.equal(accepted(data.features.find(f=>f.id===ids[0]),evidence),false);
 });
