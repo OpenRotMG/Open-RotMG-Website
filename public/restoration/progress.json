@@ -6136,11 +6136,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Remove Invisible, apply Hexed for 30s; target announcement explicitly fixes Mad Lab blue pools removing pet transformation.",
+        "expected": "Consume 0xc41 once, remove Invisible and apply Hexed for 30s without adding Speedy or Stunned. The selected client chooses one of 44 Hexable appearances until cured/expired; Mad Lab DeHexxer actors cure the transformation, not arbitrary water.",
         "differences": [],
         "unknowns": [
-          "Which terrain cures the transformation?",
-          "Original transformed appearance, Speedy interaction and lifecycle."
+          "Original pool boundaries and complete source-versus-combat cure mask; actor geometry/source separation remain reconstruction.",
+          "Original refresh/stacking and duration continuity across world changes, relogin or restart; target acquisition remains unverified."
         ],
         "sources": [
           {
@@ -6150,6 +6150,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Transformation%20Potion",
+            "label": "Potion page: own text dated September 8, 2012; later comment separate"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/ObjectLibrary.as",
+            "label": "Pinned original-client Hexable list registration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Modified 7.0 presentation comparator, not original-server authority"
           }
         ]
       }
