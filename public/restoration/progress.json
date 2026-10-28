@@ -4333,11 +4333,13 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms span 11 tiles including both rails and use target assets; their original distribution and exact AI/reward policies remain unsettled.",
-        "differences": [],
+        "differences": [
+          "Guardians use a reconstructed six-tile orbit at server37c8211c to clear the restored cover during Stheno\u0027s two-tile wander. The former ten-tile path stalls all four guardians in native phase checks; count, linear motor speed, direction, collision and cover remain unchanged. Original radius is unverified: https://github.com/OpenRotMG/Open-RotMG-Server/issues/855#issuecomment-6475434043"
+        ],
         "unknowns": [
-          "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
-          "Original phase timings, entrance probability, Guard damage eligibility and reward rates.",
-          "Exact original guardian orbit speed, direction, initial variance and activation range."
+          "Exact Snake Pit treasure-room introduction and the second dungeon in June 2012's unnamed pair remain unresolved. Test build123.2 explicitly names the Abyss treasure room; production123.3 is dated2012-06-13. June2013 reports0–3 Snake Pit rooms, not the original123.5.1 generator, footprints or probabilities.",
+          "Original phase timings, entrance probability, Guard damage eligibility and reward rates. The modified7.0 engine compares .1/.32 directly to integer damage, not HP fractions; current strict gates are Stheno>750/Guard>550. The January2012 build117.0.1 loot page is older than the selected target.",
+          "Exact original guardian orbit radius, speed, direction, variance and activation. Modified7.0 uses nominal radius10/direction-1 and randomized radius/speed; current six-tile radius/direction+1 is a cover-clearing reconstruction. Its50-tile guardian acquisition seeks Stheno, not players."
         ],
         "sources": [
           {
@@ -4346,7 +4348,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "June 2012 production notes: treasure rooms in two unnamed dungeons"
+            "label": "2012-06-13 production notes: treasure rooms in two unnamed dungeons"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.2.0",
+            "label": "Test123.2 explicitly names the Abyss treasure room, not Snake Pit"
+          },
+          {
+            "url": "https://web.archive.org/web/20120118035706/http://forums.wildshadow.com/wiki/realm-mad-god/stheno-snake-queen",
+            "label": "2012-01-18 capture marked117.0.1: three phases and older loot; DEF30 does not override selected19"
           },
           {
             "url": "https://wikiwiki.jp/rmd/Snake%20Pit",
