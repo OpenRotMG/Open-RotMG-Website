@@ -6532,16 +6532,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed clothing/accessory color choices, native previews, one-use application and persistent appearance, preserving the other texture channel. Historical palette/stock and complete native rendering remain unverified.",
-        "differences": [],
+        "expected": "Selected definitions contain141 names/channel (282 items,139 RGBs): clothing0x1000–0x108c/accessory0x1100–0x118c. Aqua/Cyan and Fuchsia/Magenta are aliases. One-use soulbound dyes replace only Tex1 or Tex2. Nexus proximity previews override rendering within one tile; leaving cancels without consuming or saving the trial color.",
+        "differences": [
+          "Current120Gold clothing-dye/60Gold accessory-dye base offers and recovered Nexus stock are reconstruction, not authenticated123.5.1 sale prices/rotation. Kithio compiles UseItem but lacks Dye activation; later Trapped/modified7.0 channel handling is comparator evidence, not original-server authority."
+        ],
         "unknowns": [
-          "Complete original palette and seasonal availability.",
-          "Preview, cancellation and rendered appearance of each color."
+          "Authenticated deployed123.5.1 palette versus bundled definitions, seasonal availability and original prices/restock remain issue895. The2013 St Patrick’s bundle,2015 fitting-room palette and2017 Japanese141-color list do not date the entire roster to the target.",
+          "PR1180 verifies all282 dyes on a prepared Wizard, Black clothing/Turquoise accessory previews and cancellation, and durable Nexus reconnect. All141 merchant-color previews, every class/skin, earned acquisition and historical acceptance remain open. PR296 retains its separately qualified earned ground-use, full-backpack and refusal receipts."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_DyesCXML.dat",
+            "label": "Modified7.0 agrees on282 item identities, channels, colors and consumption flags"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/54ad7c77f33b32d20165493f38053897761f2a04/dyes.js",
+            "label": "September2015 external fitting-room palette matches141 names/RGBs, not target stock"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "March15–19,2013 St Patrick’s bundle; later prices/rotation are not123.5.1 proof"
           }
         ]
       }
@@ -6685,11 +6699,12 @@
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
         "differences": [
           "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
-          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior."
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior.",
+          "PR1193 verifies the six current proximity overlays, minimap backtracking, authored ring equip, starter ability use and Kitchen/Nexus/Tutorial continuity in three prepared contexts. The selected client saves needsTutorial=false on Tutorial construction, not completion. Neither this local preference nor the native receipt proves earned first-run admission or the complete historical journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1193"
         ],
         "unknowns": [
           "Complete first-adventure layout and instructional/admission fidelity; the May 2012 page describes a solo Tutorial, while this change preserves the existing server admission policy.",
-          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward policy. The mutable enemy wiki describes flee at 100 HP and full potions; selected Kithio uses below 90 HP and Minor Potions. The target Kitchen layout and instance sharing remain unverified."
+          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward probabilities. The May 19, 2012 Bonegrind page (updated build122.3.2) lists Minor Health and Minor Magic Potions, unlike the mutable enemy wiki's full potions, but supplies no probabilities or flee threshold. Selected Kithio uses below90HP. Target Kitchen layout and instance sharing remain unverified."
         ],
         "sources": [
           {
@@ -6707,6 +6722,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/Bonegrind%20the%20Butcher",
             "label": "Mutable enemy wiki: corroborates blades and flee dialogue but conflicts on HP threshold and rewards"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225245id_/http://forums.wildshadow.com/wiki/realm-mad-god/bonegrind-butcher",
+            "label": "May 2012 capture, updated build122.3.2: Minor Health and Minor Magic rewards; no probabilities or flee threshold"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/https://forums.wildshadow.com/node/41768",
+            "label": "February 13, 2012 build122 announcement: Tutorial/Kitchen polished; no exact layout"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605125421id_/https://forums.wildshadow.com/node/149494",
+            "label": "October 9, 2012 Release2 announcement: extended Nexus/shop/guild Tutorial is later than target"
           }
         ]
       }
@@ -6719,10 +6746,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Choose/change registered account name; client maximum ten ASCII letters, unique-name UI and subsequent Gold-priced rename. Client advertises 1000 Gold; authoritative original enforcement, minimum length, default-name pool and first-choice rank remain unresolved.",
-        "differences": [],
+        "expected": "Registered first-name choice and later Gold-priced rename. Selected client caps ten ASCII letters, its account dialog rejects empty input, and its Nexus panel reads the supplied first-choice star requirement and advertises 1000 Gold. Compiled Kithio has a 45-name pool and UUID-hash selection; this is not recovered original server policy.",
+        "differences": [
+          "Current reconstruction requires 3–10 ASCII letters, uses Guest{id} defaults and case-insensitive human uniqueness, and permits first choice without earned stars (local Nexus nstar:0). Selected client and primary comparator do not establish the three-letter minimum. Kithio's embedded Nexus also declares nstar:0, with nstar export disabled. First choice is free; subsequent choices cost 1000 Gold in game, not through HTTP. Bot-name displacement is project policy."
+        ],
         "unknowns": [
-          "Original minimum length, generated-name distribution, rank gate, reserved/profanity rules and server-side rename price."
+          "Original server minimum, default-name distribution, first-choice rank enforcement, reserved/profanity policy and authoritative rename price. Mutable wiki lists and related community implementations are not independent target-era proof."
         ],
         "sources": [
           {
@@ -6740,18 +6769,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
+        "expected": "Named Realm selection, live population, Enter/Full availability and denied entry. Locked is selected by the client LockedPortal definition, not simply a closed Realm. January 2012 documentation describes 85-player counters and up to eight portals; exact 123.5.1 continuity, name pool and population accounting remain unresolved.",
         "differences": [
           "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-        "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability. Revision-bound regression and native after evidence do not establish the broader historical name/capacity or full/locked obligations: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998"
+          "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
+          "Issue901 distinguishes full-but-visible Realm entrances from closed/hidden entrances and XML-locked Wine Cellars. Kithio WorldClosed removes the portal; modified 7.0 ClosePortal instead clears Usable. These related comparators are not independent historical votes. The two/three-Realm limit and reservation-inclusive occupancy remain explicit reconstruction policies: https://github.com/OpenRotMG/Open-RotMG-Server/issues/901",
+          "Clean native 6ca925d passed eight bounded browsing checks, including live Full/refusal, reopening, both destinations and inventory/identity-preserving Nexus returns. An identical-revision attempt stopped at the tick-ACK guard during return; an unchanged retry passing does not explain or fix it. Prepared one-slot capacity and characters are not an 85-player load, earned journey, native closure or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1191#issuecomment-6483478106"
         ],
         "unknowns": [
-          "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."
+          "Exact 123.5.1 name pool, continuity of the January 2012 85-player/eight-portal description, and population accounting across dungeons/in-flight reservations. Current reconstruction allows two or three Realms and hides closed entrances. Native closure/removal/replacement and the unexplained tick-ACK-stop take on an otherwise passing browsing revision remain tracked in server issue901."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012 capture: named Realms, 85-player counters, up to eight portals (not exact 123.5.1 continuity)"
+          },
+          {
+            "url": "https://chronicawesome.wordpress.com/2012/02/22/realm-of-the-mad-god/",
+            "label": "February 22, 2012 player account: 85-player Realms and Medusa/Cyclops labels; other gameplay interpretations are not adopted"
           }
         ]
       }
@@ -6769,7 +6808,7 @@
           "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
+          "Complete 123.5.1 price/rank/stock matrix, randomization/rounding, rotation pools, sold-out replenishment and the full lifetime of sampled New offers. The mixed-era table's Cloth Bazaar cycle and later pet/equipment prices are not target evidence. The 123.5.0 announcement names a 390-Gold Lab Key, but it is not configured or stocked in the recovered Nexus snapshot. The later comparator's 50-Gold Lab Key is not target pricing evidence."
         ],
         "sources": [
           {
@@ -6783,6 +6822,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/アイテム売り場",
             "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Build-specific shop additions: 390-Gold Lab Key and 100-Gold XP Booster, not a complete matrix"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_7.0.0",
+            "label": "December 2012 equipment-sales experiment and price changes are later than the target"
           }
         ]
       }
@@ -6892,20 +6939,29 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Current members exchange /g or /guild messages; production122 also documents guild sign-on notices.",
+        "expected": "Every guild rank can exchange green, guild-only /g and /guild messages across servers. Build122 adds guild-member sign-on notices.",
         "differences": [],
         "unknowns": [
-          "Original cross-server routing and notice frequency.",
-          "Which ignored messages or member states prevent guild chat?"
+          "Original distributed routing implementation and exact sign-on/reconnect frequency. Current routing crosses worlds in one process; later modified7.0 uses InterServer and a1800-second LastSeen threshold, not established target rules.",
+          "Original ignore and unavailable-member exceptions. Current message recipients exclude accounts ignoring the sender; guild notices do not use that filter. Dead/departing/quarantined participants cannot chat; Paused alone is not prohibited.",
+          "Cold sign-on, membership revocation during chat and terminal-member native journeys remain unverified; prepared membership is not earned guild creation or invitation acceptance. See server issue906."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 Wild Shadow capture: all ranks, both aliases, green guild-only cross-server chat; four-rank text omits build122 Founder correction"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "url": "https://web.archive.org/web/20120216201111id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 build122 announcement, captured February16: guild-member sign-on notification, no frequency specified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ChatManager.cs",
+            "label": "Modified7.0 comparator: InterServer guild-ID routing, message ignore filter and separate announcements; not original server proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ConnectManager.cs#L301-L309",
+            "label": "Modified7.0 comparator:1800-second LastSeen sign-on threshold, not established target frequency"
           }
         ]
       }
@@ -6921,10 +6977,15 @@
         "expected": "Players request a trade, receive a private chat confirmation, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
           "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
-          "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
+          "Server PR427 removes the 2-tile limit on same-world player trades. Kithio and the related July 2013 Trapped handler resolve names within a world without a distance gate; February/June 2012 Trade System captures say 10 tiles, while the July 2011 test117.5 guide says 15. Exact 123.5.1 distance remains unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427",
+          "Current ordinary guests can trade and targets match exact-case names. The 2012 guide prohibits guest/unnamed trading; compiled Kithio requires NameChosen on both sides and matches case-insensitively. No star/guild-rank gate appears in its request path or the selected client Trade menu, which does not establish original server permissions.",
+          "Current request expiry silently uses 20000 simulation milliseconds (400 steps), separate from the elapsed stable-offer guard. Kithio subtracts elapsed tick deltas from a 20000ms request counter and sends a timeout notice. Neither establishes the original production expiry contract.",
+          "Current settlement places received goods only in backpack slots. The June 2012 guide and Kithio comparator describe compatible empty equipment slots being filled automatically. No auto-equip or safety-policy change is made by this research."
         ],
         "unknowns": [
-          "Original server-side name/rank restrictions, distance, request timeout, item eligibility, confirmation delay and exact requester-confirmation wording."
+          "Exact 123.5.1 account/name/rank gates, case matching and distance; period guides and community reconstruction do not resolve target continuity.",
+          "Original request expiry clock/notice, complete server-side item eligibility and automatic equipment placement.",
+          "Original server settling enforcement and exact requester wording. Selected client countdown is confirmed as 2999ms using getTimer(); current 3000ms enforcement and Kithio requester text remain reconstruction choices."
         ],
         "sources": [
           {
@@ -6942,6 +7003,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
             "label": "Compiled Kithio reconstruction: separate requester chat confirmation after recipient notification; not official server wording"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216040435id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "February 2012 capture: 10-tile initiation, named accounts and renewed approval, not exact target continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608005457id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "June 2012 capture additionally describes overflow refusal and automatic equipment placement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build117.5",
+            "label": "July 2011 test-build guide: 15 tiles, not a 123.5.1 distance specification"
           }
         ]
       }
@@ -7009,12 +7082,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Eligible same-map player teleporting, including Ocean Trench; paused/invisible targets rejected and rejection must not activate cooldown. Exact target successful cooldown and landing policy remain unresolved.",
+        "expected": "Eligible same-map player teleporting, including Ocean Trench. Selected 123.5.1 client uses a 10000ms cooldown after dispatch and rejects paused/invisible targets before dispatch or cooldown. Current server lands at the target's current valid position; this is reconstruction, not authenticated original landing policy.",
         "differences": [],
         "unknowns": [
-          "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Selected client establishes a ten-second dispatch cooldown, not the original server's independent successful/rejected-request timing, landing offset, world restrictions or race handling.",
           "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
-          "Whether the original server also rejected direct requests targeting invisible players."
+          "Build 123.0.0 notes (April 23, 2012 Japanese date) say invisible-Rogue attempts never activate cooldown; the selected client achieves this before dispatch. Original direct-packet rejection remains unverified. Kithio charges cooldown before target lookup; modified 7.0 rejects invisible/paused targets first, so comparator policies are not interchangeable."
         ],
         "sources": [
           {
@@ -7040,6 +7113,18 @@
           {
             "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
             "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L228-L263",
+            "label": "Selected-client source: 10000ms dispatch cooldown; paused/invisible refusal precedes dispatch and timer assignment"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/52946/is-teleporting-possible/52947#52947",
+            "label": "March 1, 2012 answer: chat/name/minimap teleport and a short cooldown; exact ten-second answer on this page is June 4, 2015, not 2012"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat",
+            "label": "April 2012 guide: wait for dungeon rushers, then teleport in Lair/Sprite/Abyss/Trench; no exact cooldown or landing offset"
           }
         ]
       }
