@@ -4988,7 +4988,7 @@
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [],
         "unknowns": [
-          "Original layout and spawn distributions, attack schedules, throw and transformation timing, entrance chance and loot probabilities.",
+          "Original layout/spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -5020,10 +5020,10 @@
             "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
             "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"}],
             "group": "layout"
           },
           {
@@ -5032,10 +5032,10 @@
             "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
             "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Period prose supports actual-damage healing, four groups and eventual return; exact123.5.1 timers/counts and the complete attack schedule remain reconstructed. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"}],
             "group": "boss"
           }
         ]
