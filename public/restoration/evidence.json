@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "coil-native-19939a5": {
+      "kind": "native",
+      "revision": "19939a5e98875bfc3a703a0e112f83c70bc88f33",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1045#issuecomment-6460698375",
+      "checks": ["realm:great-coil-snake"],
+      "method": "Retained clean QA98df4258 passes19 checks/53500game ms: natural temple, damage, movement/attacks/cloak, egg destruction/surviving hatches, Coil/Snake defeats and XP once, ordinary chest pickup/no duplication. Three other clean final-case runs pass19 each without a portal; casef790fd7b. After resuming, only missing arrival supplement QA077b489d passes3 checks/10500game ms: native natural-Coil defeat earns270XP and a rolled portal, normal Enter admits the same living character2 to Jungle, actual rendered arrival and native movement60.5,100.5 to62.11077,98.88923 retain2720XP. Private supplementce45f58a; client39acbfbf/Ruffle.16. All five cited passes have empty cleanup errors/reclaimed scratch; supplement has zero backend ERRORs.",
+      "limitations": "Prepared level8 stats/gear/position, not earned progression or ordinary survival. Full case records later protection; arrival supplement adds no protection or forced drop. One selected generated temple/portal is not a probability study, every-site/variant census, original geometry or whole-Jungle acceptance. Earlier failures and the cancelled redundant build with guardian failure remain excluded. Historical parameters remain partial in issue814."
+    },
     "coil-encounter-native-aa1cd0b": {
       "kind": "native",
       "revision": "aa1cd0bd22f3047f6d0b1829ef983ac9a8842d9c",
@@ -3745,7 +3754,7 @@
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["elf-family-native-b633c1c","elf-escort-source-048aecc","elf-escort-regression-048aecc","realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:goblin-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:great-coil-snake": {"status":"not-run","evidence":["coil-research-0e8b12c","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
+    "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3"]},
