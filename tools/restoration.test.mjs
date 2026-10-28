@@ -37,6 +37,17 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Chamber receipts preserve partial history and the failed rejected-slot retry',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:oryx-s-chamber',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(accepted(feature,evidence),false);assert.equal(feature.audit.historical,'partial');
+  for(const key of [id,id+':oryx-one-phase-and-minion-contract'])assert.equal(evidence.results[key].status,'not-run');
+  assert.equal(evidence.results[id+':incantation-unlock-transaction'].status,'failed');
+  for(const key of [id,...feature.audit.checks.map(c=>c.id)])assert(evidence.results[key].evidence.includes('chamber-native-partial-2ab46ff'));
+  assert.match(evidence.sources['chamber-native-partial-2ab46ff'].limitations,/Neither full case passes/);
+  assert.match(feature.audit.checks[1].differences.join(' '),/slot latched/);
+});
+
 test('Spider Den egg and column acceptance does not accept every entrance or original history',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',component=id+':egg-and-cover-environment',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
