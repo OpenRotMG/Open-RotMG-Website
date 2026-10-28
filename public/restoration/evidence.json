@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "orcs-research-18b3308": {
+      "kind":"source", "revision":"18b33082f5f76dd1d1484de53ab0718b861db0a9", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/18b33082f5f76dd1d1484de53ab0718b861db0a9/src/world/population.rs", "checks":["realm:orcs"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/830#issuecomment-6463616302 . All four complete selected XML objects normalize identically to pinned modified7.0 MidCXML. Compiled/reflection-registered Kithio Midland plus additional Heal/Spawn engine inspection distinguish full group healing300ms/range<10 and nested lifetime births from current100HP/500ms same-camp healing and living-slot10s refills. Trapped nearest/local-density/randomized semantics, modified7.0 HealGroup, loot expansion/allocation, January/May2012 Queen and February2012 King documents were checked.",
+      "limitations":"Reference implementations are not original123.5.1 authentication or independent historical witnesses. Period stats/projectiles are obsolete; Japanese2021 text/image dates do not date numeric claims. Formation, original heal/status/ownership, clocks/caps/AI and reward continuity remain issue830, including current Spider Den10% versus period5%. No gameplay policy, imported comparator code/assets, licensing grant or deployment change."
+    },
     "undead-dwarves-native-0716855": {
       "kind": "native",
       "revision": "0716855e6e9232a95280432e56bfd2162aada3d4",
@@ -3997,7 +4003,7 @@
     "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirates-research-55b6ab4","pirates-native-8042725"]},
     "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","night-elves-research-087f74b","night-elves-regression-087f74b","night-elves-native-62a6f95"]},
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","undead-dwarves-research-ab3bc32","undead-dwarves-native-0716855"]},
-    "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","orcs-research-18b3308"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ogres": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:nomads": {"status":"not-run","evidence":[]},
