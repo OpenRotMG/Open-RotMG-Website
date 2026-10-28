@@ -6737,12 +6737,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
+        "expected": "Personal Gold and spendable account Fame are separate from living-character Fame and Guild Fame. Death credits account Fame; supported Nexus purchases debit the selected wallet. Period reports support 100 starting Gold; exact 123.5.1 deployment, complete Fame formulas and original spending policy remain partial.",
         "differences": [
           "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
         ],
         "unknowns": [
-          "Historical starting balances, complete Fame formulas and exact original earnings/spending policy remain unresolved. Current code separately stores Gold and account Fame, credits the committed death award once, and atomically debits the selected wallet for supported purchases; source presence is not a completed native economy journey."
+          "A May 2011 firsthand report and September 2012 spending report support 100 Gold; Kithio's 1000 and April 2013's 50 must not be copied into 123.5.1. Exact target-era continuity, full Fame formulas and original earnings/spending policy remain unresolved. Prepared rewards and store transactions do not establish an earned native death-to-purchase journey. Research and remaining scope: https://github.com/OpenRotMG/Open-RotMG-Server/issues/903#issuecomment-6482538664"
         ],
         "sources": [
           {
@@ -6755,13 +6755,15 @@
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
             "expected": "The project deliberately replaces historical payment offers with a Gold guide and rewards. Each account receives 75 Gold for Blue (13 stars), 150 for Red (26), 250 for Orange (39), 750 for Yellow (52) and 2500 for White (65), once per rank.",
-            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. The selected client fetches offers dynamically; undated modern price tables are not recovered 123.5.1 offers. Do not reactivate obsolete processors or test real payments.",
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards."
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards. The selected client originally required registration and opened a payment overlay; the guide bypasses that obsolete overlay."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Exact 123.5.1 offers, regional/platform availability and active processor deployment remain unresolved. The client /credits parser is not a recovered server response."
+            ],
             "sources": [],
             "group": "behavior"
           }
