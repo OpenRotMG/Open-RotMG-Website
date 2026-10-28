@@ -7147,7 +7147,7 @@
         "expected": "Ranks0/10/20/30/40. Officer changes0↔10; Leader changes lower targets up to30; Founder changes non-Founders up to30. No change to same rank or promotion to Founder. Removal requires Officer+ and strictly lower target.",
         "differences": [],
         "unknowns": [
-          "Original Founder succession and behavior of guilds without a Founder."
+          "A May 6, 2012 player experiment supports no automatic Founder succession, Leader-managed founderless guilds and a former Founder rejoining as Initiate. Exact 123.5.1 continuity and original behavior when no Leader remains are unconfirmed; tracked in server issue913."
         ],
         "sources": [
           {
@@ -7157,6 +7157,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/founderless-guild.html",
+            "label": "May 6, 2012 player experiment: Founder leaves, Leader remains, former Founder rejoins as Initiate"
           }
         ]
       }
