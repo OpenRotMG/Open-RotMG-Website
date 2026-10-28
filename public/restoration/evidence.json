@@ -3272,6 +3272,33 @@
       "checks": ["heroes:fame-bonuses", "heroes:lifetime-combat-statistics", "heroes:equipment-fame-bonus"],
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/375#issuecomment-6372045816"
     },
+    "realm-portals-native-6ca925d": {
+      "kind": "native",
+      "revision": "6ca925dc32593d149719f538400f8eb4b8c59d2d",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1191#issuecomment-6483478106",
+      "checks": ["home:browse-realm-portals"],
+      "method": "Clean take8423a7f3b3734dae95d915b1897bf0eb passed eight assertions with two owned private-display native guests, client0282b3a/runtime.16 and a retained storage-only adapter. Walked from Nexus arrival to distinct Ogre/Blob entrances; a pre-enrollment one-slot capacity fixture made only occupied Ogre show1/1 and Full. Clicking Full retained the living source session/items. Normal occupant escape restored0/1 and Enter; first character entered that exact Realm, returned, entered the different Blob Realm and returned. Both ended alive in Nexus; primary identity/items/XP/inventory revision were preserved. Cleanup errors empty; published Full/Enter crops byte-verified.",
+      "limitations": "Identical revision take685494267375477fa0c4360c009a52a2 passed five checks then stopped at tick acknowledgement backlog exceeded during Realm-to-Nexus return. Unchanged retry passed, not a fix or explanation; guards were retained. Earlier fixture/deadline/visibility/view-schema failures are not passes. Prepared level/gear/stats/one-slot capacity, not earned progression, 85-player load, raw-packet native refusal, three-Realm, native closure/removal/replacement or historical acceptance. Exact target policy and the unexplained ACK-stop remain tracked in issue901; whole-feature status stays not-run."
+    },
+    "realm-portals-regression-53cd07c": {
+      "kind": "regression",
+      "revision": "53cd07c9f6b93081c180f4b795627736b0eb3a9b",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/53cd07c9f6b93081c180f4b795627736b0eb3a9b/src/world/realm_portal.rs#L90-L130",
+      "checks": ["home:browse-realm-portals"],
+      "method": "Focused Realm-portal regression passed on retained Rust bytes: two distinct names; an in-flight admission fills only its bound one-slot Realm, updates its label/Usable flag and refuses a second reservation; closure hides only that entrance and refuses admission; grant expiry and reopening restore the same empty available entrance. Clean-job receipt e60da10fbd924830b68389d37599567a repeats the earlier pass; formatting and native-case syntax checks passed.",
+      "limitations": "Internal deterministic setup, not observed native closure or target-era population semantics. One focused Rust test, not a fresh full suite. Runtime gameplay rules are unchanged; subsequent native-case-only commits correct discovery, availability reads and settled captures without changing these Rust bytes."
+    },
+    "realm-portals-research-bc0d2d4": {
+      "kind": "source",
+      "revision": "bc0d2d480d73f84557232888e438fe2961cb45f1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/bc0d2d480d73f84557232888e438fe2961cb45f1/src/world/realm_portal.rs",
+      "checks": ["home:browse-realm-portals"],
+      "method": "Reconciles PR336/386 with current source, selected 123.5.1 SWF SHA07ae4fc3 and pinned Kithio/Trapped/modified 7.0 monitors. Selected 0x0712 and XML-locked 0x0721 normalize identically to modified 7.0 definitions. January5,2012 Nexus capture describes minion names, 85-player counters and up to eight portals; independently authored February22,2012 player account corroborates 85 and Medusa/Cyclops labels. Full, closed/hidden and XML-locked are distinct states. Full source/date qualifications: https://github.com/OpenRotMG/Open-RotMG-Server/issues/901#issuecomment-6482460977",
+      "limitations": "Earlier-period documentation is not exact 123.5.1 continuity. Exact name pool, dungeon/reservation population accounting and concurrent-Realm policy remain unresolved. Kithio sample GameWorld startup registration is commented out; compiled monitor methods are not deployment proof. Modified 7.0 retains closed portals while Kithio removes them; related comparators are not independent historical votes. Current two/three-Realm and reservation-aware policies are not changed. Native closure/removal/replacement remains explicitly tracked in issue901; no whole-feature or historical promotion."
+    },
     "crowd-entry-regression-460dfdc": {
       "kind": "regression",
       "revision": "460dfdc7f806851fec0b6af96ff1e5a49eeb5ac0",
@@ -5806,7 +5833,7 @@
     "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1","vault-research-d41caf26","vault-native-cc2cbebb","vault-regression-610ea798"]},
     "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f","kitchen-transfer-native-f319c16","partial-differences-source-4992445","tutorial-encounters-source-f807a22","tutorial-encounters-regression-f807a22","tutorial-encounters-native-3d0fb76","kitchen-encounters-native-940cb49","chicken-combat-exit-native-c33aa99","tutorial-research-f76c012","tutorial-lessons-native-21d1872"]},
     "home:choose-your-name": {"status": "not-run","evidence": ["name-claim-source-794eccf", "name-choice-research-08fb78dc", "name-choice-native-08fb78dc", "name-choice-regression-08fb78dc"]},
-    "home:browse-realm-portals": {"status": "not-run","evidence": ["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc","instance-allocation-source-794eccf","replacement-preparation-source-794eccf"]},
+    "home:browse-realm-portals": {"status": "not-run","evidence": ["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc","instance-allocation-source-794eccf","replacement-preparation-source-794eccf","realm-portals-research-bc0d2d4","realm-portals-regression-53cd07c","realm-portals-native-6ca925d"]},
     "home:buy-from-merchants": {"status":"passed","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d","merchant-purchases-source-b537b4d","merchant-regression-bc0d2d4","merchant-purchases-native-b537b4d"]},
     "home:gold-and-fame-balances": {"status": "not-run","evidence": ["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7","wallet-source-794eccf"]},
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
