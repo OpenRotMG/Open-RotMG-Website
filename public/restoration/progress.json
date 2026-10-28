@@ -1278,7 +1278,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+              "PR1033 retains 24 server-side arrival connections and the bounded World1 native smoke. PR1082 adds all eight native coastal-to-road journeys in the current World2/3 reconstructions, with shared identity and observed Road208 endpoints. These prepared, protected, full-map-planned journeys are not earned entry, whole-map or historical acceptance; east/west explicitly restrict random bank selection to the unchanged requested entry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1082#issuecomment-6464246162"
             ],
             "unknowns": [],
             "sources": [],
