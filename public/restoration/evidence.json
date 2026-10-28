@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "ogres-native-partial-6bcdbf3": {
+      "kind":"native", "revision":"6bcdbf324bef2921c606a799da8fa172f88c07a8", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1101#issuecomment-6470492569", "checks":["realm:ogres"],
+      "method":"QA15c97d7d passes14 assertions before failing: natural nine-actor HighForest camp/selected HP, all four Ogre roles activate/move/fire selected projectiles, no new actors, native King/Mage/Warrior defeats and XP, surviving followers after King death. Reviewed combat frame is genuinely rendered. Earlier QA459a576d records HP670to81 then committed Ogre Warrior death; cold58f13a5d confirms destroyed inventory, exact death row, SQLite integrity/foreign keys and seven registered PIDs absent.",
+      "limitations":"Whole case FAILED at a native DOWN release deadline. Prepared level20 stats/T10 staff/scene placement, direct scout and renewable Invulnerable, not earned progression/survival. Latest d582c3f gives pursuit/fire350ms rather than150ms; QA2da79eac then fails the shared managed-launch PID receipt before enrollment, so adds no gameplay acceptance. Cancelled build fab54b4a/guardian assertion retained. No AOE attribution, item pickup/reconnect, multiplayer eligibility, rolled Snake Pit journey, original RNG or whole-feature/history acceptance; issue832 open. Runtime/authority/ACK/lease/death guards unchanged."
+    },
+    "ogres-source-af065a1": {
+      "kind":"source", "revision":"af065a11443922947496b87304b5d1f2cb8d91fd", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/af065a11443922947496b87304b5d1f2cb8d91fd/examples/testing/ogres.mjs#L48", "checks":["realm:ogres"],
+      "method":"Research and pins: server issue832 comment6463798402. All four complete selected Ogre objects normalize identically to pinned modified7.0 HighCXML. Inspected compiled/reflection-registered Kithio Highland, Spawn lifetime counters/initial fraction, Grenade1500ms resolution, Protect/Follow/Orbit/Shoot and independent candidate loot semantics; compared older Trapped. Followed two additional leads: five resolved May2012 Wild Shadow captures and the pinned modified7.0 server tree, whose Highland path is404. Records population, King cycle/fury, escort movement/spacing and loot differences without importing source or changing runtime.",
+      "limitations":"May2012 wiki stats conflict with selected123.5.1, and its plain Ogre page does not establish target deployment. Japanese page/image timestamps do not date numeric claims. Modified7.0 client agreement is not AI evidence; absent server table is a coverage limit. Original clocks/density/spacing, pools/eligibility/odds and continuity remain unresolved in issue832. Source inspection is not gameplay or historical acceptance."
+    },
     "sphinx-native-a7c8ba0": {
       "kind": "native",
       "revision": "a7c8ba00c0b092d8bdfb8a62e15b85e31e110687",
@@ -4135,7 +4147,7 @@
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","undead-dwarves-research-ab3bc32","undead-dwarves-native-0716855"]},
     "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:ogres": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:ogres": {"status":"not-run","evidence":["ogres-native-partial-6bcdbf3","ogres-source-af065a1","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:nomads": {"status":"not-run","evidence":[]},
     "realm:pythons": {"status":"not-run","evidence":[]},
     "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},

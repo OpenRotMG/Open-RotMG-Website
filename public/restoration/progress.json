@@ -3298,10 +3298,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighForest Mage642, Warrior643, Wizard644 and ordinary King645; distinct roles, no established extra plain Ogre.",
-        "differences": [],
+        "expected": "HighForest Mage642, Warrior643, Wizard644 and ordinary King645; all four selected objects agree with pinned modified7.0. No selected extra plain Ogre.",
+        "differences": [
+          "Current camp starts nine actors with no births; compiled Kithio starts five and counts lifetime Warrior/Mage/Wizard births to4/2/2 at12/16/20s, not alive-child refill.",
+          "Current King continuously fires blades and radius2/55-damage grenades each1s after500ms. Kithio has two radius3/60 grenades, a blade/follow phase and a separate low-HP fury; escort Protect/Orbit and spacing also differ.",
+          "Existing period-loot reconstruction differs from Kithio King tiers/rates and escort tables. Missing Mage loot arguments are not proof of no historical drops."
+        ],
         "unknowns": [
-          "Target population, exact King grenade/timing, spacing and drops; plain Ogre deployment unresolved."
+          "Original population/density, King cycle/fury, escort movement/spacing and reward eligibility/odds remain unresolved. May2012 pages retain obsolete stats and no King grenade; they do not override selected123.5.1 or authenticate Kithio.",
+          "May26,2012 plain Ogre wiki entry and Japanese removal question do not establish target deployment. Native AOE attribution, multiplayer reward acquisition/reconnect and a rolled Snake Pit journey remain unaccepted; issue832 tracks the remainder."
         ],
         "sources": [
           {
@@ -3310,7 +3315,19 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/ページ構成の実験/Ogres",
-            "label": "Ogres wiki page (date unconfirmed)"
+            "label": "Ogres catalogue; individual claim dates unestablished"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L70-L162",
+            "label": "Compiled Kithio Ogre table; reconstruction comparator, not original authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519234933id_/http://forums.wildshadow.com/wiki/realm-mad-god/ogre-king",
+            "label": "May19,2012 King wiki capture; obsolete stats and no grenade"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
+            "label": "Modified7.0 client comparator; all four complete selected objects agree"
           }
         ]
       }
