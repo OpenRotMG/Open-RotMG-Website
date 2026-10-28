@@ -3910,16 +3910,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain HP1000/DEF12; Red Fire80 plus zero-damage Green Star Slowed6s. Comparator five-shot fan and predictive slow shot are qualified expectations.",
-        "differences": [],
+        "expected": "Mountain HP1000/DEF12; Red Fire80/speed100/1100ms and Green Star0/speed70/2000ms/Slowed6s match selected and modified7.0 definitions. Build118 independently lists five red shots/gap10/range12/cooldown1s and predictive star/range10/cooldown0.65s, mountain movement/reproduction and Defense rewards.",
+        "differences": [
+          "Current linear prediction and chase7/stop4 differ from compiled Kithio angular-history prediction and Follow acquisition10/stop7. Fixed nominal cooldowns differ from Trapped's randomized initial and95–105% repeats; exact target behavior is unresolved.",
+          "Safe bounded regional births and equipment allocation are project reconstruction. Defense1.5% at180 damage follows Kithio, not modified7.0's7%/7%. Toxic Sewers was introduced in October2016; current Slime has no portal and does not drop Mad Lab."
+        ],
         "unknowns": [
-          "Original randomized cooldown/prediction, condition-hit details, population/rewards and portal association."
+          "Exact123.5.1 prediction/cooldown distribution, natural population/refill and reward odds/allocation; build118 corroboration does not establish target continuity.",
+          "Whole-feature gameplay remains not-run: earned traversal, sustained natural reproduction, native multiplayer reward eligibility and pickup/reconnect are not accepted by the bounded combat take. Exact six-second hit timing and predictive geometry remain unmeasured; see issue847."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L158-L179", "label": "Compiled Kithio Slime table; engine/version qualifications in evidence"},
+          {"url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/slime-god", "label": "May20,2012 build118 guide; earlier-version corroboration"},
+          {"url": "https://www.realmeye.com/wiki/release-history-2016#patch-27-7-x6", "label": "October11,2016 Toxic Sewers introduction; not target-era content"}
         ]
       }
     },

@@ -31,6 +31,17 @@ test('Ent God bounded combat and reward guards do not accept original history or
   assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
 });
 
+test('Slime God evidence cannot accept original RNG or the whole encounter',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:slime-god',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['slime-god-native-471824b','native'],['slime-god-reward-regression-ce4394d','regression'],['slime-god-research-fd52882','source']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.match(feature.audit.differences.join(' '),/Toxic Sewers.*October2016/);
+  assert.match(feature.audit.unknowns.join(' '),/prediction\/cooldown/);
+});
+
 test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
   const data=catalogue(),evidence=ledger(),id='heroes:priest',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
