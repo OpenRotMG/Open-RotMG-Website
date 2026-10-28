@@ -6091,7 +6091,7 @@
         "historical": "known-differences",
         "expected": "Native forgot-password email request offers recovery to the same account. Recovered UI says password will be emailed; modern reset links must not be labelled verified historical mechanics.",
         "differences": [
-          "Secure Discord-linked recovery intentionally replaces the original native email-request channel."
+          "Email and Discord recovery use expiring, single-use reset links instead of emailing a password. Discord recovery still requires an explicit account link."
         ],
         "unknowns": [
           "Original password regeneration and invalidation, and recovery-email delivery."
