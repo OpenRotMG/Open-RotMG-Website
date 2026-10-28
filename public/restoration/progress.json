@@ -6532,16 +6532,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed clothing/accessory color choices, native previews, one-use application and persistent appearance, preserving the other texture channel. Historical palette/stock and complete native rendering remain unverified.",
-        "differences": [],
+        "expected": "Selected definitions contain141 names/channel (282 items,139 RGBs): clothing0x1000–0x108c/accessory0x1100–0x118c. Aqua/Cyan and Fuchsia/Magenta are aliases. One-use soulbound dyes replace only Tex1 or Tex2. Nexus proximity previews override rendering within one tile; leaving cancels without consuming or saving the trial color.",
+        "differences": [
+          "Current120Gold clothing-dye/60Gold accessory-dye base offers and recovered Nexus stock are reconstruction, not authenticated123.5.1 sale prices/rotation. Kithio compiles UseItem but lacks Dye activation; later Trapped/modified7.0 channel handling is comparator evidence, not original-server authority."
+        ],
         "unknowns": [
-          "Complete original palette and seasonal availability.",
-          "Preview, cancellation and rendered appearance of each color."
+          "Authenticated deployed123.5.1 palette versus bundled definitions, seasonal availability and original prices/restock remain issue895. The2013 St Patrick’s bundle,2015 fitting-room palette and2017 Japanese141-color list do not date the entire roster to the target.",
+          "PR1180 verifies all282 dyes on a prepared Wizard, Black clothing/Turquoise accessory previews and cancellation, and durable Nexus reconnect. All141 merchant-color previews, every class/skin, earned acquisition and historical acceptance remain open. PR296 retains its separately qualified earned ground-use, full-backpack and refusal receipts."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_DyesCXML.dat",
+            "label": "Modified7.0 agrees on282 item identities, channels, colors and consumption flags"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/54ad7c77f33b32d20165493f38053897761f2a04/dyes.js",
+            "label": "September2015 external fitting-room palette matches141 names/RGBs, not target stock"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "March15–19,2013 St Patrick’s bundle; later prices/rotation are not123.5.1 proof"
           }
         ]
       }
@@ -6732,10 +6746,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Choose/change registered account name; client maximum ten ASCII letters, unique-name UI and subsequent Gold-priced rename. Client advertises 1000 Gold; authoritative original enforcement, minimum length, default-name pool and first-choice rank remain unresolved.",
-        "differences": [],
+        "expected": "Registered first-name choice and later Gold-priced rename. Selected client caps ten ASCII letters, its account dialog rejects empty input, and its Nexus panel reads the supplied first-choice star requirement and advertises 1000 Gold. Compiled Kithio has a 45-name pool and UUID-hash selection; this is not recovered original server policy.",
+        "differences": [
+          "Current reconstruction requires 3–10 ASCII letters, uses Guest{id} defaults and case-insensitive human uniqueness, and permits first choice without earned stars (local Nexus nstar:0). Selected client and primary comparator do not establish the three-letter minimum. Kithio's embedded Nexus also declares nstar:0, with nstar export disabled. First choice is free; subsequent choices cost 1000 Gold in game, not through HTTP. Bot-name displacement is project policy."
+        ],
         "unknowns": [
-          "Original minimum length, generated-name distribution, rank gate, reserved/profanity rules and server-side rename price."
+          "Original server minimum, default-name distribution, first-choice rank enforcement, reserved/profanity policy and authoritative rename price. Mutable wiki lists and related community implementations are not independent target-era proof."
         ],
         "sources": [
           {
@@ -6782,7 +6798,7 @@
           "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
+          "Complete 123.5.1 price/rank/stock matrix, randomization/rounding, rotation pools, sold-out replenishment and the full lifetime of sampled New offers. The mixed-era table's Cloth Bazaar cycle and later pet/equipment prices are not target evidence. The 123.5.0 announcement names a 390-Gold Lab Key, but it is not configured or stocked in the recovered Nexus snapshot. The later comparator's 50-Gold Lab Key is not target pricing evidence."
         ],
         "sources": [
           {
@@ -6796,6 +6812,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/アイテム売り場",
             "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Build-specific shop additions: 390-Gold Lab Key and 100-Gold XP Booster, not a complete matrix"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_7.0.0",
+            "label": "December 2012 equipment-sales experiment and price changes are later than the target"
           }
         ]
       }
@@ -6905,20 +6929,29 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Current members exchange /g or /guild messages; production122 also documents guild sign-on notices.",
+        "expected": "Every guild rank can exchange green, guild-only /g and /guild messages across servers. Build122 adds guild-member sign-on notices.",
         "differences": [],
         "unknowns": [
-          "Original cross-server routing and notice frequency.",
-          "Which ignored messages or member states prevent guild chat?"
+          "Original distributed routing implementation and exact sign-on/reconnect frequency. Current routing crosses worlds in one process; later modified7.0 uses InterServer and a1800-second LastSeen threshold, not established target rules.",
+          "Original ignore and unavailable-member exceptions. Current message recipients exclude accounts ignoring the sender; guild notices do not use that filter. Dead/departing/quarantined participants cannot chat; Paused alone is not prohibited.",
+          "Cold sign-on, membership revocation during chat and terminal-member native journeys remain unverified; prepared membership is not earned guild creation or invitation acceptance. See server issue906."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 Wild Shadow capture: all ranks, both aliases, green guild-only cross-server chat; four-rank text omits build122 Founder correction"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "url": "https://web.archive.org/web/20120216201111id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 build122 announcement, captured February16: guild-member sign-on notification, no frequency specified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ChatManager.cs",
+            "label": "Modified7.0 comparator: InterServer guild-ID routing, message ignore filter and separate announcements; not original server proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ConnectManager.cs#L301-L309",
+            "label": "Modified7.0 comparator:1800-second LastSeen sign-on threshold, not established target frequency"
           }
         ]
       }
@@ -6934,10 +6967,15 @@
         "expected": "Players request a trade, receive a private chat confirmation, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
           "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
-          "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
+          "Server PR427 removes the 2-tile limit on same-world player trades. Kithio and the related July 2013 Trapped handler resolve names within a world without a distance gate; February/June 2012 Trade System captures say 10 tiles, while the July 2011 test117.5 guide says 15. Exact 123.5.1 distance remains unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427",
+          "Current ordinary guests can trade and targets match exact-case names. The 2012 guide prohibits guest/unnamed trading; compiled Kithio requires NameChosen on both sides and matches case-insensitively. No star/guild-rank gate appears in its request path or the selected client Trade menu, which does not establish original server permissions.",
+          "Current request expiry silently uses 20000 simulation milliseconds (400 steps), separate from the elapsed stable-offer guard. Kithio subtracts elapsed tick deltas from a 20000ms request counter and sends a timeout notice. Neither establishes the original production expiry contract.",
+          "Current settlement places received goods only in backpack slots. The June 2012 guide and Kithio comparator describe compatible empty equipment slots being filled automatically. No auto-equip or safety-policy change is made by this research."
         ],
         "unknowns": [
-          "Original server-side name/rank restrictions, distance, request timeout, item eligibility, confirmation delay and exact requester-confirmation wording."
+          "Exact 123.5.1 account/name/rank gates, case matching and distance; period guides and community reconstruction do not resolve target continuity.",
+          "Original request expiry clock/notice, complete server-side item eligibility and automatic equipment placement.",
+          "Original server settling enforcement and exact requester wording. Selected client countdown is confirmed as 2999ms using getTimer(); current 3000ms enforcement and Kithio requester text remain reconstruction choices."
         ],
         "sources": [
           {
@@ -6955,6 +6993,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
             "label": "Compiled Kithio reconstruction: separate requester chat confirmation after recipient notification; not official server wording"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216040435id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "February 2012 capture: 10-tile initiation, named accounts and renewed approval, not exact target continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608005457id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "June 2012 capture additionally describes overflow refusal and automatic equipment placement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build117.5",
+            "label": "July 2011 test-build guide: 15 tiles, not a 123.5.1 distance specification"
           }
         ]
       }
