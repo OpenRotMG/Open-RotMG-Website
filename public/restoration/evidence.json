@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "lost-lands-native-attempt-ee5f323": {
+      "kind": "native",
+      "revision": "ee5f323ada12a3faa537f0cdd9630015b2a99d71",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1077#issuecomment-6461568069",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "FAILED QAdddf8b1e: eleven native qualifying clears admit Ship/Skull, never Lord. Only startup-reservation assertion passes; cold database/cleanup checks pass.",
+      "limitations": "Disconnect/1500ms lease expiry after managed-helper delay. No Lord/reward acceptance. Supplied stats/gear/protection/+attack/scout/teleport are not earned progression. First scout permanently died to Phoenix Reborn, never revived. Earlier failures remain failed; guards preserved, no expired-session resume."
+    },
+    "lost-lands-regression-a39b589": {
+      "kind": "regression",
+      "revision": "a39b58961fb1d8611811a79097afe8eb3602cc29",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1077#issuecomment-6461568069",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "CI40637668308:204 Rust tests and gates pass. Synthetic phases/eight crystals/shield/finalizer verify once-only critical credit and positive queued XP; focused local test passes.",
+      "limitations": "Synthetic, not native or persisted XP. Native attempts never reach Lord; earlier failures remain failed. Prepared fixtures, not earned progression. No combat/pickup/reconnect/historical acceptance; issue817 open, runtime/safety guards unchanged."
+    },
+    "lost-lands-research-3587c31": {
+      "kind": "source",
+      "revision": "3587c316e4c9c61aaf04cca42deba79f0bb672af",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3587c316e4c9c61aaf04cca42deba79f0bb672af/src/world/lost_lands.rs",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "Guardian/Knight match pinned7.0; selected Lord DEF45/Crystal HP6000 instead match May2012 build123. State/Spawn/Toss/Loots/DamageCounter distinguish clocks, births and independent rolls. Comparator0.01 eligibility uses raw integer damage; Rust>1% is reconstruction.",
+      "limitations": "Research only. Initial unshielded activation differs from period guidance; original timing/populations/replenishment, T7 armor, eligibility and probabilities remain issue817. Mixed-era content is not target evidence; older receipts are not current guards/native acceptance. No historical promotion."
+    },
     "sphinx-research-5dc0694": {"kind":"source","revision":"5dc06941112fa6019fe251e9f0efc927879f471d","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/5dc06941112fa6019fe251e9f0efc927879f471d/src/world/realm_events.rs","checks":["realm:grand-sphinx"],"method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556 . Both complete selected Sphinx/Reaper XML trees match pinned modified7.0 EncountersCXML. Kithio compiles the setpiece, not its Sphinx behavior table; modified7.0 compiles/reflection-registers it. Loots/MobDrops/DamageCounter establish an encounter-wide potion floor but compare Threshold(0.01) to raw integer damage, correcting the earlier 1%-fraction attribution. Build121 notes support one per Realm/postdeath Reaper cleanup; September7,2012/build123.5.1 removes Reaper Stasis immunity. Additional May24,2012 Sphinx/build122 and Reaper/build122.0.1 captures corroborate attack families, below15% disappearance and VIT/WIS/Juggernaut, but differ on HP/count/status units. Compiled Kithio arena shares the later stencil by lineage, not independent corroboration.","limitations":"Not native or historical acceptance. Current 550-damage inclusive gate, four Reapers, 25% uniform event director, protected terrain-1 site and guaranteed Tomb portal remain reconstruction. Modified7.0 instead compares raw damage, comments out its25% gate, places Mountains-through-MidForest and rolls portal0.33. Exact123.5.1 placement/distribution, phase timings, count, reward eligibility/portal/drop rates remain unresolved in issue818; earlier guides are not target continuity proof. No comparator code/assets imported or gameplay policy changed."},
     "undead-hobbits-native-f8d9e54": {
       "kind":"native", "revision":"f8d9e54d400ee8d995b92bd343299b030b51e8e6", "date":"2026-10-28",
@@ -3853,7 +3880,7 @@
     "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
-    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3"]},
+    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323"]},
     "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
