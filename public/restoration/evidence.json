@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "werecats-native-cd6aa30": {
+      "kind":"native", "revision":"cd6aa30676a4e7a12881918cd40c125b387cd71e", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1113#issuecomment-6473049410", "checks":["realm:werecats"],
+      "method":"Clean QAab01e41e passes25 checks/58100game ms with client39acbfbf/Ruffle.16 in natural classic-world-02-reconstruction World1: initial Lion/Tiger/Leopard/Panther1/3/2/2 with selected HP; all activate/move/fire; both Lion projectile types and current chase/orbit choices; native670to597HP; Panther spatial reset1.1991to.1333 at7050ms after activation50; native follower defeat with living400HP Lion and real Tiger vacancy refilled by identity262124; owner/survivor defeats, empty camp and stableXP18196 for10.1s. Three observed bags hold armor/MP/HP, not acquisition proof. Cold QAe5cf7aca verifies saved living character2/revision1, SQLite/FKs, zero deaths/backend ERROR, empty cleanup and70 PIDs absent; native cgroup reclaimed. Case1f2bdb01/ELF7e4f932c; inspected image crops the passing take.",
+      "limitations":"Supplied level20 stats/staff/spell, direct scout, adjacent placement and60s Invulnerable are not earned progression or unprotected survival. No relocation/status boundary, owner-return hysteresis, invisible-player Lion, multiplayer rewards, pickup/reconnect, Spider Den journey, original RNG or whole-feature/history acceptance. Failed startup15043d5d, exact-coordinate oracle0c738294, collateral-ownerc37529b6 and cold-script XP-fieldd618b4c5 are retained/excluded. Only QA oracles/aiming changed, not gameplay/ownership/persistence/death/ACK/lease/capacity/hosting policy. Whole gameplay stays not-run/history partial; precise remainders remain issue837."
+    },
+    "werecats-research-2b06591": {
+      "kind":"source", "revision":"2b06591e49f6a92b1cedb6d1176cad7bcca64b2e", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/2b06591e49f6a92b1cedb6d1176cad7bcca64b2e/examples/testing/werecats.mjs", "checks":["realm:werecats"],
+      "method":"Research: server issue837 comment6472116816. All four complete selected objects normalize identically to pinned modified7.0 MidCXML. Checked compiled/reflection-registered Kithio Midland and Spawn lifetime counters/initial fractions, Protect hysteresis and candidate loot engine; compared Trapped initial sampler, per-tick Rand, randomized reproduction/local density, Planewalk and ordered/contributor-scaled loot. Additional engine and independent Japanese follower guides distinguish current reconstruction from reference behavior. Tiger guide last-modified March17,2012 supports triple17damage cover-piercing shots; Leopard/Panther February25,2012 report single19/16damage and rapid Panther approach.",
+      "limitations":"Not official123.5.1 AI or probabilities. Current3/2/2 living-slot refills,500ms choices,7s Planewalk, Lion choreography and loot differ from primary Kithio lifetime1/2/3 policy. Japanese parent changed2018;2011 image timestamps do not date its population/rates. Readable Wild Shadow teleport lead lacks independently verified resolved capture timestamp; raw fetch failed. Historical continuity, original RNG/owner/status/relocation policies and actual loot/portal odds remain issue837. No comparator code/assets imported or gameplay/authority/ACK/lease/death/persistence/hosting policy changed."
+    },
     "shield-orcs-native-f5ba42b": {
       "kind":"native", "revision":"f5ba42b76cfb2e4e075e94079d23f9ed630541b9", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1103#issuecomment-6471611074", "checks":["realm:shield-orcs"],
@@ -4195,7 +4207,7 @@
     "realm:pythons": {"status":"not-run","evidence":[]},
     "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},
-    "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
+    "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284","werecats-research-2b06591","werecats-native-cd6aa30"]},
     "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:wargs": {"status":"not-run","evidence":[]},
