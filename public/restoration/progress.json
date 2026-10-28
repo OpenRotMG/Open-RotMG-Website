@@ -3988,7 +3988,8 @@
           "Kithio Idle-only max4/radius10/default60s reproduction is not implemented; regional bounded ecology remains. Nearby capped100XP and largest-contributor timed kill ownership differ from Kithio weighted contributor XP/LastHitter; safer gear allocation and period-adjusted pools remain reconstruction. Modified7.0 changes reproduction and Speed rates, not target-era authority."
         ],
         "unknowns": [
-          "Exact123.5.1 thresholds, warning/phase clocks/angles, XP allocation, gear probabilities, population and portal continuity remain issue849. Neither source agreement nor the earlier-version guide authenticates these numbers. Current Djinn has no dungeon association. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/849#issuecomment-6474461317"
+          "Exact123.5.1 thresholds, warning/phase clocks/angles, XP allocation, gear probabilities, population and portal continuity remain issue849. Neither source agreement nor the earlier-version guide authenticates these numbers. Current Djinn has no dungeon association. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/849#issuecomment-6474461317",
+          "PR1128 passes11 bounded native checks for natural admission, movement, shield/ring phases, one-second warning/twelve-shot terminal burst, defeat/100XP and no repeated XP, with a prepared Wizard and Invincible. Native damage/multiplayer hits, reproduction, multiplayer eligibility, successful potion acquisition, pickup/reconnect and earned travel remain unverified; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -3998,6 +3999,10 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L278-L343",
             "label": "Compiled primary Djinn table; Shoot/Reproduce/Suicide/DamageCounter/Loots semantics inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Djinn object normalizes identically to selected definition; not server AI authority"
           },
           {
             "url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/djinn",
