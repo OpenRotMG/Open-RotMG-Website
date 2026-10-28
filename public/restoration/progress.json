@@ -4323,7 +4323,7 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
         ],
         "sources": [
           {
@@ -4333,6 +4333,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
+            "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
           }
         ],
         "checks": [
@@ -4342,10 +4346,17 @@
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
             "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
+                "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              }
+            ],
             "group": "layout"
           }
         ]
