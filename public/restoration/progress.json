@@ -1788,16 +1788,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
+        "expected": "Low Plains Graveyard Deathmage commanding Skeleton, Swordsman, Veteran and Mage roles, with distinct projectiles and a separate Treasure Chest. No boss transformation is established; the retained legacy Skeleton King is a reconstruction difference.",
         "differences": [
           "Server PR586 places 5 to 9 Graveyards per Realm on Low Sand and Low Plains, each with Crosses, grey and destructible walls and a Treasure Chest beside the Deathmage. A June 2012 wiki supplies the Low Plains site, chest tiers, skeleton item lists and the Deathmage's lack of drops; rates, site count, Low Sand and the yard layout come from a later community server: https://github.com/OpenRotMG/Open-RotMG-Server/pull/586",
-          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King.",
-          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics."
+          "Rust replenishes Trapped-derived batches every 10 seconds within living-child caps 5/4/3/2/1. Trapped's engine instead adds batches without counting survivors; Kithio starts half-cap populations and limits lifetime births to 4/2/1/1. The June 2012 page lists 5/3/2/2 every 8 seconds. These are different policies, not corroborating original limits.",
+          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics.",
+          "December 2011 and June 2012 Skeleton King pages call it unused after the build111 Undead Lair revamp. Its selected definition does not establish Deathmage deployment; the extra King is retained Trapped reconstruction, not historical acceptance.",
+          "Wiki node902 is Necromancer in October 2010 and Deathmage in March 2011, supporting an earlier enemy name rather than a playable-class transformation. All six selected definitions match the pinned modified 7.0 client; Deathmage's selected 900 HP/11 DEF/Level7 override the June 2012 page's older stats. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/795#issuecomment-6459711927",
+          "PR1063's prepared native case observes HP loss, all current roles firing and defeated, orphan release, no post-death replenishment, a public Swordsman drop, chest pickup without duplication and item persistence through Nexus. Not earned discovery, native overlapping-owner isolation or every skeleton reward pool/pickup; whole-feature acceptance stays not-run: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1063#issuecomment-6460130199"
         ],
         "unknowns": [
-          "Original graveyard or setpiece placement and ordinary Skeleton population.",
-          "Deathmage’s relationship to the early Necromancer, population limits, closure eligibility and chest rewards.",
-          "Original formation timing and speeds, minion populations/cleanup and drop rates."
+          "Exact target site count, coordinates/layout and Low Sand continuity; period ordinary Skeleton evidence names Graveyards, not an independently roaming population.",
+          "Exact rename build, target King deployment, summon populations/timing and post-owner-death lifetime; the current bounded replenishment and orphan release are reconstructions.",
+          "Original closure eligibility, formation timing/speeds and chest/skeleton drop probabilities. Selected XML has no Hero marker and Kithio omits Deathmage from critical enemies, but neither proves original closure rules. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/795"
         ],
         "sources": [
           {
@@ -1819,6 +1822,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/setpieces/Graveyard.cs",
             "label": "Later community Graveyard layout and chest-rate comparator"
+          },
+          {
+            "url": "https://web.archive.org/web/20101020021118id_/http://forums.wildshadow.com/wiki/realm-mad-god/necromancer-level-5",
+            "label": "October 2010 enemy Necromancer, wiki node902; renamed Deathmage by the March 2011 capture"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610204517id_/http://forums.wildshadow.com/wiki/realm-mad-god/skeleton-king",
+            "label": "June 2012 capture: Skeleton King unused after build111, not proof of Deathmage deployment"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified 7.0 Deathmage definition matches selected 123.5.1; five MonstersCXML skeleton definitions also match, not AI or deployment proof"
           }
         ]
       }
@@ -1875,17 +1890,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, replenishment and movement roles; no transformation established. Target setpiece/chest and rewards remain unresolved.",
+        "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, bounded summons, predictive volleys and movement roles; an independent Oasis chest and committed loot return. No transformation established.",
         "differences": [
           "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467",
           "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
           "Generated Oasis Palm sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
-          "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1066 corrects prediction values mistaken for angular offsets and Oasis armor tiers 5-7 to 4-6; preserves the compiled reference's lifetime birth cap. A bounded protected native combat/chest/Nexus journey passes, not whole-feature or historical acceptance. Exact protection/follow hysteresis remains a reconstruction difference: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1066#issuecomment-6460309356"
         ],
         "unknowns": [
-          "Original placement, population, attack timing, summon limits, chest and drops."
+          "Exact 123.5.1 placement/density and continuity of the version-115 wiki's stats, drops and chest rates.",
+          "Original lifetime-versus-alive summon policy. Compiled Kithio counts ten initial births toward a lifetime cap of twenty; current reconstruction retains it.",
+          "Creature attack timing: April 2012 wiki says one second; selected community table says 400 ms.",
+          "Exact predictive algorithm, protection/follow hysteresis, chest candidate order, truncation and RNG remain reconstructed."
         ],
         "sources": [
           {
@@ -1895,6 +1914,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Oasis.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Oasis.cs",
+            "label": "Compiled primary behavior; SpawnGroup engine counts lifetime births"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 client: all five selected Oasis definitions normalize identically"
+          },
+          {
+            "url": "https://web.archive.org/web/20120217151558id_/http://forums.wildshadow.com/wiki/realm-mad-god/oasis-giant",
+            "label": "February 17, 2012 capture; claims marked version 115, not exact 123.5.1 authority"
           }
         ]
       }
@@ -2029,17 +2060,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Roaming Great Lizard with pursuit/wander, aimed/spread attacks, ring phase and repositioning; no established children or transformation.",
+        "expected": "MidSand level-six Great Lizard with movement and two selected fire-missile descriptors; no established children or transformation. Attack sequence, planewalk and reward policy remain reconstruction.",
         "differences": [
-          "Reward tiers, chances and private allocation use a later community comparator, not authenticated original-server rules."
+          "Current fixed 5000/2100/1000ms phases use random singles/pairs, twenty large-missile rings and planewalk. Compiled Kithio instead has proximity activation, a brief charge, seven delayed large-missile volleys, thirty small-missile rings and no planewalk. Trapped's randomized Cooldown and child-completing Timed engine do not establish our fixed phase durations.",
+          "Reward tiers, chances and private allocation retain PR311's qualified Trapped reconstruction, not authenticated original-server rules. Kithio specifies a different equipment/potion table.",
+          "The requested May2012 archive redirects to May14,2013, labelled11.1.0; its twelve-shot large ring is not a2012 witness. The Japanese page is last modified2021 and current RealmEye labels2024. None resolves target-build timing or planewalk."
         ],
         "unknowns": [
-          "Original habitat density, attack timing, random choices, planewalk behavior and rewards."
+          "Exact123.5.1 habitat density, elevation/home bounds, phase/target/cloak/random semantics, planewalk continuity and reward rates/private eligibility remain tracked in issue801. XML SpawnProb0.75 is not a measured spawn frequency."
         ],
         "sources": [
           {
+            "url": "https://web.archive.org/web/20130514134541id_/https://forums.wildshadow.com/wiki/realm-mad-god/great-lizard",
+            "label": "May14,2013 capture labelled11.1.0, not a2012 witness or target-build attack specification"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Compiled primary reconstruction reference, not recovered original behavior"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L687-L717",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Community behavior/loot comparator; engine semantics and original rates differ"
           }
         ]
       }
@@ -2090,13 +2131,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
+        "expected": "Shambling Sludge telegraphs five delayed Sludget throws and replaces old waves. Community comparators agree on five children and 1500ms flight, not original 123.5.1 fidelity.",
         "differences": [
-          "Sludge equipment and Sludget consumables are reconstructed from the older community table; original 123.5.1 probabilities remain unverified."
+          "Current Trapped-style radius4/10000ms replacement waves and wandering/charging children differ from compiled Kithio radius3/8000ms toss plus1000ms pause, protect/jump phases and9000ms child decay.",
+          "Sludge equipment and Sludget consumables retain the older community table. Kithio instead lists different Sludge gear/potions and no Sludget loot; its independent per-item rolls are not equivalent probabilities."
         ],
         "unknowns": [
-          "Original child counts, throw delays, health thresholds and drops.",
-          "Original policy for parent death or blocked landing is unresolved. Current admitted tosses can land after parent death, while blocked landings are refused and logged; this is source reading, not native acceptance."
+          "Exact123.5.1 activation, movement, shot/wave cadence, geometry, child lifetime, density and reward eligibility/probabilities remain unresolved. Neither inspected comparator uses an HP threshold; Trapped refills below three living children after2000ms.",
+          "Original parent-death and blocked-landing policies remain unresolved. Both comparator throw timers lack a parent-survival guard. One native kill has later admitted child arrivals and surviving children, not original-policy acceptance. Current blocked-landing refusal remains source-only."
         ],
         "sources": [
           {
@@ -2110,6 +2152,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community behavior/loot comparator; original rates remain unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L231-L303",
+            "label": "Compiled Kithio comparator; differing AI, lifetime and loot"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 client: both complete definitions match selected objects"
           }
         ]
       }
@@ -2158,16 +2208,39 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "MidForest Dwarf King is a level-5 leader with 320 HP, 3 DEF and a 16-damage Blade. The family includes Axebearers, Mages and Veterans; Mages have wavy projectiles.",
-        "differences": [],
+        "expected": "Selected MidForest King: level5, 320 HP/3 DEF/Blade16. Axebearer80/2/Blade10, Mage80/0/Red Fire12, Veteran100/3/Blade14. Mage speed35/lifetime3500ms/amplitude1/frequency3 is lateral sine displacement, not the separate Wavy flag. All four complete objects match pinned modified7.0 definitions, not original server AI.",
+        "differences": [
+          "Current initial2/1/1 escorts, alive caps3/2/2 and10-second role refills differ from compiled primary SpawnGroup: five random Dwarves initially, one birth every8s up to ten lifetime births. Current2500ms King chase/wander,1-second shots and no taunt differ from primary3400ms orbit/2600ms follow,2-second shots and20% taunt per engagement. Escort movement/aim/states also differ; matching state names do not establish King-issued orders.",
+          "Current independent per-entry reward rolls differ from primary independent p/n candidate rolls, with different King/escort pools. Current uncapped solo King XP rounds51.2 up to52; primary contributor-share/clamp/integer truncation and the undated Japanese table give51. Neither certifies original123.5.1 policy."
+        ],
         "unknowns": [
-          "Target family density, escort caps/cadence, taunts, XP and reward probabilities.",
-          "Target movement, replenishment and drops; full Mage trajectory execution acceptance."
+          "Original123.5.1 density/relative SpawnProb selection, initial populations, lifetime-versus-alive caps, commands, motion, aim, timers/taunt frequency, XP rounding/caps and reward probabilities/allocation. May19,2012 King and June5,2013 Mage captures retain obsolete stats. Japanese2021 text/image timestamps do not date its numeric claims.",
+          "Bounded natural-camp native checks remain separate from earned entry, eligible reward pickup, full-lifetime rendered Mage trajectories and whole-feature acceptance. Research and exact source/engine conflicts: https://github.com/OpenRotMG/Open-RotMG-Server/issues/805#issuecomment-6459693963"
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L363-L506",
+            "label": "Compiled and registered primary comparator; SpawnGroup counts lifetime births, not living escorts"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All four complete selected objects normalize identically; no AI or deployment authentication"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519020454id_/http://forums.wildshadow.com/wiki/realm-mad-god/dwarf-king",
+            "label": "Dated King page has obsolete200 HP/level6/Low Plains; cannot override selected definitions"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605063729id_/https://forums.wildshadow.com/wiki/realm-mad-god/dwarf-mage",
+            "label": "Additional dated Mage resource still lists obsolete8-damage/speed6/2s fire"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Dwarf%20King",
+            "label": "Additional resource: primary-like loot/ten children/XP51, but last-modified2021 and no authenticated period numeric revision"
           }
         ]
       }
@@ -2221,10 +2294,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "MidSand level5 leader0x623,320 HP/3 DEF, two Red Fire forms damage16/20; Tawny/Demon Wargs. Rage and group replenishment are comparator-supported; target threshold/projectile change disputed.",
-        "differences": [],
+        "expected": "MidSand level5 leader0x623,320 HP/3 DEF, size135, Red Fire16/20 and Tawny/Demon Wargs. All three selected definitions match pinned modified7.0. May2012 build122.3.2 guide supports low-health growth, red blinking and roar, not exact123.5.1 numeric behavior.",
+        "differences": [
+          "Current HP<200/size150/unchanged wander speed/projectile switch is qualified reconstruction. Compiled Kithio instead uses HP<75%, growth to170, faster follow/wander and projectile0 throughout; Trapped adds projectile1 alongside projectile0. Neither comparator authenticates the target transition.",
+          "Current random1–3 per kind and owned living cap3 per kind with10s replenishment differ from primary four initial random Wargs/eight lifetime births. Trapped instead counts nearby matching entities, not owned slots. These are comparator differences, not proven historical deviations."
+        ],
         "unknowns": [
-          "Target rage threshold, size/movement, projectile transition, initial distribution, exact Warg caps and rewards; later sources disagree."
+          "Exact123.5.1 rage threshold, size/motion/roar policy, concurrent attacks, initial distribution/cap/refill and reward rates/eligibility, including Warg items. The May2012 guide's18-damage stronger shot predates selected20 damage. Issue807 retains the unresolved historical work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/807#issuecomment-6459714077"
         ],
         "sources": [
           {
@@ -2232,8 +2308,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/test/build115.6",
-            "label": "Build 115.6 test-server notes"
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L793-L846",
+            "label": "Compiled primary comparator, not authenticated target AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120517002923id_/http://forums.wildshadow.com/wiki/realm-mad-god/desert-werewolf",
+            "label": "May17,2012 capture, explicitly build122.3.2"
+          },
+          {
+            "url": "https://web.archive.org/web/20110528160154id_/http://forums.wildshadow.com/node/3269",
+            "label": "Rob's May25,2011 introduction post; location, not numeric AI"
           }
         ]
       }
@@ -6107,7 +6191,7 @@
         "historical": "known-differences",
         "expected": "Native forgot-password email request offers recovery to the same account. Recovered UI says password will be emailed; modern reset links must not be labelled verified historical mechanics.",
         "differences": [
-          "Secure Discord-linked recovery intentionally replaces the original native email-request channel."
+          "Email and Discord recovery use expiring, single-use reset links instead of emailing a password. Discord recovery still requires an explicit account link."
         ],
         "unknowns": [
           "Original password regeneration and invalidation, and recovery-email delivery."
