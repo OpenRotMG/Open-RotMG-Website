@@ -6409,17 +6409,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Six directly identified temporary eggs: Purple attacks, White heals, Blue paralyzes, Orange stasises, Green slows and Yellow bleeds. Numeric lifetime/AI and any seventh variant require separate historical proof.",
+        "expected": "Six selected temporary eggs. The May 31, 2012 table gives White 60s, 25HP/0.5s; all others 30s: Purple 35 damage/0.3s, Blue Paralyze5s/1s, Orange Stasis5s/2s, Green Slow10s/0.3s and Yellow Bleed300 over10s/1s. No selected Red Drake egg.",
         "differences": [],
         "unknowns": [
-          "Independent target-era numeric AI/lifetime source.",
-          "Original concurrency/replacement, damage attribution and cross-world rules.",
-          "No evidenced seventh egg."
+          "Exact 123.5.1 continuity of the May 2012 numeric table; original range, targeting, follow and defense rules.",
+          "Original concurrency/replacement, damage attribution and travel/disconnect/death persistence. Eight-companion cap, no player damage credit and travel cleanup remain project policies; see server issue894.",
+          "Red Drake 0x1406 exists in selected and modified7.0 XML, but no selected egg activates it. Do not infer a seventh egg."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531235024id_/http://forums.wildshadow.com/wiki/realm-mad-god/drake-eggs",
+            "label": "May 31, 2012 capture: six drakes, lifetimes, strengths and intervals"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PetsCXML.dat",
+            "label": "Modified7.0 companion definitions, including Red Drake object but not a seventh egg"
           }
         ]
       }
