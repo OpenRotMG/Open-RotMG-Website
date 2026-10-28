@@ -5712,15 +5712,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot7 restrictions, exact reversible defense and fame behavior for evidenced heavy armor; do not invent a unique-heavy-armor requirement or infer upper-tier deployment from XML.",
+        "expected": "Warrior/Knight/Paladin Slot7 eligibility, exact reversible defense and equipped-only fame for the selected 15 tiered heavy armors. No unique-heavy-armor requirement or ordinary Dominion/Annihilation acquisition inferred from embedded definitions.",
         "differences": [],
         "unknowns": [
-          "Upper-tier availability and any unique heavy-armor variants outside the recovered definitions."
+          "September2012 continuity of upper-tier unavailability and absence of additional unique heavy variants; the May/June2012 catalogues are earlier observations, while November's exploit notice and modern release histories are later evidence.",
+          "Independent target-era proof of equipment above capped base defense and exact original drop/credit probabilities. Prepared inventory and fame regressions do not establish earned acquisition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/items.xml",
+            "label": "Pinned Kithio definitions agree on all 15 selected defense/fame values; comparator, not deployment proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610192324id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/heavy-armor",
+            "label": "June10,2012 catalogue: three classes, T0-T12 defense/fame, no unique heavy armor listed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/armor",
+            "label": "May24,2012 armor table explicitly marks Dominion/Annihilation unreleased"
           }
         ]
       }
