@@ -20,6 +20,17 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Ent God bounded combat and reward guards do not accept original history or acquisition',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:ent-god',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['ent-god-native-5d43505','native'],['ent-god-reward-regression-5d43505','regression'],['ent-god-research-233f7d8','source']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
+  assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
+});
+
 test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
   const data=catalogue(),evidence=ledger(),id='heroes:priest',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);

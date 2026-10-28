@@ -3844,16 +3844,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Ent God HP1000/DEF18; piercing Fire Bolt70. Qualified comparator supports predictive five-shot fan, chase/wander and Defense rewards; no presumed dungeon association.",
-        "differences": [],
+        "expected": "Mountain Ent God HP1000/DEF18; piercing Fire Bolt70/speed8/lifetime2s. Five-shot ten-degree predictive fan; qualified primary comparator supports chase/wander, local reproduction and a 1.5% private Defense roll at180 damage. No presumed dungeon association.",
+        "differences": [
+          "Current Trapped-style speed10/acquisition7/stop4/wander4 and capped linear prediction differ from Kithio Follow acquisition10/stop7/resting hysteresis and angular-history prediction. Current1250ms cadence lacks its check-before-decrement tick overhead; home tether and safe bounded births remain project reconstruction.",
+          "Current gear retains T6 armor and T3/4 rings absent from Kithio's Ent table; build118's armor list also differs. Corrected shared/private allocation is not a copy of Kithio's duplicate/hiding behavior. Modified7.0 server changes gear eligibility and Defense rates, not selected-era proof."
+        ],
         "unknowns": [
-          "Original prediction, cadence, movement, loot eligibility/rates and population/dungeon policy."
+          "Exact123.5.1 prediction/history sampling, pursuit/elevation/tether, cadence, original reward pools/odds/allocation, population distribution and dungeon continuity remain issue844. The May20,2012 guide explicitly describes build118, not target continuity.",
+          "PR1119 verifies natural Realm admission/movement/fan/defeat/100XP and an owned gear bag with prepared stats/Invulnerable, plus deterministic179/180/181-damage reward boundaries. Native piercing/hit/prediction timing, active reproduction, multiplayer eligibility, pickup/reconnect and ordinary-risk/earned travel remain unverified; whole-feature gameplay is not-run."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L93-L113", "label": "Compiled primary Ent table; Shoot/Follow/Reproduce/LootDefs engines inspected"},
+          {"url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-god", "label": "May20,2012 build118 fan/movement/reproduction guide; earlier-version corroboration"}
         ]
       }
     },
