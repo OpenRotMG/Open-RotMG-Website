@@ -6769,7 +6769,7 @@
           "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
+          "Complete 123.5.1 price/rank/stock matrix, randomization/rounding, rotation pools, sold-out replenishment and the full lifetime of sampled New offers. The mixed-era table's Cloth Bazaar cycle and later pet/equipment prices are not target evidence. The 123.5.0 announcement names a 390-Gold Lab Key, but it is not configured or stocked in the recovered Nexus snapshot. The later comparator's 50-Gold Lab Key is not target pricing evidence."
         ],
         "sources": [
           {
@@ -6783,6 +6783,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/アイテム売り場",
             "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Build-specific shop additions: 390-Gold Lab Key and 100-Gold XP Booster, not a complete matrix"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_7.0.0",
+            "label": "December 2012 equipment-sales experiment and price changes are later than the target"
           }
         ]
       }
