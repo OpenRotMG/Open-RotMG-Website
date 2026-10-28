@@ -5592,10 +5592,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot8 compatibility, individual damage/rate/range/bonuses, Crystal Wand piercing and Bulwark slow parametric cover-passing projectile. Conducting Wand uses target-buffed values.",
-        "differences": [],
+        "expected": "Priest/Sorcerer Slot8; selected individual damage/rate/lifetime/bonuses. Crystal hits multiple enemies without piercing armor. Bulwark uses a parity-dependent eleven-second parametric loop and passes ordinary cover, not EnemyOccupySquare or void; it is not MultiHit. Conducting retains 50–180 damage and +1 DEF/+1 WIS.",
+        "differences": [
+          "Twenty XML definitions are not twenty obtainable wands: current starter/tier/reward source reaches seventeen; Conducting has no identified reward entry. Evocation/Retribution remain definition-only, with a February 2012 catalogue explicitly calling them unreleased."
+        ],
         "unknowns": [
-          "Complete obtainable wand roster and original parametric-projectile/collision behavior."
+          "Conducting Wand's target-era acquisition, recipient policy and drop rates; Evocation/Retribution availability continuity into 123.5.1.",
+          "Original server collision tolerances/sampling beyond the recovered client rules; fresh native multi-enemy Crystal and Bulwark cover-collision acceptance, earned acquisition and durable re-equip journeys remain unverified."
         ],
         "sources": [
           {
@@ -5605,6 +5608,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607014236id_/http://forums.wildshadow.com/wiki/realm-mad-god/wands",
+            "label": "June 2012 wand catalogue, labelled 122.3.2"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as",
+            "label": "Pinned selected-client projectile motion and collision reconstruction"
           }
         ]
       }
