@@ -2569,10 +2569,11 @@
           "Ruin masonry now preserves generated grass or unwritten original ground, matching the community generator's independent ground/object writes. Boss clearing remains intentional; original generation and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/482",
           "Community TempleA/B plant strips now use their distinct bounds across the full grid, restoring excluded edge plants without planting through masonry. Extra random draws can alter later placement; original 123.5.1 vegetation distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/487",
           "Temple chests sample a success ceiling of 3 through 7 rather than 5 through 7, not a guaranteed item minimum: https://github.com/OpenRotMG/Open-RotMG-Server/pull/499. Tier rows now roll each selected item independently at p/n: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501. Numeric candidate order remains an adaptation; original 123.5.1 item corpus, ordering, truncated distribution and RNG remain unverified. Changed consumption can affect later placement.",
-          "Temple chest and Snake now keep fixed local community anchors A(30,30) and B(27.5,27.5) while the ruin planes rotate. Protected floor clearing follows the actual point, and habitat is checked there. Eligible sites can change; original coordinates, generation and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/502"
+          "Temple chest and Snake now keep fixed local community anchors A(30,30) and B(27.5,27.5) while the ruin planes rotate. Protected floor clearing follows the actual point, and habitat is checked there. Eligible sites can change; original coordinates, generation and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/502",
+          "April 19, 2012 guide (text labeled 122.3.2) supports surviving eggs hatching after five seconds into 1–2 snakes, unlike Kithio's 2500ms/proximity suicide and death transform. Kithio uses targeted ten-shot rings; the mixed-era Japanese page describes eight cloak-ignoring shots. Current fixed rings, two temples, child budget16 and 20% portal roll remain reconstruction, not proven original parameters: https://github.com/OpenRotMG/Open-RotMG-Server/issues/814#issuecomment-6454170994"
         ],
         "unknowns": [
-          "Exact temple count, variant mix and placement distribution, egg-hatch timing and counts, ring geometry, cloak interaction and Jungle portal probability."
+          "Exact 123.5.1 temple count/mix/distribution, egg timing/batch counts, ring count/orientation/cloak policy and Jungle probability remain unresolved; source conflicts and checked leads are tracked in issue814. Trapped's 10–19 requested sites per variant and randomized initial egg delay are not guaranteed population or exact timing."
         ],
         "sources": [
           {
@@ -2590,6 +2591,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
+            "label": "Compiled Kithio comparator: ten targeted shots, cardinal tosses and death-transform eggs; period conflicts remain unresolved"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Great%20Coil%20Snake",
+            "label": "Mixed-era Japanese page: eight cloak-ignoring shots; prose last modified2020, not independently dated2012"
           }
         ]
       }
