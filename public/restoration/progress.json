@@ -3547,15 +3547,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter.",
-        "differences": [],
+        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter: selected 30/40HP, 0DEF, size90, MidSand and 11/13-damage shots with speed60 and 600/2000ms lifetimes.",
+        "differences": [
+          "Current reconstruction starts1–3 per kind, replenishes owned living slots to3 per kind every10s and leaves orphan Wargs wandering. Compiled Kithio starts four random Wargs and permits eight lifetime births at8s intervals; its Protect can reacquire another Werewolf. Neither comparator is authenticated target behavior.",
+          "Kithio gives both Wargs a4% shared Health Potion roll; current Wargs have no item table. Modern2024 Demon documentation lists Magic Potion instead. No target-era item probability or eligibility has been established."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, orphan persistence, enrage thresholds and rewards."
+          "Exact123.5.1 initial distribution, living-versus-lifetime caps/refill, cross-family orphan retargeting, leader rage threshold/size/motion/attack concurrency and Warg item rates/eligibility remain issue840 and issue807.",
+          "Reuse PR1067 for natural admission, attacks and Tawny defeat/refill. Prepared placement/protection is not earned discovery or unprotected survival; full native multiplayer and historical acceptance remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L793-L864",
+            "label": "Compiled Kithio Wargs/Werewolf comparator; SpawnGroup lifetime births, Protect and compiled loot engine reviewed in issue840, not target fidelity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120615181402id_/http://forums.wildshadow.com/wiki/realm-mad-god/demon-warg",
+            "label": "June2012 Demon Warg guide labels build122.0.1; stats/projectiles only, EXP blank"
           }
         ]
       }
