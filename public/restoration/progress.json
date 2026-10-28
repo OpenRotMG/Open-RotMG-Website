@@ -4115,8 +4115,10 @@
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
         "differences": [],
         "unknowns": [
-          "Original entrance/layout/rewards and Arachna phase geometry/timing.",
-          "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
+          "Exact 123.5.1 entrance probabilities, rounded-room templates, dressing distribution and Arachna phase sequence/geometry/timing. The fixed room graph and modified7.0 behavior remain reconstructions.",
+          "Target-version continuity of the build117.0.1-labelled public reward rates and later comparator personal Ichor guarantee; a native drop does not measure probabilities.",
+          "Whether historical server logic slowed players on ordinary floor webs. Selected and modified7.0 SpiderWeb classes only render beside walls; neither class implements Slowed.",
+          "Exact 123.5.1 boss-exit destination. Build123.4.4 footage around02:12-02:16 shows a cave arch followed by a Realm load, but boss-exit versus Cowardice identity and target-version continuity were not isolated. Current Nexus return is not historical acceptance."
         ],
         "sources": [
           {
@@ -4130,6 +4132,26 @@
           {
             "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
             "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+            "label": "February 1, 2012 captured guide: four entrance families, linear caverns and shot/touch-triggered green sacs"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201110941id_/http://forums.wildshadow.com/wiki/realm-mad-god/arachna-spider-queen",
+            "label": "Build 117.0.1-labelled Arachna stats and public reward rates, not authenticated 123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "Original February 13, 2012 Build 122 announcement: aesthetic eggs, surrounding pillars and boss-dropped exits"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SpiderDen.cs",
+            "label": "Modified7.0 comparator: nine radial web spokes, timed attack transition and two sac triggers; not recovered original AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 Arachna and nine spoke definitions match selected XML, not proof of deployed phase sequence"
           }
         ],
         "checks": [
@@ -4152,6 +4174,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
                 "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+              },
+              {
+                "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+                "label": "February 1, 2012 captured guide distinguishes green sacs hatching on shots or contact"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/SpiderWeb.as",
+                "label": "Selected-client SpiderWeb rendering requires an adjacent Wall; no movement or status logic in this class"
               }
             ],
             "group": "layout"
