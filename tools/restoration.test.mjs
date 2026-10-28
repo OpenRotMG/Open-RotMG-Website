@@ -8,6 +8,23 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['dungeons:mad-lab','dungeons:mad-lab:ordinary-lab-and-gas','dungeons:mad-lab:coil-secret-and-pool-chain'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const row=records(data).find(r=>r.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(row.rule.historical,'partial');
+    assert.equal(accepted(row.feature,evidence),false);
+    for(const ref of ['madlab-verification-source-25a51e6','madlab-room-reward-regression-0e8f429','madlab-room-journey-native-25a51e6'])assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.equal(evidence.sources['madlab-room-journey-native-25a51e6'].revision,'25a51e6f7491c055a7303454b7b4c07e2e43c063');
+  const completion='madlab-creation-completion-native-35c8a24';
+  assert.equal(evidence.sources[completion].revision,'35c8a24ce31affe6eb7320447c79f81817319e6b');
+  assert.deepEqual(evidence.sources[completion].checks,[ids[0],ids[2]]);
+  assert(!evidence.results[ids[1]].evidence.includes(completion));
+  assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
+});
+
 test('stable 211 parents and 70 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
@@ -423,7 +440,7 @@ test('one component pass cannot accept its whole feature or historical rules',()
   const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
   evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
   evidence.results[id]={status:'passed',evidence:[...evidence.results[id].evidence,'test']};validateEvidence(data,evidence);
-  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'unreviewed');
+  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'partial');
   for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
   assert.equal(accepted(f,evidence),false);
   evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];

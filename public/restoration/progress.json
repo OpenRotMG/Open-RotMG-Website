@@ -2920,17 +2920,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Five towers, Eyes, corpses/revival, attacks, all-five completion, once-only credit and rewards. Period test's central large tower has unresolved production continuity.",
+        "expected": "Five towers, Eyes, corpses/revival, attacks, red/yellow connecting beams, all-five completion, once-only credit and rewards. Ultra was withdrawn in testing 122.3.1; its retained client definition does not establish production use.",
         "differences": [
-          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields, placement and the period test's large central tower's production fate remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
+          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields and placement remain unverified; Ultra's withdrawal is documented separately: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
         ],
         "unknowns": [
-          "Central tower's final production fate; target revival, geometry, grenade and reward parameters."
+          "Exact 123.5.1 revival clocks, rounded coordinates, Eye behavior and reward coefficients. Current Eye fire is 1 second versus the period guide's 0.2 seconds; per-corpse revival and live-child replenishment differ from the older global clock and later cumulative Spawn counter. These conflicts do not justify numerical retuning.",
+          "Ultra was withdrawn in the March 2012 test; the June production guide describes five corpse loot sites without it. Exact target-build deployment and center-cell fields remain unauthenticated. RealmEye's retrospective has an unreliable broader Pentaract introduction chronology."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/test/build122.2.1",
-            "label": "Build 122.2.1 test-server notes"
+            "label": "March 17, 2012 test-only Ultra experiment"
+          },
+          {
+            "url": "https://web.archive.org/web/20120331002105id_/http://forums.wildshadow.com/node/64679",
+            "label": "Developer thread begun March 24, 2012: 122.3.1 withdraws Ultra; dated comments distinguish tower platforms from the test-only center platform"
+          },
+          {
+            "url": "https://web.archive.org/web/20120611050120id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "June 11, 2012 production-wiki capture, marked last updated 118: red/yellow beams, five corpse loot sites and encounter parameters"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March 26, 2012 test notes corroborate Ultra withdrawal; repeated announcement is not independent evidence"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/pentaract-tower-ultra",
+            "label": "Undated retrospective labels Ultra never released; broader introduction chronology is unreliable"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Pentaract.cs",
+            "label": "Modified 7.0 comparator; inspect Spawn, Swirl, Grenade, Transform and damage-transfer semantics"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/PentaractStar.cs",
@@ -4139,7 +4160,7 @@
         "unknowns": [
           "Exact123.5.1 parent acquisition/radii, lifetime versus live-child caps, initial count/regrowth/orphan cleanup and continuity of build118 child5XP/Quiet rules. See server issue852.",
           "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%.",
-          "PR1129 records prepared natural-family combat, Quiet recovery, regrowth and surviving orphans, not earned travel, native item pickup/multiplayer allocation or a successful child portal/entry. Those acquisition checks remain issue852; whole-feature gameplay stays not-run."
+          "PR1129 separately verifies prepared natural-family combat/Quiet/lifecycle and a naturally dropped Child portal with native admission to Sprite World. Earned travel, native item pickup/multiplayer allocation and rendered-dungeon acceptance remain unverified in issue852; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -4446,7 +4467,7 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
         ],
         "sources": [
           {
@@ -4456,6 +4477,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
+            "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
           }
         ],
         "checks": [
@@ -4465,10 +4490,17 @@
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
             "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
+                "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -4493,7 +4525,9 @@
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/delays, orbit direction and teleport/phase randomness remain unresolved; the modified 7.0 engine has a 1500ms delayed toss and different shield-loop semantics from the current reconstruction.",
+          "Original room/conveyor/tree/native-god distributions, tiled/non-tiled appearance and glowing-entrance semantics remain unrecovered.",
+          "Target-era Defense availability, reward eligibility and multiplayer allocation remain unresolved; the build-118-labelled period tables and later encounter-wide required-Dexterity engine do not authenticate current per-contributor guarantees."
         ],
         "sources": [
           {
@@ -4531,6 +4565,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Limon%20Element",
             "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SpriteWorldCXML.dat",
+            "label": "Modified 7.0 client: all eleven native Sprite, Limon and Element definitions match the selected client; not original server AI"
           }
         ],
         "checks": [
@@ -4540,12 +4578,19 @@
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original tiled/non-tiled encoding and selection, tree/native-god weights and conveyor generator remain unrecovered."
+            ],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+                "label": "May 2012 guide: directional floors, destructible trees, zero-to-five gods and two appearances; no generator or distribution"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -4686,8 +4731,8 @@
           "The Abyss is now included in the existing player-teleport allowlist, restoring its advertised map flag and actual guarded teleport path. Cooldown, target eligibility, GOTO acknowledgements and lifetime tracking are unchanged. A later-edited April 2012 guide explicitly includes Abyss teleport tactics; exact target-era eligibility remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/604"
         ],
         "unknowns": [
-          "Original teleport eligibility details, layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities.",
-          "Whether Defense was present by the target build, and the original recipient guarantees."
+          "Original teleport eligibility, room/treasure distributions and exact Malphas/Idol timers remain unresolved. The local 36–52 room-count draw and truncated 20% treasure continuation, seven-phase 50.2-second Malphas cycle and Idol lava control are reconstruction, not recovered original constants.",
+          "May 27, 2012 Malphas documentation lists VIT but not DEF; October 2016 notes remove a DEF guarantee. Neither dates DEF introduction or authenticates September 2012 recipient guarantees."
         ],
         "sources": [
           {
@@ -4726,10 +4771,10 @@
             "expected": "The adopted Idol reconstruction has dry shrine access before activation and restores it after defeat without disconnecting clients. Eligible accounts receive private DEF and VIT. Lava changes stay local, and Idol defeat does not clear the main dungeon.",
             "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify dry access before activation, local restoration without disconnecting, private DEF and VIT, independent rooms and no main clear from Idol defeat alone.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original Idol potion rates and recipient minimums are unrecovered; the local DEF/VIT guarantee is a reconstruction choice."
+              "Original Idol lava/activation timers, potion rates and recipient minimums remain unrecovered. Test Build 123.2 explicitly redesigns the Abyss treasure room; June 13, 2012 production 123.3 announces two treasure rooms without naming them. Selected XML fixes Idol identity/stats/projectiles, not the local controller or DEF/VIT guarantee."
             ],
             "sources": [
               {
@@ -4947,7 +4992,7 @@
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [],
         "unknowns": [
-          "Original layout and spawn distributions, attack schedules, throw and transformation timing, entrance chance and loot probabilities.",
+          "Original layout/spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -4979,10 +5024,10 @@
             "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
             "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"}],
             "group": "layout"
           },
           {
@@ -4991,10 +5036,10 @@
             "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
             "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Period prose supports actual-damage healing, four groups and eventual return; exact123.5.1 timers/counts and the complete attack schedule remain reconstructed. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"}],
             "group": "boss"
           }
         ]
@@ -5124,10 +5169,11 @@
         "differences": [
           "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
           "Server PR603 adds Tesla Coils, turrets and the Horrific Creation room, opened by destroying every coil and defeating Dr Terrible: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603",
-          "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave and Energy volleys, and an attacking return from the DeHexxer that resumes center blasts. Shapes follow mixed-era descriptions and selected client definitions; choreography and timing are reconstruction. Low-HP variants and rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
+          "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave and Energy volleys, and an attacking return from the DeHexxer that resumes center blasts. Shapes follow mixed-era descriptions and selected client definitions; choreography and timing are reconstruction. Low-HP variants and rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718",
+          "Server PR1147 adds two regressions and prepared key-entry, four-room traversal, first-boss, earned Wisdom and same-character exit evidence without changing production gameplay. A second prepared case kills Creation and returns without duplicating clear credit or inventing rewards. Current source-aware player-pool acceptance remains in PR1097. These bounded receipts do not accept the entire dungeon or settle original semantics: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147"
         ],
         "unknowns": [
-          "Green-pool effects and blue cure mask; original Creation choreography, timing, cloak/range behavior and low-HP thresholds; target-version reward identities and rates."
+          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. Target-labeled footage t0f0_BWpBtw remains unviewed after YouTube blocked retrieval; its indexed green-minion healing claim is not accepted evidence. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
         ],
         "sources": [
           {
@@ -5146,15 +5192,21 @@
             "expected": "Ordinary robots, acid rooms and turrets are not replaced by a successful first-boss fight. No period source places gas spawners or cages outside Dr Terrible's room.",
             "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures, and only Dr Terrible has rewards."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original room generation, ordinary loot and boss-helper healing semantics remain unverified; current comparator reconstruction is not target-era acceptance."
+            ],
             "sources": [
               {
                 "url": "https://web.archive.org/web/20261025211742/https://wikiwiki.jp/rmd/Mad%20Lab",
                 "label": "Mixed-era Japanese wiki Mad Lab page (images 2012-08-30, text 2013-01-30, header 2018-03-28; archived 2026-10-25): acid rooms and turrets"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MadLabCXML.dat",
+                "label": "Modified-7.0 comparator: lower boss defenses and different Enforcer projectiles; not selected target definitions"
               }
             ],
             "group": "population"
@@ -5165,7 +5217,7 @@
             "expected": "Secret admission, melee-accessible coils, green transformation and blue cure need independent checks.",
             "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants, loot and the slowed-pet revert remain absent. Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
@@ -5184,6 +5236,10 @@
               {
                 "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
                 "label": "Build 123.5.0 test-server notes: secret boss Horrific Creation"
+              },
+              {
+                "url": "https://www.realmeye.com/wiki/lab-vat",
+                "label": "Later comparator for persistent Hexed, Stunned and Speedy; mixed-era High Tech Terror reference means the June2013 version header does not date every claim"
               }
             ],
             "group": "boss"
@@ -5201,19 +5257,35 @@
         "historical": "partial",
         "expected": "Historically available beach-party destination, party encounter and consumables; distinguish event/calendar access from permanent access and contest prizes from drops.",
         "differences": [
-          "Server PR278 adds a reconstructed Beachzone. Each new Realm has a 1-in-200 chance of an announced inland Beach Bum whose defeat opens the portal 50% of the time. The island layout, the non-attacking Masked Party God's silent full-health recovery every 5 seconds unless Stunned, and its four drinks at 10% each are reconstructions. Permanent rare-spawn access stands in for the unresolved target event/calendar availability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/278"
+          "PR278 reconstructs the island, 1/200 Realm Bum spawn, 50% entrance portal, five-second full recovery unless Stunned and four independent 10% drink rolls with >10%-HP private eligibility. Modified7.0 instead rolls four drinks at 20% under an integer-damage threshold of 0.1 and contains no healing behavior. Neither is authenticated original AI.",
+          "The 123.5.0-labeled guide describes Bum access plus a 400-Fame key sale on August16–21,2012. The event archive's Beach Ball + Bahama Sunrise contest prizes are not a boss-drop table. Exact target availability outside that sale remains unresolved.",
+          "Selected client definitions retain Party God 30000HP/300DEF and Bum 1000HP/100DEF. Later modified7.0 uses 10/15DEF, while the May2013-captured Release2.0 boss guide says 80DEF. These conflicts do not authorize changing selected stats. Requested December2012 archive URLs redirect to May2013 captures."
         ],
         "unknowns": [
-          "Target calendar/key distribution; layout; Party God lifecycle and actual drop policy."
+          "Exact 123.5.1 availability outside the documented August2012 key sale and the rare Bum trigger/spawn/portal probabilities.",
+          "Exact island geometry and Party God recovery amount, cadence, damage-window and stun interaction. The later guide and wiki disagree; no authenticated target AI was recovered.",
+          "Original private reward eligibility and four drink probabilities. A prepared native drop cannot establish rates; the selected soulbound key also conflicts with the guide's public-bag description."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
-            "label": "forum wiki page (date unconfirmed)"
+            "label": "August16–21,2012 Beach Party Madness and Best Beach Party Scene contest prizes"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515192458id_/https://forums.wildshadow.com/wiki/realm-mad-god/beachzone",
+            "label": "May15,2013 capture, guide labeled123.5.0: island, Bum access and August2012 400-Fame key sale"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Beachzone.cs",
+            "label": "Modified7.0 dance and 20% drink comparator; no healing behavior"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515202028id_/https://forums.wildshadow.com/wiki/realm-mad-god/masked-party-god",
+            "label": "May15,2013 capture, boss guide labeledRelease2.0: 80DEF and an unspecified damage window, not exact123.5.1 AI"
           }
         ]
       }
@@ -5229,7 +5301,9 @@
         "expected": "Mandatory Castle traversal, anti-rush bridges/wall/quiet towers, paired guardians and Chamber; teleport disabled, respawning armours grant no XP/fame.",
         "differences": [],
         "unknowns": [
-          "Target geometry, respawn reward exclusion mapping, guardian activation/choreography and sword probability."
+          "Exact 123.5.1 bridge geometry and spawn cohorts remain unverified; the Project-B candidate has one spawn region.",
+          "Selected XML gives authored and respawned Haunted Armor zero XP. Build 123.4.4 specifically names respawns but does not establish a separate XP-bearing original identity.",
+          "Ten-tile activation, home orbits, deterministic phases, guaranteed survivor sword and its timings remain reconstruction choices, not accepted historical probabilities or choreography. See #866."
         ],
         "sources": [
           {
@@ -5248,10 +5322,10 @@
             "expected": "Long bridges, the three-deep wall, Quiet towers and non-farmable respawning armor must work on the full route.",
             "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Build 122 documents longer bridges, three-deep wall and Quiet towers, not exact dimensions. Initial-versus-respawn reward mapping remains qualified by selected zero-XP XML."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build122.0.1","label":"February 2012 Castle anti-rush announcement"},{"url":"https://wikiwiki.jp/rmd/version/build123.4.4","label":"August 2012 respawn XP/fame exclusion"}],
             "group": "layout"
           },
           {
@@ -5260,10 +5334,10 @@
             "expected": "Guardian survival, the bound sword and shared Chamber admission must work in either defeat order.",
             "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Later comparators have startup/coordinated movement but empty survivor states; the mixed-era guide describes a stationary sword. Exact target activation, choreography, sword probability and loot rates remain unresolved."],
+            "sources": [{"url":"https://anticosmic.blogspot.com/2012/07/oryx-castle-drops.html","label":"Build 123.3.2 drop diary; author warns sample is inconclusive"},{"url":"https://www.realmeye.com/wiki/stone-guardians","label":"September 2021 guardian guide; not target-era choreography proof"}],
             "group": "boss"
           }
         ]
@@ -5425,13 +5499,21 @@
         "expected": "Evidenced target swords retain individual damage, rate, shot spread, trajectory, class compatibility, equipment bonuses and fame behavior. Embedded upper/admin tiers do not establish production availability.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster, particularly T13/T14 swords and admin items.",
-          "Individual swords’ original firing and collision behavior."
+          "Exact 123.5.1 acquisition/drop/credit policies. The build121 period roster supports T0–T12 and three untiered swords, not ordinary T13/T14/Admin availability.",
+          "Sword-specific earned acquisition, remaining native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Pinned modified7.0 comparator; upper/admin IDs and Tier/Soulbound differ"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/swords",
+            "label": "May24,2012 build121 sword table, not complete target-era acquisition proof"
           }
         ]
       }
@@ -5444,16 +5526,41 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Evidenced slot2 daggers retain individual rate/damage, piercing/wave behavior and bonuses; distinguish Obsidian, Cronus, Bone and Spirit daggers. Novelty/high-tier distribution is separately unresolved.",
+        "expected": "Selected 123.5.1 daggers retain item-specific cadence, damage, range and bonuses: Obsidian 150%, Cronus +4 WIS/short range, Bone enemy piercing, Spirit alternating sinusoidal deflection. Embedded T13/T14 and Chicken Leg definitions do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "All obtainable variants, including novelty items.",
-          "Original dagger collision and firing timing."
+          "Exact 123.5.1 novelty/high-tier acquisition and drop/credit probabilities; prepared inventory does not prove earned availability.",
+          "Original server collision tolerances, sampling and damage RNG endpoints; selected-client and comparator engines differ.",
+          "Exact deployed numbers behind the August 14, 2012 Chicken Leg buff: selected 65–105 damage at 90% is consistent with Obsidian’s unarmored average damage rate, but the announcement gives no numeric definition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Modified 7.0 comparator: 18 matching daggers; T13/T14 renumbered without Tier tags"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L887-L943",
+            "label": "Selected client cadence, attack scaling and muzzle origin"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as#L155-L351",
+            "label": "Selected client parity, MultiHit bookkeeping and sampled collision"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607094909id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/daggers",
+            "label": "June 7, 2012 capture, labelled 122.3.2: dagger roster and pre-buff Obsidian"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 build123.3: Obsidian raised to 35–65"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124640id_/http://forums.wildshadow.com/node/129333",
+            "label": "August 14, 2012 build123.4.4: Chicken Leg buff announcement, no numeric replacement"
           }
         ]
       }
@@ -5489,10 +5596,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot8 compatibility, individual damage/rate/range/bonuses, Crystal Wand piercing and Bulwark slow parametric cover-passing projectile. Conducting Wand uses target-buffed values.",
-        "differences": [],
+        "expected": "Priest/Sorcerer Slot8; selected individual damage/rate/lifetime/bonuses. Crystal hits multiple enemies without piercing armor. Bulwark uses a parity-dependent eleven-second parametric loop and passes ordinary cover, not EnemyOccupySquare or void; it is not MultiHit. Conducting retains 50–180 damage and +1 DEF/+1 WIS.",
+        "differences": [
+          "Twenty XML definitions are not twenty obtainable wands: current starter/tier/reward source reaches seventeen; Conducting has no identified reward entry. Evocation/Retribution remain definition-only, with a February 2012 catalogue explicitly calling them unreleased."
+        ],
         "unknowns": [
-          "Complete obtainable wand roster and original parametric-projectile/collision behavior."
+          "Conducting Wand's target-era acquisition, recipient policy and drop rates; Evocation/Retribution availability continuity into 123.5.1.",
+          "Original server collision tolerances/sampling beyond the recovered client rules; fresh native multi-enemy Crystal and Bulwark cover-collision acceptance, earned acquisition and durable re-equip journeys remain unverified."
         ],
         "sources": [
           {
@@ -5502,6 +5612,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607014236id_/http://forums.wildshadow.com/wiki/realm-mad-god/wands",
+            "label": "June 2012 wand catalogue, labelled 122.3.2"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as",
+            "label": "Pinned selected-client projectile motion and collision reconstruction"
           }
         ]
       }
