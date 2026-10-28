@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "amulet-native-74f851b6": {
+      "kind":"native", "revision":"74f851b64e49e3119a1b187b97abfe45e678027f", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1170#issuecomment-6481751883", "checks":["gear:amulet-of-resurrection"],
+      "method":"Clean QAe83cd3cb passes11 checks: backpack no-bonus, atomic incompatible-slot refusal, exact native equip bonuses, MP spending and real suffocation. One worn amulet is consumed; same living character reconnects to Nexus withHP100/MP100, XP18050/Fame18, other inventory retained and playable movement. Direct backpack-only control permanently dies. Cold QA73ab6091 verifies saved revision3/items/resources, one resurrection, zero native deaths/Fame payout, one suffocation control death, SQLite/FKs, no backend ERRORs and12 retired owned processes. Native15 verified ACKs, cleanup[],exit0/reclaimed; selected client0282b3a4/Ruffle.16.",
+      "limitations":"Supplied level/stats/items and initial hazard position; not earned acquisition, public-host acceptance, every class/damage source, native second death or full browser/OS restart. No post-entry health/stat/enemy edits or protection. Initial d4cb7dbf false terminal stop, queued startup cancellations and compile errors are excluded. QA-only pending-resurrection classification repaired without changing gameplay or relaxing leases, terminal connection checks, readiness, ACK or persistence guards. Historical partial."
+    },
+    "amulet-regression-74f851b6": {
+      "kind":"regression", "revision":"74f851b64e49e3119a1b187b97abfe45e678027f", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/74f851b64e49e3119a1b187b97abfe45e678027f/src/store/resurrection.rs", "checks":["gear:amulet-of-resurrection"],
+      "method":"PR1170 head CI40774855744 passes273 Rust tests, formatting, strict all-target Clippy, Cargo-wrapper and QA lifecycle. Resurrection regression covers full effective resources, progress/inventory/lifetime, foreign/invalid-slot refusal, stale resurrection/death rejection, Store reopen, subsequent permanent death despite backpack amulet and exactly-once Fame despite replay. Pending-native-state and existing real-socket retire-before-reconnect regressions pass.",
+      "limitations":"Prepared store/fatal snapshots and protocol tests, not earned progression, native later death or original-server evidence. Runtime death/inventory/persistence mechanics unchanged. CI count includes its tested merge context; the clean native receipt remains bound to74f851b6."
+    },
     "amulet-research-75b8f421": {
       "kind":"source", "revision":"75b8f4210b7a828e9cd68c8187ca991be3d7d58f", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/75b8f4210b7a828e9cd68c8187ca991be3d7d58f/data/objects.xml", "checks":["gear:amulet-of-resurrection"],
@@ -5407,7 +5419,7 @@
     "gear:transformation-potion": {"status":"not-run","evidence":["item-chat-guild-source-4992445"]},
     "gear:xp-booster": {"status":"not-run","evidence":[]},
     "gear:dungeon-keys": {"status":"not-run","evidence":["portal-window-source-4d44727","portal-window-regression-4d44727","portal-window-native-4d44727"]},
-    "gear:amulet-of-resurrection": {"status":"not-run","evidence":["amulet-research-75b8f421"]},
+    "gear:amulet-of-resurrection": {"status":"passed","evidence":["amulet-research-75b8f421","amulet-regression-74f851b6","amulet-native-74f851b6"]},
     "gear:seasonal-toys": {"status":"not-run","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17"]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
     "style:summon-a-drake": {"status":"not-run","evidence":[]},

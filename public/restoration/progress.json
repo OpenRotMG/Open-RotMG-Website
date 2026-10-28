@@ -6249,10 +6249,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Selected 0xb3e is a nonsoulbound ring: +20 HP/MP, +2 six other stats and Resurrects. Worn-only consumption, Nexus return and retained other items are supported; current full post-consumption HP/MP recovery remains a reconstruction.",
-        "differences": [
-          "Kithio/Trapped set twice base HP/MP; modified 7.0 returns at 1 HP without refilling MP and adds Soulbound. Neither overrides the selected definition or proves original 123.5.1 recovery."
-        ],
+        "differences": [],
         "unknowns": [
+          "Kithio/Trapped set twice base HP/MP; modified 7.0 returns at 1 HP without refilling MP and adds Soulbound. Neither overrides the selected definition or proves original 123.5.1 recovery.",
           "Dated 123.5.1 confirmation of HP/MP recovery policy and precise original death/Fame bookkeeping. The item page's full-resource/retention paragraph is undated; wiki history requests returned 403 and the requested Wild Shadow archive returned 404. Issue #891 tracks the remainder."
         ],
         "sources": [
