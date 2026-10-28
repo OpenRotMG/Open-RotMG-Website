@@ -4429,7 +4429,9 @@
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/delays, orbit direction and teleport/phase randomness remain unresolved; the modified 7.0 engine has a 1500ms delayed toss and different shield-loop semantics from the current reconstruction.",
+          "Original room/conveyor/tree/native-god distributions, tiled/non-tiled appearance and glowing-entrance semantics remain unrecovered.",
+          "Target-era Defense availability, reward eligibility and multiplayer allocation remain unresolved; the build-118-labelled period tables and later encounter-wide required-Dexterity engine do not authenticate current per-contributor guarantees."
         ],
         "sources": [
           {
@@ -4467,6 +4469,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Limon%20Element",
             "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SpriteWorldCXML.dat",
+            "label": "Modified 7.0 client: all eleven native Sprite, Limon and Element definitions match the selected client; not original server AI"
           }
         ],
         "checks": [
@@ -4476,12 +4482,19 @@
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original tiled/non-tiled encoding and selection, tree/native-god weights and conveyor generator remain unrecovered."
+            ],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+                "label": "May 2012 guide: directional floors, destructible trees, zero-to-five gods and two appearances; no generator or distribution"
+              }
+            ],
             "group": "layout"
           }
         ]
