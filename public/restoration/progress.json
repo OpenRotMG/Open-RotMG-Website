@@ -4764,7 +4764,7 @@
         ],
         "unknowns": [
           "Exact target geometry, random distributions and differences between period healing/timing accounts.",
-          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open.",
+          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. PR1043 verifies prepared earned Sphinx-to-Tomb entry at 1ba2972. Late join and complete readable phase/artifact imagery remain open.",
           "Objective count: the September 2012 guide's 3 to 5 objectives plus a guaranteed treasure room (implemented) conflicts with the May 2013 capture's five event rooms of 1 to 5 objectives."
         ],
         "sources": [
@@ -4795,6 +4795,10 @@
           {
             "url": "https://geegamers.blogspot.com/2012/09/tomb-of-ancients-rotmg-guide-english.html",
             "label": "September 2012 Tomb guide: 3 to 5 objectives plus a treasure room"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Tomb%20of%20the%20Ancients",
+            "label": "Japanese Tomb roster comparator; image dates do not authenticate prose dates"
           }
         ],
         "checks": [
@@ -4845,7 +4849,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified."
+              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified. Trapped deduplicates item identity per recipient, while current two-roll distribution does not; neither is authenticated original policy."
             ],
             "sources": [
               {
@@ -4864,7 +4868,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact original pack distribution and complete readable native family/phase coverage remain unverified."
+              "Exact original pack distribution and complete readable native family/phase coverage remain unverified. The undated Japanese Tomb page describes at most six Swarm followers, versus the current eight; dated image URLs do not date that claim."
             ],
             "sources": [
               {

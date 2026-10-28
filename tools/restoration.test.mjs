@@ -199,7 +199,8 @@ test('Tomb release records source restoration without inventing full acceptance'
   }
   assert.match(evidence.sources['tomb-layout-native-40d990f'].limitations,/regression-only.*not matched seeds/);
   const tomb=data.features.find(f=>f.id===ids[1]);assert(tomb.audit.sources.some(s=>s.url==='https://archive.org/details/youtube-Igu8lFDRHg0'&&s.label.includes('123.4.4')));
-  assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
+  assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*PR1043 verifies prepared earned Sphinx-to-Tomb entry.*remain open/);
+  assert.deepEqual(evidence.sources['tomb-research-5afc20a'].checks,ids.slice(1));
 });
 
 test('Undead endpoint footage keeps scoped evidence and existing acceptance separate',()=>{
