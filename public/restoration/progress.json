@@ -6228,11 +6228,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Remove Invisible, apply Hexed for 30s; target announcement explicitly fixes Mad Lab blue pools removing pet transformation.",
+        "expected": "Consume 0xc41 once, remove Invisible and apply Hexed for 30s without adding Speedy or Stunned. The selected client chooses one of 44 Hexable appearances until cured/expired; Mad Lab DeHexxer actors cure the transformation, not arbitrary water.",
         "differences": [],
         "unknowns": [
-          "Which terrain cures the transformation?",
-          "Original transformed appearance, Speedy interaction and lifecycle."
+          "Original pool boundaries and complete source-versus-combat cure mask; actor geometry/source separation remain reconstruction.",
+          "Original refresh/stacking and duration continuity across world changes, relogin or restart; target acquisition remains unverified."
         ],
         "sources": [
           {
@@ -6242,6 +6242,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Transformation%20Potion",
+            "label": "Potion page: own text dated September 8, 2012; later comment separate"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/ObjectLibrary.as",
+            "label": "Pinned original-client Hexable list registration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Modified 7.0 presentation comparator, not original-server authority"
           }
         ]
       }
@@ -6374,7 +6386,8 @@
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
         "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
+          "Firecracker 100 armor-piercing damage, ten pulses, random jumps/colors, Small radius1 and Large radius2/3 with a longer first gap are reconstruction. A July6,2012 player comment reports roughly30 damage without controlled conditions; original damage/timing/range/color rules remain unresolved.",
+          "Castle 10HP/<3 tiles/1s/30s, recipient eligibility and additive stacking are reconstruction, not recovered historical constants. Period Sand Pail descriptions support five uses and nearby healing only; historically earned acquisition is not verified."
         ],
         "sources": [
           {
@@ -6383,7 +6396,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "label": "Build 123.3.2: July4,2012 fireworks sale through July9"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Large%20Firecracker",
+            "label": "Large Firecracker: July6,2012 approximate-damage comment; not a controlled measurement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sand%20Pail",
+            "label": "Sand Pail: five uses and nearby healing; August17,2012 image timestamps do not date every claim"
           }
         ]
       }
