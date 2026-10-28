@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "lost-lands-regression-a39b589": {
+      "kind": "regression",
+      "revision": "a39b58961fb1d8611811a79097afe8eb3602cc29",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1077#issuecomment-6461568069",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "CI40637668308 passes204 Rust tests/zero failures, formatting, strict all-target Clippy and QA lifecycle; focused QAa8d7eb4d passes. Clear synthetic terrain exercises strict99% activation, phase boundaries, eight owned crystals, blocked shield damage, crystal defeat/release, strict10% dying threshold,2s warning, final expiration, one critical credit and positive queued XP.",
+      "limitations": "Reconstruction regression, not original AI or persisted XP. Native3aa21f6e clears ten qualifying sources/admitting Cube but no Lord; c60b2d61 exhausts four sources without Lord. Earlier scout persistence fence/expired1500ms lease and fixture failures remain failed. Prepared stats/gear/protection/attack modifier/scout/native teleport are not earned progression. No current native Lord combat, reward pickup/reconnect or historical acceptance; issue817 stays open. No runtime or safety guard change."
+    },
     "lost-lands-research-3587c31": {
       "kind": "source",
       "revision": "3587c316e4c9c61aaf04cca42deba79f0bb672af",
@@ -3822,7 +3831,7 @@
     "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":[]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
-    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31"]},
+    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589"]},
     "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb"]},
     "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
