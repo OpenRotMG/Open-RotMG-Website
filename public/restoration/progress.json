@@ -6378,7 +6378,8 @@
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
         "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
+          "Firecracker 100 armor-piercing damage, ten pulses, random jumps/colors, Small radius1 and Large radius2/3 with a longer first gap are reconstruction. A July6,2012 player comment reports roughly30 damage without controlled conditions; original damage/timing/range/color rules remain unresolved.",
+          "Castle 10HP/<3 tiles/1s/30s, recipient eligibility and additive stacking are reconstruction, not recovered historical constants. Period Sand Pail descriptions support five uses and nearby healing only; historically earned acquisition is not verified."
         ],
         "sources": [
           {
@@ -6387,7 +6388,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "label": "Build 123.3.2: July4,2012 fireworks sale through July9"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Large%20Firecracker",
+            "label": "Large Firecracker: July6,2012 approximate-damage comment; not a controlled measurement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sand%20Pail",
+            "label": "Sand Pail: five uses and nearby healing; August17,2012 image timestamps do not date every claim"
           }
         ]
       }

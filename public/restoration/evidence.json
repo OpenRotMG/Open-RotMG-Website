@@ -3070,6 +3070,24 @@
         "home:browse-realm-portals"
       ]
     },
+    "seasonal-toys-source-bee856e": {
+      "kind": "source",
+      "revision": "bee856e85aaf73670f07278796dc702395050781",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/bee856e85aaf73670f07278796dc702395050781/src/world/companions.rs",
+      "method": "Reconciles PR251/374: guarded companion publication, five-dose successors, ten-pulse firecrackers and stationary Castles. All ten toy XML definitions normalize identically to pinned modified 7.0 client a13c855. Kithio and 7.0 Pet activations are no-ops, not recovered numeric specifications; period research and conflicts are linked in the native receipt.",
+      "limitations": "Source inspection is not gameplay or historical acceptance. July6,2012 approximate 30-damage comment conflicts with reconstructed 100 piercing damage; original timing/range/colors and Castle constants/recipient/stacking rules remain unresolved.",
+      "checks": ["gear:seasonal-toys"]
+    },
+    "seasonal-toys-native-bee856e": {
+      "kind": "native",
+      "revision": "bee856e85aaf73670f07278796dc702395050781",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1172#issuecomment-6481864468",
+      "method": "Clean take 20dc7826986748be973fdbb4ec756a0e passed 44 assertions with three private-display native clients, client 0282b3a/runtime .16. Verifies all five doses, equipment/empty/cap/boundary refusals, multiplayer healing above passive regeneration, range/cap/stationarity/expiry, Sick eligibility and Nexus inventory/identity/owner cleanup. Five Small/two Large uses caused 600/200 observed Kage HP loss without a weapon; all consumed and expired. Read-only log check confirms 70 pulses and Small 100ms/Large initial 250ms gaps.",
+      "limitations": "Prepared items/stats/vitals/protection, seeded cave and natural grave with direct scouting, not earned acquisition or a dungeon clear. Random summons need not hit each time. Early Small capture shows loading and Large capture does not prove ring presentation; audio/color fidelity is not accepted. Earlier cancelled/failed takes and PR374 limits remain linked; no runtime rule changed or historical constants recovered.",
+      "checks": ["gear:seasonal-toys"]
+    },
     "sand-castle-source-0e3f09d": {
       "kind": "source",
       "revision": "0e3f09dc923c2435f84fda5da2b4c5d01dd12cc8",
@@ -5528,7 +5546,7 @@
     "gear:xp-booster": {"status":"not-run","evidence":[]},
     "gear:dungeon-keys": {"status":"not-run","evidence":["portal-window-source-4d44727","portal-window-regression-4d44727","portal-window-native-4d44727","dungeon-key-research-23ed96f","dungeon-key-native-83e62ce"]},
     "gear:amulet-of-resurrection": {"status":"passed","evidence":["amulet-research-75b8f421","amulet-regression-74f851b6","amulet-native-74f851b6"]},
-    "gear:seasonal-toys": {"status":"not-run","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17"]},
+    "gear:seasonal-toys": {"status":"passed","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17","seasonal-toys-source-bee856e","seasonal-toys-native-bee856e"]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
     "style:summon-a-drake": {"status":"passed","evidence":["drakes-research-4006cea","drakes-native-16583cb"]},
     "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
