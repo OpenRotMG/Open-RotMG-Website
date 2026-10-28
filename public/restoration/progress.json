@@ -4883,12 +4883,13 @@
       "category": "dungeons",
       "icon": "assets/player/thessal-the-mermaid-goddess.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Underwater dungeon, same-instance player teleporting, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
-        "differences": [],
+        "differences": ["The current return is a death-relative Nexus portal. Build122.3.2 notes describe fixed dungeon exit sites; the exact Trench site and target destination remain unresolved."],
         "unknowns": [
-          "Original topology, oxygen parameters and vent geometry, full target choreography, Hermit entrance probability, reward eligibility/rates and King Alexander target deployment."
+          "Original topology, oxygen cadence and vent geometry, full target choreography, Hermit entrance probability and reward eligibility/rates. King Alexander is documented in Thessal's question, not established as a deployed encounter.",
+          "Full normal-health entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
         ],
         "sources": [
           {
@@ -4911,22 +4912,22 @@
             "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
             "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target oxygen cadence, vent radius and placement remain reconstruction; the later comparator uses a greater-than-100ms ground gate, not an authenticated original 150ms timer."],
+            "sources": [{"url": "https://wikiwiki.jp/rmd/version/build122.3.2", "label": "April 2012 release notes explicitly add Thessal's death air pocket"}],
             "group": "layout"
           },
           {
             "id": "dungeons:ocean-trench:wounded-thessal-response",
             "name": "Wounded Thessal and response gifts",
-            "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
+            "expected": "Wounded Thessal asks Is King Alexander alive? The documented answer is He lives and reigns and conquers the world, followed by up to three Coral Gifts. This optional encounter is separate from the normal clear.",
             "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off.",
-            "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "partial",
+            "historical": "partial",
+            "differences": ["The June 13, 2012 Wild Shadow-hosted guide describes a failed-response shotgun rage; the current reconstruction expires wounded Thessal without that attack."],
+            "unknowns": ["The original trigger is explicitly unknown in the period guide. The reconstructed 10% death roll and 12-second deadline come from the later modified7.0 comparator; the undated Japanese guide instead says 15 seconds. Exact failure trigger, barrage timing and counts remain unresolved."],
+            "sources": [{"url": "https://web.archive.org/web/20120613202818id_/http://forums.wildshadow.com/wiki/realm-mad-god/thessal-mermaid-goddess", "label": "June 13, 2012 guide: question, answer in image hovertext, gifts and lethal failure attack"}],
             "group": "boss"
           }
         ]
