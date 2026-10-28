@@ -4608,10 +4608,12 @@
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
-          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664"
+          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664",
+          "Black: big to4 medium to4 little each; brown: big to6 little. Big/medium black and big brown grant XP, no loot."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter.",
+          "Build115 specifies Burst10/Blast6 at90degrees versus current12-way rings; slime protection and drops also differ. Exact123.5.1 history, Ghost God-earned entry, shared rewards and room/population coverage remain issue858."
         ],
         "sources": [
           {
@@ -4669,7 +4671,10 @@
           {
             "url": "https://www.youtube.com/watch?v=7Ajp4rlzC6A&t=57s",
             "label": "2015 guide: clearer pillar/candle groups, later comparator rather than target authentication"
-          }
+          },
+          {"url":"https://web.archive.org/web/20120420155929id_/http://forums.wildshadow.com/wiki/realm-mad-god/black-slimes","label":"Build115, April20 2012: black split/XP/no-loot guide"},
+          {"url":"https://web.archive.org/web/20120414053824id_/http://forums.wildshadow.com/wiki/realm-mad-god/brown-slimes","label":"Build115, April14 2012: brown split/no-loot guide"},
+          {"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_UndeadLairCXML.dat","label":"Modified7.0:35 enemy XML matches, not AI/loot proof"}
         ],
         "checks": [
           {
@@ -4799,7 +4804,7 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Key and earned Sphinx entry, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
+        "expected": "Key and earned Sphinx entry, player teleport, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
         "differences": [
           "The original map generator was not recovered. Room geometry, pack distribution and loot probabilities remain reconstructed; footage-informed floor bands and pillar offsets are not a tile-exact official template.",
           "Nut's peer healing and phase timing follow source-qualified community behavior, not a certified original server rate.",
@@ -4809,7 +4814,7 @@
         ],
         "unknowns": [
           "Exact target geometry, random distributions and differences between period healing/timing accounts.",
-          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open.",
+          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. PR1043 verifies prepared earned Sphinx-to-Tomb entry at 1ba2972. Prepared seed12 awakening/late join and natural Nut-artifact Stasis pass at f84ef02. Complete readable phase/artifact imagery and gate reconnect remain open.",
           "Objective count: the September 2012 guide's 3 to 5 objectives plus a guaranteed treasure room (implemented) conflicts with the May 2013 capture's five event rooms of 1 to 5 objectives."
         ],
         "sources": [
@@ -4840,6 +4845,10 @@
           {
             "url": "https://geegamers.blogspot.com/2012/09/tomb-of-ancients-rotmg-guide-english.html",
             "label": "September 2012 Tomb guide: 3 to 5 objectives plus a treasure room"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Tomb%20of%20the%20Ancients",
+            "label": "Japanese Tomb roster comparator; image dates do not authenticate prose dates"
           }
         ],
         "checks": [
@@ -4852,7 +4861,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact original objective distribution and full late-join/reconnect acceptance remain unverified."
+              "Prepared last-objective gating, one-time awakening and late native join pass at f84ef02. Exact original objective distribution and full gate reconnect acceptance remain unverified."
             ],
             "sources": [
               {
@@ -4871,7 +4880,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact historical switch/trap timing and all multi-room multiplayer journeys remain unverified."
+              "Prepared interruption/reset and local eight-trap disable in two rooms pass at e124efa. Selected turret projectile/condition checks pass at b3156af. Exact historical timing and complete cover/trap journeys remain unverified."
             ],
             "sources": [
               {
@@ -4890,7 +4899,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified."
+              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey. Seed12 optional treasure, jars and private pickup/Nexus retention pass at 5928fc2. Natural Nut-artifact Stasis passes at f84ef02. Individual boss awards, peer healing and remaining artifact/phase acceptance remain unverified. Exact period loot probabilities remain unverified. Trapped deduplicates item identity per recipient, while current two-roll distribution does not; neither is authenticated original policy."
             ],
             "sources": [
               {
@@ -4909,7 +4918,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact original pack distribution and complete readable native family/phase coverage remain unverified."
+              "Prepared native projectiles for all 14 root kinds, selected turret conditions, bounded Swarm/Jackal/Mummy followers, Swarm leader loss and Nexus escape pass at b3156af. Full attack-form, family XP/loot and scarab burst/death journeys remain unverified. Original pack distribution is unknown. The undated Japanese Tomb page describes at most six Swarm followers, versus the current eight; dated image URLs do not date that claim."
             ],
             "sources": [
               {
@@ -5350,7 +5359,7 @@
         "expected": "Chamber access, Oryx1 phases/summons/rewards, locked Cellar and Incantation unlock; teleport disabled; target minions stasis-susceptible and give small XP.",
         "differences": [],
         "unknowns": [
-          "Historical choreography/taunts, minion reward/susceptibility mapping, unlock range/lifetime/announcements and loot eligibility."
+          "Full target-era choreography/taunts, loot eligibility/rates and original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
         ],
         "sources": [
           {
@@ -5365,10 +5374,10 @@
             "expected": "The full Oryx 1 encounter includes its minion conditions and rewards, not just access to the room.",
             "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": ["Current bounded cycle omits planets/moons and the chasing grid described in the June 2012 build 123.0.0 guide; continuity into 123.5.1 is not established. Later Valor's written dance-two subgraph loops until the HP transition, unlike the current repeating 85-second scheduler."],
+            "unknowns": ["Exact target-era phase selection/timings, taunts and loot recipient/probability rules remain open in server issue #867. June guide describes three outer artifacts versus current/later-comparator four. The five inspected definitions match modified 7.0; that does not authenticate choreography."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
             "group": "boss"
           },
           {
@@ -5377,10 +5386,10 @@
             "expected": "A committed Incantation use opens one shared Cellar route, without consuming or exposing success on rejected actions.",
             "acceptance": "Test pre-victory, wrong-world/range/item, competing users and commit failure. Exactly one successful consumption must bind a usable shared destination; original range/lifetime remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": ["June 2, 2012 guide says misuse wastes the Incantation. This project deliberately retains rejected items and publishes only after commit. Native rejection leaves the original client slot latched, so retrying that retained item emits no new request; this client defect remains open in server issue #867."],
+            "unknowns": ["Range 3 and 120-second lifetime are later-comparator reconstruction, not recovered target-era constants. October 2012 footage shows unlock text/notification but no verified build label."],
+            "sources": [{"url":"https://web.archive.org/web/20120602012050id_/http://forums.wildshadow.com/wiki/realm-mad-god/wine-cellar-incantation","label":"June2,2012 captured misuse-consumption rule"},{"url":"https://www.youtube.com/watch?v=H44UToO5faY&t=9","label":"Uploaded October3,2012; unlock visible at0:09/0:11"},{"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/player/Player.UseItem.cs#L337-L416","label":"Later7.0 nearest/shared portal, range and announcement handler"},{"url":"reference-data/client-123.5.1.swf","label":"Original 123.5.1 client (SWF reference data)"},{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as","label":"Recovered slot attemptUse, draw and refresh latch path"}],
             "group": "admission"
           }
         ]
@@ -5397,11 +5406,16 @@
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
         "differences": [
           "Server PR581 places a Wine Barrel on each of 38 free inside room corners. Barrels block movement, fall to ordinary shots and give no loot or XP; the corner rule and count are reconstructions: https://github.com/OpenRotMG/Open-RotMG-Server/pull/581",
-          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit."
+          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit.",
+          "Research at server 09889dd4: current Oryx 2 uses a <=20% threshold, 10-second shield, individual transition spinners, opening chase and five-live-Henchman replenishment. The pinned 2013 comparator and December 2013 description instead support a 30% branch and radial rings, with conflicting timing/summon policies. None is authenticated 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Current loot gives each >10%-damage contributor a Vitality potion and independent table-row rolls with uniform tier-pool selection. Comparator top-damager, threshold and per-candidate probability semantics differ; original rates/recipients are not established.",
+          "The 140x132 authored map has two right-side spawn regions and no dedicated WineSpill objects in its dictionary. Selected spill definitions are aesthetic; exact placement and target map byte fidelity remain unverified."
         ],
         "unknowns": [
-          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
-          "Barrel proximity triggers, summons, contents and loot require positive period evidence; zero XP does not establish zero loot."
+          "Exact 123.5.1 phase thresholds/timing, Henchman lifetime/death policy, Goo hit immunity and loot recipients/rates remain unresolved after checking pinned source and dated claims: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Exact map, barrel density/positions and decorative spill placement remain reconstructed. Empty barrels have a November 2012 witness; no positive target-period barrel proximity/summon rule was established.",
+          "The 120-second locked entrance has a December 2013 witness, not a native expiry-boundary or authenticated target-continuity pass; unlocked-portal lifetime remains unresolved.",
+          "Prepared protected boss mechanics are verified separately from full unprotected entry/route/reward/return acceptance; the parent remains not-run."
         ],
         "sources": [
           {
@@ -5411,6 +5425,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+            "label": "December 2013 Oryx2 capture (page says11.1.0), not authenticated123.5.1 AI"
           }
         ],
         "checks": [
@@ -5420,7 +5438,7 @@
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
             "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Barrel placement on every free inside room corner, 38 on the current map, is a reconstruction; no period source gives barrel positions or density."
             ],
@@ -5443,7 +5461,7 @@
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
             "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Bile speed, one Goo per second and the 20-Goo cap come from a commented-out line in a later community server, and the 6-second Goo life reuses its projectile lifetime. A Japanese wiki says Bile circles its Henchman; random wandering follows a 2016 RealmEye page.",
               "Purple Goo stays an ordinary hittable, killable enemy with no XP or loot, a chosen simplification: a 2015 RealmEye snapshot already says it cannot be hit or damaged except by poison."
@@ -5465,6 +5483,10 @@
               {
                 "url": "https://web.archive.org/web/20150726201317/http://www.realmeye.com:80/wiki/purple-goo",
                 "label": "RealmEye Purple Goo, July 2015 snapshot: cannot be hit except by poison"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com:80/wiki/wine-cellar",
+                "label": "December 2013 Cellar: distinct Goo and Drunk threats; mixed-era strategy text"
               }
             ],
             "group": "layout"
@@ -5475,10 +5497,25 @@
             "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
             "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "known-differences",
+            "differences": [
+              "Current <=20% / 10-second preparation and individual spinner output differ from the pinned 2013 comparator and December 2013 22500-HP/radial-ring description. Opening chases at2 tiles/s and rage at8; original movement/timing are not established.",
+              "Five-live-Henchman replenishment every5 seconds and60-second child expiry differ from the December2013 four-max/12-second/all-Henchmen-die description and later birth-counted Spawn semantics.",
+              "Strictly >10%-damage eligibility, per-contributor Vitality and uniform tier-row selection are reconstructions, not the comparator top-damager/separate-threshold/per-candidate policy."
+            ],
+            "unknowns": [
+              "Original threshold/timing, summon/death policy and loot recipient/probability semantics remain unresolved. Protected native dagger defeat, actual reward/no-duplicate and same-character return are recorded, but full unprotected gameplay acceptance remains not-run."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oryx2.cs",
+                "label": "Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+                "label": "December 2013 Oryx2 capture:22500HP transition; claim labelled11.1.0"
+              }
+            ],
             "group": "rewards"
           }
         ]
@@ -5572,9 +5609,9 @@
         "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility is inclusive 1200/8000 at unchanged .001; other Septavius rewards retain the generic >800 gate.",
         "differences": [],
         "unknowns": [
-          "Original availability of Thousand Shot and upper-tier bows.",
-          "Each bow’s original spread and collision behavior.",
-          "The attributed 15% Doom fragment and original threshold engine are not authenticated."
+          "Original production acquisition of Thousand Shot and T13/T14 bows remains unproved. The February 6, 2012 Thousand Shot post describes testing code, not a released drop.",
+          "Selected recovered client code supports centered 11.25-degree spacing and distinct enemy/cover piercing; original server collision tolerances remain unauthenticated.",
+          "The attributed 15% Doom fragment and original threshold engine are not authenticated. Research disposition and pinned comparisons: https://github.com/OpenRotMG/Open-RotMG-Server/issues/871#issuecomment-6478307595"
         ],
         "sources": [
           {
@@ -5592,10 +5629,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot8 compatibility, individual damage/rate/range/bonuses, Crystal Wand piercing and Bulwark slow parametric cover-passing projectile. Conducting Wand uses target-buffed values.",
-        "differences": [],
+        "expected": "Priest/Sorcerer Slot8; selected individual damage/rate/lifetime/bonuses. Crystal hits multiple enemies without piercing armor. Bulwark uses a parity-dependent eleven-second parametric loop and passes ordinary cover, not EnemyOccupySquare or void; it is not MultiHit. Conducting retains 50–180 damage and +1 DEF/+1 WIS.",
+        "differences": [
+          "Twenty XML definitions are not twenty obtainable wands: current starter/tier/reward source reaches seventeen; Conducting has no identified reward entry. Evocation/Retribution remain definition-only, with a February 2012 catalogue explicitly calling them unreleased."
+        ],
         "unknowns": [
-          "Complete obtainable wand roster and original parametric-projectile/collision behavior."
+          "Conducting Wand's target-era acquisition, recipient policy and drop rates; Evocation/Retribution availability continuity into 123.5.1.",
+          "Original server collision tolerances/sampling beyond the recovered client rules; fresh native multi-enemy Crystal and Bulwark cover-collision acceptance, earned acquisition and durable re-equip journeys remain unverified."
         ],
         "sources": [
           {
@@ -5605,6 +5645,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607014236id_/http://forums.wildshadow.com/wiki/realm-mad-god/wands",
+            "label": "June 2012 wand catalogue, labelled 122.3.2"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as",
+            "label": "Pinned selected-client projectile motion and collision reconstruction"
           }
         ]
       }
