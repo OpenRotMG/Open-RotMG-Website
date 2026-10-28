@@ -1278,7 +1278,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+              "PR1033 retains 24 server-side arrival connections and the bounded World1 native smoke. PR1082 adds all eight native coastal-to-road journeys in the current World2/3 reconstructions, with shared identity and observed Road208 endpoints. These prepared, protected, full-map-planned journeys are not earned entry, whole-map or historical acceptance; east/west explicitly restrict random bank selection to the unchanged requested entry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1082#issuecomment-6464246162"
             ],
             "unknowns": [],
             "sources": [],
@@ -2872,9 +2872,17 @@
           "PR601 rechecks the Cube God's untouched birth cell before delayed admission. Blockers and live or owned occupants postpone admission without clearing native terrain or scenery. Prepared checks are not original spawn-selection proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
         ],
         "unknowns": [
-          "Target spawn selection, choreography, counts and reward distribution."
+          "Original 123.5.1 spawn/target selection, choreography, counts and reward distribution remain unresolved: Build121.0 documentation, Trapped and modified7.0 disagree on reproduction timers, populations and minion control. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/820#issuecomment-6454414446"
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120117000123id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/cube-god",
+            "label": "January2012 capture; text labels Build121.0, not authenticated 123.5.1 continuity"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EncountersCXML.dat",
+            "label": "All four selected Cube definitions normalize identically; modified7.0 client is not server AI"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.CubeGod.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
@@ -2998,7 +3006,8 @@
         "differences": [
           "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
           "Issue823 rechecks selected Ship50000HP/DEF60, MineDEF100 and SpectreDEF15 against differing modified7.0 values. Its Reproduce marks every summon no-XP, but the August2012 hotfix only establishes respawn exclusion. No shore Spawner is ordinarily placed. Phase2 parent shielding is not proof of an unreachable comparator transition: child exits clear the same condition timer. https://github.com/OpenRotMG/Open-RotMG-Server/issues/823#issuecomment-6461431871",
-          "Three controlled World lifecycle regressions pass within CI210 tests. Native prerequisite takecb6f47df fails at the unchanged256-receipt budget, after twelve client teleports and one Cube God admission but no Ship; cold persistence/cleanup checks pass without resuming state. It is not Ship gameplay acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1085#issuecomment-6463473406"
+          "Three controlled World lifecycle regressions pass within CI210 tests. Native prerequisite takecb6f47df fails at the unchanged256-receipt budget, after twelve client teleports and one Cube God admission but no Ship; cold persistence/cleanup checks pass without resuming state. It is not Ship gameplay acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1085#issuecomment-6463473406",
+          "A separate clean native take on57c258ed passes six initial encounter observations: earned Ship admission from an Oasis defeat, selected HP/anchor, activation and battle entry, then Spirit defeat without XP and replenishment. ENOSPC ends the take during later battle; cold persistence/cleanup checks pass, but the final log line is truncated. No completion, portal or reward pass is claimed. A separate completion supplement reaches the unchanged256-receipt cap during natural prerequisites without admitting a Ship; its failure does not erase the earlier six observations. Later phases/clouds/defeat, portal and reward observations remain issue823. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1085#issuecomment-6463889568"
         ],
         "unknowns": [
           "Exact target-era phase order/shield timing, initial skull XP eligibility, shore-spawner placement and item-drop allocation remain unresolved in issue823. Portal and reward probabilities follow community reconstruction, not authenticated original values. Mixed-era wiki text and2012 image dates do not date each gameplay claim."
@@ -3026,10 +3035,11 @@
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
           "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293",
-          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555"
+          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555",
+          "Conflicting comparators: HP1000000/55000, three/six Steeds; reconstruction differs on Daisy shielding, warning Follow, blocked Clone tosses and loot. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "unknowns": [
-          "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
+          "123.5.1 thresholds/timing, placement and rewards unresolved. Details: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "sources": [
           {
@@ -3043,6 +3053,26 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
             "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Crystal.cs",
+            "label": "Compiled Kithio; original AI unauthenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 minions/Prisoner match selected XML"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Crystal matches selected XML"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Crystal%20Prisoner%20Clone",
+            "label": "September7,2012 Clone description"
+          },
+          {
+            "url": "https://web.archive.org/web/20120606200609id_/http://forums.wildshadow.com/wiki/crystal-prisoner-steed-0",
+            "label": "June6,2012 Steed; immunity predates123.5.1 correction"
           }
         ]
       }
