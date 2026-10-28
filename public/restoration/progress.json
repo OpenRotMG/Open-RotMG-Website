@@ -2920,17 +2920,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Five towers, Eyes, corpses/revival, attacks, all-five completion, once-only credit and rewards. Period test's central large tower has unresolved production continuity.",
+        "expected": "Five towers, Eyes, corpses/revival, attacks, red/yellow connecting beams, all-five completion, once-only credit and rewards. Ultra was withdrawn in testing 122.3.1; its retained client definition does not establish production use.",
         "differences": [
-          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields, placement and the period test's large central tower's production fate remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
+          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields and placement remain unverified; Ultra's withdrawal is documented separately: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
         ],
         "unknowns": [
-          "Central tower's final production fate; target revival, geometry, grenade and reward parameters."
+          "Exact 123.5.1 revival clocks, rounded coordinates, Eye behavior and reward coefficients. Current Eye fire is 1 second versus the period guide's 0.2 seconds; per-corpse revival and live-child replenishment differ from the older global clock and later cumulative Spawn counter. These conflicts do not justify numerical retuning.",
+          "Ultra was withdrawn in the March 2012 test; the June production guide describes five corpse loot sites without it. Exact target-build deployment and center-cell fields remain unauthenticated. RealmEye's retrospective has an unreliable broader Pentaract introduction chronology."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/test/build122.2.1",
-            "label": "Build 122.2.1 test-server notes"
+            "label": "March 17, 2012 test-only Ultra experiment"
+          },
+          {
+            "url": "https://web.archive.org/web/20120331002105id_/http://forums.wildshadow.com/node/64679",
+            "label": "Developer thread begun March 24, 2012: 122.3.1 withdraws Ultra; dated comments distinguish tower platforms from the test-only center platform"
+          },
+          {
+            "url": "https://web.archive.org/web/20120611050120id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "June 11, 2012 production-wiki capture, marked last updated 118: red/yellow beams, five corpse loot sites and encounter parameters"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March 26, 2012 test notes corroborate Ultra withdrawal; repeated announcement is not independent evidence"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/pentaract-tower-ultra",
+            "label": "Undated retrospective labels Ultra never released; broader introduction chronology is unreliable"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Pentaract.cs",
+            "label": "Modified 7.0 comparator; inspect Spawn, Swirl, Grenade, Transform and damage-transfer semantics"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/PentaractStar.cs",
@@ -4139,7 +4160,7 @@
         "unknowns": [
           "Exact123.5.1 parent acquisition/radii, lifetime versus live-child caps, initial count/regrowth/orphan cleanup and continuity of build118 child5XP/Quiet rules. See server issue852.",
           "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%.",
-          "PR1129 records prepared natural-family combat, Quiet recovery, regrowth and surviving orphans, not earned travel, native item pickup/multiplayer allocation or a successful child portal/entry. Those acquisition checks remain issue852; whole-feature gameplay stays not-run."
+          "PR1129 separately verifies prepared natural-family combat/Quiet/lifecycle and a naturally dropped Child portal with native admission to Sprite World. Earned travel, native item pickup/multiplayer allocation and rendered-dungeon acceptance remain unverified in issue852; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -4250,8 +4271,10 @@
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
         "differences": [],
         "unknowns": [
-          "Original entrance/layout/rewards and Arachna phase geometry/timing.",
-          "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
+          "Exact 123.5.1 entrance probabilities, rounded-room templates, dressing distribution and Arachna phase sequence/geometry/timing. The fixed room graph and modified7.0 behavior remain reconstructions.",
+          "Target-version continuity of the build117.0.1-labelled public reward rates and later comparator personal Ichor guarantee; a native drop does not measure probabilities.",
+          "Whether historical server logic slowed players on ordinary floor webs. Selected and modified7.0 SpiderWeb classes only render beside walls; neither class implements Slowed.",
+          "Exact 123.5.1 boss-exit destination. Build123.4.4 footage around02:12-02:16 shows a cave arch followed by a Realm load, but boss-exit versus Cowardice identity and target-version continuity were not isolated. Current Nexus return is not historical acceptance."
         ],
         "sources": [
           {
@@ -4265,6 +4288,26 @@
           {
             "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
             "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+            "label": "February 1, 2012 captured guide: four entrance families, linear caverns and shot/touch-triggered green sacs"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201110941id_/http://forums.wildshadow.com/wiki/realm-mad-god/arachna-spider-queen",
+            "label": "Build 117.0.1-labelled Arachna stats and public reward rates, not authenticated 123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "Original February 13, 2012 Build 122 announcement: aesthetic eggs, surrounding pillars and boss-dropped exits"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SpiderDen.cs",
+            "label": "Modified7.0 comparator: nine radial web spokes, timed attack transition and two sac triggers; not recovered original AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 Arachna and nine spoke definitions match selected XML, not proof of deployed phase sequence"
           }
         ],
         "checks": [
@@ -4287,6 +4330,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
                 "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+              },
+              {
+                "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+                "label": "February 1, 2012 captured guide distinguishes green sacs hatching on shots or contact"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/SpiderWeb.as",
+                "label": "Selected-client SpiderWeb rendering requires an adjacent Wall; no movement or status logic in this class"
               }
             ],
             "group": "layout"
@@ -4463,7 +4514,9 @@
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/delays, orbit direction and teleport/phase randomness remain unresolved; the modified 7.0 engine has a 1500ms delayed toss and different shield-loop semantics from the current reconstruction.",
+          "Original room/conveyor/tree/native-god distributions, tiled/non-tiled appearance and glowing-entrance semantics remain unrecovered.",
+          "Target-era Defense availability, reward eligibility and multiplayer allocation remain unresolved; the build-118-labelled period tables and later encounter-wide required-Dexterity engine do not authenticate current per-contributor guarantees."
         ],
         "sources": [
           {
@@ -4501,6 +4554,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Limon%20Element",
             "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SpriteWorldCXML.dat",
+            "label": "Modified 7.0 client: all eleven native Sprite, Limon and Element definitions match the selected client; not original server AI"
           }
         ],
         "checks": [
@@ -4510,12 +4567,19 @@
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original tiled/non-tiled encoding and selection, tree/native-god weights and conveyor generator remain unrecovered."
+            ],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+                "label": "May 2012 guide: directional floors, destructible trees, zero-to-five gods and two appearances; no generator or distribution"
+              }
+            ],
             "group": "layout"
           }
         ]

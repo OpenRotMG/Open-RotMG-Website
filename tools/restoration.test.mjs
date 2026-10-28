@@ -20,6 +20,19 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
+test('Spider Den egg and column acceptance does not accept every entrance or original history',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',component=id+':egg-and-cover-environment',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks[0].historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['spider-journey-native-57551f0','spider-cover-native-44b376d']){
+    assert.equal(evidence.sources[ref].kind,'native');assert.deepEqual(evidence.sources[ref].checks,[id,component]);
+    for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  }
+  assert.match(evidence.sources['spider-journey-native-57551f0'].limitations,/shared\/denied admission/);
+  assert.match(feature.audit.unknowns.join(' '),/boss-exit destination/);
+});
+
 test('Ent and Ghost God bounded receipts do not accept original history or acquisition',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   for(const [name,native,regression,research] of [['ent-god','5d43505','5d43505','233f7d8'],['ghost-god','9e258e9','9e258e9','9e258e9']]){
