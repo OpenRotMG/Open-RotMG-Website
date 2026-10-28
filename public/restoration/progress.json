@@ -1490,14 +1490,21 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
-        "differences": [],
+        "differences": [
+          "Trusting valid native client shot placement is intentional policy, not missing restoration."
+        ],
         "unknowns": [
-          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration."
+          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration.",
+          "Original server shot-position validation and lag tolerances remain unauthenticated."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/PlayerShootPacketHandler.cs",
+            "label": "Compiled community comparison: Kithio uses reported shot positions, not proof of original server policy"
           }
         ],
         "checks": [
