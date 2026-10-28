@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "shield-orcs-native-f5ba42b": {
+      "kind":"native", "revision":"f5ba42b76cfb2e4e075e94079d23f9ed630541b9", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1103#issuecomment-6471611074", "checks":["realm:shield-orcs"],
+      "method":"Clean QA faaec752 passes17 checks/38650game ms with client39acbfbf/Ruffle.16 in natural realm-fsod-2, live World1: selected initial4 actors, all three kinds activate/move/fire, King heals852to1102HP, native spell defeat with living Queen/no replacement10s, native low-staff swap, Queen alive460HP/stage2 at30850/deadline31850, ten36-degree rays in privileged player view, withdrawal/no XP18050, two silent living Warriors5s. Cold QA8df9f6de confirms saved living character2/revision2, SQLite/FKs, zero deaths/backend ERROR,41 PIDs absent, empty cleanup and successful cgroup reclamation. Case1fb26b58/ELF70a1ab5d. Published image is cropped from this passing take.",
+      "limitations":"Supplied level20 stats/staves/spell, scout, camp-adjacent placement and renewable Invulnerable are not earned progression or unprotected survival. No two-native-client piercing geometry, reward acquisition/pickup/reconnect, decoded ring packet or original RNG acceptance. Prior build/absent-camp failures, committed deathf1b470b1, lease2639d76e, collateralbbd840fa, overkill21b094eb, encrypted-body oraclec4b4e376 and unrelated-XP oraclef49947d0 are excluded and retained. Shared launcher self-cgroup moves blocked later starts; final task-local PID-preserving private-D-Bus Chrome wrapper kept guards intact and cold retirement passed. No gameplay/authority/ACK/lease/death/persistence/hosting policy change. Whole gameplay stays not-run/history partial; remainders issue831."
+    },
     "shield-orcs-research-6ab0792": {
       "kind":"source", "revision":"6ab079293fe603564cfb552571177a8edb93734d", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/6ab079293fe603564cfb552571177a8edb93734d/src/world/midlands.rs", "checks":["realm:shield-orcs"],
@@ -4164,7 +4170,7 @@
     "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","night-elves-research-087f74b","night-elves-regression-087f74b","night-elves-native-62a6f95"]},
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","undead-dwarves-research-ab3bc32","undead-dwarves-native-0716855"]},
     "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","orcs-research-18b3308","orcs-native-cbc9a1b"]},
-    "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","shield-orcs-research-6ab0792"]},
+    "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","shield-orcs-research-6ab0792","shield-orcs-native-f5ba42b"]},
     "realm:ogres": {"status":"not-run","evidence":["ogres-native-partial-6bcdbf3","ogres-source-af065a1","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:nomads": {"status":"not-run","evidence":[]},
     "realm:pythons": {"status":"not-run","evidence":[]},
