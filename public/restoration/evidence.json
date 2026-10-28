@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "realm-sprites-research-f3bbd7d": {
+      "kind":"source", "revision":"f3bbd7d3043fdc76b2d4bd05c46b384aeff0efaa", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/f3bbd7d3043fdc76b2d4bd05c46b384aeff0efaa/src/encounter.rs#L260-L261", "checks":["realm:sprites"],
+      "method":"Research and pinned anchors: https://github.com/OpenRotMG/Open-RotMG-Server/issues/839#issuecomment-6472186081 . All three complete selected Sprite objects normalize identically to pinned modified7.0 MidCXML. Compiled/reflection-registered Kithio Midland, Shoot/Cooldown, Wander/StayAbove/Reproduce, Utils and loot engines resolve fan counts2/3/4, seven-degree gaps, nominal300/1000/1000ms, independent per-candidate equipment probabilities and local density. Follow-up fresh January27,2012 build118 Sprite capture corroborates attacks/statuses/coefficients; February armor names reconcile wikiT5 with selectedT6. Modified7.0 server Midland agrees with Kithio but is not independent. September2010 Japanese five-shot/damage8 claims are obsolete.",
+      "limitations":"Current Trapped-style movement and regional refill differ from Kithio local reproduction/elevation. Original123.5.1 policy, tick timing, pools/odds and reward continuity remain issue839. Matching loot coefficients did not establish matching roll semantics; source review identified the current tier-wide roll versus Kithio per-candidate discrepancy for a separate regression. Source inspection is not gameplay/history acceptance or reuse clearance. Existing period-loot receipts remain bound to their original revisions."
+    },
     "shield-orcs-native-f5ba42b": {
       "kind":"native", "revision":"f5ba42b76cfb2e4e075e94079d23f9ed630541b9", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1103#issuecomment-6471611074", "checks":["realm:shield-orcs"],
@@ -4197,7 +4203,7 @@
     "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},
     "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:sprites": {"status":"not-run","evidence":["realm-sprites-research-f3bbd7d","realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:wargs": {"status":"not-run","evidence":[]},
     "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:cubes": {"status":"not-run","evidence":["shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff"]},
