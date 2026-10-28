@@ -2115,13 +2115,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Shambling Sludge throws Sludgets with a visible telegraph and delayed arrival. New waves replace old ones. Original health thresholds, timing and minion cleanup remain unresolved.",
+        "expected": "Shambling Sludge telegraphs five delayed Sludget throws and replaces old waves. Community comparators agree on five children and 1500ms flight, not original 123.5.1 fidelity.",
         "differences": [
-          "Sludge equipment and Sludget consumables are reconstructed from the older community table; original 123.5.1 probabilities remain unverified."
+          "Current Trapped-style radius4/10000ms replacement waves and wandering/charging children differ from compiled Kithio radius3/8000ms toss plus1000ms pause, protect/jump phases and9000ms child decay.",
+          "Sludge equipment and Sludget consumables retain the older community table. Kithio instead lists different Sludge gear/potions and no Sludget loot; its independent per-item rolls are not equivalent probabilities."
         ],
         "unknowns": [
-          "Original child counts, throw delays, health thresholds and drops.",
-          "Original policy for parent death or blocked landing is unresolved. Current admitted tosses can land after parent death, while blocked landings are refused and logged; this is source reading, not native acceptance."
+          "Exact123.5.1 activation, movement, shot/wave cadence, geometry, child lifetime, density and reward eligibility/probabilities remain unresolved. Neither inspected comparator uses an HP threshold; Trapped refills below three living children after2000ms.",
+          "Original parent-death and blocked-landing policies remain unresolved. Both comparator throw timers lack a parent-survival guard. One native kill has later admitted child arrivals and surviving children, not original-policy acceptance. Current blocked-landing refusal remains source-only."
         ],
         "sources": [
           {
@@ -2135,6 +2136,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
             "label": "Community behavior/loot comparator; original rates remain unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L231-L303",
+            "label": "Compiled Kithio comparator; differing AI, lifetime and loot"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 client: both complete definitions match selected objects"
           }
         ]
       }
