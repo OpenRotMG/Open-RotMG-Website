@@ -804,7 +804,7 @@
         ],
         "unknowns": [
           "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
-          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
+          "Bounded native checks now show an ordinarily dyed death in Legends/details and a separate new native death reaching its unranked own row on all three tabs. The leaderboard is filled with explicitly prepared deaths; this is not earned fixture progression, a combined dyed-own-row test or whole-feature acceptance (#781, PR1073)."
         ],
         "sources": [
           {
@@ -830,6 +830,14 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
             "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/death/control/HandleDeathCommand.as",
+            "label": "Modified7 actual-death context comparator; not original backend policy"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build118.7",
+            "label": "Build118.7 testing quote labelled September 23, 2011; testing heading conflicts (August 18); top10 glow is not list capacity"
           }
         ]
       }
