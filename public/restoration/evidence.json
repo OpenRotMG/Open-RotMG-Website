@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "sphinx-native-1ba2972": {
+      "kind": "native",
+      "revision": "1ba2972612ec473697f5bb4eb6d53896e96d5d2a",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1043#issuecomment-6471075024",
+      "checks": ["realm:grand-sphinx"],
+      "method": "Final native QA 6ab3e282 passed all 11 admission, full-health Sphinx/four-Reaper combat, Stasis, phase/projectile, earned-loot and same-character rendered Tomb/Nexus checks. Client 39acbfbf3bf545c397d6ac94f0a9430d6d660ac2/Ruffle 0.7.1-openrotmg.16. Cold postflight 9ed6adeb verifies retained Vitality/revision 2, two living characters, zero deaths, clean SQLite/FKs, no server/cleanup errors and owned PIDs absent. Exact-head CI passed; server PR1043 merged as e76660937feae6fb500badb4029b0d44031b7f7f. Inspected native crops are attached. Backend peak RSS 765060 KiB, driver 1014580 KiB; these are run measurements, not capacity acceptance.",
+      "limitations": "Prepared level-20 Mystics, selected gear, temporary +100 Attack, human Invulnerable/scout Invincible. Direct-scout ordinary combat prepares admission, not native-earned Realm progression or normal-risk balance. Enemy HP/phases/credit and native safety guards unchanged. Original placement/rates and whole-feature/historical acceptance remain unverified; not public-host acceptance. Earlier passes, failed takes and committed permanent death are preserved."
+    },
     "orcs-native-cbc9a1b": {
       "kind":"native", "revision":"cbc9a1b115c81aa11eecc27237515b07da1aa4c9", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1102#issuecomment-6470704465", "checks":["realm:orcs"],
@@ -4146,7 +4155,7 @@
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323","lost-lands-source-followup-67ba7b7","lost-lands-followup-48a3be9"]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694","sphinx-native-a7c8ba0"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694","sphinx-native-a7c8ba0","sphinx-native-1ba2972"]},
     "realm:skull-shrine": {"status":"passed","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df","skull-shrine-research-3587c31","skull-shrine-cap-regression-8055278","skull-shrine-native-0c03248"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df","cube-research-5dc0694"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
