@@ -6131,15 +6131,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four self tinctures +15 DEX/DEF or +75 max HP/MP; four range-six effusions +30 or +150; 30 seconds. Nearby allies, not formal party.",
-        "differences": [],
+        "expected": "Four self tinctures +15 DEX/DEF or +75 maximum HP/MP; four range-six effusions +30 or +150 for nearby allies, not formal party; 30 seconds per dose. Overlapping same-stat boosts diminish by successive halves, rounded down, without refreshing timers. The reconstruction ranks active doses strongest-first, excludes the exact six-tile boundary, does not instantly refill HP/MP, clamps on expiry and discards temporary boosts on reconnect.",
+        "differences": [
+          "The May29,2012 Wild Shadow guide documents halving, separate timers and range6. Compiled Kithio instead adds every dose at full strength and halves aura range to3. Preserve selected range6; correct full-strength stacking. Modified7.0 ActivateBoost supplies strongest-first ranking/re-ranking as reconstruction, not independent target-era proof."
+        ],
         "unknowns": [
-          "Original stacking, refresh, range-boundary and temporary maximum-stat rules."
+          "Exact 123.5.1 mixed-strength ordering/expiry re-ranking, inclusive boundary and temporary-maximum clamp/reconnect policy remain historically unresolved. Dated guide tables settle equal-dose halving, not those server details. Tracked in server issue884.",
+          "Prepared native items do not prove original acquisition, effusion distribution or drop probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120529033324id_/http://forums.wildshadow.com/wiki/realm-mad-god/tinctures-and-effusions",
+            "label": "May29,2012 Wild Shadow capture: values, range6, half-rounded-down overlaps and separate30-second timers"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ActivateBoost.cs",
+            "label": "Modified7.0 comparator: descending live-dose ranking, per-stat halving and re-ranking on expiry"
           }
         ]
       }
