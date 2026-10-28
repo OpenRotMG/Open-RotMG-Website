@@ -2782,14 +2782,14 @@
         "expected": "At most one Sphinx per Realm, setting, combat and Horrid Reapers; Reapers disappear after boss death and are Stasis-susceptible at123.5.1.",
         "differences": [
           "PR451 matches the community sand-star stencil; outer flooring, placement and original fidelity remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/451",
-          "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "PR336 adds phase/Reaper integration and the current contribution reconstruction. PR1043 records a prepared full-health native fight, loot pickup and earned Tomb/Nexus journey at a7c8ba0, not whole-feature or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1043#issuecomment-6464305065",
           "PR417 restores the community encounter-wide Vitality/Wisdom floor. Its inclusive 550-damage gate is retained reconstruction: the pinned comparator compares Threshold(0.01) against raw integer damage, not an HP fraction. Prepared final-hit evidence is not full-fight acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
           "The May 24, 2012 guide labels its content build122 and describes 60k HP/five Reapers, unlike selected 55k HP/four-Reaper reconstruction. Current guaranteed Tomb portal and terrain-1 protected placement also differ from the later comparator's 0.33 portal roll and Mountains-through-MidForest placement. These are not authenticated target-era settings.",
           "PR493 matches the community outer-floor radius origin (40.5 in tile-index space), not boss-centering. Star/boss positions and local draw counts stay unchanged; placement, RNG parity and original 123.5.1 flooring remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/493"
         ],
         "unknowns": [
           "Exact 123.5.1 setting/distribution, phase timing, Reaper count, reward eligibility, portal chance and loot probabilities. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
-          "Native earned-Sphinx defeat, portal entry and subsequent dungeon journey remain unverified."
+          "Prepared native full-health defeat, loot pickup and earned Tomb/Nexus journey are recorded at a7c8ba0. Native-earned Realm progression, normal-risk balance and complete feature acceptance remain unverified."
         ],
         "sources": [
           {

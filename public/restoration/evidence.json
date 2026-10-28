@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "sphinx-native-a7c8ba0": {
+      "kind": "native",
+      "revision": "a7c8ba00c0b092d8bdfb8a62e15b85e31e110687",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1043#issuecomment-6464305065",
+      "checks": ["realm:grand-sphinx"],
+      "method": "Native QA 6c8d5da3 passed all 11 checks: unmodified 55,000-HP Sphinx/four Reapers, Orb Stasis without Reaper damage, phases 1-6 and projectile speeds 80/55/67, full defeat/XP and Reaper cleanup, earned Vitality pickup/revision 2, same-character earned Tomb entry, visibly rendered movement and Nexus return retaining the item. Client 39acbfbf3bf545c397d6ac94f0a9430d6d660ac2/Ruffle 0.7.1-openrotmg.16. Cold postflight df356fcc confirms two living characters, zero deaths, clean SQLite/FKs, no server ERROR/cleanup failures and owned PIDs absent. Actual native crops are attached.",
+      "limitations": "Prepared level-20 Mystics, selected gear, Invulnerable and +100 Attack; direct-scout ordinary combat prepares admission. No enemy HP/phase/credit edits. Not native-earned Realm progression, normal-risk balance, original placement/rates or whole-feature/historical acceptance. Revision-bound evidence, not moving-main or public-host acceptance. Prior failures and receipts remain preserved."
+    },
     "pirates-native-8042725": {
       "kind":"native", "revision":"804272519f8a0804f6173d65c18a41c6a0cce0c4", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1089#issuecomment-6462887485", "checks":["realm:pirates"],
@@ -3950,7 +3959,7 @@
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323","lost-lands-source-followup-67ba7b7","lost-lands-followup-48a3be9"]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694","sphinx-native-a7c8ba0"]},
     "realm:skull-shrine": {"status":"passed","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df","skull-shrine-research-3587c31","skull-shrine-cap-regression-8055278","skull-shrine-native-0c03248"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
