@@ -2872,7 +2872,8 @@
           "PR601 rechecks the Cube God's untouched birth cell before delayed admission. Blockers and live or owned occupants postpone admission without clearing native terrain or scenery. Prepared checks are not original spawn-selection proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
         ],
         "unknowns": [
-          "Original 123.5.1 spawn/target selection, choreography, counts and reward distribution remain unresolved: Build121.0 documentation, Trapped and modified7.0 disagree on reproduction timers, populations and minion control. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/820#issuecomment-6454414446"
+          "Original 123.5.1 spawn/target selection, choreography, counts and reward distribution remain unresolved: Build121.0 documentation, Trapped and modified7.0 disagree on reproduction timers, populations and minion control. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/820#issuecomment-6454414446",
+          "Unverified: unprotected damage/statuses, target arbitration and ineligible-account reward denial. Whole-feature gameplay stays not-run. Prepared-native receipt: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1074#issuecomment-6470990621"
         ],
         "sources": [
           {
@@ -2936,7 +2937,8 @@
           "The decoded modified-7 map is32x29 with eight spawners and four drop markers; Valor's map is byte-identical, not independent evidence. Reproduce counts nearby living entities; death transfer chooses one nearest drop actor and transfers raw integer damage. Its0.01 loot threshold therefore accepts any positive integer hit, not1% HP. Original geometry, allocation and rates remain unresolved."
         ],
         "unknowns": [
-          "Original geometry/placement distribution, minion densities, phase timing/attack continuity and difficulty; loot pools, eligibility, minima/rates and portal probability."
+          "Original geometry/placement distribution, minion densities, phase timing/attack continuity and difficulty; loot pools, eligibility, minima/rates and portal probability.",
+          "Bounded native takes verify the initial gate and repeated waves, not full defeat/rewards, private ownership, pickup/duplicate or Trench entry. Earned native admission/travel, unprotected status/survival and multiplayer acceptance also remain open: https://github.com/OpenRotMG/Open-RotMG-Server/issues/822"
         ],
         "sources": [
           {
