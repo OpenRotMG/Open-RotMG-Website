@@ -6333,19 +6333,30 @@
       "category": "style",
       "icon": "assets/player/black-cat.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "All target-era pet choices and generators, following, persistence and loss/transfer behavior, including Baby as one companion. Historically deployed roster, acquisition and exact lifecycle remain qualified; modern feeding/fusion is not imported.",
-        "differences": [],
+        "expected": "Target-era companions, generators, following, persistence and loss/transfer behavior, including Baby. Selected definitions contain 66 generators; this is not a historically obtainable roster. Modern feeding/fusion is excluded.",
+        "differences": [
+          "Source inspection finds generic owner-follow/toggle behavior for Beach Ball, not buddy tossing, and one saved selection rather than Valentine's reported multiple hearts. These special behaviors are not accepted by the generic summon checks."
+        ],
         "unknowns": [
-          "Complete obtainable pet roster, seasonal shops, and original loss/transfer rules.",
-          "Original following distances, replacement and continued ownership after seasonal sales.",
-          "Was Beach Ball Generator obtainable in 123.5.1, and how did buddy play work?"
+          "Which of the 66 selected generators were actually obtainable in 123.5.1? The June 10, 2012 forum capture lists 34 known pets and explicitly says some were unreleased; the modified 7.0 catalogue adds later pets.",
+          "Complete target-build acquisition, manual shop rotations, seasonal retention and original loss/transfer exceptions remain tracked in server issue893. Prepared generator fixtures do not prove acquisition.",
+          "Exact original following/warp distances, cooldown scope and special Valentine behavior remain unresolved; the later PetFollow comparator differs from this reconstruction.",
+          "The preserved event table dates Beach Ball's 700 Gold sale to August 16–21, 2012, before 123.5.1. Retained use in the target build and buddy-play routing/range/timing still need period evidence and dedicated gameplay checks."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610080612id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/pets",
+            "label": "June 2012 forum capture: unreleased pets, reusable generators, manual shop rotation and consumable event pets"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events",
+            "label": "Preserved event table: Beach Party Madness, August 16–21, 2012"
           }
         ]
       }
