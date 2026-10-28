@@ -4830,7 +4830,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact historical switch/trap timing and all multi-room multiplayer journeys remain unverified."
+              "Prepared interruption/reset and local eight-trap disable in two rooms pass at e124efa. Exact historical timing and complete cover/trap-condition journeys remain unverified."
             ],
             "sources": [
               {
@@ -4849,7 +4849,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified. Trapped deduplicates item identity per recipient, while current two-roll distribution does not; neither is authenticated original policy."
+              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey. Seed12 optional treasure, jars and private pickup/Nexus retention pass at 5928fc2. Individual boss awards, peer healing and complete artifact acceptance remain unverified. Exact period loot probabilities remain unverified. Trapped deduplicates item identity per recipient, while current two-roll distribution does not; neither is authenticated original policy."
             ],
             "sources": [
               {
