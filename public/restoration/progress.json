@@ -3057,12 +3057,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Pirate0x600 and Piratess0x601, selected Blade definitions and ordinary population interaction; excludes Pirate Cave.",
-        "differences": [],
+        "expected": "ShoreSand Pirate0x600 has5HP; Piratess0x601 has6HP. Both have0DEF and one Blade: damage4/speed40/lifetime600ms. Complete selected definitions match recovered123.5.1 and pinned modified7.0. Excludes Pirate Cave.",
+        "differences": [
+          "At server55b6ab4d, continuous range6 chase/home leash and bounded two-initial/five-Pirate/five-Piratess camp with10s refill differ from compiled primary Follow duration/rest/hysteresis and60s same-type radius10 density reproduction. Older Trapped explains several current constants, not exact target fidelity.",
+          "Nominal20% selected T1 weapon/armor and3% HP potion agree with primary and January2012 build118-labelled text. Current one tier roll/uniform item differs from primary independent0.2/N candidate rolls and contributor bag allocation.",
+          "No current Pirate/Piratess portal roll. January8,2020 patch says beach Pirates can now drop caves, but a January2012 key page already lists them. Do not apply today's drop table or infer original probability from a few kills."
+        ],
         "unknowns": [
-          "Target caps, replenishment, movement timing, loot rates and Pirate Cave portal probability."
+          "Exact123.5.1 movement, reproduction clocks/density/start counts, tier-roll allocation and conflicting portal documentation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/827#issuecomment-6462537681 . Prepared gameplay is separate from historical and whole-feature acceptance."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120124041159id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirates",
+            "label": "January24,2012 capture; content labelled build118, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L16-L39",
+            "label": "Compiled primary comparator; Follow/Reproduce/loot engines qualified separately"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2020#patch-x-32-4-1",
+            "label": "January8,2020 portal addition; conflicts with earlier key documentation"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
