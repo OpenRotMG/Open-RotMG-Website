@@ -1666,6 +1666,33 @@
       "limitations": "Source and map inspection only, with no native facility, chat or potion run. Hall layouts are project maps, not authenticated target layouts.",
       "checks": ["gear:inventory-and-equipment", "social:chat", "social:guild-hall", "gear:transformation-potion", "condition:28"]
     },
+    "chamber-native-partial-2ab46ff": {
+      "kind": "native",
+      "revision": "2ab46ffb6b69b026c3093fafef420ef68e93996a",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1152#issuecomment-6479535958",
+      "method": "Before bf455899 restored the pre-fix publication block; after 1079cf25 used clean 2ab46ffb, client 0282b3a4/Ruffle .16. Each passes 17 checks through minion Stasis/kill/XP, current phase projectiles/rage, actual Oryx defeat/kill credit, one fresh-slot consumption, competing-item retention and two native clients entering one Cellar. The after capture renders green notification and chat. Retained rejected-slot retry sends no request and remains failed.",
+      "limitations": "Neither full case passes: final Nexus assertion used the wrong R binding. Corrected to Insert; separate prepared Cellar escape 0934b2e8 at 143ec201 passes three identity/inventory/XP checks, not the complete earned journey. Legal capped stats and explicit Invincible protection; no earned Castle entry, authentic difficulty, loot or historical choreography acceptance. Reference SWF and authority guards unchanged.",
+      "checks": ["dungeons:oryx-s-chamber", "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract", "dungeons:oryx-s-chamber:incantation-unlock-transaction"]
+    },
+    "cellar-unlock-regression-7de478c": {
+      "kind": "regression",
+      "revision": "7de478c35a809ac8ec03415157a30c87b490bf1c",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/867#issuecomment-6478221203",
+      "method": "Executed 242/242 Rust tests and the focused Chamber transaction regression. Before fix, active participants receive zero unlock announcements instead of one; after fix it passes. Covers pre-victory, wrong world/range/item ownership, competing reservation, commit failure cleanup, unpublished-route denial, exactly one consumption/shared destination, replay rejection and exact active-participant text/notification after commit.",
+      "limitations": "Injected completion result, not a real disk-fault experiment. Quarantine is preserved after uncertain persistence. No native or historical acceptance is implied; native inventory commitment/travel remains separate. Later formatter-only module reorder and native-case setup changes do not change this transaction.",
+      "checks": ["dungeons:oryx-s-chamber:incantation-unlock-transaction"]
+    },
+    "chamber-research-18d4ce7": {
+      "kind": "source",
+      "revision": "18d4ce727310967db6f0b6b4366d257a2dbccde0",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/18d4ce727310967db6f0b6b4366d257a2dbccde0/data/objects.xml",
+      "method": "Compared selected Oryx1, Ring, Minion and two Guardian Element XML definitions recursively against pinned modified7.0: all five including projectiles agree. Checked Kithio project/registration and absent Oryx1 table, Trapped Oryx2-only table, later Valor phase/summon comparator, original June2012 wiki captures and October2012 footage. Target notes support ordinary Minion Stasis susceptibility and small XP, not removing artifact immunity. Footage at 0:09/0:11 shows unlock text and green notification. Source/engine anchors and period conflicts: https://github.com/OpenRotMG/Open-RotMG-Server/issues/867#issuecomment-6477105897",
+      "limitations": "Research only, not executed gameplay. No exact footage build label. June guide labels123.0.0 and has conflicting DEF34 versus selected60; planets/moons/grid and taunts are absent from the bounded current cycle. Rejection-safe Incantations deliberately differ from June misuse-consumption guidance. Original phase/loot policies and range/lifetime remain unresolved in issue867; later code is not independent historical corroboration or reuse clearance.",
+      "checks": ["dungeons:oryx-s-chamber", "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract", "dungeons:oryx-s-chamber:incantation-unlock-transaction"]
+    },
     "endgame-fauna-source-4992445": {
       "kind": "source",
       "revision": "499244541ab1e6f794cd6a7ec3a6bcd29f833b8a",
@@ -4731,9 +4758,9 @@
     "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"not-run","evidence":[]},
-    "dungeons:oryx-s-chamber": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
-    "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract": {"status":"not-run","evidence":[]},
-    "dungeons:oryx-s-chamber:incantation-unlock-transaction": {"status":"not-run","evidence":[]},
+    "dungeons:oryx-s-chamber": {"status":"not-run","evidence":["endgame-fauna-source-4992445","chamber-research-18d4ce7","chamber-native-partial-2ab46ff"]},
+    "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract": {"status":"not-run","evidence":["chamber-research-18d4ce7","chamber-native-partial-2ab46ff"]},
+    "dungeons:oryx-s-chamber:incantation-unlock-transaction": {"status":"failed","evidence":["chamber-research-18d4ce7","cellar-unlock-regression-7de478c","chamber-native-partial-2ab46ff"]},
     "dungeons:wine-cellar": {"status":"not-run","evidence":["wine-barrels-native-89f5247","wine-bile-native-7a33b60"]},
     "dungeons:wine-cellar:barrel-destruction": {"status":"not-run","evidence":["wine-barrels-native-89f5247"]},
     "dungeons:wine-cellar:bile-trail-and-wine-threats": {"status":"not-run","evidence":["wine-bile-native-7a33b60"]},

@@ -5289,7 +5289,7 @@
         "expected": "Chamber access, Oryx1 phases/summons/rewards, locked Cellar and Incantation unlock; teleport disabled; target minions stasis-susceptible and give small XP.",
         "differences": [],
         "unknowns": [
-          "Historical choreography/taunts, minion reward/susceptibility mapping, unlock range/lifetime/announcements and loot eligibility."
+          "Full target-era choreography/taunts, loot eligibility/rates and original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
         ],
         "sources": [
           {
@@ -5304,10 +5304,10 @@
             "expected": "The full Oryx 1 encounter includes its minion conditions and rewards, not just access to the room.",
             "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": ["Current bounded cycle omits planets/moons and the chasing grid described in the June 2012 build 123.0.0 guide; continuity into 123.5.1 is not established. Later Valor's written dance-two subgraph loops until the HP transition, unlike the current repeating 85-second scheduler."],
+            "unknowns": ["Exact target-era phase selection/timings, taunts and loot recipient/probability rules remain open in server issue #867. June guide describes three outer artifacts versus current/later-comparator four. The five inspected definitions match modified 7.0; that does not authenticate choreography."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
             "group": "boss"
           },
           {
@@ -5316,10 +5316,10 @@
             "expected": "A committed Incantation use opens one shared Cellar route, without consuming or exposing success on rejected actions.",
             "acceptance": "Test pre-victory, wrong-world/range/item, competing users and commit failure. Exactly one successful consumption must bind a usable shared destination; original range/lifetime remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": ["June 2, 2012 guide says misuse wastes the Incantation. This project deliberately retains rejected items and publishes only after commit. Native rejection leaves the original client slot latched, so retrying that retained item emits no new request; this client defect remains open in server issue #867."],
+            "unknowns": ["Range 3 and 120-second lifetime are later-comparator reconstruction, not recovered target-era constants. October 2012 footage shows unlock text/notification but no verified build label."],
+            "sources": [{"url":"https://web.archive.org/web/20120602012050id_/http://forums.wildshadow.com/wiki/realm-mad-god/wine-cellar-incantation","label":"June2,2012 captured misuse-consumption rule"},{"url":"https://www.youtube.com/watch?v=H44UToO5faY&t=9","label":"Uploaded October3,2012; unlock visible at0:09/0:11"},{"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/player/Player.UseItem.cs#L337-L416","label":"Later7.0 nearest/shared portal, range and announcement handler"},{"url":"reference-data/client-123.5.1.swf","label":"Original 123.5.1 client (SWF reference data)"},{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as","label":"Recovered slot attemptUse, draw and refresh latch path"}],
             "group": "admission"
           }
         ]
