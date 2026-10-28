@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "drakes-native-16583cb": {
+      "kind":"native", "revision":"16583cb5d803a06272a74137f3970f41cdcf3af2", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1171#issuecomment-6481799726", "checks":["style:summon-a-drake"],
+      "method":"Clean QAc24bf5da passes44 checks: all six eggs consumed once and selected drakes published; enemy Paralyzed/Slowed/Bleeding with HP loss, Purple damage without weapon fire, Orange Stasis and White healing observed. Native Nexus reconnect preserves living identity/inventory and clears old-world drakes. Eight coexist, ninth refusal logged with egg/revision preserved, actual movement/following and bounded30s/60s expiry samples pass. Cold QA15398c34 verifies16 samples, committed casef666747b, exact saved items/revisions, SQLite/FKs, four living characters/zero deaths, zero ERRORs and42 absent PIDs. Client0282b3a4/Ruffle16; cleanup[],QA0/reclaimed.",
+      "limitations":"Prepared level20/stats/eggs, scouted spawn, finite Invulnerable/vitals and one cap-test refill, not earned acquisition or ordinary-risk survival. No millisecond lifetime/pulse measurement, ground use, Sick/other-recipient healing, disconnect/death or original server acceptance. Earlier9f1730a3 fails a test-only map-field oracle after19 checks and actual successful travel; queue-only cancellations remain non-passes.56 latency/slow-tick WARNs retained, no performance claim. Production mechanics, authority/durability and historical partial unchanged."
+    },
+    "drakes-research-4006cea": {
+      "kind":"source", "revision":"4006cea164c1a6913594966d3f8c7f22d5161ae1", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/4006cea164c1a6913594966d3f8c7f22d5161ae1/data/objects.xml", "checks":["style:summon-a-drake"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/894#issuecomment-6481480974 . QA3954ee06 extracts selected SWF07ae4fc3: all six egg/six drake/Red Drake object subtrees match runtime and pinned modified7.0; no selected Red Drake activation. Compiled Kithio and7.0 Pet activations are no-ops. Fresh May31,2012 Wildshadow table independently supplies all six lifetimes, strengths and intervals, agreeing with current constants. Japanese pages provide weaker-dated range/area leads; no code/assets imported.",
+      "limitations":"Source inspection, not gameplay or authenticated original server. September archive request redirects back to May, not a second witness; GameFAQs and Fandom challenge/403 are not credited. Exact target continuity, targeting/following/defense, concurrency, damage credit and travel/disconnect/death rules remain in894. Red object is not a seventh egg. Current authority/durability policies unchanged."
+    },
     "inventory-native-c5f52f74": {
       "kind":"native", "revision":"c5f52f740d78a028999f1265463754cbf234cd93", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1163#issuecomment-6481129567", "checks":["gear:inventory-and-equipment"],
@@ -5461,7 +5473,7 @@
     "gear:amulet-of-resurrection": {"status":"not-run","evidence":[]},
     "gear:seasonal-toys": {"status":"not-run","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17"]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
-    "style:summon-a-drake": {"status":"not-run","evidence":[]},
+    "style:summon-a-drake": {"status":"passed","evidence":["drakes-research-4006cea","drakes-native-16583cb"]},
     "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
     "home:nexus": {"status": "not-run","evidence": ["void-background-source-15c1e17","void-background-regression-2e116c1","void-background-native-bde9a38","nexus-source-794eccf"]},
