@@ -8,6 +8,17 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Magic Potion consumption passes without accepting deployment or original hue',()=>{
+  const data=catalogue(),evidence=ledger(),id='gear:magic-potions',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['magic-potions-research-3389a2c','source'],['magic-potions-regression-62c38f4','regression'],['magic-potions-native-3389a2c','native']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.equal(evidence.results[id].evidence.length,9);
+  assert.match(feature.audit.unknowns.join(' '),/deployment.*unresolved/);assert.match(feature.audit.unknowns.join(' '),/RGB/);
+});
+
 test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics',()=>{
   const data=catalogue(),evidence=ledger(),ids=['dungeons:mad-lab','dungeons:mad-lab:ordinary-lab-and-gas','dungeons:mad-lab:coil-secret-and-pool-chain'];
   validateEvidence(data,evidence);

@@ -4940,12 +4940,13 @@
       "category": "dungeons",
       "icon": "assets/player/thessal-the-mermaid-goddess.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Underwater dungeon, same-instance player teleporting, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
-        "differences": [],
+        "differences": ["The current return is a death-relative Nexus portal. Build122.3.2 notes describe fixed dungeon exit sites; the exact Trench site and target destination remain unresolved."],
         "unknowns": [
-          "Original topology, oxygen parameters and vent geometry, full target choreography, Hermit entrance probability, reward eligibility/rates and King Alexander target deployment."
+          "Original topology, oxygen cadence and vent geometry, full target choreography, Hermit entrance probability and reward eligibility/rates. King Alexander is documented in Thessal's question, not established as a deployed encounter.",
+          "Unprotected or earned-entry entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
         ],
         "sources": [
           {
@@ -4968,22 +4969,22 @@
             "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
             "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target oxygen cadence, vent radius and placement remain reconstruction; the later comparator uses a greater-than-100ms ground gate, not an authenticated original 150ms timer."],
+            "sources": [{"url": "https://wikiwiki.jp/rmd/version/build122.3.2", "label": "April 2012 release notes explicitly add Thessal's death air pocket"}],
             "group": "layout"
           },
           {
             "id": "dungeons:ocean-trench:wounded-thessal-response",
             "name": "Wounded Thessal and response gifts",
-            "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
+            "expected": "Wounded Thessal asks Is King Alexander alive? The documented answer is He lives and reigns and conquers the world, followed by up to three Coral Gifts. This optional encounter is separate from the normal clear.",
             "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off.",
-            "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "partial",
+            "historical": "partial",
+            "differences": ["The June 13, 2012 Wild Shadow-hosted guide describes a failed-response shotgun rage; the current reconstruction expires wounded Thessal without that attack."],
+            "unknowns": ["The original trigger is explicitly unknown in the period guide. The reconstructed 10% death roll and 12-second deadline come from the later modified7.0 comparator; the undated Japanese guide instead says 15 seconds. Exact failure trigger, barrage timing and counts remain unresolved."],
+            "sources": [{"url": "https://web.archive.org/web/20120613202818id_/http://forums.wildshadow.com/wiki/realm-mad-god/thessal-mermaid-goddess", "label": "June 13, 2012 guide: question, answer in image hovertext, gifts and lethal failure attack"}],
             "group": "boss"
           }
         ]
@@ -5970,10 +5971,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Minor/normal/Greater Magic restore 50/100/200 MP; consumable, Greater soulbound; permitted ground use.",
+        "expected": "Selected Minor/normal/Greater Magic definitions restore 50/100/200 MP up to the effective maximum; consumable, Greater soulbound; permitted accessible-ground use. Definition presence does not establish original deployment.",
         "differences": [],
         "unknowns": [
-          "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
+          "Full-MP spending and Quiet consumption follow selected-client eligibility and compiled Kithio reconstruction, not recovered original server policy; exact 123.5.1 ground eligibility remains unconfirmed.",
+          "May 1, 2012 Wild Shadow documentation lists Minor Magic at Butcher, Bonegrind and Forbidden Jungle, while the August 5, 2012 Japanese page lists no acquisition. Greater Magic is listed as unreleased on a March 13, 2013 Japanese page. Exact target-build deployment and acquisition continuity remain unresolved.",
           "Exact original MP-restoration text hue remains unrecovered; Kithio purple and Trapped white conflict. Light blue 6084e0 is a later-reference reconstruction, not authenticated 123.5.1 RGB."
         ],
         "sources": [
@@ -5984,6 +5986,30 @@
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/entities/player/Player.UseItem.cs#L140",
             "label": "Later FSoD light-blue 6084e0 comparator; reconstruction, not original 123.5.1 hue"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L88-L102",
+            "label": "Compiled comparator consumes at full MP; does not authenticate original server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L2116-L2154",
+            "label": "Modified 7.0 comparator: all three potion definitions normalize identically to selected data"
+          },
+          {
+            "url": "https://web.archive.org/web/20120430102741id_/http://forums.wildshadow.com/wiki/realm-mad-god/magic-potion",
+            "label": "April 30, 2012 capture: normal Magic restores100 MP and is consumed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120501002624id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-magic-potion",
+            "label": "May 1, 2012 capture: Minor restores50 MP; lists Butcher, Bonegrind and Jungle drops"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Minor%20Magic%20Potion",
+            "label": "Minor page last modified August 5, 2012:50 MP, no acquisition; conflicts with May capture"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Greater%20Magic%20Potion",
+            "label": "Greater page last modified March 13, 2013:200 MP, unreleased, no acquisition"
           }
         ]
       }
@@ -6065,12 +6091,24 @@
         "expected": "Health and Magic each have seven soulbound doses, restore 125 per dose, replace with successor and remove final dose.",
         "differences": [],
         "unknowns": [
-          "Original consumption at full HP/MP or while Sick, and both seven-dose sequences."
+          "Independent original-server consumption/refund at full HP/MP or while Sick; exact 123.5.1 continuity of April/June 2012 guides. Kithio lacks a Sick healing guard, unlike period documentation and modified 7.0; retain current no-heal policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L89-L149",
+            "label": "Compiled Kithio: successor replacement, ineffective-use consumption and capped restoration; no Sick healing guard"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422182039id_/http://forums.wildshadow.com/wiki/realm-mad-god/elixirs",
+            "label": "April 22, 2012 capture: Soulbound, up to seven doses, 125 HP/MP per use"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June 13, 2012 capture: Sick prevents healing, not proof of dose consumption/refund"
           }
         ]
       }
