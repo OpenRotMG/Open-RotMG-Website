@@ -8,6 +8,15 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('six native drakes pass without accepting original policy or a seventh egg',()=>{
+  const data=catalogue(),evidence=ledger(),id='style:summon-a-drake',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.deepEqual(evidence.results[id].evidence,['drakes-research-4006cea','drakes-native-16583cb']);
+  assert.match(feature.audit.unknowns.join(' '),/damage attribution.*travel\/disconnect\/death/);
+  assert.match(feature.audit.unknowns.join(' '),/Do not infer a seventh egg/);
+});
+
 test('Magic Potion consumption passes without accepting deployment or original hue',()=>{
   const data=catalogue(),evidence=ledger(),id='gear:magic-potions',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
