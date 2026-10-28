@@ -804,7 +804,7 @@
         ],
         "unknowns": [
           "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
-          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
+          "Bounded native checks now show an ordinarily dyed death in Legends/details and a separate new native death reaching its unranked own row on all three tabs. The leaderboard is filled with explicitly prepared deaths; this is not earned fixture progression, a combined dyed-own-row test or whole-feature acceptance (#781, PR1073)."
         ],
         "sources": [
           {
@@ -830,6 +830,14 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
             "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/death/control/HandleDeathCommand.as",
+            "label": "Modified7 actual-death context comparator; not original backend policy"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build118.7",
+            "label": "Build118.7 testing quote labelled September 23, 2011; testing heading conflicts (August 18); top10 glow is not list capacity"
           }
         ]
       }
@@ -1402,10 +1410,11 @@
         "expected": "Finite qualifying encounter lifecycle, announcements, sealed admission, eligible Castle transfer and replacement realm; exact target roster/countdowns remain qualified.",
         "differences": [
           "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+          "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192"
         ],
         "unknowns": [
-          "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
+          "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
           "Recurring per-family counts use the gameplay documentation's two-minute cadence rather than modified forks' 20 seconds. Exact target-era phase, selection weights and complete spawn/death/entry phrase pools remain unverified."
         ],
         "sources": [
@@ -1413,6 +1422,8 @@
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/Oryx.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
           },
+          {"url":"https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq","label":"January 6, 2012: finite Quests, replenishing minions and a two-minute lockout"},
+          {"url":"https://web.archive.org/web/20120602012040id_/http://forums.wildshadow.com/wiki/realm-mad-god/game-objectives","label":"June 2, 2012: six named event bosses, Castle and Guardians; all players wording does not resolve dungeon eligibility"},
           {
             "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
             "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
@@ -1430,10 +1441,13 @@
               "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
             ],
             "unknowns": [
-              "Exact 123.5.1 trigger probability, type distribution and site selection remain qualified. Related server comparators disagree on the roll."
+              "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
             ],
             "sources": [
               {"url":"https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88","label":"Classic quest and event reference"},
+              {"url":"https://web.archive.org/web/20120613202917id_/http://forums.wildshadow.com/wiki/realm-mad-god/quest-monsters","label":"June 13, 2012: 10% event roll and evaluation bosses; capture verified after Wayback redirected the requested date"},
+              {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Oryx.cs#L670-L714","label":"Compiled primary reconstruction: Quest plus critical display-name gate, 25% roll, selected PerRealmMax removal"},
+              {"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/Oryx.cs#L814-L883","label":"Modified 7.0 comparator disables the nominal 25% gate; not independent historical evidence"},
               {"url":"https://remaster.realmofthemadgod.com/?p=3259","label":"2022 change to 25% and expanded repeat limits, not target-era policy"}
             ],
             "group": "behavior"
@@ -1491,10 +1505,11 @@
         "historical": "partial",
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
         "differences": [
-          "Trusting valid native client shot placement is intentional policy, not missing restoration."
+          "Trusting valid native client shot placement is intentional policy, not missing restoration.",
+          "PR1071 fixes the reproduced Invulnerable projectile-effect mismatch while preserving HP immunity, once-only hit snapshots and current native shot placement policy. Prepared native and synthetic boundary checks do not accept the whole combat feature. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071"
         ],
         "unknowns": [
-          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration.",
+          "Original-server RNG and hit/ACK arbitration remain unresolved. Selected-client trajectory/parity, RNG and defense rounding are source-reviewed in #789; exhaustive native trajectory/cover/MultiHit combinations remain unaccepted.",
           "Original server shot-position validation and lag tolerances remain unauthenticated."
         ],
         "sources": [
@@ -1514,10 +1529,17 @@
             "expected": "Particles, actual damage text, status names/icons and paused presentation must correspond to real state.",
             "acceptance": "Apply and expire overlapping effects, hit ordinary/immune/dying targets and pause/unpause. Avoid invented icons and duplicated prediction feedback; selected Hexed icon gating needs care.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Native immune/dying-target presentation, pause/unpause and isolated/combined Hexed rendering remain unaccepted. The selected client lists a Hexed icon but excludes Hexed from its outer icon-render gate; that entry alone is not a presentation pass."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/GameObject.as",
+                "label": "Selected 123.5.1 damage/effect prediction and icon-render gate; not original-server arbitration"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -1529,7 +1551,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original server protection and acknowledgement timing policy; complete area-effect and ACK duplication/loss coverage."
+              "Original-server protection and ACK timing remain unresolved. The selected client uses a strict radius boundary; compiled Kithio's AOE ACK handler is TODO, not an original timing specification. Native exact-boundary/effect and ACK duplication/loss presentation remain unaccepted."
             ],
             "sources": [
               {
@@ -1591,8 +1613,8 @@
           "Server PR438 returns ordinary dungeon exits to the Realm whose drop or key opened the dungeon, and nested keys inherit that Realm. If that Realm has closed, the exit refuses and directs the player to the Nexus instead of choosing another Realm. Explicit Random Realm Portals and Nexus exits are unchanged. This is project policy; a later community handler is only a comparator: https://github.com/OpenRotMG/Open-RotMG-Server/pull/438"
         ],
         "unknowns": [
-          "Original world capacity, escape/death interactions, transfer timeouts and reconnection behavior.",
-          "Original dungeon-exit destination, including when the opening Realm is full or closed."
+          "Exact 123.5.1 continuity of the independently documented April 3, 2012 85-player Realm capacity and anytime Nexus escape; original escape-versus-fatal-hit ordering and server transfer timeouts remain unverified.",
+          "Original dungeon-exit destination, including full/closed origins. Compiled Kithio maps Cowardice to the account's prior world (or Nexus); modified 7.0 uses a random Realm for unbound exits. Neither authenticates this project's explicit origin-Realm policy."
         ],
         "sources": [
           {
@@ -1606,6 +1628,22 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/networking/handlers/UsePortalHandler.cs",
             "label": "Later community portal handler: explicit instance preferred, random Realm for unbound exits; comparator only"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/UsePortalPacketHandler.cs",
+            "label": "Compiled primary reconstruction reference; prior-world mapping has admitted recycled-world/Vault caveats, not original-server proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/_1f.as#L1207-L1210",
+            "label": "123.5.1 source mirror follows RECONNECT game ID/key with existing character ID; pre-entry retry is one second, not server grant lifetime"
+          },
+          {
+            "url": "https://www.rpgfan.com/review/realm-of-the-mad-god/",
+            "label": "April 3, 2012 independent review: up to 85 players and anytime Nexus escape despite ailments; not exact September-build race semantics"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 capture: portal Enter UI, permanent death, autosave and account-bound Vault; earlier-version corroboration only"
           }
         ]
       }
@@ -1692,7 +1730,8 @@
           "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554",
           "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
           "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987",
-          "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002"
+          "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002",
+        "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
@@ -2388,15 +2427,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "LowSand level3 quest0x6c4,300 HP/2 DEF; four Beam indexes and Blue Bolt. Movement and both attack families required; no evidenced mandatory minions/transformation.",
-        "differences": [],
+        "expected": "LowSand level3 quest0x6c4,300 HP/2 DEF; four Beam indexes and Blue Bolt. Complete selected definition matches pinned modified7.0. June1,2012 player account supports desert groups, approach and roughly44–50XP; no evidenced mandatory minions/transformation.",
+        "differences": [
+          "Current1000ms move/1000ms pause and6500ms direct-aim cycle differ from compiled Kithio's nominal400/200ms movement and4700ms Beam/3200ms tri-spit states with predictive Blue Bolts. Timer evaluation, Follow steering/hysteresis and target ranges also differ; neither comparator authenticates123.5.1 timing.",
+          "Current ordered10/10/10/10/3/2 weights with four attempts per contributor/cap8 differ from Kithio14/19/5/28/2/2 expanded per-item independent shared rolls. Relative0.75 spawn weight and LowSand area/200 budget are not recovered density; no current Crab portal is registered."
+        ],
         "unknowns": [
-          "Target scuttle/fire schedule, targeting, population density, XP/loot and portal outcome. Comparator timings are not production proof."
+          "Original123.5.1 scuttle/fire cadence, predictive targeting, density and reward distribution/ownership remain unresolved. Current44 baseXP fits the period approximation, not an exact historical recipient/rounding specification.",
+          "Whether/when Crab deaths could open Pirate Cave remains unresolved: April2024 RealmEye lists it, but compiled Kithio's Crab registration does not. Japanese2021 text and2011 image metadata do not date the AI/rate claims. Prepared native checks and older PR162 loot evidence are scoped, not whole-feature or historical acceptance; see issue809."
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/2012/06/01/rotmg-lvl-20-in-20-minutes/",
-            "label": "2012 player account"
+            "label": "June1,2012 player account and inspected desert Crab image; approximate XP, not exact cadence"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -2405,6 +2448,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L460-L518",
+            "label": "Compiled/registered primary reconstruction comparator; timers and loot engine inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat#L85-L140",
+            "label": "Modified7.0 Crab definition equals selected SWF binary124, not AI or drop-rate evidence"
           }
         ]
       }
@@ -2459,12 +2510,27 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowPlains Undead Hobbit Mage is level 4 with 270 HP and 5 DEF, three 13-damage ring forms and a 20-damage Salmon Missile. The family includes Undead Archers and Rogues.",
-        "differences": [],
+        "differences": [
+          "Current two/two initial followers and living-slot replenishment differ from compiled primary's two/one initial followers and lifetime birth limits4/3. Undead replacement identities match the primary and period description; Trapped's living replacement IDs do not.",
+          "Simple camp-bound follower movement omits primary/build118 Archer's400/600/400ms Mage-protect, StayBack and nearest-Archer cycle, plus Protect/Follow hysteresis. Period minimum height31 differs from primary StayAbove20; current home leash is reconstruction."
+        ],
         "unknowns": [
-          "Authoritative target replenishment identities, ring/fourth-shot interleaving, movement, minion limits and reward probabilities.",
-          "Whether2013 comparator living replacement IDs are a bug; target replacement quantities, AI and drops."
+          "Build118 January2012 text and compiled primary support twelve-tile ring activation, concurrent radius10 aimed shots and undead Archer4/12s, Rogue3/6s reproduction. Exact123.5.1 deployment, idle/reentry/cloak timing, initial counts, lifetime-versus-living caps and orphan retargeting remain unverified.",
+          "Period public Mage coefficients weapon30%, armor30%, ring12%, ability39%, MP3%, Archer MP3% and Rogue HP4% match current tables after wiki armor+1 conversion. Original tier-candidate RNG, eligibility and bag ownership remain unresolved. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/811#issuecomment-6460686707"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L86-L155",
+            "label": "Compiled primary; Spawn lifetime counters, Shoot concurrency and Protect/Follow inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120122074638id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-hobbit-mage",
+            "label": "January22,2012 capture, build118 text: activation, aimed/ring attacks, undead reproduction and public drops"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Modified7.0 comparator: all three full definitions normalize identically to selected123.5.1"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -2624,15 +2690,29 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "ShoreSand Scorpion Queen is level 1 with 100 HP, no DEF and no projectile of its own. Ordinary Poison Scorpions fire 7-damage Green Magic; the name does not establish a Poisoned effect.",
-        "differences": [],
+        "differences": [
+          "Bounded reconstruction starts five defenders on a two-tile formation, refills ten owned slots on fixed 10s attempts, and omits Queen self-reproduction/orphan adoption. Compiled Kithio instead starts two offset defenders, adds up to five lifetime Spawn births, separately reproduces scorpions below ten within radius ten, and Queens below two within radius forty. This comparator mismatch is not a proven target-era bug."
+        ],
         "unknowns": [
-          "Target initial count/radius, Queen reproduction, deployment density and reward rates.",
-          "Target counts, ordinary no-drop policy, movement and replenishment timing."
+          "Original initial counts/placement, density versus ownership, refill clocks, Queen reproduction, orphan adoption/protection hysteresis/home leash and deployment density remain #815; bounded native coverage is not whole-feature acceptance.",
+          "Queen 3% Health/2% Magic candidates and ordinary no-drop match community tables; target reward rates, contributor eligibility/XP and native Queen potion acquisition remain unverified. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/815#issuecomment-6460829230"
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl1-scorpions.jpg",
-            "label": "2012 player screenshot"
+            "label": "June 1, 2012 article screenshot; visible build123.0.0, not a spawn census"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/06/01/rotmg-lvl-20-in-20-minutes/",
+            "label": "Dated parent article; early shore combat, not numeric reproduction/drop proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20130525090345id_/https://forums.wildshadow.com/wiki/realm-mad-god/scorpion-queen",
+            "label": "May 2013 capture labels claims updated118; target continuity unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L48-L65",
+            "label": "Compiled community comparator; inspect Spawn/Reproduce/Protect/loot semantics"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -2689,10 +2769,12 @@
         "expected": "Lord of the Lost Lands was introduced in build 121.0.0; build 122.0.1 fixed kill awards and increased health. The encounter includes activation, protection, combatants and rewards.",
         "differences": [
           "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. Full native encounter completion and original reward-rate fidelity are not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
-          "PR601 adds the same guard to the Lord's transparent native cell. This is a local safety invariant, not authenticated original placement; Kithio's event registry comments the Lord out. Native checks are prepared, not earned encounters: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
+          "PR601 adds the same guard to the Lord's transparent native cell. This is a local safety invariant, not authenticated original placement; Kithio's event registry comments the Lord out. Native checks are prepared, not earned encounters: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601",
+          "Issue817's May21,2012 build123 capture supports selected HP70000/DEF45 and Crystal HP6000; modified7.0 instead uses DEF30/Crystal HP5000. The archive describes initially surrounding crystals, unlike current unshielded activation; later AI clocks/reward rates and Rust>1% eligibility (comparator uses raw damage) remain reconstruction: https://github.com/OpenRotMG/Open-RotMG-Server/issues/817#issuecomment-6460946883",
+          "PR1088's fresh native attempts also stop before Lord combat; reward assertions remain unexecuted, not acceptance. Trapped's wandering stub and a current Japanese Crystal page do not resolve original encounter numbers: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1088#issuecomment-6462195687"
         ],
         "unknowns": [
-          "Original phase timings, health, spawning and reward probabilities."
+          "Original phase clocks, initial shielding, spawn counts/replenishment, contribution eligibility and reward probabilities, including the period T7-armor listing absent from the later table."
         ],
         "sources": [
           {
@@ -2714,17 +2796,26 @@
         "differences": [
           "PR451 matches the community sand-star stencil; outer flooring, placement and original fidelity remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/451",
           "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "PR417 restores the community comparator's encounter-wide Vitality/Wisdom floor and inclusive 1% boundary. Prepared final-hit, drop and pickup evidence is recorded, not an earned full-fight acceptance.",
+          "PR417 restores the community encounter-wide Vitality/Wisdom floor. Its inclusive 550-damage gate is retained reconstruction: the pinned comparator compares Threshold(0.01) against raw integer damage, not an HP fraction. Prepared final-hit evidence is not full-fight acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
+          "The May 24, 2012 guide labels its content build122 and describes 60k HP/five Reapers, unlike selected 55k HP/four-Reaper reconstruction. Current guaranteed Tomb portal and terrain-1 protected placement also differ from the later comparator's 0.33 portal roll and Mountains-through-MidForest placement. These are not authenticated target-era settings.",
           "PR493 matches the community outer-floor radius origin (40.5 in tile-index space), not boss-centering. Star/boss positions and local draw counts stay unchanged; placement, RNG parity and original 123.5.1 flooring remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/493"
         ],
         "unknowns": [
-          "Exact period setting/distribution and loot probabilities.",
+          "Exact 123.5.1 setting/distribution, phase timing, Reaper count, reward eligibility, portal chance and loot probabilities. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
           "Native earned-Sphinx defeat, portal entry and subsequent dungeon journey remain unverified."
         ],
         "sources": [
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Sphinx.cs",
             "label": "Community Sphinx potion-floor comparator, not official 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/DamageCounter.cs#L30-L54",
+            "label": "Raw integer damage counters qualify Threshold(0.01); not a normalized 1% gate"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234323id_/http://forums.wildshadow.com/wiki/realm-mad-god/grand-sphinx",
+            "label": "Build122-labelled period guide, not target-era numbers"
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
@@ -2752,12 +2843,27 @@
         "expected": "Shrine, setting, red/blue skull attacks, movement, replenishment, ownership, completion and rewards; exact target rates and geometry remain qualified.",
         "differences": [
           "PR607 keeps erosion-selected Skull Shrine birth cells unchanged and rechecks their current floor and occupants before placement or delayed admission. Surviving stone still paints normally. Prepared checks and community-source erosion semantics do not establish original layouts or noise/RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/607",
-          "PR614 replaces the 2D value-noise erosion field with community-source 3D simplex, retaining source coordinate precision, byte-table construction and normalization. Its deterministic seed adapter does not recover original seeds, historical runtime or whole-engine RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/614"
+          "PR614 replaces the 2D value-noise erosion field with community-source 3D simplex, retaining source coordinate precision, byte-table construction and normalization. Its deterministic seed adapter does not recover original seeds, historical runtime or whole-engine RNG parity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/614",
+          "Issue819 compares all three selected shrine/skull XML definitions identically with pinned modified7.0. January2012/build115 and June2012/build122.3.2 pages independently describe grouped40-skull/5s replenishment, unlike the current later-source20-per-colour/500ms reconstruction. Older reward percentages corroborate the PR535 table, not exact123.5.1 continuity: https://github.com/OpenRotMG/Open-RotMG-Server/issues/819#issuecomment-6461031749",
+          "PR1078 fixes the demonstrated shared-cap mismatch:32 total owned actors stopped the shrine at16 red/15 blue. Its shrine-only41-actor bound allows20 of each plus the root; other encounters retain32 and the global256 summon limit is unchanged. This repairs the chosen reconstruction, not historical authentication: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1078"
         ],
         "unknowns": [
-          "Independent target counts, timing, geometry, cleanup and reward probabilities."
+          "Exact123.5.1 replenishment cadence and mixed-colour cap, skull aim/acquisition/protection geometry, orphan lifetime/cleanup and original terrain/RNG parity.",
+          "Continuity of build115 reward probabilities into123.5.1; private threshold and Orb/cloth coefficients remain reconstruction."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120117000123id_/http://forums.wildshadow.com/wiki/realm-mad-god/skull-shrine",
+            "label": "January2012 capture, page updated build115: older behavior and reward rates, not123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023618id_/http://forums.wildshadow.com/wiki/realm-mad-god/skull-shrine",
+            "label": "June2012 capture, page updated122.3.2: shrine terrain and Orb; conflicting projectile lifetime"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EncountersCXML.dat",
+            "label": "Modified7.0 comparator: all three selected XML definitions agree, not server AI or official RNG"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SkullShrine.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
@@ -2829,10 +2935,12 @@
           "Loot follows the modified-7 reference's private rolls and encounter-wide Dexterity/Vitality minima, not a guaranteed pair per raider. This is a qualified reconstruction, not original-rate certification.",
           "Server PR524 distributes private bags across eight tentacle-spawner sites without changing rates, shared potion minima or the Trench portal. The release-7 loot guide describes eight drop locations; pinned realm-src/Valor maps instead contain four drop markers. Exact target-era allocation remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/524#issuecomment-6394267838",
           "Server movement correction confines Hermit to actual dark-water tiles and starts home return beyond three tiles. A period guide lists range3; later forks differ. Collision regressions, not the contextual native frames, verify movement. Original geometry/AI acceptance remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/558#issuecomment-6398913625",
-        "Server PR711 makes the southern reference approach walkable and rejects blocked southern sites instead of substituting another side. Defeat/portal-construction regressions and a prepared, seeded native combat case verify this scoped fix, not ordinary admission, original geometry/rates or full-encounter acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/711#issuecomment-6432793983"
+          "Server PR711 makes the southern reference approach walkable and rejects blocked southern sites instead of substituting another side. Defeat/portal-construction regressions and a prepared, seeded native combat case verify this scoped fix, not ordinary admission, original geometry/rates or full-encounter acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/711#issuecomment-6432793983",
+          "Issue822 research preserves selected definitions over the modified-7 client: Hermit DEF55/35; Minion HP3500/2200 and DEF40/0; Whirlpool DEF50/0; Tentacle HP10000/7500 and DEF50/15. Compiled Kithio coverage lacks Hermit; Trapped has no dedicated Hermit table. The February27, April29 and June10, 2012 guides support eight tentacles, gated exposure, eight whirlpools and repetition, not exact selected combat values. They describe three red novas in phase3, whereas the modified-7 reconstruction uses ink and rotating paired shots; target-era continuity remains unresolved.",
+          "The decoded modified-7 map is32x29 with eight spawners and four drop markers; Valor's map is byte-identical, not independent evidence. Reproduce counts nearby living entities; death transfer chooses one nearest drop actor and transfers raw integer damage. Its0.01 loot threshold therefore accepts any positive integer hit, not1% HP. Original geometry, allocation and rates remain unresolved."
         ],
         "unknowns": [
-          "Original lake geometry and placement distribution, cycle/counts, difficulty values, portal probability, loot pools, eligibility, minimum counts and rates."
+          "Original geometry/placement distribution, minion densities, phase timing/attack continuity and difficulty; loot pools, eligibility, minima/rates and portal probability."
         ],
         "sources": [
           {
@@ -2866,6 +2974,26 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/SP_Hermit.jm",
             "label": "Modified-7 map comparator: stationary portal maker south of the dark pool"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EncountersCXML.dat",
+            "label": "Modified-7 client comparator: Hermit combat stats differ from selected definitions"
+          },
+          {
+            "url": "https://web.archive.org/web/20120227100929id_/http://forums.wildshadow.com/wiki/realm-mad-god/hermit-god",
+            "label": "February27, 2012 guide: eight-tentacle vulnerability cycle and broader soulbound pool"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/Reproduce.cs",
+            "label": "Additional engine check: live local-density reproduction"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/behaviors/TransferDamageOnDeath.cs",
+            "label": "Additional engine check: nearest drop actor receives damage transfer"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/DamageCounter.cs",
+            "label": "Comparator loot eligibility uses raw integer damage, not HP fractions"
           }
         ]
       }
@@ -2880,10 +3008,12 @@
         "historical": "known-differences",
         "expected": "Ship battle, respawning skull enemies and completion/rewards;123.4.4 removes XP/fame from respawning battle skulls. Exact first-generation eligibility and choreography remain unresolved.",
         "differences": [
-          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+          "One pre-reserved lake admits its ship through qualifying quest defeats, with ordinary combat and a natural 50% Locker portal. PR380 adds researched private Wisdom/gear/Incantation rolls and a separate once-per-defeat public Rum roll. Real-World private pickup and SQLite living reload pass; full native encounter completion and original probabilities remain qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "Issue823 rechecks selected Ship50000HP/DEF60, MineDEF100 and SpectreDEF15 against differing modified7.0 values. Its Reproduce marks every summon no-XP, but the August2012 hotfix only establishes respawn exclusion. No shore Spawner is ordinarily placed. Phase2 parent shielding is not proof of an unreachable comparator transition: child exits clear the same condition timer. https://github.com/OpenRotMG/Open-RotMG-Server/issues/823#issuecomment-6461431871",
+          "Three controlled World lifecycle regressions pass within CI210 tests. Native prerequisite takecb6f47df fails at the unchanged256-receipt budget, after twelve client teleports and one Cube God admission but no Ship; cold persistence/cleanup checks pass without resuming state. It is not Ship gameplay acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1085#issuecomment-6463473406"
         ],
         "unknowns": [
-          "Original phase choreography, initial skull XP eligibility and item-drop allocation still need historical sign-off; the restored portal probability follows community references."
+          "Exact target-era phase order/shield timing, initial skull XP eligibility, shore-spawner placement and item-drop allocation remain unresolved in issue823. Portal and reward probabilities follow community reconstruction, not authenticated original values. Mixed-era wiki text and2012 image dates do not date each gameplay claim."
         ],
         "sources": [
           {
@@ -2940,8 +3070,8 @@
         "expected": "A disguised grave in a graveyard reveals Kage when damaged. The fight alternates human and protected flying forms, includes Specter Shots and Specter Mines, and can award a Manor entrance.",
         "differences": [],
         "unknowns": [
-          "Original graveyard distribution, reveal and combat timings, mine policy, Manor probability and rewards.",
-          "Whether Kage participated in target-era quest selection or Realm closure."
+          "Exact target-era graveyard count/shape, human movement, reveal threshold, phase/volley/mine timings and reward probabilities. Two HighForest/HighPlains sites, reveal below 90% HP, 2/5/4-second phases, 2-second tosses and 50% Manor chance are comparator reconstruction, not authenticated original values.",
+          "Target-era quest-arrow and closure eligibility. March/April 2012 notes call Kage a new Realm Quest, but selected XML has no Quest flag; the later 7.0 quest dictionary still requires that flag. Current Kage is excluded from both systems; original server policy remains unresolved in issue #826."
         ],
         "sources": [
           {
@@ -2955,6 +3085,18 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130525111810id_/https://forums.wildshadow.com/wiki/realm-mad-god/kage-kami",
+            "label": "May 2013 capture: grave reveal, stationary human and protected chase; later than target"
+          },
+          {
+            "url": "https://github.com/UniverseRealms/vanilla-7.0/blob/ba1fa22c58c24b4a2403860116656492d0133748/realm-server-master/Game/Logic/Database/HighLands.cs#L694-L769",
+            "label": "Pinned later behavior comparator; not original-server timing or loot evidence"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 client: matching projectiles, different Kage and mine stats"
           }
         ]
       }
@@ -2967,12 +3109,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Pirate0x600 and Piratess0x601, selected Blade definitions and ordinary population interaction; excludes Pirate Cave.",
-        "differences": [],
+        "expected": "ShoreSand Pirate0x600 has5HP; Piratess0x601 has6HP. Both have0DEF and one Blade: damage4/speed40/lifetime600ms. Complete selected definitions match recovered123.5.1 and pinned modified7.0. Excludes Pirate Cave.",
+        "differences": [
+          "At server55b6ab4d, continuous range6 chase/home leash and bounded two-initial/five-Pirate/five-Piratess camp with10s refill differ from compiled primary Follow duration/rest/hysteresis and60s same-type radius10 density reproduction. Older Trapped explains several current constants, not exact target fidelity.",
+          "Nominal20% selected T1 weapon/armor and3% HP potion agree with primary and January2012 build118-labelled text. Current one tier roll/uniform item differs from primary independent0.2/N candidate rolls and contributor bag allocation.",
+          "No current Pirate/Piratess portal roll. January8,2020 patch says beach Pirates can now drop caves, but a January2012 key page already lists them. Do not apply today's drop table or infer original probability from a few kills."
+        ],
         "unknowns": [
-          "Target caps, replenishment, movement timing, loot rates and Pirate Cave portal probability."
+          "Exact123.5.1 movement, reproduction clocks/density/start counts, tier-roll allocation and conflicting portal documentation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/827#issuecomment-6462537681 . Prepared gameplay is separate from historical and whole-feature acceptance."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120124041159id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirates",
+            "label": "January24,2012 capture; content labelled build118, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L16-L39",
+            "label": "Compiled primary comparator; Follow/Reproduce/loot engines qualified separately"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2020#patch-x-32-4-1",
+            "label": "January8,2020 portal addition; conflicts with earlier key documentation"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -2988,10 +3146,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f; explicitly allocate Lizard God population relation.",
-        "differences": [],
+        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f with Lizard God0x650; selected Mage/Veteran MultiHit and Health-Potion-only elf rewards.",
+        "differences": [
+          "Rust retains nested King ownership, 2/2/1/1/1 initial elves, living-slot ten-second refill, simplified chase/aim and a home leash. Compiled Kithio instead gives Lizard direct 4/3/2/2/1 lifetime birth caps with floor-half initial counts and no King reproduction; Trapped has a different nested model. Neither comparator authenticates target-era behavior."
+        ],
         "unknowns": [
-          "Original group sizes and timing, orphan behavior, MultiHit attacks and drops."
+          "Exact 123.5.1 initial quantities, birth/reentry clocks, orphan/adoption policy, predictive/cloaked attacks, height constraints and reward RNG/eligibility; issue828 tracks the remainder. November2011/May2012 potion evidence predates the target."
         ],
         "sources": [
           {
@@ -2999,8 +3159,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L164-L256",
+            "label": "Compiled primary comparator: Night Elves and Lizard God"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Older comparator: nested King ownership differs from Kithio"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127224752id_/http://forums.wildshadow.com/wiki/realm-mad-god/night-elf-king",
+            "label": "November 2011 King guide: Health Potion 3%, no reproduction; other stats differ"
           }
         ]
       }
@@ -3013,15 +3181,43 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighPlains Warrior0x63a, Axebearer0x63b, Mage0x63c, King0x63e and Soulless0x63f; allocate God0x640 nested population relation.",
-        "differences": [],
+        "expected": "HighPlains Warrior0x63a, Axebearer0x63b, Mage0x63c, King0x63e, Soulless0x63f, God0x640. All six complete definitions match pinned modified7.0, not AI; God's Blue Star deals0 damage/3s Confused.",
+        "differences": [
+          "Current God owns1 King/1 Soulless; King escorts start2/type, cap3, refill10s. Kithio directly spawns3/3/3/2/1, initially floor(max/2), with lifetime caps; Trapped uses nested, randomized density-based reproduction.",
+          "God: current3 bolts/7 degrees and fully predicted Star+500ms; Kithio15-degree fan, Star1200ms/0.5 prediction. Mage/Soulless phases also differ.",
+          "Loot differs: Kithio King Health3%, Mage/Soulless Magic3%, Warrior/Axebearer none; current adds drops. God ability: current10%, Kithio20%, undated Japanese15%. February2012 supports10% ability/0.5% egg; wiki armor tiers map+1 to selected tiers. Tier-pool semantics also differ."
+        ],
         "unknowns": [
-          "Target nested quantities, exact attack timings/prediction and reward policy."
+          "Original123.5.1 population, AI and rewards remain unproven: period stats are obsolete; later claims lack reliable target-era dating. Research/bounded gameplay does not establish earned progression, multiplayer rewards or full acceptance. Historical remains partial; details: https://github.com/OpenRotMG/Open-RotMG-Server/issues/829#issuecomment-6462794075"
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L257-L376",
+            "label": "Compiled/registered primary comparator; check Spawn/Shoot/Cooldown/LootDefs/Loots semantics"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
+            "label": "Modified7.0: all six complete objects normalize identically"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs#L225-L330",
+            "label": "Older comparator: nested King ownership, jittered local-density reproduction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216044213id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-dwarf-god",
+            "label": "February2012 capture: Confused, quantities, rates; obsolete300HP/15DEF and projectile speeds"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516130635id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-dwarf-king",
+            "label": "Additional period resource: King does not reproduce and only drops Health Potion; obsolete200HP/10DEF"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Undead%20Dwarf%20God",
+            "label": "Additional wiki lead: older15% ability rate conflicts with February2012's10%; backup403 prevents dating claim"
           }
         ]
       }
