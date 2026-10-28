@@ -2,6 +2,121 @@
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
     "ghost-ship-research-33bf0fc": {"kind":"source","revision":"33bf0fce0aff0e9d5830fdd42844102b60c9038d","date":"2026-10-28","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/33bf0fce0aff0e9d5830fdd42844102b60c9038d/src/world/ghost_ship.rs","checks":["realm:ghost-ship"],"method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/823#issuecomment-6461431871 . Reconciles PR281/310/380 and current lake/admission/AI/rewards. Pinned Kithio has no Ship table;2013 Trapped is a simpler comparator. Modified7.0 table, Reproduce, ConditionalEffect and Entity establish all-summon no-XP and a shared condition timer, not stacked parent shields. Seven selected XML records compared with pinned7.0: ShipHP/DEF50000/60 versus42000/40, MineDEF100 versus30, SpectreDEF15 versus5; four other normalized leaf definitions agree. August2012 BitFox hotfix mirror explicitly excludes respawning skull XP/fame. Follow-ups inspect mixed-era Beach Spectre/Ghost Ship pages, Reddit discussions and original announcement archive lead.","limitations":"Research only, not gameplay or historical acceptance. First-wave eligibility, exact choreography/shield timing, shore-spawner placement, item allocation and original probabilities remain issue823. Reddit extraction/JSON failed and Wayback returned a calendar shell; snippets are not primary evidence. Wiki image dates do not date later prose. No comparator code/assets imported; prior private pickup/SQLite evidence is not a native clear."},
+    "night-elves-native-62a6f95": {
+      "kind":"native", "revision":"62a6f958d59dacdcbae3c6cd13a6ab86ed7cedcb", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1092#issuecomment-6463248489", "checks":["realm:night-elves"],
+      "method":"Clean QA8aa2c234 passes29 assertions with client39acbfbf/Ruffle.16 over86,550game ms: natural HighForest camp, all six native projectile families, activation/movement or in-range chase stops, current role caps/new births, native Lizard/King/four elf-role defeats and positive XP, two surviving wandering orphans, no new King after root death and once-only XP18050to18388. Cold QA75980769 confirms SQLite/FKs, persisted living character2/revision1/XP18388, no deaths/backend ERROR and all129 child/guardian PIDs absent; cleanup empty. Public after-image is cropped from this passing take.",
+      "limitations":"Prepared level20 stats/staff/scout placement and protection before native startup, not earned traversal/survival. Final visible bag list empty; no potion acquisition, pickup/reconnect, two-native-client piercing, portal entry or RNG acceptance. Failed QA4df795eb records unprotected670to132HP/all six shot families before an incorrect stationary-King oracle; QA5daec99f permanently dies to Archer during initial unprotected startup (dead revision2/death row preserved); QA363e3547 reaches24 checks then rejects an11s action. Final10s+1s observation preserves the controller limit; guards unchanged. Exact history and wider acceptance stay issue828; parent gameplay not-run/history partial, no deployment acceptance."
+    },
+    "night-elves-research-087f74b": {
+      "kind":"source", "revision":"087f74bcc63ad92cb35593f13bfdccb4f2bf7575", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/087f74bcc63ad92cb35593f13bfdccb4f2bf7575/src/loot.rs", "checks":["realm:night-elves"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/828#issuecomment-6462540682 . All six selected XML trees match pinned modified7.0 HighCXML; only Mage/Veteran have MultiHit. Compiled/reflection-registered Kithio and additional Spawn/LootDefs/Loots inspection distinguish lifetime births, floor-half initial counts and once-per-death shared item rolls. November2011 King/Mage guides specify Health Potion3%; May2012 retains potion-only lists. Corrected ordinary elf MP/King private-equipment pools to one public Health Potion roll. Lizard rewards unchanged.",
+      "limitations":"Not official123.5.1 authentication. Current nested King ownership, 2/2/1/1/1 initial counts, living-slot10s refill, home leash and simplified chase/aim differ from Kithio's direct Lizard4/3/2/2/1 lifetime births and older Trapped's nested/randomized model. Mixed-era Japanese/2024 RealmEye pages cannot override selected definitions. Exact original clocks, orphan/adoption, height, prediction/cloak and reward/portal probabilities/eligibility remain issue828. No reference code/assets imported."
+    },
+    "night-elves-regression-087f74b": {
+      "kind":"regression", "revision":"087f74bcc63ad92cb35593f13bfdccb4f2bf7575", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/087f74bcc63ad92cb35593f13bfdccb4f2bf7575/src/world/combat_tests.rs", "checks":["realm:night-elves"],
+      "method":"QAb860e4e8 passes all206 Rust tests, including both focused regressions: selected damage/no-condition flags for six kinds; Mage/Veteran pierce two simulated players while ordinary shots stop at one; acknowledged native hit reports commit once per player. Potion table/forced-success RNG asserts only Health Potion0.03 and public classification for all five elves. Pre-fix QA591c583e fails the same loot assertion on Archer0x64a.",
+      "limitations":"Synthetic collision/ACK and table/RNG checks, not two native clients observing a shared piercing projectile, earned progression, pickup/reconnect or historical RNG acceptance. Per-player native hit reporting does not itself prove client-side projectile geometry. Whole-feature gameplay remains not-run/history partial."
+    },
+    "pirates-native-8042725": {
+      "kind":"native", "revision":"804272519f8a0804f6173d65c18a41c6a0cce0c4", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1089#issuecomment-6462887485", "checks":["realm:pirates"],
+      "method":"Clean QA5fdaa7b2 passes11 native assertions over86400 actual game ms with client39acbfbf/Ruffle.16: natural Realm camp starts one6HP Piratess/two5HP Pirates, activation/movement, both speed40/600ms Blades, damage without immunity, growth/stability at five per species, native defeat/XP50to62 and no resurrection/repeatedXP over12s. Continued combat births give six defeats per species. Cold QAb98389f0 confirms five public bags(two Wolfskin Armors/Broad Sword/two HP Potions), persisted XP62/inventory revision1, healthy SQLite/FKs, two living characters/no deaths/backendERROR and all46 owned process IDs absent. Cleanup empty/reclaimed. Case10d4c917/runner71fcd889/controllere0dba469; QAbb5d886e passes204 Rust tests at runtime-identical55b6ab4d.",
+      "limitations":"Prepared level2 high HP/MP/DEF25 Wizard/T0 gear, direct scout/scene entry, not earned progression or ordinary survival; no immunity/refill/actor mutation. Nearby snakes/cubes/Bandits remain, so damage is not Pirate-only. Bags observed, not picked up. No reconnect/multiplayer/density/exact clocks/portal/probability or historical acceptance. DEF0 attempt15857ce6 dies to Piratess after six checks; committed death retained, audit839853d3 healthy/all35 PIDs absent. Queued8f7c8f91 cancelled pre-start with retained guardian-exit cleanup assertion; cgroup reclaimed/two PIDs absent. Final fresh run passes without weakening death/authority/ACK/lease guards. Whole-feature gameplay stays not-run/history partial; issue827 remains open."
+    },
+    "pirates-research-55b6ab4": {
+      "kind":"source", "revision":"55b6ab4d9bb918de453aa272f6c86fc086f0f3f4", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/55b6ab4d9bb918de453aa272f6c86fc086f0f3f4/src/world/population.rs", "checks":["realm:pirates"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/827#issuecomment-6462537681 . QAef67d9e6 structurally matches both complete selected objects to recovered123.5.1 SWF07ae4fc3 and fresh pinned modified7.0 Shore XML. Research checks compiled/reflection-registered Kithio Shore and Follow/Reproduce/Shoot/Cooldown/Utils/compiled LootDefs+Loots, older Trapped and related7.0 server. Additional January24,2012 build118-labelled Pirates capture confirms stats/Blades/chase3s/caps5/nominal20%+3%; January8,2020 changelog dates beach Pirate portal addition.",
+      "limitations":"Current continuous chase/bounded10s camp reproduction and one-tier candidate selection differ from primary Follow/hysteresis/60s radius10 density and independent p/N item rolls. Period default clock unspecified; target-version continuity/allocation unresolved. January2012 keys page conflicts with2020 portal addition; no original probability certified. Reddit original unreadable, mutable Japanese Wiki not period proof. No code/assets imported or historical promotion."
+    },
+    "skull-shrine-native-0c03248": {
+      "kind": "native",
+      "revision": "0c032482e2a98bd0c1bc0efdebf02008ef86749a",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1078#issuecomment-6462426004",
+      "checks": ["realm:skull-shrine"],
+      "method": "Clean QA834a916d passes23 assertions/426250 game ms with client39acbfbf/Ruffle.16: ordinary direct-controlled hero defeat admits a reserved shrine once; native unprotected770to715HP, stationary10000HP root,20 red/20 blue, both moving/firing colours, red defeat/new owned replacement. Two native contributors defeat it, receive XP and a private reward inaccessible to a nearby direct noncontributor. Native pickup/repeat/Nexus reconnect retain item0xa07 and revision2. Root/refill/XP do not repeat; orphans persist. Cold QAc45d60d8 verifies saved pickup, three living native characters,32 moving orphans,15 complete nine-shot/10-degree fans, SQLite integrity/foreign keys,60 PIDs absent and empty cleanup.",
+      "limitations": "Prepared legal high stats/gear, scene-side native placement, protected direct admission movement and safe-spawn expiry waits, not earned progression or survival. Protection follows a bounded unprotected hit. The direct noncontributor later dies normally to a Red Flaming Skull with permanent inventory destruction; no native character is revived. One reward is not probability acceptance. Earlier Ent issue1070, protection/targeting/deadline/lease/ACK failures remain excluded. Cold verification initially assumed zero total deaths and zero-based projectile IDs; corrected without state/guard edits. Case01f7e619, ELF da5bcbbe; historical continuity/geometry/cleanup/threshold/rare odds stay partial. No deployment claim."
+    },
+    "skull-shrine-cap-regression-8055278": {
+      "kind": "regression",
+      "revision": "8055278c183f1fd598c2f2a762484833f465236e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1078#issuecomment-6462229135",
+      "checks": ["realm:skull-shrine"],
+      "method": "Before clean native QA2e2cf7cd/98cee1bf stops at16 red/15 blue plus root. Shrine-only41-slot correction permits the existing20-per-colour policy. Regression fills both colours, replaces one red identity, remains at41 and preserves the unrelated32-slot cap. CI40638832434 passes204 Rust tests, strict Clippy, formatting and lifecycle.",
+      "limitations": "Repairs an internal reconstruction mismatch, not original counts/cadence authentication. Global256 summon guard is unchanged; source/tests are separate from the later native receipt."
+    },
+    "skull-shrine-research-3587c31": {
+      "kind": "source",
+      "revision": "3587c316e4c9c61aaf04cca42deba79f0bb672af",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3587c316e4c9c61aaf04cca42deba79f0bb672af/src/world/realm_events.rs",
+      "checks": ["realm:skull-shrine"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/819#issuecomment-6461031749 . All three selected shrine/skull XML definitions normalize identically to pinned modified7.0. Kithio compiles the setpiece, not its SkullShrine behavior table. January2012/build115 and June2012/build122.3.2 captures corroborate stationary nine-shot shrine, red protection, blue orbit and older grouped40/5s replenishment. Build115 lists the PR535 equipment/potion rates;122.3.2 lists shrine terrain and Orb. Reproduce/Protect/Orbit/Cooldown engine inspection distinguishes the current later-source per-colour20/500ms reconstruction.",
+      "limitations": "Not official123.5.1 AI/RNG or a gameplay pass. Older grouped cadence conflicts with the later comparator; the period2s lifetime conflicts with selected2400ms. Exact target continuity, aim/acquisition/protection geometry, orphan lifetime, terrain/RNG, private threshold and Orb/cloth odds remain unresolved. PR607/614 evidence and earlier receipts are retained."
+    },
+    "lost-lands-followup-48a3be9": {
+      "kind": "native",
+      "revision": "48a3be9ef0c39d5e704303010cd15e4d5ee7c214",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1088#issuecomment-6462195687",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "FAILED QA8d3cab3b at67ba7b7 clears2 Phoenix encounters/admitted Ship, never Lord; FAILED QA67c7e228 at48a3be9 stops in first Phoenix. Only startup-reservation assertions pass. Existing500ms renewal deadline/1500ms lease remain enforced. Cold QA1b4afedf confirms healthy SQLite/FKs, two living revision1 characters per take, no deaths/backendERROR and all24+11 child/guardian PIDs absent.",
+      "limitations": "No Lord combat or reward acceptance. Added natural-roll/private-visibility/native-pickup/duplicate/reconnect assertions are syntax-checked but unexecuted. Prepared gear/stats/protection/+attack/scout/native teleport, not earned progression. Delayed helper bookkeeping is an observation, not a proven root cause or Lord defect. Older failures/death preserved; no expired-session replay or shared policy change. Issue817 remains open."
+    },
+    "lost-lands-source-followup-67ba7b7": {
+      "kind": "source",
+      "revision": "67ba7b757db46fa5186f36719420ecbb75b80657",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/67ba7b757db46fa5186f36719420ecbb75b80657/src/world/lost_lands.rs",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/817#issuecomment-6462045738 . Additional Trapped593e4908 LotLL/LootDef/LootBehavior inspection finds a wandering stub, ordered first-success potion draws and >100 raw-damage encounter-wide distribution, not full encounter evidence. Japanese Protection Crystal page reports eight orbiting crystals/no drops and HP5000, conflicting with selected6000/May2012 capture.",
+      "limitations": "The current Japanese page reports October11,2012 modification, not authenticated period continuity. Neither source resolves original shielding/clocks/populations/replenishment/eligibility/rates or justifies changing selected definitions. No imports or historical promotion."
+    },
+    "kage-research-f897f74": {
+      "kind":"source", "revision":"f897f745d818360f0e6f3e23d13ab1157d27cab6", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/f897f745d818360f0e6f3e23d13ab1157d27cab6/src/world/manor_entry.rs", "checks":["realm:kage-kami"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1086#issuecomment-6462022634 . Reconciled PR441/455/457. Kithio compiled Highland/SetPieces lack Kage; modified7.0 placement requests two HighForest/HighPlains sites. Selected Kage7000/120 and Mine500/150 differ from modified7.0 3000/63 and200/150, while all three projectile definitions agree. March/April2012 build notes establish grave reveal and probabilistic Manor. Additional vanilla HealthTransition uses <=90%, unlike current <90%; DropPortalOnDeath/MathUtils confirm fractional0.5 RNG. Later quest dictionary still requires the missing XML Quest flag; current arrow/closure exclude Kage.",
+      "limitations":"Not historical acceptance or proof of historical absence. May2013 guide describes stationary human fire and later stats; current wandering and exact target threshold/timings/mines/placement/reward rates remain reconstruction. Related servers are not independent historical votes. No reference code/assets imported or production behavior changed; precise remainders stay issue826."
+    },
+    "kage-natural-native-5e9ad95": {
+      "kind":"native", "revision":"5e9ad95fc9a4e461d5a9c45135213861dc028f68", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1086#issuecomment-6462022634", "checks":["realm:kage-kami"],
+      "method":"Clean QAd5cb5bd9 passes19 assertions with client39acbfbf/Ruffle.16: two ordinary generated graves, proximity stays hidden, native reveal, reveal/flight protection, human wandering/flying pursuit, Shot/Spinner families, four-spike mine detonation/retirement, native Sick before flight plus Paralyzed/Confused, defeat and once-only XP18050to18245, one Manor portal and same living character2 admitted. Sampled entry clocks show2000/5000/4000ms; Realm samples span0to38650ms, not the destination-relative final game_ms. Cleanup errors empty.",
+      "limitations":"Prepared level20 legal stats/gear, scout-assisted initial placement and one60s Invulnerable after exposure, not earned traversal/survival, multiplayer reward eligibility, pickup/reconnect or original probabilities. Manor screenshot shows loading title, not dungeon acceptance. Precommit QAfdb2c664 also passed19; published encounter image uses its identical case/runtime tree. Invalid-stats, terminal-lease and incorrect projectile-view-oracle failures are retained; native mine status outcomes replaced the false oracle without changing visibility/ACK/lease guards. Whole-feature gameplay remains not-run/history partial; wider acceptance stays issue826."
+    },
+    "lost-lands-native-attempt-ee5f323": {
+      "kind": "native",
+      "revision": "ee5f323ada12a3faa537f0cdd9630015b2a99d71",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1077#issuecomment-6461568069",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "FAILED QAdddf8b1e: eleven native qualifying clears admit Ship/Skull, never Lord. Only startup-reservation assertion passes; cold database/cleanup checks pass.",
+      "limitations": "Disconnect/1500ms lease expiry after managed-helper delay. No Lord/reward acceptance. Supplied stats/gear/protection/+attack/scout/teleport are not earned progression. First scout permanently died to Phoenix Reborn, never revived. Earlier failures remain failed; guards preserved, no expired-session resume."
+    },
+    "lost-lands-regression-a39b589": {
+      "kind": "regression",
+      "revision": "a39b58961fb1d8611811a79097afe8eb3602cc29",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1077#issuecomment-6461568069",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "CI40637668308:204 Rust tests and gates pass. Synthetic phases/eight crystals/shield/finalizer verify once-only critical credit and positive queued XP; focused local test passes.",
+      "limitations": "Synthetic, not native or persisted XP. Native attempts never reach Lord; earlier failures remain failed. Prepared fixtures, not earned progression. No combat/pickup/reconnect/historical acceptance; issue817 open, runtime/safety guards unchanged."
+    },
+    "lost-lands-research-3587c31": {
+      "kind": "source",
+      "revision": "3587c316e4c9c61aaf04cca42deba79f0bb672af",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3587c316e4c9c61aaf04cca42deba79f0bb672af/src/world/lost_lands.rs",
+      "checks": ["realm:lord-of-the-lost-lands"],
+      "method": "Guardian/Knight match pinned7.0; selected Lord DEF45/Crystal HP6000 instead match May2012 build123. State/Spawn/Toss/Loots/DamageCounter distinguish clocks, births and independent rolls. Comparator0.01 eligibility uses raw integer damage; Rust>1% is reconstruction.",
+      "limitations": "Research only. Initial unshielded activation differs from period guidance; original timing/populations/replenishment, T7 armor, eligibility and probabilities remain issue817. Mixed-era content is not target evidence; older receipts are not current guards/native acceptance. No historical promotion."
+    },
+    "sphinx-research-5dc0694": {"kind":"source","revision":"5dc06941112fa6019fe251e9f0efc927879f471d","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/5dc06941112fa6019fe251e9f0efc927879f471d/src/world/realm_events.rs","checks":["realm:grand-sphinx"],"method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556 . Both complete selected Sphinx/Reaper XML trees match pinned modified7.0 EncountersCXML. Kithio compiles the setpiece, not its Sphinx behavior table; modified7.0 compiles/reflection-registers it. Loots/MobDrops/DamageCounter establish an encounter-wide potion floor but compare Threshold(0.01) to raw integer damage, correcting the earlier 1%-fraction attribution. Build121 notes support one per Realm/postdeath Reaper cleanup; September7,2012/build123.5.1 removes Reaper Stasis immunity. Additional May24,2012 Sphinx/build122 and Reaper/build122.0.1 captures corroborate attack families, below15% disappearance and VIT/WIS/Juggernaut, but differ on HP/count/status units. Compiled Kithio arena shares the later stencil by lineage, not independent corroboration.","limitations":"Not native or historical acceptance. Current 550-damage inclusive gate, four Reapers, 25% uniform event director, protected terrain-1 site and guaranteed Tomb portal remain reconstruction. Modified7.0 instead compares raw damage, comments out its25% gate, places Mountains-through-MidForest and rolls portal0.33. Exact123.5.1 placement/distribution, phase timings, count, reward eligibility/portal/drop rates remain unresolved in issue818; earlier guides are not target continuity proof. No comparator code/assets imported or gameplay policy changed."},
     "undead-hobbits-native-f8d9e54": {
       "kind":"native", "revision":"f8d9e54d400ee8d995b92bd343299b030b51e8e6", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1081#issuecomment-6461179233", "checks":["realm:undead-hobbit-mage"],
@@ -3853,17 +3968,17 @@
     "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
-    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3"]},
-    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb"]},
-    "realm:skull-shrine": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323","lost-lands-source-followup-67ba7b7","lost-lands-followup-48a3be9"]},
+    "realm:grand-sphinx": {"status":"not-run","evidence":["tomb-regression-99451ac","sphinx-potions-d39f73e","sphinx-star-regression-8ec141d","sphinx-floor-regression-bb1e9bb","sphinx-research-5dc0694"]},
+    "realm:skull-shrine": {"status":"passed","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df","skull-shrine-research-3587c31","skull-shrine-cap-regression-8055278","skull-shrine-native-0c03248"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3","ghost-ship-research-33bf0fc"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":["crystal-release-native-b98ad3e"]},
-    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
-    "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c","kage-research-f897f74","kage-natural-native-5e9ad95"]},
+    "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirates-research-55b6ab4","pirates-native-8042725"]},
+    "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","night-elves-research-087f74b","night-elves-regression-087f74b","night-elves-native-62a6f95"]},
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
