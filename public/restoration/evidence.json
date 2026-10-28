@@ -1573,6 +1573,33 @@
       "limitations": "13 deleted-character histories at 20 Fame were prepared, not earned; the living Wizard's bytes were preserved during setup. This checks Blue-rank catch-up through normal entry, not earning 65 stars, native higher-colour payouts, original payments or production gameplay. Earlier native failures and one rejected transition-overlay image remain retained. Overall acceptance stays not-run and historical status stays partial.",
       "checks": ["heroes:class-stars", "home:gold-and-fame-balances", "home:realm-gold-offers"]
     },
+    "manor-owned-lifecycle-source-6ab0792": {
+      "kind": "source",
+      "revision": "6ab079293fe603564cfb552571177a8edb93734d",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/6ab079293fe603564cfb552571177a8edb93734d/src/world/manor.rs",
+      "method": "Existing Ruthven mechanics remove his owned swarm roots and bats on timed return, preserve living thrown coffins, and clean owned descendants on death while canceling their pending coffin landings when due. PR1094 adds only two dungeon-local lifecycle tests; the merged Manor source blob matches the reviewed4480ff9 blob. Normal merged-revision CI and deployment passed, and public health reported this revision.",
+      "limitations": "Source and rollout attribution, not new production behavior or full Manor acceptance. The May2012 guide supports four groups and eventual return, not exact bat counts, timers, layout/spawn or reward probabilities. Community reconstruction timings remain qualified; no shared healing, generator, loot or teleport change.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
+    "manor-owned-lifecycle-regression-4480ff9": {
+      "kind": "regression",
+      "revision": "4480ff9546612d0d39d070bb41529adf0d44dafd",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1094#issuecomment-6463554673",
+      "method": "Two tests check owned cohorts across two cycles, duplicate-step idempotence, selected zero-XP definitions, HP/damage preservation, return with living coffins, foreign-owner preservation, descendant cleanup and once-only pending-coffin cancellation/landing. Focused2/2 and all205 Rust tests passed at this exact clean head, alongside fmt, warning-denied all-target Clippy, release,10 Python tests and1 Node test.",
+      "limitations": "Engineering verification of existing reconstruction, not a failing gameplay baseline or historical numeric authentication. The already-finished focused job was consumed after provider recovery without redispatch. Original failed setup and deploy-test attempts remain failures; successful same-head components were composed explicitly after guarded terminal-cache retirement, without changing guards.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
+    "manor-owned-lifecycle-native-c843c61": {
+      "kind": "native",
+      "revision": "c843c61321ca3fc11b5a660d5edcddf83819e246",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1094#issuecomment-6463554673",
+      "method": "Prepared native observation passed18 assertions: natural Ruthven produced four owned roots and45 bats, then returned with four living thrown coffins and the same surviving character. Initially prepared legal level20 unarmed Knight, Wooden Shield and Acropolis Armor; layout/fixture seed12351, client39acbfb and Ruffle0.7.1-openrotmg.16. Actual201ms walking input moved about0.503 tiles; no shots, kills, post-entry HP/NPC/RNG mutation or account replay. Cleanup errors were empty.",
+      "limitations": "Existing behavior at clean c843c613, not final-head/current-main native acceptance, earned entry, actual-hit/missed/blocked life steal, ACK deduplication, reconnect/late join, defeat, rewards, exit or full Manor acceptance. Nearby diagnostic scope20 is corroborated separately by whole-World tests. Missing-Cargo startup remains failed. Original guardian UID/start and contemporaneous /proc/exe digest were not serialized; retained build/source hashes and awaited exit/absent PID/cgroup receipts are bounded evidence. No native replay after recovery. All functional statuses remain not-run; Manor history remains partial and component history remains unreviewed.",
+      "checks": ["dungeons:manor-of-the-immortals", "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech"]
+    },
     "manor-coffin-window-source-3f7b17b": {
       "kind": "source",
       "revision": "3f7b17b346985ced7fe5f9b960f725f962d579c7",
@@ -4127,9 +4154,9 @@
     "dungeons:ocean-trench": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5","portal-window-source-4d44727","trench-teleport-source-e316eea","trench-teleport-native-e316eea","trench-coral-source-e1483e3","trench-coral-regression-e1483e3","trench-coral-native-e1483e3"]},
     "dungeons:ocean-trench:oxygen-route-and-air-pockets": {"status":"not-run","evidence":["trench-oxygen-source-51ce3df","trench-oxygen-regression-5975233","trench-oxygen-native-51962c5"]},
     "dungeons:ocean-trench:wounded-thessal-response": {"status":"not-run","evidence":[]},
-    "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b","portal-window-source-4d44727"]},
+    "dungeons:manor-of-the-immortals": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b","portal-window-source-4d44727","manor-owned-lifecycle-source-6ab0792","manor-owned-lifecycle-regression-4480ff9","manor-owned-lifecycle-native-c843c61"]},
     "dungeons:manor-of-the-immortals:secret-shelves-and-coffins": {"status":"not-run","evidence":[]},
-    "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b"]},
+    "dungeons:manor-of-the-immortals:ruthven-transformation-and-leech": {"status":"not-run","evidence":["manor-coffin-window-source-3f7b17b","manor-coffin-window-regression-3f7b17b","manor-coffin-window-native-3f7b17b","manor-owned-lifecycle-source-6ab0792","manor-owned-lifecycle-regression-4480ff9","manor-owned-lifecycle-native-c843c61"]},
     "dungeons:davy-jones-s-locker": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","portal-window-source-4d44727","davy-crates-source-babcc25","davy-crates-regression-babcc25","davy-crates-native-babcc25"]},
     "dungeons:davy-jones-s-locker:colored-key-door-chain": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle": {"status":"passed","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
