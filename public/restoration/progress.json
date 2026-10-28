@@ -2509,12 +2509,27 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowPlains Undead Hobbit Mage is level 4 with 270 HP and 5 DEF, three 13-damage ring forms and a 20-damage Salmon Missile. The family includes Undead Archers and Rogues.",
-        "differences": [],
+        "differences": [
+          "Current two/two initial followers and living-slot replenishment differ from compiled primary's two/one initial followers and lifetime birth limits4/3. Undead replacement identities match the primary and period description; Trapped's living replacement IDs do not.",
+          "Simple camp-bound follower movement omits primary/build118 Archer's400/600/400ms Mage-protect, StayBack and nearest-Archer cycle, plus Protect/Follow hysteresis. Period minimum height31 differs from primary StayAbove20; current home leash is reconstruction."
+        ],
         "unknowns": [
-          "Authoritative target replenishment identities, ring/fourth-shot interleaving, movement, minion limits and reward probabilities.",
-          "Whether2013 comparator living replacement IDs are a bug; target replacement quantities, AI and drops."
+          "Build118 January2012 text and compiled primary support twelve-tile ring activation, concurrent radius10 aimed shots and undead Archer4/12s, Rogue3/6s reproduction. Exact123.5.1 deployment, idle/reentry/cloak timing, initial counts, lifetime-versus-living caps and orphan retargeting remain unverified.",
+          "Period public Mage coefficients weapon30%, armor30%, ring12%, ability39%, MP3%, Archer MP3% and Rogue HP4% match current tables after wiki armor+1 conversion. Original tier-candidate RNG, eligibility and bag ownership remain unresolved. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/811#issuecomment-6460686707"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L86-L155",
+            "label": "Compiled primary; Spawn lifetime counters, Shoot concurrency and Protect/Follow inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120122074638id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-hobbit-mage",
+            "label": "January22,2012 capture, build118 text: activation, aimed/ring attacks, undead reproduction and public drops"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Modified7.0 comparator: all three full definitions normalize identically to selected123.5.1"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
