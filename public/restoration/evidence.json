@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "pirate-journey-native-749847f": {
+      "kind": "native",
+      "revision": "749847fda6b466fe2435b1bb02357ca742774686",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1126#issuecomment-6475228919",
+      "method": "Clean-head native QA46481e5f passes10 assertions over113250 game ms: ordinary supplied key entry, natural room traversal encountering57 actors/all13 roster roles, intact800HP boss without attacks, native damage below640HP and both selected shots, defeat, one clear, account1-owned Ring of Health pickup once and return to the exact opening Realm with the same living Knight. Cold SQLite checks retain XP18210, clear1 and exact inventory/revision3; zero deaths/errors/warnings,151 owned PIDs absent, scratch reclaimed. Client0282b3a/Ruffle.16; exact case/runtime hashes and images in the receipt.",
+      "limitations": "Prepared level20 max-stat/gear/key and privileged map-guided ordinary movement, not earned progression or key purchase. No protective cheats or spawned fixture enemies. Native-view samples are not packet decoding, exact chase/orbit geometry or original cadence. Cube-generated entry, shared admission, Cowardice escape, multiplayer reward thresholds, Rum probability, every layout and reconnect remain unverified. Two pre-gameplay cancellations and one defeated-target case failure remain failed. Whole cave gameplay stays not-run; this bounded roster traversal passes without historical acceptance.",
+      "checks": ["dungeons:pirate-cave", "dungeons:pirate-cave:officers-and-cave-roster"]
+    },
+    "pirate-research-fd52882": {
+      "kind": "source",
+      "revision": "fd5288233ad880fb41238391371b4672889e757b",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/fd5288233ad880fb41238391371b4672889e757b/data/objects.xml",
+      "method": "Issue853 compares all14 selected definitions with pinned modified7.0 XML: normalized equal. All18 compiled Kithio tables lack matching cave coverage; Trapped's compiled table and HP/cooldown/movement/loot engines, realm-src generation and dated period pages supply qualified comparators. Disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/853#issuecomment-6474523414",
+      "limitations": "Definition agreement is not AI/probability authority. Build115/117 statistics and older entrance rates conflict with later definitions/comparator policy. Exact123.5.1 layout/population RNG, entrances, cadence and reward allocation remain unresolved. No imported source/assets or historical acceptance.",
+      "checks": ["dungeons:pirate-cave", "dungeons:pirate-cave:officers-and-cave-roster"]
+    },
+    "pirate-generation-native-c8b4f98": {
+      "kind": "native",
+      "revision": "c8b4f98aa555a0fa9bd3c271fe28277a80094067",
+      "date": "2026-10-25",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/853#issuecomment-6474523414",
+      "method": "Reconciled PR575's three passing native journeys at seeds0,17,31: five assertions each for generated layout, branch/dry-corridor traversal, Dreadstump defeat, completion Realm Portal and same living character. Cold SQLite receipts persist one clear in each. Current generator differs only by retired tests.",
+      "limitations": "Reused revision-bound prepared level20 Knight journeys, not fresh target-era acceptance, key purchase or natural entrance-rate measurement. These runs did not qualify each ordinary roster role or loot pickup. Historical generation remains reconstruction; retired Rust tests are not current guards.",
+      "checks": ["dungeons:pirate-cave"]
+    },
     "ghost-god-native-9e258e9": {
       "kind":"native", "revision":"9e258e92ec8867fe34653438c36a904e0220887c", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1125#issuecomment-6475278345", "checks":["realm:ghost-god"],
@@ -4460,8 +4487,8 @@
     "realm:leviathan": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","leviathan-cadence-source-9f79c95","leviathan-cadence-regression-9f79c95","leviathan-cadence-native-9f79c95"]},
     "realm:white-demon": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f","white-demon-combat-source-8643741","white-demon-combat-regression-8643741","white-demon-combat-native-8643741"]},
     "realm:sprite-god": {"status":"not-run","evidence":["sprite-god-aim-source-a21b869","period-loot-source-1f488df","period-loot-regression-1f488df","sprite-child-idle-regression-277bc65","sprite-child-idle-native-277bc65","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f","god-reproduction-native-aa7997f"]},
-    "dungeons:pirate-cave": {"status": "not-run","evidence": ["period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7","portal-window-source-4d44727","portal-window-regression-4d44727","portal-window-native-4d44727","instance-allocation-source-794eccf"]},
-    "dungeons:pirate-cave:officers-and-cave-roster": {"status":"not-run","evidence":[]},
+    "dungeons:pirate-cave": {"status": "not-run","evidence": ["pirate-journey-native-749847f","pirate-research-fd52882","pirate-generation-native-c8b4f98","period-loot-source-1f488df","period-loot-regression-1f488df","pirate-exit-regression-d19287c","pirate-exit-native-d19287c","pirate-exit-regression-f879fb7","pirate-exit-native-f879fb7","portal-window-source-4d44727","portal-window-regression-4d44727","portal-window-native-4d44727","instance-allocation-source-794eccf"]},
+    "dungeons:pirate-cave:officers-and-cave-roster": {"status":"passed","evidence":["pirate-research-fd52882","pirate-journey-native-749847f"]},
     "dungeons:spider-den": {"status":"not-run","evidence":["spider-pillars-source-7019e28","period-loot-source-1f488df","period-loot-regression-1f488df","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d","portal-window-source-4d44727"]},
     "dungeons:spider-den:egg-and-cover-environment": {"status":"not-run","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["snake-cover-shape-source-5eec572","snake-cover-shape-regression-5eec572","snake-cover-shape-native-5eec572","snake-cover-materials-source-2b28e06","snake-cover-materials-regression-f9ad3e0","snake-cover-materials-native-f9ad3e0","snake-minimap-native-544ff3f","snake-minimap-regression-544ff3f","highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","dungeon-return-regression-456ab72","dungeon-return-native-456ab72","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","period-loot-source-1f488df","period-loot-regression-1f488df","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63","snake-width-source-4514010","snake-width-regression-4514010","snake-width-native-4514010","portal-window-source-4d44727"]},

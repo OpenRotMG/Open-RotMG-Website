@@ -4102,10 +4102,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Coastal entrance, traversable cave populated by cave pirates, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF; original layout distribution, entrance/drop rates and reward policy are unresolved.",
-        "differences": [],
+        "expected": "Coastal or key entrance, seeded connected cave populated by officers, fighters and passive fauna, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF with 17/25-damage projectiles.",
+        "differences": [
+          "PR575 replaced the static comparator map with seeded reconstructed rooms and corridors, not recovered original generation.",
+          "Current natural entry is cube-only at 1%. The May 28, 2012 guide also lists lowland quest bosses/minions; older Japanese rates are explicitly limited to build118.7.4 or earlier.",
+          "Selected boss definitions override the build117.0.1 page's 4 DEF and 18/28 damage. Attack gating below640 HP follows the compiled Trapped comparator, not recovered target-era AI."
+        ],
         "unknowns": [
-          "Original layout and population distribution, boss timing, entrance probability and reward eligibility/rates. Period minimaps differ between runs, so the static map is a community comparator layout, not a recovered original."
+          "Original layout/population distribution, target-era entrance sources/rates and exact boss cadence remain unresolved. Trapped randomizes its nominal500ms cooldown; the build115 Brawler page instead lists1s.",
+          "Target-era reward tiers, rates and multiplayer eligibility/allocation remain unresolved. Current independent tier rolls and lower officer thresholds are reconstruction, not Trapped's ordered first-success shared allocation. See issue853's research disposition.",
+          "Remaining gameplay: cube-generated/shared entry, initial Cowardice escape, multiplayer reward qualification, Rum outcomes and reconnect. The supplied-key journey verifies ordinary traversal, boss, one reward and saved return, not every admission/reward gate."
         ],
         "sources": [
           {
@@ -4115,6 +4121,10 @@
           {
             "url": "https://www.youtube.com/watch?v=JMZXtUNZ96s",
             "label": "TwoYetis Pirate Cave guide, upload metadata 2012-11-06: Realm Portal at Dreadstump's death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.PirateCave.cs",
+            "label": "Compiled secondary comparator: boss HP gate, officer circling, fighters and passives; not original server authority"
           }
         ],
         "checks": [
@@ -4124,10 +4134,23 @@
             "expected": "Cave officer roles, pursuing fighters and passive fauna must appear through ordinary room traversal.",
             "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": [
+              "All13 ordinary selected definitions match the pinned modified7.0 client. The May2012 guide lists the same roster, but does not specify population distribution."
+            ],
+            "unknowns": [
+              "Exact target-era population distribution, movement/cadence and per-role drop policy remain unresolved. The build115 Brawler page and later comparator disagree on attack cooldown and potion rate."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PirateCaveCXML.dat",
+                "label": "Pinned modified7.0 definitions match the selected roster; not server behavior evidence"
+              },
+              {
+                "url": "https://web.archive.org/web/20120528161505id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirate-cave",
+                "label": "May28,2012 guide lists13 ordinary roles; no exact distribution"
+              }
+            ],
             "group": "population"
           }
         ]
