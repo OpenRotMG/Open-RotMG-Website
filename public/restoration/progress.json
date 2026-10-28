@@ -3628,11 +3628,26 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Fire/Ice/Magic Sprite0x624–626; selected Ice slows1.6s. Exclude Sprite God/Child and dungeon sprites.",
-        "differences": [],
+        "differences": [
+          "Current movement uses the Trapped-style15 motor, not Kithio rate1.4/StayAbove. Regional MidPlains area/200 admission and60s refill are not Kithio same-species radius10/density2 reproduction.",
+          "Build118 wiki armor tier5 maps to selected tier6: period Chimera Hide Armor, Plate Mail and Robe of the Adept names reconcile the numbering, not original RNG."
+        ],
         "unknowns": [
-          "Target density, movement, cadence/spread and loot probabilities."
+          "Original123.5.1 movement/elevation, local reproduction versus regional density, tick-exact cadence, equipment-pool/odds provenance and multiplayer reward/pickup/reconnect continuity. Research and bounded gameplay remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/issues/839#issuecomment-6472186081"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Compiled primary reconstruction table; engine semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120127132732id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprites",
+            "label": "January2012 capture marked build118; not proof of123.5.1 deployment"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 comparator: all three complete selected Sprite objects match"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
