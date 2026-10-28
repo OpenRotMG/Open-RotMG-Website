@@ -4731,8 +4731,8 @@
           "The Abyss is now included in the existing player-teleport allowlist, restoring its advertised map flag and actual guarded teleport path. Cooldown, target eligibility, GOTO acknowledgements and lifetime tracking are unchanged. A later-edited April 2012 guide explicitly includes Abyss teleport tactics; exact target-era eligibility remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/604"
         ],
         "unknowns": [
-          "Original teleport eligibility details, layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities.",
-          "Whether Defense was present by the target build, and the original recipient guarantees."
+          "Original teleport eligibility, room/treasure distributions and exact Malphas/Idol timers remain unresolved. The local 36–52 room-count draw and truncated 20% treasure continuation, seven-phase 50.2-second Malphas cycle and Idol lava control are reconstruction, not recovered original constants.",
+          "May 27, 2012 Malphas documentation lists VIT but not DEF; October 2016 notes remove a DEF guarantee. Neither dates DEF introduction or authenticates September 2012 recipient guarantees."
         ],
         "sources": [
           {
@@ -4771,10 +4771,10 @@
             "expected": "The adopted Idol reconstruction has dry shrine access before activation and restores it after defeat without disconnecting clients. Eligible accounts receive private DEF and VIT. Lava changes stay local, and Idol defeat does not clear the main dungeon.",
             "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify dry access before activation, local restoration without disconnecting, private DEF and VIT, independent rooms and no main clear from Idol defeat alone.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original Idol potion rates and recipient minimums are unrecovered; the local DEF/VIT guarantee is a reconstruction choice."
+              "Original Idol lava/activation timers, potion rates and recipient minimums remain unrecovered. Test Build 123.2 explicitly redesigns the Abyss treasure room; June 13, 2012 production 123.3 announces two treasure rooms without naming them. Selected XML fixes Idol identity/stats/projectiles, not the local controller or DEF/VIT guarantee."
             ],
             "sources": [
               {
@@ -4988,7 +4988,7 @@
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [],
         "unknowns": [
-          "Original layout and spawn distributions, attack schedules, throw and transformation timing, entrance chance and loot probabilities.",
+          "Original layout/spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -5020,10 +5020,10 @@
             "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
             "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"}],
             "group": "layout"
           },
           {
@@ -5032,10 +5032,10 @@
             "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
             "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Period prose supports actual-damage healing, four groups and eventual return; exact123.5.1 timers/counts and the complete attack schedule remain reconstructed. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"}],
             "group": "boss"
           }
         ]
@@ -5242,19 +5242,35 @@
         "historical": "partial",
         "expected": "Historically available beach-party destination, party encounter and consumables; distinguish event/calendar access from permanent access and contest prizes from drops.",
         "differences": [
-          "Server PR278 adds a reconstructed Beachzone. Each new Realm has a 1-in-200 chance of an announced inland Beach Bum whose defeat opens the portal 50% of the time. The island layout, the non-attacking Masked Party God's silent full-health recovery every 5 seconds unless Stunned, and its four drinks at 10% each are reconstructions. Permanent rare-spawn access stands in for the unresolved target event/calendar availability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/278"
+          "PR278 reconstructs the island, 1/200 Realm Bum spawn, 50% entrance portal, five-second full recovery unless Stunned and four independent 10% drink rolls with >10%-HP private eligibility. Modified7.0 instead rolls four drinks at 20% under an integer-damage threshold of 0.1 and contains no healing behavior. Neither is authenticated original AI.",
+          "The 123.5.0-labeled guide describes Bum access plus a 400-Fame key sale on August16–21,2012. The event archive's Beach Ball + Bahama Sunrise contest prizes are not a boss-drop table. Exact target availability outside that sale remains unresolved.",
+          "Selected client definitions retain Party God 30000HP/300DEF and Bum 1000HP/100DEF. Later modified7.0 uses 10/15DEF, while the May2013-captured Release2.0 boss guide says 80DEF. These conflicts do not authorize changing selected stats. Requested December2012 archive URLs redirect to May2013 captures."
         ],
         "unknowns": [
-          "Target calendar/key distribution; layout; Party God lifecycle and actual drop policy."
+          "Exact 123.5.1 availability outside the documented August2012 key sale and the rare Bum trigger/spawn/portal probabilities.",
+          "Exact island geometry and Party God recovery amount, cadence, damage-window and stun interaction. The later guide and wiki disagree; no authenticated target AI was recovered.",
+          "Original private reward eligibility and four drink probabilities. A prepared native drop cannot establish rates; the selected soulbound key also conflicts with the guide's public-bag description."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
-            "label": "forum wiki page (date unconfirmed)"
+            "label": "August16–21,2012 Beach Party Madness and Best Beach Party Scene contest prizes"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515192458id_/https://forums.wildshadow.com/wiki/realm-mad-god/beachzone",
+            "label": "May15,2013 capture, guide labeled123.5.0: island, Bum access and August2012 400-Fame key sale"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Beachzone.cs",
+            "label": "Modified7.0 dance and 20% drink comparator; no healing behavior"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515202028id_/https://forums.wildshadow.com/wiki/realm-mad-god/masked-party-god",
+            "label": "May15,2013 capture, boss guide labeledRelease2.0: 80DEF and an unspecified damage window, not exact123.5.1 AI"
           }
         ]
       }
