@@ -6035,12 +6035,24 @@
         "expected": "Health and Magic each have seven soulbound doses, restore 125 per dose, replace with successor and remove final dose.",
         "differences": [],
         "unknowns": [
-          "Original consumption at full HP/MP or while Sick, and both seven-dose sequences."
+          "Independent original-server consumption/refund at full HP/MP or while Sick; exact 123.5.1 continuity of April/June 2012 guides. Kithio lacks a Sick healing guard, unlike period documentation and modified 7.0; retain current no-heal policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L89-L149",
+            "label": "Compiled Kithio: successor replacement, ineffective-use consumption and capped restoration; no Sick healing guard"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422182039id_/http://forums.wildshadow.com/wiki/realm-mad-god/elixirs",
+            "label": "April 22, 2012 capture: Soulbound, up to seven doses, 125 HP/MP per use"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June 13, 2012 capture: Sick prevents healing, not proof of dose consumption/refund"
           }
         ]
       }

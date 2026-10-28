@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "elixirs-native-ab71ab4": {
+      "kind":"native", "revision":"ab71ab4f57e89c7628147b7acdd8d420c83d2677", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1165#issuecomment-6480925805", "checks":["gear:elixirs"],
+      "method":"Clean QA5c441a89 passes111 native checks at client0282b3a4/Ruffle.16 on private displays. All seven Health and Magic doses restore125 each, preserve stats/identity and change only one slot/revision;2-to-1/final removal and empty-repeat atomicity pass. FullHP/MP consumption, capped670HP/385MP and ordinary Nexus reconnect preserving both partial five-dose items pass. A second native Wizard shoots a natural Kage grave; real mines apply Sick. Every Health dose consumes withHP100 unchanged; every Magic dose restores125MP, with Sick asserted before/after each use. Cold QAd47665e1 checks32 samples/case hash, saved exact inventories/potion-use flags, three living characters/zero deaths, SQLite/FKs, no ERROR logs and63 absent tracked PIDs. Cleanup[],QA0/reclaimed; syntax6656daf0 passes.",
+      "limitations":"Prepared level20/stats/backpack/vitals, map-scouted spawn and temporary Invulnerable. Not earned acquisition, pricing/drop rates, unprotected survival, a Kage clear or original-server acceptance. Soulbound ownership/expiry evidence remains separate. Preliminary8f0b3e39 was canceled before gameplay and is not credited. No production gameplay or authority/durability guards changed. Historical partial and issue883 remain."
+    },
+    "elixirs-research-ab71ab4": {
+      "kind":"source", "revision":"ab71ab4f57e89c7628147b7acdd8d420c83d2677", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/ab71ab4f57e89c7628147b7acdd8d420c83d2677/data/objects.xml", "checks":["gear:elixirs"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/883#issuecomment-6480803253 . QA4bdbb0e3/cf64febd: fresh selected SWF07ae4fc3, all14 complete elixir objects structurally match runtime and pinned modified7.0. Seven Health/Magic doses each restore125, remain Soulbound and follow exact successors to empty. Selected attemptUse and7.0 useItem_new have no HP/MP/Sick gate. Compiled Kithio replaces/consumes regardless of effective gain, caps Stats+Boost, but lacks Sick healing guard;7.0 consumes before its Sick heal guard. April22,2012 Wild Shadow elixir capture corroborates Soulbound/up-to-seven/125 per dose; June13 status page says Sick cannot be healed. Modern Realm.wiki adds ForbidUseOnMaxHP absent from both selected and7.0 definitions.",
+      "limitations":"Source/engine inspection is not gameplay or authenticated original-server acceptance. Independent ineffective-use consumption/refund evidence and target-build continuity remain in883; historical partial. Related forks are not independent witnesses. Japanese direct403 and corrected7.0 connection-path404 retained privately. No production gameplay, authority, loot or third-party material changed."
+    },
     "trench-key-route-native-7c96af6": {
       "kind": "native", "revision": "7c96af635cf47d8a6e0214e5683aee7b5a895141", "date": "2026-10-28",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/861#issuecomment-6480936060",
@@ -5363,7 +5375,7 @@
     "gear:magic-potions": {"status":"not-run","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7"]},
     "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
     "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
-    "gear:elixirs": {"status":"not-run","evidence":[]},
+    "gear:elixirs": {"status":"passed","evidence":["elixirs-research-ab71ab4","elixirs-native-ab71ab4"]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
     "gear:rum-and-mushrooms": {"status":"not-run","evidence":[]},
