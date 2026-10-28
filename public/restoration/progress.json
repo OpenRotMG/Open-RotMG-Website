@@ -5791,8 +5791,8 @@
         "expected": "Slot9 compatibility and reversible exact individual stat/fame bonuses for evidenced deployed rings. Use target Experimental Ring and changed Divine Faith; resurrection and seasonal acquisition remain separate bundles.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable ring roster, developer Crown availability and seasonal calendar.",
-          "Original bonuses and tooltip presentation."
+          "Complete target-era acquisition, recipient/drop probabilities and Minor Defense tutorial continuity; legitimate Crown distribution and exact swimming-award dates. Later Crown +700 WIS/Soulbound and Ring Pop are not selected definitions. America and medals are event prizes, not evidenced recurring seasonal drops. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/877#issuecomment-6479962237",
+          "Native earned acquisition and death-Fame/tooltip comparison across classes remain separate from prepared equip/remove checks. Selected stat/Fame definitions are verified; exact original rounding and complete target-production continuity remain unresolved. Resurrection and seasonal acquisition remain separate bundles."
         ],
         "sources": [
           {
