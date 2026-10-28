@@ -129,7 +129,10 @@ test('Leviathan cadence receipts do not accept the whole encounter',()=>{
 
 test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
-  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.deepEqual(evidence.results[roster],{status:'not-run',evidence:[]});
+  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[roster].status,'passed');
+  for(const key of [id,roster])for(const ref of ['pirate-research-fd52882','pirate-journey-native-749847f'])assert(evidence.results[key].evidence.includes(ref));
+  assert.deepEqual(evidence.sources['pirate-journey-native-749847f'].checks,[id,roster]);
+  assert(evidence.results[id].evidence.includes('pirate-generation-native-c8b4f98'));
   for(const ref of ['pirate-exit-regression-d19287c','pirate-exit-native-d19287c']){
     assert.equal(evidence.sources[ref].revision,'d19287c44d7b2bac88e9b132302c31be431129d9');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
