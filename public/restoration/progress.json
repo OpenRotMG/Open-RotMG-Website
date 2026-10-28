@@ -2937,7 +2937,8 @@
           "The decoded modified-7 map is32x29 with eight spawners and four drop markers; Valor's map is byte-identical, not independent evidence. Reproduce counts nearby living entities; death transfer chooses one nearest drop actor and transfers raw integer damage. Its0.01 loot threshold therefore accepts any positive integer hit, not1% HP. Original geometry, allocation and rates remain unresolved."
         ],
         "unknowns": [
-          "Original geometry/placement distribution, minion densities, phase timing/attack continuity and difficulty; loot pools, eligibility, minima/rates and portal probability."
+          "Original geometry/placement distribution, minion densities, phase timing/attack continuity and difficulty; loot pools, eligibility, minima/rates and portal probability.",
+          "Bounded native takes verify the initial gate and repeated waves, not full defeat/rewards, private ownership, pickup/duplicate or Trench entry. Earned native admission/travel, unprotected status/survival and multiplayer acceptance also remain open: https://github.com/OpenRotMG/Open-RotMG-Server/issues/822"
         ],
         "sources": [
           {
