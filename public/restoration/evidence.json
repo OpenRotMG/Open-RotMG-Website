@@ -1,6 +1,45 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "madlab-verification-source-25a51e6": {
+      "kind": "source",
+      "revision": "25a51e6f7491c055a7303454b7b4c07e2e43c063",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/25a51e6f7491c055a7303454b7b4c07e2e43c063/examples/testing/mad-lab.mjs",
+      "checks": [
+        "dungeons:mad-lab",
+        "dungeons:mad-lab:ordinary-lab-and-gas",
+        "dungeons:mad-lab:coil-secret-and-pool-chain"
+      ],
+      "method": "Read the bounded native cases and Lab regressions; production Lab AI, generated layout, selected definitions and loot are unchanged. Reconciled PR603, PR743 and PR1097 against pinned community sources, modified-7.0 XML and claim-specific period documentation.",
+      "limitations": "Source presence is not gameplay or historical acceptance. Selected Enforcer definitions differ from modified 7.0. The target-labeled video remains unviewed after blocked retrieval; mixed-era wiki headers do not date each claim. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
+    },
+    "madlab-room-reward-regression-0e8f429": {
+      "kind": "regression",
+      "revision": "0e8f42909af27e3bc175617f90cdeaab98984f7d",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147#issuecomment-6478622597",
+      "checks": [
+        "dungeons:mad-lab",
+        "dungeons:mad-lab:ordinary-lab-and-gas",
+        "dungeons:mad-lab:coil-secret-and-pool-chain"
+      ],
+      "method": "QA 5f936011 passes all 242 Rust tests, including six Lab tests. Two additions check selected ordinary shot counts and Cyborg burst stages, then twelve bounded cage children, one damaging contributor versus a bystander, owned Wisdom, staged clear/exit and no child-created duplicate loot/clear. Existing pool and coil/Creation tests also run.",
+      "limitations": "Prepared deterministic world/state checks, not native risk or historical fidelity. Current Lab Rust content remains identical in 25a51e6. Threshold semantics follow the pinned comparator's integer damage comparison, not an authenticated original probability model."
+    },
+    "madlab-room-journey-native-25a51e6": {
+      "kind": "native",
+      "revision": "25a51e6f7491c055a7303454b7b4c07e2e43c063",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147#issuecomment-6478622597",
+      "checks": [
+        "dungeons:mad-lab",
+        "dungeons:mad-lab:ordinary-lab-and-gas",
+        "dungeons:mad-lab:coil-secret-and-pool-chain"
+      ],
+      "method": "Clean QA fcdc9aed passes 10 checks with client 0282b3a4/Ruffle.16 and no cleanup errors. Normal Lab Key use admits the same Archer at the generated entrance and its Cowardice portal. Native walking traverses four populated rooms with a fresh ordinary fight in each; robot and both acid-turret projectiles are observed. Native combat defeats 90,000-HP Dr Terrible, commits one clear and leaves Creation sealed while coils remain. Native drag acquires earned Wisdom, an empty-slot repeat cannot duplicate it, and the boss exit returns the same living character to Nexus. Cold QA a9a37221 verifies alive character 1, one clear, revision 3, exactly one Wisdom, 52 kills, 20135 XP, SQLite integrity/foreign keys and zero deaths.",
+      "limitations": "Supplied max-base-stat level-20 Archer, gear and key, with explicit 60-second invincibility, temporary +100 DEF and HP/MP refills. Not ordinary-risk survival, earned progression, full trash clearance, a Flying Brain entrance roll, native sword hits, measured reward rates or historical Nexus-destination acceptance. Transient local-inspection, capture, waypoint, aiming-bound, receipt-budget and handoff-sampling failures are retained and excluded in PR1147. No gameplay, ownership, permanent-death, ACK, lease, persistence or 256-receipt guard changes. All three IDs remain incomplete; original pool masks and Creation semantics/rewards stay unresolved."
+    },
     "spider-journey-native-57551f0": {
       "kind": "native",
       "revision": "57551f0492290a3079846bbd5d7ba35f238b3930",
@@ -4694,9 +4733,9 @@
     "dungeons:davy-jones-s-locker:colored-key-door-chain": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle": {"status":"passed","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:ship-trash-and-objects": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","davy-crates-source-babcc25","davy-crates-regression-babcc25","davy-crates-native-babcc25"]},
-    "dungeons:mad-lab": {"status":"not-run","evidence":["god-portals-regression-411c536","mad-lab-source-69806e2","mad-lab-acid-native-6115e97","mad-lab-secret-native-6115e97","portal-window-source-4d44727","instance-allocation-source-794eccf","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
-    "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-acid-native-6115e97"]},
-    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
+    "dungeons:mad-lab": {"status":"not-run","evidence":["madlab-verification-source-25a51e6","madlab-room-reward-regression-0e8f429","madlab-room-journey-native-25a51e6","god-portals-regression-411c536","mad-lab-source-69806e2","mad-lab-acid-native-6115e97","mad-lab-secret-native-6115e97","portal-window-source-4d44727","instance-allocation-source-794eccf","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
+    "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["madlab-verification-source-25a51e6","madlab-room-reward-regression-0e8f429","madlab-room-journey-native-25a51e6","mad-lab-source-69806e2","mad-lab-acid-native-6115e97"]},
+    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["madlab-verification-source-25a51e6","madlab-room-reward-regression-0e8f429","madlab-room-journey-native-25a51e6","mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
     "dungeons:beachzone": {"status":"not-run","evidence":["beachzone-source-b587298","portal-window-source-4d44727"]},
     "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
