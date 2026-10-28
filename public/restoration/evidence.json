@@ -4011,13 +4011,8 @@
     "realm:skull-shrine": {"status":"passed","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df","skull-shrine-research-3587c31","skull-shrine-cap-regression-8055278","skull-shrine-native-0c03248"]},
     "realm:cube-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:pentaract": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-<<<<<<< HEAD
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f","hermit-research-9ddc74c","hermit-admission-direct-15e9b50"]},
-    "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3"]},
-=======
-    "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3","ghost-ship-research-33bf0fc","ghost-ship-regression-51cd8d1","ghost-ship-native-prerequisites-f5b580b"]},
->>>>>>> origin/main
     "realm:crystal-prisoner": {"status":"not-run","evidence":["crystal-release-native-b98ad3e"]},
     "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c","kage-research-f897f74","kage-natural-native-5e9ad95"]},
     "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirates-research-55b6ab4","pirates-native-8042725"]},
