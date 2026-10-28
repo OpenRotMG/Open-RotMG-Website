@@ -6161,17 +6161,32 @@
       "category": "gear",
       "icon": "assets/player/coral-juice.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Individual restorative drinks, Coral Juice dual restoration, Healing Ichor, range-ten Snake Oil/Pollen Powder; include Beachzone compound boost/intoxication cocktails. Wine Cellar drinks do not implicitly cause Drunk.",
-        "differences": [],
+        "expected": "Ten wines restore150 HP or MP without Drunk, except Fire Water230HP; Ichor150 HP, Coral100 HP+100 MP, Snake Oil100 HP/Pollen100 MP within range10 including self. Four Beach cocktails each boost two selected stats and apply Drunk15s; selected Lime boosts last30s, the others20s.",
+        "differences": [
+          "All18 selected drink definitions match recovered123.5.1 and modified7.0, but the ten wines have no current production loot candidates. Prepared consumption does not establish ordinary acquisition.",
+          "Kithio halves nova range; modified7.0/current reconstruction use full range. May2013 Beach wiki says Lime20s versus selected/7.0 XML30s. Preserve selected definitions and current authority rather than importing conflicting comparator rules."
+        ],
         "unknowns": [
-          "Production loot/distribution, historical range/self/resource rejection semantics."
+          "Exact target-era drop schedules and ordinary wine acquisition; historical self/range-edge/recipient eligibility and full-resource/Sick/Quiet consumption or refund; Lime20-versus30s continuity. Bounded prepared gameplay is separate from full acquisition/history acceptance. Research and remaining work: server issue885."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "All18 complete drink objects match selected123.5.1; modified7.0 agreement is not original-server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162737id_/http://forums.wildshadow.com/wiki/realm-mad-god/wines",
+            "label": "May28,2012: ten wines, Fire Water230HP/others150HP or MP; Cellar and Castle minion drops, not exact probabilities"
+          },
+          {
+            "url": "https://web.archive.org/web/20130516012303id_/https://forums.wildshadow.com/wiki/realm-mad-god/beach-party-madness-drinks",
+            "label": "May2013 retrospective August2012 event account; Lime20s conflicts with selected30s"
           }
         ]
       }
