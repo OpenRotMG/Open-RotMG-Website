@@ -5528,9 +5528,9 @@
         "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility is inclusive 1200/8000 at unchanged .001; other Septavius rewards retain the generic >800 gate.",
         "differences": [],
         "unknowns": [
-          "Original availability of Thousand Shot and upper-tier bows.",
-          "Each bow’s original spread and collision behavior.",
-          "The attributed 15% Doom fragment and original threshold engine are not authenticated."
+          "Original production acquisition of Thousand Shot and T13/T14 bows remains unproved. The February 6, 2012 Thousand Shot post describes testing code, not a released drop.",
+          "Selected recovered client code supports centered 11.25-degree spacing and distinct enemy/cover piercing; original server collision tolerances remain unauthenticated.",
+          "The attributed 15% Doom fragment and original threshold engine are not authenticated. Research disposition and pinned comparisons: https://github.com/OpenRotMG/Open-RotMG-Server/issues/871#issuecomment-6478307595"
         ],
         "sources": [
           {
