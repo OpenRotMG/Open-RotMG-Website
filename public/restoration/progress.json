@@ -6463,16 +6463,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed clothing/accessory color choices, native previews, one-use application and persistent appearance, preserving the other texture channel. Historical palette/stock and complete native rendering remain unverified.",
-        "differences": [],
+        "expected": "Selected definitions contain141 names/channel (282 items,139 RGBs): clothing0x1000–0x108c/accessory0x1100–0x118c. Aqua/Cyan and Fuchsia/Magenta are aliases. One-use soulbound dyes replace only Tex1 or Tex2. Nexus proximity previews override rendering within one tile; leaving cancels without consuming or saving the trial color.",
+        "differences": [
+          "Current120Gold clothing-dye/60Gold accessory-dye base offers and recovered Nexus stock are reconstruction, not authenticated123.5.1 sale prices/rotation. Kithio compiles UseItem but lacks Dye activation; later Trapped/modified7.0 channel handling is comparator evidence, not original-server authority."
+        ],
         "unknowns": [
-          "Complete original palette and seasonal availability.",
-          "Preview, cancellation and rendered appearance of each color."
+          "Authenticated deployed123.5.1 palette versus bundled definitions, seasonal availability and original prices/restock remain issue895. The2013 St Patrick’s bundle,2015 fitting-room palette and2017 Japanese141-color list do not date the entire roster to the target.",
+          "PR1180 verifies all282 dyes on a prepared Wizard, Black clothing/Turquoise accessory previews and cancellation, and durable Nexus reconnect. All141 merchant-color previews, every class/skin, earned acquisition and historical acceptance remain open. PR296 retains its separately qualified earned ground-use, full-backpack and refusal receipts."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_DyesCXML.dat",
+            "label": "Modified7.0 agrees on282 item identities, channels, colors and consumption flags"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/54ad7c77f33b32d20165493f38053897761f2a04/dyes.js",
+            "label": "September2015 external fitting-room palette matches141 names/RGBs, not target stock"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "March15–19,2013 St Patrick’s bundle; later prices/rotation are not123.5.1 proof"
           }
         ]
       }

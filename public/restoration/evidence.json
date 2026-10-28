@@ -3786,6 +3786,33 @@
         "realm:wasp-queen"
       ]
     },
+    "dyes-research-d9798cc": {
+      "kind": "source",
+      "revision": "d9798cc9af5979f0ca1c2fc5fdaafb7ae9dd938a",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/d9798cc9af5979f0ca1c2fc5fdaafb7ae9dd938a/data/objects.xml",
+      "method": "Compared all282 selected dye identities, activation/channel/color and consumption flags against preserved client and pinned modified7.0 XML.141 names/channel encode139 RGBs; Aqua/Cyan and Fuchsia/Magenta are aliases. Selected Player/Merchant proximity rendering and both later server channel implementations were inspected. Research and dated follow-up sources are in issue895 comment6482071181.",
+      "limitations": "Definitions are not authenticated deployed stock. Compiled Kithio UseItem lacks Dye activation. The2013 St Patrick’s bundle,2015 fitting room and2017 Japanese list do not date the full roster to123.5.1. Original prices, rotation and seasonal availability remain unresolved; source inspection is not gameplay acceptance.",
+      "checks": ["style:clothing-and-accessory-dyes"]
+    },
+    "dyes-regression-5f3c3e0": {
+      "kind": "regression",
+      "revision": "5f3c3e0625a9febd3dd7dd2172ad7707aedc5bc6",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1180#issuecomment-6482358069",
+      "method": "All275 Rust tests pass through QA9c896ba48d3344cdbeac3f7ed4ce01e4; separately filtered dye transaction rollback passes. PRd9798cc adds only the native case, with production Rust/data inputs unchanged. Its exact-revision GitHub qa-lifecycle/test checks, formatting and strict Clippy pass.",
+      "limitations": "Backend rollback/regression and CI are not native rendering, earned acquisition or historical acceptance. PR296 refusal/ownership receipts retain their original revision/runtime qualifications rather than becoming fresh native adversarial tests.",
+      "checks": ["style:clothing-and-accessory-dyes"]
+    },
+    "dyes-native-c1e6a87": {
+      "kind": "native",
+      "revision": "c1e6a87f6b006d65801f9880c96b559e65f6de7e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1180#issuecomment-6482876889",
+      "method": "Clean QA72b7a3a009934ec298a1e56b99dc2d5f passes436 checks through client0282b3a4/Ruffle.16. All282 dyes apply once through native hotkeys, preserve other slots/channels and produce141 settled frames. Black clothing/Turquoise accessory proximity previews cancel without applying or consuming. Ordinary Nexus reconnect retains identity/colors/inventory. Cold QA922c1e1701a241d196ae5124599996b9 checks149 samples/captures,286 appearance commits,141 exact hat-RGB checks/shaded robe probes, three living saves, zero deaths, SQLite integrity/FKs, zero backend ERRORs and175 absent owned PIDs. Cleanup/scratch collection pass; one26ms slow-tick WARN remains.",
+      "limitations": "Prepared stats, placements and inventory/refills are not earned acquisition. Two merchant colors do not verify all141 previews or every class/skin. Source presence and this selected-renderer execution do not authenticate original shop palette, prices, seasonal stock or deployment. Earlier helper/axis failures and the stopped69-frame run with8 unsettled captures remain retained; final captures wait after observed consumption. Whole-feature gameplay stays not-run and history partial under895; no production dye behavior changed.",
+      "checks": ["style:clothing-and-accessory-dyes"]
+    },
     "ground-appearance-source-0a19612": {
       "kind": "source",
       "revision": "0a1961234c2dfea79047311d117d90a78020d376",
@@ -5549,7 +5576,7 @@
     "gear:seasonal-toys": {"status":"passed","evidence":["sand-castle-source-0e3f09d","sand-castle-regression-f16ad17","sand-castle-native-f16ad17","seasonal-toys-source-bee856e","seasonal-toys-native-bee856e"]},
     "style:legacy-pet-collection": {"status":"not-run","evidence":[]},
     "style:summon-a-drake": {"status":"passed","evidence":["drakes-research-4006cea","drakes-native-16583cb"]},
-    "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9"]},
+    "style:clothing-and-accessory-dyes": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","dyes-research-d9798cc","dyes-regression-5f3c3e0","dyes-native-c1e6a87"]},
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
     "home:nexus": {"status": "not-run","evidence": ["void-background-source-15c1e17","void-background-regression-2e116c1","void-background-native-bde9a38","nexus-source-794eccf"]},
     "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1"]},
