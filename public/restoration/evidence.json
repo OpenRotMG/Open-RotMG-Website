@@ -19,6 +19,129 @@
       "method":"Selected123.5.1 and modified7.0 match all35 enemy XML definitions, not AI. Build115 guides support the restored black generation and intermediate XP/no loot. Kithio compiles no Lair table.",
       "limitations":"123.5.1 history/AI unresolved in858; modified7.0 differs. Trapped projectile3 is absent;403/404s prove nothing historical. Existing endpoint evidence retained; no third-party code/assets imported."
     },
+    "castle-armor-quiet-native-0e590235": {
+      "kind": "native",
+      "revision": "0e590235a16f84f3a995effb30beba122010d87e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Native spawner armor and replacement defeats increment kills 0→1→2 before expiry with fresh same-parent identities; XP18050/fame18 unchanged. Separate western Living Floor contact applies Quiet, MP0 and no Weak. Jobs c311ad2d6bc14ea385c6965e79ef585b and f0c5eaf94fc043a3a6e30d1f8a2478a2 pass with empty cleanup errors.",
+      "limitations": "Prepared starts/gear; armor uses temporary +100 attack and Invincible, tower uses Invulnerable which preserves conditions. One western tower context, not the complete route or final barrier. Earlier expired-target false positive is rejected, not reused. No historical or unassisted acceptance.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-authored-armor-native-c0147979": {
+      "kind": "native",
+      "revision": "c014797965c7edcf313c2a0b357bca59f5835da1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Authored parent-null Haunted Armor actually defeated by native piercing bow; credited kills 0→1, XP18050 and fame18 unchanged. Job f59491428513437b8bd7b538bb2ea7fd passes. Final exact predicate rejects two retained expiry-only examples and accepts three actual armor kills.",
+      "limitations": "Prepared scene, supplied legal-max stats/gear, temporary +100 attack and Invincible. A prior attempt also killed a roaming Pet and correctly failed isolation; final startup begins combat before adds arrive. Proves selected current reward mapping, not original-versus-respawn historical intent or full traversal.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-guardian-left-partial-84080b7": {
+      "kind": "native",
+      "revision": "84080b703cc5dad19d8606ba2e84818405873fe4",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Left-first native fixture credits guardian, bound sword and survivor as three actual kills; observes shield/release, one earned Chamber portal and native Defense pickup. XP18050→18861→18861→19672. QA 72d2f4fab0254260ad9180d099dd68b3 is globally failed, not passed.",
+      "limitations": "Fresh second participant fails native ingress clock monotonicity before shared admission. No shared Chamber destination proved; survivor was full HP, so recovery heal magnitude was not exercised. Prepared arena, protection, temporary attack and mana fills; not earned route, ordinary difficulty, exact original choreography or probabilities.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:guardian-survivor-and-chamber"
+      ]
+    },
+    "castle-guardian-right-partial-59ce2ab": {
+      "kind": "native",
+      "revision": "59ce2ab721f528e52ffadda22c4084016340e958",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Reverse defeat order likewise credits three actual native kills, sword-gated survivor release, one earned Chamber portal and private Defense pickup. QA 23ef9a3efdfe4ee09746f69530987c7f remains failed after the same fresh-participant native ingress clock regression.",
+      "limitations": "No successful shared Chamber admission, recovery healing magnitude or full entrance route. Prepared protection, temporary attack and mana fills. Positive earlier observations do not relabel the failed take as passing; exact original choreography, sword chance and XP rounding remain unaccepted.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:guardian-survivor-and-chamber"
+      ]
+    },
+    "castle-traversal-partial-a02271b": {
+      "kind": "native",
+      "revision": "a02271b9c39542ad69638d4d00ce6ef671748b2f",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Native movement and ordinary populated rooms from authored entrance, without relocation, reach approximately (48.84,113.5); 77 kills and XP22415. QA 66fc109964f84d6e9909b2dd23c59415 ends in permanent character death at a protection boundary and remains failed.",
+      "limitations": "Final three-deep wall and entrance-to-guardian traversal not completed. Earlier central-tower/routing input-rate disconnects and failed/cancelled/dead takes are retained. No guard relaxed, no character resumed/revived. Separate armor/tower successes cannot pass this component; earned arrival, teleport denial and shared Chamber entry remain unaccepted.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-source-48b16697": {
+      "kind": "source",
+      "revision": "48b16697a0ee57cc955b4b16a6563db1f3b13026",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/48b16697a0ee57cc955b4b16a6563db1f3b13026/src/endgame.rs",
+      "method": "Compared eight selected Castle definitions with pinned modified 7.0 XML; inspected all 54 Kithio/7.0 behavior-table files, later Castle tables and engine semantics; decoded current candidate map. Read February 2012 anti-rush and August 2012 armor-reward announcements, then checked a build-123.3.2 drop diary and dated limits of later guides.",
+      "limitations": "Source presence is not gameplay acceptance. Exact geometry/spawn cohorts, original-versus-replacement historical armor rewards, activation/choreography, sword probability and loot rates remain qualified. Full anchors/disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/866#issuecomment-6476616760. Later forks are not independent historical witnesses; a guessed Wayback guardian URL returned 404.",
+      "checks": ["dungeons:oryx-s-castle", "dungeons:oryx-s-castle:mandatory-route-and-armor", "dungeons:oryx-s-castle:guardian-survivor-and-chamber"]
+    },
+    "jungle-journey-native-c945d8a": {
+      "kind": "native",
+      "revision": "c945d8a6c55525f7a7175b5ee78d2c55fe3491c9",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1131#issuecomment-6477284927",
+      "method": "Clean QA303804fa passes9 assertions/150400game ms: one supplied Totem Key/ordinary admission, six populated rooms cleared by native wand fire, Mixcoatl ritual/normal2/late5/pursuit6 and defeat, one committed clear, four Boss Totems remain without further barrage, earned Pollen pickup once/no duplicate, same living character1/account1 returns to exact Realm1. Cold QAc09ce0a3 verifies SQLite/FKs, XP19125/clear1/inventory revision6, no deaths/backend ERRORs,154 absent owned PIDs and reclaimed scratch. One latency warning retained; client0282b3a/Ruffle.16; exact case33536edb and result52d9b322 hashes in receipt.",
+      "limitations": "Prepared level20 Priest/stats/UT purification loadout/key/Holy Water/MP potions; three Holy Waters consumed and one tome input recorded. Privileged map/home-guided keys/mouse, not earned progression or unaided navigation. One seed5927447791712578000/clearing route, not all branches/layouts/classes or multiplayer thresholds. Stage3/brief4 not sampled here; no original timing/odds acceptance. Earlier rushing, death, ACK/lease and defeated-target race failures remain failed. Requested1600% Chrome quota does not establish a quota or general ACK-stall fix; measured main scope was unthrottled. No protection, forced outcomes, authority or guard changes. Historical partial.",
+      "checks": ["dungeons:forbidden-jungle", "dungeons:forbidden-jungle:foliage-and-tribal-rooms"]
+    },
+    "jungle-coil-entry-native-19939a5": {
+      "kind": "native",
+      "revision": "19939a5e98875bfc3a703a0e112f83c70bc88f33",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1045#issuecomment-6460698375",
+      "method": "Reused PR1045 QA077b489d's three clean-source checks/10500game ms: native defeat of a naturally placed Coil earns270XP and a rolled Jungle entrance; normal entry admits the same living character2, then rendered native movement reaches62.11077,98.88923. Empty cleanup errors, reclaimed scratch and zero backend ERRORs. Client39acbfb/Ruffle.16; casece45f58a hash and source binding retained in the original receipt.",
+      "limitations": "Separate prepared level8 Rogue/gear/stats/temple position and older revision, not the new key-journey character, fresh rerun, earned progression or a20% probability measurement. No protection/forced drop in this entry supplement. PR1045 explicitly did not accept the whole Jungle. Failed/cancelled predecessors remain retained; original Coil probability remains issue814/history partial.",
+      "checks": ["dungeons:forbidden-jungle"]
+    },
+    "jungle-foliage-native-24f6420": {
+      "kind": "native",
+      "revision": "24f6420b4021433d95ef841a2a7c4b4e2fcaaadc",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1131#issuecomment-6476189553",
+      "method": "Clean QA626d4845 passes6 assertions/41750game ms: ordinary movement crosses one nonblocking decoration intact; shooting preserves one permanent solid, destroys one selected500HP plant and opens a natively crossed tile. Same living supplied Priest, no Jungle clear. Cold QAf13e0baa verifies saved character/inventory/revision, SQLite/FKs, no deaths/backend ERRORs,50 absent owned PIDs and reclaimed scratch. One latency warning retained; client0282b3a/Ruffle.16.",
+      "limitations": "Prepared generated seed12351 scene, supplied stats/gear and privileged map-guided targeting, not earned travel or every foliage variant/distribution. No protection or gameplay/authority guard changes. Static-target helper failure8b7163ea remains failed. Runtime unchanged through final PR; this run has its own archived case hash, not a claim that later camp-only case edits ran here. Historical partial.",
+      "checks": ["dungeons:forbidden-jungle", "dungeons:forbidden-jungle:foliage-and-tribal-rooms"]
+    },
+    "jungle-tribes-native-31cd850": {
+      "kind": "native",
+      "revision": "31cd850de437d463a69fa1d74d7bb8fe51b87415",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1131#issuecomment-6476189553",
+      "method": "Clean QA92b94607 passes9 assertions/113200game ms: ordinary corridor approach to generated Fire/five owned tribes, wand-wounded Hunter heals, tribal movement and selected Hallucinating/Quiet are observed. A single final Fire shot detaches all tribes alive immediately before it; survivors remain through ownership expiry. Same living Priest, no Jungle clear. Cold QAf13e0baa verifies saved XP18090/revision1/inventory, SQLite/FKs, no deaths/backend ERRORs,86 absent owned PIDs and reclaimed scratch. Seven latency warnings retained; client0282b3a/Ruffle.16.",
+      "limitations": "Prepared stats/gear and starting corridor, not earned progression or original healing/ownership policy. Earlier moving-target miss, collateral kill and Fire-adjacent startup ACK failures remain failed; final scene approaches after readiness and separates final-shot effects from earlier collateral damage. No forced kill, protection, HP/RNG edit or ACK/lease relaxation. Historical partial.",
+      "checks": ["dungeons:forbidden-jungle", "dungeons:forbidden-jungle:foliage-and-tribal-rooms"]
+    },
+    "jungle-families-native-28a3dc7": {
+      "kind": "native",
+      "revision": "28a3dc78a6b5bfc5964bdb972ffcf52167a837b7",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1131#issuecomment-6476189553",
+      "method": "Clean QA667a6227/cb61908a pass7 assertions each over24400/20250game ms: generated Totem/three owned Spirits and Basilisk/two owned babies send native projectiles. Native parent defeats detach living children, which survive without stale ownership, parent respawn or continued parent summons. Same supplied living Priest/no clear. Cold QAf13e0baa verifies SQLite/FKs and exact saved state, zero deaths/backend ERRORs,36 absent owned PIDs and reclaimed scratch. One Basilisk latency warning retained; client0282b3a/Ruffle.16.",
+      "limitations": "Separate prepared generated-room fixtures with supplied stats/gear, not one continuous route or every population/attack parameter. No protection or gameplay/authority guard changes. Later camp-only case edits do not relabel these archived case bytes; their exact hashes and original revisions remain in the receipt. Original parent-death/replacement semantics remain historical partial.",
+      "checks": ["dungeons:forbidden-jungle", "dungeons:forbidden-jungle:foliage-and-tribal-rooms"]
+    },
+    "jungle-research-dd4191a": {
+      "kind": "source",
+      "revision": "dd4191abe3dbefb488689750997145acb52a09f2",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/dd4191abe3dbefb488689750997145acb52a09f2/data/objects.xml",
+      "method": "Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/856#issuecomment-6475597321 Fresh27-object selected-client field/projectile/texture comparison passes;26/27 match pinned modified7.0, with selected CoilDEF16 versus15 retained. Kithio's compiled Jungle table covers only overworld snakes. Valor compilation/registration and HealGroup/Spawn engines inspected: default full healing and birth counts do not establish our30HP healing/alive-child reconstruction. April2012 dungeon/boss captures conflict at12000/5000HP versus selected4200. Additional Steam guide is2013-published/2021-updated, not a dated2012 section. Current generator, cadence, portal20% and independent loot rolls are explicitly separated from original evidence.",
+      "limitations": "Historical partial, including component. Original topology/population/foliage probabilities, exact boss/Totem cadence/geometry, healing recipients/timing, Spirit replacement/parent-death policy, entrance probability and loot/allocation rates remain unresolved. No gameplay or authority change, imported source/assets, source-presence acceptance or historical promotion.",
+      "checks": ["dungeons:forbidden-jungle", "dungeons:forbidden-jungle:foliage-and-tribal-rooms"]
+    },
     "sprite-directions-native-f8a7158": {
       "kind":"native", "revision":"f8a7158118ed0062ca603bf06abbb1acd7fb7c5a", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1134#issuecomment-6476633309", "checks":["dungeons:sprite-world","dungeons:sprite-world:floor-and-native-variants"],
@@ -4706,8 +4829,8 @@
     "dungeons:spider-den:egg-and-cover-environment": {"status":"passed","evidence":["spider-pillars-source-7019e28","spider-pillars-regression-7019e28","spider-pillars-native-7019e28","spider-footage-regression-85886d9","spider-footage-source-85886d9","spider-footage-regression-52ef54d","spider-footage-native-52ef54d","spider-research-fd52882","spider-journey-native-57551f0","spider-cover-native-44b376d"]},
     "dungeons:snake-pit": {"status":"not-run","evidence":["snake-clear-native-9c67dd0","snake-orbit-regression-37c8211","snake-research-e16871e","snake-cover-shape-source-5eec572","snake-cover-shape-regression-5eec572","snake-cover-shape-native-5eec572","snake-cover-materials-source-2b28e06","snake-cover-materials-regression-f9ad3e0","snake-cover-materials-native-f9ad3e0","snake-minimap-native-544ff3f","snake-minimap-regression-544ff3f","highland-portals-12770cc","snake-guardians-regression-49335a6","snake-guardians-native-49335a6","snake-treasure-regression-e837b9d","snake-treasure-native-e837b9d","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","dungeon-return-regression-456ab72","dungeon-return-native-456ab72","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","period-loot-source-1f488df","period-loot-regression-1f488df","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63","snake-width-source-4514010","snake-width-regression-4514010","snake-width-native-4514010","portal-window-source-4d44727"]},
     "dungeons:snake-pit:diggable-route-and-cover": {"status":"not-run","evidence":["snake-research-e16871e","snake-cover-shape-source-5eec572","snake-cover-shape-regression-5eec572","snake-cover-shape-native-5eec572","snake-cover-materials-source-2b28e06","snake-cover-materials-regression-f9ad3e0","snake-cover-materials-native-f9ad3e0","snake-minimap-native-544ff3f","snake-minimap-regression-544ff3f","snake-cover-regression-3778af2","snake-cover-native-3778af2","snake-layout-regression-6f35dab","snake-layout-native-6f35dab","snake-boss-room-source-684eff6","snake-boss-room-regression-684eff6","snake-boss-room-native-b84d963","snake-treasure-layout-source-daf0c68","snake-treasure-layout-regression-daf0c68","snake-treasure-layout-native-daf0c68","snake-necks-source-e016a63","snake-necks-regression-e016a63","snake-necks-native-e016a63","snake-width-source-4514010","snake-width-regression-4514010","snake-width-native-4514010","snake-cover-spacing-regression-8f490a1","snake-cover-spacing-native-8f490a1"]},
-    "dungeons:forbidden-jungle": {"status":"not-run","evidence":["portal-window-source-4d44727"]},
-    "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
+    "dungeons:forbidden-jungle": {"status":"passed","evidence":["portal-window-source-4d44727","jungle-research-dd4191a","jungle-foliage-native-24f6420","jungle-tribes-native-31cd850","jungle-families-native-28a3dc7","jungle-journey-native-c945d8a","jungle-coil-entry-native-19939a5"]},
+    "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"passed","evidence":["jungle-research-dd4191a","jungle-foliage-native-24f6420","jungle-tribes-native-31cd850","jungle-families-native-28a3dc7","jungle-journey-native-c945d8a"]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-directions-native-f8a7158","sprite-child-entry-native-587dd26","limon-native-2267984","sprite-directions-native-75a3a86","sprite-world-research-2267984","sprite-population-source-d14fb34","sprite-population-regression-d14fb34","sprite-population-native-d14fb34","sprite-stars-source-5ac2a41","sprite-stars-native-5ac2a41","god-portals-regression-411c536","sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550","sprite-defense-source-c6b4925","sprite-defense-regression-c6b4925","period-loot-source-1f488df","period-loot-regression-1f488df","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","limon-box-regression-7d5d1c8","limon-box-native-7d5d1c8","portal-window-regression-4d44727","sprite-tree-source-2cb231a","sprite-tree-regression-9ad296c","sprite-tree-native-9ad296c"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-directions-native-f8a7158","sprite-directions-native-75a3a86","sprite-world-research-2267984","sprite-population-source-d14fb34","sprite-population-regression-d14fb34","sprite-population-native-d14fb34","sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","partial-differences-source-4992445","sprite-tree-source-2cb231a","sprite-tree-regression-9ad296c","sprite-tree-native-9ad296c"]},
     "dungeons:undead-lair": {"status":"not-run","evidence":["god-portals-regression-411c536","portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db","shield-stun-regression-06b5675","shield-stun-native-545f79e","portal-window-source-4d44727","septavius-exit-source-3a80aec","septavius-exit-native-3a80aec","septavius-exit-regression-3a80aec","udl-slime-research-47dba50","udl-lifecycle-regression-13db35f","udl-slimes-native-4568417"]},
@@ -4757,9 +4880,9 @@
     "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-acid-native-6115e97"]},
     "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
     "dungeons:beachzone": {"status":"not-run","evidence":["beachzone-source-b587298","portal-window-source-4d44727"]},
-    "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
-    "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
-    "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"not-run","evidence":[]},
+    "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445","castle-source-48b16697","castle-armor-quiet-native-0e590235","castle-authored-armor-native-c0147979","castle-guardian-left-partial-84080b7","castle-guardian-right-partial-59ce2ab","castle-traversal-partial-a02271b"]},
+    "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"failed","evidence":["castle-source-48b16697","castle-armor-quiet-native-0e590235","castle-authored-armor-native-c0147979","castle-traversal-partial-a02271b"]},
+    "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"failed","evidence":["castle-source-48b16697","castle-guardian-left-partial-84080b7","castle-guardian-right-partial-59ce2ab"]},
     "dungeons:oryx-s-chamber": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-chamber:incantation-unlock-transaction": {"status":"not-run","evidence":[]},

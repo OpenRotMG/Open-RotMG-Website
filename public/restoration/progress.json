@@ -4467,7 +4467,7 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
         ],
         "sources": [
           {
@@ -4477,6 +4477,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
+            "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
           }
         ],
         "checks": [
@@ -4486,10 +4490,17 @@
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
             "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
+                "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -5264,7 +5275,9 @@
         "expected": "Mandatory Castle traversal, anti-rush bridges/wall/quiet towers, paired guardians and Chamber; teleport disabled, respawning armours grant no XP/fame.",
         "differences": [],
         "unknowns": [
-          "Target geometry, respawn reward exclusion mapping, guardian activation/choreography and sword probability."
+          "Exact 123.5.1 bridge geometry and spawn cohorts remain unverified; the Project-B candidate has one spawn region.",
+          "Selected XML gives authored and respawned Haunted Armor zero XP. Build 123.4.4 specifically names respawns but does not establish a separate XP-bearing original identity.",
+          "Ten-tile activation, home orbits, deterministic phases, guaranteed survivor sword and its timings remain reconstruction choices, not accepted historical probabilities or choreography. See #866."
         ],
         "sources": [
           {
@@ -5283,10 +5296,10 @@
             "expected": "Long bridges, the three-deep wall, Quiet towers and non-farmable respawning armor must work on the full route.",
             "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Build 122 documents longer bridges, three-deep wall and Quiet towers, not exact dimensions. Initial-versus-respawn reward mapping remains qualified by selected zero-XP XML."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build122.0.1","label":"February 2012 Castle anti-rush announcement"},{"url":"https://wikiwiki.jp/rmd/version/build123.4.4","label":"August 2012 respawn XP/fame exclusion"}],
             "group": "layout"
           },
           {
@@ -5295,10 +5308,10 @@
             "expected": "Guardian survival, the bound sword and shared Chamber admission must work in either defeat order.",
             "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Later comparators have startup/coordinated movement but empty survivor states; the mixed-era guide describes a stationary sword. Exact target activation, choreography, sword probability and loot rates remain unresolved."],
+            "sources": [{"url":"https://anticosmic.blogspot.com/2012/07/oryx-castle-drops.html","label":"Build 123.3.2 drop diary; author warns sample is inconclusive"},{"url":"https://www.realmeye.com/wiki/stone-guardians","label":"September 2021 guardian guide; not target-era choreography proof"}],
             "group": "boss"
           }
         ]
