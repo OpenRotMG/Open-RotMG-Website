@@ -698,7 +698,7 @@
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
         "differences": [],
         "unknowns": [
-          "Fresh final-head normal-client combat, death, archived Legends reopening and a complete native backup-restore journey are deferred.",
+          "Complete authenticated native backup recovery and an earned combat-to-death journey remain unverified. Prepared death/Legends and credential-free restored-archive receipts are bounded, not whole-feature acceptance.",
           "Long-history and dungeon-condition cases have regression-fixture coverage, not complete historical or native acceptance. Unknown legacy history is preserved rather than reconstructed as zero."
         ],
         "sources": [
@@ -713,6 +713,10 @@
           {
             "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rotmg-fame-calculator/RotMG_Fame_Calculator.ods",
             "label": "May 2012 community Fame calculator (ODS reference)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/FameStats.cs#L227-L485",
+            "label": "Compiled Kithio bonus descriptions; arithmetic conflicts with period compounding evidence"
           }
         ],
         "checks": [
@@ -722,10 +726,10 @@
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
             "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Native multi-hit deduplication, god/non-god report partition, assists, transformations, repeated tiles and complete dungeon-exit history remain unverified; community counter code is not authenticated target-server behavior."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/FameCounter.cs#L22-L66","label":"Compiled Kithio counter semantics: first projectile hit, final blows, quests and tiles"}],
             "group": "behavior"
           },
           {
@@ -734,10 +738,10 @@
             "expected": "Only worn equipment contributes, with correct rounding, an immutable archived award and once-only payout.",
             "acceptance": "Compare combined versus per-item rounding, carried items, last-moment swaps, retry/save failure and resurrection. When other bonuses are added, verify the running subtotal and ordering rather than assuming base-only interaction.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["The May calculator and June wiki support aggregate gear rounding against the running subtotal, unlike Kithio's base-only per-item arithmetic. Exact 123.5.1 deployment and the complete native retry/resurrection matrix remain unverified."],
+            "sources": [{"url":"https://storage.googleapis.com/google-code-archive/v2/code.google.com/rotmg-fame-calculator/downloads-page-1.json","label":"Calculator release metadata: May 16, 2012 and matching original SHA1"},{"url":"https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rotmg-fame-calculator/RotMG_Fame_Calculator.ods","label":"Well Equipped row 24 and subsequent First Born row 25"}],
             "group": "behavior"
           }
         ]
@@ -1486,14 +1490,21 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
-        "differences": [],
+        "differences": [
+          "Trusting valid native client shot placement is intentional policy, not missing restoration."
+        ],
         "unknowns": [
-          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration."
+          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration.",
+          "Original server shot-position validation and lag tolerances remain unauthenticated."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/networking/handlers/PlayerShootPacketHandler.cs",
+            "label": "Compiled community comparison: Kithio uses reported shot positions, not proof of original server policy"
           }
         ],
         "checks": [
@@ -1989,13 +2000,22 @@
         "differences": [
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "PR517 added public chest loot at the Pyre center with a 5-7 success ceiling. Later overrides in PR535 use independent tier trials and two guaranteed potion rolls instead of that ceiling. Original contents, order and RNG remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/517 https://github.com/OpenRotMG/Open-RotMG-Server/pull/535",
-        "Painted Pyre cells retain native raw configuration, matching the compiled Kithio clone. This does not configure the empty cell or separate chest, or authenticate original map data or RNG: https://github.com/OpenRotMG/Open-RotMG-Server/pull/623"
+          "Painted Pyre cells retain native raw configuration, matching the compiled Kithio clone. This does not configure the empty cell or separate chest, or authenticate original map data or RNG: https://github.com/OpenRotMG/Open-RotMG-Server/pull/623",
+          "Current protection: owned Lord/Egg/Reborn vs Kithio Lord-only; Trapped 0x678=Oasis Giant. Reborn incantation: private 0.01% per contributor with >420 cumulative damage vs Kithio one shared 0.2% ItemLoot. Current cumulative damage/final-only XP vs Kithio Enemy.Death calling DamageCounter.Death before TransformOnDeath creates fresh-counter actor.",
+          "Japanese wiki lists five bolts vs Kithio four; page-self timestamp 2013-03-05 neither dates that claim nor resolves 123.5.1. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/799#issuecomment-6460050488"
         ],
         "unknowns": [
-          "Target egg shielding: older comparator1500ms versus later2000ms.",
-          "Target Birdman protection dependency, summon/attack schedules and reward boundaries."
+          "Unresolved: egg shield 1500 vs 2000ms, protection/summon/attack cadence and reward policy. No whole-feature historical/native acceptance claimed."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Phoenix.cs",
+            "label": "Compiled Kithio reconstruction reference; not authenticated original server"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Phoenix%20Lord",
+            "label": "Japanese wiki; 2013 page-self timestamp does not date individual claims"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Phoenix.cs#L17-L123",
             "label": "Community server comparison: rotmg_svr (2013)"
