@@ -804,7 +804,7 @@
         ],
         "unknowns": [
           "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
-          "Native unranked own-row/death-screen context and dyed appearance remain separate from XML/source checks; prepared deaths do not prove earned progression."
+          "Bounded native checks now show an ordinarily dyed death in Legends/details and a separate new native death reaching its unranked own row on all three tabs. The leaderboard is filled with explicitly prepared deaths; this is not earned fixture progression, a combined dyed-own-row test or whole-feature acceptance (#781, PR1073)."
         ],
         "sources": [
           {
@@ -830,6 +830,14 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/12/the-legendary-archer.html",
             "label": "December 16, 2012 player account of weekly Legends placement after death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/death/control/HandleDeathCommand.as",
+            "label": "Modified7 actual-death context comparator; not original backend policy"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build118.7",
+            "label": "Build118.7 testing quote labelled September 23, 2011; testing heading conflicts (August 18); top10 glow is not list capacity"
           }
         ]
       }
@@ -2501,12 +2509,27 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowPlains Undead Hobbit Mage is level 4 with 270 HP and 5 DEF, three 13-damage ring forms and a 20-damage Salmon Missile. The family includes Undead Archers and Rogues.",
-        "differences": [],
+        "differences": [
+          "Current two/two initial followers and living-slot replenishment differ from compiled primary's two/one initial followers and lifetime birth limits4/3. Undead replacement identities match the primary and period description; Trapped's living replacement IDs do not.",
+          "Simple camp-bound follower movement omits primary/build118 Archer's400/600/400ms Mage-protect, StayBack and nearest-Archer cycle, plus Protect/Follow hysteresis. Period minimum height31 differs from primary StayAbove20; current home leash is reconstruction."
+        ],
         "unknowns": [
-          "Authoritative target replenishment identities, ring/fourth-shot interleaving, movement, minion limits and reward probabilities.",
-          "Whether2013 comparator living replacement IDs are a bug; target replacement quantities, AI and drops."
+          "Build118 January2012 text and compiled primary support twelve-tile ring activation, concurrent radius10 aimed shots and undead Archer4/12s, Rogue3/6s reproduction. Exact123.5.1 deployment, idle/reentry/cloak timing, initial counts, lifetime-versus-living caps and orphan retargeting remain unverified.",
+          "Period public Mage coefficients weapon30%, armor30%, ring12%, ability39%, MP3%, Archer MP3% and Rogue HP4% match current tables after wiki armor+1 conversion. Original tier-candidate RNG, eligibility and bag ownership remain unresolved. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/811#issuecomment-6460686707"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L86-L155",
+            "label": "Compiled primary; Spawn lifetime counters, Shoot concurrency and Protect/Follow inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120122074638id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-hobbit-mage",
+            "label": "January22,2012 capture, build118 text: activation, aimed/ring attacks, undead reproduction and public drops"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat",
+            "label": "Modified7.0 comparator: all three full definitions normalize identically to selected123.5.1"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -2654,15 +2677,29 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "ShoreSand Scorpion Queen is level 1 with 100 HP, no DEF and no projectile of its own. Ordinary Poison Scorpions fire 7-damage Green Magic; the name does not establish a Poisoned effect.",
-        "differences": [],
+        "differences": [
+          "Bounded reconstruction starts five defenders on a two-tile formation, refills ten owned slots on fixed 10s attempts, and omits Queen self-reproduction/orphan adoption. Compiled Kithio instead starts two offset defenders, adds up to five lifetime Spawn births, separately reproduces scorpions below ten within radius ten, and Queens below two within radius forty. This comparator mismatch is not a proven target-era bug."
+        ],
         "unknowns": [
-          "Target initial count/radius, Queen reproduction, deployment density and reward rates.",
-          "Target counts, ordinary no-drop policy, movement and replenishment timing."
+          "Original initial counts/placement, density versus ownership, refill clocks, Queen reproduction, orphan adoption/protection hysteresis/home leash and deployment density remain #815; bounded native coverage is not whole-feature acceptance.",
+          "Queen 3% Health/2% Magic candidates and ordinary no-drop match community tables; target reward rates, contributor eligibility/XP and native Queen potion acquisition remain unverified. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/815#issuecomment-6460829230"
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl1-scorpions.jpg",
-            "label": "2012 player screenshot"
+            "label": "June 1, 2012 article screenshot; visible build123.0.0, not a spawn census"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/06/01/rotmg-lvl-20-in-20-minutes/",
+            "label": "Dated parent article; early shore combat, not numeric reproduction/drop proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20130525090345id_/https://forums.wildshadow.com/wiki/realm-mad-god/scorpion-queen",
+            "label": "May 2013 capture labels claims updated118; target continuity unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L48-L65",
+            "label": "Compiled community comparator; inspect Spawn/Reproduce/Protect/loot semantics"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -2744,17 +2781,26 @@
         "differences": [
           "PR451 matches the community sand-star stencil; outer flooring, placement and original fidelity remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/451",
           "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "PR417 restores the community comparator's encounter-wide Vitality/Wisdom floor and inclusive 1% boundary. Prepared final-hit, drop and pickup evidence is recorded, not an earned full-fight acceptance.",
+          "PR417 restores the community encounter-wide Vitality/Wisdom floor. Its inclusive 550-damage gate is retained reconstruction: the pinned comparator compares Threshold(0.01) against raw integer damage, not an HP fraction. Prepared final-hit evidence is not full-fight acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
+          "The May 24, 2012 guide labels its content build122 and describes 60k HP/five Reapers, unlike selected 55k HP/four-Reaper reconstruction. Current guaranteed Tomb portal and terrain-1 protected placement also differ from the later comparator's 0.33 portal roll and Mountains-through-MidForest placement. These are not authenticated target-era settings.",
           "PR493 matches the community outer-floor radius origin (40.5 in tile-index space), not boss-centering. Star/boss positions and local draw counts stay unchanged; placement, RNG parity and original 123.5.1 flooring remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/493"
         ],
         "unknowns": [
-          "Exact period setting/distribution and loot probabilities.",
+          "Exact 123.5.1 setting/distribution, phase timing, Reaper count, reward eligibility, portal chance and loot probabilities. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
           "Native earned-Sphinx defeat, portal entry and subsequent dungeon journey remain unverified."
         ],
         "sources": [
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Sphinx.cs",
             "label": "Community Sphinx potion-floor comparator, not official 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/DamageCounter.cs#L30-L54",
+            "label": "Raw integer damage counters qualify Threshold(0.01); not a normalized 1% gate"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234323id_/http://forums.wildshadow.com/wiki/realm-mad-god/grand-sphinx",
+            "label": "Build122-labelled period guide, not target-era numbers"
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
