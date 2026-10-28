@@ -5801,7 +5801,7 @@
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
-          "When private bags become public, who can see them, and what survives reconnecting."
+          "Original private-to-public conversion, lifetime and reconnect persistence remain unverified. Current reconstruction keeps private bags account-owned until their nominal 60-second removal deadline; pending inventory reservations defer removal. Same-world reentry does not reset that deadline. Collected items persist, while uncollected world bags are not saved. Native reconnect remains untested."
         ],
         "sources": [
           {
@@ -5818,7 +5818,7 @@
           },
           {
             "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
-            "label": "2012 player account: purple god sacks can only be looted by their owner"
+            "label": "February 29, 2012 post33073282: purple god sacks can only be looted by their owner; no timer or numeric threshold"
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
@@ -5836,9 +5836,9 @@
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
             "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions. Successful equipment must survive simultaneous private potion rolls for solo and grouped contributors.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
+            "unknowns": ["Selected/modified7.0 bag slots, put flags and textures agree, and a February29,2012 account supports owner-only purple god sacks. Exact original appearance allocation, public/private generation, timing and winner selection remain unverified. Existing gameplay acceptance is retained, not inferred from this research."],
             "sources": [],
             "group": "behavior"
           }
