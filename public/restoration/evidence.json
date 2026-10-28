@@ -1,6 +1,56 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "wine-research-09889dd": {
+      "kind": "source",
+      "revision": "09889dd4baaccf9b5d4d1e05d3926f5f76a6e107",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/09889dd4baaccf9b5d4d1e05d3926f5f76a6e107/src/endgame.rs",
+      "method": "Reconciles PR581 at15501ec8/09889dd4; all19 modified7.0 Wine Cellar objects normalize to selected XML. Checks Kithio compiled coverage, Trapped phase/Cooldown semantics, later Spawn/loot engines, February2012 announcement, November2012 empty-barrel answer and dated2013/2015/2016 pages. Pins current phase/summon/reward/map/lifetime policies and conflicts.",
+      "limitations": "Source/historical evidence only. No compiled Kithio Oryx2 coverage, original AI authentication, exact target timing/rates/placement or new gameplay pass. Later page labels and copied forks are not independent2012 witnesses.",
+      "checks": [
+        "dungeons:wine-cellar",
+        "dungeons:wine-cellar:barrel-destruction",
+        "dungeons:wine-cellar:bile-trail-and-wine-threats",
+        "dungeons:wine-cellar:oryx-two-reward-return"
+      ]
+    },
+    "wine-shared-barrels-native-15501ec": {
+      "kind": "native",
+      "revision": "15501ec8a303c835af8f8cfee878d43a8a633993",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1145#issuecomment-6478271770",
+      "method": "QA4668b8f1 passes6 assertions/11450game ms: two native clients share natural3000HP barrel, blocked movement, ordinary sword removal, opened collision for both, no loot/XP/Oryx/dungeon/qualified-quest credit. Cold QA1dd58bfd confirms two saved living identities, unchanged XP18050/revision1/credits, clean floor HP910/conditions0, SQLite/FKs, zero deaths/backend ERRORs,15 absent owned PIDs and reclaimed scratch.",
+      "limitations": "Prepared capped Knights/gear/corner position; no protection or forced removal. Source dirty only for boss-case work; game files unchanged. One barrel/cell, not original density/proximity/content or complete Cellar. Retained case9de962d9/result32f34d7e hashes in receipt.",
+      "checks": [
+        "dungeons:wine-cellar",
+        "dungeons:wine-cellar:barrel-destruction"
+      ]
+    },
+    "wine-threats-native-09889dd": {
+      "kind": "native",
+      "revision": "09889dd4baaccf9b5d4d1e05d3926f5f76a6e107",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1145#issuecomment-6478271770",
+      "method": "Clean QA51819e5d passes5 assertions/14750game ms: natural Henchman summons Bile/Goo/Vintner, native movement crosses real Goo and receives Slowed/Sick, separate Wine Bomb fire causes Drunk, first Goo expires while new trail remains, same living character/no XP or clear. Cold QA1dd58bfd verifies SQLite/FKs, persisted inventory/identity, zero deaths/backend ERRORs,12 absent owned PIDs and reclaimed scratch.",
+      "limitations": "Prepared capped unarmed Knight with explicit Invulnerable protection, so no HP-damage/survival claim. Native keys account for actual Confused controls. No dedicated decorative spill objects in current map; no placement, original cadence/cap or hit-immunity acceptance. Earlier ACK/steering failures remain failed. Case17f5c634/resulteab1b788 pinned in receipt.",
+      "checks": [
+        "dungeons:wine-cellar",
+        "dungeons:wine-cellar:bile-trail-and-wine-threats"
+      ]
+    },
+    "wine-oryx2-native-09889dd": {
+      "kind": "native",
+      "revision": "09889dd4baaccf9b5d4d1e05d3926f5f76a6e107",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1145#issuecomment-6478271770",
+      "method": "Clean QA48ec12c1 passes9 assertions/370650game ms:75000HP Oryx2, natural Henchmen/Bile/Vintner, low-HP shield, observed rage chase, selected projectile speeds, ordinary dagger defeat, actual Vitality pickup once/no duplicate and same living character/account1 returns via completion exit to Nexus. Cold QA8c9e16c6 confirms XP19047/revision2/Vitality/one Oryx kill and qualified quest, SQLite/FKs, zero deaths/backend ERRORs,220 absent owned PIDs and reclaimed scratch.",
+      "limitations": "Prepared capped Rogue/gear/boss position, timed Invincible windows and ordinary cloak casts covering protection expiry. Mechanics only, not unprotected survival, earned progression, entry journey or historical odds/threshold acceptance. Parent/boss full gameplay remains not-run; prior deaths/capture failures retained. Case7d1b65e7/result50f2adf7 pinned in receipt.",
+      "checks": [
+        "dungeons:wine-cellar",
+        "dungeons:wine-cellar:oryx-two-reward-return"
+      ]
+    },
     "jungle-journey-native-c945d8a": {
       "kind": "native",
       "revision": "c945d8a6c55525f7a7175b5ee78d2c55fe3491c9",
@@ -4796,10 +4846,40 @@
     "dungeons:oryx-s-chamber": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-chamber:incantation-unlock-transaction": {"status":"not-run","evidence":[]},
-    "dungeons:wine-cellar": {"status":"not-run","evidence":["wine-barrels-native-89f5247","wine-bile-native-7a33b60"]},
-    "dungeons:wine-cellar:barrel-destruction": {"status":"not-run","evidence":["wine-barrels-native-89f5247"]},
-    "dungeons:wine-cellar:bile-trail-and-wine-threats": {"status":"not-run","evidence":["wine-bile-native-7a33b60"]},
-    "dungeons:wine-cellar:oryx-two-reward-return": {"status":"not-run","evidence":[]},
+    "dungeons:wine-cellar": {
+      "status": "not-run",
+      "evidence": [
+        "wine-barrels-native-89f5247",
+        "wine-bile-native-7a33b60",
+        "wine-research-09889dd",
+        "wine-shared-barrels-native-15501ec",
+        "wine-threats-native-09889dd",
+        "wine-oryx2-native-09889dd"
+      ]
+    },
+    "dungeons:wine-cellar:barrel-destruction": {
+      "status": "passed",
+      "evidence": [
+        "wine-barrels-native-89f5247",
+        "wine-research-09889dd",
+        "wine-shared-barrels-native-15501ec"
+      ]
+    },
+    "dungeons:wine-cellar:bile-trail-and-wine-threats": {
+      "status": "passed",
+      "evidence": [
+        "wine-bile-native-7a33b60",
+        "wine-research-09889dd",
+        "wine-threats-native-09889dd"
+      ]
+    },
+    "dungeons:wine-cellar:oryx-two-reward-return": {
+      "status": "not-run",
+      "evidence": [
+        "wine-research-09889dd",
+        "wine-oryx2-native-09889dd"
+      ]
+    },
     "gear:swords": {"status":"not-run","evidence":[]},
     "gear:daggers": {"status":"not-run","evidence":[]},
     "gear:bows": {"status":"not-run","evidence":["reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc"]},
