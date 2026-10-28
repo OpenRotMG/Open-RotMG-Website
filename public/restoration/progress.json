@@ -7122,16 +7122,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client Accept/Reject panel lasts20seconds.",
-        "differences": [],
+        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client panel lasts20seconds; Reject/timeout close it locally without a rejection packet.",
+        "differences": [
+          "Current same-world/known/20-tile guard,60-second server lifetime and acceptance-time inviter-authority recheck are reconstruction policies, not recovered original numbers."
+        ],
         "unknowns": [
-          "Original invitation expiry and distance limits; the client’s 20-second panel does not establish server expiry.",
-          "Rejection, replacement and inviter-departure behavior."
+          "Original server invitation expiry and exact distance; the February17,2012 guide says nearby but supplies no number.",
+          "Original server replacement and inviter-departure semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 capture: nearby invites, Accept, Chronicle removal and renunciation; stale four-rank paragraph"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/panels/GuildInvitePanel.as",
+            "label": "Modified7.0 comparator:20-second panel and local Reject; not original server expiry"
           }
         ]
       }
