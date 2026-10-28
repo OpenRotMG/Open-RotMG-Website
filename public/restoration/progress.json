@@ -3110,10 +3110,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f; explicitly allocate Lizard God population relation.",
-        "differences": [],
+        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f with Lizard God0x650; selected Mage/Veteran MultiHit and Health-Potion-only elf rewards.",
+        "differences": [
+          "Rust retains nested King ownership, 2/2/1/1/1 initial elves, living-slot ten-second refill, simplified chase/aim and a home leash. Compiled Kithio instead gives Lizard direct 4/3/2/2/1 lifetime birth caps with floor-half initial counts and no King reproduction; Trapped has a different nested model. Neither comparator authenticates target-era behavior."
+        ],
         "unknowns": [
-          "Original group sizes and timing, orphan behavior, MultiHit attacks and drops."
+          "Exact 123.5.1 initial quantities, birth/reentry clocks, orphan/adoption policy, predictive/cloaked attacks, height constraints and reward RNG/eligibility; issue828 tracks the remainder. November2011/May2012 potion evidence predates the target."
         ],
         "sources": [
           {
@@ -3121,8 +3123,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L164-L256",
+            "label": "Compiled primary comparator: Night Elves and Lizard God"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Older comparator: nested King ownership differs from Kithio"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127224752id_/http://forums.wildshadow.com/wiki/realm-mad-god/night-elf-king",
+            "label": "November 2011 King guide: Health Potion 3%, no reproduction; other stats differ"
           }
         ]
       }
