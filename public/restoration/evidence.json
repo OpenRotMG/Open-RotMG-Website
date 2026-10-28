@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "wargs-orphans-native-6b164fc": {
+      "kind":"native", "revision":"6b164fce6a5ffa4ffa167736103aa14e3aa1a5e9", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1106#issuecomment-6473375444", "checks":["realm:wargs"],
+      "method":"Clean QAcf3f7560 passes8 checks/41300game ms with client39acbfbf/Ruffle.16: natural World1 classic-world-03-reconstruction camp,25.17tile initial separation from other enemies, native Werewolf defeat leaving one Tawny/two Demons. Same-ID orphans of both kinds persist/move/fire selected projectiles over18.3s with no new children/repeated XP. Native orphan kills earn3/4XP;16.95s later both killed IDs stay absent, one Demon survives and XP18113 is unchanged. Cold QAfd75428d proves saved living character2, XP18050to18113, same items/revision1, zero deaths/backend ERRORs, SQLite/FKs, all66 tracked PIDs absent, empty cleanup and reclaimed cgroup. Case8d6525bc/ELF3a93caa8; image is a byte-verified800x600 native crop.",
+      "limitations":"Prepared level20 Wizard/max HP-MP-attack, T12 Cosmic staff/T0 spell, scout/camp-side entry and renewable Invulnerable are not earned discovery, ordinary survival, native multiplayer, cross-family orphan retargeting, pickup/reconnect or original probabilities. Four kills include a collateral Demon; scene63XP is not leader-only. Queue timeout278c1fc0, missing-activity72701857, ACK4d81d80e, scenery-refusalc102b112, missed100ms movement08ef01f6 and all-children-collateralc47cd342 remain failed. No revival, uncertain effect replay, helper/gameplay/persistence/ACK/lease/guard change or post-pass native rerun. Whole gameplay not-run/history partial; issue840/807 retain exact remainders."
+    },
+    "wargs-demon-native-e8873ad": {
+      "kind":"native", "revision":"e8873adc4aff114037f95b4e5138a37290759118", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1106#issuecomment-6473375444", "checks":["realm:wargs"],
+      "method":"Clean QA4d81d80e observes two successful checks before failure: native Demon defeat/XP with a living owner and Demon replenishment to3 within its owned living cap. Reuses PR1067's separate initial/attack/Tawny receipt; no claim that these two checks accept owner death or orphan behavior.",
+      "limitations":"Overall take FAILED later on SHOOT ACK timeout, before owner death/orphans; not a passing campaign. Prepared level5 Wizard/T0 gear/scout placement/protection and collateral kills, so scene XP is not target-only, earned progression or historical reward fidelity. Failure retained; ACK/lease/receipt and death guards unchanged. Final separate orphan take uses its own clean revision and prepared context."
+    },
     "wargs-research-e8873ad": {
       "kind":"source", "revision":"e8873adc4aff114037f95b4e5138a37290759118", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/e8873adc4aff114037f95b4e5138a37290759118/src/world/fauna.rs#L328-L371", "checks":["realm:wargs"],
@@ -4215,7 +4227,7 @@
     "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:wargs": {"status":"not-run","evidence":["werewolf-native-7fb6e70","wargs-research-e8873ad"]},
+    "realm:wargs": {"status":"not-run","evidence":["werewolf-native-7fb6e70","wargs-research-e8873ad","wargs-demon-native-e8873ad","wargs-orphans-native-6b164fc"]},
     "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:cubes": {"status":"not-run","evidence":["shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff"]},
     "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
