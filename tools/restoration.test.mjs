@@ -310,13 +310,15 @@ test('Stars hiscores do not accept original Legends or all class-star rules',()=
   assert.equal(evidence.sources['star-hiscores-browser-f7f6c60'].revision,'f7f6c605aea2f751c3e7df22146a5e1d34f1328e');
 });
 
-test('Native Dexterity reconciliation does not accept whole combat or inventory',()=>{
+test('Inventory native verification does not imply historical acceptance',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   const ids=['realm:shoot-and-take-damage','gear:inventory-and-equipment'];
-  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
+  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,id===ids[0]?'not-run':'passed');assert.equal(accepted(row.feature,evidence),false);
     for(const ref of ['native-dex-regression-c531740','native-dex-native-e736c05']){assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);}}
   assert.equal(evidence.sources['native-dex-regression-c531740'].revision,'c531740f75ffc977c55dfaa31bca5b509fc8469b');
   assert.equal(evidence.sources['native-dex-native-e736c05'].revision,'e736c0573a644947566dcd206abac5f23fcd5fa6');
+  for(const id of [ids[1],'gear:ability-activation-contract']){assert.equal(evidence.results[id].status,'passed');assert.equal(records(data).find(r=>r.id===id).rule.historical,'partial');}
+  for(const [id,ref] of [[ids[1],'inventory-native-c5f52f74'],['gear:ability-activation-contract','ability-contract-native-7a756fca'],['gear:ability-activation-contract','ability-refusals-native-d6caa5d1']])assert(evidence.results[id].evidence.includes(ref));
 });
 
 test('Ability cooldown evidence does not accept complete classes',()=>{
