@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "flayers-native-b445dd7": {
+      "kind":"native", "revision":"b445dd74c0ec1041dfba522650b4cb079cca3f76", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1115#issuecomment-6473356890", "checks":["realm:flayers"],
+      "method":"Clean QA8b1ce960 passes17 checks/51000game ms with client39acbfbf/Ruffle.16 in natural classic-world-02-reconstruction, live Realm-3: selected initial actors/HP, all three kinds activate/move and send four projectile forms, Quiet drains mana, current4/3 fills/caps, native Veteran defeat/XP and replacement identity, God defeat with six survivors/no births or duplicate XP. Quiet is absent and mana28 at end. Public bag393390 retains Golden Chainmail/Stingray Poison; neither picked up, no Snake Pit observed. Cold QA48d6e1db verifies saved living Priest2/revision1/XP18246, unchanged inventory,16shots/16hits/3kills, SQLite/FKs, zero deaths/backend ERROR,58 PIDs absent, empty cleanup and reclaimed cgroup. Casef3bbc3c0/ELF06698557. Published image is cropped from this passing take.",
+      "limitations":"Supplied level20/T8 wand/stats, scout, adjacent placement and renewable Invulnerable are not earned progression or unprotected survival; neighboring Medusas are present. No multiplayer reward eligibility, pickup/reconnect, rolled dungeon journey, God self-reproduction, exact Quiet boundary or original RNG acceptance. Eight failed/cancelled takes remain excluded in the linked receipt. Cancelled5259 has fetch/guardian cleanup errors and no command receipt; cold8e99a21c verifies232 PIDs absent, zero deaths, healthy SQLite/FKs and reclaimed cgroup. Passing take retains three warnings. No gameplay/authority/ownership/death/persistence/ACK/lease/hosting or shared framework change. Whole gameplay stays not-run/history partial; remainders issue835."
+    },
+    "flayers-research-cedf830": {
+      "kind":"source", "revision":"cedf83050ad16560fe72941a15c4e6a97649e056", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/cedf83050ad16560fe72941a15c4e6a97649e056/src/world/population.rs", "checks":["realm:flayers"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/835#issuecomment-6472065913 . All three selected objects normalize identically to pinned modified7.0 HighCXML. Inspected compiled/reflection-registered Kithio Highland and Shoot/Cooldown, Spawn lifetime counters, Reproduce density/clocks and compiled LootDefs/Loots candidate-expanded probabilities; compared Trapped's queued attacks/random initial population. Two follow-up resources were actual spawn engines and fresh May19,2012 Wild Shadow God/follower captures. Reconciles PR235/303 Snake Pit guards and existing period-loot receipts. Private QA2509880e retains exact source hashes and resolved captures.",
+      "limitations":"Sources disagree on selected-era AI/population and allocation. Period guide stats/projectiles are obsolete, while Japanese2021 page mixes later eggs. Modified7.0 server tree lacks Highland and inspected Midland lacks Flayers; client equality is not AI proof. Current live-child caps, absent self-reproduction, alternating God streams, follower prediction and10% ability rate remain explicit differences in issue835. No comparator code/assets imported, original RNG or historical acceptance claimed."
+    },
     "shield-orcs-native-f5ba42b": {
       "kind":"native", "revision":"f5ba42b76cfb2e4e075e94079d23f9ed630541b9", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1103#issuecomment-6471611074", "checks":["realm:shield-orcs"],
@@ -4193,7 +4205,7 @@
     "realm:ogres": {"status":"not-run","evidence":["ogres-native-partial-6bcdbf3","ogres-source-af065a1","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:nomads": {"status":"not-run","evidence":[]},
     "realm:pythons": {"status":"not-run","evidence":[]},
-    "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","flayers-research-cedf830","flayers-native-b445dd7"]},
     "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},
     "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
