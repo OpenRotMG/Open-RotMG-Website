@@ -12,7 +12,8 @@ test('cloth roster evidence does not certify seasonal sales or full rendering',(
   const data=catalogue(),evidence=ledger(),id='style:clothing-and-accessory-cloths',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
   assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
-  assert(evidence.results[id].evidence.includes('cloths-research-186f2b4'));
+  for(const ref of ['cloths-research-186f2b4','cloths-native-6e8b4e5'])assert(evidence.results[id].evidence.includes(ref));
+  assert.equal(evidence.sources['cloths-native-6e8b4e5'].revision,'6e8b4e5d4243de401b16ecc52a4b9b63deffe20e');
   assert.match(feature.audit.expected,/71 pattern pairs \(142 items\)/);
   assert.match(feature.audit.unknowns.join(' '),/seasonal.*120G.*all-class/);
 });
