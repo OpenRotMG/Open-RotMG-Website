@@ -1,6 +1,17 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "wine-entry-route-native-05ed9e0": {
+      "kind": "native",
+      "revision": "05ed9e01ee23a4e6d5bf6fbc205e58b3b5739e3f",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1145#issuecomment-6480219628",
+      "method": "Clean QA 9efca43f passes 4 assertions: ordinary dagger defeat of natural Oryx 1 earns the locked Cellar; one supplied Incantation commits consumption/usable portal; normal same-character admission; native keys traverse the populated map from upper-right arrival 134.5,6.5 to the Oryx 2 room at 119.3477,65.1826. Cold QA eef96075 verifies saved living identity/account 1, XP 19,025, revision 2, consumed Incantation, one Oryx 1 kill/qualified quest, SQLite/FKs, zero deaths/backend ERRORs, 209 absent owned processes and reclaimed scratch.",
+      "limitations": "Prepared capped Rogue/gear/Chamber position/Incantation, timed Invincible and ordinary cloaks, privileged fixed-map centerline steering. One upper-right route, not both arrivals/all rooms, earned progression or unprotected survival. Stops at natural Oryx 2; does not defeat it or return in this scene. Separate from boss/reward/return case; parent full gameplay remains not-run. Chamber defeat clock 246,600 ms; Cellar arrival 8,750 and completion 87,050 ms. Raw runner activeGameMs crosses world clocks and is not total duration. Case f0baf344/result b1dee3c5 and failed receipt-budget/portal-selection predecessors are retained; guards unchanged.",
+      "checks": [
+        "dungeons:wine-cellar"
+      ]
+    },
     "wine-oryx2-native-781921e": {
       "kind": "native",
       "revision": "781921e98a53eef60c91e66cb95f984be44b1736",
@@ -5116,7 +5127,8 @@
         "wine-shared-barrels-native-15501ec",
         "wine-threats-native-09889dd",
         "wine-oryx2-native-09889dd",
-        "wine-oryx2-native-781921e"
+        "wine-oryx2-native-781921e",
+        "wine-entry-route-native-05ed9e0"
       ]
     },
     "dungeons:wine-cellar:barrel-destruction": {
