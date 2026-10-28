@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "udl-lifecycle-regression-13db35f": {
+      "kind":"regression", "revision":"13db35f88f22b7aa3b4c25a67a5d9b3ec4a178c7", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/13db35f88f22b7aa3b4c25a67a5d9b3ec4a178c7/src/world/reward_accuracy_tests.rs", "checks":["dungeons:undead-lair","dungeons:undead-lair:room-family-and-split-lifecycle"],
+      "method":"QAd5c22d9c passes241 Rust tests. Eight generated seeds retain coherent room families and reachable enemies. Each intermediate form passes64 seeded split/no-loot deaths; terminal outcomes remain exclusive HP/MP/miss. Both real NPC traps retire after one volley without deleting bullets. Boss9+6 owned escorts survive late join without restart and disappear after parent removal.",
+      "limitations":"Prepared backend execution, not native input or original RNG. Baseline5dbe1439 reproduces intermediate loot atseed0. Earlierfd95c689 fails only an incorrect simultaneous-terminal-potion oracle; its240 other passes are not relabelled a full pass. Correction changes the test, not terminal reward policy."
+    },
+    "udl-slimes-native-4568417": {
+      "kind":"native", "revision":"45684172bab75969edbbf967070598413937ddde", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1138", "checks":["dungeons:undead-lair","dungeons:undead-lair:room-family-and-split-lifecycle"],
+      "method":"QAc12d7374 passes10 checks: native sword fire produces4 medium black,4 little per defeated medium and6 little brown, retains intermediate XP and creates no intermediate loot. Three prepared Knights remain alive. Cold196bdbf9 verifies SQLite/FKs, saved characters and zero deaths; failed efbffa37 retains one committed brown-slime death withHP0/empty inventory. Client0282b3a4/Ruffle.16/ELF7c90ca88; cleanup errors empty.",
+      "limitations":"Supplied max stats/gear, map scouting and near-slime joins; protection after black checks and for brown exposure. Not earned entry, traversal, terminal native loot pickup, escort behavior or historical acceptance. Earlier missed-shot/collateral-parent oracles and aggregate brown-room death remain failures. Published black AFTER is the earlier six-assertion portion ofefbffa37, not a full-case pass."
+    },
+    "udl-slime-research-47dba50": {
+      "kind":"source", "revision":"47dba5066b5416b809dbcf1e1dff4221cf29e4ee", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/commit/47dba5066b5416b809dbcf1e1dff4221cf29e4ee", "checks":["dungeons:undead-lair","dungeons:undead-lair:room-family-and-split-lifecycle"],
+      "method":"Selected123.5.1 and modified7.0 match all35 enemy XML definitions, not AI. Build115 guides support the restored black generation and intermediate XP/no loot. Kithio compiles no Lair table.",
+      "limitations":"123.5.1 history/AI unresolved in858; modified7.0 differs. Trapped projectile3 is absent;403/404s prove nothing historical. Existing endpoint evidence retained; no third-party code/assets imported."
+    },
     "leviathan-native-0135391": {
       "kind":"native", "revision":"0135391524c18f0b6fc0abfdd2f7fe083bce6e4b", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1124#issuecomment-6475496055", "checks":["realm:leviathan"],
@@ -4572,7 +4590,7 @@
     "dungeons:forbidden-jungle:foliage-and-tribal-rooms": {"status":"not-run","evidence":[]},
     "dungeons:sprite-world": {"status":"not-run","evidence":["sprite-population-source-d14fb34","sprite-population-regression-d14fb34","sprite-population-native-d14fb34","sprite-stars-source-5ac2a41","sprite-stars-native-5ac2a41","god-portals-regression-411c536","sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","limon-center-source-b942870","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","limon-arena-regression-fa2e550","limon-arena-native-fa2e550","sprite-defense-source-c6b4925","sprite-defense-regression-c6b4925","period-loot-source-1f488df","period-loot-regression-1f488df","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","limon-box-regression-7d5d1c8","limon-box-native-7d5d1c8","portal-window-regression-4d44727","sprite-tree-source-2cb231a","sprite-tree-regression-9ad296c","sprite-tree-native-9ad296c"]},
     "dungeons:sprite-world:floor-and-native-variants": {"status":"not-run","evidence":["sprite-population-source-d14fb34","sprite-population-regression-d14fb34","sprite-population-native-d14fb34","sprite-conveyor-source-ef6dc1b","sprite-conveyor-regression-ef6dc1b","sprite-conveyor-native-ef6dc1b","sprite-floor-pattern-source-cb37add","sprite-floor-pattern-regression-42d4c7a","sprite-floor-pattern-native-42d4c7a","sprite-floor-correction-regression-474c2b5","sprite-floor-correction-native-474c2b5","sprite-platforms-regression-ce58c7f","sprite-platforms-native-ce58c7f","native-sprite-quiet-source-b6eeda4","native-sprite-quiet-regression-b6eeda4","native-sprite-quiet-native-b6eeda4","partial-differences-source-4992445","sprite-tree-source-2cb231a","sprite-tree-regression-9ad296c","sprite-tree-native-9ad296c"]},
-    "dungeons:undead-lair": {"status":"not-run","evidence":["god-portals-regression-411c536","portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db","shield-stun-regression-06b5675","shield-stun-native-545f79e","portal-window-source-4d44727","septavius-exit-source-3a80aec","septavius-exit-native-3a80aec","septavius-exit-regression-3a80aec"]},
+    "dungeons:undead-lair": {"status":"not-run","evidence":["god-portals-regression-411c536","portal-position-source-78d8151","portal-position-native-d7c39b1","portal-position-regression-78d8151","udl-endpoint-regression-3bdaddb","udl-endpoint-native-3bdaddb","lair-room-space-native-89bc191","lair-room-space-regression-89bc191","septavius-move-source-8a98415","udl-room-groups-regression-a072dbd","septavius-move-regression-a776877","septavius-move-native-a776877","lair-spacing-source-6e7bf4d","lair-spacing-regression-6e7bf4d","lair-spacing-native-6e7bf4d","period-loot-source-1f488df","period-loot-regression-1f488df","reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc","udl-arrival-class-source-5e70c60","udl-arrival-class-regression-5e70c60","udl-arrival-class-native-5e70c60","udl-compact-arrival-regression-0f9d8db","udl-compact-arrival-native-0f9d8db","shield-stun-regression-06b5675","shield-stun-native-545f79e","portal-window-source-4d44727","septavius-exit-source-3a80aec","septavius-exit-native-3a80aec","septavius-exit-regression-3a80aec","udl-slime-research-47dba50","udl-lifecycle-regression-13db35f","udl-slimes-native-4568417"]},
     "dungeons:undead-lair:room-family-and-split-lifecycle": {
       "status": "not-run",
       "evidence": [
@@ -4580,7 +4598,10 @@
         "lair-traps-native-2f9f272",
         "septavius-spacing-regression-580a65c",
         "septavius-spacing-native-580a65c",
-        "udl-room-groups-regression-a072dbd"
+        "udl-room-groups-regression-a072dbd",
+        "udl-slime-research-47dba50",
+        "udl-lifecycle-regression-13db35f",
+        "udl-slimes-native-4568417"
       ]
     },
     "dungeons:undead-lair:entrance-end-dressing": {

@@ -4519,10 +4519,12 @@
         "differences": [
           "Endpoint dark floor crosses and the eight-candle boss ring are video-informed reconstructions; the original room generator and exact full templates remain unrecovered.",
           "Server PR309 keeps Septavius's 0.5-speed wandering through the ten-second spiral, following the older community comparator; modified 7.0 stops him during it. Original movement is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/309",
-          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664"
+          "PR654 corrected the rounded arrival class. The entrance now has an 11-wide rounded floor, four pillars and twelve peripheral candles, reconstructed from period footage and a later community map. Original target dimensions and the exact furnishing raster remain unverified; this is not recovery of a 123.5.1 template. Later seeded placements may shift: https://github.com/OpenRotMG/Open-RotMG-Server/pull/664",
+          "Black: big to4 medium to4 little each; brown: big to6 little. Big/medium black and big brown grant XP, no loot."
         ],
         "unknowns": [
-          "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter."
+          "Original projectile rotation and timing, room/population distributions and reward rates. Ordinary 13-21-tile chambers and 17-tile round rooms are a spacious reconstruction, not recovered original size distributions; period guidance retains short connections. Exact movement radius, chase policy and minion spacing remain unrecovered. Separate summon slots compensate for deterministic chase, rather than reproducing the modified 7.0 server's per-ghost steering jitter.",
+          "Build115 specifies Burst10/Blast6 at90degrees versus current12-way rings; slime protection and drops also differ. Exact123.5.1 history, Ghost God-earned entry, shared rewards and room/population coverage remain issue858."
         ],
         "sources": [
           {
@@ -4580,7 +4582,10 @@
           {
             "url": "https://www.youtube.com/watch?v=7Ajp4rlzC6A&t=57s",
             "label": "2015 guide: clearer pillar/candle groups, later comparator rather than target authentication"
-          }
+          },
+          {"url":"https://web.archive.org/web/20120420155929id_/http://forums.wildshadow.com/wiki/realm-mad-god/black-slimes","label":"Build115, April20 2012: black split/XP/no-loot guide"},
+          {"url":"https://web.archive.org/web/20120414053824id_/http://forums.wildshadow.com/wiki/realm-mad-god/brown-slimes","label":"Build115, April14 2012: brown split/no-loot guide"},
+          {"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_UndeadLairCXML.dat","label":"Modified7.0:35 enemy XML matches, not AI/loot proof"}
         ],
         "checks": [
           {
