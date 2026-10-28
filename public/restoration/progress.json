@@ -1772,16 +1772,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A graveyard or fort Deathmage encounter with Skeleton, Skeleton Swordsman, Veteran, Mage and King roles and distinct projectiles. No boss transformation is established.",
+        "expected": "Low Plains Graveyard Deathmage commanding Skeleton, Swordsman, Veteran and Mage roles, with distinct projectiles and a separate Treasure Chest. No boss transformation is established; the retained legacy Skeleton King is a reconstruction difference.",
         "differences": [
           "Server PR586 places 5 to 9 Graveyards per Realm on Low Sand and Low Plains, each with Crosses, grey and destructible walls and a Treasure Chest beside the Deathmage. A June 2012 wiki supplies the Low Plains site, chest tiers, skeleton item lists and the Deathmage's lack of drops; rates, site count, Low Sand and the yard layout come from a later community server: https://github.com/OpenRotMG/Open-RotMG-Server/pull/586",
-          "The Deathmage still raises 3 to 5 Skeletons, 2 to 4 Swordsmen, 1 to 3 Veterans, 1 to 2 Mages and a Skeleton King every 10 seconds, following Trapped; the June 2012 wiki lists 5/3/2/2 every 8 seconds and no King.",
-          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics."
+          "Rust replenishes Trapped-derived batches every 10 seconds within living-child caps 5/4/3/2/1. Trapped's engine instead adds batches without counting survivors; Kithio starts half-cap populations and limits lifetime births to 4/2/1/1. The June 2012 page lists 5/3/2/2 every 8 seconds. These are different policies, not corroborating original limits.",
+          "Protect, player-centered Circling and Engaging orders for the other four kinds are reconstructed from compiled Kithio, not authenticated original-server timing. Rust retains its existing collision-aware movement, fixed-home tether and predictive-aim semantics.",
+          "December 2011 and June 2012 Skeleton King pages call it unused after the build111 Undead Lair revamp. Its selected definition does not establish Deathmage deployment; the extra King is retained Trapped reconstruction, not historical acceptance.",
+          "Wiki node902 is Necromancer in October 2010 and Deathmage in March 2011, supporting an earlier enemy name rather than a playable-class transformation. All six selected definitions match the pinned modified 7.0 client; Deathmage's selected 900 HP/11 DEF/Level7 override the June 2012 page's older stats. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/795#issuecomment-6459711927",
+          "PR1063's prepared native case observes HP loss, all current roles firing and defeated, orphan release, no post-death replenishment, a public Swordsman drop, chest pickup without duplication and item persistence through Nexus. Not earned discovery, native overlapping-owner isolation or every skeleton reward pool/pickup; whole-feature acceptance stays not-run: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1063#issuecomment-6460130199"
         ],
         "unknowns": [
-          "Original graveyard or setpiece placement and ordinary Skeleton population.",
-          "Deathmage’s relationship to the early Necromancer, population limits, closure eligibility and chest rewards.",
-          "Original formation timing and speeds, minion populations/cleanup and drop rates."
+          "Exact target site count, coordinates/layout and Low Sand continuity; period ordinary Skeleton evidence names Graveyards, not an independently roaming population.",
+          "Exact rename build, target King deployment, summon populations/timing and post-owner-death lifetime; the current bounded replenishment and orphan release are reconstructions.",
+          "Original closure eligibility, formation timing/speeds and chest/skeleton drop probabilities. Selected XML has no Hero marker and Kithio omits Deathmage from critical enemies, but neither proves original closure rules. Remaining work: https://github.com/OpenRotMG/Open-RotMG-Server/issues/795"
         ],
         "sources": [
           {
@@ -1803,6 +1806,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/setpieces/Graveyard.cs",
             "label": "Later community Graveyard layout and chest-rate comparator"
+          },
+          {
+            "url": "https://web.archive.org/web/20101020021118id_/http://forums.wildshadow.com/wiki/realm-mad-god/necromancer-level-5",
+            "label": "October 2010 enemy Necromancer, wiki node902; renamed Deathmage by the March 2011 capture"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610204517id_/http://forums.wildshadow.com/wiki/realm-mad-god/skeleton-king",
+            "label": "June 2012 capture: Skeleton King unused after build111, not proof of Deathmage deployment"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified 7.0 Deathmage definition matches selected 123.5.1; five MonstersCXML skeleton definitions also match, not AI or deployment proof"
           }
         ]
       }

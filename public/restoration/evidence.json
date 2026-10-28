@@ -571,6 +571,33 @@
       "limitations": "Prepared stat-capped Knight with no weapon beside a Henchman, with Vintner Drunk blurring the screen. Not an earned Cellar run or Oryx 2 acceptance. Same patch id as merged 4b3be81. Failed death, SHOOT acknowledgement, CDP and ENOSPC attempts are retained in the PR record. Goo killability is a chosen known difference.",
       "checks": ["dungeons:wine-cellar", "dungeons:wine-cellar:bile-trail-and-wine-threats"]
     },
+    "deathmage-native-156740e": {
+      "kind": "native",
+      "revision": "156740e6b114f315f4a1e95f9b31e0a2b481375b",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1063#issuecomment-6460130199",
+      "method": "QA596f9df85b7a44f883aa45f620c67870 passed all 16 checks with no cleanup errors: nine ordinarily generated Graveyards in the Classic World3 reconstruction; native HP loss, all five current skeleton roles firing, dagger defeat of Deathmage and each role, orphan release and no replenishment after 11 seconds. A Swordsman produced a public Bronze Helm bag; Deathmage allocated none. Native chest drag acquired Robe of the Acolyte once, revision1 to2, and normal Nexus reconnect preserved the item, revision and living character. Published image bytes match the inspected captures. No ERROR events; four performance warnings retained.",
+      "limitations": "Prepared level20 Rogue placed at a naturally generated site, with invulnerability after observed HP loss; not earned discovery or original map fidelity. Other skeleton reward pools/pickups and native overlapping-owner isolation remain unverified. One drop proves no probability. Canceled build waits, invalid fixture stats and a rejected overlong native action remain failed in the linked receipt. Runtime/content unchanged; historical partial and whole-feature not-run remain.",
+      "checks": ["realm:deathmage"]
+    },
+    "deathmage-regression-60c1225": {
+      "kind": "regression",
+      "revision": "60c12250e220b1195ed47f776c127426719ac485",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1063#issuecomment-6460130199",
+      "method": "QA61a04da7f6314894a8b69dd08bc1e741 passes all three focused Deathmage ownership, phase, target-window, movement-role and roster regressions; 188 unrelated tests filtered out. Runtime files are unchanged in PR1063.",
+      "limitations": "Deterministic regression evidence, not native overlapping-owner or historical acceptance. This is not a rerun of the entire Rust suite.",
+      "checks": ["realm:deathmage"]
+    },
+    "deathmage-research-60c1225": {
+      "kind": "source",
+      "revision": "60c12250e220b1195ed47f776c127426719ac485",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/60c12250e220b1195ed47f776c127426719ac485/src/world/deathmage.rs",
+      "method": "Fresh pinned 7.0 comparison matches all six selected definitions (QA c67e038c). Period node902 continuity supports the earlier enemy name Necromancer; the June 2012 Skeleton page names Graveyards. Kithio Spawn counts lifetime births, Trapped SpawnMinionImmediate adds unrestricted batches, and current Rust instead replenishes bounded living children. December 2011/June 2012 King pages call that legacy actor unused after build111. Research receipt: https://github.com/OpenRotMG/Open-RotMG-Server/issues/795#issuecomment-6459711927",
+      "limitations": "No original-server timing, King deployment, closure policy, density/layout or reward-probability acceptance. The sources describe different versions and engines; no roster change or imported reference code/assets. Exact remaining questions stay tracked in issue795.",
+      "checks": ["realm:deathmage"]
+    },
     "deathmage-formations-source-56a6186": {
       "kind": "source",
       "revision": "56a618630c216048695440dc29ff02e794eae171",
@@ -3593,7 +3620,7 @@
     "realm:ent-ancient": {"status":"not-run","evidence":["ent-groves-source-f5f7398","ent-groves-regression-f5f7398","ent-groves-native-f5f7398","ent-anchor-regression-4bd1817","tree-size-config-regression-e75cf97","authored-groves-source-fc0831a","authored-groves-regression-fc0831a","authored-groves-native-fc0831a","shield-stun-regression-06b5675","ent-follower-loot-source-2425fe4","ent-follower-loot-regression-2425fe4","ent-family-native-6045638"]},
     "realm:lich": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","lich-sites-source-831ddde","lich-sites-regression-831ddde","lich-sites-native-831ddde"]},
     "realm:ghost-king": {"status":"not-run","evidence":["ghost-throw-source-3016fe7","ghost-throw-regression-3016fe7","ghost-throw-native-3016fe7","quest-site-counts-regression-52da19c","ghost-master-source-e7ab45c","ghost-master-regression-e7ab45c","ghost-master-native-576d885d","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","ghost-centered-source-12a3151","ghost-centered-regression-12a3151","ghost-centered-native-12a3151","ghost-cleanup-research-3a38cfc","ghost-smallgroup-native-168cea1","ghost-mob-native-b258c54","ghost-huge-native-8e122d1"]},
-    "realm:deathmage": {"status":"not-run","evidence":["deathmage-formations-source-56a6186","deathmage-formations-regression-56a6186","deathmage-formations-native-56a6186","deathmage-formations-paired-native-56a6186","deathmage-graveyard-native-957e273"]},
+    "realm:deathmage": {"status":"not-run","evidence":["deathmage-native-156740e","deathmage-regression-60c1225","deathmage-research-60c1225","deathmage-formations-source-56a6186","deathmage-formations-regression-56a6186","deathmage-formations-native-56a6186","deathmage-formations-paired-native-56a6186","deathmage-graveyard-native-957e273"]},
     "realm:red-demon": {"status":"not-run","evidence":["red-demon-authored-native-078d99d","red-demon-generated-native-97e8609","red-demon-authored-source-078d99d","red-demon-rewards-97e8609","red-demon-research-a901746","hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","period-loot-source-1f488df","period-loot-regression-1f488df","fissure-source-458ccc1","fissure-rebuild-458ccc1","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","hero-controller-source-d373e0c"]},
     "realm:oasis-giant": {"status":"not-run","evidence":["quest-site-counts-regression-52da19c","oasis-palms-regression-4dc7761","landmark-chest-trials-regression-09eb8b7","tree-size-config-regression-e75cf97","period-loot-source-1f488df","period-loot-regression-1f488df","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
     "realm:cyclops-god": {"status":"not-run","evidence":["cyclops-native-d373e0c","cyclops-regression-d373e0c","hero-controller-source-d373e0c","cyclops-research-a901746","hero-site-counts-regression-50cd0fc","landmark-chest-trials-regression-09eb8b7","castle-anchor-regression-ee30ed8","castle-chest-cells-regression-5cd8ecf","castle-ground-writes-regression-f176964","period-loot-source-1f488df","period-loot-regression-1f488df","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde"]},
