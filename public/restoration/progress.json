@@ -6094,10 +6094,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s.",
-        "differences": [],
+        "expected": "Selected 123.5.1: Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s. Consumed without HP/MP/stat cost.",
+        "differences": [
+          "Current condition engine retains the later deadline; compiled Kithio and related Trapped replace remaining duration. Independent target-era mixed-duration overlap is unresolved."
+        ],
         "unknowns": [
-          "Historical refresh/overlap and deployment; complete visual/AI condition fidelity."
+          "Original mixed-duration overwrite, exact production acquisition/drop probabilities and full visual/AI condition fidelity remain unaccepted (issues 886, 942, 943, 946). July 19, 2012 test notes list Ghost Rum's 6s/4s; an August 4 player comment reports its drop, not exact September deployment."
         ],
         "sources": [
           {

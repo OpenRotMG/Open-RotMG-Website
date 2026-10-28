@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "rum-mushrooms-source-824d8e8f": {
+      "kind":"source", "revision":"824d8e8f79d289816ec92f4ab71a447ef1091bbc", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/824d8e8f79d289816ec92f4ab71a447ef1091bbc/data/objects.xml", "checks":["gear:rum-and-mushrooms"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/886#issuecomment-6480952386 . Fresh selected SWF07ae4fc3 extraction and pinned modified7.0 EquipCXML normalize all three complete items identically to runtime XML: Pirate Rum0xa50 Drunk30s, Mushroom0xa51 Hallucinating30s, Ghost Rum0xc25 Drunk6s/Invisible4s. Compiled Kithio UseItem/Entity and related2013 Trapped replace condition timers; current Rust retains later deadlines. Selected decompile and7.0 map/sprite paths distinguish Drunk blur, random Hallucinating art and Invisible targeting. Followed July19,2012 JST test123.4.0 notes, production rollback/release history and the specific August4,2012 Lil' Ghost Pirate rum-drop comment.",
+      "limitations":"Community reconstruction, not original-server recovery or code reuse.2016-edited Ghost Rum overwrite prose and modern drop lists do not date September2012 overlap/acquisition. Archive rum capture timestamp was not verified; Mushroom archive/direct terminal requests failed. Source inspection is not native or historical acceptance. Full visual/AI conditions remain942/943/946; original mixed-duration/deployment questions remain886."
+    },
     "staves-native-roster-f79ad1e": {
       "kind": "native", "revision": "f79ad1e96b6e563754b00874236358895711af7e", "date": "2026-10-28",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1161#issuecomment-6480698433", "checks": ["gear:staves"],
@@ -5332,7 +5338,7 @@
     "gear:elixirs": {"status":"not-run","evidence":[]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
-    "gear:rum-and-mushrooms": {"status":"not-run","evidence":[]},
+    "gear:rum-and-mushrooms": {"status":"not-run","evidence":["rum-mushrooms-source-824d8e8f"]},
     "gear:holy-water": {"status":"not-run","evidence":[]},
     "gear:transformation-potion": {"status":"not-run","evidence":["item-chat-guild-source-4992445"]},
     "gear:xp-booster": {"status":"not-run","evidence":[]},
