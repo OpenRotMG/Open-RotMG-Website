@@ -1874,17 +1874,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, replenishment and movement roles; no transformation established. Target setpiece/chest and rewards remain unresolved.",
+        "expected": "Oasis Giant with Ruler/Soldier/Creature/Monster participation, bounded summons, predictive volleys and movement roles; an independent Oasis chest and committed loot return. No transformation established.",
         "differences": [
           "Server PR336 implements a reconstructed Realm site, owned combatants, chest and private rewards. Complete current-revision native combat and reward-return acceptance is not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "Community requests 0-4 sites; protected all-or-error placement vs reference's 50 tries (may skip). Original density unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/464",
           "Placed sites retain 40 palms, matching the community generator's half-border count. Clear cardinal approaches remain, unlike its unrestricted placement. Original density and configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/467",
           "Treasure chest tiers now roll each selected item independently at p/n, matching the community mechanic within selected pools. Numeric candidate order remains an adaptation, not authenticated source order or truncated distribution. Original 123.5.1 item corpus and RNG remain unverified; changed consumption can affect later placement: https://github.com/OpenRotMG/Open-RotMG-Server/pull/501",
           "Generated Oasis Palm sizes now also populate map configuration, so rebuilding native scenery retains the chosen 120/140 size. Live sizes and RNG calls stay unchanged. This is not whole-world or database persistence; original configuration and distributions remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/507",
-          "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d"
+          "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
+          "PR1066 corrects prediction values mistaken for angular offsets and Oasis armor tiers 5-7 to 4-6; preserves the compiled reference's lifetime birth cap. A bounded protected native combat/chest/Nexus journey passes, not whole-feature or historical acceptance. Exact protection/follow hysteresis remains a reconstruction difference: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1066#issuecomment-6460309356"
         ],
         "unknowns": [
-          "Original placement, population, attack timing, summon limits, chest and drops."
+          "Exact 123.5.1 placement/density and continuity of the version-115 wiki's stats, drops and chest rates.",
+          "Original lifetime-versus-alive summon policy. Compiled Kithio counts ten initial births toward a lifetime cap of twenty; current reconstruction retains it.",
+          "Creature attack timing: April 2012 wiki says one second; selected community table says 400 ms.",
+          "Exact predictive algorithm, protection/follow hysteresis, chest candidate order, truncation and RNG remain reconstructed."
         ],
         "sources": [
           {
@@ -1894,6 +1898,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Oasis.cs",
             "label": "Compiled Kithio setpiece reference; original authored-map coordinates unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Oasis.cs",
+            "label": "Compiled primary behavior; SpawnGroup engine counts lifetime births"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 client: all five selected Oasis definitions normalize identically"
+          },
+          {
+            "url": "https://web.archive.org/web/20120217151558id_/http://forums.wildshadow.com/wiki/realm-mad-god/oasis-giant",
+            "label": "February 17, 2012 capture; claims marked version 115, not exact 123.5.1 authority"
           }
         ]
       }
