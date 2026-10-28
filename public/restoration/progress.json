@@ -1644,6 +1644,14 @@
           {
             "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
             "label": "January 2012 capture: portal Enter UI, permanent death, autosave and account-bound Vault; earlier-version corroboration only"
+          },
+          {
+            "url": "https://www.eurobricks.com/forum/forums/topic/64657-realm-of-the-mad-god/page/39/",
+            "label": "August 7, 2012 independent player post observes a closing/closed Realm; does not specify dungeon-return routing"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2012#build-123-5-1",
+            "label": "September 6, 2012 hotfix transcription: duplication prevention and Mad Lab entrance Cowardice, not transfer lifetime; same notes, not independent corroboration"
           }
         ]
       }
@@ -1731,12 +1739,13 @@
           "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
           "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987",
           "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002",
+          "PR1075 restores distinct Mummy/King Tome/potion, Pharaoh weapon, Bearer egg/tincture/potion and Spirit T8/ring/tincture/potion pools from compiled Kithio. Mummies roll once per death; Bearer/Spirit tiers roll independently per candidate with existing soulbound/colored-bag ownership. Actual Lich private thresholds, AI and summon policy are unchanged. CI passes202 tests, formatting and strict Clippy at87292512; rates are reconstruction values, not measured original probabilities: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1075#issuecomment-6461083265",
         "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091"
         ],
         "unknowns": [
-          "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
-          "Target spawn density, summon expiry and reward policy.",
-          "Target ownership policy, counts, cadence and loot probabilities."
+          "Original complete branch populations remain unresolved. Compiled Kithio counts Spirit births per state; current encounter-wide living caps differ. Trapped and the undated Japanese Lich table disagree: https://github.com/OpenRotMG/Open-RotMG-Server/issues/793#issuecomment-6454994102",
+          "Original placement/density, mummy replenishment/expiry and reward ownership remain unverified. The October 9, 2012 Haunted Spirit page supports its 90-second expiry and 7/3-second shield cycle, not every family member.",
+          "Exact original loot probabilities remain unverified. Compiled Kithio supplies reconstruction rates and candidate semantics; independent period documentation lists Spirit items with unknown rates."
         ],
         "sources": [
           {
@@ -2605,10 +2614,14 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowForest Goblin Mage is level 4 with 280 HP and no DEF. Its projectiles include wavy Cyan Magic dealing 14 damage and Dark Blue Magic dealing 16. The family includes Rogues and Warriors.",
-        "differences": [],
+        "differences": [
+          "Kithio reconstruction: below 182 HP switches to six-tile retreat and .25 angular prediction; healthy aim is .35. Independent 1000/1300ms channels repeat at 1050/1350ms on the 50ms engine tick, then both at 1050ms. The five-second flash is not an escape timeout.",
+          "Three initial escorts per role grow to seven lifetime births at nominal 12s intervals, not seven living replacements. Unharmed escorts protect/scatter rather than chase the player; fixed 1200/2400ms phases, radius seven and home leashes remain bounded approximations of randomized/concurrent source movement.",
+          "Escorts now have one public 4% HP-potion attempt per death, not repeated contributor-scaled 3% rolls. Mage tier-group-one-item rolls still differ from Kithio's independent per-candidate expansion; rates/distribution remain reconstruction, not authenticated history."
+        ],
         "unknowns": [
-          "Target escape threshold/duration, attack interleaving, minion caps, deployment corroboration and reward rates.",
-          "Target movement timing, population/replenishment and loot distribution."
+          "Authenticated 123.5.1 deployment, initial formation/population, exact movement randomization and original lifetime-versus-living reproduction policy remain unresolved.",
+          "Build118 wiki captured in 2012 lists T2 armor while Kithio uses selected T3; the project's general wiki/client armor-tier offset may explain this, but Goblin-specific reward identity/rate corroboration remains partial. Prepared gameplay is not earned progression or a probability study."
         ],
         "sources": [
           {
@@ -2617,7 +2630,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "2013 comparator; differs in movement, replenishment and loot"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L293-L364",
+            "label": "Compiled primary reconstruction table; Spawn, Shoot and transition semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120502020343id_/http://forums.wildshadow.com/wiki/realm-mad-god/goblin-mage",
+            "label": "Archived Build118 claims, not a 123.5.1 deployment receipt"
           }
         ]
       }
