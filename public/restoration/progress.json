@@ -6278,16 +6278,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Thirteen declared ordinary keys create mapped portals, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Placement/failure permissions require historical qualification; destinations separate.",
-        "differences": [],
+        "expected": "Thirteen soulbound consumable keys create their declared portals at the user position, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Current ordinary keys share a commit-time60s entrance window; original adventures remain separate.",
+        "differences": [
+          "Kithio's compiled Create uses PortalDesc.TimeoutTime, which hardcodes30s. This project deliberately uses60s following the June2012 general dungeon guide; that guide does not independently specify keyed entrances.",
+          "Rejected Incantations are retained deliberately, unlike June2012 misuse-consumption guidance. Original-client rejected-slot retry remains failed in issue867; fresh-slot success is not a complete unlock acceptance pass."
+        ],
         "unknowns": [
-          "Historical permitted worlds, placement, admission and lifetime policy.",
-          "The original complete adventures behind keys remain separate dungeon requirements."
+          "The June21,2011 Arqade answer independently supports Nexus use, not Vault or exact123.5.1 continuity. Target world exclusions, overlapping placement/interaction priority, keyed lifetime and admission capacity/range remain unresolved in issue890.",
+          "The original complete adventures behind keys remain separate dungeon requirements. Full Incantation acceptance and its original range/unlocked lifetime remain tracked in issue867."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Descriptors.cs#L261-L283",
+            "label": "Compiled comparator's PortalDesc hardcodes30s; not original123.5.1 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023836id_/http://forums.wildshadow.com/wiki/realm-mad-god/dungeons",
+            "label": "June9,2012 capture: general entrances last one minute and any player can enter; not an exact keyed-timeout rule"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/23337/can-i-use-dungeon-keys-in-the-nexus",
+            "label": "May27,2011 question / June21 answer: purchased-key Nexus-use witness, no Vault claim"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602012050id_/http://forums.wildshadow.com/wiki/realm-mad-god/wine-cellar-incantation",
+            "label": "June2,2012 capture: misuse consumes Incantation without effect, unlike deliberate rejection-safe reconstruction"
           }
         ]
       }
