@@ -3636,11 +3636,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Sand Phantom0x6c5 and Wisp0x7f22, distinct selected data; transformation is comparator-supported, target continuity policy unresolved.",
-        "differences": [],
+        "expected": "Sand Phantom0x6c5 and Wisp0x7f22 retain distinct selected definitions. Compiled Kithio supplies a proximity-triggered Phantom and retreating/wandering Wisp reconstruction, not recovered123.5.1 AI.",
+        "differences": [
+          "Fresh selected HP and preserved damage attribution/population ownership are deliberate server continuity policy. Kithio replaces without transferring damage. Neither source proves original kill-credit/reward continuity.",
+          "The bounded correction adopts nominal800ms Wisp movement phases/6500ms return and proximity4.4, not a tick-exact Kithio engine port. Existing Phantom chase and500ms/range10 non-predictive fire differ from Kithio's0.85 motor and400ms/range8/predictive0.4 schedule; current home-leash and authority guards remain."
+        ],
         "unknowns": [
-          "Original transformation timing and triggers, and continuity of HP, kill credit and rewards.",
-          "The community comparison uses five- and ten-second transitions; the original timings are unresolved."
+          "Exact123.5.1 trigger, transition timing, HP/credit/reward continuity and loot remain unresolved in issue841. Trapped uses five-/ten-second chasing forms; Kithio uses proximity4.4 and nominal6.5-second return with800ms retreat/wander states. Engine pre-decrement and state execution affect actual timings.",
+          "March17,2012 Wildshadow capture (content122.0.1) corroborates both forms' stats/projectiles, not AI. Japanese wiki6.5-second text is not dated to target; its chase description conflicts with Kithio/modern RealmEye retreat."
         ],
         "sources": [
           {
@@ -3649,7 +3652,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Older five-/ten-second comparator, not independent target-era AI"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L700-L737",
+            "label": "Compiled primary reconstruction; not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120317154006id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/sand-phantom",
+            "label": "March2012 capture, content122.0.1: both forms' stats/projectiles only"
           }
         ]
       }
