@@ -4943,7 +4943,7 @@
         "differences": ["The current return is a death-relative Nexus portal. Build122.3.2 notes describe fixed dungeon exit sites; the exact Trench site and target destination remain unresolved."],
         "unknowns": [
           "Original topology, oxygen cadence and vent geometry, full target choreography, Hermit entrance probability and reward eligibility/rates. King Alexander is documented in Thessal's question, not established as a deployed encounter.",
-          "Full normal-health entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
+          "Unprotected or earned-entry entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
         ],
         "sources": [
           {
