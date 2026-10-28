@@ -66,6 +66,34 @@ class WebsiteDeploy(unittest.TestCase):
             p = patch.object(deploy, name, value)
             p.start()
             self.addCleanup(p.stop)
+        # Tiny simulated publishes must not inherit unrelated host-capacity fluctuations.
+        capacity = patch.object(deploy.shutil, 'disk_usage', return_value=SimpleNamespace(free=2 * 1024**3))
+        capacity.start()
+        self.addCleanup(capacity.stop)
+
+    def test_low_capacity_rejects_before_staging_or_restart_and_retains_failed_receipt(self):
+        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        trees = {tree: deploy.files(tree) for tree in [self.live, self.live_client]}
+        metadata = {tree.with_suffix(suffix): tree.with_suffix(suffix).read_bytes()
+                    for tree in trees for suffix in ['.REVISION', '.sha256.json']}
+        error = 'Less than 2 GiB free; retained recovery data needs review'
+        with patch.object(deploy.shutil, 'disk_usage', return_value=SimpleNamespace(free=2 * 1024**3 - 1)), \
+                patch.object(deploy, 'current_main'), patch.object(deploy, 'stage_tree') as stage, \
+                patch.object(deploy, 'exchange') as exchange, patch.object(deploy, 'activate') as activate, \
+                patch.object(deploy, 'server_updater') as updater:
+            with self.assertRaisesRegex(ValueError, error):
+                self.publish()
+        for operation in [stage, exchange, activate, updater]:
+            operation.assert_not_called()
+        for tree, files in trees.items():
+            self.assertEqual(deploy.files(tree), files)
+        for path, data in metadata.items():
+            self.assertEqual(path.read_bytes(), data)
+        status = json.loads((deploy.STATE / 'status.json').read_text())
+        self.assertEqual((status['state'], status['error']), ('staging', error))
+        self.assertEqual(json.loads((Path(status['recovery']) / 'receipt.json').read_text()), status)
+        self.assertNotIn('files', status)
+        self.assertNotIn('previous_site', status)
 
     def test_local_or_incomplete_selection_cannot_be_packaged_or_deployed(self):
         build_path = self.build / 'diagnostics-build.json'
