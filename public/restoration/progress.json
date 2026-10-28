@@ -1411,7 +1411,8 @@
         "differences": [
           "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
-          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192"
+          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192",
+          "PR1084's earlier native walking take credits a Cyclops, Red Demon and transformed Ent once and admits one Cube God. It fails on route steering with 38 encounters remaining, not a completed closure/Castle journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
         ],
         "unknowns": [
           "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
@@ -1427,7 +1428,8 @@
           {
             "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
             "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
-          }
+          },
+          {"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/messaging/impl/GameServerConnection.as#L1680-L1690","label":"Later modified 7.0 client comparator: reconnect preserves character ID; not original eligibility or timing proof"}
         ],
         "checks": [
           {
@@ -1438,7 +1440,8 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+              "PR1084's partial native take binds one Cyclops death to one Cube God admission. It does not complete that event or establish probability or repeatability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
             ],
             "unknowns": [
               "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
@@ -5407,11 +5410,16 @@
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
         "differences": [
           "Server PR581 places a Wine Barrel on each of 38 free inside room corners. Barrels block movement, fall to ordinary shots and give no loot or XP; the corner rule and count are reconstructions: https://github.com/OpenRotMG/Open-RotMG-Server/pull/581",
-          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit."
+          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit.",
+          "Research at server 09889dd4: current Oryx 2 uses a <=20% threshold, 10-second shield, individual transition spinners, opening chase and five-live-Henchman replenishment. The pinned 2013 comparator and December 2013 description instead support a 30% branch and radial rings, with conflicting timing/summon policies. None is authenticated 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Current loot gives each >10%-damage contributor a Vitality potion and independent table-row rolls with uniform tier-pool selection. Comparator top-damager, threshold and per-candidate probability semantics differ; original rates/recipients are not established.",
+          "The 140x132 authored map has two right-side spawn regions and no dedicated WineSpill objects in its dictionary. Selected spill definitions are aesthetic; exact placement and target map byte fidelity remain unverified."
         ],
         "unknowns": [
-          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
-          "Barrel proximity triggers, summons, contents and loot require positive period evidence; zero XP does not establish zero loot."
+          "Exact 123.5.1 phase thresholds/timing, Henchman lifetime/death policy, Goo hit immunity and loot recipients/rates remain unresolved after checking pinned source and dated claims: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Exact map, barrel density/positions and decorative spill placement remain reconstructed. Empty barrels have a November 2012 witness; no positive target-period barrel proximity/summon rule was established.",
+          "The 120-second locked entrance has a December 2013 witness, not a native expiry-boundary or authenticated target-continuity pass; unlocked-portal lifetime remains unresolved.",
+          "Prepared protected boss mechanics are verified separately from full unprotected entry/route/reward/return acceptance; the parent remains not-run."
         ],
         "sources": [
           {
@@ -5421,6 +5429,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+            "label": "December 2013 Oryx2 capture (page says11.1.0), not authenticated123.5.1 AI"
           }
         ],
         "checks": [
@@ -5430,7 +5442,7 @@
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
             "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Barrel placement on every free inside room corner, 38 on the current map, is a reconstruction; no period source gives barrel positions or density."
             ],
@@ -5453,7 +5465,7 @@
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
             "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Bile speed, one Goo per second and the 20-Goo cap come from a commented-out line in a later community server, and the 6-second Goo life reuses its projectile lifetime. A Japanese wiki says Bile circles its Henchman; random wandering follows a 2016 RealmEye page.",
               "Purple Goo stays an ordinary hittable, killable enemy with no XP or loot, a chosen simplification: a 2015 RealmEye snapshot already says it cannot be hit or damaged except by poison."
@@ -5475,6 +5487,10 @@
               {
                 "url": "https://web.archive.org/web/20150726201317/http://www.realmeye.com:80/wiki/purple-goo",
                 "label": "RealmEye Purple Goo, July 2015 snapshot: cannot be hit except by poison"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com:80/wiki/wine-cellar",
+                "label": "December 2013 Cellar: distinct Goo and Drunk threats; mixed-era strategy text"
               }
             ],
             "group": "layout"
@@ -5485,10 +5501,25 @@
             "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
             "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "known-differences",
+            "differences": [
+              "Current <=20% / 10-second preparation and individual spinner output differ from the pinned 2013 comparator and December 2013 22500-HP/radial-ring description. Opening chases at2 tiles/s and rage at8; original movement/timing are not established.",
+              "Five-live-Henchman replenishment every5 seconds and60-second child expiry differ from the December2013 four-max/12-second/all-Henchmen-die description and later birth-counted Spawn semantics.",
+              "Strictly >10%-damage eligibility, per-contributor Vitality and uniform tier-row selection are reconstructions, not the comparator top-damager/separate-threshold/per-candidate policy."
+            ],
+            "unknowns": [
+              "Original threshold/timing, summon/death policy and loot recipient/probability semantics remain unresolved. Protected native dagger defeat, actual reward/no-duplicate and same-character return are recorded, but full unprotected gameplay acceptance remains not-run."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oryx2.cs",
+                "label": "Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+                "label": "December 2013 Oryx2 capture:22500HP transition; claim labelled11.1.0"
+              }
+            ],
             "group": "rewards"
           }
         ]
@@ -5638,16 +5669,32 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot17 compatibility and individual rate/damage/wave/shot count/spread; ordinary two-shot zero-gap staves must remain distinct from Extreme Prejudice, Crystal Serpent and Anatis. Deployment is separately qualified.",
+        "expected": "Slot17 compatibility and individual damage, rate, parity-alternating waves, shot count/spread and first-target/cover collision. Ordinary paired zero-gap staves remain distinct from EP ten-way36degree/40%, Crystal Serpent110% and Anatis single-shot25%. Embedded upper tiers do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "Original availability of Anatis and upper-tier staves.",
-          "Each staff’s trajectories and collision behavior."
+          "Exact first Anatis release and target123.5.1 acquisition/drop schedules. April15,2012 trading advertisements establish advertised possession, not first release or a completed trade. Period staff tables corroborate T0–T12, not ordinary T13/T14 drops.",
+          "Original server collision tolerance and damage RNG endpoints. Earned acquisition, native range/cover boundaries and staff-specific death-fame acceptance remain unverified; bounded prepared checks are not whole-feature acceptance. Track #873."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L909-L944",
+            "label": "Pinned selected-version client firing engine; XML-derived consecutive pellets and centered spread"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234149/http://forums.wildshadow.com/wiki/realm-mad-god/staves",
+            "label": "May24,2012 capture labelled122.3.2: T0–T12, EP and Crystal Serpent parameters"
+          },
+          {
+            "url": "https://web.archive.org/web/20120415023228/http://forums.wildshadow.com/forum/51",
+            "label": "April15,2012 trading index advertises Anatis Staff; no first-release/drop-policy claim"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=2",
+            "label": "Additional August8,2011 equipment guide lists Astral and Cosmic; editable, not a frozen2011 snapshot"
           }
         ]
       }
@@ -5663,13 +5710,29 @@
         "expected": "Slot6 compatibility and exact reversible additive bonuses/fame behavior for evidenced tiered and named leathers, including Snake Skin, Coral Silk and Spectral Cloth. Embedded upper tiers are not automatically obtainable requirements.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster and upper-tier availability.",
-          "Original equipment changes and stat-cap interactions."
+          "Original-server proof of boosts above capped base stats and Wyrmhide/Leviathan unavailability. The June 2012 table lists wiki T0–T12 plus Snake Skin/Coral Silk; current source loot reaches selected tier13 and all three named UTs, not selected14/15.",
+          "Target-dated Spectral Cloth fame: selected 123.5.1/Kithio give 2%, but the May 2013 archived item page gives 4%. The date and reason for that change remain unknown."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604225529id_/http://forums.wildshadow.com/wiki/realm-mad-god/leather-armor",
+            "label": "June 2012 leather roster and exact tiered/Snake Skin/Coral Silk stats and fame; marked build122"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605151311id_/https://forums.wildshadow.com/node/123422",
+            "label": "August 3, 2012 announcement: Davy Jones and new Trickster set; no individual item values"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508120647id_/https://forums.wildshadow.com/wiki/spectral-cloth-armor",
+            "label": "May 2013 Spectral Cloth: matching equip stats, later 4% fame conflicts with selected 2%"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs",
+            "label": "Compiled community reconstruction: reset equipped boosts, publish base plus boost, save base separately"
           }
         ]
       }
@@ -5682,15 +5745,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot7 restrictions, exact reversible defense and fame behavior for evidenced heavy armor; do not invent a unique-heavy-armor requirement or infer upper-tier deployment from XML.",
+        "expected": "Warrior/Knight/Paladin Slot7 eligibility, exact reversible defense and equipped-only fame for the selected 15 tiered heavy armors. No unique-heavy-armor requirement or ordinary Dominion/Annihilation acquisition inferred from embedded definitions.",
         "differences": [],
         "unknowns": [
-          "Upper-tier availability and any unique heavy-armor variants outside the recovered definitions."
+          "September2012 continuity of upper-tier unavailability and absence of additional unique heavy variants; the May/June2012 catalogues are earlier observations, while November's exploit notice and modern release histories are later evidence.",
+          "Independent target-era proof of equipment above capped base defense and exact original drop/credit probabilities. Prepared inventory and fame regressions do not establish earned acquisition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/items.xml",
+            "label": "Pinned Kithio definitions agree on all 15 selected defense/fame values; comparator, not deployment proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610192324id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/heavy-armor",
+            "label": "June10,2012 catalogue: three classes, T0-T12 defense/fame, no unique heavy armor listed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/armor",
+            "label": "May24,2012 armor table explicitly marks Dominion/Annihilation unreleased"
           }
         ]
       }
@@ -5703,10 +5779,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot14 compatibility and reversible exact individual stat/fame bonuses. Preserve Tlatoani's lack of DEF and distinct Chasuble/Mad Scientist bonuses; use target-buffed Mad Scientist values.",
+        "expected": "All 18 selected Slot14 robe definitions match. Equipped bonuses add above base caps and reverse on removal; only equipped items count toward death fame. Tlatoani has no DEF. Chasuble grants 10 DEF, 50 MP, 4 VIT/WIS and 3% fame. Target-buffed Mad Scientist grants 4 ATT, 13 DEF, 5 WIS, 2 VIT, 55 MP and 5% fame. Current rewards cover armor tiers 1–13 and three UT robes; embedded Star Mother/Ancient Intellect do not establish obtainable drops.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable robe roster, upper-tier availability and stat-cap interactions."
+          "Exact 123.5.1 upper-tier availability and original acquisition, recipient and drop-rate rules remain unresolved; supplied native equipment is not earned acquisition.",
+          "May/June 2012 Wild Shadow sources give Chasuble 2% fame versus the selected client's 3%; the transition date remains unresolved. Historical evidence and remaining gameplay: https://github.com/OpenRotMG/Open-RotMG-Server/issues/876"
         ],
         "sources": [
           {
@@ -5731,8 +5808,8 @@
         "expected": "Slot9 compatibility and reversible exact individual stat/fame bonuses for evidenced deployed rings. Use target Experimental Ring and changed Divine Faith; resurrection and seasonal acquisition remain separate bundles.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable ring roster, developer Crown availability and seasonal calendar.",
-          "Original bonuses and tooltip presentation."
+          "Complete target-era acquisition, recipient/drop probabilities and Minor Defense tutorial continuity; legitimate Crown distribution and exact swimming-award dates. Later Crown +700 WIS/Soulbound and Ring Pop are not selected definitions. America and medals are event prizes, not evidenced recurring seasonal drops. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/877#issuecomment-6479962237",
+          "Native earned acquisition and death-Fame/tooltip comparison across classes remain separate from prepared equip/remove checks. Selected stat/Fame definitions are verified; exact original rounding and complete target-production continuity remain unresolved. Resurrection and seasonal acquisition remain separate bundles."
         ],
         "sources": [
           {
@@ -5758,7 +5835,7 @@
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
-          "When private bags become public, who can see them, and what survives reconnecting."
+          "Original private-to-public conversion, lifetime and reconnect persistence remain unverified. Current reconstruction keeps private bags account-owned until their nominal 60-second removal deadline; pending inventory reservations defer removal. Same-world reentry does not reset that deadline. Collected items persist, while uncollected world bags are not saved. Native reconnect remains untested."
         ],
         "sources": [
           {
@@ -5775,7 +5852,7 @@
           },
           {
             "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
-            "label": "2012 player account: purple god sacks can only be looted by their owner"
+            "label": "February 29, 2012 post33073282: purple god sacks can only be looted by their owner; no timer or numeric threshold"
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
@@ -5793,9 +5870,9 @@
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
             "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions. Successful equipment must survive simultaneous private potion rolls for solo and grouped contributors.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
+            "unknowns": ["Selected/modified7.0 bag slots, put flags and textures agree, and a February29,2012 account supports owner-only purple god sacks. Exact original appearance allocation, public/private generation, timing and winner selection remain unverified. Existing gameplay acceptance is retained, not inferred from this research."],
             "sources": [],
             "group": "behavior"
           }
@@ -5858,16 +5935,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Each evidenced instant-heal consumable uses its own amount, consumes once and caps at effective maximum HP. Definitions include Minor50/Health100/Greater200; Greater deployment is unresolved. Dose succession and mixed/area/cure effects belong to existing consumable bundles, not extra potion-size points.",
-        "differences": [],
+        "expected": "Minor/Health/Greater instant-heal definitions restore 50/100/200 HP, consume once and cap at effective maximum HP. The reconstruction consumes ineffective full-HP/Sick uses; Sick blocks healing. Greater obtainability remains unresolved. Dose succession and mixed/area/cure effects are separate consumable bundles.",
+        "differences": [
+          "Compiled Kithio consumes ineffective uses and caps at Stats+Boost, but lacks a Sick guard. Build122 documents Sick disabling healing; modified7.0 consumes before its guarded heal. These are reconstruction anchors, not recovered original-server code."
+        ],
         "unknowns": [
-          "Was Greater Health Potion obtainable in 123.5.1?",
-          "Does using a potion at full HP or while Sick consume it?"
+          "Was Greater Health Potion obtainable in 123.5.1? Its selected definition and modern drop lists do not prove target-era deployment; tracked in server issue880.",
+          "Independent target-era server evidence for full-HP/Sick consumption versus refund remains missing; selected-client dispatch and community comparators alone do not settle it."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427021641id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-health-potion",
+            "label": "April27,2012 capture: Minor restores50HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427030354id_/http://forums.wildshadow.com/wiki/realm-mad-god/health-potion",
+            "label": "April27,2012 capture: Health restores100HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing; no consumption/refund policy stated"
           }
         ]
       }
