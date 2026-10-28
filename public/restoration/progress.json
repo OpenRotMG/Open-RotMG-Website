@@ -5693,13 +5693,29 @@
         "expected": "Slot6 compatibility and exact reversible additive bonuses/fame behavior for evidenced tiered and named leathers, including Snake Skin, Coral Silk and Spectral Cloth. Embedded upper tiers are not automatically obtainable requirements.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster and upper-tier availability.",
-          "Original equipment changes and stat-cap interactions."
+          "Original-server proof of boosts above capped base stats and Wyrmhide/Leviathan unavailability. The June 2012 table lists wiki T0–T12 plus Snake Skin/Coral Silk; current source loot reaches selected tier13 and all three named UTs, not selected14/15.",
+          "Target-dated Spectral Cloth fame: selected 123.5.1/Kithio give 2%, but the May 2013 archived item page gives 4%. The date and reason for that change remain unknown."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604225529id_/http://forums.wildshadow.com/wiki/realm-mad-god/leather-armor",
+            "label": "June 2012 leather roster and exact tiered/Snake Skin/Coral Silk stats and fame; marked build122"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605151311id_/https://forums.wildshadow.com/node/123422",
+            "label": "August 3, 2012 announcement: Davy Jones and new Trickster set; no individual item values"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508120647id_/https://forums.wildshadow.com/wiki/spectral-cloth-armor",
+            "label": "May 2013 Spectral Cloth: matching equip stats, later 4% fame conflicts with selected 2%"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs",
+            "label": "Compiled community reconstruction: reset equipped boosts, publish base plus boost, save base separately"
           }
         ]
       }
