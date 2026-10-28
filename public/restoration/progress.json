@@ -6620,7 +6620,7 @@
         ],
         "unknowns": [
           "Complete first-adventure layout and instructional/admission fidelity; the May 2012 page describes a solo Tutorial, while this change preserves the existing server admission policy.",
-          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward policy. The mutable enemy wiki describes flee at 100 HP and full potions; selected Kithio uses below 90 HP and Minor Potions. The target Kitchen layout and instance sharing remain unverified."
+          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward probabilities. The May 19, 2012 Bonegrind page (updated build122.3.2) lists Minor Health and Minor Magic Potions, unlike the mutable enemy wiki's full potions, but supplies no probabilities or flee threshold. Selected Kithio uses below90HP. Target Kitchen layout and instance sharing remain unverified."
         ],
         "sources": [
           {
@@ -6638,6 +6638,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/Bonegrind%20the%20Butcher",
             "label": "Mutable enemy wiki: corroborates blades and flee dialogue but conflicts on HP threshold and rewards"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225245id_/http://forums.wildshadow.com/wiki/realm-mad-god/bonegrind-butcher",
+            "label": "May 2012 capture, updated build122.3.2: Minor Health and Minor Magic rewards; no probabilities or flee threshold"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/https://forums.wildshadow.com/node/41768",
+            "label": "February 13, 2012 build122 announcement: Tutorial/Kitchen polished; no exact layout"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605125421id_/https://forums.wildshadow.com/node/149494",
+            "label": "October 9, 2012 Release2 announcement: extended Nexus/shop/guild Tutorial is later than target"
           }
         ]
       }

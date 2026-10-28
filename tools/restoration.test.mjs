@@ -8,6 +8,15 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Tutorial research keeps whole-feature acceptance separate from period reward identities',()=>{
+  const data=catalogue(),evidence=ledger(),id='home:tutorial-and-kitchen',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['tutorial-research-f76c012','chicken-combat-exit-native-c33aa99','kitchen-encounters-native-940cb49'])assert(evidence.results[id].evidence.includes(ref));
+  assert.match(feature.audit.unknowns.join(' '),/no probabilities or flee threshold/);
+  assert.match(evidence.sources['tutorial-research-f76c012'].method,/constructor immediately saves needsTutorial=false/);
+});
+
 test('six native drakes pass without accepting original policy or a seventh egg',()=>{
   const data=catalogue(),evidence=ledger(),id='style:summon-a-drake',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);

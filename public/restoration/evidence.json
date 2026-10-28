@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "tutorial-research-f76c012": {
+      "kind": "source",
+      "revision": "f76c012969f218bd1011e1d41f821897b0847c9c",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/f76c012969f218bd1011e1d41f821897b0847c9c/src/server.rs",
+      "checks": ["home:tutorial-and-kitchen"],
+      "method": "Extracted selected client0282b3a4 (SWF SHA25607ae4fc3) Tutorial XML and decompiled Tutorial/GameSprite/Parameters: six independent proximity overlays, constructor immediately saves needsTutorial=false, removal detaches frame listener. Pinned modified7.0 changes UI coordinates and final Kitchen Portal to Nexus Explanation Portal; Guard/Butcher/Bonegrind/Tutorial Bag XML normalize identically to selected definitions, not independent AI evidence. Compiled Kithio and Trapped engine/portal semantics remain qualified. Additional May19,2012 22:52:45 Bonegrind capture (claim updated122.3.2) lists Minor Health/Minor Magic, no drop rates or numeric flee threshold. Official Feb13,2012 build122 says Tutorial/Kitchen polished; Oct9,2012 Release2 extends Nexus/shop/guild lessons, later than target. Direct archive redirects/Memento timestamps retained.",
+      "limitations": "Source inspection is not unprepared first-run or gameplay acceptance. Older Bonegrind XP/projectile values differ from selected XML and do not override it. Exact123.5.1 map/sharing/admission, phase/interruption clocks and reward probabilities remain unresolved on server899. Shared Tutorial and fresh Kitchen policy are unchanged; no runtime defect or authenticated original behavior claimed. Full research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/899#issuecomment-6482257369"
+    },
     "holy-water-native-2a99da2": {
       "kind": "native",
       "revision": "2a99da2ec5d1628280201aabad6b76ce16db1ac5",
@@ -5587,7 +5596,7 @@
     "style:clothing-and-accessory-cloths": {"status":"not-run","evidence":["ground-appearance-source-0a19612","ground-appearance-regression-09caf36","ground-dyes-accessory-cloth-native-778e8a9","ground-clothing-cloth-native-9e015f9","ground-appearance-repeat-native-9e015f9"]},
     "home:nexus": {"status": "not-run","evidence": ["void-background-source-15c1e17","void-background-regression-2e116c1","void-background-native-bde9a38","nexus-source-794eccf"]},
     "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1"]},
-    "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f","kitchen-transfer-native-f319c16","partial-differences-source-4992445","tutorial-encounters-source-f807a22","tutorial-encounters-regression-f807a22","tutorial-encounters-native-3d0fb76","kitchen-encounters-native-940cb49","chicken-combat-exit-native-c33aa99"]},
+    "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f","kitchen-transfer-native-f319c16","partial-differences-source-4992445","tutorial-encounters-source-f807a22","tutorial-encounters-regression-f807a22","tutorial-encounters-native-3d0fb76","kitchen-encounters-native-940cb49","chicken-combat-exit-native-c33aa99","tutorial-research-f76c012"]},
     "home:choose-your-name": {"status": "not-run","evidence": ["name-claim-source-794eccf"]},
     "home:browse-realm-portals": {"status": "not-run","evidence": ["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc","instance-allocation-source-794eccf","replacement-preparation-source-794eccf"]},
     "home:buy-from-merchants": {"status":"not-run","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d"]},
