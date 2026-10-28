@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "staves-source-745b4b8": {
+      "kind": "source", "revision": "745b4b8130783bbec6128ebeb05e9e67b15ea8c7", "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/745b4b8130783bbec6128ebeb05e9e67b15ea8c7/data/objects.xml", "checks": ["gear:staves"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/873#issuecomment-6479161754 . All18 selected definitions and selected123.5.1/modified7.0 shoot/trajectory/collision engines inspected. Compiled Kithio Projectile.cs and related2013 Trapped retain parity waves and first-target/cover behavior; not independent official evidence. Modified7.0 renumbers upper tiers and adds Admin Staff. May24,2012 capture labelled122.3.2 corroborates T0–T12, EP ten-way36degree/40%/80–95 and Crystal Serpent110%/60–70. Two additional resources: April15,2012 trading index advertises Anatis; August8,2011 editable equipment guide lists Astral/Cosmic. Later T13/T14 release history does not establish target-era drops.",
+      "limitations": "No official provenance or comparator-code reuse claimed. Exact first Anatis release, target acquisition/drop schedules, original collision tolerance and damage RNG endpoints remain unresolved. Advertisements are not completed trades; a dated editable guide is not a frozen historical snapshot. Source inspection is not gameplay acceptance. Historical partial."
+    },
     "swords-native-roster-488268e": {
       "kind": "native", "revision": "488268e91a02d1bc6670fe7e39591254563b00cc", "date": "2026-10-28",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1150#issuecomment-6478787057", "checks": ["gear:swords"],
@@ -4993,7 +4999,7 @@
     "gear:daggers": {"status":"not-run","evidence":[]},
     "gear:bows": {"status":"not-run","evidence":["reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc"]},
     "gear:wands": {"status":"not-run","evidence":["wand-hit-source-82c3430","wand-hit-regression-82c3430","wand-hit-native-82c3430"]},
-    "gear:staves": {"status":"not-run","evidence":[]},
+    "gear:staves": {"status":"not-run","evidence":["staves-source-745b4b8"]},
     "gear:leather-armor": {"status":"not-run","evidence":[]},
     "gear:heavy-armor": {"status":"not-run","evidence":[]},
     "gear:robes": {"status":"not-run","evidence":[]},
