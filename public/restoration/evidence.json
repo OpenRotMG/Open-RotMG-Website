@@ -3419,6 +3419,33 @@
         "dungeons:snake-pit:diggable-route-and-cover"
       ]
     },
+    "stat-potions-native-3725171": {
+      "kind": "native",
+      "revision": "3725171ce94130117e89c85625899a189d696b9e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1166#issuecomment-6481112299",
+      "method": "Final clean native run passes31 assertions with client0282b3a and Ruffle.16 on a private display. Ordinary hotkeys consume all8 potions once, clip Life/Mana +5 to +2, reach Wizard base caps, keep the equipped Defense bonus separate, and refuse all8 capped drinks without item/stat/revision changes. Positive partial HP/MP deficits are asserted; captures show +39HP/+32MP, not advertised100. Blue Paradise maxima expire and clamp current resources to670/385 without losing permanent gains. Ordinary Nexus reconnect and a read-only closed SQLite check agree on final stats/items, revision23 and the same living character. All children close; cleanupErrors is empty.",
+      "limitations": "Prepared level/stats/items/placement, not earned acquisition, all-class native coverage or historical acceptance. First attempts failed on a test JSON-shape error and stale prepared client inventory; an intermediate29-assertion pass did not establish partial MP because regeneration filled it. Those results remain scoped/failed. Final case waits for native updates and asserts positive deficits. Original capped consumption, partial final gains, server chat and MP hue remain qualified; no gameplay or timing/ACK/lease policy changed.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
+    "stat-potions-source-3725171": {
+      "kind": "source",
+      "revision": "3725171ce94130117e89c85625899a189d696b9e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/3725171ce94130117e89c85625899a189d696b9e/src/world.rs#L4723-L4751",
+      "method": "Reconciled PR346/343/620. Fresh SWF binary-data extraction verifies all eight increments and all 13 class-cap rows against current data/objects.xml and pinned 7.0 PlayersCXML/EquipCXML. World clips permanent growth to base caps and publishes silent growth only after Store completion; restoration feedback uses actual gain. Pinned source/engine and period research are recorded in issue882 comment6480729166.",
+      "limitations": "Source inspection is not native acceptance. Shared client definitions and related comparators are not independent original-server evidence. Original capped consumption, final partial Life/Mana gains, server chat and MP hue remain historically qualified; no gameplay policy changed.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
+    "stat-potions-regression-a8622fb": {
+      "kind": "regression",
+      "revision": "a8622fb14d4ad11cdc225fe13d5b3e1c2e8e9513",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1166#issuecomment-6481041657",
+      "method": "Potion selector passes10 and recovery selector passes4, totaling13 distinct tests. Store covers312 class/stat/gap combinations across13 classes and8 potions: real AFTER UPDATE abort rollback, one committed increment/item/revision, stale replay and depleted-source rejection. World covers silent stat growth, pending repeat/capped refusal, no pre-commit effects or failed-publication success, and exact clipped +7HP/+9MP notifications. Formatting and strict all-target Clippy pass. Rust sources/tests are byte-identical at3725171.",
+      "limitations": "Prepared regressions, not earned progression, all-class native gameplay or original-server fidelity. World uses simulated completion receipts; Store separately exercises real SQLite transactions. These selectors are not a full-suite pass. Native completion is recorded separately.",
+      "checks": ["gear:stat-potions", "gear:consumable-result-feedback"]
+    },
     "potion-chat-regression-ee3d1fc": {
       "kind": "regression",
       "revision": "ee3d1fcf055ba2813bbcf3a120ea3f8b411bb04d",
@@ -5421,8 +5448,8 @@
     "gear:ability-activation-contract": {"status":"passed","evidence":["ability-deadline-source-22c9a7c","ability-deadline-regression-22c9a7c","ability-deadline-native-22c9a7c","ability-cooldown-regression-ef5686e","ability-cooldown-native-ef5686e","inventory-era-source-d15f321","ability-contract-native-7a756fca","ability-refusals-native-d6caa5d1","ability-refusals-regression-c66da90c"]},
     "gear:health-potions": {"status":"passed","evidence":["health-potions-research-de39f41","health-potions-native-9faba5a"]},
     "gear:magic-potions": {"status":"passed","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","magic-potions-research-3389a2c","magic-potions-regression-62c38f4","magic-potions-native-3389a2c"]},
-    "gear:stat-potions": {"status":"not-run","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
-    "gear:consumable-result-feedback": {"status":"not-run","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc"]},
+    "gear:stat-potions": {"status":"passed","evidence":["potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc","stat-potions-source-3725171","stat-potions-regression-a8622fb","stat-potions-native-3725171"]},
+    "gear:consumable-result-feedback": {"status":"passed","evidence":["mana-light-blue-source-c19c48f","mana-light-blue-regression-c19c48f","mana-light-blue-native-c19c48f","mana-text-source-65dd762","mana-text-regression-65dd762","mana-text-native-4759ff7","potion-chat-regression-ee3d1fc","potion-chat-native-ee3d1fc","stat-potions-source-3725171","stat-potions-regression-a8622fb","stat-potions-native-3725171"]},
     "gear:elixirs": {"status":"passed","evidence":["elixirs-research-ab71ab4","elixirs-native-ab71ab4"]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
