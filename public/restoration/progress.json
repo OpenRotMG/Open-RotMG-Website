@@ -3167,15 +3167,43 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighPlains Warrior0x63a, Axebearer0x63b, Mage0x63c, King0x63e and Soulless0x63f; allocate God0x640 nested population relation.",
-        "differences": [],
+        "expected": "HighPlains Warrior0x63a, Axebearer0x63b, Mage0x63c, King0x63e, Soulless0x63f, God0x640. All six complete definitions match pinned modified7.0, not AI; God's Blue Star deals0 damage/3s Confused.",
+        "differences": [
+          "Current God owns1 King/1 Soulless; King escorts start2/type, cap3, refill10s. Kithio directly spawns3/3/3/2/1, initially floor(max/2), with lifetime caps; Trapped uses nested, randomized density-based reproduction.",
+          "God: current3 bolts/7 degrees and fully predicted Star+500ms; Kithio15-degree fan, Star1200ms/0.5 prediction. Mage/Soulless phases also differ.",
+          "Loot differs: Kithio King Health3%, Mage/Soulless Magic3%, Warrior/Axebearer none; current adds drops. God ability: current10%, Kithio20%, undated Japanese15%. February2012 supports10% ability/0.5% egg; wiki armor tiers map+1 to selected tiers. Tier-pool semantics also differ."
+        ],
         "unknowns": [
-          "Target nested quantities, exact attack timings/prediction and reward policy."
+          "Original123.5.1 population, AI and rewards remain unproven: period stats are obsolete; later claims lack reliable target-era dating. Research/bounded gameplay does not establish earned progression, multiplayer rewards or full acceptance. Historical remains partial; details: https://github.com/OpenRotMG/Open-RotMG-Server/issues/829#issuecomment-6462794075"
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L257-L376",
+            "label": "Compiled/registered primary comparator; check Spawn/Shoot/Cooldown/LootDefs/Loots semantics"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
+            "label": "Modified7.0: all six complete objects normalize identically"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs#L225-L330",
+            "label": "Older comparator: nested King ownership, jittered local-density reproduction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216044213id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-dwarf-god",
+            "label": "February2012 capture: Confused, quantities, rates; obsolete300HP/15DEF and projectile speeds"
+          },
+          {
+            "url": "https://web.archive.org/web/20120516130635id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-dwarf-king",
+            "label": "Additional period resource: King does not reproduce and only drops Health Potion; obsolete200HP/10DEF"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Undead%20Dwarf%20God",
+            "label": "Additional wiki lead: older15% ability rate conflicts with February2012's10%; backup403 prevents dating claim"
           }
         ]
       }
