@@ -6733,10 +6733,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Choose/change registered account name; client maximum ten ASCII letters, unique-name UI and subsequent Gold-priced rename. Client advertises 1000 Gold; authoritative original enforcement, minimum length, default-name pool and first-choice rank remain unresolved.",
-        "differences": [],
+        "expected": "Registered first-name choice and later Gold-priced rename. Selected client caps ten ASCII letters, its account dialog rejects empty input, and its Nexus panel reads the supplied first-choice star requirement and advertises 1000 Gold. Compiled Kithio has a 45-name pool and UUID-hash selection; this is not recovered original server policy.",
+        "differences": [
+          "Current reconstruction requires 3–10 ASCII letters, uses Guest{id} defaults and case-insensitive human uniqueness, and permits first choice without earned stars (local Nexus nstar:0). Selected client and primary comparator do not establish the three-letter minimum. Kithio's embedded Nexus also declares nstar:0, with nstar export disabled. First choice is free; subsequent choices cost 1000 Gold in game, not through HTTP. Bot-name displacement is project policy."
+        ],
         "unknowns": [
-          "Original minimum length, generated-name distribution, rank gate, reserved/profanity rules and server-side rename price."
+          "Original server minimum, default-name distribution, first-choice rank enforcement, reserved/profanity policy and authoritative rename price. Mutable wiki lists and related community implementations are not independent target-era proof."
         ],
         "sources": [
           {
