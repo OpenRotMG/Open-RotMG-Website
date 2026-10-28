@@ -2614,10 +2614,14 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The LowForest Goblin Mage is level 4 with 280 HP and no DEF. Its projectiles include wavy Cyan Magic dealing 14 damage and Dark Blue Magic dealing 16. The family includes Rogues and Warriors.",
-        "differences": [],
+        "differences": [
+          "Kithio reconstruction: below 182 HP switches to six-tile retreat and .25 angular prediction; healthy aim is .35. Independent 1000/1300ms channels repeat at 1050/1350ms on the 50ms engine tick, then both at 1050ms. The five-second flash is not an escape timeout.",
+          "Three initial escorts per role grow to seven lifetime births at nominal 12s intervals, not seven living replacements. Unharmed escorts protect/scatter rather than chase the player; fixed 1200/2400ms phases, radius seven and home leashes remain bounded approximations of randomized/concurrent source movement.",
+          "Escorts now have one public 4% HP-potion attempt per death, not repeated contributor-scaled 3% rolls. Mage tier-group-one-item rolls still differ from Kithio's independent per-candidate expansion; rates/distribution remain reconstruction, not authenticated history."
+        ],
         "unknowns": [
-          "Target escape threshold/duration, attack interleaving, minion caps, deployment corroboration and reward rates.",
-          "Target movement timing, population/replenishment and loot distribution."
+          "Authenticated 123.5.1 deployment, initial formation/population, exact movement randomization and original lifetime-versus-living reproduction policy remain unresolved.",
+          "Build118 wiki captured in 2012 lists T2 armor while Kithio uses selected T3; the project's general wiki/client armor-tier offset may explain this, but Goblin-specific reward identity/rate corroboration remains partial. Prepared gameplay is not earned progression or a probability study."
         ],
         "sources": [
           {
@@ -2626,7 +2630,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "2013 comparator; differs in movement, replenishment and loot"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L293-L364",
+            "label": "Compiled primary reconstruction table; Spawn, Shoot and transition semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120502020343id_/http://forums.wildshadow.com/wiki/realm-mad-god/goblin-mage",
+            "label": "Archived Build118 claims, not a 123.5.1 deployment receipt"
           }
         ]
       }
