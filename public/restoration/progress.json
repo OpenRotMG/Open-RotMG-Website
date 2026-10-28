@@ -2677,15 +2677,29 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "ShoreSand Scorpion Queen is level 1 with 100 HP, no DEF and no projectile of its own. Ordinary Poison Scorpions fire 7-damage Green Magic; the name does not establish a Poisoned effect.",
-        "differences": [],
+        "differences": [
+          "Bounded reconstruction starts five defenders on a two-tile formation, refills ten owned slots on fixed 10s attempts, and omits Queen self-reproduction/orphan adoption. Compiled Kithio instead starts two offset defenders, adds up to five lifetime Spawn births, separately reproduces scorpions below ten within radius ten, and Queens below two within radius forty. This comparator mismatch is not a proven target-era bug."
+        ],
         "unknowns": [
-          "Target initial count/radius, Queen reproduction, deployment density and reward rates.",
-          "Target counts, ordinary no-drop policy, movement and replenishment timing."
+          "Original initial counts/placement, density versus ownership, refill clocks, Queen reproduction, orphan adoption/protection hysteresis/home leash and deployment density remain #815; bounded native coverage is not whole-feature acceptance.",
+          "Queen 3% Health/2% Magic candidates and ordinary no-drop match community tables; target reward rates, contributor eligibility/XP and native Queen potion acquisition remain unverified. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/815#issuecomment-6460829230"
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/wp-content/uploads/2012/06/lvl1-scorpions.jpg",
-            "label": "2012 player screenshot"
+            "label": "June 1, 2012 article screenshot; visible build123.0.0, not a spawn census"
+          },
+          {
+            "url": "https://whyigame.wordpress.com/2012/06/01/rotmg-lvl-20-in-20-minutes/",
+            "label": "Dated parent article; early shore combat, not numeric reproduction/drop proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20130525090345id_/https://forums.wildshadow.com/wiki/realm-mad-god/scorpion-queen",
+            "label": "May 2013 capture labels claims updated118; target continuity unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L48-L65",
+            "label": "Compiled community comparator; inspect Spawn/Reproduce/Protect/loot semantics"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
