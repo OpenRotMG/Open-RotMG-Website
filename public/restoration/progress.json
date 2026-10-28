@@ -3931,17 +3931,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying Mountain Ghost God HP1000/DEF12, White Bolt120; comparator seven-shot25-degree fan, chase/wander and Speed rewards. Distinct from Ghost King.",
-        "differences": [],
+        "expected": "Flying Mountain Ghost God0x659 HP1000/DEF12; selected White Bolt120/speed50/lifetime2700 has no status or piercing. Build118 corroborates seven shots/25-degree gaps, Speed and Undead Lair. Distinct from Ghost King and Septavius.",
+        "differences": [
+          "Current Trapped-derived pursuit4/acquisition7/stop4 and nonpredictive fan differ from compiled Kithio Follow(1,range7), angular-history prediction0.5 and tick-driven cooldown; build118 lists chase10 and aim0.5.",
+          "Current broader gear tiers, corrected loot allocation, safe bounded births and17% Undead Lair roll remain reconstruction. Kithio has Speed1.5% at180 damage but no portal; modified7.0 uses17% portal and different7% reward thresholds/rates, while the Japanese page limits its4% portal figure to118.7.4."
+        ],
         "unknowns": [
-          "Target movement/attack constants, portal association/rate, population and reward eligibility.",
-          "Earned portals now prefer unobstructed death coordinates; occupied sites still use project interaction clearance, not a certified original separation policy."
+          "Exact123.5.1 pursuit/elevation/tether/peak teleport, prediction/history/cadence, population distribution and loot/portal probabilities remain unresolved in server issue848.",
+          "Prepared native combat and forced reward draws do not accept earned traversal, unprotected projectile hits, sustained reproduction, multiplayer eligibility, pickup/reconnect or rolled Undead Lair entry. Whole gameplay remains not-run.",
+          "Earned portals prefer unobstructed death coordinates; occupied sites use project interaction clearance, not a certified original separation policy."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L180-L200", "label": "Compiled primary Ghost God table; engine semantics and conflicts in server issue848"},
+          {"url": "https://web.archive.org/web/20120519230020id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-god", "label": "May19,2012 build118 fan, movement, Speed and Undead Lair; earlier-version evidence"},
+          {"url": "https://wikiwiki.jp/rmd/Ghost%20God", "label": "Japanese Ghost God page; parenthesized reward/portal odds explicitly limited to118.7.4"}
         ]
       }
     },
