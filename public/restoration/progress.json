@@ -1730,7 +1730,8 @@
           "The protective clearing described above no longer fills native holes at the fixed Lich birth point. Those cells retain their ground, objects, configuration, terrain, region and scenery identity. Written floor cells still clear scenery. Untouched birth cells require native walkability, with the existing habitat, ownership and whole-site guards retained. Original fields and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/554",
           "Lich Idle now uses the compiled primary reference's strict HP/MaxHP < 0.99999 predicate instead of any damage. At the selected 300000 HP, losses of 1-3 HP remain vulnerable; 4 admits the existing shield phase. Regression tests and prepared native encounters cover subthreshold damage and later admission, not historical entry clocks, complete AI or original map configuration: https://github.com/OpenRotMG/Open-RotMG-Server/pull/731",
           "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987",
-          "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002"
+          "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002",
+        "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091"
         ],
         "unknowns": [
           "Conflicting historical comparator/wiki summon counts; no accepted complete target branch table.",
@@ -3094,12 +3095,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "ShoreSand Pirate0x600 and Piratess0x601, selected Blade definitions and ordinary population interaction; excludes Pirate Cave.",
-        "differences": [],
+        "expected": "ShoreSand Pirate0x600 has5HP; Piratess0x601 has6HP. Both have0DEF and one Blade: damage4/speed40/lifetime600ms. Complete selected definitions match recovered123.5.1 and pinned modified7.0. Excludes Pirate Cave.",
+        "differences": [
+          "At server55b6ab4d, continuous range6 chase/home leash and bounded two-initial/five-Pirate/five-Piratess camp with10s refill differ from compiled primary Follow duration/rest/hysteresis and60s same-type radius10 density reproduction. Older Trapped explains several current constants, not exact target fidelity.",
+          "Nominal20% selected T1 weapon/armor and3% HP potion agree with primary and January2012 build118-labelled text. Current one tier roll/uniform item differs from primary independent0.2/N candidate rolls and contributor bag allocation.",
+          "No current Pirate/Piratess portal roll. January8,2020 patch says beach Pirates can now drop caves, but a January2012 key page already lists them. Do not apply today's drop table or infer original probability from a few kills."
+        ],
         "unknowns": [
-          "Target caps, replenishment, movement timing, loot rates and Pirate Cave portal probability."
+          "Exact123.5.1 movement, reproduction clocks/density/start counts, tier-roll allocation and conflicting portal documentation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/827#issuecomment-6462537681 . Prepared gameplay is separate from historical and whole-feature acceptance."
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120124041159id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirates",
+            "label": "January24,2012 capture; content labelled build118, not target-version continuity"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L16-L39",
+            "label": "Compiled primary comparator; Follow/Reproduce/loot engines qualified separately"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2020#patch-x-32-4-1",
+            "label": "January8,2020 portal addition; conflicts with earlier key documentation"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -3115,10 +3132,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f; explicitly allocate Lizard God population relation.",
-        "differences": [],
+        "expected": "HighForest Archer0x64a, Warrior0x64b, Mage0x64c, Veteran0x64d and ordinary King0x64f with Lizard God0x650; selected Mage/Veteran MultiHit and Health-Potion-only elf rewards.",
+        "differences": [
+          "Rust retains nested King ownership, 2/2/1/1/1 initial elves, living-slot ten-second refill, simplified chase/aim and a home leash. Compiled Kithio instead gives Lizard direct 4/3/2/2/1 lifetime birth caps with floor-half initial counts and no King reproduction; Trapped has a different nested model. Neither comparator authenticates target-era behavior."
+        ],
         "unknowns": [
-          "Original group sizes and timing, orphan behavior, MultiHit attacks and drops."
+          "Exact 123.5.1 initial quantities, birth/reentry clocks, orphan/adoption policy, predictive/cloaked attacks, height constraints and reward RNG/eligibility; issue828 tracks the remainder. November2011/May2012 potion evidence predates the target."
         ],
         "sources": [
           {
@@ -3126,8 +3145,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L164-L256",
+            "label": "Compiled primary comparator: Night Elves and Lizard God"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Older comparator: nested King ownership differs from Kithio"
+          },
+          {
+            "url": "https://web.archive.org/web/20111127224752id_/http://forums.wildshadow.com/wiki/realm-mad-god/night-elf-king",
+            "label": "November 2011 King guide: Health Potion 3%, no reproduction; other stats differ"
           }
         ]
       }
