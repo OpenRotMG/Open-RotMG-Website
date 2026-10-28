@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "rum-mushrooms-native-e4041e57": {
+      "kind":"native", "revision":"e4041e57c438403eace2e57e74775c806074a5b8", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1176#issuecomment-6481846565", "checks":["gear:rum-and-mushrooms"],
+      "method":"Clean QA3f401047 passes24 checks over67800 game ms/751 observations: all three native consumables, concurrent conditions, active Ghost/30-second refresh, later-deadline overlap, independent4s/6s expiration, seven exact consumption revisions, unchanged HP/MP/stats, empty/incompatible refusal and same-character cave-to-Nexus inventory persistence. Timing windows have at most150ms sampling gaps and bracket selected durations. Cold QA4cd0f03d verifies SQLite/FKs, exact living character1/revision8/items/HP555/MP290/base, zero deaths/shots/kills/WARNs/ERRORs and39 absent owned PIDs. Cleanup[]/QA0/scratch reclaimed. Client0282b3a4/Ruffle.16; both unretouched viewport crops anonymously byte-verified.",
+      "limitations":"Prepared legal Wizard/gear at generated cave spawn, not earned acquisition, all-class eligibility, active-effect transfer, continuous rendering performance, full visual/AI or historical acceptance. LP_NUM_THREADS4 invocation; inherited150% renderer quota unchanged. Short coordinated native/server pause windows, not continuous30s footage.9907ca3e fails endpoint timing/overlay;53bbb124 trips unchanged ACK backlog guard;560e1af8 inserts a frame wait and refreshes too late. Failures retained, no guard weakened. A later quota-adjustment attempt refused the closed owned browser. Whole-feature not-run/history partial;886/942/943/946 retain precise remainder."
+    },
     "rum-mushrooms-source-824d8e8f": {
       "kind":"source", "revision":"824d8e8f79d289816ec92f4ab71a447ef1091bbc", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/824d8e8f79d289816ec92f4ab71a447ef1091bbc/data/objects.xml", "checks":["gear:rum-and-mushrooms"],
@@ -5459,7 +5465,7 @@
     "gear:elixirs": {"status":"passed","evidence":["elixirs-research-ab71ab4","elixirs-native-ab71ab4"]},
     "gear:tinctures-and-effusions": {"status":"not-run","evidence":[]},
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
-    "gear:rum-and-mushrooms": {"status":"not-run","evidence":["rum-mushrooms-source-824d8e8f"]},
+    "gear:rum-and-mushrooms": {"status":"not-run","evidence":["rum-mushrooms-source-824d8e8f","rum-mushrooms-native-e4041e57"]},
     "gear:holy-water": {"status":"not-run","evidence":[]},
     "gear:transformation-potion": {"status":"not-run","evidence":["item-chat-guild-source-4992445"]},
     "gear:xp-booster": {"status":"not-run","evidence":[]},
