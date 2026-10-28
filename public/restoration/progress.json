@@ -3249,9 +3249,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "MidPlains Warrior629, Mage62a, Queen62b and ordinary King62c with differentiated melee, ranged and support roles.",
-        "differences": [],
+        "differences": [
+          "Current King-owned living caps3/2/2 with10s refills, same-camp King healing100HP/500ms/range≤10, fixed formation/home leash and simplified chase/Queen-orbit attacks differ from compiled Kithio's nested lifetime births, full group healing/300ms/range<10 and phased movement/attacks.",
+          "Current King pools retain earlier period corrections rather than Kithio's later tier/rate/Magic Potion table. Current Spider Den10% differs from February2012 wiki5%; neither authenticates123.5.1 continuity."
+        ],
         "unknowns": [
-          "Target heal amounts/range/eligibility, formation, replenishment and drops."
+          "Original heal/status/recipient policy, formation/orphan/adoption, population clocks/caps, attack phases/prediction and reward/portal continuity remain #830. Bounded prepared native evidence does not accept earned traversal, multiplayer rewards, pickup/reconnect or a rolled dungeon journey."
         ],
         "sources": [
           {
@@ -3259,8 +3262,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
-            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L48-L119",
+            "label": "Older Orc comparator; randomized nearest/local-density semantics, not selected-version proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L52-L114",
+            "label": "Compiled primary comparator; Heal/Spawn engine semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120123045113id_/http://forums.wildshadow.com/wiki/realm-mad-god/orc-queen",
+            "label": "January2012 Queen guide; obsolete stats/attack and no numeric heal policy"
           }
         ]
       }

@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "orcs-native-cbc9a1b": {
+      "kind":"native", "revision":"cbc9a1b115c81aa11eecc27237515b07da1aa4c9", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1102#issuecomment-6470704465", "checks":["realm:orcs"],
+      "method":"Clean QAa21326b3 passes21 checks/103700game ms with client39acbfbf/Ruffle.16: natural MidPlains initial selected actors, all three attacking kinds activate/move/fire, Mage three-shot15-degree fans, nonshooting Queen inside chase stop7, native670to423HP, current3/2/2 fills/caps, wounded King heals38HP, native defeat/positive XP and new identity for each escort role, King defeat with moving survivors/no births/no duplicate XP. Cold QA1e7b4f23 checks SQLite/FKs, living saved character2/revision1/XP18181, no backend ERROR, empty cleanup and117 PIDs absent. Case300ec03c/ELF1eacf510; published image cropped from passing take.",
+      "limitations":"Supplied level20/staff/stats, family-adjacent placement/direct scout, protection after observed damage and attack/dexterity upgrade for King defeat. Not earned progression/survival, heal boundary/status policy, multiplayer rewards/acquisition, pickup/reconnect, a rolled Spider Den journey or RNG/history acceptance. Retained failures80cad6e0(Queen-stop oracle),b3da4b10(setup timeout),45038bb6(stale target),d8a6e32e(collateral King),22abef78(depleted role),5ae06978(Xvfb exit) and2abaaf83(distant Mage) are excluded. No gameplay/authority/ACK/lease/death/persistence/ownership policy changed. Whole gameplay stays not-run/history partial; remainders issue830."
+    },
+    "orcs-research-18b3308": {
+      "kind":"source", "revision":"18b33082f5f76dd1d1484de53ab0718b861db0a9", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/18b33082f5f76dd1d1484de53ab0718b861db0a9/src/world/population.rs", "checks":["realm:orcs"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/830#issuecomment-6463616302 . All four complete selected XML objects normalize identically to pinned modified7.0 MidCXML. Compiled/reflection-registered Kithio Midland plus additional Heal/Spawn engine inspection distinguish full group healing300ms/range<10 and nested lifetime births from current100HP/500ms same-camp healing and living-slot10s refills. Trapped nearest/local-density/randomized semantics, modified7.0 HealGroup, loot expansion/allocation, January/May2012 Queen and February2012 King documents were checked.",
+      "limitations":"Reference implementations are not original123.5.1 authentication or independent historical witnesses. Period stats/projectiles are obsolete; Japanese2021 text/image dates do not date numeric claims. Formation, original heal/status/ownership, clocks/caps/AI and reward continuity remain issue830, including current Spider Den10% versus period5%. No gameplay policy, imported comparator code/assets, licensing grant or deployment change."
+    },
     "ogres-native-partial-6bcdbf3": {
       "kind":"native", "revision":"6bcdbf324bef2921c606a799da8fa172f88c07a8", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1101#issuecomment-6470492569", "checks":["realm:ogres"],
@@ -4145,7 +4157,7 @@
     "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","pirates-research-55b6ab4","pirates-native-8042725"]},
     "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","night-elves-research-087f74b","night-elves-regression-087f74b","night-elves-native-62a6f95"]},
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","undead-dwarves-research-ab3bc32","undead-dwarves-native-0716855"]},
-    "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","orcs-research-18b3308","orcs-native-cbc9a1b"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ogres": {"status":"not-run","evidence":["ogres-native-partial-6bcdbf3","ogres-source-af065a1","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:nomads": {"status":"not-run","evidence":[]},
