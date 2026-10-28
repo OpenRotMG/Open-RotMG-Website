@@ -3868,15 +3868,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120 plus zero-damage Purple Star Blind5s. Comparator radial damage and predictive condition shots are qualified, not target-certified.",
-        "differences": [],
+        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120/speed5/lifetime2.7s and zero-damage Purple Star/speed7/lifetime3s/Blind5s. Qualified five-bolt72-degree ring and predictive star; primary comparator supports local max3 reproduction and1% private Defense at270 damage.",
+        "differences": [
+          "Current speed10/acquisition7/stop4/wander4 agrees with the build118 guide but differs from Kithio Follow acquisition10/stop7/resting hysteresis and Trapped chase speed4. Capped linear prediction and750/1000ms schedules differ from Kithio angular-history prediction and check-before-decrement timing; home tether remains project reconstruction.",
+          "Current gear retains T6 armor and T4 abilities absent from Kithio's Beholder table. Build118 wiki armor labels require the recorded client-tier offset; modified7.0 changes gear eligibility and Defense rates. Corrected shared/private allocation and safe finite births remain authoritative, not original-fidelity claims."
+        ],
         "unknowns": [
-          "Production geometry, cadence/prediction, condition-hit semantics, rewards and population/portal policies."
+          "Exact123.5.1 prediction/history sampling, pursuit/elevation/peak teleporting/tether, cadence, original rewards/allocation, population distribution and portal continuity remain issue845. April26,2012's build118 guide is earlier-version corroboration; current RealmEye Weak4s/Abandoned City does not override selected Blind5s.",
+          "PR1127 verifies natural Realm admission/movement/volleys/Blind/defeat/150XP with prepared stats and Invulnerable, plus deterministic zero-damage Blind/ACK/expiry and269/270/271-damage reward boundaries. Unprotected native damage, active reproduction, multiplayer eligibility, pickup/reconnect and ordinary-risk/earned travel remain unverified; whole-feature gameplay is not-run."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L114-L140",
+            "label": "Compiled primary Beholder table; Shoot/Follow/Reproduce/loot engines inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120426135122id_/http://forums.wildshadow.com/wiki/realm-mad-god/beholder",
+            "label": "April26,2012 build118 combat/movement/reproduction guide; earlier-version corroboration"
           }
         ]
       }
