@@ -2581,9 +2581,17 @@
           "PR601 rechecks the Cube God's untouched birth cell before delayed admission. Blockers and live or owned occupants postpone admission without clearing native terrain or scenery. Prepared checks are not original spawn-selection proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601"
         ],
         "unknowns": [
-          "Target spawn selection, choreography, counts and reward distribution."
+          "Original 123.5.1 spawn/target selection, choreography, counts and reward distribution remain unresolved: Build121.0 documentation, Trapped and modified7.0 disagree on reproduction timers, populations and minion control. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/820#issuecomment-6454414446"
         ],
         "sources": [
+          {
+            "url": "https://web.archive.org/web/20120117000123id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/cube-god",
+            "label": "January2012 capture; text labels Build121.0, not authenticated 123.5.1 continuity"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EncountersCXML.dat",
+            "label": "All four selected Cube definitions normalize identically; modified7.0 client is not server AI"
+          },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.CubeGod.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
