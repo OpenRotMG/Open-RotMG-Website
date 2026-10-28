@@ -6945,10 +6945,15 @@
         "expected": "Players request a trade, receive a private chat confirmation, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
           "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
-          "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
+          "Server PR427 removes the 2-tile limit on same-world player trades. Kithio and the related July 2013 Trapped handler resolve names within a world without a distance gate; February/June 2012 Trade System captures say 10 tiles, while the July 2011 test117.5 guide says 15. Exact 123.5.1 distance remains unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427",
+          "Current ordinary guests can trade and targets match exact-case names. The 2012 guide prohibits guest/unnamed trading; compiled Kithio requires NameChosen on both sides and matches case-insensitively. No star/guild-rank gate appears in its request path or the selected client Trade menu, which does not establish original server permissions.",
+          "Current request expiry silently uses 20000 simulation milliseconds (400 steps), separate from the elapsed stable-offer guard. Kithio subtracts elapsed tick deltas from a 20000ms request counter and sends a timeout notice. Neither establishes the original production expiry contract.",
+          "Current settlement places received goods only in backpack slots. The June 2012 guide and Kithio comparator describe compatible empty equipment slots being filled automatically. No auto-equip or safety-policy change is made by this research."
         ],
         "unknowns": [
-          "Original server-side name/rank restrictions, distance, request timeout, item eligibility, confirmation delay and exact requester-confirmation wording."
+          "Exact 123.5.1 account/name/rank gates, case matching and distance; period guides and community reconstruction do not resolve target continuity.",
+          "Original request expiry clock/notice, complete server-side item eligibility and automatic equipment placement.",
+          "Original server settling enforcement and exact requester wording. Selected client countdown is confirmed as 2999ms using getTimer(); current 3000ms enforcement and Kithio requester text remain reconstruction choices."
         ],
         "sources": [
           {
@@ -6966,6 +6971,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
             "label": "Compiled Kithio reconstruction: separate requester chat confirmation after recipient notification; not official server wording"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216040435id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "February 2012 capture: 10-tile initiation, named accounts and renewed approval, not exact target continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608005457id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "June 2012 capture additionally describes overflow refusal and automatic equipment placement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build117.5",
+            "label": "July 2011 test-build guide: 15 tiles, not a 123.5.1 distance specification"
           }
         ]
       }
