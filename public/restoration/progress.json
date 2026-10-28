@@ -3521,11 +3521,31 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Weretiger0x635, Wereleopard0x636, Werepanther0x639 and owner Werelion0x637; differentiated attacks, movement and owner relationship.",
-        "differences": [],
+        "differences": [
+          "Current Trapped-based camps initially roll 1..3 Tigers, 1..2 Leopards and 1..2 Panthers, then refill empty owned slots every10s. Compiled Kithio Spawn truncates initial .5 fractions to0/1/1 and caps lifetime births at1/2/3 on23/9/15s clocks, not alive-child replacement.",
+          "Current Tiger/Leopard chase-orbit choices are equal every500ms, versus Trapped's per-tick choices. Panther attempts target-position Planewalk every7s; Kithio uses a200ms high-speed jump and4s attack state. Camp/home/clear-ground guards are reconstruction policy.",
+          "Current Tiger triple shots and Lion alternating projectile types differ from Kithio's predictive single Tiger shot and Lion hidden-player eight-ray choreography. Current loot uses Trapped coefficients with different allocation semantics; Kithio and dated follower guides list HP-only Tiger/Leopard and MP-only Panther."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, random-choice probabilities, Planewalk policy and loot rates."
+          "123.5.1 continuity of initial/replenishment counts and clocks, choice cadence, Panther teleport versus dash and owner limits, Lion hidden-player attacks, loot allocation/odds and Spider Den10% versus mixed-era5%. Research disposition and remaining checks: server issue837."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L503-L600",
+            "label": "Compiled and registered primary reconstruction reference; original123.5.1 AI not authenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All four complete objects normalize identically to selected123.5.1; modified7.0 client agreement is not server AI evidence"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Weretiger",
+            "label": "March17,2012 last-modified follower guide: three17damage cover-piercing shots; parent page changed2018"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Werepanther",
+            "label": "February25,2012 last-modified follower guide: occasional rapid approach, not exact teleport/dash timing; parent population/rates not dated to target"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
