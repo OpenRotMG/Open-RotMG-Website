@@ -4077,10 +4077,13 @@
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
           "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
-          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652",
+          "Kithio Spawn starts2 children and caps5 lifetime births, while current bounded families start3, regrow at10s and retain parent ownership rather than nearest-God adoption. Modified7.0 uses live-child tracking. These are comparator differences, not demonstrated defects: https://github.com/OpenRotMG/Open-RotMG-Server/issues/852#issuecomment-6474494394"
         ],
         "unknowns": [
-          "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
+          "Exact123.5.1 parent acquisition/radii, lifetime versus live-child caps, initial count/regrowth/orphan cleanup and continuity of build118 child5XP/Quiet rules. See server issue852.",
+          "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%.",
+          "PR1129 records prepared natural-family combat, Quiet recovery, regrowth and surviving orphans, not earned travel, native item pickup/multiplayer allocation or a successful child portal/entry. Those acquisition checks remain issue852; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -4102,6 +4105,18 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/05/how-to-get-healed-by-necromancer.html",
             "label": "May 2012 healing guide: Sprite Gods with children form useful clustered groups"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture, build118 claims: attacks,200/5XP, non-attacking children and Sprite World eligibility; not exact123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120512045834id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "May12,2012 status guide: Quiet drains MP and stops regeneration; transfer/restoration claim separately unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L37-L68",
+            "label": "Compiled Kithio God/Child reference; inspect Spawn, Protect, Shoot and loot engines, not original server authenticity"
           }
         ]
       }
