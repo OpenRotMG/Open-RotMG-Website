@@ -6476,15 +6476,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed textile patterns, encoded scale variants, native previews, application and persistence in both texture channels. Seasonal possession is distinct from permanent shop sale; complete target roster/rendering remain unverified.",
+        "expected": "Selected 123.5.1 has71 pattern pairs (142 items): Large selects clothing/Tex1, Small accessory/Tex2; encoded high byte chooses4x4/5x5/9x9/10x10 atlas, not avatar scale. Verify native preview/application, once-only consumption, other-channel preservation and persistent appearance; embedded possession is not permanent shop availability.",
         "differences": [],
         "unknowns": [
-          "Original pattern and scale variants, their appearance, and seasonal shop inventories."
+          "Exact target-deployed and seasonal shop rosters/windows/prices. Selected142 definitions and the later100G textile table do not replace provisional120G offers or prove permanent sale; see issue896.",
+          "Full all-pattern/all-class visual, tooltip and mask fidelity, earned acquisition and cold browser/server restart continuity. Representative atlas/channel captures and prior ground-use receipts are bounded acceptance, not whole-feature certification."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/8f610f6fb4eb8c3a5caeeb4bc075ab670c5dc906/dyes.js",
+            "label": "September27,2012 fitting-room roster:Shamrock commented out, not proof of sale windows"
+          },
+          {
+            "url": "https://web.archive.org/web/20120901000000id_/http://forums.wildshadow.com/node/80502",
+            "label": "April22,2012 Build123 announcement:missing dye/textile pixels fixed"
           }
         ]
       }
