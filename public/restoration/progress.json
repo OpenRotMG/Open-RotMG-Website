@@ -1411,7 +1411,8 @@
         "differences": [
           "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
-          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192"
+          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192",
+          "PR1084's earlier native walking take credits a Cyclops, Red Demon and transformed Ent once and admits one Cube God. It fails on route steering with 38 encounters remaining, not a completed closure/Castle journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
         ],
         "unknowns": [
           "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
@@ -1427,7 +1428,8 @@
           {
             "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
             "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
-          }
+          },
+          {"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/messaging/impl/GameServerConnection.as#L1680-L1690","label":"Later modified 7.0 client comparator: reconnect preserves character ID; not original eligibility or timing proof"}
         ],
         "checks": [
           {
@@ -1438,7 +1440,8 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+              "PR1084's partial native take binds one Cyclops death to one Cube God admission. It does not complete that event or establish probability or repeatability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
             ],
             "unknowns": [
               "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
@@ -5709,15 +5712,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot7 restrictions, exact reversible defense and fame behavior for evidenced heavy armor; do not invent a unique-heavy-armor requirement or infer upper-tier deployment from XML.",
+        "expected": "Warrior/Knight/Paladin Slot7 eligibility, exact reversible defense and equipped-only fame for the selected 15 tiered heavy armors. No unique-heavy-armor requirement or ordinary Dominion/Annihilation acquisition inferred from embedded definitions.",
         "differences": [],
         "unknowns": [
-          "Upper-tier availability and any unique heavy-armor variants outside the recovered definitions."
+          "September2012 continuity of upper-tier unavailability and absence of additional unique heavy variants; the May/June2012 catalogues are earlier observations, while November's exploit notice and modern release histories are later evidence.",
+          "Independent target-era proof of equipment above capped base defense and exact original drop/credit probabilities. Prepared inventory and fame regressions do not establish earned acquisition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/items.xml",
+            "label": "Pinned Kithio definitions agree on all 15 selected defense/fame values; comparator, not deployment proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610192324id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/heavy-armor",
+            "label": "June10,2012 catalogue: three classes, T0-T12 defense/fame, no unique heavy armor listed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/armor",
+            "label": "May24,2012 armor table explicitly marks Dominion/Annihilation unreleased"
           }
         ]
       }
