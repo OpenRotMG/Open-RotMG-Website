@@ -40,6 +40,21 @@ test('Mystic receipts preserve unresolved acquisition and whole-class acceptance
   for(const ref of evidence.results[id].evidence){assert.deepEqual(evidence.sources[ref].checks,[id]);assert.match(evidence.sources[ref].limitations,/not|Not/);}
 });
 
+test('combat receipts keep native projectile checks separate from AOE and history',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['realm:shoot-and-take-damage','access:combat-status-feedback','realm:area-damage-feedback'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    assert.equal(evidence.results[id].status,'not-run');
+    const receipts=evidence.results[id].evidence.filter(ref=>ref.startsWith('combat-')).map(ref=>evidence.sources[ref]);
+    assert.deepEqual(receipts.map(source=>source.kind).sort(),id===ids[2]?['regression','source']:['native','regression','source']);
+    for(const source of receipts)assert(source.checks.includes(id));
+  }
+  const feature=data.features.find(f=>f.id===ids[0]);
+  assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.match(feature.audit.checks[0].unknowns.join(' '),/Hexed/);
+  assert.match(feature.audit.checks[1].unknowns.join(' '),/ACK/);
+});
+
 test('client movement trust is intentional policy, not missing restoration or historical sign-off',()=>{
   const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='realm:walk-and-dodge');
   validateEvidence(data,evidence);
