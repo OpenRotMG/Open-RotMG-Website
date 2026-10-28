@@ -3812,15 +3812,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Medusa, HP2000/DEF18, Green Bolt100; qualified comparator supports pursuit, five-shot fan and grenade. Exact population, rewards and Abyss of Demons portal eligibility/rate remain qualified.",
-        "differences": [],
+        "expected": "Mountain Medusa 0x654, HP2000/DEF18, Green Bolt100/speed70/2000ms. The May2012 guide and compiled Kithio agree on five shots at10 degrees/range12/1s and grenade150/radius4/range8/3s; Kithio delays impact1500ms. Period Medusa drops Abyss, not the later Snake Pit.",
+        "differences": [
+          "Current Trapped-derived movement uses speed6/acquisition7/stop4/wander4 plus a home leash. Kithio Follow uses acquisition10/stop7, resumes above8, and converts speed1 to6.29; the period page instead describes chase speed10 and peak teleporting. No motor change or historical equivalence claimed.",
+          "Abyss10% remains the PR231 reconstruction. Selected spawn groups and bounded 60s reproduction/refilling do not establish original Realm density. Current Speed potion gate360/1% differs from Trapped1.5% and modified7.0's7% gate/7% chance; these forks are not independent witnesses."
+        ],
         "unknowns": [
-          "Target attack/movement constants, population/repopulation policy and loot/portal probabilities."
+          "Exact123.5.1 movement/peak relocation, Realm population/refilling, reward eligibility/ownership/probabilities and Abyss percentage. Earned multiplayer rewards/portal entry and sustained reproduction remain unverified; see issue843."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L69-L92",
+            "label": "Compiled Kithio Medusa comparator; engine and era qualifications in evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120522023605id_/http://forums.wildshadow.com/wiki/realm-mad-god/medusa",
+            "label": "May22,2012 Medusa guide (not exact123.5.1 continuity)"
           }
         ]
       }

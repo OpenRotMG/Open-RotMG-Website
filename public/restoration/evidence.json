@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "medusa-native-912e2c9": {
+      "kind": "native",
+      "revision": "912e2c980a74b9fcd8f63dde70dfdd2f4ec9400f",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1117#issuecomment-6473825980",
+      "checks": ["realm:medusa"],
+      "method": "QA a527140f passes8 checks over17250game ms with client39acbfbf/Ruffle.16, natural Medusa254586 in classic-world-03-reconstruction. Observes selectedHP/size, activation/movement, Green Bolt70/2000ms and five-shot10-degree fan in privileged player view, rendered combat and native staff defeat. Logs confirm exactly one defeat of that entity by the native player; XP18440 stays unchanged afterward. Cold QA41f8e37c/51806a6b verifies persisted living character/inventory/revision1, SQLite/FKs, zero deaths/backendERRORs,14 PIDs absent and reclaimed scratch. Case a2dab088/runner5c28b36d/controllerc1c17470/ELF0726785c. The runner recorded dirty220bc4c0, but case bytes equal912e2c98 and runtime-source diff is empty.",
+      "limitations": "Prepared level20 Wizard/gear/stats/location, then explicit60-second Invulnerable, not earned traversal or multiplayer acceptance. HP670 to231 and XP18050 to18440/two kills include nearby enemies, not isolated Medusa damage/reward. Ten Medusa-kind AOE impacts deal0 under protection; unprotected150-damage grenade, exact radius/timing and individual throw ownership are not accepted. No bag or portal was present in local defeat/end diagnostics; no pickup, successful roll or entry claim. Crowded first attempt353354ef permanently killed character2, retained with killerMedusa and failed control receipts. Whole feature stays not-run/history partial with sustained reproduction, rewards/portal and target-era gaps in issue843; no native policy/guard/hosting changes."
+    },
+    "medusa-research-220bc4c": {
+      "kind": "source",
+      "revision": "220bc4c0f8c2e8e2cf87354b778eb5234d161c55",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/220bc4c0f8c2e8e2cf87354b778eb5234d161c55/src/world/mechanics.rs#L441-L451",
+      "checks": ["realm:medusa"],
+      "method": "Fresh selected/modified7.0 XML comparison matches the whole Medusa definition. Compiled/registered Kithio, Trapped and modified7.0 Mountain tables were compared with Follow/GetSpeed, Grenade, Reproduce/CountEntity, Cooldown and per-candidate/threshold loot semantics. May22/28,2012 Wildshadow Medusa/Abyss captures corroborate attack values and Abyss eligibility, not a percentage. Reconciles PR231/235/303/652/676; research at https://github.com/OpenRotMG/Open-RotMG-Server/issues/843#issuecomment-6473600282 distinguishes current motor, population and loot reconstruction from references.",
+      "limitations": "Not gameplay or exact123.5.1 historical acceptance. Kithio motor semantics conflict with both period prose and current Trapped-derived movement; original density/refilling and reward/portal probabilities remain unresolved in issue843. Shared fork ancestry is not independent corroboration. Failed Fandom challenge, Japanese403 and guessed helper404 are retained; the correct helper was fetched separately. No third-party source imported."
+    },
     "golems-native-cb5af28": {
       "kind":"native", "revision":"cb5af2844d187c105a415111a4454fdc44572287", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1112#issuecomment-6473494996", "checks":["realm:golems"],
@@ -4393,7 +4411,7 @@
     "realm:wargs": {"status":"not-run","evidence":["werewolf-native-7fb6e70","wargs-research-e8873ad","wargs-demon-native-e8873ad","wargs-orphans-native-6b164fc"]},
     "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284","sand-phantoms-research-cedf830","sand-phantoms-regression-4b2fc9c","sand-phantoms-native-af94ad7"]},
     "realm:cubes": {"status":"not-run","evidence":["shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","cubes-research-eebf8e1","cubes-red-purple-native-eebf8e1","cubes-green-native-efbab3d","cubes-regression-83c77df"]},
-    "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
+    "realm:medusa": {"status":"not-run","evidence":["abyss-medusa-source-5a5502f","period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f","medusa-research-220bc4c","medusa-native-912e2c9"]},
     "realm:ent-god": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
     "realm:beholder": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
     "realm:flying-brain": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","god-reproduction-source-aa7997f","god-reproduction-regression-aa7997f"]},
