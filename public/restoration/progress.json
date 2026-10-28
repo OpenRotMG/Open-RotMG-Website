@@ -5762,10 +5762,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot14 compatibility and reversible exact individual stat/fame bonuses. Preserve Tlatoani's lack of DEF and distinct Chasuble/Mad Scientist bonuses; use target-buffed Mad Scientist values.",
+        "expected": "All 18 selected Slot14 robe definitions match. Equipped bonuses add above base caps and reverse on removal; only equipped items count toward death fame. Tlatoani has no DEF. Chasuble grants 10 DEF, 50 MP, 4 VIT/WIS and 3% fame. Target-buffed Mad Scientist grants 4 ATT, 13 DEF, 5 WIS, 2 VIT, 55 MP and 5% fame. Current rewards cover armor tiers 1–13 and three UT robes; embedded Star Mother/Ancient Intellect do not establish obtainable drops.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable robe roster, upper-tier availability and stat-cap interactions."
+          "Exact 123.5.1 upper-tier availability and original acquisition, recipient and drop-rate rules remain unresolved; supplied native equipment is not earned acquisition.",
+          "May/June 2012 Wild Shadow sources give Chasuble 2% fame versus the selected client's 3%; the transition date remains unresolved. Historical evidence and remaining gameplay: https://github.com/OpenRotMG/Open-RotMG-Server/issues/876"
         ],
         "sources": [
           {
