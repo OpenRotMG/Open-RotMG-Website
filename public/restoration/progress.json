@@ -3426,7 +3426,7 @@
         "expected": "Ghost Archer/Warrior/Mage/Rogue/Paladin/Knight0x662–667 are retired Ghost King escorts and should not spawn in 123.5.1. Wiki stat blocks last updated at build 115 still list them as Ghost King reproduction, while the same 2012 page text describes the later large-ghost evaluation fight and pinned comparators use Ghost Master and Small/Medium/Large Ghosts.",
         "differences": [],
         "unknowns": [
-          "The exact retirement build: official Build 117 notes (June 2011) list new Ghost King behaviors, and a modern RealmEye page names Build 118 (July 2011). No 2012 capture directly proves their absence."
+          "Exact retirement build remains unresolved after reading the original June 18, 2011 Build 117 and July 15, 2011 Build 118 announcements. The former names new Ghost King behaviors; neither names the six escorts. Modern RealmEye's Build 118 attribution is not independently established, and the mixed-era May 2012 wiki capture does not prove absence. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/836#issuecomment-6472088623"
         ],
         "sources": [
           {
@@ -3451,7 +3451,23 @@
           },
           {
             "url": "https://web.archive.org/web/20250212161750/https://www.realmeye.com/wiki/archived-enemies",
-            "label": "Modern RealmEye archived enemies: Build 118 replaced the six escorts with Ghost Master and Small/Medium/Large Ghosts"
+            "label": "Modern RealmEye attributes replacement to Build 118; precise contemporary support remains unresolved"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 comparator: all six complete legacy escort definitions match selected XML; no Terrain or SpawnProbability, not deployment proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Compiled and reflection-registered primary reconstruction uses only Ghost Master and Small/Medium/Large Ghosts"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605135133id_/http://forums.wildshadow.com/node/3772",
+            "label": "Original June 18, 2011 Build 117 announcement names new Ghost King behaviors, not escort retirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134308id_/http://forums.wildshadow.com/node/4820",
+            "label": "Original July 15, 2011 Build 118 announcement lists general monster improvements, not these identities"
           }
         ]
       }

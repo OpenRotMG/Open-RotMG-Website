@@ -1173,6 +1173,33 @@
       "limitations": "Prepared placement inside the sealed room. No native Dr Terrible kill, door opening or Hexxer pet loop; those ran only in a temporary uncommitted server test, which is not native acceptance. Merged head f08f45e has an identical Lab diff.",
       "checks": ["dungeons:mad-lab", "dungeons:mad-lab:coil-secret-and-pool-chain"]
     },
+    "ghost-retirement-source-0efeddf": {
+      "kind": "source",
+      "revision": "0efeddf598ecafc3870ae760c69ec4c0a903f0c1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0efeddf598ecafc3870ae760c69ec4c0a903f0c1/src/world/realm_quests.rs",
+      "checks": ["realm:ghosts"],
+      "method": "Fresh QA 41d09ecc compares all six complete legacy escort definitions with pinned modified 7.0 MonstersCXML: identical, without Terrain/SpawnProbability. Compiled and reflection-registered Kithio GhostKing/TossObject uses replacement identities only; Trapped/FSoD share that roster, not independent historical corroboration. Fresh May 2012 capture separates build 115 stats from later evaluation prose. Two additional original forum announcements, June 18 Build 117 and July 15 Build 118, do not identify escort retirement.",
+      "limitations": "Current non-spawning policy is supported reconstruction, not recovered official AI or target-production absence proof. Modern RealmEye attributes retirement to Build 118 without a precise contemporary citation. Exact retirement build remains historical-partial; current Ghost King behavior/rewards remain separately scoped to issue 794. No reference code/assets imported or runtime policy changed."
+    },
+    "ghost-retirement-regression-0efeddf": {
+      "kind": "regression",
+      "revision": "0efeddf598ecafc3870ae760c69ec4c0a903f0c1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40709161501/job/122889371765",
+      "checks": ["realm:ghosts"],
+      "method": "Exact-head CI passes 217 Rust tests, formatting and warning-denied all-target Clippy. All four initial Ghost King tiers and three Company variants land the exact replacement roster after 1500 ms, with no legacy escorts. Selected legacy definitions remain loadable but have no habitat weight, ordinary family membership or scripted quest profile. Existing authored-site coverage excludes legacy actors across all six shipped Realm sources.",
+      "limitations": "Deterministic prepared flat-map waves and generated named-site checks, not native gameplay or historical production proof. No runtime code, selected definitions, rewards or ownership/authority/persistence/death policy changed."
+    },
+    "ghost-retirement-native-0efeddf": {
+      "kind": "native",
+      "revision": "0efeddf598ecafc3870ae760c69ec4c0a903f0c1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1104#issuecomment-6472818712",
+      "checks": ["realm:ghosts"],
+      "method": "Clean native QA ff7706a2 passes 11 assertions over 56050 game ms in naturally populated realm-fsod-3, client 39acbfbf/Ruffle .16. Native combat selects SmallGroup, admits 3 Small/3 Medium Ghosts, reaches owned Master/Company, releases and defeats Actual King, and earns 500 XP once. Five encounter snapshots contain zero legacy escort IDs. Cold QA b0cfe1b7/50c29e04 confirms the same living character, inventory revision 1, 18550 XP, zero deaths/backend ERROR, healthy SQLite/FKs, 40 tracked PIDs absent, empty cleanup errors and reclaimed cgroup. Server PR1104 merged as faae66935a1e264ea118cac802d3b61af3119404.",
+      "limitations": "Prepared level20 Warrior/gear/legal base stats, tower-adjacent start, renewable 60-second Invulnerable and +100 temporary test Attack, not earned progression or unprotected survival. Scoped retirement-policy check, not a continuous whole-Realm census or historical absence proof. Prior replacement-encounter branch/reward receipts remain at their own revisions under issue794; this does not accept Ghost King or new reward probabilities. Cancelled pre-gameplay native 4b1a4ac8 and earlier compile/format/source/client-input failures remain excluded and retained. No runtime policy changed; exact retirement build remains historical-partial."
+    },
     "ghost-retirement-source-4992445": {
       "kind": "source",
       "revision": "499244541ab1e6f794cd6a7ec3a6bcd29f833b8a",
@@ -4194,7 +4221,7 @@
     "realm:nomads": {"status":"not-run","evidence":[]},
     "realm:pythons": {"status":"not-run","evidence":[]},
     "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},
+    "realm:ghosts": {"status":"passed","evidence":["ghost-retirement-source-4992445","ghost-retirement-source-0efeddf","ghost-retirement-regression-0efeddf","ghost-retirement-native-0efeddf"]},
     "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
     "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
