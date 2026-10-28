@@ -8,6 +8,23 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['dungeons:mad-lab','dungeons:mad-lab:ordinary-lab-and-gas','dungeons:mad-lab:coil-secret-and-pool-chain'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const row=records(data).find(r=>r.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(row.rule.historical,'partial');
+    assert.equal(accepted(row.feature,evidence),false);
+    for(const ref of ['madlab-verification-source-25a51e6','madlab-room-reward-regression-0e8f429','madlab-room-journey-native-25a51e6'])assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.equal(evidence.sources['madlab-room-journey-native-25a51e6'].revision,'25a51e6f7491c055a7303454b7b4c07e2e43c063');
+  const completion='madlab-creation-completion-native-35c8a24';
+  assert.equal(evidence.sources[completion].revision,'35c8a24ce31affe6eb7320447c79f81817319e6b');
+  assert.deepEqual(evidence.sources[completion].checks,[ids[0],ids[2]]);
+  assert(!evidence.results[ids[1]].evidence.includes(completion));
+  assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
+});
+
 test('stable 211 parents and 70 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
@@ -199,7 +216,8 @@ test('Tomb release records source restoration without inventing full acceptance'
   }
   assert.match(evidence.sources['tomb-layout-native-40d990f'].limitations,/regression-only.*not matched seeds/);
   const tomb=data.features.find(f=>f.id===ids[1]);assert(tomb.audit.sources.some(s=>s.url==='https://archive.org/details/youtube-Igu8lFDRHg0'&&s.label.includes('123.4.4')));
-  assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*Earned Sphinx-to-Tomb entry.*remain open/);
+  assert.match(tomb.audit.unknowns.join(' '),/Run242 verifies.*PR1043 verifies prepared earned Sphinx-to-Tomb entry.*remain open/);
+  assert.deepEqual(evidence.sources['tomb-research-5afc20a'].checks,ids.slice(1));
 });
 
 test('Undead endpoint footage keeps scoped evidence and existing acceptance separate',()=>{
