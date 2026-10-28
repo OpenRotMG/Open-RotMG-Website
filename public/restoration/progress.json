@@ -2167,16 +2167,39 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "MidForest Dwarf King is a level-5 leader with 320 HP, 3 DEF and a 16-damage Blade. The family includes Axebearers, Mages and Veterans; Mages have wavy projectiles.",
-        "differences": [],
+        "expected": "Selected MidForest King: level5, 320 HP/3 DEF/Blade16. Axebearer80/2/Blade10, Mage80/0/Red Fire12, Veteran100/3/Blade14. Mage speed35/lifetime3500ms/amplitude1/frequency3 is lateral sine displacement, not the separate Wavy flag. All four complete objects match pinned modified7.0 definitions, not original server AI.",
+        "differences": [
+          "Current initial2/1/1 escorts, alive caps3/2/2 and10-second role refills differ from compiled primary SpawnGroup: five random Dwarves initially, one birth every8s up to ten lifetime births. Current2500ms King chase/wander,1-second shots and no taunt differ from primary3400ms orbit/2600ms follow,2-second shots and20% taunt per engagement. Escort movement/aim/states also differ; matching state names do not establish King-issued orders.",
+          "Current independent per-entry reward rolls differ from primary independent p/n candidate rolls, with different King/escort pools. Current uncapped solo King XP rounds51.2 up to52; primary contributor-share/clamp/integer truncation and the undated Japanese table give51. Neither certifies original123.5.1 policy."
+        ],
         "unknowns": [
-          "Target family density, escort caps/cadence, taunts, XP and reward probabilities.",
-          "Target movement, replenishment and drops; full Mage trajectory execution acceptance."
+          "Original123.5.1 density/relative SpawnProb selection, initial populations, lifetime-versus-alive caps, commands, motion, aim, timers/taunt frequency, XP rounding/caps and reward probabilities/allocation. May19,2012 King and June5,2013 Mage captures retain obsolete stats. Japanese2021 text/image timestamps do not date its numeric claims.",
+          "Bounded natural-camp native checks remain separate from earned entry, eligible reward pickup, full-lifetime rendered Mage trajectories and whole-feature acceptance. Research and exact source/engine conflicts: https://github.com/OpenRotMG/Open-RotMG-Server/issues/805#issuecomment-6459693963"
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L363-L506",
+            "label": "Compiled and registered primary comparator; SpawnGroup counts lifetime births, not living escorts"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All four complete selected objects normalize identically; no AI or deployment authentication"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519020454id_/http://forums.wildshadow.com/wiki/realm-mad-god/dwarf-king",
+            "label": "Dated King page has obsolete200 HP/level6/Low Plains; cannot override selected definitions"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605063729id_/https://forums.wildshadow.com/wiki/realm-mad-god/dwarf-mage",
+            "label": "Additional dated Mage resource still lists obsolete8-damage/speed6/2s fire"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Dwarf%20King",
+            "label": "Additional resource: primary-like loot/ten children/XP51, but last-modified2021 and no authenticated period numeric revision"
           }
         ]
       }
