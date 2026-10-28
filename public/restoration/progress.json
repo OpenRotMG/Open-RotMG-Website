@@ -4731,8 +4731,8 @@
           "The Abyss is now included in the existing player-teleport allowlist, restoring its advertised map flag and actual guarded teleport path. Cooldown, target eligibility, GOTO acknowledgements and lifetime tracking are unchanged. A later-edited April 2012 guide explicitly includes Abyss teleport tactics; exact target-era eligibility remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/604"
         ],
         "unknowns": [
-          "Original teleport eligibility details, layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities.",
-          "Whether Defense was present by the target build, and the original recipient guarantees."
+          "Original teleport eligibility, room/treasure distributions and exact Malphas/Idol timers remain unresolved. The local 36–52 room-count draw and truncated 20% treasure continuation, seven-phase 50.2-second Malphas cycle and Idol lava control are reconstruction, not recovered original constants.",
+          "May 27, 2012 Malphas documentation lists VIT but not DEF; October 2016 notes remove a DEF guarantee. Neither dates DEF introduction or authenticates September 2012 recipient guarantees."
         ],
         "sources": [
           {
@@ -4771,10 +4771,10 @@
             "expected": "The adopted Idol reconstruction has dry shrine access before activation and restores it after defeat without disconnecting clients. Eligible accounts receive private DEF and VIT. Lava changes stay local, and Idol defeat does not clear the main dungeon.",
             "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify dry access before activation, local restoration without disconnecting, private DEF and VIT, independent rooms and no main clear from Idol defeat alone.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original Idol potion rates and recipient minimums are unrecovered; the local DEF/VIT guarantee is a reconstruction choice."
+              "Original Idol lava/activation timers, potion rates and recipient minimums remain unrecovered. Test Build 123.2 explicitly redesigns the Abyss treasure room; June 13, 2012 production 123.3 announces two treasure rooms without naming them. Selected XML fixes Idol identity/stats/projectiles, not the local controller or DEF/VIT guarantee."
             ],
             "sources": [
               {
