@@ -1947,7 +1947,7 @@
       "revision": "2ab46ffb6b69b026c3093fafef420ef68e93996a",
       "date": "2026-10-28",
       "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1152#issuecomment-6479535958",
-      "method": "Before bf455899 restored the pre-fix publication block; after 1079cf25 used clean 2ab46ffb, client 0282b3a4/Ruffle .16. Each passes 17 checks through minion Stasis/kill/XP, current phase projectiles/rage, actual Oryx defeat/kill credit, one fresh-slot consumption, competing-item retention and two native clients entering one Cellar. The after capture renders green notification and chat. Retained rejected-slot retry sends no request and remains failed.",
+      "method": "Before bf455899 restored the pre-fix publication block; after 1079cf25 used clean 2ab46ffb, client 0282b3a4/Ruffle .16. Each passes 16 checks through minion Stasis/kill/XP, current phase projectiles/rage, actual Oryx defeat/kill credit, one fresh-slot consumption, competing-item retention and two native clients entering one Cellar. The after capture renders green notification and chat. Retained rejected-slot retry sends no request and remains failed.",
       "limitations": "Neither full case passes: final Nexus assertion used the wrong R binding. Corrected to Insert; separate prepared Cellar escape 0934b2e8 at 143ec201 passes three identity/inventory/XP checks, not the complete earned journey. Legal capped stats and explicit Invincible protection; no earned Castle entry, authentic difficulty, loot or historical choreography acceptance. Reference SWF and authority guards unchanged.",
       "checks": ["dungeons:oryx-s-chamber", "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract", "dungeons:oryx-s-chamber:incantation-unlock-transaction"]
     },
