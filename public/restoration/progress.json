@@ -3244,9 +3244,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "One cooperative HighPlains group: Key900=Queen, Flooder901=King, Shield902=Warrior; selected MultiHit projectiles and support/commander-loss lifecycle.",
-        "differences": [],
+        "differences": [
+          "Current camp-owned250HP healing, radius2 orbit and1000ms Queen-only burst differ from Kithio's spatial full healing, radius3 orbit and300ms burst. Older Trapped and build118 prose conflict on follower explosions."
+        ],
         "unknowns": [
-          "Target healing/replacement rules, precise final burst and survivor attacks, post118.7.4 loot rates."
+          "Original healing eligibility/amount, cross-camp adoption, replacement, final-burst delay/follower explosions and survivor attacks remain unresolved in issue831. Kithio Spawn counts lifetime births, not living replacements; current followers spawn once.",
+          "Post118.7.4 loot coefficients and original allocation remain unknown. January2012 rates are not target123.5.1 rates; May2012 captures omit them. Selected-client and pinned7.0 definitions agree for all three complete objects."
         ],
         "sources": [
           {
@@ -3256,6 +3259,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/test/build115.6",
             "label": "Build 115.6 test-server notes"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L539-L632",
+            "label": "Compiled Kithio reconstruction comparator, not official AI"
           }
         ]
       }
