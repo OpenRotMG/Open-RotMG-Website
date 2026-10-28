@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "swords-source-f9d60e6": {
+      "kind": "source", "revision": "f9d60e678b3d7f7ab29e9cc27105172278d52cda", "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/f9d60e678b3d7f7ab29e9cc27105172278d52cda/data/objects.xml", "checks": ["gear:swords"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/869#issuecomment-6477784880 . Fresh selected SWF07ae4fc3 extraction matches all19 complete current sword definitions. May24,2012 build121 table independently corroborates T0–T12/three UTs, Glass30–210, Demon two shots/40degrees and Stone340–390/rate60%. Modified7.0 matches16 full definitions; Splendor/Majesty renumber and lose Tier, Admin renumbers/adds Soulbound, Def Test is extra. Selected/7.0 Player and compiled Kithio shoot/collision engines inspected. Two further checks: original November5,2012 hacking announcement and later item-release/balance histories. Existing source acquisition includes three UT sources and weapon tiers through12, not upper/admin distribution.",
+      "limitations": "Research, not gameplay or original-server recovery. Earlier-build table and later release histories do not prove every September123.5.1 acquisition/drop/credit policy. Original collision tolerance/RNG endpoints remain unresolved; Kithio's Paralyzed/Attack bug is not imported. No balance, availability or authority change. Historical partial."
+    },
     "jungle-journey-native-c945d8a": {
       "kind": "native",
       "revision": "c945d8a6c55525f7a7175b5ee78d2c55fe3491c9",
@@ -4800,7 +4806,7 @@
     "dungeons:wine-cellar:barrel-destruction": {"status":"not-run","evidence":["wine-barrels-native-89f5247"]},
     "dungeons:wine-cellar:bile-trail-and-wine-threats": {"status":"not-run","evidence":["wine-bile-native-7a33b60"]},
     "dungeons:wine-cellar:oryx-two-reward-return": {"status":"not-run","evidence":[]},
-    "gear:swords": {"status":"not-run","evidence":[]},
+    "gear:swords": {"status":"not-run","evidence":["swords-source-f9d60e6"]},
     "gear:daggers": {"status":"not-run","evidence":[]},
     "gear:bows": {"status":"not-run","evidence":["reward-allocation-source-1b051cc","reward-allocation-regression-1b051cc"]},
     "gear:wands": {"status":"not-run","evidence":["wand-hit-source-82c3430","wand-hit-regression-82c3430","wand-hit-native-82c3430"]},

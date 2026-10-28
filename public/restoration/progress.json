@@ -5466,13 +5466,21 @@
         "expected": "Evidenced target swords retain individual damage, rate, shot spread, trajectory, class compatibility, equipment bonuses and fame behavior. Embedded upper/admin tiers do not establish production availability.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster, particularly T13/T14 swords and admin items.",
-          "Individual swords’ original firing and collision behavior."
+          "Exact 123.5.1 acquisition/drop/credit policies. The build121 period roster supports T0–T12 and three untiered swords, not ordinary T13/T14/Admin availability.",
+          "Sword-specific earned acquisition, native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Pinned modified7.0 comparator; upper/admin IDs and Tier/Soulbound differ"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/swords",
+            "label": "May24,2012 build121 sword table, not complete target-era acquisition proof"
           }
         ]
       }
