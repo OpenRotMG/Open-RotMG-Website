@@ -20,15 +20,17 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
 
-test('Ent God bounded combat and reward guards do not accept original history or acquisition',()=>{
-  const data=catalogue(),evidence=ledger(),id='realm:ent-god',feature=data.features.find(f=>f.id===id);
-  validateEvidence(data,evidence);
-  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
-  for(const [ref,kind] of [['ent-god-native-5d43505','native'],['ent-god-reward-regression-5d43505','regression'],['ent-god-research-233f7d8','source']]){
-    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+test('Ent and Ghost God bounded receipts do not accept original history or acquisition',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  for(const [name,native,regression,research] of [['ent-god','5d43505','5d43505','233f7d8'],['ghost-god','9e258e9','9e258e9','9e258e9']]){
+    const id='realm:'+name,feature=data.features.find(f=>f.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+    for(const [ref,kind] of [[`${name}-native-${native}`,'native'],[`${name}-reward-regression-${regression}`,'regression'],[`${name}-research-${research}`,'source']]){
+      assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+    }
+    assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
+    assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
   }
-  assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
-  assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
 });
 
 test('Slime God evidence cannot accept original RNG or the whole encounter',()=>{
@@ -138,7 +140,10 @@ test('Leviathan cadence receipts do not accept the whole encounter',()=>{
 
 test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
-  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.deepEqual(evidence.results[roster],{status:'not-run',evidence:[]});
+  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[roster].status,'passed');
+  for(const key of [id,roster])for(const ref of ['pirate-research-fd52882','pirate-journey-native-749847f'])assert(evidence.results[key].evidence.includes(ref));
+  assert.deepEqual(evidence.sources['pirate-journey-native-749847f'].checks,[id,roster]);
+  assert(evidence.results[id].evidence.includes('pirate-generation-native-c8b4f98'));
   for(const ref of ['pirate-exit-regression-d19287c','pirate-exit-native-d19287c']){
     assert.equal(evidence.sources[ref].revision,'d19287c44d7b2bac88e9b132302c31be431129d9');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
