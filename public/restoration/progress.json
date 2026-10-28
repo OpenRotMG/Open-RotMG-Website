@@ -3035,10 +3035,11 @@
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
           "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293",
-          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555"
+          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555",
+          "Conflicting comparators: HP1000000/55000, three/six Steeds; reconstruction differs on Daisy shielding, warning Follow, blocked Clone tosses and loot. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "unknowns": [
-          "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
+          "123.5.1 thresholds/timing, placement and rewards unresolved. Details: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "sources": [
           {
@@ -3052,6 +3053,26 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
             "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Crystal.cs",
+            "label": "Compiled Kithio; original AI unauthenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 minions/Prisoner match selected XML"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Crystal matches selected XML"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Crystal%20Prisoner%20Clone",
+            "label": "September7,2012 Clone description"
+          },
+          {
+            "url": "https://web.archive.org/web/20120606200609id_/http://forums.wildshadow.com/wiki/crystal-prisoner-steed-0",
+            "label": "June6,2012 Steed; immunity predates123.5.1 correction"
           }
         ]
       }
