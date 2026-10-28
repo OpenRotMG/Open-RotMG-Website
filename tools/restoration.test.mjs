@@ -8,6 +8,23 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['dungeons:mad-lab','dungeons:mad-lab:ordinary-lab-and-gas','dungeons:mad-lab:coil-secret-and-pool-chain'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const row=records(data).find(r=>r.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(row.rule.historical,'partial');
+    assert.equal(accepted(row.feature,evidence),false);
+    for(const ref of ['madlab-verification-source-25a51e6','madlab-room-reward-regression-0e8f429','madlab-room-journey-native-25a51e6'])assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.equal(evidence.sources['madlab-room-journey-native-25a51e6'].revision,'25a51e6f7491c055a7303454b7b4c07e2e43c063');
+  const completion='madlab-creation-completion-native-35c8a24';
+  assert.equal(evidence.sources[completion].revision,'35c8a24ce31affe6eb7320447c79f81817319e6b');
+  assert.deepEqual(evidence.sources[completion].checks,[ids[0],ids[2]]);
+  assert(!evidence.results[ids[1]].evidence.includes(completion));
+  assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
+});
+
 test('stable 211 parents and 70 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
@@ -18,6 +35,43 @@ test('stable 211 parents and 70 components remain separate from evidence',()=>{
   assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'27e5eec1f99db6d2e0c2a0846cbce7471def7dbf165f78679f58a53b33b59bed');
   assert(data.features.every(f=>!accepted(f,evidence)));
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
+});
+
+test('Spider Den egg and column acceptance does not accept every entrance or original history',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',component=id+':egg-and-cover-environment',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks[0].historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['spider-journey-native-57551f0','spider-cover-native-44b376d']){
+    assert.equal(evidence.sources[ref].kind,'native');assert.deepEqual(evidence.sources[ref].checks,[id,component]);
+    for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  }
+  assert.match(evidence.sources['spider-journey-native-57551f0'].limitations,/shared\/denied admission/);
+  assert.match(feature.audit.unknowns.join(' '),/boss-exit destination/);
+});
+
+test('Ent and Ghost God bounded receipts do not accept original history or acquisition',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  for(const [name,native,regression,research] of [['ent-god','5d43505','5d43505','233f7d8'],['ghost-god','9e258e9','9e258e9','9e258e9']]){
+    const id='realm:'+name,feature=data.features.find(f=>f.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+    for(const [ref,kind] of [[`${name}-native-${native}`,'native'],[`${name}-reward-regression-${regression}`,'regression'],[`${name}-research-${research}`,'source']]){
+      assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+    }
+    assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
+    assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
+  }
+});
+
+test('Slime God evidence cannot accept original RNG or the whole encounter',()=>{
+  const data=catalogue(),evidence=ledger(),id='realm:slime-god',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['slime-god-native-471824b','native'],['slime-god-reward-regression-ce4394d','regression'],['slime-god-research-fd52882','source']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.match(feature.audit.differences.join(' '),/Toxic Sewers.*October2016/);
+  assert.match(feature.audit.unknowns.join(' '),/prediction\/cooldown/);
 });
 
 test('Priest tome receipts do not accept earned progression or original drop rates',()=>{
@@ -116,7 +170,10 @@ test('Leviathan cadence receipts do not accept the whole encounter',()=>{
 
 test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
-  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.deepEqual(evidence.results[roster],{status:'not-run',evidence:[]});
+  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[roster].status,'passed');
+  for(const key of [id,roster])for(const ref of ['pirate-research-fd52882','pirate-journey-native-749847f'])assert(evidence.results[key].evidence.includes(ref));
+  assert.deepEqual(evidence.sources['pirate-journey-native-749847f'].checks,[id,roster]);
+  assert(evidence.results[id].evidence.includes('pirate-generation-native-c8b4f98'));
   for(const ref of ['pirate-exit-regression-d19287c','pirate-exit-native-d19287c']){
     assert.equal(evidence.sources[ref].revision,'d19287c44d7b2bac88e9b132302c31be431129d9');assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
@@ -189,7 +246,7 @@ test('Snake Pit cover and layout evidence does not accept the full route',()=>{
   const width=['source','regression','native'].map(kind=>'snake-width-'+kind+'-4514010');
   const materials=['snake-cover-materials-source-2b28e06','snake-cover-materials-regression-f9ad3e0','snake-cover-materials-native-f9ad3e0'];
   const shape=['source','regression','native'].map(kind=>'snake-cover-shape-'+kind+'-5eec572');
-  assert.deepEqual(result.evidence,[...shape,...materials,...sight,...cover,...layout,...room,...treasure,...neck,...width,...spacing]);
+  assert.deepEqual(result.evidence,['snake-research-e16871e',...shape,...materials,...sight,...cover,...layout,...room,...treasure,...neck,...width,...spacing]);
   for(const ref of [...shape,...materials,...sight,...room,...treasure,...neck,...width])assert.deepEqual(evidence.sources[ref].checks,['dungeons:snake-pit',id]);
   for(const ref of shape){assert.equal(evidence.sources[ref].revision,'5eec5726be7b22ce9e50c54f3c9b4f33e247a502');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
   for(const ref of width){assert.equal(evidence.sources[ref].revision,'4514010b8e35d45a483e50eaa6e4ad66c61bd99c');assert(evidence.results['dungeons:snake-pit'].evidence.includes(ref));}
@@ -382,7 +439,7 @@ test('one component pass cannot accept its whole feature or historical rules',()
   const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
   evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
   evidence.results[id]={status:'passed',evidence:[...evidence.results[id].evidence,'test']};validateEvidence(data,evidence);
-  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'unreviewed');
+  assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'partial');
   for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
   assert.equal(accepted(f,evidence),false);
   evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];

@@ -7,24 +7,29 @@ export function events(buffer) {
   }), rest];
 }
 
-export function viewMessage(event, origin, source, bot) {
+export function viewMessage(event, origin, source, bot, generation) {
   const data = event.data;
   return event.origin === origin && source != null && event.source === source &&
     data !== null && typeof data === 'object' && !Array.isArray(data) &&
-    Object.keys(data).every(key => ['type', 'bot', 'status', 'error'].includes(key)) &&
-    data.type === 'openrotmg-bot-view' && data.bot === bot &&
+    Object.keys(data).every(key => ['type', 'bot', 'status', 'error', ...(generation === undefined ? [] : ['generation'])].includes(key)) &&
+    data.type === (generation === undefined ? 'openrotmg-bot-view' : 'openrotmg-bot-state') && data.bot === bot &&
+    (generation === undefined || data.generation === generation) &&
     ['connecting', 'live', 'stale', 'disconnected', 'error'].includes(data.status) &&
     (data.error === undefined || typeof data.error === 'string') &&
     (data.status !== 'error' || (typeof data.error === 'string' && data.error.trim().length > 0));
 }
 
-export function selectionMessage(event, origin, source, bot, available) {
+export function selectionMessage(event, origin, source, bot, available, generation) {
   const data = event.data;
   return event.origin === origin && source != null && event.source === source &&
     data !== null && typeof data === 'object' && !Array.isArray(data) &&
-    Object.keys(data).length === 3 && Object.keys(data).every(key => ['type', 'bot', 'target'].includes(key)) &&
-    data.type === 'openrotmg-bot-select' && data.bot === bot &&
-    typeof data.target === 'string' && data.target !== bot && available.has(data.target);
+    Object.keys(data).length === (generation === undefined ? 3 : 6) &&
+    Object.keys(data).every(key => ['type', 'bot', 'target', ...(generation === undefined ? [] : ['generation', 'source', 'player'])].includes(key)) &&
+    data.type === (generation === undefined ? 'openrotmg-bot-select' : 'openrotmg-bot-choice') && data.bot === bot &&
+    (generation === undefined || data.generation === generation &&
+      [data.source, data.player].every(value => Number.isInteger(value) && value > 0 && value <= 2147483647) && data.source !== data.player) &&
+    typeof data.target === 'string' && data.target !== bot && available.has(data.target) &&
+    (generation === undefined || /^[A-Za-z][A-Za-z0-9_]{0,31}$/.test(data.target));
 }
 
 export function intentionRows(intent) {
@@ -71,7 +76,7 @@ function locationSample({frame, age_ms: age}, received) {
 export function start({document, window, backend, now = Date.now}) {
   const $ = selector => document.querySelector(selector);
   const origin = backend.url('/api/bots').origin;
-  let selected = new URLSearchParams(window.location.search).get('bot'), active, refreshId = 0, available = new Set();
+  let selected = new URLSearchParams(window.location.search).get('bot'), active, bridge, refreshId = 0, available = new Set();
   const options = new Map();
   const current = session => active === session && !session.controller.signal.aborted;
   function label(entry) {
@@ -95,7 +100,6 @@ export function start({document, window, backend, now = Date.now}) {
   }
   function stop() {
     active?.controller.abort();active = undefined;
-    $('#view').replaceChildren();
     $('#intention').replaceChildren();$('#intention-status').textContent = 'No decision intention received.';
     $('#view-status').textContent = '';
     $('#telemetry-status').textContent = '';
@@ -174,34 +178,89 @@ export function start({document, window, backend, now = Date.now}) {
       });
     }
   }
-  function select(name) {
+  function requestView() {
+    if (bridge.failed) {
+      if (active) nativeStatus(active, 'error', 'Native viewer is closed; reload CCTV to reopen it');
+      return;
+    }
+    if (!bridge.ready || bridge.pending || bridge.name === selected || !available.has(selected)) return;
+    bridge.pending = {bot: selected, generation: bridge.generation + 1};
+    bridge.iframe.contentWindow.postMessage({type: 'openrotmg-bot-watch', ...bridge.pending, target: bridge.target}, origin);
+  }
+  function select(name, target = {kind: 'bot', bot: name}) {
     stop();
     const session = active = {name, controller: new AbortController(), telemetry: 'connecting'};
-    const iframe = session.iframe = document.createElement('iframe');
-    iframe.title = `Read-only native gameplay for ${name}`;
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-    iframe.setAttribute('allow', "autoplay 'none'; camera 'none'; microphone 'none'; fullscreen 'none'; gamepad 'none'");
-    iframe.referrerPolicy = 'no-referrer';
-    iframe.src = backend.url(`/api/bots/${encodeURIComponent(name)}/view`).href;
-    iframe.addEventListener('error', () => {if (current(session)) nativeStatus(session, 'error', 'native page failed to load');});
-    $('#view').replaceChildren(iframe);nativeStatus(session, 'connecting');telemetryStatus(session);
-    void watch(session);
+    if (!bridge) {
+      const iframe = document.createElement('iframe');
+      iframe.title = `Read-only native gameplay for ${name}`;
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+      iframe.setAttribute('allow', "autoplay 'none'; camera 'none'; microphone 'none'; fullscreen 'none'; gamepad 'none'");
+      iframe.referrerPolicy = 'no-referrer';
+      iframe.src = backend.url(`/api/bots/${encodeURIComponent(name)}/view`).href;
+      iframe.addEventListener('error', () => {if (active) {bridge.failed = true;nativeStatus(active, 'error', 'native page failed to load');}});
+      bridge = {iframe, initial: name, name, generation: 0, ready: false};
+      $('#view').replaceChildren(iframe);
+    }
+    bridge.target = target;session.iframe = bridge.iframe;
+    nativeStatus(session, 'connecting');telemetryStatus(session);requestView();void watch(session);
   }
   function message(event) {
-    if (!active) return;
-    if (selectionMessage(event, origin, active.iframe.contentWindow, active.name, available)) {
-      $('#bot').value = event.data.target;change({target: $('#bot')});return;
+    if (!bridge || event.origin !== origin || event.source !== bridge.iframe.contentWindow) return;
+    const data = event.data;
+    if (!data || typeof data !== 'object' || Array.isArray(data) || bridge.failed && data.status !== 'error') return;
+    const shape = keys => Object.keys(data).sort().join(',') === keys;
+    if (data.type === 'openrotmg-bot-ready' && shape('bot,generation,type') && !bridge.ready && data.bot === bridge.initial && data.generation === 0) {
+      bridge.ready = true;requestView();return;
     }
-    if (viewMessage(event, origin, active.iframe.contentWindow, active.name)) nativeStatus(active, event.data.status, event.data.error);
+    if (data.type === 'openrotmg-bot-selected' && shape('bot,generation,type') && bridge.pending &&
+        data.bot === bridge.pending.bot && data.generation === bridge.pending.generation) {
+      bridge.name = data.bot;bridge.generation = data.generation;bridge.pending = null;
+      bridge.iframe.title = `Read-only native gameplay for ${data.bot}`;requestView();return;
+    }
+    if (data.type === 'openrotmg-bot-rejected' && shape('bot,error,generation,requested,type') && bridge.pending &&
+        data.bot === bridge.name && data.generation === bridge.generation && data.requested === bridge.pending.generation &&
+        typeof data.error === 'string' && data.error.trim()) {
+      const attempted = bridge.pending.bot;bridge.pending = null;
+      if (selected === attempted) {
+        $('#bot').value = bridge.name;change({target: $('#bot')});
+        $('#status').textContent = `Cannot watch ${attempted}: ${data.error}. Current view: ${bridge.name}.`;
+      } else requestView();
+      return;
+    }
+    if (data.status === 'error' && viewMessage(event, origin, bridge.iframe.contentWindow, bridge.name, bridge.ready ? bridge.generation : undefined)) {
+      bridge.failed = true;bridge.pending = null;
+      if (active) nativeStatus(active, 'error', data.error);
+      return;
+    }
+    if (!active || bridge.failed) return;
+    if (bridge.ready && !bridge.pending && active.name === bridge.name &&
+        selectionMessage(event, origin, bridge.iframe.contentWindow, active.name, new Set([...available, data.target]), bridge.generation)) {
+      const pick = () => {
+        $('#bot').value = data.target;
+        change({target: $('#bot')}, {kind: 'player', source: data.source, target: data.player});
+      };
+      if (available.has(data.target)) pick();
+      else {
+        const from = active, generation = bridge.generation;
+        void refresh().then(refreshed => {
+          if (!refreshed || active !== from || bridge.generation !== generation || bridge.pending) return;
+          if (available.has(data.target)) pick();
+          else $('#status').textContent = `Bot ${data.target} is no longer available.`;
+        });
+      }
+      return;
+    }
+    if ((!bridge.ready || !bridge.pending && active.name === bridge.name) &&
+        viewMessage(event, origin, bridge.iframe.contentWindow, active.name, bridge.ready ? bridge.generation : undefined)) nativeStatus(active, data.status, data.error);
   }
   async function refresh() {
     const id = ++refreshId, requested = now();
     try {
       const response = await backend.fetch('/api/bots', {cache: 'no-store', redirect: 'error'});
-      if (id !== refreshId) return;
+      if (id !== refreshId) return false;
       if (!response.ok) throw new Error(`bot list failed (HTTP ${response.status}): ${await response.text()}`);
       const list = await response.json();
-      if (id !== refreshId) return;
+      if (id !== refreshId) return false;
       if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length)) throw new Error('malformed bot list');
       const names = new Set(list.bots.map(bot => bot.name));
       if (names.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
@@ -216,7 +275,7 @@ export function start({document, window, backend, now = Date.now}) {
         }
       }
       for (const [name, entry] of options) {
-        if (!available.has(name) && name !== selected) {
+        if (!available.has(name) && name !== selected && name !== bridge?.name) {
           picker.removeChild(entry.option);options.delete(name);continue;
         }
         entry.online = available.has(name);entry.option.disabled = !entry.online;label(entry);
@@ -229,19 +288,21 @@ export function start({document, window, backend, now = Date.now}) {
       if (picker.value !== selected) picker.value = selected ?? '';
       picker.disabled = !list.bots.length;
       if (!list.bots.some(bot => bot.name === selected)) {
-        stop();$('#status').textContent = selected ? `Bot ${selected} is offline or unavailable. Pick another bot.` : 'No bots are running on this server.';return;
+        stop();$('#status').textContent = selected ? `Bot ${selected} is offline or unavailable. Pick another bot.` : 'No bots are running on this server.';return true;
       }
       $('#status').textContent = '';
       if (active?.name !== selected) select(selected);
+      return true;
     } catch (error) {
-      if (id !== refreshId) return;
+      if (id !== refreshId) return false;
       $('#status').textContent = `Bot list error: ${error.message}. Retrying in 10 s.`;console.error(error);
+      return false;
     }
   }
-  function change(event) {
+  function change(event, target) {
     selected = event.target.value;
     window.history.replaceState(null, '', `?bot=${encodeURIComponent(selected)}`);
-    $('#status').textContent = '';if (active?.name !== selected) select(selected);
+    $('#status').textContent = '';if (active?.name !== selected) select(selected, target);
   }
   $('#bot').addEventListener('change', change);window.addEventListener('message', message);
   const tick = window.setInterval(() => {
@@ -252,7 +313,7 @@ export function start({document, window, backend, now = Date.now}) {
   }, 1000);
   const polling = window.setInterval(() => {void refresh();}, 10000);
   void refresh();
-  return () => {++refreshId;stop();window.clearInterval(tick);window.clearInterval(polling);window.removeEventListener('message', message);$('#bot').removeEventListener('change', change);};
+  return () => {++refreshId;stop();$('#view').replaceChildren();bridge = undefined;window.clearInterval(tick);window.clearInterval(polling);window.removeEventListener('message', message);$('#bot').removeEventListener('change', change);};
 }
 
 if (typeof document !== 'undefined') start({document, window, backend: window.OpenRotMGBackend});

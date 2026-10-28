@@ -2923,17 +2923,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Five towers, Eyes, corpses/revival, attacks, all-five completion, once-only credit and rewards. Period test's central large tower has unresolved production continuity.",
+        "expected": "Five towers, Eyes, corpses/revival, attacks, red/yellow connecting beams, all-five completion, once-only credit and rewards. Ultra was withdrawn in testing 122.3.1; its retained client definition does not establish production use.",
         "differences": [
-          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields, placement and the period test's large central tower's production fate remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
+          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields and placement remain unverified; Ultra's withdrawal is documented separately: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
         ],
         "unknowns": [
-          "Central tower's final production fate; target revival, geometry, grenade and reward parameters."
+          "Exact 123.5.1 revival clocks, rounded coordinates, Eye behavior and reward coefficients. Current Eye fire is 1 second versus the period guide's 0.2 seconds; per-corpse revival and live-child replenishment differ from the older global clock and later cumulative Spawn counter. These conflicts do not justify numerical retuning.",
+          "Ultra was withdrawn in the March 2012 test; the June production guide describes five corpse loot sites without it. Exact target-build deployment and center-cell fields remain unauthenticated. RealmEye's retrospective has an unreliable broader Pentaract introduction chronology."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/test/build122.2.1",
-            "label": "Build 122.2.1 test-server notes"
+            "label": "March 17, 2012 test-only Ultra experiment"
+          },
+          {
+            "url": "https://web.archive.org/web/20120331002105id_/http://forums.wildshadow.com/node/64679",
+            "label": "Developer thread begun March 24, 2012: 122.3.1 withdraws Ultra; dated comments distinguish tower platforms from the test-only center platform"
+          },
+          {
+            "url": "https://web.archive.org/web/20120611050120id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "June 11, 2012 production-wiki capture, marked last updated 118: red/yellow beams, five corpse loot sites and encounter parameters"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March 26, 2012 test notes corroborate Ultra withdrawal; repeated announcement is not independent evidence"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/pentaract-tower-ultra",
+            "label": "Undated retrospective labels Ultra never released; broader introduction chronology is unreliable"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Pentaract.cs",
+            "label": "Modified 7.0 comparator; inspect Spawn, Swirl, Grenade, Transform and damage-transfer semantics"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/PentaractStar.cs",
@@ -3384,15 +3405,34 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Single MidSand Nomadic Shaman6c6 with Green Magic and Blind1.5s Green Spinner; no invented Nomad variants.",
-        "differences": [],
+        "expected": "Single MidSand Nomadic Shaman6c6, HP140/DEF1, Green Magic20 and Green Spinner30 with Blind1.5s. Primary reconstruction: aimed three-shot11-degree magic fans in3100ms phases, single spinners in2200ms phases,500/700ms entry delays/cooldowns and one public Magic Potion4% roll.",
+        "differences": [
+          "Rust retains chase(stop2), a home leash and bounded relative-SpawnProb population with MidSand area divisor200. Compiled Kithio instead uses StayAbove(0.8,55)/Wander(0.7), divisor300 and explicit Shaman weight0.25; original elevation and selector semantics are not recovered.",
+          "The chosen numeric attack schedule uses existing50ms Rust deadlines, not a literal replay of Kithio's decrement/test tick ordering. Older Trapped instead has1000ms phases, randomized400ms cooldowns,15-degree fans and equipment/potion pools. Neither comparator authenticates123.5.1."
+        ],
         "unknowns": [
-          "Original firing timing and patterns, density, Blind application and drops."
+          "Exact123.5.1 movement, density, phase/clock quantization, potion odds and multiplayer reward eligibility remain unresolved in issue833. Prepared encounter checks do not establish earned discovery, natural-risk survival, item acquisition or historical acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L682-L699",
+            "label": "Compiled primary Shaman table; Shoot/Cooldown/TimedTransition and shared ItemLoot semantics checked"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 full Shaman object equals selected definition; not server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073636id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nomadic-shaman",
+            "label": "Period guide marked122.0.1 supports projectiles/Blind1.5s/MidSand, not clocks or drops"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/nomadic-shaman",
+            "label": "Current history explicitly dates Blind-to-Slowed and sprite changes to April2024, not2012"
           }
         ]
       }
@@ -3405,15 +3445,52 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Ordinary Shore Snake 0x602 is distinct from the Fire, Brown and Yellow Pythons 0x225–227 found in dungeon definitions.",
-        "differences": [],
+        "expected": "Shore Snake 0x602 has 5 HP, ShoreSand admission and 4-damage Green Magic. Snake Pit Fire/Brown/Yellow Pythons 0x225–227 have 200 HP, 5/20/5 DEF and 25-damage projectiles; they have no Realm spawn tags. Selected projectile speed/lifetime is 4 tiles/s for 2 seconds for Snake and 8 tiles/s for 2/3/3 seconds for Pythons, without status effects.",
+        "differences": [
+          "Comparator discrepancies, not adjudicated target bugs: Snake wanders at 6 tiles/s with bounded regional refill. Kithio uses Wander(0.8), converted by GetSpeed to 5.18 units per world-clock second, with local density-five reproduction. Build118 separately labels wander speed8; its unit equivalence is unverified. Fire continuously chases rather than the intermittent charge in period leads and Trapped.",
+          "Python rewards currently share Snake Oil (10%), T3 rings (5%) and T6 weapons (5%). Comparator species lists and ordered-versus-independent loot engines differ; the Japanese Fire/Yellow item lists also conflict with later Wild Shadow captures. These are not established target odds."
+        ],
         "unknowns": [
-          "Target Python production deployment and dungeon layout/admission policy, original Snake density and all reward probabilities."
+          "Target-build production Python placement/admission and original Snake Pit room/population policy remain unresolved; selected XML and later maps do not recover the generator.",
+          "Resolve target Fire timing/spread/movement and Snake speed, area density and local reproduction versus regional refill. June 2012 Python archive requests resolve to 2013 captures marked 8.0.0, not June 2012 evidence.",
+          "Resolve species-specific reward eligibility, allocation and target odds. Parenthesized Japanese rates refer to build 118.7.4. Bounded prepared native checks do not establish earned entry, original RNG, reward pickup/reconnect or whole-feature acceptance; see server issue 834."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L38-L47",
+            "label": "Compiled primary Snake table; no compiled Python coverage at this pin"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Utils.cs#L156-L159",
+            "label": "Kithio GetSpeed converts Wander(0.8) to 5.18, not the guide's speed8 label"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SnakePit.cs#L113-L164",
+            "label": "Python comparator; ordered loot weights are not independent drop odds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SnakePitCXML.dat",
+            "label": "Modified 7.0 Python definitions match selected XML, not proof of AI or deployment"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Fire%20Python",
+            "label": "Fire guide displays 2012-06-22; intermittent rush and three shots, disputed item list"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Brown%20Python",
+            "label": "Brown guide displays 2012-06-22; wandering, 200 HP/20 DEF"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Yellow%20Python",
+            "label": "Yellow guide displays 2012-06-22; chasing, disputed item list"
+          },
+          {
+            "url": "https://web.archive.org/web/20120517003342id_/http://forums.wildshadow.com/wiki/realm-mad-god/snake",
+            "label": "May 17, 2012 Snake capture marked build 118; reproduction and attacks, no reward odds"
           }
         ]
       }
@@ -3427,9 +3504,13 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Flayer/Veteran and population-owner Flayer God 0x647–649; selected God projectile applies Quiet10s.",
-        "differences": [],
+        "differences": [
+          "Current initial3/2 and live-child4/3 refills every10s differ from compiled Kithio lifetime births2/3 and self-density2 reproduction every60s. Current God alternates two2s streams rather than Kithio's independent400ms green/1000ms star; followers omit its0.5 prediction.",
+          "Current God ability3 rate10%, one-success-per-tier rolls and private allocation differ from Kithio's15% and candidate-expanded shared rolls. Comparator values are not authenticated123.5.1 probabilities."
+        ],
         "unknowns": [
-          "Target reproduction, exact attack cadence and reward probabilities."
+          "Exact123.5.1 population/replacement/self-reproduction, attack clocks/prediction, orphan/protection behavior and reward allocation/rates, including Snake Pit17%. May19,2012 guides support mechanics but have obsolete stats; issue835 retains the source/engine comparison and remaining checks.",
+          "The17-check prepared native encounter does not accept earned traversal/survival, multiplayer rewards, item pickup/reconnect or a rolled Snake Pit journey. Whole-feature gameplay remains not-run."
         ],
         "sources": [
           {
@@ -3450,7 +3531,7 @@
         "expected": "Ghost Archer/Warrior/Mage/Rogue/Paladin/Knight0x662–667 are retired Ghost King escorts and should not spawn in 123.5.1. Wiki stat blocks last updated at build 115 still list them as Ghost King reproduction, while the same 2012 page text describes the later large-ghost evaluation fight and pinned comparators use Ghost Master and Small/Medium/Large Ghosts.",
         "differences": [],
         "unknowns": [
-          "The exact retirement build: official Build 117 notes (June 2011) list new Ghost King behaviors, and a modern RealmEye page names Build 118 (July 2011). No 2012 capture directly proves their absence."
+          "Exact retirement build remains unresolved after reading the original June 18, 2011 Build 117 and July 15, 2011 Build 118 announcements. The former names new Ghost King behaviors; neither names the six escorts. Modern RealmEye's Build 118 attribution is not independently established, and the mixed-era May 2012 wiki capture does not prove absence. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/836#issuecomment-6472088623"
         ],
         "sources": [
           {
@@ -3475,7 +3556,23 @@
           },
           {
             "url": "https://web.archive.org/web/20250212161750/https://www.realmeye.com/wiki/archived-enemies",
-            "label": "Modern RealmEye archived enemies: Build 118 replaced the six escorts with Ghost Master and Small/Medium/Large Ghosts"
+            "label": "Modern RealmEye attributes replacement to Build 118; precise contemporary support remains unresolved"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 comparator: all six complete legacy escort definitions match selected XML; no Terrain or SpawnProbability, not deployment proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Compiled and reflection-registered primary reconstruction uses only Ghost Master and Small/Medium/Large Ghosts"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605135133id_/http://forums.wildshadow.com/node/3772",
+            "label": "Original June 18, 2011 Build 117 announcement names new Ghost King behaviors, not escort retirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134308id_/http://forums.wildshadow.com/node/4820",
+            "label": "Original July 15, 2011 Build 118 announcement lists general monster improvements, not these identities"
           }
         ]
       }
@@ -3489,11 +3586,31 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Weretiger0x635, Wereleopard0x636, Werepanther0x639 and owner Werelion0x637; differentiated attacks, movement and owner relationship.",
-        "differences": [],
+        "differences": [
+          "Current Trapped-based camps initially roll 1..3 Tigers, 1..2 Leopards and 1..2 Panthers, then refill empty owned slots every10s. Compiled Kithio Spawn truncates initial .5 fractions to0/1/1 and caps lifetime births at1/2/3 on23/9/15s clocks, not alive-child replacement.",
+          "Current Tiger/Leopard chase-orbit choices are equal every500ms, versus Trapped's per-tick choices. Panther attempts target-position Planewalk every7s; Kithio uses a200ms high-speed jump and4s attack state. Camp/home/clear-ground guards are reconstruction policy.",
+          "Current Tiger triple shots and Lion alternating projectile types differ from Kithio's predictive single Tiger shot and Lion hidden-player eight-ray choreography. Current loot uses Trapped coefficients with different allocation semantics; Kithio and dated follower guides list HP-only Tiger/Leopard and MP-only Panther."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, random-choice probabilities, Planewalk policy and loot rates."
+          "123.5.1 continuity of initial/replenishment counts and clocks, choice cadence, Panther teleport versus dash and owner limits, Lion hidden-player attacks, loot allocation/odds and Spider Den10% versus mixed-era5%. Research disposition and remaining checks: server issue837."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L503-L600",
+            "label": "Compiled and registered primary reconstruction reference; original123.5.1 AI not authenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All four complete objects normalize identically to selected123.5.1; modified7.0 client agreement is not server AI evidence"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Weretiger",
+            "label": "March17,2012 last-modified follower guide: three17damage cover-piercing shots; parent page changed2018"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Werepanther",
+            "label": "February25,2012 last-modified follower guide: occasional rapid approach, not exact teleport/dash timing; parent population/rates not dated to target"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -3513,15 +3630,32 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Six Earth/Paper/Metal/Clockwork/Fire/Darkness Golems and satellites0x6d2–6d7, including target-announced small satellite XP; separate from Constructs.",
-        "differences": [],
+        "expected": "Six Earth/Paper/Metal/Clockwork/Fire/Darkness Golems and satellites0x6d2–6d7; selected definitions and a September7,2012 Gray Satellite2 page support ten satellite XP. Separate from Constructs.",
+        "differences": [
+          "Current random-colored/three-gray owned camps, radius3/1 orbits, single gray shots and30-second orphan cleanup follow an older Trapped reconstruction. Compiled Kithio covers four roots, uses named satellite sets, radius2/0.75, distinct gray attacks and16-second state-entry decay. Neither establishes exact original six-root policy: https://github.com/OpenRotMG/Open-RotMG-Server/issues/838#issuecomment-6472148986",
+          "All twelve complete selected objects match pinned modified7.0 MidCXML. Ten satellite XP has target-era documentary support, not proof of multiplayer allocation. Current root reward pools and ceil-rounded XP differ from Kithio; prior period-loot receipts remain separate.",
+          "PR1112 records81 bounded checks across six clean natural-camp native takes, including all six satellite kinds awarding10XP and cold saved-progress checks. Prepared assistance, collateral awards and failed takes are explicit; no whole-feature or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1112#issuecomment-6473494996"
+        ],
         "unknowns": [
-          "Target satellite composition, orbit/cleanup policy and exact XP amount; exact attack/drop policy."
+          "Original six-root population/composition, named-target versus owned-camp orbit, hub-loss behavior with a living root, numeric cleanup and replacement policy.",
+          "Exact attack clocks/prediction and original root reward pools/probabilities/allocation; earned acquisition, multiplayer, status-hit and durable-return gameplay remain unverified."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
-            "label": "Build 123.5.1 release notes"
+            "url": "https://wikiwiki.jp/rmd/?cmd=read&page=version%2Fbuild123.5.1",
+            "label": "September7,2012 release announcement: small satellite XP, no numeric amount"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/?cmd=read&page=Gray%20Satellite%202",
+            "label": "Last modified September7,2012: ten XP, hub-loss stop and unspecified post-Golem decay"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Golems.cs",
+            "label": "Compiled primary: six satellites but only Earth/Paper/Fire/Darkness roots; engine semantics in issue838"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 comparator: twelve complete definitions match, not AI or probability proof"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -3539,11 +3673,26 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Fire/Ice/Magic Sprite0x624–626; selected Ice slows1.6s. Exclude Sprite God/Child and dungeon sprites.",
-        "differences": [],
+        "differences": [
+          "Current movement uses the Trapped-style15 motor, not Kithio rate1.4/StayAbove. Regional MidPlains area/200 admission and60s refill are not Kithio same-species radius10/density2 reproduction.",
+          "Build118 wiki armor tier5 maps to selected tier6: period Chimera Hide Armor, Plate Mail and Robe of the Adept names reconcile the numbering, not original RNG."
+        ],
         "unknowns": [
-          "Target density, movement, cadence/spread and loot probabilities."
+          "Original123.5.1 movement/elevation, local reproduction versus regional density, tick-exact cadence, equipment-pool/odds provenance and multiplayer reward/pickup/reconnect continuity. Research and bounded gameplay remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/issues/839#issuecomment-6472186081"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Compiled primary reconstruction table; engine semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120127132732id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprites",
+            "label": "January2012 capture marked build118; not proof of123.5.1 deployment"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 comparator: all three complete selected Sprite objects match"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -3563,15 +3712,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter.",
-        "differences": [],
+        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter: selected 30/40HP, 0DEF, size90, MidSand and 11/13-damage shots with speed60 and 600/2000ms lifetimes.",
+        "differences": [
+          "Current reconstruction starts1–3 per kind, replenishes owned living slots to3 per kind every10s and leaves orphan Wargs wandering. Compiled Kithio starts four random Wargs and permits eight lifetime births at8s intervals; its Protect can reacquire another Werewolf. Neither comparator is authenticated target behavior.",
+          "Kithio gives both Wargs a4% shared Health Potion roll; current Wargs have no item table. Modern2024 Demon documentation lists Magic Potion instead. No target-era item probability or eligibility has been established."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, orphan persistence, enrage thresholds and rewards."
+          "Exact123.5.1 initial distribution, living-versus-lifetime caps/refill, cross-family orphan retargeting, leader rage threshold/size/motion/attack concurrency and Warg item rates/eligibility remain issue840 and issue807.",
+          "PR1067 and PR1106 now record bounded natural admission/attacks, both living refills, orphan persistence/movement/attacks, native orphan defeats/XP and no replacement/repeated XP. Prepared placement/gear/protection is not earned discovery, ordinary survival, native multiplayer or historical acceptance; those limits remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L793-L864",
+            "label": "Compiled Kithio Wargs/Werewolf comparator; SpawnGroup lifetime births, Protect and compiled loot engine reviewed in issue840, not target fidelity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120615181402id_/http://forums.wildshadow.com/wiki/realm-mad-god/demon-warg",
+            "label": "June2012 Demon Warg guide labels build122.0.1; stats/projectiles only, EXP blank"
           }
         ]
       }
@@ -3584,11 +3745,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Sand Phantom0x6c5 and Wisp0x7f22, distinct selected data; transformation is comparator-supported, target continuity policy unresolved.",
-        "differences": [],
+        "expected": "Sand Phantom0x6c5 and Wisp0x7f22 retain distinct selected definitions. Compiled Kithio supplies a proximity-triggered Phantom and retreating/wandering Wisp reconstruction, not recovered123.5.1 AI.",
+        "differences": [
+          "Fresh selected HP and preserved damage attribution/population ownership are deliberate server continuity policy. Kithio replaces without transferring damage. Neither source proves original kill-credit/reward continuity.",
+          "The bounded correction adopts nominal800ms Wisp movement phases/6500ms return and proximity4.4, not a tick-exact Kithio engine port. Existing Phantom chase and500ms/range10 non-predictive fire differ from Kithio's0.85 motor and400ms/range8/predictive0.4 schedule; current home-leash and authority guards remain."
+        ],
         "unknowns": [
-          "Original transformation timing and triggers, and continuity of HP, kill credit and rewards.",
-          "The community comparison uses five- and ten-second transitions; the original timings are unresolved."
+          "Exact123.5.1 trigger, transition timing, HP/credit/reward continuity and loot remain unresolved in issue841. Trapped uses five-/ten-second chasing forms; Kithio uses proximity4.4 and nominal6.5-second return with800ms retreat/wander states. Engine pre-decrement and state execution affect actual timings.",
+          "March17,2012 Wildshadow capture (content122.0.1) corroborates both forms' stats/projectiles, not AI. Japanese wiki6.5-second text is not dated to target; its chase description conflicts with Kithio/modern RealmEye retreat."
         ],
         "sources": [
           {
@@ -3597,7 +3761,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Older five-/ten-second comparator, not independent target-era AI"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L700-L737",
+            "label": "Compiled primary reconstruction; not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120317154006id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/sand-phantom",
+            "label": "March2012 capture, content122.0.1: both forms' stats/projectiles only"
           }
         ]
       }
@@ -3610,11 +3782,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Ordinary Red, Purple and Green Gelatinous Cubes inhabit ShorePlains and have distinct projectiles. They are separate from Cube God followers.",
-        "differences": [],
+        "expected": "Ordinary Red/Purple/Green Gelatinous Cubes (0x60e-0x610), separate from Cube God followers: ShorePlains, 70HP/0DEF, wandering and 2/1/5 projectiles. Complete selected definitions match pinned modified 7.0 XML; period guides list4XP, current ceiling-rounded award is5.",
+        "differences": [
+          "Current radius5/nonpredictive aiming differs from compiled Kithio radius8/predictive0.2; global bounded replenishment and home-limited wandering do not reproduce its local densityMax5/radius10 reproduction and randomized movement. Trapped instead has randomized attack cooldowns. Current5XP versus guide4XP follows the shared ceiling-rounding policy already qualified by progression research, not a cube-specific repair. These are reconstruction choices, not recovered original AI."
+        ],
         "unknowns": [
-          "Original production spawn counts/density and use of XML Spawn metadata.",
-          "Original cooldown randomization, movement/spread policy and potion/portal probabilities.",
+          "Original production spawn counts/density and XML Spawn policy. Trapped uses ShorePlains area/150, clipped Gaussian groups and Bandit/Cube weights0.4/0.2/0.2/0.2; current relative XML selection and legal placement are reconstructed.",
+          "Original cooldown variance, movement/spread and post118.7.4 potion/portal rates. March5,2013 Japanese pages explicitly limit potion4%/PirateCave3% to through118.7.4 and leave later rates unknown; modified7.0 supports current4%/4% potions and1% portal, not authenticated123.5.1 probabilities.",
+          "Native reward pickup/duplicate rejection, cube-generated Pirate Cave entry and full-feature acceptance remain tracked in server issue842; bounded combat receipts are not whole-feature acceptance.",
           "Classic Worlds 1 to 3 use an engineered eight-tile moist coastal band, not recovered original polygon boundaries."
         ],
         "sources": [
@@ -3632,11 +3807,23 @@
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ShoreCXML.dat#L177-L255",
-            "label": "Modified 7.0 client comparison: all three cubes use ShorePlains"
+            "label": "Pinned modified 7.0 client: all three complete cube objects normalize identically to selected definitions"
           },
           {
             "url": "https://wikiwiki.jp/rmd/試験的ページ/モンスター#ShorePlains",
-            "label": "Period Shore Plains listing and September 2012 image"
+            "label": "Shore Plains family listing; September2012 image date does not date all page claims"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L168-L199",
+            "label": "Compiled/registered primary cube table; Shoot/Cooldown/Reproduce semantics qualified in evidence receipt"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Red%20Gelatinous%20Cube",
+            "label": "March5,2013 individual guide: 70HP/4XP/wandering; numerical rates explicitly stop at118.7.4"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Shore.cs",
+            "label": "Modified7.0 comparator: independent4% potions and1% PirateCave; not original probability proof"
           }
         ]
       }
@@ -3649,15 +3836,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Medusa, HP2000/DEF18, Green Bolt100; qualified comparator supports pursuit, five-shot fan and grenade. Exact population, rewards and Abyss of Demons portal eligibility/rate remain qualified.",
-        "differences": [],
+        "expected": "Mountain Medusa 0x654, HP2000/DEF18, Green Bolt100/speed70/2000ms. The May2012 guide and compiled Kithio agree on five shots at10 degrees/range12/1s and grenade150/radius4/range8/3s; Kithio delays impact1500ms. Period Medusa drops Abyss, not the later Snake Pit.",
+        "differences": [
+          "Current Trapped-derived movement uses speed6/acquisition7/stop4/wander4 plus a home leash. Kithio Follow uses acquisition10/stop7, resumes above8, and converts speed1 to6.29; the period page instead describes chase speed10 and peak teleporting. No motor change or historical equivalence claimed.",
+          "Abyss10% remains the PR231 reconstruction. Selected spawn groups and bounded 60s reproduction/refilling do not establish original Realm density. Current Speed potion gate360/1% differs from Trapped1.5% and modified7.0's7% gate/7% chance; these forks are not independent witnesses."
+        ],
         "unknowns": [
-          "Target attack/movement constants, population/repopulation policy and loot/portal probabilities."
+          "Exact123.5.1 movement/peak relocation, Realm population/refilling, reward eligibility/ownership/probabilities and Abyss percentage. Earned multiplayer rewards/portal entry and sustained reproduction remain unverified; see issue843."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L69-L92",
+            "label": "Compiled Kithio Medusa comparator; engine and era qualifications in evidence"
+          },
+          {
+            "url": "https://web.archive.org/web/20120522023605id_/http://forums.wildshadow.com/wiki/realm-mad-god/medusa",
+            "label": "May22,2012 Medusa guide (not exact123.5.1 continuity)"
           }
         ]
       }
@@ -3670,16 +3868,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Ent God HP1000/DEF18; piercing Fire Bolt70. Qualified comparator supports predictive five-shot fan, chase/wander and Defense rewards; no presumed dungeon association.",
-        "differences": [],
+        "expected": "Mountain Ent God HP1000/DEF18; piercing Fire Bolt70/speed8/lifetime2s. Five-shot ten-degree predictive fan; qualified primary comparator supports chase/wander, local reproduction and a 1.5% private Defense roll at180 damage. No presumed dungeon association.",
+        "differences": [
+          "Current Trapped-style speed10/acquisition7/stop4/wander4 and capped linear prediction differ from Kithio Follow acquisition10/stop7/resting hysteresis and angular-history prediction. Current1250ms cadence lacks its check-before-decrement tick overhead; home tether and safe bounded births remain project reconstruction.",
+          "Current gear retains T6 armor and T3/4 rings absent from Kithio's Ent table; build118's armor list also differs. Corrected shared/private allocation is not a copy of Kithio's duplicate/hiding behavior. Modified7.0 server changes gear eligibility and Defense rates, not selected-era proof."
+        ],
         "unknowns": [
-          "Original prediction, cadence, movement, loot eligibility/rates and population/dungeon policy."
+          "Exact123.5.1 prediction/history sampling, pursuit/elevation/tether, cadence, original reward pools/odds/allocation, population distribution and dungeon continuity remain issue844. The May20,2012 guide explicitly describes build118, not target continuity.",
+          "PR1119 verifies natural Realm admission/movement/fan/defeat/100XP and an owned gear bag with prepared stats/Invulnerable, plus deterministic179/180/181-damage reward boundaries. Native piercing/hit/prediction timing, active reproduction, multiplayer eligibility, pickup/reconnect and ordinary-risk/earned travel remain unverified; whole-feature gameplay is not-run."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L93-L113", "label": "Compiled primary Ent table; Shoot/Follow/Reproduce/LootDefs engines inspected"},
+          {"url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-god", "label": "May20,2012 build118 fan/movement/reproduction guide; earlier-version corroboration"}
         ]
       }
     },
@@ -3691,15 +3892,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120 plus zero-damage Purple Star Blind5s. Comparator radial damage and predictive condition shots are qualified, not target-certified.",
-        "differences": [],
+        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120/speed5/lifetime2.7s and zero-damage Purple Star/speed7/lifetime3s/Blind5s. Qualified five-bolt72-degree ring and predictive star; primary comparator supports local max3 reproduction and1% private Defense at270 damage.",
+        "differences": [
+          "Current speed10/acquisition7/stop4/wander4 agrees with the build118 guide but differs from Kithio Follow acquisition10/stop7/resting hysteresis and Trapped chase speed4. Capped linear prediction and750/1000ms schedules differ from Kithio angular-history prediction and check-before-decrement timing; home tether remains project reconstruction.",
+          "Current gear retains T6 armor and T4 abilities absent from Kithio's Beholder table. Build118 wiki armor labels require the recorded client-tier offset; modified7.0 changes gear eligibility and Defense rates. Corrected shared/private allocation and safe finite births remain authoritative, not original-fidelity claims."
+        ],
         "unknowns": [
-          "Production geometry, cadence/prediction, condition-hit semantics, rewards and population/portal policies."
+          "Exact123.5.1 prediction/history sampling, pursuit/elevation/peak teleporting/tether, cadence, original rewards/allocation, population distribution and portal continuity remain issue845. April26,2012's build118 guide is earlier-version corroboration; current RealmEye Weak4s/Abandoned City does not override selected Blind5s.",
+          "PR1127 verifies natural Realm admission/movement/volleys/Blind/defeat/150XP with prepared stats and Invulnerable, plus deterministic zero-damage Blind/ACK/expiry and269/270/271-damage reward boundaries. Unprotected native damage, active reproduction, multiplayer eligibility, pickup/reconnect and ordinary-risk/earned travel remain unverified; whole-feature gameplay is not-run."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L114-L140",
+            "label": "Compiled primary Beholder table; Shoot/Follow/Reproduce/loot engines inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120426135122id_/http://forums.wildshadow.com/wiki/realm-mad-god/beholder",
+            "label": "April26,2012 build118 combat/movement/reproduction guide; earlier-version corroboration"
           }
         ]
       }
@@ -3712,15 +3925,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying mountain enemy HP1000/DEF12, Pink Bolt50; qualified comparator supports chase/wander, five-shot radial bursts and Attack potion eligibility.",
-        "differences": [],
+        "expected": "Flying mountain god HP1000/DEF12; five Pink Bolts50 at72 degrees, speed12/lifetime1.8s/range12 and nominal500ms cadence. Compiled Kithio supports player-oriented rings, chase/wander, max3 same-kind reproduction and Attack1.5% after180 damage. Retained123.5.0 announcement associates Mad Lab with Flying Brain.",
+        "differences": [
+          "Current acquisition7/stop4/speed6/wander4 follows Trapped, not Kithio Follow acquisition10/stop7 with resting hysteresis and jitter. Exact500ms firing differs from Kithio's check-before-subtract clock, nominal500ms becoming550ms at50ms ticks; original123.5.1 timing remains unresolved.",
+          "Project home tether, finite habitat/capacity and safe births are not original elevation200/peak-teleport fidelity. Selected spawn mean3/stddev1/min2/max5 does not prove original world distribution.",
+          "Current common-god equipment pool is broader than Kithio's Brain-specific table. Mad Lab association has retained period support;17% is a later7.0 comparator rate, not a certified123.5.1 probability."
+        ],
         "unknowns": [
-          "Original ring orientation/cadence, movement, population and complete rewards/dungeon associations."
+          "Exact123.5.1 orientation/tick cadence, pursuit/elevation/tether policy, population distribution and full equipment pool/odds/allocation remain historically unresolved. Build118 independently supports72-degree five-shot0.5s rings, but not target continuity or spoke orientation.",
+          "Whole-feature native acceptance still needs multiplayer eligibility, potion pickup/reconnect, earned Lab entry and longer population lifecycle. Prepared combat and controlled reward/portal tests cannot certify those outcomes or original probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L137-L157",
+            "label": "Compiled Kithio reconstruction comparator, not authenticated original server"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Shoot.cs",
+            "label": "Comparator engine: centered target-oriented fan and cooldown evaluation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519152549id_/http://forums.wildshadow.com/wiki/realm-mad-god/flying-brain",
+            "label": "May19,2012 capture, explicitly build118; earlier-version corroboration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat#L156-L185",
+            "label": "Modified7.0 client definition agrees with selected Flying Brain object, not AI authority"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Retained release announcement associates Flying Brain with Mad Lab; no original rate"
           }
         ]
       }
@@ -3733,16 +3971,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain HP1000/DEF12; Red Fire80 plus zero-damage Green Star Slowed6s. Comparator five-shot fan and predictive slow shot are qualified expectations.",
-        "differences": [],
+        "expected": "Mountain HP1000/DEF12; Red Fire80/speed100/1100ms and Green Star0/speed70/2000ms/Slowed6s match selected and modified7.0 definitions. Build118 independently lists five red shots/gap10/range12/cooldown1s and predictive star/range10/cooldown0.65s, mountain movement/reproduction and Defense rewards.",
+        "differences": [
+          "Current linear prediction and chase7/stop4 differ from compiled Kithio angular-history prediction and Follow acquisition10/stop7. Fixed nominal cooldowns differ from Trapped's randomized initial and95–105% repeats; exact target behavior is unresolved.",
+          "Safe bounded regional births and equipment allocation are project reconstruction. Defense1.5% at180 damage follows Kithio, not modified7.0's7%/7%. Toxic Sewers was introduced in October2016; current Slime has no portal and does not drop Mad Lab."
+        ],
         "unknowns": [
-          "Original randomized cooldown/prediction, condition-hit details, population/rewards and portal association."
+          "Exact123.5.1 prediction/cooldown distribution, natural population/refill and reward odds/allocation; build118 corroboration does not establish target continuity.",
+          "Whole-feature gameplay remains not-run: earned traversal, sustained natural reproduction, native multiplayer reward eligibility and pickup/reconnect are not accepted by the bounded combat take. Exact six-second hit timing and predictive geometry remain unmeasured; see issue847."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L158-L179", "label": "Compiled Kithio Slime table; engine/version qualifications in evidence"},
+          {"url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/slime-god", "label": "May20,2012 build118 guide; earlier-version corroboration"},
+          {"url": "https://www.realmeye.com/wiki/release-history-2016#patch-27-7-x6", "label": "October11,2016 Toxic Sewers introduction; not target-era content"}
         ]
       }
     },
@@ -3754,17 +3996,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying Mountain Ghost God HP1000/DEF12, White Bolt120; comparator seven-shot25-degree fan, chase/wander and Speed rewards. Distinct from Ghost King.",
-        "differences": [],
+        "expected": "Flying Mountain Ghost God0x659 HP1000/DEF12; selected White Bolt120/speed50/lifetime2700 has no status or piercing. Build118 corroborates seven shots/25-degree gaps, Speed and Undead Lair. Distinct from Ghost King and Septavius.",
+        "differences": [
+          "Current Trapped-derived pursuit4/acquisition7/stop4 and nonpredictive fan differ from compiled Kithio Follow(1,range7), angular-history prediction0.5 and tick-driven cooldown; build118 lists chase10 and aim0.5.",
+          "Current broader gear tiers, corrected loot allocation, safe bounded births and17% Undead Lair roll remain reconstruction. Kithio has Speed1.5% at180 damage but no portal; modified7.0 uses17% portal and different7% reward thresholds/rates, while the Japanese page limits its4% portal figure to118.7.4."
+        ],
         "unknowns": [
-          "Target movement/attack constants, portal association/rate, population and reward eligibility.",
-          "Earned portals now prefer unobstructed death coordinates; occupied sites still use project interaction clearance, not a certified original separation policy."
+          "Exact123.5.1 pursuit/elevation/tether/peak teleport, prediction/history/cadence, population distribution and loot/portal probabilities remain unresolved in server issue848.",
+          "Prepared native combat and forced reward draws do not accept earned traversal, unprotected projectile hits, sustained reproduction, multiplayer eligibility, pickup/reconnect or rolled Undead Lair entry. Whole gameplay remains not-run.",
+          "Earned portals prefer unobstructed death coordinates; occupied sites use project interaction clearance, not a certified original separation policy."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L180-L200", "label": "Compiled primary Ghost God table; engine semantics and conflicts in server issue848"},
+          {"url": "https://web.archive.org/web/20120519230020id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-god", "label": "May19,2012 build118 fan, movement, Speed and Undead Lair; earlier-version evidence"},
+          {"url": "https://wikiwiki.jp/rmd/Ghost%20God", "label": "Japanese Ghost God page; parenthesized reward/portal odds explicitly limited to118.7.4"}
         ]
       }
     },
@@ -3776,15 +4022,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Djinn HP1000/DEF12, piercing White Bullet60; production122 says awards EXP. Qualified comparator supports invulnerable pursuit, ring phases and low-HP telegraphed terminal burst/death.",
-        "differences": [],
+        "expected": "Mountain flying Djinn HP1000/DEF12; White Bullet60/speed6/lifetime1.5s is MultiHit, not ArmorPiercing. Build122 awards EXP; period guide supports shielded pursuit, vulnerable ring phases and red-warning terminal burst/death. Qualified primary Speed roll1.5% at180 damage.",
+        "differences": [
+          "Retained Trapped-style reconstruction uses2500ms chase, five paired four-shot ring steps, below400HP and twelve-shot terminal ring after1000ms. Compiled Kithio instead uses2000ms Bullet/Wait, below50%HP and ten terminal shots; Shoot centers fixedAngle fans unlike Trapped RingAttack offsets. Earlier117.1.3 guide says three-second warning/20DEF, conflicting with both comparators/selected12DEF.",
+          "Kithio Idle-only max4/radius10/default60s reproduction is not implemented; regional bounded ecology remains. Nearby capped100XP and largest-contributor timed kill ownership differ from Kithio weighted contributor XP/LastHitter; safer gear allocation and period-adjusted pools remain reconstruction. Modified7.0 changes reproduction and Speed rates, not target-era authority."
+        ],
         "unknowns": [
-          "Original thresholds, phase timings/angles, XP amount and ownership, loot/population/portal policies."
+          "Exact123.5.1 thresholds, warning/phase clocks/angles, XP allocation, gear probabilities, population and portal continuity remain issue849. Neither source agreement nor the earlier-version guide authenticates these numbers. Current Djinn has no dungeon association. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/849#issuecomment-6474461317",
+          "PR1128 passes11 bounded native checks for natural admission, movement, shield/ring phases, one-second warning/twelve-shot terminal burst, defeat/100XP and no repeated XP, with a prepared Wizard and Invincible. Native damage/multiplayer hits, reproduction, multiplayer eligibility, successful potion acquisition, pickup/reconnect and earned travel remain unverified; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L278-L343",
+            "label": "Compiled primary Djinn table; Shoot/Reproduce/Suicide/DamageCounter/Loots semantics inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Djinn object normalizes identically to selected definition; not server AI authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/djinn",
+            "label": "May20,2012 archive explicitly describes117.1.3; broad behavior corroboration and three-second warning conflict"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "label": "February14,2012 Build122.0.1 EXP change; not exact ownership"
           }
         ]
       }
@@ -3797,15 +4063,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Leviathan HP2000/DEF20, Aqua Missile70 and Blue Missile90; comparator supports chase/orbit/tangent movement, fan phases and predictive pairs. Period122 confirms distinct sound, not full AI.",
-        "differences": [],
+        "expected": "Mountain Leviathan HP2000/DEF20; Aqua70/speed6.7/lifetime1.7s and Blue90/speed8.5/lifetime1.8s. Build120 guide warns it shoots while Rogues are cloaked; February2012 lists Defense2.5% at360 damage. Build122 announces distinct sounds; selected hit/death IDs match modified7.0 XML.",
+        "differences": [
+          "Current Trapped-style chase/orbit/tangent6s and target-relative9/12/2-shot phases every1.5s differ from compiled Kithio's retreat/orbit/follow sequence and fixed-angle9/12/12 aqua pattern for4.4s, then4.5s of offset predictive blue pairs. Nominal300ms cadence does not reproduce either engine's exact tick/jitter or angular-history prediction.",
+          "Build120 guide lists Blue95, but authoritative selected XML says90. Kithio's weapon/HP/MP-only loot and modified7.0's7% Defense at1% damage disagree with period2.5%/18%; current equipment pools/allocation and weighted bounded population are qualified reconstruction."
+        ],
         "unknowns": [
-          "Original invisibility exception policy, timings/geometry, sound playback and complete population/reward/portal policy."
+          "Exact123.5.1 phase geometry/timing, prediction, elevation/home tether, density/respawn, XP-cap continuity, complete gear odds/allocation and portal continuity remain issue850. The build120 cloak warning supports continued shooting, not proof of every original acquisition/movement rule.",
+          "PR1124 verifies bounded natural admission, cloaked combat, native projectile groups, defeat/capped195XP and durable living save with prepared stats/gear/Invulnerable, not full acceptance. Distinct sound names/client load-play code are not audible playback proof. Earned traversal, ordinary-risk damage, native multiplayer rewards, pickup/reconnect and full history remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "Compiled/registered primary comparator; conflicting phase and reward policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524033343id_/http://forums.wildshadow.com/wiki/realm-mad-god/leviathan",
+            "label": "Build120 guide: cloaked shooting warning; incomplete/conflicting attack table"
+          },
+          {
+            "url": "https://web.archive.org/web/20120203021407id_/http://forums.wildshadow.com/wiki/realm-mad-god/leviathan",
+            "label": "February3,2012 capture: Defense2.5% at18%/360 damage; earlier-version testimony"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "February14,2012 build122 announcement: distinct sounds, not full AI"
           }
         ]
       }
@@ -3818,14 +4104,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying White Demon HP1000/DEF12, armor-piercing MultiHit45-damage shot.122.0.1 paired-swipes wording is qualified by intervening122.3.2 nerf; continuity to123.5.1 is unproven.",
+        "expected": "Mountain flying White Demon HP1000/DEF12; armor-piercing MultiHit45-damage shot, speed50/lifetime2000. Full object agrees with pinned modified7.0 client.122.0.1 paired swipes precede the March26,2012 testing122.3.1 melee nerf, adopted in production122.3.2; paired timing continuity to123.5.1 remains unproven.",
         "differences": [
           "Server PR413 originally introduced a 10-tile firing acquisition with pursuit9/stop4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413",
           "Selected White Demon reconstruction now uses compiled-Kithio immediate attempts,500ms argument/550ms fixed-tick intervals,20-degree gaps,Follow10/7/8 and angular-history aim. Trapped1000ms/15-degree comparator conflicts;exact123.5.1 is not certified. Abyss and selected projectile definitions remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/blob/86437418f9a5b888b0ce8cae04ce6292a9add41c/src/world/gods.rs"
         ],
         "unknowns": [
-          "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy.",
-          "Original firing-acquisition and pursuit radii."
+          "Whether paired swipes survived the122.3 nerf; exact123.5.1 timing/geometry, population/reward/dungeon policy and original RNG. Compiled primary selects20-degree gaps; May20,2012 build122 guide lists15 degrees and0.5s cooldown, not intra/inter-pair delays.",
+          "May20,2012 guide supports trigger10/chase7, but does not establish exact123.5.1 firing/Follow acquisition and hysteresis. Peak teleportation algorithm remains unrecovered. Native defeat evidence does not cover earned travel, unprotected survival, MultiHit through two players, pickup/reconnect, multiplayer potion eligibility or active reproduction."
         ],
         "sources": [
           {
@@ -3843,6 +4129,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
             "label": "Compiled Kithio White Demon comparator;engine timing/history semantics qualified,not official123.5.1"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March26,2012 testing122.3.1 melee nerf; production adoption is separately dated"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520002714id_/http://forums.wildshadow.com/wiki/realm-mad-god/white-demon",
+            "label": "May20,2012 capture; page labels content build122 and lists three shots/trigger10/chase7/cooldown0.5s/angle15, not exact123.5.1"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Pinned modified7.0 client: complete White Demon object agrees with selected definitions; not server AI"
           }
         ]
       }
@@ -3859,10 +4157,13 @@
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
           "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
-          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652",
+          "Kithio Spawn starts2 children and caps5 lifetime births, while current bounded families start3, regrow at10s and retain parent ownership rather than nearest-God adoption. Modified7.0 uses live-child tracking. These are comparator differences, not demonstrated defects: https://github.com/OpenRotMG/Open-RotMG-Server/issues/852#issuecomment-6474494394"
         ],
         "unknowns": [
-          "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
+          "Exact123.5.1 parent acquisition/radii, lifetime versus live-child caps, initial count/regrowth/orphan cleanup and continuity of build118 child5XP/Quiet rules. See server issue852.",
+          "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%.",
+          "PR1129 separately verifies prepared natural-family combat/Quiet/lifecycle and a naturally dropped Child portal with native admission to Sprite World. Earned travel, native item pickup/multiplayer allocation and rendered-dungeon acceptance remain unverified in issue852; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -3884,6 +4185,18 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/05/how-to-get-healed-by-necromancer.html",
             "label": "May 2012 healing guide: Sprite Gods with children form useful clustered groups"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture, build118 claims: attacks,200/5XP, non-attacking children and Sprite World eligibility; not exact123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120512045834id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "May12,2012 status guide: Quiet drains MP and stops regeneration; transfer/restoration claim separately unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L37-L68",
+            "label": "Compiled Kithio God/Child reference; inspect Spawn, Protect, Shoot and loot engines, not original server authenticity"
           }
         ]
       }
@@ -3896,10 +4209,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Coastal entrance, traversable cave populated by cave pirates, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF; original layout distribution, entrance/drop rates and reward policy are unresolved.",
-        "differences": [],
+        "expected": "Coastal or key entrance, seeded connected cave populated by officers, fighters and passive fauna, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF with 17/25-damage projectiles.",
+        "differences": [
+          "PR575 replaced the static comparator map with seeded reconstructed rooms and corridors, not recovered original generation.",
+          "Current natural entry is cube-only at 1%. The May 28, 2012 guide also lists lowland quest bosses/minions; older Japanese rates are explicitly limited to build118.7.4 or earlier.",
+          "Selected boss definitions override the build117.0.1 page's 4 DEF and 18/28 damage. Attack gating below640 HP follows the compiled Trapped comparator, not recovered target-era AI."
+        ],
         "unknowns": [
-          "Original layout and population distribution, boss timing, entrance probability and reward eligibility/rates. Period minimaps differ between runs, so the static map is a community comparator layout, not a recovered original."
+          "Original layout/population distribution, target-era entrance sources/rates and exact boss cadence remain unresolved. Trapped randomizes its nominal500ms cooldown; the build115 Brawler page instead lists1s.",
+          "Target-era reward tiers, rates and multiplayer eligibility/allocation remain unresolved. Current independent tier rolls and lower officer thresholds are reconstruction, not Trapped's ordered first-success shared allocation. See issue853's research disposition.",
+          "Remaining gameplay: cube-generated/shared entry, initial Cowardice escape, multiplayer reward qualification, Rum outcomes and reconnect. The supplied-key journey verifies ordinary traversal, boss, one reward and saved return, not every admission/reward gate."
         ],
         "sources": [
           {
@@ -3909,6 +4228,10 @@
           {
             "url": "https://www.youtube.com/watch?v=JMZXtUNZ96s",
             "label": "TwoYetis Pirate Cave guide, upload metadata 2012-11-06: Realm Portal at Dreadstump's death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.PirateCave.cs",
+            "label": "Compiled secondary comparator: boss HP gate, officer circling, fighters and passives; not original server authority"
           }
         ],
         "checks": [
@@ -3918,10 +4241,23 @@
             "expected": "Cave officer roles, pursuing fighters and passive fauna must appear through ordinary room traversal.",
             "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": [
+              "All13 ordinary selected definitions match the pinned modified7.0 client. The May2012 guide lists the same roster, but does not specify population distribution."
+            ],
+            "unknowns": [
+              "Exact target-era population distribution, movement/cadence and per-role drop policy remain unresolved. The build115 Brawler page and later comparator disagree on attack cooldown and potion rate."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PirateCaveCXML.dat",
+                "label": "Pinned modified7.0 definitions match the selected roster; not server behavior evidence"
+              },
+              {
+                "url": "https://web.archive.org/web/20120528161505id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirate-cave",
+                "label": "May28,2012 guide lists13 ordinary roles; no exact distribution"
+              }
+            ],
             "group": "population"
           }
         ]
@@ -3938,8 +4274,10 @@
         "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
         "differences": [],
         "unknowns": [
-          "Original entrance/layout/rewards and Arachna phase geometry/timing.",
-          "Whether ordinary floor webs slowed players; historical rendering alone does not establish this."
+          "Exact 123.5.1 entrance probabilities, rounded-room templates, dressing distribution and Arachna phase sequence/geometry/timing. The fixed room graph and modified7.0 behavior remain reconstructions.",
+          "Target-version continuity of the build117.0.1-labelled public reward rates and later comparator personal Ichor guarantee; a native drop does not measure probabilities.",
+          "Whether historical server logic slowed players on ordinary floor webs. Selected and modified7.0 SpiderWeb classes only render beside walls; neither class implements Slowed.",
+          "Exact 123.5.1 boss-exit destination. Build123.4.4 footage around02:12-02:16 shows a cave arch followed by a Realm load, but boss-exit versus Cowardice identity and target-version continuity were not isolated. Current Nexus return is not historical acceptance."
         ],
         "sources": [
           {
@@ -3953,6 +4291,26 @@
           {
             "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
             "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+            "label": "February 1, 2012 captured guide: four entrance families, linear caverns and shot/touch-triggered green sacs"
+          },
+          {
+            "url": "https://web.archive.org/web/20120201110941id_/http://forums.wildshadow.com/wiki/realm-mad-god/arachna-spider-queen",
+            "label": "Build 117.0.1-labelled Arachna stats and public reward rates, not authenticated 123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "Original February 13, 2012 Build 122 announcement: aesthetic eggs, surrounding pillars and boss-dropped exits"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SpiderDen.cs",
+            "label": "Modified7.0 comparator: nine radial web spokes, timed attack transition and two sac triggers; not recovered original AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 Arachna and nine spoke definitions match selected XML, not proof of deployed phase sequence"
           }
         ],
         "checks": [
@@ -3975,6 +4333,14 @@
               {
                 "url": "https://www.youtube.com/watch?v=4e_NAJKzL6Y&t=110s",
                 "label": "MrJakeBills1, August 2012: wall columns and decorative webs at 01:50; visible Build 123.4.4, not exact 123.5.1"
+              },
+              {
+                "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
+                "label": "February 1, 2012 captured guide distinguishes green sacs hatching on shots or contact"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/SpiderWeb.as",
+                "label": "Selected-client SpiderWeb rendering requires an adjacent Wall; no movement or status logic in this class"
               }
             ],
             "group": "layout"
@@ -3991,11 +4357,13 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Enter the Snake Pit, traverse snake-filled tunnels, fight Stheno with stable circling guardians, earn rewards and leave. Optional button/Guard/dart rooms span 11 tiles including both rails and use target assets; their original distribution and exact AI/reward policies remain unsettled.",
-        "differences": [],
+        "differences": [
+          "Guardians use a reconstructed six-tile orbit at server37c8211c to clear the restored cover during Stheno\u0027s two-tile wander. The former ten-tile path stalls all four guardians in native phase checks; count, linear motor speed, direction, collision and cover remain unchanged. Original radius is unverified: https://github.com/OpenRotMG/Open-RotMG-Server/issues/855#issuecomment-6475434043"
+        ],
         "unknowns": [
-          "Exact treasure-room introduction date and which dungeons the June 2012 notes mean, original room footprints and generation probabilities. The reconstructed 0-3-room layout is not a recovered official generator.",
-          "Original phase timings, entrance probability, Guard damage eligibility and reward rates.",
-          "Exact original guardian orbit speed, direction, initial variance and activation range."
+          "Exact Snake Pit treasure-room introduction and the second dungeon in June 2012's unnamed pair remain unresolved. Test build123.2 explicitly names the Abyss treasure room; production123.3 is dated2012-06-13. June2013 reports0–3 Snake Pit rooms, not the original123.5.1 generator, footprints or probabilities.",
+          "Original phase timings, entrance probability, Guard damage eligibility and reward rates. The modified7.0 engine compares .1/.32 directly to integer damage, not HP fractions; current strict gates are Stheno>750/Guard>550. The January2012 build117.0.1 loot page is older than the selected target.",
+          "Exact original guardian orbit radius, speed, direction, variance and activation. Modified7.0 uses nominal radius10/direction-1 and randomized radius/speed; current six-tile radius/direction+1 is a cover-clearing reconstruction. Its50-tile guardian acquisition seeks Stheno, not players."
         ],
         "sources": [
           {
@@ -4004,7 +4372,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "June 2012 production notes: treasure rooms in two unnamed dungeons"
+            "label": "2012-06-13 production notes: treasure rooms in two unnamed dungeons"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.2.0",
+            "label": "Test123.2 explicitly names the Abyss treasure room, not Snake Pit"
+          },
+          {
+            "url": "https://web.archive.org/web/20120118035706/http://forums.wildshadow.com/wiki/realm-mad-god/stheno-snake-queen",
+            "label": "2012-01-18 capture marked117.0.1: three phases and older loot; DEF30 does not override selected19"
           },
           {
             "url": "https://wikiwiki.jp/rmd/Snake%20Pit",
@@ -4094,7 +4470,7 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
         ],
         "sources": [
           {
@@ -4104,6 +4480,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
+            "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
           }
         ],
         "checks": [
@@ -4113,10 +4493,17 @@
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
             "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
+                "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -4141,7 +4528,9 @@
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/delays, orbit direction and teleport/phase randomness remain unresolved; the modified 7.0 engine has a 1500ms delayed toss and different shield-loop semantics from the current reconstruction.",
+          "Original room/conveyor/tree/native-god distributions, tiled/non-tiled appearance and glowing-entrance semantics remain unrecovered.",
+          "Target-era Defense availability, reward eligibility and multiplayer allocation remain unresolved; the build-118-labelled period tables and later encounter-wide required-Dexterity engine do not authenticate current per-contributor guarantees."
         ],
         "sources": [
           {
@@ -4179,6 +4568,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Limon%20Element",
             "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SpriteWorldCXML.dat",
+            "label": "Modified 7.0 client: all eleven native Sprite, Limon and Element definitions match the selected client; not original server AI"
           }
         ],
         "checks": [
@@ -4188,12 +4581,19 @@
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original tiled/non-tiled encoding and selection, tree/native-god weights and conveyor generator remain unrecovered."
+            ],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+                "label": "May 2012 guide: directional floors, destructible trees, zero-to-five gods and two appearances; no generator or distribution"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -4334,8 +4734,8 @@
           "The Abyss is now included in the existing player-teleport allowlist, restoring its advertised map flag and actual guarded teleport path. Cooldown, target eligibility, GOTO acknowledgements and lifetime tracking are unchanged. A later-edited April 2012 guide explicitly includes Abyss teleport tactics; exact target-era eligibility remains qualified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/604"
         ],
         "unknowns": [
-          "Original teleport eligibility details, layout and treasure-room distributions, controller behavior, Malphas phase timings and loot probabilities.",
-          "Whether Defense was present by the target build, and the original recipient guarantees."
+          "Original teleport eligibility, room/treasure distributions and exact Malphas/Idol timers remain unresolved. The local 36–52 room-count draw and truncated 20% treasure continuation, seven-phase 50.2-second Malphas cycle and Idol lava control are reconstruction, not recovered original constants.",
+          "May 27, 2012 Malphas documentation lists VIT but not DEF; October 2016 notes remove a DEF guarantee. Neither dates DEF introduction or authenticates September 2012 recipient guarantees."
         ],
         "sources": [
           {
@@ -4374,10 +4774,10 @@
             "expected": "The adopted Idol reconstruction has dry shrine access before activation and restores it after defeat without disconnecting clients. Eligible accounts receive private DEF and VIT. Lava changes stay local, and Idol defeat does not clear the main dungeon.",
             "acceptance": "Use instances with and without treasure rooms. Approach, retreat and defeat each Idol; verify dry access before activation, local restoration without disconnecting, private DEF and VIT, independent rooms and no main clear from Idol defeat alone.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original Idol potion rates and recipient minimums are unrecovered; the local DEF/VIT guarantee is a reconstruction choice."
+              "Original Idol lava/activation timers, potion rates and recipient minimums remain unrecovered. Test Build 123.2 explicitly redesigns the Abyss treasure room; June 13, 2012 production 123.3 announces two treasure rooms without naming them. Selected XML fixes Idol identity/stats/projectiles, not the local controller or DEF/VIT guarantee."
             ],
             "sources": [
               {
@@ -4591,7 +4991,7 @@
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [],
         "unknowns": [
-          "Original layout and spawn distributions, attack schedules, throw and transformation timing, entrance chance and loot probabilities.",
+          "Original layout/spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -4623,10 +5023,10 @@
             "expected": "Only secret shelves open passages; genuine treasure and impostor coffins have different waves and rewards.",
             "acceptance": "Open a real passage with native damage, check paired coffins, once-only waves, genuine private loot and impostor brood without loot or dungeon-clear credit. Review existing native evidence before repeating it.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"}],
             "group": "layout"
           },
           {
@@ -4635,10 +5035,10 @@
             "expected": "Escalating daggers, actual-damage healing, four owned bat groups and timed return must work together.",
             "acceptance": "Check hit acknowledgement/deduplication, dead-owner healing exclusion, bat cleanup/no EXP, return while coffins live, reconnect/late join and the earned exit. Review existing native and regression evidence; exact original schedules remain qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Period prose supports actual-damage healing, four groups and eventual return; exact123.5.1 timers/counts and the complete attack schedule remain reconstructed. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"}],
             "group": "boss"
           }
         ]
@@ -4768,10 +5168,11 @@
         "differences": [
           "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
           "Server PR603 adds Tesla Coils, turrets and the Horrific Creation room, opened by destroying every coil and defeating Dr Terrible: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603",
-          "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave and Energy volleys, and an attacking return from the DeHexxer that resumes center blasts. Shapes follow mixed-era descriptions and selected client definitions; choreography and timing are reconstruction. Low-HP variants and rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
+          "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave and Energy volleys, and an attacking return from the DeHexxer that resumes center blasts. Shapes follow mixed-era descriptions and selected client definitions; choreography and timing are reconstruction. Low-HP variants and rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718",
+          "Server PR1147 adds two regressions and prepared key-entry, four-room traversal, first-boss, earned Wisdom and same-character exit evidence without changing production gameplay. A second prepared case kills Creation and returns without duplicating clear credit or inventing rewards. Current source-aware player-pool acceptance remains in PR1097. These bounded receipts do not accept the entire dungeon or settle original semantics: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147"
         ],
         "unknowns": [
-          "Green-pool effects and blue cure mask; original Creation choreography, timing, cloak/range behavior and low-HP thresholds; target-version reward identities and rates."
+          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. Target-labeled footage t0f0_BWpBtw remains unviewed after YouTube blocked retrieval; its indexed green-minion healing claim is not accepted evidence. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
         ],
         "sources": [
           {
@@ -4790,15 +5191,21 @@
             "expected": "Ordinary robots, acid rooms and turrets are not replaced by a successful first-boss fight. No period source places gas spawners or cages outside Dr Terrible's room.",
             "acceptance": "Traverse natural rooms and verify selected identities, burst/status behavior, routes and ordinary versus summoned reward eligibility.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures, and only Dr Terrible has rewards."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original room generation, ordinary loot and boss-helper healing semantics remain unverified; current comparator reconstruction is not target-era acceptance."
+            ],
             "sources": [
               {
                 "url": "https://web.archive.org/web/20261025211742/https://wikiwiki.jp/rmd/Mad%20Lab",
                 "label": "Mixed-era Japanese wiki Mad Lab page (images 2012-08-30, text 2013-01-30, header 2018-03-28; archived 2026-10-25): acid rooms and turrets"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MadLabCXML.dat",
+                "label": "Modified-7.0 comparator: lower boss defenses and different Enforcer projectiles; not selected target definitions"
               }
             ],
             "group": "population"
@@ -4809,7 +5216,7 @@
             "expected": "Secret admission, melee-accessible coils, green transformation and blue cure need independent checks.",
             "acceptance": "Source the exact coil/secret predicate and cure mask. Test partial coil clearance, the first and optional boss, restored appearance/state and independent rewards/exits without importing modern generic cleansing.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants, loot and the slowed-pet revert remain absent. Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
@@ -4828,6 +5235,10 @@
               {
                 "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
                 "label": "Build 123.5.0 test-server notes: secret boss Horrific Creation"
+              },
+              {
+                "url": "https://www.realmeye.com/wiki/lab-vat",
+                "label": "Later comparator for persistent Hexed, Stunned and Speedy; mixed-era High Tech Terror reference means the June2013 version header does not date every claim"
               }
             ],
             "group": "boss"
@@ -4845,19 +5256,35 @@
         "historical": "partial",
         "expected": "Historically available beach-party destination, party encounter and consumables; distinguish event/calendar access from permanent access and contest prizes from drops.",
         "differences": [
-          "Server PR278 adds a reconstructed Beachzone. Each new Realm has a 1-in-200 chance of an announced inland Beach Bum whose defeat opens the portal 50% of the time. The island layout, the non-attacking Masked Party God's silent full-health recovery every 5 seconds unless Stunned, and its four drinks at 10% each are reconstructions. Permanent rare-spawn access stands in for the unresolved target event/calendar availability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/278"
+          "PR278 reconstructs the island, 1/200 Realm Bum spawn, 50% entrance portal, five-second full recovery unless Stunned and four independent 10% drink rolls with >10%-HP private eligibility. Modified7.0 instead rolls four drinks at 20% under an integer-damage threshold of 0.1 and contains no healing behavior. Neither is authenticated original AI.",
+          "The 123.5.0-labeled guide describes Bum access plus a 400-Fame key sale on August16–21,2012. The event archive's Beach Ball + Bahama Sunrise contest prizes are not a boss-drop table. Exact target availability outside that sale remains unresolved.",
+          "Selected client definitions retain Party God 30000HP/300DEF and Bum 1000HP/100DEF. Later modified7.0 uses 10/15DEF, while the May2013-captured Release2.0 boss guide says 80DEF. These conflicts do not authorize changing selected stats. Requested December2012 archive URLs redirect to May2013 captures."
         ],
         "unknowns": [
-          "Target calendar/key distribution; layout; Party God lifecycle and actual drop policy."
+          "Exact 123.5.1 availability outside the documented August2012 key sale and the rare Bum trigger/spawn/portal probabilities.",
+          "Exact island geometry and Party God recovery amount, cadence, damage-window and stun interaction. The later guide and wiki disagree; no authenticated target AI was recovered.",
+          "Original private reward eligibility and four drink probabilities. A prepared native drop cannot establish rates; the selected soulbound key also conflicts with the guide's public-bag description."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
-            "label": "forum wiki page (date unconfirmed)"
+            "label": "August16–21,2012 Beach Party Madness and Best Beach Party Scene contest prizes"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515192458id_/https://forums.wildshadow.com/wiki/realm-mad-god/beachzone",
+            "label": "May15,2013 capture, guide labeled123.5.0: island, Bum access and August2012 400-Fame key sale"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Beachzone.cs",
+            "label": "Modified7.0 dance and 20% drink comparator; no healing behavior"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515202028id_/https://forums.wildshadow.com/wiki/realm-mad-god/masked-party-god",
+            "label": "May15,2013 capture, boss guide labeledRelease2.0: 80DEF and an unspecified damage window, not exact123.5.1 AI"
           }
         ]
       }
@@ -4873,7 +5300,9 @@
         "expected": "Mandatory Castle traversal, anti-rush bridges/wall/quiet towers, paired guardians and Chamber; teleport disabled, respawning armours grant no XP/fame.",
         "differences": [],
         "unknowns": [
-          "Target geometry, respawn reward exclusion mapping, guardian activation/choreography and sword probability."
+          "Exact 123.5.1 bridge geometry and spawn cohorts remain unverified; the Project-B candidate has one spawn region.",
+          "Selected XML gives authored and respawned Haunted Armor zero XP. Build 123.4.4 specifically names respawns but does not establish a separate XP-bearing original identity.",
+          "Ten-tile activation, home orbits, deterministic phases, guaranteed survivor sword and its timings remain reconstruction choices, not accepted historical probabilities or choreography. See #866."
         ],
         "sources": [
           {
@@ -4892,10 +5321,10 @@
             "expected": "Long bridges, the three-deep wall, Quiet towers and non-farmable respawning armor must work on the full route.",
             "acceptance": "Traverse entry to guardians without bypass, destroy the barrier and test tower conditions. Distinguish ordinary and respawning armor reward identities; a guardian fixture alone is insufficient.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Build 122 documents longer bridges, three-deep wall and Quiet towers, not exact dimensions. Initial-versus-respawn reward mapping remains qualified by selected zero-XP XML."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build122.0.1","label":"February 2012 Castle anti-rush announcement"},{"url":"https://wikiwiki.jp/rmd/version/build123.4.4","label":"August 2012 respawn XP/fame exclusion"}],
             "group": "layout"
           },
           {
@@ -4904,10 +5333,10 @@
             "expected": "Guardian survival, the bound sword and shared Chamber admission must work in either defeat order.",
             "acceptance": "Defeat either guardian first and exercise survivor/sword behavior, actual defeats and one shared destination. Keep sword probability and exact choreography historically qualified.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Later comparators have startup/coordinated movement but empty survivor states; the mixed-era guide describes a stationary sword. Exact target activation, choreography, sword probability and loot rates remain unresolved."],
+            "sources": [{"url":"https://anticosmic.blogspot.com/2012/07/oryx-castle-drops.html","label":"Build 123.3.2 drop diary; author warns sample is inconclusive"},{"url":"https://www.realmeye.com/wiki/stone-guardians","label":"September 2021 guardian guide; not target-era choreography proof"}],
             "group": "boss"
           }
         ]
@@ -5069,13 +5498,21 @@
         "expected": "Evidenced target swords retain individual damage, rate, shot spread, trajectory, class compatibility, equipment bonuses and fame behavior. Embedded upper/admin tiers do not establish production availability.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster, particularly T13/T14 swords and admin items.",
-          "Individual swords’ original firing and collision behavior."
+          "Exact 123.5.1 acquisition/drop/credit policies. The build121 period roster supports T0–T12 and three untiered swords, not ordinary T13/T14/Admin availability.",
+          "Sword-specific earned acquisition, remaining native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Pinned modified7.0 comparator; upper/admin IDs and Tier/Soulbound differ"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/swords",
+            "label": "May24,2012 build121 sword table, not complete target-era acquisition proof"
           }
         ]
       }
@@ -5088,16 +5525,41 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Evidenced slot2 daggers retain individual rate/damage, piercing/wave behavior and bonuses; distinguish Obsidian, Cronus, Bone and Spirit daggers. Novelty/high-tier distribution is separately unresolved.",
+        "expected": "Selected 123.5.1 daggers retain item-specific cadence, damage, range and bonuses: Obsidian 150%, Cronus +4 WIS/short range, Bone enemy piercing, Spirit alternating sinusoidal deflection. Embedded T13/T14 and Chicken Leg definitions do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "All obtainable variants, including novelty items.",
-          "Original dagger collision and firing timing."
+          "Exact 123.5.1 novelty/high-tier acquisition and drop/credit probabilities; prepared inventory does not prove earned availability.",
+          "Original server collision tolerances, sampling and damage RNG endpoints; selected-client and comparator engines differ.",
+          "Exact deployed numbers behind the August 14, 2012 Chicken Leg buff: selected 65–105 damage at 90% is consistent with Obsidian’s unarmored average damage rate, but the announcement gives no numeric definition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "Modified 7.0 comparator: 18 matching daggers; T13/T14 renumbered without Tier tags"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L887-L943",
+            "label": "Selected client cadence, attack scaling and muzzle origin"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as#L155-L351",
+            "label": "Selected client parity, MultiHit bookkeeping and sampled collision"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607094909id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/daggers",
+            "label": "June 7, 2012 capture, labelled 122.3.2: dagger roster and pre-buff Obsidian"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 build123.3: Obsidian raised to 35–65"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124640id_/http://forums.wildshadow.com/node/129333",
+            "label": "August 14, 2012 build123.4.4: Chicken Leg buff announcement, no numeric replacement"
           }
         ]
       }
