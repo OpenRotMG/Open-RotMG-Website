@@ -6916,20 +6916,29 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Current members exchange /g or /guild messages; production122 also documents guild sign-on notices.",
+        "expected": "Every guild rank can exchange green, guild-only /g and /guild messages across servers. Build122 adds guild-member sign-on notices.",
         "differences": [],
         "unknowns": [
-          "Original cross-server routing and notice frequency.",
-          "Which ignored messages or member states prevent guild chat?"
+          "Original distributed routing implementation and exact sign-on/reconnect frequency. Current routing crosses worlds in one process; later modified7.0 uses InterServer and a1800-second LastSeen threshold, not established target rules.",
+          "Original ignore and unavailable-member exceptions. Current message recipients exclude accounts ignoring the sender; guild notices do not use that filter. Dead/departing/quarantined participants cannot chat; Paused alone is not prohibited.",
+          "Cold sign-on, membership revocation during chat and terminal-member native journeys remain unverified; prepared membership is not earned guild creation or invitation acceptance. See server issue906."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 Wild Shadow capture: all ranks, both aliases, green guild-only cross-server chat; four-rank text omits build122 Founder correction"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "url": "https://web.archive.org/web/20120216201111id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 build122 announcement, captured February16: guild-member sign-on notification, no frequency specified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ChatManager.cs",
+            "label": "Modified7.0 comparator: InterServer guild-ID routing, message ignore filter and separate announcements; not original server proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ConnectManager.cs#L301-L309",
+            "label": "Modified7.0 comparator:1800-second LastSeen sign-on threshold, not established target frequency"
           }
         ]
       }

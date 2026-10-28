@@ -7,6 +7,24 @@
       "method":"Inspected server0c00c1ba and freshly exported selected SWF07ae4fc3 p-code with JPEXS26.3.0 (QA01583313):2999ms/getTimer countdown, bilateral backpack-space checks, server-provided tradeability, ungated client Trade menu and recipient-generated invitation. Checked compiled Kithio handlers, reflection registration/Client dispatch, RequestTrade/World name lookup, Tick timeout and Accept settlement against related July2013 Trapped and modified7.0 UI. February/June2012 guides say10 tiles/named accounts; the June passage adds overflow/auto-equip. July2011 test117.5 guide says15 tiles. Follow-up official July12,2011 introduction and February13,2012 visibility announcements supply no range/timing numbers. Current guests/exact-case names, silent400-step request expiry and backpack-only settlement are distinguished from comparator policy. Existing3000ms pause-aware settling remains unchanged.",
       "limitations":"Research disposition, not original-server recovery, licensing clearance or fresh native acceptance. Related forks are not independent corroboration; capture dates do not establish123.5.1 continuity. Account/name/rank/case/range, expiry/notice, full server eligibility/auto-equip, server settling and requester wording remain explicitly unresolved. Reuses existing revision-bound gameplay receipts and their fixture limits without relabelling them as current-main executions. No gameplay, persistence, ownership, ACK, lease, bot-consent or hosting changes."
     },
+    "guild-chat-native-eedd6572": {
+      "kind": "native",
+      "revision": "eedd6572c7a368473482c355bf9c348f55eb59f0",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1188#issuecomment-6483051552",
+      "checks": ["social:guild-chat"],
+      "method": "Clean QA62d0c892 passes17 checks over46750 game ms with three ordinary native Human clients: Founder/Initiate exchange both aliases with green rendered text; outsider/empty refusals, recipient ignore, persisted ignore through Tutorial reconnect, unignore and cross-world delivery, Insert return to Nexus and Paused chat. Actual nonmember refusal is captured red. Cold QA7431ab18 verifies committed case8f44f354, SQLite/FKs, three living characters/zero deaths, one guild/two members, final empty ignore list, delivery recipient counts2,2,1,1,2,2,2 and39 absent retired processes. Client0282b3a4/Ruffle16; cleanup[],QA0/reclaimed; zero ERRORs/two expected refusal WARNs.",
+      "limitations": "Prepared level5 and unearned membership, not creation/invitation acceptance. No cold sign-on rendering, in-flight revocation, terminal-member journey, distributed server or historical acceptance. Parent remains not-run. Earlier f0fd6855 fails a test-only reconnect/ACK race after7 checks; c52245df fails the wrong test escape binding after10; both retained. Corrected c225e055 also passes17 checks before the final refusal-capture addition. Production authority, persistence and gameplay code unchanged."
+    },
+    "guild-chat-research-0c00c1ba": {
+      "kind": "source",
+      "revision": "0c00c1baa91f5a6b9dc288ccf0fd787bded4b2be",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0c00c1baa91f5a6b9dc288ccf0fd787bded4b2be/src/world/chat.rs#L353-L383",
+      "checks": ["social:guild-chat"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/906#issuecomment-6482776420 . February17,2012 Wild Shadow Guilds capture specifies all ranks, both aliases, green guild-only cross-server chat. February13 build122 announcement, captured February16, adds sign-on notices without frequency. Selected123.5.1 and readable modified7.0 client recipient handling agree. Compiled Kithio chat/commands lack guild routing; Trapped has a same-manager /g comparator. Modified7.0 InterServer filters guild IDs and recipient ignores, separates notices and uses a1800-second LastSeen threshold.",
+      "limitations": "Source review, not gameplay or authenticated original server. Period four-rank guide omits build122 Founder correction; Japanese release notes mirror the announcement, not an independent witness. Current single-process world routing, live/member guards, ignore policy and non-transfer sign-on choice remain reconstruction; original distributed delivery, notice frequency and exceptions remain tracked in906. No comparator code/assets imported."
+    },
     "vault-native-cc2cbebb": {
       "kind":"native", "revision":"cc2cbebb39a2380bd08101c426bf952c3ed57824", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1183#issuecomment-6482642695", "checks":["home:vault"],
@@ -5776,7 +5794,7 @@
     "home:realm-gold-offers": {"status":"not-run","evidence":["class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
     "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30","chat-star-transform-regression-0277516","chat-star-transform-native-0277516","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
     "social:whispers": {"status":"not-run","evidence":[]},
-    "social:guild-chat": {"status":"not-run","evidence":[]},
+    "social:guild-chat": {"status":"not-run","evidence":["guild-chat-research-0c00c1ba","guild-chat-native-eedd6572"]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05","trade-request-source-5f03584","trade-request-regression-5f03584","trade-request-native-5f03584","trade-research-07a0afd9"]},
     "social:lock-players": {"status":"not-run","evidence":[]},
     "social:ignore-players": {"status":"not-run","evidence":[]},
