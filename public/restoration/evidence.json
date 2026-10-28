@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "golems-research-b8c92ff": {
+      "kind":"source", "revision":"b8c92ffbe4a2a7d7cff9232566bf1a106e659cae", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/b8c92ffbe4a2a7d7cff9232566bf1a106e659cae/examples/testing/golems.mjs", "checks":["realm:golems"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/838#issuecomment-6472148986 . Reconciled owned-group92f85431 and period-loot1f488df with unchanged runtime cedf8305. All12 complete selected objects normalize identically to pinned modified7.0 MidCXML. Compiled/reflection-registered Kithio Golems covers six satellites/four roots; Spawn counts state births, Orbit uses nearby named kinds, Decay starts16s on entry. Trapped random-four/30s absence policy and closely related7.0 table are comparisons, not independent history. Additional dated Gray Satellite2 page supports10XP and hub-loss stop;123.5.1 announcement dates small XP to September7,2012. Loot candidate expansion/shared-roll and XP allocation/rounding differences are explicit.",
+      "limitations":"No original six-root AI/RNG recovered.2021 Earth text and2011 sprite attachments do not date its numeric claims; selected Weak3s outranks its2s. Current owned radii3/1, gray500ms shots,30s orphan cleanup and root reward pools remain reconstruction differences. Exact original composition/lifecycle/attack/allocation and earned gameplay remain issue838. Challenge/403/429/404 and parked-domain responses are not witnesses. No comparator code/assets imported or gameplay/authority/ownership/persistence/death policy changed."
+    },
     "shield-orcs-native-f5ba42b": {
       "kind":"native", "revision":"f5ba42b76cfb2e4e075e94079d23f9ed630541b9", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1103#issuecomment-6471611074", "checks":["realm:shield-orcs"],
@@ -4196,7 +4202,7 @@
     "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},
     "realm:werecats": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
-    "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:golems": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df","golems-research-b8c92ff"]},
     "realm:sprites": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:wargs": {"status":"not-run","evidence":[]},
     "realm:sand-phantoms": {"status":"not-run","evidence":["realm-loot-regression-e222284"]},
