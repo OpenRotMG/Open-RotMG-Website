@@ -5469,7 +5469,7 @@
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 acquisition/drop/credit policies. The build121 period roster supports T0–T12 and three untiered swords, not ordinary T13/T14/Admin availability.",
-          "Sword-specific earned acquisition, native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
+          "Sword-specific earned acquisition, remaining native damage/range/cover and permanent-death fame acceptance; original collision tolerance and damage RNG endpoints remain unverified."
         ],
         "sources": [
           {
