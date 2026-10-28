@@ -3017,8 +3017,8 @@
         "expected": "A disguised grave in a graveyard reveals Kage when damaged. The fight alternates human and protected flying forms, includes Specter Shots and Specter Mines, and can award a Manor entrance.",
         "differences": [],
         "unknowns": [
-          "Original graveyard distribution, reveal and combat timings, mine policy, Manor probability and rewards.",
-          "Whether Kage participated in target-era quest selection or Realm closure."
+          "Exact target-era graveyard count/shape, human movement, reveal threshold, phase/volley/mine timings and reward probabilities. Two HighForest/HighPlains sites, reveal below 90% HP, 2/5/4-second phases, 2-second tosses and 50% Manor chance are comparator reconstruction, not authenticated original values.",
+          "Target-era quest-arrow and closure eligibility. March/April 2012 notes call Kage a new Realm Quest, but selected XML has no Quest flag; the later 7.0 quest dictionary still requires that flag. Current Kage is excluded from both systems; original server policy remains unresolved in issue #826."
         ],
         "sources": [
           {
@@ -3032,6 +3032,18 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130525111810id_/https://forums.wildshadow.com/wiki/realm-mad-god/kage-kami",
+            "label": "May 2013 capture: grave reveal, stationary human and protected chase; later than target"
+          },
+          {
+            "url": "https://github.com/UniverseRealms/vanilla-7.0/blob/ba1fa22c58c24b4a2403860116656492d0133748/realm-server-master/Game/Logic/Database/HighLands.cs#L694-L769",
+            "label": "Pinned later behavior comparator; not original-server timing or loot evidence"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 client: matching projectiles, different Kage and mine stats"
           }
         ]
       }
