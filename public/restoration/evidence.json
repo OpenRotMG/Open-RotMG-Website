@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "transformation-native-4dca187": {
+      "kind":"native", "revision":"4dca18779b5b137fbcf2e719cdeac5fcc0fd0648", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1175#issuecomment-6481812536", "checks":["gear:transformation-potion"],
+      "method":"Clean QA7e24f721 passes20 checks over50050 game ms: ordinary cloak then potion removes Invisible/applies only Hexed, commits one slot/revision with unchanged stats/no MP spend, refuses empty-slot repeat, permits four shots, expires inside the observed30-second application bracket, cures on blue, consumes/cures while on blue, transforms again on dry ground and returns the same living character to Nexus with consumed inventory and no Hexed. Cold QA2444a0b3 verifies saved revision5/XP18050/shots4/kills0, all four consumed slots, SQLite/FKs, zero deaths/WARNs/ERRORs,52 absent owned PIDs, cleanup[] and reclaimed scratch. Selected client0282b3a4/Ruffle.16; actual panda/restored-Rogue viewport crops inspected.",
+      "limitations":"Supplied level20/gear/potions/sealed-room location, not earned acquisition or a dungeon journey. Original pool boundaries/full cure mask, refresh/stacking and cross-world/relogin/restart timer continuity remain issue888. Reuses PR992 conditional-Speedy and PR1097 persistent-pool receipts without claiming new full acceptance. Canceled4cb76b29 guardian SIGTERM, schema-failure1d70d3ac and screenshot-clock-failure366da45c remain failed; their processes are absent/scratch reclaimed. Final assertions use pre/post-use clocks, not screenshot completion; no native clock/ACK/lease guard changed. Whole-feature not-run/history partial."
+    },
+    "transformation-source-138c900": {
+      "kind":"source", "revision":"138c9005a06a835c6ddf5da0ba2a8f1f426912ea", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/138c9005a06a835c6ddf5da0ba2a8f1f426912ea/data/objects.xml", "checks":["gear:transformation-potion"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/888#issuecomment-6481058962 . QA1cac64ed freshly extracts selected SWF07ae4fc3: the complete0xc41 item equals runtime XML and pinned modified7.0. Clear Invisible then Hexed30s, no Speedy/Stunned/cost/stat change. Original Player/ObjectLibrary select from44 Hexable appearances and restore class texture after cure/expiry. Compiled Kithio duration engine inspected; its missing ClearConditionEffectSelf handler does not override selected XML. Modified7.0 implements clearing. September123.5.1 blue-pool hotfix and potion page own-text date September8,2012 checked. Reuses PR1097 pool-source and PR992 native conditional-Speedy receipts.",
+      "limitations":"Source/historical disposition, not gameplay or official server recovery. Current actor boundaries/source-aware cure mask are reconstruction, not arbitrary-water behavior. Original refresh/stacking, cross-world/relogin/restart timing and target acquisition remain issue888. Editable page dates are not frozen2012 captures; related community sources are not independent. Additional ObjectLibrary and potion-page resources inspected; Reddit JSON403 retained. No gameplay/XML/asset/authority change."
+    },
     "rum-mushrooms-native-e4041e57": {
       "kind":"native", "revision":"e4041e57c438403eace2e57e74775c806074a5b8", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1176#issuecomment-6481846565", "checks":["gear:rum-and-mushrooms"],
@@ -5512,7 +5524,7 @@
     "gear:dungeon-drinks": {"status":"not-run","evidence":[]},
     "gear:rum-and-mushrooms": {"status":"not-run","evidence":["rum-mushrooms-source-824d8e8f","rum-mushrooms-native-e4041e57"]},
     "gear:holy-water": {"status":"not-run","evidence":[]},
-    "gear:transformation-potion": {"status":"not-run","evidence":["item-chat-guild-source-4992445"]},
+    "gear:transformation-potion": {"status":"not-run","evidence":["item-chat-guild-source-4992445","transformation-source-138c900","transformation-native-4dca187"]},
     "gear:xp-booster": {"status":"not-run","evidence":[]},
     "gear:dungeon-keys": {"status":"not-run","evidence":["portal-window-source-4d44727","portal-window-regression-4d44727","portal-window-native-4d44727","dungeon-key-research-23ed96f","dungeon-key-native-83e62ce"]},
     "gear:amulet-of-resurrection": {"status":"passed","evidence":["amulet-research-75b8f421","amulet-regression-74f851b6","amulet-native-74f851b6"]},
