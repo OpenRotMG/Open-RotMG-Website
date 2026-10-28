@@ -9,6 +9,7 @@
       "checks": ["realm:grand-sphinx"],
       "method": "Native QA 6c8d5da3 passed all 11 checks: unmodified 55,000-HP Sphinx/four Reapers, Orb Stasis without Reaper damage, phases 1-6 and projectile speeds 80/55/67, full defeat/XP and Reaper cleanup, earned Vitality pickup/revision 2, same-character earned Tomb entry, visibly rendered movement and Nexus return retaining the item. Client 39acbfbf3bf545c397d6ac94f0a9430d6d660ac2/Ruffle 0.7.1-openrotmg.16. Cold postflight df356fcc confirms two living characters, zero deaths, clean SQLite/FKs, no server ERROR/cleanup failures and owned PIDs absent. Actual native crops are attached.",
       "limitations": "Prepared level-20 Mystics, selected gear, Invulnerable and +100 Attack; direct-scout ordinary combat prepares admission. No enemy HP/phase/credit edits. Not native-earned Realm progression, normal-risk balance, original placement/rates or whole-feature/historical acceptance. Revision-bound evidence, not moving-main or public-host acceptance. Prior failures and receipts remain preserved."
+    },
     "sprite-tree-source-2cb231a": {
       "kind": "source",
       "revision": "2cb231af26553563d515f2fc2bf7b6f93fcf12b9",
