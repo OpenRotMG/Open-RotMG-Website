@@ -3632,11 +3632,26 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Fire/Ice/Magic Sprite0x624–626; selected Ice slows1.6s. Exclude Sprite God/Child and dungeon sprites.",
-        "differences": [],
+        "differences": [
+          "Current movement uses the Trapped-style15 motor, not Kithio rate1.4/StayAbove. Regional MidPlains area/200 admission and60s refill are not Kithio same-species radius10/density2 reproduction.",
+          "Build118 wiki armor tier5 maps to selected tier6: period Chimera Hide Armor, Plate Mail and Robe of the Adept names reconcile the numbering, not original RNG."
+        ],
         "unknowns": [
-          "Target density, movement, cadence/spread and loot probabilities."
+          "Original123.5.1 movement/elevation, local reproduction versus regional density, tick-exact cadence, equipment-pool/odds provenance and multiplayer reward/pickup/reconnect continuity. Research and bounded gameplay remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/issues/839#issuecomment-6472186081"
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Compiled primary reconstruction table; engine semantics checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20120127132732id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprites",
+            "label": "January2012 capture marked build118; not proof of123.5.1 deployment"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 comparator: all three complete selected Sprite objects match"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -3656,15 +3671,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter.",
-        "differences": [],
+        "expected": "Tawny and Demon Wargs belong to the Desert Werewolf encounter: selected 30/40HP, 0DEF, size90, MidSand and 11/13-damage shots with speed60 and 600/2000ms lifetimes.",
+        "differences": [
+          "Current reconstruction starts1–3 per kind, replenishes owned living slots to3 per kind every10s and leaves orphan Wargs wandering. Compiled Kithio starts four random Wargs and permits eight lifetime births at8s intervals; its Protect can reacquire another Werewolf. Neither comparator is authenticated target behavior.",
+          "Kithio gives both Wargs a4% shared Health Potion roll; current Wargs have no item table. Modern2024 Demon documentation lists Magic Potion instead. No target-era item probability or eligibility has been established."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, orphan persistence, enrage thresholds and rewards."
+          "Exact123.5.1 initial distribution, living-versus-lifetime caps/refill, cross-family orphan retargeting, leader rage threshold/size/motion/attack concurrency and Warg item rates/eligibility remain issue840 and issue807.",
+          "PR1067 and PR1106 now record bounded natural admission/attacks, both living refills, orphan persistence/movement/attacks, native orphan defeats/XP and no replacement/repeated XP. Prepared placement/gear/protection is not earned discovery, ordinary survival, native multiplayer or historical acceptance; those limits remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L793-L864",
+            "label": "Compiled Kithio Wargs/Werewolf comparator; SpawnGroup lifetime births, Protect and compiled loot engine reviewed in issue840, not target fidelity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120615181402id_/http://forums.wildshadow.com/wiki/realm-mad-god/demon-warg",
+            "label": "June2012 Demon Warg guide labels build122.0.1; stats/projectiles only, EXP blank"
           }
         ]
       }
