@@ -7027,15 +7027,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based lock/unlock list 0 and persisted loading; nearby panel prioritizes locked players and exempts them from ordinary distance cutoff. No global/offline tracking requirement established.",
+        "expected": "Account-based lock/unlock list 0 and persisted loading. The selected client displays six peers, sorted by lock descending, distance ascending, then object ID; unlocked peers beyond 50 tiles are omitted. Locks bypass that cutoff only for peers in the current map, not offline/global tracking.",
         "differences": [],
         "unknowns": [
-          "Original list limit and retention, and nearby-panel ordering across reconnects and characters."
+          "Original saved-list capacity, eviction and retention across sessions/characters are unresolved. Six displayed slots are not a saved-list cap; Kithio's cap sketch is commented out and its handler is a no-op. The current wiki's 50-entry/oldest-eviction claim is undated. See server issue908.",
+          "Native death-to-Continue-to-replacement panel ordering, six-slot saturation and equal-distance ties are not executed; the account-storage regression is not native replacement acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Pinned selected-client party sorting and account-keyed locks"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build100",
+            "label": "Build100 test-context party description, not saved-list retention proof"
           }
         ]
       }
