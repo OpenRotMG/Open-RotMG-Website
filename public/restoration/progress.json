@@ -698,7 +698,7 @@
         "expected": "Death details show Base Fame, named bonuses with descriptions, and Total Fame. Bonus eligibility, arithmetic and ordering must follow the original rules, not merely their display in the client.",
         "differences": [],
         "unknowns": [
-          "Fresh final-head normal-client combat, death, archived Legends reopening and a complete native backup-restore journey are deferred.",
+          "Complete authenticated native backup recovery and an earned combat-to-death journey remain unverified. Prepared death/Legends and credential-free restored-archive receipts are bounded, not whole-feature acceptance.",
           "Long-history and dungeon-condition cases have regression-fixture coverage, not complete historical or native acceptance. Unknown legacy history is preserved rather than reconstructed as zero."
         ],
         "sources": [
@@ -713,6 +713,10 @@
           {
             "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rotmg-fame-calculator/RotMG_Fame_Calculator.ods",
             "label": "May 2012 community Fame calculator (ODS reference)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/FameStats.cs#L227-L485",
+            "label": "Compiled Kithio bonus descriptions; arithmetic conflicts with period compounding evidence"
           }
         ],
         "checks": [
@@ -722,10 +726,10 @@
             "expected": "Accuracy, kills, exploration, clears, assists and eligibility counters must accumulate and persist independently of bonus formulas.",
             "acceptance": "Test multi-hit/projectile deduplication, final blows/assists, transformations, revisited tiles, ground/carried potion use and reconnect/death. Replace hardcoded report zeros only with source-supported authoritative counters.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Native multi-hit deduplication, god/non-god report partition, assists, transformations, repeated tiles and complete dungeon-exit history remain unverified; community counter code is not authenticated target-server behavior."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/FameCounter.cs#L22-L66","label":"Compiled Kithio counter semantics: first projectile hit, final blows, quests and tiles"}],
             "group": "behavior"
           },
           {
@@ -734,10 +738,10 @@
             "expected": "Only worn equipment contributes, with correct rounding, an immutable archived award and once-only payout.",
             "acceptance": "Compare combined versus per-item rounding, carried items, last-moment swaps, retry/save failure and resurrection. When other bonuses are added, verify the running subtotal and ordering rather than assuming base-only interaction.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["The May calculator and June wiki support aggregate gear rounding against the running subtotal, unlike Kithio's base-only per-item arithmetic. Exact 123.5.1 deployment and the complete native retry/resurrection matrix remain unverified."],
+            "sources": [{"url":"https://storage.googleapis.com/google-code-archive/v2/code.google.com/rotmg-fame-calculator/downloads-page-1.json","label":"Calculator release metadata: May 16, 2012 and matching original SHA1"},{"url":"https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rotmg-fame-calculator/RotMG_Fame_Calculator.ods","label":"Well Equipped row 24 and subsequent First Born row 25"}],
             "group": "behavior"
           }
         ]
