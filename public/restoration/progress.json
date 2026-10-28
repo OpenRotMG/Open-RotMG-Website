@@ -3868,15 +3868,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120 plus zero-damage Purple Star Blind5s. Comparator radial damage and predictive condition shots are qualified, not target-certified.",
-        "differences": [],
+        "expected": "Mountain flying Beholder HP1500/DEF12; White Bolt120/speed5/lifetime2.7s and zero-damage Purple Star/speed7/lifetime3s/Blind5s. Qualified five-bolt72-degree ring and predictive star; primary comparator supports local max3 reproduction and1% private Defense at270 damage.",
+        "differences": [
+          "Current speed10/acquisition7/stop4/wander4 agrees with the build118 guide but differs from Kithio Follow acquisition10/stop7/resting hysteresis and Trapped chase speed4. Capped linear prediction and750/1000ms schedules differ from Kithio angular-history prediction and check-before-decrement timing; home tether remains project reconstruction.",
+          "Current gear retains T6 armor and T4 abilities absent from Kithio's Beholder table. Build118 wiki armor labels require the recorded client-tier offset; modified7.0 changes gear eligibility and Defense rates. Corrected shared/private allocation and safe finite births remain authoritative, not original-fidelity claims."
+        ],
         "unknowns": [
-          "Production geometry, cadence/prediction, condition-hit semantics, rewards and population/portal policies."
+          "Exact123.5.1 prediction/history sampling, pursuit/elevation/peak teleporting/tether, cadence, original rewards/allocation, population distribution and portal continuity remain issue845. April26,2012's build118 guide is earlier-version corroboration; current RealmEye Weak4s/Abandoned City does not override selected Blind5s.",
+          "PR1127 verifies natural Realm admission/movement/volleys/Blind/defeat/150XP with prepared stats and Invulnerable, plus deterministic zero-damage Blind/ACK/expiry and269/270/271-damage reward boundaries. Unprotected native damage, active reproduction, multiplayer eligibility, pickup/reconnect and ordinary-risk/earned travel remain unverified; whole-feature gameplay is not-run."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L114-L140",
+            "label": "Compiled primary Beholder table; Shoot/Follow/Reproduce/loot engines inspected"
+          },
+          {
+            "url": "https://web.archive.org/web/20120426135122id_/http://forums.wildshadow.com/wiki/realm-mad-god/beholder",
+            "label": "April26,2012 build118 combat/movement/reproduction guide; earlier-version corroboration"
           }
         ]
       }
@@ -3889,15 +3901,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying mountain enemy HP1000/DEF12, Pink Bolt50; qualified comparator supports chase/wander, five-shot radial bursts and Attack potion eligibility.",
-        "differences": [],
+        "expected": "Flying mountain god HP1000/DEF12; five Pink Bolts50 at72 degrees, speed12/lifetime1.8s/range12 and nominal500ms cadence. Compiled Kithio supports player-oriented rings, chase/wander, max3 same-kind reproduction and Attack1.5% after180 damage. Retained123.5.0 announcement associates Mad Lab with Flying Brain.",
+        "differences": [
+          "Current acquisition7/stop4/speed6/wander4 follows Trapped, not Kithio Follow acquisition10/stop7 with resting hysteresis and jitter. Exact500ms firing differs from Kithio's check-before-subtract clock, nominal500ms becoming550ms at50ms ticks; original123.5.1 timing remains unresolved.",
+          "Project home tether, finite habitat/capacity and safe births are not original elevation200/peak-teleport fidelity. Selected spawn mean3/stddev1/min2/max5 does not prove original world distribution.",
+          "Current common-god equipment pool is broader than Kithio's Brain-specific table. Mad Lab association has retained period support;17% is a later7.0 comparator rate, not a certified123.5.1 probability."
+        ],
         "unknowns": [
-          "Original ring orientation/cadence, movement, population and complete rewards/dungeon associations."
+          "Exact123.5.1 orientation/tick cadence, pursuit/elevation/tether policy, population distribution and full equipment pool/odds/allocation remain historically unresolved. Build118 independently supports72-degree five-shot0.5s rings, but not target continuity or spoke orientation.",
+          "Whole-feature native acceptance still needs multiplayer eligibility, potion pickup/reconnect, earned Lab entry and longer population lifecycle. Prepared combat and controlled reward/portal tests cannot certify those outcomes or original probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L137-L157",
+            "label": "Compiled Kithio reconstruction comparator, not authenticated original server"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Shoot.cs",
+            "label": "Comparator engine: centered target-oriented fan and cooldown evaluation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519152549id_/http://forums.wildshadow.com/wiki/realm-mad-god/flying-brain",
+            "label": "May19,2012 capture, explicitly build118; earlier-version corroboration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat#L156-L185",
+            "label": "Modified7.0 client definition agrees with selected Flying Brain object, not AI authority"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Retained release announcement associates Flying Brain with Mad Lab; no original rate"
           }
         ]
       }
@@ -3931,17 +3968,21 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying Mountain Ghost God HP1000/DEF12, White Bolt120; comparator seven-shot25-degree fan, chase/wander and Speed rewards. Distinct from Ghost King.",
-        "differences": [],
+        "expected": "Flying Mountain Ghost God0x659 HP1000/DEF12; selected White Bolt120/speed50/lifetime2700 has no status or piercing. Build118 corroborates seven shots/25-degree gaps, Speed and Undead Lair. Distinct from Ghost King and Septavius.",
+        "differences": [
+          "Current Trapped-derived pursuit4/acquisition7/stop4 and nonpredictive fan differ from compiled Kithio Follow(1,range7), angular-history prediction0.5 and tick-driven cooldown; build118 lists chase10 and aim0.5.",
+          "Current broader gear tiers, corrected loot allocation, safe bounded births and17% Undead Lair roll remain reconstruction. Kithio has Speed1.5% at180 damage but no portal; modified7.0 uses17% portal and different7% reward thresholds/rates, while the Japanese page limits its4% portal figure to118.7.4."
+        ],
         "unknowns": [
-          "Target movement/attack constants, portal association/rate, population and reward eligibility.",
-          "Earned portals now prefer unobstructed death coordinates; occupied sites still use project interaction clearance, not a certified original separation policy."
+          "Exact123.5.1 pursuit/elevation/tether/peak teleport, prediction/history/cadence, population distribution and loot/portal probabilities remain unresolved in server issue848.",
+          "Prepared native combat and forced reward draws do not accept earned traversal, unprotected projectile hits, sustained reproduction, multiplayer eligibility, pickup/reconnect or rolled Undead Lair entry. Whole gameplay remains not-run.",
+          "Earned portals prefer unobstructed death coordinates; occupied sites use project interaction clearance, not a certified original separation policy."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L180-L200", "label": "Compiled primary Ghost God table; engine semantics and conflicts in server issue848"},
+          {"url": "https://web.archive.org/web/20120519230020id_/http://forums.wildshadow.com/wiki/realm-mad-god/ghost-god", "label": "May19,2012 build118 fan, movement, Speed and Undead Lair; earlier-version evidence"},
+          {"url": "https://wikiwiki.jp/rmd/Ghost%20God", "label": "Japanese Ghost God page; parenthesized reward/portal odds explicitly limited to118.7.4"}
         ]
       }
     },
@@ -3995,14 +4036,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying White Demon HP1000/DEF12, armor-piercing MultiHit45-damage shot.122.0.1 paired-swipes wording is qualified by intervening122.3.2 nerf; continuity to123.5.1 is unproven.",
+        "expected": "Mountain flying White Demon HP1000/DEF12; armor-piercing MultiHit45-damage shot, speed50/lifetime2000. Full object agrees with pinned modified7.0 client.122.0.1 paired swipes precede the March26,2012 testing122.3.1 melee nerf, adopted in production122.3.2; paired timing continuity to123.5.1 remains unproven.",
         "differences": [
           "Server PR413 originally introduced a 10-tile firing acquisition with pursuit9/stop4, instead of inheriting Medusa's 12. This follows the 2013 community behavior table, not recovered 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/413",
           "Selected White Demon reconstruction now uses compiled-Kithio immediate attempts,500ms argument/550ms fixed-tick intervals,20-degree gaps,Follow10/7/8 and angular-history aim. Trapped1000ms/15-degree comparator conflicts;exact123.5.1 is not certified. Abyss and selected projectile definitions remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/blob/86437418f9a5b888b0ce8cae04ce6292a9add41c/src/world/gods.rs"
         ],
         "unknowns": [
-          "Whether paired swipes survived122.3.2; target exact cadence/geometry and full population/reward/dungeon policy.",
-          "Original firing-acquisition and pursuit radii."
+          "Whether paired swipes survived the122.3 nerf; exact123.5.1 timing/geometry, population/reward/dungeon policy and original RNG. Compiled primary selects20-degree gaps; May20,2012 build122 guide lists15 degrees and0.5s cooldown, not intra/inter-pair delays.",
+          "May20,2012 guide supports trigger10/chase7, but does not establish exact123.5.1 firing/Follow acquisition and hysteresis. Peak teleportation algorithm remains unrecovered. Native defeat evidence does not cover earned travel, unprotected survival, MultiHit through two players, pickup/reconnect, multiplayer potion eligibility or active reproduction."
         ],
         "sources": [
           {
@@ -4020,6 +4061,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
             "label": "Compiled Kithio White Demon comparator;engine timing/history semantics qualified,not official123.5.1"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March26,2012 testing122.3.1 melee nerf; production adoption is separately dated"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520002714id_/http://forums.wildshadow.com/wiki/realm-mad-god/white-demon",
+            "label": "May20,2012 capture; page labels content build122 and lists three shots/trigger10/chase7/cooldown0.5s/angle15, not exact123.5.1"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Pinned modified7.0 client: complete White Demon object agrees with selected definitions; not server AI"
           }
         ]
       }
@@ -4036,10 +4089,13 @@
         "differences": [
           "Server PR337 aims the four-shot Purple Magic fan at the target's current position, and only the Quiet Grey Boomerang leads movement. This follows a September 2013 Steam guide; the 2013 community server leads both attacks, and 123.5.1 aiming is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/337",
           "Caught-up children now wander within the existing two-tile following radius instead of freezing. Speed, family limits, regrowth, stats, attacks and home leash are unchanged. Natural overlap remains possible; no repulsion or forced spacing was added: https://github.com/OpenRotMG/Open-RotMG-Server/pull/553",
-          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652"
+          "Bounded ordinary god self-reproduction is current reconstruction: active clocks, local density, capacity and12-tile safety guards;family regrowth remains separate. Not authenticated original population behavior: https://github.com/OpenRotMG/Open-RotMG-Server/pull/652",
+          "Kithio Spawn starts2 children and caps5 lifetime births, while current bounded families start3, regrow at10s and retain parent ownership rather than nearest-God adoption. Modified7.0 uses live-child tracking. These are comparator differences, not demonstrated defects: https://github.com/OpenRotMG/Open-RotMG-Server/issues/852#issuecomment-6474494394"
         ],
         "unknowns": [
-          "Original parent adoption/acquisition, child count/regeneration/cleanup/XP, Quiet interactions, attack and reward/population/portal policies."
+          "Exact123.5.1 parent acquisition/radii, lifetime versus live-child caps, initial count/regrowth/orphan cleanup and continuity of build118 child5XP/Quiet rules. See server issue852.",
+          "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%.",
+          "PR1129 records prepared natural-family combat, Quiet recovery, regrowth and surviving orphans, not earned travel, native item pickup/multiplayer allocation or a successful child portal/entry. Those acquisition checks remain issue852; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
@@ -4061,6 +4117,18 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/05/how-to-get-healed-by-necromancer.html",
             "label": "May 2012 healing guide: Sprite Gods with children form useful clustered groups"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture, build118 claims: attacks,200/5XP, non-attacking children and Sprite World eligibility; not exact123.5.1 continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120512045834id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "May12,2012 status guide: Quiet drains MP and stops regeneration; transfer/restoration claim separately unverified"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L37-L68",
+            "label": "Compiled Kithio God/Child reference; inspect Spawn, Protect, Shoot and loot engines, not original server authenticity"
           }
         ]
       }
@@ -4073,10 +4141,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Coastal entrance, traversable cave populated by cave pirates, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF; original layout distribution, entrance/drop rates and reward policy are unresolved.",
-        "differences": [],
+        "expected": "Coastal or key entrance, seeded connected cave populated by officers, fighters and passive fauna, Dreadstump, rewards, clear credit and a Realm Portal exit. Selected Dreadstump is 800 HP/3 DEF with 17/25-damage projectiles.",
+        "differences": [
+          "PR575 replaced the static comparator map with seeded reconstructed rooms and corridors, not recovered original generation.",
+          "Current natural entry is cube-only at 1%. The May 28, 2012 guide also lists lowland quest bosses/minions; older Japanese rates are explicitly limited to build118.7.4 or earlier.",
+          "Selected boss definitions override the build117.0.1 page's 4 DEF and 18/28 damage. Attack gating below640 HP follows the compiled Trapped comparator, not recovered target-era AI."
+        ],
         "unknowns": [
-          "Original layout and population distribution, boss timing, entrance probability and reward eligibility/rates. Period minimaps differ between runs, so the static map is a community comparator layout, not a recovered original."
+          "Original layout/population distribution, target-era entrance sources/rates and exact boss cadence remain unresolved. Trapped randomizes its nominal500ms cooldown; the build115 Brawler page instead lists1s.",
+          "Target-era reward tiers, rates and multiplayer eligibility/allocation remain unresolved. Current independent tier rolls and lower officer thresholds are reconstruction, not Trapped's ordered first-success shared allocation. See issue853's research disposition.",
+          "Remaining gameplay: cube-generated/shared entry, initial Cowardice escape, multiplayer reward qualification, Rum outcomes and reconnect. The supplied-key journey verifies ordinary traversal, boss, one reward and saved return, not every admission/reward gate."
         ],
         "sources": [
           {
@@ -4086,6 +4160,10 @@
           {
             "url": "https://www.youtube.com/watch?v=JMZXtUNZ96s",
             "label": "TwoYetis Pirate Cave guide, upload metadata 2012-11-06: Realm Portal at Dreadstump's death; exact build unverified"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.PirateCave.cs",
+            "label": "Compiled secondary comparator: boss HP gate, officer circling, fighters and passives; not original server authority"
           }
         ],
         "checks": [
@@ -4095,10 +4173,23 @@
             "expected": "Cave officer roles, pursuing fighters and passive fauna must appear through ordinary room traversal.",
             "acceptance": "Traverse the cave and boss area, recording naturally encountered roles, loot and return. Fixture-spawning each species is not whole-cave acceptance.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": [
+              "All13 ordinary selected definitions match the pinned modified7.0 client. The May2012 guide lists the same roster, but does not specify population distribution."
+            ],
+            "unknowns": [
+              "Exact target-era population distribution, movement/cadence and per-role drop policy remain unresolved. The build115 Brawler page and later comparator disagree on attack cooldown and potion rate."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PirateCaveCXML.dat",
+                "label": "Pinned modified7.0 definitions match the selected roster; not server behavior evidence"
+              },
+              {
+                "url": "https://web.archive.org/web/20120528161505id_/http://forums.wildshadow.com/wiki/realm-mad-god/pirate-cave",
+                "label": "May28,2012 guide lists13 ordinary roles; no exact distribution"
+              }
+            ],
             "group": "population"
           }
         ]
