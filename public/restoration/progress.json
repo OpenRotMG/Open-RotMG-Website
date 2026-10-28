@@ -7057,15 +7057,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based ignore/unignore list1, persistent loading and chat suppression. Period announcement explicitly permits ignoring players in private guild hall/vault; exact channel/interaction coverage unresolved.",
-        "differences": [],
+        "expected": "Selected123.5.1 client stores ignored account IDs in list1 and describes /ignore as chat suppression. June12,2012 Build123.3 announcement explicitly permits private Guild Hall/Vault targets. The six-member client constant limits the party panel, not the ignore dictionary.",
+        "differences": [
+          "Current server suppresses public/yell/tell/guild chat and guild invitations from ignored senders, but not trade requests. Selected client trade/invite handlers do not filter ignores; this does not establish original server policy."
+        ],
         "unknowns": [
-          "Original list cap, offline targeting details and effects on trade/invites versus chat-only suppression."
+          "Original numeric ignore cap and offline targeting policy remain unresolved. Kithio's six-entry editor is commented out and its registered packet handler is a TODO; Trapped's active six-entry editor is a later comparator, not target-era proof.",
+          "Named whispers, guild invitations and Guild Hall targeting still need bounded native verification. Public/yell/guild suppression, private Vault targeting, trade cancellation and reconnect are bounded prepared checks, not whole-feature acceptance."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June12,2012 Build123.3 announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Selected client account dictionaries and visible party limit"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Party.as",
+            "label": "Modified7.0 account-list comparator, not target-era authority"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
