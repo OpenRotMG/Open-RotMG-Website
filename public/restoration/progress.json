@@ -3404,13 +3404,13 @@
         "historical": "partial",
         "expected": "Shore Snake 0x602 has 5 HP, ShoreSand admission and 4-damage Green Magic. Snake Pit Fire/Brown/Yellow Pythons 0x225–227 have 200 HP, 5/20/5 DEF and 25-damage projectiles; they have no Realm spawn tags. Selected projectile speed/lifetime is 4 tiles/s for 2 seconds for Snake and 8 tiles/s for 2/3/3 seconds for Pythons, without status effects.",
         "differences": [
-          "Comparator discrepancies, not adjudicated target bugs: Snake wanders at speed6 with bounded regional refill, versus Kithio/build118's speed8 and local density-five reproduction. Fire continuously chases rather than the intermittent charge described by period leads and Trapped.",
-          "Python rewards currently share Snake Oil10%, T3 rings5% and T6 weapons5%. Comparator species lists and ordered-versus-independent loot engines differ; the Japanese Fire/Yellow item lists also conflict with later Wild Shadow captures. These are not established target odds."
+          "Comparator discrepancies, not adjudicated target bugs: Snake wanders at 6 tiles/s with bounded regional refill. Kithio uses Wander(0.8), converted by GetSpeed to 5.18 units per world-clock second, with local density-five reproduction. Build118 separately labels wander speed8; its unit equivalence is unverified. Fire continuously chases rather than the intermittent charge in period leads and Trapped.",
+          "Python rewards currently share Snake Oil (10%), T3 rings (5%) and T6 weapons (5%). Comparator species lists and ordered-versus-independent loot engines differ; the Japanese Fire/Yellow item lists also conflict with later Wild Shadow captures. These are not established target odds."
         ],
         "unknowns": [
           "Target-build production Python placement/admission and original Snake Pit room/population policy remain unresolved; selected XML and later maps do not recover the generator.",
-          "Resolve target Fire timing/spread/movement and Snake speed, area density and local reproduction versus regional refill. June2012 Python archive requests resolve to2013 captures marked8.0.0, not June2012 evidence.",
-          "Resolve species-specific reward eligibility, allocation and target odds. Parenthesized Japanese rates refer to build118.7.4. Bounded prepared native checks do not establish earned entry, original RNG, reward pickup/reconnect or whole-feature acceptance; see server issue834."
+          "Resolve target Fire timing/spread/movement and Snake speed, area density and local reproduction versus regional refill. June 2012 Python archive requests resolve to 2013 captures marked 8.0.0, not June 2012 evidence.",
+          "Resolve species-specific reward eligibility, allocation and target odds. Parenthesized Japanese rates refer to build 118.7.4. Bounded prepared native checks do not establish earned entry, original RNG, reward pickup/reconnect or whole-feature acceptance; see server issue 834."
         ],
         "sources": [
           {
@@ -3422,6 +3422,10 @@
             "label": "Compiled primary Snake table; no compiled Python coverage at this pin"
           },
           {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Utils.cs#L156-L159",
+            "label": "Kithio GetSpeed converts Wander(0.8) to 5.18, not the guide's speed8 label"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SnakePit.cs#L113-L164",
             "label": "Python comparator; ordered loot weights are not independent drop odds"
           },
@@ -3431,19 +3435,19 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/Fire%20Python",
-            "label": "Fire guide displays2012-06-22; intermittent rush and three shots, disputed item list"
+            "label": "Fire guide displays 2012-06-22; intermittent rush and three shots, disputed item list"
           },
           {
             "url": "https://wikiwiki.jp/rmd/Brown%20Python",
-            "label": "Brown guide displays2012-06-22; wandering,200HP/20DEF"
+            "label": "Brown guide displays 2012-06-22; wandering, 200 HP/20 DEF"
           },
           {
             "url": "https://wikiwiki.jp/rmd/Yellow%20Python",
-            "label": "Yellow guide displays2012-06-22; chasing, disputed item list"
+            "label": "Yellow guide displays 2012-06-22; chasing, disputed item list"
           },
           {
             "url": "https://web.archive.org/web/20120517003342id_/http://forums.wildshadow.com/wiki/realm-mad-god/snake",
-            "label": "May17,2012 Snake capture marked build118; reproduction and attacks, no reward odds"
+            "label": "May 17, 2012 Snake capture marked build 118; reproduction and attacks, no reward odds"
           }
         ]
       }
