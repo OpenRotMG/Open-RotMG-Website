@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "nomads-regression-4c885f0": {
+      "kind":"regression", "revision":"4c885f0e56f8513c02eeabd71777bf8fdbcc5922", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/4c885f0e56f8513c02eeabd71777bf8fdbcc5922/src/world/combat_tests.rs", "checks":["realm:nomads"],
+      "method":"QA5604e959 passes all218 Rust tests. Shaman coverage executes two full attack cycles at50ms boundaries, centered11-degree indices/angles and deadline resets; ACK-backed spinner damage30 commits once and Blind expires exactly at1500ms. Loot test forces successful and unsuccessful draws for a single public4% Magic Potion entry. Existing world allocation test includes Shaman across64 seeds and one/three contributors, preserving one public attempt per death. Redbcd98545 fails both new oracles on baseline.",
+      "limitations":"Prepared deterministic server tests verify the chosen primary reconstruction, not original123.5.1 clocks/odds/eligibility or native item acquisition. Whole gameplay remains not-run and history partial; see issue833 and the separately scoped native receipt."
+    },
+    "nomads-native-4c885f0": {
+      "kind":"native", "revision":"4c885f0e56f8513c02eeabd71777bf8fdbcc5922", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1109#issuecomment-6472763985", "checks":["realm:nomads"],
+      "method":"QA6bff0581 passes11 native assertions: naturally allocated solo Shaman140HP in Realm, activation/approach, HP670to334 and Blind before protection, both selected projectile speeds/lifetimes, observed11-degree fans and primary500/700ms deadlines across multiple cycles, ordinary Energy Staff defeat/XP18050to18064, later Blind expiry, no duplicate XP and same-character Nexus transfer. Client39acbfbf/Ruffle.16. Colda22cd4c4 checks frozen case/source equality with4c885f0 (runner initially reports dirtye766609), caseb9e5c62c/ELF56df5b88, SQLite/FKs, living saved character2/revision1/XP18064, zero deaths/errors/cleanup failures,51 PIDs absent and successful cgroup reclamation. Published crops are actual native before/after frames.",
+      "limitations":"Prepared level20/stats/T0 staff, privileged direct-scout discovery and scene position;60s Invulnerable only after observed unprotected Blind. Not earned discovery, ordinary-risk survival, multiplayer eligibility, potion acquisition/probability, whole-feature/history or public-host acceptance. One defeat rolled no bag. Failed3814ea91(invalid Speed),639ac44c(launcher containment),96c3558e(overconstrained scene) and baseline871f6607(committed Shaman death) retained; cold4c0f23be verifies destroyed inventory/24 PIDs absent. Remaining historical/native acquisition questions stay issue833; whole gameplay not-run/history partial."
+    },
+    "nomads-source-4c885f0": {
+      "kind":"source", "revision":"4c885f0e56f8513c02eeabd71777bf8fdbcc5922", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/4c885f0e56f8513c02eeabd71777bf8fdbcc5922/src/encounter/attacks.rs", "checks":["realm:nomads"],
+      "method":"Research: issue833 comment6471832121. Full selected Shaman object equals pinned modified7.0 MidCXML (QA76a2fbf8). Compiled/reflection-registered Kithio Midland, Shoot/Cooldown/TimedTransition, ItemLoot and Loots distinguish3100/2200ms states,500/700ms delays,11-degree three-shot magic, single spinners and one public Magic Potion4% roll from older Trapped. Period122.0.1 guide supports selected projectile/Blind definitions; current RealmEye explicitly dates Slowed/sprite changes to April2024. Rust source aligns attacks/rewards with primary while retaining selected Blind1500ms.",
+      "limitations":"Source presence is not gameplay or historical acceptance. Exact target clocks/tick ordering, chase versus altitude/Wander, density/divisor/selector and original potion odds/eligibility remain issue833. Modified7.0 server text is related comparator evidence, not independent corroboration. No imported community source/assets, licensing grant, extra variants, hosting or authority/death/ACK/lease policy changes."
+    },
     "sphinx-native-1ba2972": {
       "kind": "native",
       "revision": "1ba2972612ec473697f5bb4eb6d53896e96d5d2a",
@@ -4170,7 +4188,7 @@
     "realm:orcs": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","orcs-research-18b3308","orcs-native-cbc9a1b"]},
     "realm:shield-orcs": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ogres": {"status":"not-run","evidence":["ogres-native-partial-6bcdbf3","ogres-source-af065a1","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:nomads": {"status":"not-run","evidence":[]},
+    "realm:nomads": {"status":"not-run","evidence":["nomads-source-4c885f0","nomads-regression-4c885f0","nomads-native-4c885f0"]},
     "realm:pythons": {"status":"not-run","evidence":[]},
     "realm:flayers": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:ghosts": {"status":"not-run","evidence":["ghost-retirement-source-4992445"]},

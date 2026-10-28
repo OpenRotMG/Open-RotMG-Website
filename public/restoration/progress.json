@@ -3352,15 +3352,34 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Single MidSand Nomadic Shaman6c6 with Green Magic and Blind1.5s Green Spinner; no invented Nomad variants.",
-        "differences": [],
+        "expected": "Single MidSand Nomadic Shaman6c6, HP140/DEF1, Green Magic20 and Green Spinner30 with Blind1.5s. Primary reconstruction: aimed three-shot11-degree magic fans in3100ms phases, single spinners in2200ms phases,500/700ms entry delays/cooldowns and one public Magic Potion4% roll.",
+        "differences": [
+          "Rust retains chase(stop2), a home leash and bounded relative-SpawnProb population with MidSand area divisor200. Compiled Kithio instead uses StayAbove(0.8,55)/Wander(0.7), divisor300 and explicit Shaman weight0.25; original elevation and selector semantics are not recovered.",
+          "The chosen numeric attack schedule uses existing50ms Rust deadlines, not a literal replay of Kithio's decrement/test tick ordering. Older Trapped instead has1000ms phases, randomized400ms cooldowns,15-degree fans and equipment/potion pools. Neither comparator authenticates123.5.1."
+        ],
         "unknowns": [
-          "Original firing timing and patterns, density, Blind application and drops."
+          "Exact123.5.1 movement, density, phase/clock quantization, potion odds and multiplayer reward eligibility remain unresolved in issue833. Prepared encounter checks do not establish earned discovery, natural-risk survival, item acquisition or historical acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L682-L699",
+            "label": "Compiled primary Shaman table; Shoot/Cooldown/TimedTransition and shared ItemLoot semantics checked"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 full Shaman object equals selected definition; not server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073636id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nomadic-shaman",
+            "label": "Period guide marked122.0.1 supports projectiles/Blind1.5s/MidSand, not clocks or drops"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/nomadic-shaman",
+            "label": "Current history explicitly dates Blind-to-Slowed and sprite changes to April2024, not2012"
           }
         ]
       }
