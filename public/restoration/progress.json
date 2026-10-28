@@ -6584,14 +6584,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
+        "expected": "Safe lobby, escape/spawn, facilities and destination bindings. Selected Sheep, fountain and portal definitions match runtime; they do not specify healing or deployed map data. January 2012 documents Sheep and HP fountains. Documented Crier announcements begin in later Build 4.3; selected 123.5.1 XML has no Crier.",
         "differences": [
-          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304",
+          "Rust heals every eligible nearby player by 100 HP per second without restoring MP. January 5, 2012 describes one recipient and 100 HP every 1-2 seconds; Trapped uses nearest-player healing with a randomized 600ms interval, while modified 7.0 heals multiple recipients. Target continuity remains unresolved, not an automatic policy correction.",
+          "The current 142x130 map matches pinned Trapped cells except one added merchant; it has 16 spawn cells, eight fountains and 28 Sheep. Sheep presence is implemented, but wandering/baa behavior is not verified; the mixed-era Japanese page says 25. The 123.4 minimap supports broad room arrangement, not exact 123.5.1 tiles."
         ],
         "unknowns": [
-          "Original 123.5.1 layout, spawn points and destination bindings.",
-          "Fountain timing, MP healing and recipient rules.",
-          "Were Sheep and the Nexus Crier present, and what did the Crier say?"
+          "Exact original 123.5.1 layout, spawn cells and destination deployment remain in issue 897.",
+          "Target fountain cadence, MP and recipient-policy continuity remain in issue 897; current all-recipient behavior is reconstruction, not recovered original server logic.",
+          "Original Sheep count/script and target deployment remain in issue 897. Selected XML has no Crier; November 6, 2012 Build 4.3 and January 25, 2013 Build 10 messages must not be backported as 123.5.1 dialogue."
         ],
         "sources": [
           {
@@ -6609,6 +6611,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
             "label": "Conflicting modified 7.0 Nexus: background 0"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012: Sheep/baa and single-recipient 100 HP fountains; target continuity unverified"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0#v430",
+            "label": "November 6, 2012 Crier introduction; later than target build 123"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_10.0.0",
+            "label": "January 25, 2013 Crier return, not 123.5.1 dialogue"
           }
         ]
       }
