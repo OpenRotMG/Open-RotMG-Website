@@ -1278,7 +1278,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "PR1033 checks 24 arrival connections after normal population on six layouts. A separate three-client native smoke checks shared southern and opposite northern positions in World1 only, not earned entry, every native arrival or an inland journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1033#issuecomment-6454422645"
+              "PR1033 retains 24 server-side arrival connections and the bounded World1 native smoke. PR1082 adds all eight native coastal-to-road journeys in the current World2/3 reconstructions, with shared identity and observed Road208 endpoints. These prepared, protected, full-map-planned journeys are not earned entry, whole-map or historical acceptance; east/west explicitly restrict random bank selection to the unchanged requested entry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1082#issuecomment-6464246162"
             ],
             "unknowns": [],
             "sources": [],
@@ -2783,14 +2783,14 @@
         "expected": "At most one Sphinx per Realm, setting, combat and Horrid Reapers; Reapers disappear after boss death and are Stasis-susceptible at123.5.1.",
         "differences": [
           "PR451 matches the community sand-star stencil; outer flooring, placement and original fidelity remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/451",
-          "Server PR336 adds phase/Reaper integration and one-percent private contribution credit. Full current-revision earned fight and reward-return acceptance remains deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
+          "PR336 adds phase/Reaper integration and the current contribution reconstruction. PR1043 records a prepared full-health native fight, loot pickup and earned Tomb/Nexus journey at a7c8ba0, not whole-feature or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1043#issuecomment-6464305065",
           "PR417 restores the community encounter-wide Vitality/Wisdom floor. Its inclusive 550-damage gate is retained reconstruction: the pinned comparator compares Threshold(0.01) against raw integer damage, not an HP fraction. Prepared final-hit evidence is not full-fight acceptance. https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
           "The May 24, 2012 guide labels its content build122 and describes 60k HP/five Reapers, unlike selected 55k HP/four-Reaper reconstruction. Current guaranteed Tomb portal and terrain-1 protected placement also differ from the later comparator's 0.33 portal roll and Mountains-through-MidForest placement. These are not authenticated target-era settings.",
           "PR493 matches the community outer-floor radius origin (40.5 in tile-index space), not boss-centering. Star/boss positions and local draw counts stay unchanged; placement, RNG parity and original 123.5.1 flooring remain unverified. https://github.com/OpenRotMG/Open-RotMG-Server/pull/493"
         ],
         "unknowns": [
           "Exact 123.5.1 setting/distribution, phase timing, Reaper count, reward eligibility, portal chance and loot probabilities. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/818#issuecomment-6454426556",
-          "Native earned-Sphinx defeat, portal entry and subsequent dungeon journey remain unverified."
+          "Prepared native full-health defeat, loot pickup and earned Tomb/Nexus journey are recorded at a7c8ba0. Native-earned Realm progression, normal-risk balance and complete feature acceptance remain unverified."
         ],
         "sources": [
           {
@@ -3035,10 +3035,11 @@
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
           "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293",
-          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555"
+          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555",
+          "Conflicting comparators: HP1000000/55000, three/six Steeds; reconstruction differs on Daisy shielding, warning Follow, blocked Clone tosses and loot. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "unknowns": [
-          "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
+          "123.5.1 thresholds/timing, placement and rewards unresolved. Details: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "sources": [
           {
@@ -3052,6 +3053,26 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
             "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Crystal.cs",
+            "label": "Compiled Kithio; original AI unauthenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 minions/Prisoner match selected XML"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Crystal matches selected XML"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Crystal%20Prisoner%20Clone",
+            "label": "September7,2012 Clone description"
+          },
+          {
+            "url": "https://web.archive.org/web/20120606200609id_/http://forums.wildshadow.com/wiki/crystal-prisoner-steed-0",
+            "label": "June6,2012 Steed; immunity predates123.5.1 correction"
           }
         ]
       }
@@ -3288,10 +3309,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "HighForest Mage642, Warrior643, Wizard644 and ordinary King645; distinct roles, no established extra plain Ogre.",
-        "differences": [],
+        "expected": "HighForest Mage642, Warrior643, Wizard644 and ordinary King645; all four selected objects agree with pinned modified7.0. No selected extra plain Ogre.",
+        "differences": [
+          "Current camp starts nine actors with no births; compiled Kithio starts five and counts lifetime Warrior/Mage/Wizard births to4/2/2 at12/16/20s, not alive-child refill.",
+          "Current King continuously fires blades and radius2/55-damage grenades each1s after500ms. Kithio has two radius3/60 grenades, a blade/follow phase and a separate low-HP fury; escort Protect/Orbit and spacing also differ.",
+          "Existing period-loot reconstruction differs from Kithio King tiers/rates and escort tables. Missing Mage loot arguments are not proof of no historical drops."
+        ],
         "unknowns": [
-          "Target population, exact King grenade/timing, spacing and drops; plain Ogre deployment unresolved."
+          "Original population/density, King cycle/fury, escort movement/spacing and reward eligibility/odds remain unresolved. May2012 pages retain obsolete stats and no King grenade; they do not override selected123.5.1 or authenticate Kithio.",
+          "May26,2012 plain Ogre wiki entry and Japanese removal question do not establish target deployment. Native AOE attribution, multiplayer reward acquisition/reconnect and a rolled Snake Pit journey remain unaccepted; issue832 tracks the remainder."
         ],
         "sources": [
           {
@@ -3300,7 +3326,19 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/ページ構成の実験/Ogres",
-            "label": "Ogres wiki page (date unconfirmed)"
+            "label": "Ogres catalogue; individual claim dates unestablished"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Highland.cs#L70-L162",
+            "label": "Compiled Kithio Ogre table; reconstruction comparator, not original authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519234933id_/http://forums.wildshadow.com/wiki/realm-mad-god/ogre-king",
+            "label": "May19,2012 King wiki capture; obsolete stats and no grenade"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_HighCXML.dat",
+            "label": "Modified7.0 client comparator; all four complete selected objects agree"
           }
         ]
       }
