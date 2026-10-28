@@ -6207,15 +6207,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "100 HP heal, conditional Speedy clear when Hexed, then negative-condition removal; exact historical negative set/order consequences unresolved.",
-        "differences": [],
+        "expected": "Heal 100 HP before cleansing, so Sick blocks that use's heal. Clear Speedy only when Hexed, then clear Quiet, Weak, Slowed, Sick, Dazed, Stunned, Blind, Hallucinating, Drunk, Confused, Paralyzed, Bleeding, Armor Broken and Hexed. Preserve other buffs; the selected client restores its class texture when Hexed clears. Ineffective full-HP/Sick uses consume in this reconstruction.",
+        "differences": [
+          "Compiled Kithio supplies the 14-effect cleanse list but omits the Sick heal guard and conditional-clear activation. Selected XML order and the February 2012 Sick rule take precedence; modified 7.0 implements both guards. The later client restores skins instead of the selected client's objectType texture."
+        ],
         "unknowns": [
-          "Historical negative-condition set, Sick/heal ordering and transformation presentation restoration."
+          "Independent target-version evidence for the exact cleanse mask and ineffective-use consumption/refund remains missing. The June 2012 status page predates Hexed and also lists enemy Stasis and attack Armor Pierce, so it is not an exact player cleanse contract. Track server issue887.",
+          "Prepared native checks are not earned Coffin/Lord Ruthven acquisition or exhaustive acceptance of every hostile condition, green-pool reapplication and multiplayer scope."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L14-L86",
+            "label": "Compiled primary reconstruction:14-effect NegativeEffs, not independently authenticated official behavior"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/player/Player.UseItem.cs#L851-L903",
+            "label": "Modified7.0 comparator guards Heal with Sick and conditionally clears Speedy; not a2012 specification"
+          },
+          {
+            "url": "https://web.archive.org/web/20120417215230id_/http://forums.wildshadow.com/wiki/realm-mad-god/holy-water",
+            "label": "April17,2012 capture:100HP and removal of negative effects; no exact mask or Sick ordering"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June13,2012 capture: Sick cannot be healed; positive Speedy/Berserk and negative effects, before MadLab/Hexed"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1#original",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing"
           }
         ]
       }
@@ -6269,8 +6292,8 @@
         "expected": "The normal soulbound XP Booster doubles XP until level 20 or death. It does not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Original repeated-use, reconnect and level-20 crossing behavior.",
-          "Was the separate XP Booster Test item ever distributed?"
+          "Original repeated-use consumption, reconnect persistence and level-20 kill/queue splitting remain unverified. Duplicate refusal, durable boost state and whole-crossing-award doubling are reconstruction choices, not authenticated original boundaries.",
+          "No distribution witness for XP Booster Test (0xc43) was established from the selected XML, 123.5.0 production/testing notes or inspected comparators. Its presence does not prove availability; it remains unsupported. Modified 7.0 timers must not be imported into 123.5.1."
         ],
         "sources": [
           {
@@ -6280,6 +6303,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L6231-L6258",
+            "label": "Modified 7.0 comparator: added timers are not target-version rules"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+            "label": "August 25 / September 5, 2012 testing notes; no Test-item distribution claim"
           }
         ]
       }
