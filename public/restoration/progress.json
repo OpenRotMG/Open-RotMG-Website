@@ -2404,15 +2404,19 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "LowSand level3 quest0x6c4,300 HP/2 DEF; four Beam indexes and Blue Bolt. Movement and both attack families required; no evidenced mandatory minions/transformation.",
-        "differences": [],
+        "expected": "LowSand level3 quest0x6c4,300 HP/2 DEF; four Beam indexes and Blue Bolt. Complete selected definition matches pinned modified7.0. June1,2012 player account supports desert groups, approach and roughly44–50XP; no evidenced mandatory minions/transformation.",
+        "differences": [
+          "Current1000ms move/1000ms pause and6500ms direct-aim cycle differ from compiled Kithio's nominal400/200ms movement and4700ms Beam/3200ms tri-spit states with predictive Blue Bolts. Timer evaluation, Follow steering/hysteresis and target ranges also differ; neither comparator authenticates123.5.1 timing.",
+          "Current ordered10/10/10/10/3/2 weights with four attempts per contributor/cap8 differ from Kithio14/19/5/28/2/2 expanded per-item independent shared rolls. Relative0.75 spawn weight and LowSand area/200 budget are not recovered density; no current Crab portal is registered."
+        ],
         "unknowns": [
-          "Target scuttle/fire schedule, targeting, population density, XP/loot and portal outcome. Comparator timings are not production proof."
+          "Original123.5.1 scuttle/fire cadence, predictive targeting, density and reward distribution/ownership remain unresolved. Current44 baseXP fits the period approximation, not an exact historical recipient/rounding specification.",
+          "Whether/when Crab deaths could open Pirate Cave remains unresolved: April2024 RealmEye lists it, but compiled Kithio's Crab registration does not. Japanese2021 text and2011 image metadata do not date the AI/rate claims. Prepared native checks and older PR162 loot evidence are scoped, not whole-feature or historical acceptance; see issue809."
         ],
         "sources": [
           {
             "url": "https://whyigame.wordpress.com/2012/06/01/rotmg-lvl-20-in-20-minutes/",
-            "label": "2012 player account"
+            "label": "June1,2012 player account and inspected desert Crab image; approximate XP, not exact cadence"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -2421,6 +2425,14 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
             "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L460-L518",
+            "label": "Compiled/registered primary reconstruction comparator; timers and loot engine inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_LowCXML.dat#L85-L140",
+            "label": "Modified7.0 Crab definition equals selected SWF binary124, not AI or drop-rate evidence"
           }
         ]
       }
