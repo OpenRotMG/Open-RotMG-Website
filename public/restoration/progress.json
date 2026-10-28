@@ -6300,15 +6300,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Equipped ring grants +20 HP/MP and +2 six other stats; protects from death without later curse. Detailed recovery policy incompletely documented.",
+        "expected": "Selected 0xb3e is a nonsoulbound ring: +20 HP/MP, +2 six other stats and Resurrects. Worn-only consumption, Nexus return and retained other items are supported; current full post-consumption HP/MP recovery remains a reconstruction.",
         "differences": [],
         "unknowns": [
-          "Historical recovery resources/destination, equipment retention and once-only fame/death semantics."
+          "Kithio/Trapped set twice base HP/MP; modified 7.0 returns at 1 HP without refilling MP and adds Soulbound. Neither overrides the selected definition or proves original 123.5.1 recovery.",
+          "Dated 123.5.1 confirmation of HP/MP recovery policy and precise original death/Fame bookkeeping. The item page's full-resource/retention paragraph is undated; wiki history requests returned 403 and the requested Wild Shadow archive returned 404. Issue #891 tracks the remainder."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L438-L466",
+            "label": "Compiled Kithio: worn-only consumption and Nexus return before death processing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build116.5",
+            "label": "June 9, 2011 test: breakage, Nexus return and full HP"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build117.0.1",
+            "label": "June 19, 2011 release: one-time resurrection when worn"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Amulet%20of%20Resurrection",
+            "label": "Undated full HP/MP and item retention; September 19, 2011 no-grave comments"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012 release: later curse change, not a target-build rule"
           }
         ]
       }
