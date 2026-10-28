@@ -6623,12 +6623,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each. The older community server selects blue background 2, also visible in the linked Vault tutorial's thumbnail; modified 7.0 settings instead select 0.",
+        "expected": "Selected client: eight-item chests shared by all account characters. The June2,2012 Nexus capture describes twenty chests, one free and nineteen at500 Gold. Current93x81 map exactly matches Trapped and matches compiled Kithio after its version-zero prefix. This is comparator provenance, not recovered official production layout.",
         "differences": [
           "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
         ],
         "unknowns": [
-          "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
+          "Current purchases preserve the clicked cell's durable identity. Kithio/Trapped instead assign saved chest lists to distance-sorted cells on reload. Original reload/equal-distance ordering is not established; existing player storage is not reordered.",
+          "Exact 123.5.1 production layout, equal-distance chest ordering, purchase presentation/bonus policy and continuity of the June capacity/price remain issue898. Kithio uses100 Gold; modified7.0 uses750 Fame. A September archive request redirects to the same June capture, not a later witness.",
+          "The mutable Japanese Vault page mixes a2016 map,120 chests and bonus items; its ordering chart is not target-dated. Build124.0 notes place Gift Chests on October5,2012, after the target. No expanded map, gifts or bonus items are inferred.",
+          "Whole-feature native acceptance still requires registered purchase/refusal and death-to-replacement storage access. Store/world regressions are not those native journeys; see issue898."
         ],
         "sources": [
           {
@@ -6650,7 +6653,12 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Vault.jw",
             "label": "Conflicting modified 7.0 Vault: background 0"
-          }
+          },
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/worlds/Vault.cs","label":"Compiled Kithio: eight slots, distance ordering and versioned copy of the same map"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/SellableObject.cs","label":"Kithio chest price100 Gold, not current500"},
+          {"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/vendors/ClosedVaultChest.cs","label":"Modified7.0 price750 Fame, not target authority"},
+          {"url":"https://wikiwiki.jp/rmd/Vault","label":"Mutable mixed-era page:120 chests,2016 map and undated ordering/bonus policy"},
+          {"url":"https://wikiwiki.jp/rmd/version/build124.0","label":"Following build: Gift Chests added October5,2012"}
         ]
       }
     },
