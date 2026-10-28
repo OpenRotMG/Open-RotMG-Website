@@ -2920,17 +2920,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Five towers, Eyes, corpses/revival, attacks, all-five completion, once-only credit and rewards. Period test's central large tower has unresolved production continuity.",
+        "expected": "Five towers, Eyes, corpses/revival, attacks, red/yellow connecting beams, all-five completion, once-only credit and rewards. Ultra was withdrawn in testing 122.3.1; its retained client definition does not establish production use.",
         "differences": [
-          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields, placement and the period test's large central tower's production fate remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
+          "The controller's native center now keeps its ground, objects, configuration, terrain, region and scenery identity instead of adding Scorch Blend, matching the community renderer. The five tower platforms still paint normally. Native walkability and ownership guards apply at placement and event admission. Original center fields and placement remain unverified; Ultra's withdrawal is documented separately: https://github.com/OpenRotMG/Open-RotMG-Server/pull/576"
         ],
         "unknowns": [
-          "Central tower's final production fate; target revival, geometry, grenade and reward parameters."
+          "Exact 123.5.1 revival clocks, rounded coordinates, Eye behavior and reward coefficients. Current Eye fire is 1 second versus the period guide's 0.2 seconds; per-corpse revival and live-child replenishment differ from the older global clock and later cumulative Spawn counter. These conflicts do not justify numerical retuning.",
+          "Ultra was withdrawn in the March 2012 test; the June production guide describes five corpse loot sites without it. Exact target-build deployment and center-cell fields remain unauthenticated. RealmEye's retrospective has an unreliable broader Pentaract introduction chronology."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/test/build122.2.1",
-            "label": "Build 122.2.1 test-server notes"
+            "label": "March 17, 2012 test-only Ultra experiment"
+          },
+          {
+            "url": "https://web.archive.org/web/20120331002105id_/http://forums.wildshadow.com/node/64679",
+            "label": "Developer thread begun March 24, 2012: 122.3.1 withdraws Ultra; dated comments distinguish tower platforms from the test-only center platform"
+          },
+          {
+            "url": "https://web.archive.org/web/20120611050120id_/http://forums.wildshadow.com/wiki/realm-mad-god/pentaract",
+            "label": "June 11, 2012 production-wiki capture, marked last updated 118: red/yellow beams, five corpse loot sites and encounter parameters"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build122.3.0#test12231",
+            "label": "March 26, 2012 test notes corroborate Ultra withdrawal; repeated announcement is not independent evidence"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/pentaract-tower-ultra",
+            "label": "Undated retrospective labels Ultra never released; broader introduction chronology is unreliable"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Pentaract.cs",
+            "label": "Modified 7.0 comparator; inspect Spawn, Swirl, Grenade, Transform and damage-transfer semantics"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/PentaractStar.cs",
@@ -4446,7 +4467,7 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map and population distributions, exact Mixcoatl/Totem timing, entrance probability and loot rates."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
         ],
         "sources": [
           {
@@ -4456,6 +4477,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
+            "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
           }
         ],
         "checks": [
@@ -4465,10 +4490,17 @@
             "expected": "Distinguish breakable foliage from permanent/decorative plants, and preserve tribal healing and ownership.",
             "acceptance": "Walk ordinary rooms, open only valid foliage paths and exercise Basilisk families, Shaman conditions, healing and owned Totem/Spirit cleanup.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
+                "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              }
+            ],
             "group": "layout"
           }
         ]
@@ -4493,7 +4525,9 @@
           "Limon's optional Defense potion now rolls at 5% per currently eligible contributor, following later FSoD rather than recovered 123.5.1 odds. The May/June 2012 guides omit Defense; an August 2013 account confirms occasional drops. Exact original availability/rate remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/529"
         ],
         "unknowns": [
-          "Original turret dimensions/timing, terrain/conveyors, teleport/orbit/phase probabilities, map distribution, glowing entrance semantics and rewards."
+          "Original turret dimensions/delays, orbit direction and teleport/phase randomness remain unresolved; the modified 7.0 engine has a 1500ms delayed toss and different shield-loop semantics from the current reconstruction.",
+          "Original room/conveyor/tree/native-god distributions, tiled/non-tiled appearance and glowing-entrance semantics remain unrecovered.",
+          "Target-era Defense availability, reward eligibility and multiplayer allocation remain unresolved; the build-118-labelled period tables and later encounter-wide required-Dexterity engine do not authenticate current per-contributor guarantees."
         ],
         "sources": [
           {
@@ -4531,6 +4565,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/Limon%20Element",
             "label": "Limon Element page last modified June 2012: stationary, invulnerable, disappears after 20 seconds"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SpriteWorldCXML.dat",
+            "label": "Modified 7.0 client: all eleven native Sprite, Limon and Element definitions match the selected client; not original server AI"
           }
         ],
         "checks": [
@@ -4540,12 +4578,19 @@
             "expected": "Verify directional/stationary floors, compact platforms, destructible trees and tiled versus non-tiled variants.",
             "acceptance": "Exercise all push directions, tree destruction and historical tiled versus non-tiled variants; correcting white stationary floors alone does not complete this check.",
             "implementation": "partial",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [
               "Directional conveyors now vary by seed, width, length and overlap; white stationary tiles, compact platforms and destructible Sprite Trees remain. This band reconstruction does not restore the historical non-tiled appearance or original pattern distribution."
             ],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Original tiled/non-tiled encoding and selection, tree/native-god weights and conveyor generator remain unrecovered."
+            ],
+            "sources": [
+              {
+                "url": "https://web.archive.org/web/20120531054927id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-world",
+                "label": "May 2012 guide: directional floors, destructible trees, zero-to-five gods and two appearances; no generator or distribution"
+              }
+            ],
             "group": "layout"
           }
         ]
