@@ -4802,7 +4802,7 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Key and earned Sphinx entry, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
+        "expected": "Key and earned Sphinx entry, player teleport, escape, local traps, objective sarcophagi/worshippers, dormant statues, Bes/Nut/Geb, artifacts, individual rewards and committed three-boss completion. Target123.5.1 artifact Stasis susceptibility remains authoritative.",
         "differences": [
           "The original map generator was not recovered. Room geometry, pack distribution and loot probabilities remain reconstructed; footage-informed floor bands and pillar offsets are not a tile-exact official template.",
           "Nut's peer healing and phase timing follow source-qualified community behavior, not a certified original server rate.",
@@ -4812,7 +4812,7 @@
         ],
         "unknowns": [
           "Exact target geometry, random distributions and differences between period healing/timing accounts.",
-          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. Earned Sphinx-to-Tomb entry, late join and complete readable phase/artifact imagery remain open.",
+          "Run242 verifies a prepared native three-boss clear and durable clear-exit/reconnect. PR1043 verifies prepared earned Sphinx-to-Tomb entry at 1ba2972. Prepared seed12 awakening/late join and natural Nut-artifact Stasis pass at f84ef02. Complete readable phase/artifact imagery and gate reconnect remain open.",
           "Objective count: the September 2012 guide's 3 to 5 objectives plus a guaranteed treasure room (implemented) conflicts with the May 2013 capture's five event rooms of 1 to 5 objectives."
         ],
         "sources": [
@@ -4843,6 +4843,10 @@
           {
             "url": "https://geegamers.blogspot.com/2012/09/tomb-of-ancients-rotmg-guide-english.html",
             "label": "September 2012 Tomb guide: 3 to 5 objectives plus a treasure room"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Tomb%20of%20the%20Ancients",
+            "label": "Japanese Tomb roster comparator; image dates do not authenticate prose dates"
           }
         ],
         "checks": [
@@ -4855,7 +4859,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact original objective distribution and full late-join/reconnect acceptance remain unverified."
+              "Prepared last-objective gating, one-time awakening and late native join pass at f84ef02. Exact original objective distribution and full gate reconnect acceptance remain unverified."
             ],
             "sources": [
               {
@@ -4874,7 +4878,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact historical switch/trap timing and all multi-room multiplayer journeys remain unverified."
+              "Prepared interruption/reset and local eight-trap disable in two rooms pass at e124efa. Selected turret projectile/condition checks pass at b3156af. Exact historical timing and complete cover/trap journeys remain unverified."
             ],
             "sources": [
               {
@@ -4893,7 +4897,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey, not the combined optional treasure, individual loot and artifact acceptance. Exact period loot probabilities remain unverified."
+              "Run242 verifies the native three-boss clear and durable normal-exit/reconnect journey. Seed12 optional treasure, jars and private pickup/Nexus retention pass at 5928fc2. Natural Nut-artifact Stasis passes at f84ef02. Individual boss awards, peer healing and remaining artifact/phase acceptance remain unverified. Exact period loot probabilities remain unverified. Trapped deduplicates item identity per recipient, while current two-roll distribution does not; neither is authenticated original policy."
             ],
             "sources": [
               {
@@ -4912,7 +4916,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact original pack distribution and complete readable native family/phase coverage remain unverified."
+              "Prepared native projectiles for all 14 root kinds, selected turret conditions, bounded Swarm/Jackal/Mummy followers, Swarm leader loss and Nexus escape pass at b3156af. Full attack-form, family XP/loot and scarab burst/death journeys remain unverified. Original pack distribution is unknown. The undated Japanese Tomb page describes at most six Swarm followers, versus the current eight; dated image URLs do not date that claim."
             ],
             "sources": [
               {
@@ -5575,9 +5579,9 @@
         "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility is inclusive 1200/8000 at unchanged .001; other Septavius rewards retain the generic >800 gate.",
         "differences": [],
         "unknowns": [
-          "Original availability of Thousand Shot and upper-tier bows.",
-          "Each bow’s original spread and collision behavior.",
-          "The attributed 15% Doom fragment and original threshold engine are not authenticated."
+          "Original production acquisition of Thousand Shot and T13/T14 bows remains unproved. The February 6, 2012 Thousand Shot post describes testing code, not a released drop.",
+          "Selected recovered client code supports centered 11.25-degree spacing and distinct enemy/cover piercing; original server collision tolerances remain unauthenticated.",
+          "The attributed 15% Doom fragment and original threshold engine are not authenticated. Research disposition and pinned comparisons: https://github.com/OpenRotMG/Open-RotMG-Server/issues/871#issuecomment-6478307595"
         ],
         "sources": [
           {
@@ -5595,10 +5599,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot8 compatibility, individual damage/rate/range/bonuses, Crystal Wand piercing and Bulwark slow parametric cover-passing projectile. Conducting Wand uses target-buffed values.",
-        "differences": [],
+        "expected": "Priest/Sorcerer Slot8; selected individual damage/rate/lifetime/bonuses. Crystal hits multiple enemies without piercing armor. Bulwark uses a parity-dependent eleven-second parametric loop and passes ordinary cover, not EnemyOccupySquare or void; it is not MultiHit. Conducting retains 50–180 damage and +1 DEF/+1 WIS.",
+        "differences": [
+          "Twenty XML definitions are not twenty obtainable wands: current starter/tier/reward source reaches seventeen; Conducting has no identified reward entry. Evocation/Retribution remain definition-only, with a February 2012 catalogue explicitly calling them unreleased."
+        ],
         "unknowns": [
-          "Complete obtainable wand roster and original parametric-projectile/collision behavior."
+          "Conducting Wand's target-era acquisition, recipient policy and drop rates; Evocation/Retribution availability continuity into 123.5.1.",
+          "Original server collision tolerances/sampling beyond the recovered client rules; fresh native multi-enemy Crystal and Bulwark cover-collision acceptance, earned acquisition and durable re-equip journeys remain unverified."
         ],
         "sources": [
           {
@@ -5608,6 +5615,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120607014236id_/http://forums.wildshadow.com/wiki/realm-mad-god/wands",
+            "label": "June 2012 wand catalogue, labelled 122.3.2"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Projectile.as",
+            "label": "Pinned selected-client projectile motion and collision reconstruction"
           }
         ]
       }
