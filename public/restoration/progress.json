@@ -5069,7 +5069,7 @@
         ],
         "unknowns": [
           "Original map distribution, precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
-          "Full ordinary disconnect/reconnect and every whole-dungeon acceptance path still need separately scoped results."
+          "Live-combat interruption and empty-instance retirement remain untested; supplied gear/party are not earned or unprotected-survival evidence."
         ],
         "sources": [
           {
@@ -5091,6 +5091,14 @@
           {
             "url": "https://www.youtube.com/watch?v=DSrzfLhuP4k",
             "label": "2013 video static samples: asymmetric lamps, rug and Realm Portal label; not playback timing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.4.0",
+            "label": "July 2012 testing and access-release poll; not proof of released spawn/chance values"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Maggot",
+            "label": "October 27, 2012 page calls Maggot an unused Locker enemy; does not establish Sack placement"
           }
         ],
         "checks": [
@@ -5103,7 +5111,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Shared discovery and late arrival were executed; a full ordinary disconnect/reconnect is not separately recorded."
+              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated."
             ],
             "sources": [
               {
@@ -5153,12 +5161,16 @@
               "Active selected crew, bounded ghost regrowth, Roger-owned Souls and armor cycles are implemented. Unproven Maggot/Sack content is not spawned."
             ],
             "unknowns": [
-              "Original sack presence, complete collision/destructible/revisit behavior and precise crew timing lack full historical sign-off."
+              "Original Sack placement, prop/room distribution and precise crew timing remain unresolved; no active Sack lifecycle is authenticated."
             ],
             "sources": [
               {
                 "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
                 "label": "Historical Locker guide: shared colored keys and ordinary access"
+              },
+              {
+                "url": "https://wikiwiki.jp/rmd/Maggot",
+                "label": "2012 unused-Maggot lead; does not establish active Sack placement"
               }
             ],
             "group": "population"
@@ -6161,17 +6173,32 @@
       "category": "gear",
       "icon": "assets/player/coral-juice.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Individual restorative drinks, Coral Juice dual restoration, Healing Ichor, range-ten Snake Oil/Pollen Powder; include Beachzone compound boost/intoxication cocktails. Wine Cellar drinks do not implicitly cause Drunk.",
-        "differences": [],
+        "expected": "Ten wines restore150 HP or MP without Drunk, except Fire Water230HP; Ichor150 HP, Coral100 HP+100 MP, Snake Oil100 HP/Pollen100 MP within range10 including self. Four Beach cocktails each boost two selected stats and apply Drunk15s; selected Lime boosts last30s, the others20s.",
+        "differences": [
+          "All18 selected drink definitions match recovered123.5.1 and modified7.0, but the ten wines have no current production loot candidates. Prepared consumption does not establish ordinary acquisition.",
+          "Kithio halves nova range; modified7.0/current reconstruction use full range. May2013 Beach wiki says Lime20s versus selected/7.0 XML30s. Preserve selected definitions and current authority rather than importing conflicting comparator rules."
+        ],
         "unknowns": [
-          "Production loot/distribution, historical range/self/resource rejection semantics."
+          "Exact target-era drop schedules and ordinary wine acquisition; historical self/range-edge/recipient eligibility and full-resource/Sick/Quiet consumption or refund; Lime20-versus30s continuity. Bounded prepared gameplay is separate from full acquisition/history acceptance. Research and remaining work: server issue885."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "All18 complete drink objects match selected123.5.1; modified7.0 agreement is not original-server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162737id_/http://forums.wildshadow.com/wiki/realm-mad-god/wines",
+            "label": "May28,2012: ten wines, Fire Water230HP/others150HP or MP; Cellar and Castle minion drops, not exact probabilities"
+          },
+          {
+            "url": "https://web.archive.org/web/20130516012303id_/https://forums.wildshadow.com/wiki/realm-mad-god/beach-party-madness-drinks",
+            "label": "May2013 retrospective August2012 event account; Lime20s conflicts with selected30s"
           }
         ]
       }
@@ -6438,19 +6465,30 @@
       "category": "style",
       "icon": "assets/player/black-cat.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "All target-era pet choices and generators, following, persistence and loss/transfer behavior, including Baby as one companion. Historically deployed roster, acquisition and exact lifecycle remain qualified; modern feeding/fusion is not imported.",
-        "differences": [],
+        "expected": "Target-era companions, generators, following, persistence and loss/transfer behavior, including Baby. Selected definitions contain 66 generators; this is not a historically obtainable roster. Modern feeding/fusion is excluded.",
+        "differences": [
+          "Source inspection finds generic owner-follow/toggle behavior for Beach Ball, not buddy tossing, and one saved selection rather than Valentine's reported multiple hearts. These special behaviors are not accepted by the generic summon checks."
+        ],
         "unknowns": [
-          "Complete obtainable pet roster, seasonal shops, and original loss/transfer rules.",
-          "Original following distances, replacement and continued ownership after seasonal sales.",
-          "Was Beach Ball Generator obtainable in 123.5.1, and how did buddy play work?"
+          "Which of the 66 selected generators were actually obtainable in 123.5.1? The June 10, 2012 forum capture lists 34 known pets and explicitly says some were unreleased; the modified 7.0 catalogue adds later pets.",
+          "Complete target-build acquisition, manual shop rotations, seasonal retention and original loss/transfer exceptions remain tracked in server issue893. Prepared generator fixtures do not prove acquisition.",
+          "Exact original following/warp distances, cooldown scope and special Valentine behavior remain unresolved; the later PetFollow comparator differs from this reconstruction.",
+          "The preserved event table dates Beach Ball's 700 Gold sale to August 16–21, 2012, before 123.5.1. Retained use in the target build and buddy-play routing/range/timing still need period evidence and dedicated gameplay checks."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610080612id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/pets",
+            "label": "June 2012 forum capture: unreleased pets, reusable generators, manual shop rotation and consumable event pets"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events",
+            "label": "Preserved event table: Beach Party Madness, August 16–21, 2012"
           }
         ]
       }
@@ -6516,15 +6554,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed textile patterns, encoded scale variants, native previews, application and persistence in both texture channels. Seasonal possession is distinct from permanent shop sale; complete target roster/rendering remain unverified.",
+        "expected": "Selected 123.5.1 has71 pattern pairs (142 items): Large selects clothing/Tex1, Small accessory/Tex2; encoded high byte chooses4x4/5x5/9x9/10x10 atlas, not avatar scale. Verify native preview/application, once-only consumption, other-channel preservation and persistent appearance; embedded possession is not permanent shop availability.",
         "differences": [],
         "unknowns": [
-          "Original pattern and scale variants, their appearance, and seasonal shop inventories."
+          "Exact target-deployed and seasonal shop rosters/windows/prices. Selected142 definitions and the later100G textile table do not replace provisional120G offers or prove permanent sale; see issue896.",
+          "Full all-pattern/all-class visual, tooltip and mask fidelity, earned acquisition and cold browser/server restart continuity. Representative atlas/channel captures and prior ground-use receipts are bounded acceptance, not whole-feature certification."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/8f610f6fb4eb8c3a5caeeb4bc075ab670c5dc906/dyes.js",
+            "label": "September27,2012 fitting-room roster:Shamrock commented out, not proof of sale windows"
+          },
+          {
+            "url": "https://web.archive.org/web/20120901000000id_/http://forums.wildshadow.com/node/80502",
+            "label": "April22,2012 Build123 announcement:missing dye/textile pixels fixed"
           }
         ]
       }
@@ -6537,14 +6584,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
+        "expected": "Safe lobby, escape/spawn, facilities and destination bindings. Selected Sheep, fountain and portal definitions match runtime; they do not specify healing or deployed map data. January 2012 documents Sheep and HP fountains. Documented Crier announcements begin in later Build 4.3; selected 123.5.1 XML has no Crier.",
         "differences": [
-          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304",
+          "Rust heals every eligible nearby player by 100 HP per second without restoring MP. January 5, 2012 describes one recipient and 100 HP every 1-2 seconds; Trapped uses nearest-player healing with a randomized 600ms interval, while modified 7.0 heals multiple recipients. Target continuity remains unresolved, not an automatic policy correction.",
+          "The current 142x130 map matches pinned Trapped cells except one added merchant; it has 16 spawn cells, eight fountains and 28 Sheep. Sheep presence is implemented, but wandering/baa behavior is not verified; the mixed-era Japanese page says 25. The 123.4 minimap supports broad room arrangement, not exact 123.5.1 tiles."
         ],
         "unknowns": [
-          "Original 123.5.1 layout, spawn points and destination bindings.",
-          "Fountain timing, MP healing and recipient rules.",
-          "Were Sheep and the Nexus Crier present, and what did the Crier say?"
+          "Exact original 123.5.1 layout, spawn cells and destination deployment remain in issue 897.",
+          "Target fountain cadence, MP and recipient-policy continuity remain in issue 897; current all-recipient behavior is reconstruction, not recovered original server logic.",
+          "Original Sheep count/script and target deployment remain in issue 897. Selected XML has no Crier; November 6, 2012 Build 4.3 and January 25, 2013 Build 10 messages must not be backported as 123.5.1 dialogue."
         ],
         "sources": [
           {
@@ -6562,6 +6611,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
             "label": "Conflicting modified 7.0 Nexus: background 0"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012: Sheep/baa and single-recipient 100 HP fountains; target continuity unverified"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0#v430",
+            "label": "November 6, 2012 Crier introduction; later than target build 123"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_10.0.0",
+            "label": "January 25, 2013 Crier return, not 123.5.1 dialogue"
           }
         ]
       }
@@ -6574,12 +6635,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each. The older community server selects blue background 2, also visible in the linked Vault tutorial's thumbnail; modified 7.0 settings instead select 0.",
+        "expected": "Selected client: eight-item chests shared by all account characters. The June2,2012 Nexus capture describes twenty chests, one free and nineteen at500 Gold. Current93x81 map exactly matches Trapped and matches compiled Kithio after its version-zero prefix. This is comparator provenance, not recovered official production layout.",
         "differences": [
           "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
         ],
         "unknowns": [
-          "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
+          "Current purchases preserve the clicked cell's durable identity. Kithio/Trapped instead assign saved chest lists to distance-sorted cells on reload. Original reload/equal-distance ordering is not established; existing player storage is not reordered.",
+          "Exact 123.5.1 production layout, equal-distance chest ordering, purchase presentation/bonus policy and continuity of the June capacity/price remain issue898. Kithio uses100 Gold; modified7.0 uses750 Fame. A September archive request redirects to the same June capture, not a later witness.",
+          "The mutable Japanese Vault page mixes a2016 map,120 chests and bonus items; its ordering chart is not target-dated. Build124.0 notes place Gift Chests on October5,2012, after the target. No expanded map, gifts or bonus items are inferred.",
+          "Whole-feature native acceptance still requires registered purchase/refusal and death-to-replacement storage access. Store/world regressions are not those native journeys; see issue898."
         ],
         "sources": [
           {
@@ -6601,7 +6665,12 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Vault.jw",
             "label": "Conflicting modified 7.0 Vault: background 0"
-          }
+          },
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/worlds/Vault.cs","label":"Compiled Kithio: eight slots, distance ordering and versioned copy of the same map"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/SellableObject.cs","label":"Kithio chest price100 Gold, not current500"},
+          {"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/vendors/ClosedVaultChest.cs","label":"Modified7.0 price750 Fame, not target authority"},
+          {"url":"https://wikiwiki.jp/rmd/Vault","label":"Mutable mixed-era page:120 chests,2016 map and undated ordering/bonus policy"},
+          {"url":"https://wikiwiki.jp/rmd/version/build124.0","label":"Following build: Gift Chests added October5,2012"}
         ]
       }
     },
