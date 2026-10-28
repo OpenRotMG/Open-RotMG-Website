@@ -5668,16 +5668,32 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot17 compatibility and individual rate/damage/wave/shot count/spread; ordinary two-shot zero-gap staves must remain distinct from Extreme Prejudice, Crystal Serpent and Anatis. Deployment is separately qualified.",
+        "expected": "Slot17 compatibility and individual damage, rate, parity-alternating waves, shot count/spread and first-target/cover collision. Ordinary paired zero-gap staves remain distinct from EP ten-way36degree/40%, Crystal Serpent110% and Anatis single-shot25%. Embedded upper tiers do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "Original availability of Anatis and upper-tier staves.",
-          "Each staff’s trajectories and collision behavior."
+          "Exact first Anatis release and target123.5.1 acquisition/drop schedules. April15,2012 trading advertisements establish advertised possession, not first release or a completed trade. Period staff tables corroborate T0–T12, not ordinary T13/T14 drops.",
+          "Original server collision tolerance and damage RNG endpoints. Earned acquisition, native range/cover boundaries and staff-specific death-fame acceptance remain unverified; bounded prepared checks are not whole-feature acceptance. Track #873."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L909-L944",
+            "label": "Pinned selected-version client firing engine; XML-derived consecutive pellets and centered spread"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234149/http://forums.wildshadow.com/wiki/realm-mad-god/staves",
+            "label": "May24,2012 capture labelled122.3.2: T0–T12, EP and Crystal Serpent parameters"
+          },
+          {
+            "url": "https://web.archive.org/web/20120415023228/http://forums.wildshadow.com/forum/51",
+            "label": "April15,2012 trading index advertises Anatis Staff; no first-release/drop-policy claim"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=2",
+            "label": "Additional August8,2011 equipment guide lists Astral and Cosmic; editable, not a frozen2011 snapshot"
           }
         ]
       }
