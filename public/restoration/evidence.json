@@ -9,7 +9,7 @@
     },
     "health-potions-research-de39f41": {
       "kind":"source", "revision":"de39f413ad4dfb0e7bbbae16745bebc3282717ff", "date":"2026-10-28",
-      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/issues/880#issuecomment-6480227672", "checks":["gear:health-potions"],
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/de39f413ad4dfb0e7bbbae16745bebc3282717ff/data/objects.xml", "checks":["gear:health-potions"],
       "method":"QAd0a182c6 freshly extracts selected SWF07ae4fc3: all three complete potion objects match runtime XML and pinned modified7.0 client, including50/100/200HP and Greater Soulbound. Inspected compiled Kithio consumption/Stats+Boost cap, modified7.0 consume-before-Sick-guard and client dispatch, fresh April27,2012 Wild Shadow50/100 item pages and February14,2012 Build122 Sick announcement. Reconciled PR176/620 and782 recovery.",
       "limitations":"Definitions are not deployment. Greater obtainability and independent target-era full-HP/Sick consumption/refund evidence remain tracked in880. Kithio lacks a Sick guard; modern Greater drops do not date2012 acquisition. Related forks are not independent witnesses; failed403/404 and initial FWS decompression attempt are not historical findings. No production balance, loot, authority or third-party code/assets changed."
     },

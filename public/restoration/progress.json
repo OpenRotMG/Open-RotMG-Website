@@ -5899,8 +5899,16 @@
             "label": "Original 123.5.1 client (SWF reference data)"
           },
           {
-            "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/880#issuecomment-6480227672",
-            "label": "Pinned definition/engine comparison, April2012 item pages and Build122 Sick announcement; deployment/consumption-history limits"
+            "url": "https://web.archive.org/web/20120427021641id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-health-potion",
+            "label": "April27,2012 capture: Minor restores50HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427030354id_/http://forums.wildshadow.com/wiki/realm-mad-god/health-potion",
+            "label": "April27,2012 capture: Health restores100HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing; no consumption/refund policy stated"
           }
         ]
       }
