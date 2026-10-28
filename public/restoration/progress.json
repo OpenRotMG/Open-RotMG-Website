@@ -2028,17 +2028,27 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Roaming Great Lizard with pursuit/wander, aimed/spread attacks, ring phase and repositioning; no established children or transformation.",
+        "expected": "MidSand level-six Great Lizard with movement and two selected fire-missile descriptors; no established children or transformation. Attack sequence, planewalk and reward policy remain reconstruction.",
         "differences": [
-          "Reward tiers, chances and private allocation use a later community comparator, not authenticated original-server rules."
+          "Current fixed 5000/2100/1000ms phases use random singles/pairs, twenty large-missile rings and planewalk. Compiled Kithio instead has proximity activation, a brief charge, seven delayed large-missile volleys, thirty small-missile rings and no planewalk. Trapped's randomized Cooldown and child-completing Timed engine do not establish our fixed phase durations.",
+          "Reward tiers, chances and private allocation retain PR311's qualified Trapped reconstruction, not authenticated original-server rules. Kithio specifies a different equipment/potion table.",
+          "The requested May2012 archive redirects to May14,2013, labelled11.1.0; its twelve-shot large ring is not a2012 witness. The Japanese page is last modified2021 and current RealmEye labels2024. None resolves target-build timing or planewalk."
         ],
         "unknowns": [
-          "Original habitat density, attack timing, random choices, planewalk behavior and rewards."
+          "Exact123.5.1 habitat density, elevation/home bounds, phase/target/cloak/random semantics, planewalk continuity and reward rates/private eligibility remain tracked in issue801. XML SpawnProb0.75 is not a measured spawn frequency."
         ],
         "sources": [
           {
+            "url": "https://web.archive.org/web/20130514134541id_/https://forums.wildshadow.com/wiki/realm-mad-god/great-lizard",
+            "label": "May14,2013 capture labelled11.1.0, not a2012 witness or target-build attack specification"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs",
+            "label": "Compiled primary reconstruction reference, not recovered original behavior"
+          },
+          {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L687-L717",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Community behavior/loot comparator; engine semantics and original rates differ"
           }
         ]
       }
