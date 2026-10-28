@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "madlab-pool-source-1e4332d": {
+      "kind": "source",
+      "revision": "1e4332dba867093cb9fab28f7eacd279b7291de0",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/1e4332dba867093cb9fab28f7eacd279b7291de0/src/world/lab.rs#L18-L58",
+      "checks": ["dungeons:mad-lab", "dungeons:mad-lab:coil-secret-and-pool-chain"],
+      "method": "Existing player pool sources persist off green actors; blue actors clear pool-owned Hexed/Speedy/Stunned and timed Hexed while preserving independently timed combat effects. Blue wins overlaps and terminal players lose pool ownership. Server PR1097 adds regression coverage only, not gameplay. Research and native bindings: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1097#issuecomment-6464633995",
+      "limitations": "Engineering reconstruction, not authenticated original pool geometry or cure mask. Selected 123.5.1 establishes Hexed rendering and actor identities, not server source separation. The dated coil predicate was already implemented; original Creation timing, low-health behavior and rewards remain unresolved. No historical or whole-dungeon acceptance upgrade."
+    },
+    "madlab-pool-regression-294c511": {
+      "kind": "regression",
+      "revision": "294c511beafceb8c9ac1d9930129afa72cb9b454",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40659313832",
+      "checks": ["dungeons:mad-lab", "dungeons:mad-lab:coil-secret-and-pool-chain"],
+      "method": "Two new lab_tests.rs tests cover actor-versus-rug effects, dry-ground persistence, blue source-aware remedy and independent timed-status expiry, player isolation, blue overlap precedence, pause and dead/death-pending/departing cleanup. All 209 local Rust tests, strict all-target Clippy, fmt, locked release, five Python tests and one Node test pass at clean 294c511. Normal PR composed-main CI passes 214 Rust tests, Clippy, fmt and QA lifecycle; existing coil/Creation regressions pass.",
+      "limitations": "Synthetic player positions, masks and clocks test the current engineering contract, not original server behavior or native combat-status cure. Initial focused compile exit101 from real ENOSPC remains failed; guarded terminal cache maintenance preceded the successful retry. Tests-only change, no gameplay or guard rewrite."
+    },
+    "madlab-pool-native-294c511": {
+      "kind": "native",
+      "revision": "294c511beafceb8c9ac1d9930129afa72cb9b454",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1097#issuecomment-6464633995",
+      "checks": ["dungeons:mad-lab", "dungeons:mad-lab:coil-secret-and-pool-chain"],
+      "method": "Clean before QAf50b5001 on c843c613 and after QA5bafca6e on 294c511 each pass 13 assertions with identical case 135ba68b, client 39acbfbf/Ruffle .16 and two fresh native Wizards: green pet appearance, weapon suppression, dry-floor persistence, blue appearance restoration/fire resumption and independent second-player conditions. Creation remains dormant and door sealed; both characters live. Walking pre-UP minima 150ms, firing 800/801ms; restored shots 10/12; cleanup errors empty.",
+      "limitations": "Prepared level20 initial stats, Energy Staff and secret-room positions, not earned entry or ordinary survival. No NPC/HP/RNG mutation, protection/refill, post-entry relocation or account replay. Five earlier native attempts remain failed/excluded. Timed combat-status mask is regression-only; partial-coil admission, bosses, ordinary rooms/acid, rewards, exits and whole-dungeon/history acceptance remain unverified. No post-merge native replay claimed."
+    },
     "crystal-native-a42b982": {"kind":"native","revision":"a42b9825bebb5a3287bbf0095df86048ce2d1814","date":"2026-10-28","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1087#issuecomment-6462115118","checks":["realm:crystal-prisoner"],"method":"Clean a42b9825, QAb600ad7d: 36 actual-client checks pass: Crystal lifecycle, Prisoner cycle/statuses, Steeds/Clones, minion Stasis/boss immunity, defeat cleanup. Defeat/allocation-bound bag, native Attack pickup, living same-character Nexus return; cold QA436518bc verifies SQLite inventory/revision/XP, 500 matching frame-hash ACKs, zero backend ERRORs/deaths.","limitations":"Prepared level20 stats/placement/gear, renewed Invulnerable and +100DEX aid are unearned. Not survival/balance, earned entry or authenticated 123.5.1 acceptance; historical differences remain. Probabilities/absent-player bag-access untested. Not post-merge 60e23ef2 or public-host acceptance. Crystal gameplay/loot unchanged; receipt-cap, lease, ownership, ACK, forbidden-method and permanent-death guards retained."},
     "crystal-research-3597b3e": {
       "kind": "source",
@@ -4134,9 +4161,9 @@
     "dungeons:davy-jones-s-locker:colored-key-door-chain": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:lantern-vulnerability-cycle": {"status":"passed","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3"]},
     "dungeons:davy-jones-s-locker:ship-trash-and-objects": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","davy-crates-source-babcc25","davy-crates-regression-babcc25","davy-crates-native-babcc25"]},
-    "dungeons:mad-lab": {"status":"not-run","evidence":["god-portals-regression-411c536","mad-lab-source-69806e2","mad-lab-acid-native-6115e97","mad-lab-secret-native-6115e97","portal-window-source-4d44727","instance-allocation-source-794eccf","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53"]},
+    "dungeons:mad-lab": {"status":"not-run","evidence":["god-portals-regression-411c536","mad-lab-source-69806e2","mad-lab-acid-native-6115e97","mad-lab-secret-native-6115e97","portal-window-source-4d44727","instance-allocation-source-794eccf","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
     "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-acid-native-6115e97"]},
-    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53"]},
+    "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
     "dungeons:beachzone": {"status":"not-run","evidence":["beachzone-source-b587298","portal-window-source-4d44727"]},
     "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
