@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "dwarf-family-native-a062294": {
+      "kind": "native",
+      "revision": "a062294804d3bc10034cf6c225e5e23e689e06b0",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1061#issuecomment-6460217444",
+      "checks": ["realm:dwarf-king"],
+      "method": "Clean QAce66a7c0 passes19 assertions over70850 game ms with client39acbfbf/Ruffle.16 on a private display. Natural Realm camp: initial HP/composition, all four actors pursue/activate/move and execute selected projectiles, unprotected native damage,185 Mage sine-position samples age0 to3449.99ms with max error0.000137 tiles, native Axebearer defeat/XP, ordinary return to MidForest and observed capped refill, then King defeat and over12 seconds without new camp members or duplicate XP. Reviewed native frames show the family,52XP/Quest Complete and a bag. Cold QA1dee51e7 confirms same living character, XP800 to878, inventory/revision1, one committed qualified quest, one King death log, SQLite integrity/foreign keys, no backend ERROR and all95 registered PIDs absent. Cleanup empty.",
+      "limitations": "Prepared level5 stats/gear/placement, direct scout and renewable60-second protection, not earned entry, multiplayer, eligible item acquisition, rate inference or full rendered-client/collision trajectory acceptance. Sine measurements are server positions during native combat. Retained failures: startup queue timeout f8c72021, overstrict already-in-range Mage movement b6238ba6 and no observed16-second refill after luring away43405a7d. Final case uses native pursuit and return to habitat, not spawn/kill cheats. Whole-feature gameplay stays not-run and history partial; no runtime policy changed."
+    },
     "dwarf-family-source-60c1225": {
       "kind": "source",
       "revision": "60c12250e220b1195ed47f776c127426719ac485",
@@ -3612,7 +3621,7 @@
     "realm:wasp-queen": {"status":"not-run","evidence":["midland-rewards-source-bf5425c","midland-rewards-regression-bf5425c","midland-rewards-native-bf5425c","wasp-research-d0eb5e6","wasp-native-64c4eab"]},
     "realm:shambling-sludge": {"status": "not-run","evidence": ["realm-loot-regression-e222284","realm-loot-native-1fa1986","sludge-source-794eccf"]},
     "realm:swarm": {"status":"not-run","evidence":["swarm-research-d0eb5e6","swarm-regression-68b6bba","swarm-native-68b6bba"]},
-    "realm:dwarf-king": {"status":"not-run","evidence":["dwarf-family-source-60c1225","period-loot-source-1f488df","period-loot-regression-1f488df"]},
+    "realm:dwarf-king": {"status":"not-run","evidence":["dwarf-family-native-a062294","dwarf-family-source-60c1225","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:horned-drake": {"status":"not-run","evidence":["realm-loot-regression-e222284","drake-research-c8520ba","drake-regression-c8520ba","drake-native-c8520ba"]},
     "realm:desert-werewolf": {"status":"not-run","evidence":[]},
     "realm:sandsman-king": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","sandsman-source-338b419","sandsman-regression-338b419","sandsman-native-8c7486b"]},
