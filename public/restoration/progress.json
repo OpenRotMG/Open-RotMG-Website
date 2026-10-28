@@ -3947,16 +3947,20 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain HP1000/DEF12; Red Fire80 plus zero-damage Green Star Slowed6s. Comparator five-shot fan and predictive slow shot are qualified expectations.",
-        "differences": [],
+        "expected": "Mountain HP1000/DEF12; Red Fire80/speed100/1100ms and Green Star0/speed70/2000ms/Slowed6s match selected and modified7.0 definitions. Build118 independently lists five red shots/gap10/range12/cooldown1s and predictive star/range10/cooldown0.65s, mountain movement/reproduction and Defense rewards.",
+        "differences": [
+          "Current linear prediction and chase7/stop4 differ from compiled Kithio angular-history prediction and Follow acquisition10/stop7. Fixed nominal cooldowns differ from Trapped's randomized initial and95–105% repeats; exact target behavior is unresolved.",
+          "Safe bounded regional births and equipment allocation are project reconstruction. Defense1.5% at180 damage follows Kithio, not modified7.0's7%/7%. Toxic Sewers was introduced in October2016; current Slime has no portal and does not drop Mad Lab."
+        ],
         "unknowns": [
-          "Original randomized cooldown/prediction, condition-hit details, population/rewards and portal association."
+          "Exact123.5.1 prediction/cooldown distribution, natural population/refill and reward odds/allocation; build118 corroboration does not establish target continuity.",
+          "Whole-feature gameplay remains not-run: earned traversal, sustained natural reproduction, native multiplayer reward eligibility and pickup/reconnect are not accepted by the bounded combat take. Exact six-second hit timing and predictive geometry remain unmeasured; see issue847."
         ],
         "sources": [
-          {
-            "url": "reference-data/client-123.5.1.swf",
-            "label": "Original 123.5.1 client (SWF reference data)"
-          }
+          {"url": "reference-data/client-123.5.1.swf", "label": "Original 123.5.1 client (SWF reference data)"},
+          {"url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L158-L179", "label": "Compiled Kithio Slime table; engine/version qualifications in evidence"},
+          {"url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/slime-god", "label": "May20,2012 build118 guide; earlier-version corroboration"},
+          {"url": "https://www.realmeye.com/wiki/release-history-2016#patch-27-7-x6", "label": "October11,2016 Toxic Sewers introduction; not target-era content"}
         ]
       }
     },
@@ -3994,15 +3998,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Djinn HP1000/DEF12, piercing White Bullet60; production122 says awards EXP. Qualified comparator supports invulnerable pursuit, ring phases and low-HP telegraphed terminal burst/death.",
-        "differences": [],
+        "expected": "Mountain flying Djinn HP1000/DEF12; White Bullet60/speed6/lifetime1.5s is MultiHit, not ArmorPiercing. Build122 awards EXP; period guide supports shielded pursuit, vulnerable ring phases and red-warning terminal burst/death. Qualified primary Speed roll1.5% at180 damage.",
+        "differences": [
+          "Retained Trapped-style reconstruction uses2500ms chase, five paired four-shot ring steps, below400HP and twelve-shot terminal ring after1000ms. Compiled Kithio instead uses2000ms Bullet/Wait, below50%HP and ten terminal shots; Shoot centers fixedAngle fans unlike Trapped RingAttack offsets. Earlier117.1.3 guide says three-second warning/20DEF, conflicting with both comparators/selected12DEF.",
+          "Kithio Idle-only max4/radius10/default60s reproduction is not implemented; regional bounded ecology remains. Nearby capped100XP and largest-contributor timed kill ownership differ from Kithio weighted contributor XP/LastHitter; safer gear allocation and period-adjusted pools remain reconstruction. Modified7.0 changes reproduction and Speed rates, not target-era authority."
+        ],
         "unknowns": [
-          "Original thresholds, phase timings/angles, XP amount and ownership, loot/population/portal policies."
+          "Exact123.5.1 thresholds, warning/phase clocks/angles, XP allocation, gear probabilities, population and portal continuity remain issue849. Neither source agreement nor the earlier-version guide authenticates these numbers. Current Djinn has no dungeon association. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/849#issuecomment-6474461317",
+          "PR1128 passes11 bounded native checks for natural admission, movement, shield/ring phases, one-second warning/twelve-shot terminal burst, defeat/100XP and no repeated XP, with a prepared Wizard and Invincible. Native damage/multiplayer hits, reproduction, multiplayer eligibility, successful potion acquisition, pickup/reconnect and earned travel remain unverified; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L278-L343",
+            "label": "Compiled primary Djinn table; Shoot/Reproduce/Suicide/DamageCounter/Loots semantics inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Djinn object normalizes identically to selected definition; not server AI authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/djinn",
+            "label": "May20,2012 archive explicitly describes117.1.3; broad behavior corroboration and three-second warning conflict"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "label": "February14,2012 Build122.0.1 EXP change; not exact ownership"
           }
         ]
       }
@@ -4015,15 +4039,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain Leviathan HP2000/DEF20, Aqua Missile70 and Blue Missile90; comparator supports chase/orbit/tangent movement, fan phases and predictive pairs. Period122 confirms distinct sound, not full AI.",
-        "differences": [],
+        "expected": "Mountain Leviathan HP2000/DEF20; Aqua70/speed6.7/lifetime1.7s and Blue90/speed8.5/lifetime1.8s. Build120 guide warns it shoots while Rogues are cloaked; February2012 lists Defense2.5% at360 damage. Build122 announces distinct sounds; selected hit/death IDs match modified7.0 XML.",
+        "differences": [
+          "Current Trapped-style chase/orbit/tangent6s and target-relative9/12/2-shot phases every1.5s differ from compiled Kithio's retreat/orbit/follow sequence and fixed-angle9/12/12 aqua pattern for4.4s, then4.5s of offset predictive blue pairs. Nominal300ms cadence does not reproduce either engine's exact tick/jitter or angular-history prediction.",
+          "Build120 guide lists Blue95, but authoritative selected XML says90. Kithio's weapon/HP/MP-only loot and modified7.0's7% Defense at1% damage disagree with period2.5%/18%; current equipment pools/allocation and weighted bounded population are qualified reconstruction."
+        ],
         "unknowns": [
-          "Original invisibility exception policy, timings/geometry, sound playback and complete population/reward/portal policy."
+          "Exact123.5.1 phase geometry/timing, prediction, elevation/home tether, density/respawn, XP-cap continuity, complete gear odds/allocation and portal continuity remain issue850. The build120 cloak warning supports continued shooting, not proof of every original acquisition/movement rule.",
+          "PR1124 verifies bounded natural admission, cloaked combat, native projectile groups, defeat/capped195XP and durable living save with prepared stats/gear/Invulnerable, not full acceptance. Distinct sound names/client load-play code are not audible playback proof. Earned traversal, ordinary-risk damage, native multiplayer rewards, pickup/reconnect and full history remain unverified."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
+            "label": "Compiled/registered primary comparator; conflicting phase and reward policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524033343id_/http://forums.wildshadow.com/wiki/realm-mad-god/leviathan",
+            "label": "Build120 guide: cloaked shooting warning; incomplete/conflicting attack table"
+          },
+          {
+            "url": "https://web.archive.org/web/20120203021407id_/http://forums.wildshadow.com/wiki/realm-mad-god/leviathan",
+            "label": "February3,2012 capture: Defense2.5% at18%/360 damage; earlier-version testimony"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "February14,2012 build122 announcement: distinct sounds, not full AI"
           }
         ]
       }
