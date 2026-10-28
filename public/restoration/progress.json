@@ -3381,15 +3381,34 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Single MidSand Nomadic Shaman6c6 with Green Magic and Blind1.5s Green Spinner; no invented Nomad variants.",
-        "differences": [],
+        "expected": "Single MidSand Nomadic Shaman6c6, HP140/DEF1, Green Magic20 and Green Spinner30 with Blind1.5s. Primary reconstruction: aimed three-shot11-degree magic fans in3100ms phases, single spinners in2200ms phases,500/700ms entry delays/cooldowns and one public Magic Potion4% roll.",
+        "differences": [
+          "Rust retains chase(stop2), a home leash and bounded relative-SpawnProb population with MidSand area divisor200. Compiled Kithio instead uses StayAbove(0.8,55)/Wander(0.7), divisor300 and explicit Shaman weight0.25; original elevation and selector semantics are not recovered.",
+          "The chosen numeric attack schedule uses existing50ms Rust deadlines, not a literal replay of Kithio's decrement/test tick ordering. Older Trapped instead has1000ms phases, randomized400ms cooldowns,15-degree fans and equipment/potion pools. Neither comparator authenticates123.5.1."
+        ],
         "unknowns": [
-          "Original firing timing and patterns, density, Blind application and drops."
+          "Exact123.5.1 movement, density, phase/clock quantization, potion odds and multiplayer reward eligibility remain unresolved in issue833. Prepared encounter checks do not establish earned discovery, natural-risk survival, item acquisition or historical acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L682-L699",
+            "label": "Compiled primary Shaman table; Shoot/Cooldown/TimedTransition and shared ItemLoot semantics checked"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "Modified7.0 full Shaman object equals selected definition; not server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610073636id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nomadic-shaman",
+            "label": "Period guide marked122.0.1 supports projectiles/Blind1.5s/MidSand, not clocks or drops"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/nomadic-shaman",
+            "label": "Current history explicitly dates Blind-to-Slowed and sprite changes to April2024, not2012"
           }
         ]
       }
@@ -3447,7 +3466,7 @@
         "expected": "Ghost Archer/Warrior/Mage/Rogue/Paladin/Knight0x662–667 are retired Ghost King escorts and should not spawn in 123.5.1. Wiki stat blocks last updated at build 115 still list them as Ghost King reproduction, while the same 2012 page text describes the later large-ghost evaluation fight and pinned comparators use Ghost Master and Small/Medium/Large Ghosts.",
         "differences": [],
         "unknowns": [
-          "The exact retirement build: official Build 117 notes (June 2011) list new Ghost King behaviors, and a modern RealmEye page names Build 118 (July 2011). No 2012 capture directly proves their absence."
+          "Exact retirement build remains unresolved after reading the original June 18, 2011 Build 117 and July 15, 2011 Build 118 announcements. The former names new Ghost King behaviors; neither names the six escorts. Modern RealmEye's Build 118 attribution is not independently established, and the mixed-era May 2012 wiki capture does not prove absence. Research disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/836#issuecomment-6472088623"
         ],
         "sources": [
           {
@@ -3472,7 +3491,23 @@
           },
           {
             "url": "https://web.archive.org/web/20250212161750/https://www.realmeye.com/wiki/archived-enemies",
-            "label": "Modern RealmEye archived enemies: Build 118 replaced the six escorts with Ghost Master and Small/Medium/Large Ghosts"
+            "label": "Modern RealmEye attributes replacement to Build 118; precise contemporary support remains unresolved"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MonstersCXML.dat",
+            "label": "Modified 7.0 comparator: all six complete legacy escort definitions match selected XML; no Terrain or SpawnProbability, not deployment proof"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.GhostKing.cs",
+            "label": "Compiled and reflection-registered primary reconstruction uses only Ghost Master and Small/Medium/Large Ghosts"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605135133id_/http://forums.wildshadow.com/node/3772",
+            "label": "Original June 18, 2011 Build 117 announcement names new Ghost King behaviors, not escort retirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134308id_/http://forums.wildshadow.com/node/4820",
+            "label": "Original July 15, 2011 Build 118 announcement lists general monster improvements, not these identities"
           }
         ]
       }
@@ -3486,11 +3521,31 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Weretiger0x635, Wereleopard0x636, Werepanther0x639 and owner Werelion0x637; differentiated attacks, movement and owner relationship.",
-        "differences": [],
+        "differences": [
+          "Current Trapped-based camps initially roll 1..3 Tigers, 1..2 Leopards and 1..2 Panthers, then refill empty owned slots every10s. Compiled Kithio Spawn truncates initial .5 fractions to0/1/1 and caps lifetime births at1/2/3 on23/9/15s clocks, not alive-child replacement.",
+          "Current Tiger/Leopard chase-orbit choices are equal every500ms, versus Trapped's per-tick choices. Panther attempts target-position Planewalk every7s; Kithio uses a200ms high-speed jump and4s attack state. Camp/home/clear-ground guards are reconstruction policy.",
+          "Current Tiger triple shots and Lion alternating projectile types differ from Kithio's predictive single Tiger shot and Lion hidden-player eight-ray choreography. Current loot uses Trapped coefficients with different allocation semantics; Kithio and dated follower guides list HP-only Tiger/Leopard and MP-only Panther."
+        ],
         "unknowns": [
-          "Target initial/replenishment counts, random-choice probabilities, Planewalk policy and loot rates."
+          "123.5.1 continuity of initial/replenishment counts and clocks, choice cadence, Panther teleport versus dash and owner limits, Lion hidden-player attacks, loot allocation/odds and Spider Den10% versus mixed-era5%. Research disposition and remaining checks: server issue837."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L503-L600",
+            "label": "Compiled and registered primary reconstruction reference; original123.5.1 AI not authenticated"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MidCXML.dat",
+            "label": "All four complete objects normalize identically to selected123.5.1; modified7.0 client agreement is not server AI evidence"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Weretiger",
+            "label": "March17,2012 last-modified follower guide: three17damage cover-piercing shots; parent page changed2018"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Werepanther",
+            "label": "February25,2012 last-modified follower guide: occasional rapid approach, not exact teleport/dash timing; parent population/rates not dated to target"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -3593,11 +3648,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Sand Phantom0x6c5 and Wisp0x7f22, distinct selected data; transformation is comparator-supported, target continuity policy unresolved.",
-        "differences": [],
+        "expected": "Sand Phantom0x6c5 and Wisp0x7f22 retain distinct selected definitions. Compiled Kithio supplies a proximity-triggered Phantom and retreating/wandering Wisp reconstruction, not recovered123.5.1 AI.",
+        "differences": [
+          "Fresh selected HP and preserved damage attribution/population ownership are deliberate server continuity policy. Kithio replaces without transferring damage. Neither source proves original kill-credit/reward continuity.",
+          "The bounded correction adopts nominal800ms Wisp movement phases/6500ms return and proximity4.4, not a tick-exact Kithio engine port. Existing Phantom chase and500ms/range10 non-predictive fire differ from Kithio's0.85 motor and400ms/range8/predictive0.4 schedule; current home-leash and authority guards remain."
+        ],
         "unknowns": [
-          "Original transformation timing and triggers, and continuity of HP, kill credit and rewards.",
-          "The community comparison uses five- and ten-second transitions; the original timings are unresolved."
+          "Exact123.5.1 trigger, transition timing, HP/credit/reward continuity and loot remain unresolved in issue841. Trapped uses five-/ten-second chasing forms; Kithio uses proximity4.4 and nominal6.5-second return with800ms retreat/wander states. Engine pre-decrement and state execution affect actual timings.",
+          "March17,2012 Wildshadow capture (content122.0.1) corroborates both forms' stats/projectiles, not AI. Japanese wiki6.5-second text is not dated to target; its chase description conflicts with Kithio/modern RealmEye retreat."
         ],
         "sources": [
           {
@@ -3606,7 +3664,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Older five-/ten-second comparator, not independent target-era AI"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L700-L737",
+            "label": "Compiled primary reconstruction; not authenticated original AI"
+          },
+          {
+            "url": "https://web.archive.org/web/20120317154006id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/sand-phantom",
+            "label": "March2012 capture, content122.0.1: both forms' stats/projectiles only"
           }
         ]
       }
@@ -3619,11 +3685,14 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Ordinary Red, Purple and Green Gelatinous Cubes inhabit ShorePlains and have distinct projectiles. They are separate from Cube God followers.",
-        "differences": [],
+        "expected": "Ordinary Red/Purple/Green Gelatinous Cubes (0x60e-0x610), separate from Cube God followers: ShorePlains, 70HP/0DEF, wandering and 2/1/5 projectiles. Complete selected definitions match pinned modified 7.0 XML; period guides list4XP, current ceiling-rounded award is5.",
+        "differences": [
+          "Current radius5/nonpredictive aiming differs from compiled Kithio radius8/predictive0.2; global bounded replenishment and home-limited wandering do not reproduce its local densityMax5/radius10 reproduction and randomized movement. Trapped instead has randomized attack cooldowns. Current5XP versus guide4XP follows the shared ceiling-rounding policy already qualified by progression research, not a cube-specific repair. These are reconstruction choices, not recovered original AI."
+        ],
         "unknowns": [
-          "Original production spawn counts/density and use of XML Spawn metadata.",
-          "Original cooldown randomization, movement/spread policy and potion/portal probabilities.",
+          "Original production spawn counts/density and XML Spawn policy. Trapped uses ShorePlains area/150, clipped Gaussian groups and Bandit/Cube weights0.4/0.2/0.2/0.2; current relative XML selection and legal placement are reconstructed.",
+          "Original cooldown variance, movement/spread and post118.7.4 potion/portal rates. March5,2013 Japanese pages explicitly limit potion4%/PirateCave3% to through118.7.4 and leave later rates unknown; modified7.0 supports current4%/4% potions and1% portal, not authenticated123.5.1 probabilities.",
+          "Native reward pickup/duplicate rejection, cube-generated Pirate Cave entry and full-feature acceptance remain tracked in server issue842; bounded combat receipts are not whole-feature acceptance.",
           "Classic Worlds 1 to 3 use an engineered eight-tile moist coastal band, not recovered original polygon boundaries."
         ],
         "sources": [
@@ -3641,11 +3710,23 @@
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ShoreCXML.dat#L177-L255",
-            "label": "Modified 7.0 client comparison: all three cubes use ShorePlains"
+            "label": "Pinned modified 7.0 client: all three complete cube objects normalize identically to selected definitions"
           },
           {
             "url": "https://wikiwiki.jp/rmd/試験的ページ/モンスター#ShorePlains",
-            "label": "Period Shore Plains listing and September 2012 image"
+            "label": "Shore Plains family listing; September2012 image date does not date all page claims"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Shore.cs#L168-L199",
+            "label": "Compiled/registered primary cube table; Shoot/Cooldown/Reproduce semantics qualified in evidence receipt"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Red%20Gelatinous%20Cube",
+            "label": "March5,2013 individual guide: 70HP/4XP/wandering; numerical rates explicitly stop at118.7.4"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Shore.cs",
+            "label": "Modified7.0 comparator: independent4% potions and1% PirateCave; not original probability proof"
           }
         ]
       }
