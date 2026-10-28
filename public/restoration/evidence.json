@@ -19,6 +19,18 @@
       "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/817#issuecomment-6462045738 . Additional Trapped593e4908 LotLL/LootDef/LootBehavior inspection finds a wandering stub, ordered first-success potion draws and >100 raw-damage encounter-wide distribution, not full encounter evidence. Japanese Protection Crystal page reports eight orbiting crystals/no drops and HP5000, conflicting with selected6000/May2012 capture.",
       "limitations": "The current Japanese page reports October11,2012 modification, not authenticated period continuity. Neither source resolves original shielding/clocks/populations/replenishment/eligibility/rates or justifies changing selected definitions. No imports or historical promotion."
     },
+    "kage-research-f897f74": {
+      "kind":"source", "revision":"f897f745d818360f0e6f3e23d13ab1157d27cab6", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/f897f745d818360f0e6f3e23d13ab1157d27cab6/src/world/manor_entry.rs", "checks":["realm:kage-kami"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1086#issuecomment-6462022634 . Reconciled PR441/455/457. Kithio compiled Highland/SetPieces lack Kage; modified7.0 placement requests two HighForest/HighPlains sites. Selected Kage7000/120 and Mine500/150 differ from modified7.0 3000/63 and200/150, while all three projectile definitions agree. March/April2012 build notes establish grave reveal and probabilistic Manor. Additional vanilla HealthTransition uses <=90%, unlike current <90%; DropPortalOnDeath/MathUtils confirm fractional0.5 RNG. Later quest dictionary still requires the missing XML Quest flag; current arrow/closure exclude Kage.",
+      "limitations":"Not historical acceptance or proof of historical absence. May2013 guide describes stationary human fire and later stats; current wandering and exact target threshold/timings/mines/placement/reward rates remain reconstruction. Related servers are not independent historical votes. No reference code/assets imported or production behavior changed; precise remainders stay issue826."
+    },
+    "kage-natural-native-5e9ad95": {
+      "kind":"native", "revision":"5e9ad95fc9a4e461d5a9c45135213861dc028f68", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1086#issuecomment-6462022634", "checks":["realm:kage-kami"],
+      "method":"Clean QAd5cb5bd9 passes19 assertions with client39acbfbf/Ruffle.16: two ordinary generated graves, proximity stays hidden, native reveal, reveal/flight protection, human wandering/flying pursuit, Shot/Spinner families, four-spike mine detonation/retirement, native Sick before flight plus Paralyzed/Confused, defeat and once-only XP18050to18245, one Manor portal and same living character2 admitted. Sampled entry clocks show2000/5000/4000ms; Realm samples span0to38650ms, not the destination-relative final game_ms. Cleanup errors empty.",
+      "limitations":"Prepared level20 legal stats/gear, scout-assisted initial placement and one60s Invulnerable after exposure, not earned traversal/survival, multiplayer reward eligibility, pickup/reconnect or original probabilities. Manor screenshot shows loading title, not dungeon acceptance. Precommit QAfdb2c664 also passed19; published encounter image uses its identical case/runtime tree. Invalid-stats, terminal-lease and incorrect projectile-view-oracle failures are retained; native mine status outcomes replaced the false oracle without changing visibility/ACK/lease guards. Whole-feature gameplay remains not-run/history partial; wider acceptance stays issue826."
+    },
     "lost-lands-native-attempt-ee5f323": {
       "kind": "native",
       "revision": "ee5f323ada12a3faa537f0cdd9630015b2a99d71",
@@ -3906,7 +3918,7 @@
     "realm:hermit-god": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","hermit-loot-regression-22ecae7","hermit-inland-regression-ffd8a45","hermit-inland-native-ffd8a45","hermit-drop-sites-regression-bf7475d","hermit-leash-source-cf5976f","hermit-leash-regression-cf5976f","hermit-leash-context-native-cf5976f"]},
     "realm:ghost-ship": {"status":"not-run","evidence":["davy-source-5ca33c3","davy-regression-5ca33c3","davy-native-5ca33c3","quest-event-source-322c425","quest-event-regression-322c425","realm-completion-regression-a972cb3"]},
     "realm:crystal-prisoner": {"status":"not-run","evidence":["crystal-release-native-b98ad3e"]},
-    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c"]},
+    "realm:kage-kami": {"status":"not-run","evidence":["kage-cover-source-820e341","kage-cover-regression-820e341","kage-cover-native-820e341","kage-phase-clock-source-20c2493","kage-phase-clock-regression-20c2493","kage-phase-clock-native-20c2493","kage-phase-clock-integration-f27fc4c","kage-research-f897f74","kage-natural-native-5e9ad95"]},
     "realm:pirates": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:night-elves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:undead-dwarves": {"status":"not-run","evidence":["period-loot-source-1f488df","period-loot-regression-1f488df"]},
