@@ -1,6 +1,44 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "combat-regression-6014fce": {
+      "kind": "regression",
+      "revision": "6014fce2d3324f09dfac6be4ec93f82ec81c3349",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071#issuecomment-6460817954",
+      "checks": [
+        "realm:shoot-and-take-damage",
+        "access:combat-status-feedback",
+        "realm:area-damage-feedback"
+      ],
+      "method": "Exact-head CI40632621111 passes200 Rust tests, strict all-target Clippy, formatting, Python checks and QA lifecycle. Five synthetic combat regressions cover condition-vs-HP protection/timers, once-only acknowledged hostile hits and rejected/expired snapshots, strict AOE boundary/protection/defense rounding, special trajectory/parity/return samples, cover/MultiHit distinct targets and half-open Park-Miller draws.",
+      "limitations": "Unit/synthetic fixtures, not native AOE/effect/ACK-loss presentation, original-server arbitration or exhaustive geometry/UI acceptance. Initial illegal-stat/missing-shot-provenance fixture failures are preserved; runtime guards were not relaxed. Only test code differs from native-tested6474dfea."
+    },
+    "combat-native-6474dfe": {
+      "kind": "native",
+      "revision": "6474dfeaabbe15980ee741ba881aae7ec45d0fa0",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071#issuecomment-6460817954",
+      "checks": [
+        "realm:shoot-and-take-damage",
+        "access:combat-status-feedback"
+      ],
+      "method": "Clean QAe9fbb5f9 passes7 native checks across29600 game ms with client39acbfbf/Ruffle.16. Real Arachna/web hits apply Weak+Slowed through Invulnerable atHP670; ordinary staff fire admits16 paired shots; protection expiry permits HP480; later Invincible prevents new hits and existing effects expire, with ordinary regeneration toHP534. QA590a7356 verifies persisted living Wizard/staff, database integrity,9 owned child exits, no backend ERRORs and clean cleanup. Case03809b36, runner71fcd889, controllere0dba469; raw frames/receipts retained and published crop bytes verified.",
+      "limitations": "Prepared legal level20 stats/gear/placement and temporary Invulnerable then Invincible, not earned progression, native AOE/exhaustive trajectories, immune/dying-target UI, pause/unpause or isolated/combined Hexed rendering. Build deadline, short protection, refused native teleport and synthetic fixture failures remain failed. No shot-placement/ACK/lease/durability guard relaxation; all three whole-feature results remain not-run and historical partial."
+    },
+    "combat-source-6e52062": {
+      "kind": "source",
+      "revision": "6e520629ba6d08fd8fbad8602899c2c3e5c68efe",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/6e520629ba6d08fd8fbad8602899c2c3e5c68efe/src/world/native_hits.rs",
+      "checks": [
+        "realm:shoot-and-take-damage",
+        "access:combat-status-feedback",
+        "realm:area-damage-feedback"
+      ],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/789#issuecomment-6454241310 . Selected 123.5.1 and modified 7.0 client comparison; compiled Kithio Player/StatsManager/Projectile/AOE handler checked against its project file. Pins trajectory/parity, half-open RNG, defense truncation, strict AOE radius and Hexed icon gating. PR1071 fixes Invulnerable projectile conditions without changing HP protection, ACK snapshots or native shot placement policy; prior PR289/426/824 are not duplicated.",
+      "limitations": "Source inspection, not gameplay acceptance or authenticated original-server arbitration. Kithio Wavy and attack formulas conflict with the selected client. The 2013 Steam guide was edited in 2016 and cannot date its conflicting 1/8 floor to the target build. No comparator source or assets copied."
+    },
     "ghost-smallgroup-native-168cea1": {"kind":"native","revision":"168cea1d882841f732a973c8cd7cfadf541afe1e","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821","checks":["realm:ghost-king"],"method":"Clean QAa04845dd passes10 checks over59600 game ms: measured8104HP evaluation loss selects SmallGroup,3Small+3Medium first wave, Company total12 with one Master, native Master release/final defeat and500XP once. Client39acbfbf/Ruffle.16; case2a743160; cleanup empty and scratch reclaimed.","limitations":"Prepared legal-base-stat level20 Warrior/gear, one+100 temporary test attack modifier, protection and ordinary Berserk helm; generated Realm tower, not earned entry or unprotected survival. This exact older case/revision is retained, not relabeled as final-case execution. Every-site population, probabilities and history are not accepted."},
     "ghost-mob-native-b258c54": {"kind":"native","revision":"b258c54e1b41b0c065797d7c30c6edd74bcf0e4c","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821","checks":["realm:ghost-king"],"method":"Clean QA920369eb passes10 checks over80100 game ms: measured24180HP loss selects Mob,3Small+3Large first wave, Company total12, native Master release/final defeat and500XP once. Client39acbfbf/Ruffle.16; case169170c4; cleanup empty and scratch reclaimed. Earlier1992f98b admitted only five first-wave ghosts because a wall blocked one landing; current admission guards remain.","limitations":"Prepared legal-base-stat level20 Warrior/gear, one+100 temporary test attack modifier, protection and ordinary Berserk helm. Generated tower, not earned progression, every-site six-birth guarantee, probability study or historical acceptance. The older passing case is revision-bound; failed input/fixture attempts remain excluded."},
     "ghost-huge-native-8e122d1": {"kind":"native","revision":"8e122d1647a077f08283c9d7153bdf13c4c809a8","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821","checks":["realm:ghost-king"],"method":"Clean QAc116a6ee passes19 checks over234650 game ms: two native Warriors remove37874HP and select HugeMob; two3Small/3Large waves precede Company, totaling6Small/2Medium/9Large/oneMaster. At Wait+128200ms the100000HP Master remains; by+141250ms Actual King replaces the shielded King and nearby owned ghosts disappear withoutXP. Two contributors defeat Actual King and get private bags; noncontributor cannot see/pick them. Native walking/drag acquires2648, empty-slot repeat cannot duplicate it, and ordinary Nexus reconnect retains it. Cold QAd237dd79 confirms exact inventory/revision2, three alive/no deaths, quick_checkOK, no FK violations/serverERRORs and owned PIDs gone. Cleanup empty/reclaimed; client39acbfbf/Ruffle.16; final caseac7169ee.","limitations":"Prepared legal-base-stat level20 gear/protection and one+100 temporary test attack modifier per fighter; supplied Dexterity rings/effusion and native Berserk helm, not earned progression or ordinary survival. Actor cleanup does not delete in-flight arrows. One scene/loot roll does not certify probabilities, all blocked landing sites, original clocks/geometry/density/rewards or whole-feature acceptance. Canvas startup, refused native teleport/overlapping modifiers, evaluation-window/threshold, duplicate-Realm fixture and capture-schema failures are retained, not passes. No runtime/ownership/physics/ACK/lease policy changed."},
@@ -3561,14 +3599,16 @@
     "realm:realm-closure": {"status": "not-run","evidence": ["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115","closure-reward-regression-ebf04d1","castle-arrival-regression-ece8d95","castle-protocol-native-ece8d95","replacement-preparation-source-794eccf"]},
     "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":["walk-dodge-source-5ee46b7","walk-dodge-native-5ee46b7","quicksand-native-5ee46b7","walk-dodge-collision-native-59e9f64","native-client-policy-a6e6b21","native-client-policy-regression-a6e6b21","native-client-policy-public-a925e79","movement-combat-source-4992445","selected-client-ui-source-2bf948c","native-movement-source-4e3c253","native-movement-regression-4e3c253","native-movement-native-dec809c","collision-slide-source-6b253a1","collision-slide-regression-6b253a1","collision-slide-native-6b253a1"]},
-    "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445"]},
-    "access:combat-status-feedback": {"status":"not-run","evidence":[]},
+    "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445","combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe"]},
+    "access:combat-status-feedback": {"status":"not-run","evidence":["combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe"]},
     "realm:area-damage-feedback": {
       "status": "not-run",
       "evidence": [
         "paused-area-source-a886831",
         "paused-area-regression-a886831",
-        "paused-area-native-a886831"
+        "paused-area-native-a886831",
+        "combat-source-6e52062",
+        "combat-regression-6014fce"
       ]
     },
     "realm:environmental-hazards": {"status":"not-run","evidence":["ground-cooldown-regression-58f4a08","ground-cooldown-native-58f4a08","environmental-hazards-source-59e9f64","environmental-hazards-native-2e54621","environmental-hazards-pools-sinking-native-e82e77c"]},

@@ -1444,9 +1444,11 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
-        "differences": [],
+        "differences": [
+          "PR1071 fixes the reproduced Invulnerable projectile-effect mismatch while preserving HP immunity, once-only hit snapshots and current native shot placement policy. Prepared native and synthetic boundary checks do not accept the whole combat feature. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071"
+        ],
         "unknowns": [
-          "Complete special trajectories, cover/MultiHit cases, defense rounding, RNG and acknowledgement arbitration."
+          "Original-server RNG and hit/ACK arbitration remain unresolved. Selected-client trajectory/parity, RNG and defense rounding are source-reviewed in #789; exhaustive native trajectory/cover/MultiHit combinations remain unaccepted."
         ],
         "sources": [
           {
@@ -1461,10 +1463,17 @@
             "expected": "Particles, actual damage text, status names/icons and paused presentation must correspond to real state.",
             "acceptance": "Apply and expire overlapping effects, hit ordinary/immune/dying targets and pause/unpause. Avoid invented icons and duplicated prediction feedback; selected Hexed icon gating needs care.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Native immune/dying-target presentation, pause/unpause and isolated/combined Hexed rendering remain unaccepted. The selected client lists a Hexed icon but excludes Hexed from its outer icon-render gate; that entry alone is not a presentation pass."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/GameObject.as",
+                "label": "Selected 123.5.1 damage/effect prediction and icon-render gate; not original-server arbitration"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -1476,7 +1485,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original server protection and acknowledgement timing policy; complete area-effect and ACK duplication/loss coverage."
+              "Original-server protection and ACK timing remain unresolved. The selected client uses a strict radius boundary; compiled Kithio's AOE ACK handler is TODO, not an original timing specification. Native exact-boundary/effect and ACK duplication/loss presentation remain unaccepted."
             ],
             "sources": [
               {
