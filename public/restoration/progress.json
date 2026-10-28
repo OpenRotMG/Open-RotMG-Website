@@ -6161,17 +6161,32 @@
       "category": "gear",
       "icon": "assets/player/coral-juice.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Individual restorative drinks, Coral Juice dual restoration, Healing Ichor, range-ten Snake Oil/Pollen Powder; include Beachzone compound boost/intoxication cocktails. Wine Cellar drinks do not implicitly cause Drunk.",
-        "differences": [],
+        "expected": "Ten wines restore150 HP or MP without Drunk, except Fire Water230HP; Ichor150 HP, Coral100 HP+100 MP, Snake Oil100 HP/Pollen100 MP within range10 including self. Four Beach cocktails each boost two selected stats and apply Drunk15s; selected Lime boosts last30s, the others20s.",
+        "differences": [
+          "All18 selected drink definitions match recovered123.5.1 and modified7.0, but the ten wines have no current production loot candidates. Prepared consumption does not establish ordinary acquisition.",
+          "Kithio halves nova range; modified7.0/current reconstruction use full range. May2013 Beach wiki says Lime20s versus selected/7.0 XML30s. Preserve selected definitions and current authority rather than importing conflicting comparator rules."
+        ],
         "unknowns": [
-          "Production loot/distribution, historical range/self/resource rejection semantics."
+          "Exact target-era drop schedules and ordinary wine acquisition; historical self/range-edge/recipient eligibility and full-resource/Sick/Quiet consumption or refund; Lime20-versus30s continuity. Bounded prepared gameplay is separate from full acquisition/history acceptance. Research and remaining work: server issue885."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "All18 complete drink objects match selected123.5.1; modified7.0 agreement is not original-server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162737id_/http://forums.wildshadow.com/wiki/realm-mad-god/wines",
+            "label": "May28,2012: ten wines, Fire Water230HP/others150HP or MP; Cellar and Castle minion drops, not exact probabilities"
+          },
+          {
+            "url": "https://web.archive.org/web/20130516012303id_/https://forums.wildshadow.com/wiki/realm-mad-god/beach-party-madness-drinks",
+            "label": "May2013 retrospective August2012 event account; Lime20s conflicts with selected30s"
           }
         ]
       }
@@ -6207,15 +6222,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "100 HP heal, conditional Speedy clear when Hexed, then negative-condition removal; exact historical negative set/order consequences unresolved.",
-        "differences": [],
+        "expected": "Heal 100 HP before cleansing, so Sick blocks that use's heal. Clear Speedy only when Hexed, then clear Quiet, Weak, Slowed, Sick, Dazed, Stunned, Blind, Hallucinating, Drunk, Confused, Paralyzed, Bleeding, Armor Broken and Hexed. Preserve other buffs; the selected client restores its class texture when Hexed clears. Ineffective full-HP/Sick uses consume in this reconstruction.",
+        "differences": [
+          "Compiled Kithio supplies the 14-effect cleanse list but omits the Sick heal guard and conditional-clear activation. Selected XML order and the February 2012 Sick rule take precedence; modified 7.0 implements both guards. The later client restores skins instead of the selected client's objectType texture."
+        ],
         "unknowns": [
-          "Historical negative-condition set, Sick/heal ordering and transformation presentation restoration."
+          "Independent target-version evidence for the exact cleanse mask and ineffective-use consumption/refund remains missing. The June 2012 status page predates Hexed and also lists enemy Stasis and attack Armor Pierce, so it is not an exact player cleanse contract. Track server issue887.",
+          "Prepared native checks are not earned Coffin/Lord Ruthven acquisition or exhaustive acceptance of every hostile condition, green-pool reapplication and multiplayer scope."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L14-L86",
+            "label": "Compiled primary reconstruction:14-effect NegativeEffs, not independently authenticated official behavior"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/player/Player.UseItem.cs#L851-L903",
+            "label": "Modified7.0 comparator guards Heal with Sick and conditionally clears Speedy; not a2012 specification"
+          },
+          {
+            "url": "https://web.archive.org/web/20120417215230id_/http://forums.wildshadow.com/wiki/realm-mad-god/holy-water",
+            "label": "April17,2012 capture:100HP and removal of negative effects; no exact mask or Sick ordering"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June13,2012 capture: Sick cannot be healed; positive Speedy/Berserk and negative effects, before MadLab/Hexed"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1#original",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing"
           }
         ]
       }
@@ -6269,8 +6307,8 @@
         "expected": "The normal soulbound XP Booster doubles XP until level 20 or death. It does not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Original repeated-use, reconnect and level-20 crossing behavior.",
-          "Was the separate XP Booster Test item ever distributed?"
+          "Original repeated-use consumption, reconnect persistence and level-20 kill/queue splitting remain unverified. Duplicate refusal, durable boost state and whole-crossing-award doubling are reconstruction choices, not authenticated original boundaries.",
+          "No distribution witness for XP Booster Test (0xc43) was established from the selected XML, 123.5.0 production/testing notes or inspected comparators. Its presence does not prove availability; it remains unsupported. Modified 7.0 timers must not be imported into 123.5.1."
         ],
         "sources": [
           {
@@ -6280,6 +6318,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L6231-L6258",
+            "label": "Modified 7.0 comparator: added timers are not target-version rules"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+            "label": "August 25 / September 5, 2012 testing notes; no Test-item distribution claim"
           }
         ]
       }
@@ -6407,19 +6453,30 @@
       "category": "style",
       "icon": "assets/player/black-cat.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "All target-era pet choices and generators, following, persistence and loss/transfer behavior, including Baby as one companion. Historically deployed roster, acquisition and exact lifecycle remain qualified; modern feeding/fusion is not imported.",
-        "differences": [],
+        "expected": "Target-era companions, generators, following, persistence and loss/transfer behavior, including Baby. Selected definitions contain 66 generators; this is not a historically obtainable roster. Modern feeding/fusion is excluded.",
+        "differences": [
+          "Source inspection finds generic owner-follow/toggle behavior for Beach Ball, not buddy tossing, and one saved selection rather than Valentine's reported multiple hearts. These special behaviors are not accepted by the generic summon checks."
+        ],
         "unknowns": [
-          "Complete obtainable pet roster, seasonal shops, and original loss/transfer rules.",
-          "Original following distances, replacement and continued ownership after seasonal sales.",
-          "Was Beach Ball Generator obtainable in 123.5.1, and how did buddy play work?"
+          "Which of the 66 selected generators were actually obtainable in 123.5.1? The June 10, 2012 forum capture lists 34 known pets and explicitly says some were unreleased; the modified 7.0 catalogue adds later pets.",
+          "Complete target-build acquisition, manual shop rotations, seasonal retention and original loss/transfer exceptions remain tracked in server issue893. Prepared generator fixtures do not prove acquisition.",
+          "Exact original following/warp distances, cooldown scope and special Valentine behavior remain unresolved; the later PetFollow comparator differs from this reconstruction.",
+          "The preserved event table dates Beach Ball's 700 Gold sale to August 16–21, 2012, before 123.5.1. Retained use in the target build and buddy-play routing/range/timing still need period evidence and dedicated gameplay checks."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610080612id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/pets",
+            "label": "June 2012 forum capture: unreleased pets, reusable generators, manual shop rotation and consumable event pets"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events",
+            "label": "Preserved event table: Beach Party Madness, August 16–21, 2012"
           }
         ]
       }
@@ -6485,15 +6542,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed textile patterns, encoded scale variants, native previews, application and persistence in both texture channels. Seasonal possession is distinct from permanent shop sale; complete target roster/rendering remain unverified.",
+        "expected": "Selected 123.5.1 has71 pattern pairs (142 items): Large selects clothing/Tex1, Small accessory/Tex2; encoded high byte chooses4x4/5x5/9x9/10x10 atlas, not avatar scale. Verify native preview/application, once-only consumption, other-channel preservation and persistent appearance; embedded possession is not permanent shop availability.",
         "differences": [],
         "unknowns": [
-          "Original pattern and scale variants, their appearance, and seasonal shop inventories."
+          "Exact target-deployed and seasonal shop rosters/windows/prices. Selected142 definitions and the later100G textile table do not replace provisional120G offers or prove permanent sale; see issue896.",
+          "Full all-pattern/all-class visual, tooltip and mask fidelity, earned acquisition and cold browser/server restart continuity. Representative atlas/channel captures and prior ground-use receipts are bounded acceptance, not whole-feature certification."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/8f610f6fb4eb8c3a5caeeb4bc075ab670c5dc906/dyes.js",
+            "label": "September27,2012 fitting-room roster:Shamrock commented out, not proof of sale windows"
+          },
+          {
+            "url": "https://web.archive.org/web/20120901000000id_/http://forums.wildshadow.com/node/80502",
+            "label": "April22,2012 Build123 announcement:missing dye/textile pixels fixed"
           }
         ]
       }
@@ -6506,14 +6572,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
+        "expected": "Safe lobby, escape/spawn, facilities and destination bindings. Selected Sheep, fountain and portal definitions match runtime; they do not specify healing or deployed map data. January 2012 documents Sheep and HP fountains. Documented Crier announcements begin in later Build 4.3; selected 123.5.1 XML has no Crier.",
         "differences": [
-          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304",
+          "Rust heals every eligible nearby player by 100 HP per second without restoring MP. January 5, 2012 describes one recipient and 100 HP every 1-2 seconds; Trapped uses nearest-player healing with a randomized 600ms interval, while modified 7.0 heals multiple recipients. Target continuity remains unresolved, not an automatic policy correction.",
+          "The current 142x130 map matches pinned Trapped cells except one added merchant; it has 16 spawn cells, eight fountains and 28 Sheep. Sheep presence is implemented, but wandering/baa behavior is not verified; the mixed-era Japanese page says 25. The 123.4 minimap supports broad room arrangement, not exact 123.5.1 tiles."
         ],
         "unknowns": [
-          "Original 123.5.1 layout, spawn points and destination bindings.",
-          "Fountain timing, MP healing and recipient rules.",
-          "Were Sheep and the Nexus Crier present, and what did the Crier say?"
+          "Exact original 123.5.1 layout, spawn cells and destination deployment remain in issue 897.",
+          "Target fountain cadence, MP and recipient-policy continuity remain in issue 897; current all-recipient behavior is reconstruction, not recovered original server logic.",
+          "Original Sheep count/script and target deployment remain in issue 897. Selected XML has no Crier; November 6, 2012 Build 4.3 and January 25, 2013 Build 10 messages must not be backported as 123.5.1 dialogue."
         ],
         "sources": [
           {
@@ -6531,6 +6599,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
             "label": "Conflicting modified 7.0 Nexus: background 0"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012: Sheep/baa and single-recipient 100 HP fountains; target continuity unverified"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0#v430",
+            "label": "November 6, 2012 Crier introduction; later than target build 123"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_10.0.0",
+            "label": "January 25, 2013 Crier return, not 123.5.1 dialogue"
           }
         ]
       }
