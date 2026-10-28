@@ -3901,15 +3901,40 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Flying mountain enemy HP1000/DEF12, Pink Bolt50; qualified comparator supports chase/wander, five-shot radial bursts and Attack potion eligibility.",
-        "differences": [],
+        "expected": "Flying mountain god HP1000/DEF12; five Pink Bolts50 at72 degrees, speed12/lifetime1.8s/range12 and nominal500ms cadence. Compiled Kithio supports player-oriented rings, chase/wander, max3 same-kind reproduction and Attack1.5% after180 damage. Retained123.5.0 announcement associates Mad Lab with Flying Brain.",
+        "differences": [
+          "Current acquisition7/stop4/speed6/wander4 follows Trapped, not Kithio Follow acquisition10/stop7 with resting hysteresis and jitter. Exact500ms firing differs from Kithio's check-before-subtract clock, nominal500ms becoming550ms at50ms ticks; original123.5.1 timing remains unresolved.",
+          "Project home tether, finite habitat/capacity and safe births are not original elevation200/peak-teleport fidelity. Selected spawn mean3/stddev1/min2/max5 does not prove original world distribution.",
+          "Current common-god equipment pool is broader than Kithio's Brain-specific table. Mad Lab association has retained period support;17% is a later7.0 comparator rate, not a certified123.5.1 probability."
+        ],
         "unknowns": [
-          "Original ring orientation/cadence, movement, population and complete rewards/dungeon associations."
+          "Exact123.5.1 orientation/tick cadence, pursuit/elevation/tether policy, population distribution and full equipment pool/odds/allocation remain historically unresolved. Build118 independently supports72-degree five-shot0.5s rings, but not target continuity or spoke orientation.",
+          "Whole-feature native acceptance still needs multiplayer eligibility, potion pickup/reconnect, earned Lab entry and longer population lifecycle. Prepared combat and controlled reward/portal tests cannot certify those outcomes or original probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L137-L157",
+            "label": "Compiled Kithio reconstruction comparator, not authenticated original server"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/behaviors/Shoot.cs",
+            "label": "Comparator engine: centered target-oriented fan and cooldown evaluation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519152549id_/http://forums.wildshadow.com/wiki/realm-mad-god/flying-brain",
+            "label": "May19,2012 capture, explicitly build118; earlier-version corroboration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat#L156-L185",
+            "label": "Modified7.0 client definition agrees with selected Flying Brain object, not AI authority"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Retained release announcement associates Flying Brain with Mad Lab; no original rate"
           }
         ]
       }

@@ -42,10 +42,10 @@ const intent = {goal: {id: 1, label: 'Max permanent Speed', current: 30, target:
 const frame = {character: 1, level: 3, class: 'Wizard', world: 'Realm', hp: 80, max_hp: 100, mp: 40, max_mp: 60, reason: 'exploring', aim: null, intent};
 const bots = names => ({bots: names.map(name => ({name, frame, age_ms: 0})), llm: {enabled: false}});
 const json = value => new Response(JSON.stringify(value), {headers: {'content-type': 'application/json'}});
-function harness(t, query = '', initial = bots(['Alpha', 'Beta'])) {
+function harness(t, query = '', initial = bots(['Alpha', 'Beta']), {autoSelect = true, autoReady = true} = {}) {
   let clock = 0, nextTimer = 0;
   const nodes = Object.fromEntries(['bot', 'status', 'view', 'view-status', 'telemetry-status', 'intention', 'intention-status'].map(id => [`#${id}`, new Node(id === 'bot' ? 'select' : '')]));
-  const listeners = {}, timers = new Map(), calls = [], lists = [json(initial)], streams = [], feeds = [];
+  const listeners = {}, timers = new Map(), calls = [], lists = [json(initial)], streams = [], feeds = [], commands = [];
   const window = {location: {search: query}, history: {replaceState(...args) {window.path = args[2];}},
     addEventListener(type, callback) {listeners[type] = callback;}, removeEventListener(type) {delete listeners[type];},
     setInterval(callback, ms) {timers.set(++nextTimer, {callback, ms, interval: true});return nextTimer;},
@@ -58,11 +58,27 @@ function harness(t, query = '', initial = bots(['Alpha', 'Beta'])) {
     const stream = new ReadableStream({start(controller) {feeds.push(controller);}});
     return new Response(stream);
   }};
-  const stop = start({document: {querySelector: key => nodes[key], createElement: tag => new Node(tag)}, window, backend, now: () => clock});
+  const deliver = (iframe, data) => listeners.message({origin:'https://game.test',source:iframe.contentWindow,data});
+  const element = tag => {
+    const node = new Node(tag);
+    if (tag === 'iframe') {
+      node.generation = 0;
+      node.contentWindow.postMessage = (data, origin) => {
+        commands.push({data,origin});assert.equal(origin,'https://game.test');
+        if (autoSelect) queueMicrotask(() => {
+          node.generation = data.generation;
+          deliver(node,{type:'openrotmg-bot-selected',bot:data.bot,generation:data.generation});
+        });
+      };
+      if (autoReady) queueMicrotask(() => deliver(node,{type:'openrotmg-bot-ready',bot:decodeURIComponent(new URL(node.src).pathname.split('/')[3]),generation:0}));
+    }
+    return node;
+  };
+  const stop = start({document: {querySelector: key => nodes[key], createElement: element}, window, backend, now: () => clock});
   t.after(stop);
-  return {nodes, window, calls, lists, streams, feeds, timers,
+  return {nodes, window, calls, lists, streams, feeds, timers, commands,
     iframe: () => nodes['#view'].children[0],
-    send(data, change = {}) {listeners.message({origin: 'https://game.test', source: nodes['#view'].children[0]?.contentWindow, data: {type: 'openrotmg-bot-view', bot: 'Alpha', status: 'live', ...data}, ...change});},
+    send(data, change = {}) {listeners.message({origin: 'https://game.test', source: nodes['#view'].children[0]?.contentWindow, data: {type: 'openrotmg-bot-state', bot: 'Alpha', generation:nodes['#view'].children[0]?.generation, status: 'live', ...data}, ...change});},
     choose(name) {nodes['#bot'].value = name;nodes['#bot'].listeners.change({target: nodes['#bot']});},
     async emit(update, feed = feeds.at(-1)) {feed.enqueue(new TextEncoder().encode(`data: ${JSON.stringify(update)}\n\n`));await flush();},
     async advance(ms) {clock += ms;for (const [id, timer] of [...timers]) if (timer.ms <= ms && timers.has(id)) {if (!timer.interval) timers.delete(id);timer.callback();}await flush();},
@@ -86,16 +102,16 @@ test('healthy native view and decisions are quiet; actual loading/stale/errors r
   assert.match(h.nodes['#telemetry-status'].textContent, /Intentions stale/);
   h.send({status: 'disconnected'});assert.match(h.nodes['#view-status'].textContent, /disconnected/);
   h.send({status: 'error', error: 'overflow; reconnect required'});assert.match(h.nodes['#view-status'].textContent, /error.*overflow/);
-  h.send({status: 'connecting'});assert.match(h.nodes['#view-status'].textContent, /Loading game view/);
+  h.send({status: 'connecting'});assert.match(h.nodes['#view-status'].textContent, /error.*overflow/);
 });
 
-test('picker discards old iframe/feed; forged and retired-window messages cannot repaint', async t => {
+test('picker retains iframe and discards old feed; forged and old-generation messages cannot repaint', async t => {
   const h = harness(t);await flush();await h.emit({frame, age_ms: 0});
   const old = h.iframe(), signal = h.calls[1].options.signal;
   h.choose('Beta');await flush();
-  assert.equal(signal.aborted, true);assert.notEqual(h.iframe(), old);
+  assert.equal(signal.aborted, true);assert.equal(h.iframe(), old);
   assert.equal(h.window.path, '?bot=Beta');assert.equal(h.nodes['#intention'].children.length, 0);
-  for (const [data, change] of [[{bot: 'Alpha'}, {}], [{bot: 'Beta'}, {source: old.contentWindow}], [{bot: 'Beta'}, {origin: 'https://evil.test'}], [{bot: 'Beta', status: 'nonsense'}, {}]]) h.send(data, change);
+  for (const [data, change] of [[{bot: 'Alpha'}, {}], [{bot: 'Beta'}, {source: {}}], [{bot: 'Beta'}, {origin: 'https://evil.test'}], [{bot: 'Beta', status: 'nonsense'}, {}]]) h.send(data, change);
   assert.match(h.nodes['#view-status'].textContent, /Loading game view/);
   await h.emit({frame, age_ms: 0}, h.feeds[0]);
   assert.equal(h.nodes['#intention'].children.length, 0);
@@ -112,7 +128,7 @@ test('HTTP failure retry is canceled on selection and late responses never repai
   assert.equal(h.nodes['#telemetry-status'].textContent, '');
   const count = h.calls.filter(call => call.path.endsWith('/stream')).length;
   await h.advance(5000);assert.equal(h.calls.filter(call => call.path.endsWith('/stream')).length, count);
-  assert.equal(h.nodes['#intention'].children.length, 0);assert.match(h.iframe().src, /Beta\/view$/);
+  assert.equal(h.nodes['#intention'].children.length, 0);assert.match(h.iframe().src, /Alpha\/view$/);assert.match(h.iframe().title,/Beta/);
 });
 
 test('malformed/closed SSE and missing decisions stay observable without history UI', async t => {
@@ -129,7 +145,7 @@ test('missing query bot never substitutes another bot; availability loss resets 
   assert.equal(h.nodes['#bot'].value, '');assert.equal(h.calls.length, 1);
   h.choose('Beta');await flush();await h.emit({frame, age_ms: 0, thoughts: [{at: 0, text: 'Beta thought'}]});
   h.lists.push(json(bots([])));await h.advance(10000);
-  assert.equal(h.iframe(), undefined);assert.equal(h.nodes['#intention'].children.length, 0);
+  assert.match(h.iframe().src,/Beta\/view$/);assert.equal(h.nodes['#intention'].children.length, 0);
   assert.equal(h.nodes['#bot'].disabled, true);assert.match(h.nodes['#status'].textContent, /Beta is offline/);
   h.lists.push(json(bots(['Beta'])));await h.advance(10000);
   assert.match(h.iframe().src, /Beta\/view$/);assert.equal(h.nodes['#bot'].disabled, false);
@@ -149,7 +165,7 @@ test('bootstrap errors stay explicit; unrelated model statistics are not present
   const h = harness(t);await flush();
   h.iframe().listeners.error();assert.match(h.nodes['#view-status'].textContent, /error.*failed to load/);
   h.choose('Beta');await flush();h.choose('Alpha');await flush();
-  await h.advance(16000);assert.match(h.nodes['#view-status'].textContent, /error.*no native status/);
+  await h.advance(16000);assert.match(h.nodes['#view-status'].textContent, /error.*viewer is closed/);
   const list = bots(['Alpha', 'Beta']);list.llm = {enabled: true, budget_scope: 'unknown'};
   h.lists.push(json(list));await h.advance(10000);
   assert.equal(h.nodes['#status'].textContent, '');assert.match(h.iframe().src, /Alpha\/view$/);
@@ -179,8 +195,8 @@ test('locations update in place from SSE and catalogue without selection, URL or
   h.choose('Alpha');await flush();
   assert.equal(h.window.path, '?bot=Alpha');assert.equal(h.iframe(), iframe);assert.equal(signal.aborted, false);
   assert.equal(h.calls.filter(call => call.path.endsWith('/stream')).length, 1);
-  h.send({}, {data: {type: 'openrotmg-bot-select', bot: 'Alpha', target: 'Beta'}});await flush();
-  assert.equal(h.window.path, '?bot=Beta');assert.equal(picker.value, 'Beta');assert.match(h.iframe().src, /\/Beta\/view$/);
+  h.send({}, {data:{type:'openrotmg-bot-choice',bot:'Alpha',generation:0,target:'Beta',source:11,player:22}});await flush();
+  assert.equal(h.window.path, '?bot=Beta');assert.equal(picker.value, 'Beta');assert.equal(h.iframe(),iframe);assert.match(h.iframe().title,/Beta/);
 });
 
 test('retired guest options stay bounded without replacing live or selected identities', async t => {
@@ -216,10 +232,10 @@ test('location age, missing worlds, catalogue failures and offline bots are expl
   h.lists.push(json(invalid));await h.advance(10000);assert.match(h.nodes['#status'].textContent, /malformed bot location/);
   h.lists.push(json(bots(['Beta'])));await h.advance(10000);
   assert.equal(picker.children[0], alpha);assert.equal(alpha.textContent, 'Alpha — Offline');assert.equal(alpha.disabled, true);
-  assert.equal(picker.value, 'Alpha');assert.equal(h.iframe(), undefined);assert.match(h.nodes['#status'].textContent, /Alpha is offline/);
+  assert.equal(picker.value, 'Alpha');assert.equal(h.iframe(), iframe);assert.match(h.nodes['#status'].textContent, /Alpha is offline/);
   h.lists.push(json(bots(['Alpha', 'Beta'])));await h.advance(10000);
   assert.equal(picker.children[0], alpha);assert.equal(alpha.disabled, false);assert.equal(alpha.textContent, 'Alpha — Realm');
-  assert.notEqual(h.iframe(), iframe);assert.equal(picker.value, 'Alpha');
+  assert.equal(h.iframe(), iframe);assert.equal(picker.value, 'Alpha');
 });
 
 test('perspective-selection messages admit only the current native window and a listed other bot', async t => {
@@ -233,9 +249,57 @@ test('perspective-selection messages admit only the current native window and a 
   const h = harness(t);await flush();const old = h.iframe(), signal = h.calls[1].options.signal;
   h.send({}, {data, origin: 'https://evil.test'});assert.equal(h.iframe(), old);
   h.send({}, {data: {...data, target: 'Human'}});assert.equal(h.iframe(), old);
-  h.send({}, {data});await flush();
-  assert.notEqual(h.iframe(), old);assert.match(h.iframe().src, /Beta\/view$/);assert.equal(h.window.path, '?bot=Beta');assert.equal(signal.aborted, true);
-  const next = h.iframe();h.send({}, {data: {...data, bot: 'Beta', target: 'Alpha'}, source: old.contentWindow});assert.equal(h.iframe(), next);
+  h.send({}, {data:{type:'openrotmg-bot-choice',bot:'Alpha',generation:0,target:'Beta',source:11,player:22}});await flush();
+  assert.equal(h.iframe(), old);assert.match(h.iframe().title,/Beta/);assert.equal(h.window.path, '?bot=Beta');assert.equal(signal.aborted, true);
+  assert.deepEqual(h.commands[0].data.target,{kind:'player',source:11,target:22});
+  const count=h.commands.length;h.send({type:'openrotmg-bot-choice',bot:'Beta',target:'Alpha',source:22,player:11,generation:0});
+  assert.equal(h.commands.length,count);assert.equal(h.iframe(),old);
+});
+
+test('A to B to A keeps the same iframe URL and rejects the first A generation', async t => {
+  const h=harness(t);await flush();const iframe=h.iframe(),src=iframe.src;
+  h.choose('Beta');await flush();h.choose('Alpha');await flush();
+  assert.equal(h.iframe(),iframe);assert.equal(iframe.src,src);assert.equal(h.commands.length,2);
+  assert.deepEqual(h.commands.map(c=>[c.data.bot,c.data.generation]),[['Beta',1],['Alpha',2]]);
+  h.send({generation:0});assert.match(h.nodes['#view-status'].textContent,/Loading/);
+  h.send({generation:2});assert.equal(h.nodes['#view-status'].textContent,'');
+});
+
+test('selection requests serialize and only the latest desired bot is requested after an acknowledgment', async t => {
+  const h=harness(t,'',bots(['Alpha','Beta']),{autoSelect:false});await flush();const iframe=h.iframe();
+  h.choose('Beta');h.choose('Alpha');assert.equal(h.commands.length,1);
+  h.send();assert.match(h.nodes['#view-status'].textContent,/Loading/);
+  h.send({}, {data:{type:'openrotmg-bot-selected',bot:'Beta',generation:1}});
+  assert.equal(h.commands.length,2);assert.equal(h.commands[1].data.bot,'Alpha');assert.equal(h.commands[1].data.generation,2);
+  h.send({bot:'Beta',generation:1});assert.match(h.nodes['#view-status'].textContent,/Loading/);
+  h.send({}, {data:{type:'openrotmg-bot-selected',bot:'Alpha',generation:2}});
+  h.send({generation:2});assert.equal(h.nodes['#view-status'].textContent,'');assert.equal(h.iframe(),iframe);
+});
+
+test('a rejected switch reports the error and restores the acknowledged selection without a reload', async t => {
+  const h=harness(t,'',bots(['Alpha','Beta']),{autoSelect:false});await flush();const iframe=h.iframe();h.choose('Beta');
+  h.send({}, {data:{type:'openrotmg-bot-rejected',bot:'Alpha',generation:0,requested:1,error:'Bot is no longer online'}});await flush();
+  assert.equal(h.nodes['#bot'].value,'Alpha');assert.equal(h.window.path,'?bot=Alpha');assert.equal(h.iframe(),iframe);
+  assert.match(h.nodes['#status'].textContent,/Cannot watch Beta.*no longer online.*Current view: Alpha/);
+  h.send();assert.equal(h.nodes['#view-status'].textContent,'');assert.match(h.nodes['#status'].textContent,/Cannot watch Beta/);
+});
+
+test('offline catalogue transitions keep the native document available for another bot', async t => {
+  const h=harness(t);await flush();const iframe=h.iframe();h.send({status:'disconnected',error:'Bot is offline'});
+  h.lists.push(json(bots(['Beta'])));await h.advance(10000);assert.equal(h.iframe(),iframe);
+  h.choose('Beta');await flush();assert.equal(h.iframe(),iframe);assert.equal(h.commands.length,1);
+  h.send({bot:'Beta',generation:1});assert.equal(h.nodes['#view-status'].textContent,'');
+});
+
+test('newly visible bots refresh the catalogue before switching and list errors are not disguised as absence', async t => {
+  for (const failure of [false,true]) {
+    const h=harness(t,'',bots(['Alpha']));await flush();const iframe=h.iframe();
+    h.lists.push(failure ? new Response('offline',{status:503}) : json(bots(['Alpha','Beta'])));
+    h.send({}, {data:{type:'openrotmg-bot-choice',bot:'Alpha',generation:0,target:'Beta',source:11,player:22}});await flush();
+    assert.equal(h.iframe(),iframe);
+    if (failure) {assert.match(h.nodes['#status'].textContent,/HTTP 503/);assert.equal(h.commands.length,0);}
+    else {assert.equal(h.nodes['#bot'].value,'Beta');assert.deepEqual(h.commands[0].data.target,{kind:'player',source:11,target:22});}
+  }
 });
 
 test('overview uses plain broad activities, not per-tick targets or internal policy explanations', () => {
