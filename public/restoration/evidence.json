@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "wine-oryx2-native-781921e": {
+      "kind": "native",
+      "revision": "781921e98a53eef60c91e66cb95f984be44b1736",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1145#issuecomment-6479263550",
+      "method": "Final clean QA 816e8448 passes 9 assertions / 298,900 game ms: selected 75,000-HP Oryx 2, natural minions, shield and actual rage chase, selected projectile publication, ordinary dagger defeat, Vitality pickup once/no duplicate, and same living character/account 1 returns to Nexus. Cold QA 438b7e7c verifies saved XP 19,041, revision 2, Vitality, one Oryx kill/qualified quest, SQLite/FKs, zero deaths/backend ERRORs, 204 absent owned processes and reclaimed scratch.",
+      "limitations": "Prepared capped Rogue/gear/boss position with timed Invincible windows and ordinary cloak casts. Final case scopes protection to each actual world and retains short firing holds after a longer-hold death. Repeats the earlier protected boss mechanics, not independent historical evidence, unprotected survival, earned progression or a full entry journey. Parent/boss full gameplay remains not-run. Case 860d3427 / result d6db3a5c hashes and further failed entry/steering attempts are pinned in the receipt.",
+      "checks": [
+        "dungeons:wine-cellar",
+        "dungeons:wine-cellar:oryx-two-reward-return"
+      ]
+    },
     "wine-research-09889dd": {
       "kind": "source",
       "revision": "09889dd4baaccf9b5d4d1e05d3926f5f76a6e107",
@@ -5019,7 +5031,8 @@
         "wine-research-09889dd",
         "wine-shared-barrels-native-15501ec",
         "wine-threats-native-09889dd",
-        "wine-oryx2-native-09889dd"
+        "wine-oryx2-native-09889dd",
+        "wine-oryx2-native-781921e"
       ]
     },
     "dungeons:wine-cellar:barrel-destruction": {
@@ -5042,7 +5055,8 @@
       "status": "not-run",
       "evidence": [
         "wine-research-09889dd",
-        "wine-oryx2-native-09889dd"
+        "wine-oryx2-native-09889dd",
+        "wine-oryx2-native-781921e"
       ]
     },
     "gear:swords": {"status":"not-run","evidence":[]},
