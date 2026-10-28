@@ -1402,10 +1402,11 @@
         "expected": "Finite qualifying encounter lifecycle, announcements, sealed admission, eligible Castle transfer and replacement realm; exact target roster/countdowns remain qualified.",
         "differences": [
           "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-          "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+          "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192"
         ],
         "unknowns": [
-          "Target counted roster, transformation exclusions, countdowns and dungeon-player transfer eligibility.",
+          "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
           "Recurring per-family counts use the gameplay documentation's two-minute cadence rather than modified forks' 20 seconds. Exact target-era phase, selection weights and complete spawn/death/entry phrase pools remain unverified."
         ],
         "sources": [
@@ -1413,6 +1414,8 @@
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/Oryx.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
           },
+          {"url":"https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq","label":"January 6, 2012: finite Quests, replenishing minions and a two-minute lockout"},
+          {"url":"https://web.archive.org/web/20120602012040id_/http://forums.wildshadow.com/wiki/realm-mad-god/game-objectives","label":"June 2, 2012: six named event bosses, Castle and Guardians; all players wording does not resolve dungeon eligibility"},
           {
             "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
             "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
@@ -1430,10 +1433,13 @@
               "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
             ],
             "unknowns": [
-              "Exact 123.5.1 trigger probability, type distribution and site selection remain qualified. Related server comparators disagree on the roll."
+              "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
             ],
             "sources": [
               {"url":"https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88","label":"Classic quest and event reference"},
+              {"url":"https://web.archive.org/web/20120613202917id_/http://forums.wildshadow.com/wiki/realm-mad-god/quest-monsters","label":"June 13, 2012: 10% event roll and evaluation bosses; capture verified after Wayback redirected the requested date"},
+              {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Oryx.cs#L670-L714","label":"Compiled primary reconstruction: Quest plus critical display-name gate, 25% roll, selected PerRealmMax removal"},
+              {"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/Oryx.cs#L814-L883","label":"Modified 7.0 comparator disables the nominal 25% gate; not independent historical evidence"},
               {"url":"https://remaster.realmofthemadgod.com/?p=3259","label":"2022 change to 25% and expanded repeat limits, not target-era policy"}
             ],
             "group": "behavior"
