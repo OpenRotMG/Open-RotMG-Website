@@ -3994,15 +3994,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Mountain flying Djinn HP1000/DEF12, piercing White Bullet60; production122 says awards EXP. Qualified comparator supports invulnerable pursuit, ring phases and low-HP telegraphed terminal burst/death.",
-        "differences": [],
+        "expected": "Mountain flying Djinn HP1000/DEF12; White Bullet60/speed6/lifetime1.5s is MultiHit, not ArmorPiercing. Build122 awards EXP; period guide supports shielded pursuit, vulnerable ring phases and red-warning terminal burst/death. Qualified primary Speed roll1.5% at180 damage.",
+        "differences": [
+          "Retained Trapped-style reconstruction uses2500ms chase, five paired four-shot ring steps, below400HP and twelve-shot terminal ring after1000ms. Compiled Kithio instead uses2000ms Bullet/Wait, below50%HP and ten terminal shots; Shoot centers fixedAngle fans unlike Trapped RingAttack offsets. Earlier117.1.3 guide says three-second warning/20DEF, conflicting with both comparators/selected12DEF.",
+          "Kithio Idle-only max4/radius10/default60s reproduction is not implemented; regional bounded ecology remains. Nearby capped100XP and largest-contributor timed kill ownership differ from Kithio weighted contributor XP/LastHitter; safer gear allocation and period-adjusted pools remain reconstruction. Modified7.0 changes reproduction and Speed rates, not target-era authority."
+        ],
         "unknowns": [
-          "Original thresholds, phase timings/angles, XP amount and ownership, loot/population/portal policies."
+          "Exact123.5.1 thresholds, warning/phase clocks/angles, XP allocation, gear probabilities, population and portal continuity remain issue849. Neither source agreement nor the earlier-version guide authenticates these numbers. Current Djinn has no dungeon association. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/849#issuecomment-6474461317",
+          "PR1128 passes11 bounded native checks for natural admission, movement, shield/ring phases, one-second warning/twelve-shot terminal burst, defeat/100XP and no repeated XP, with a prepared Wizard and Invincible. Native damage/multiplayer hits, reproduction, multiplayer eligibility, successful potion acquisition, pickup/reconnect and earned travel remain unverified; whole-feature gameplay stays not-run."
         ],
         "sources": [
           {
+            "url": "reference-data/client-123.5.1.swf",
+            "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs#L278-L343",
+            "label": "Compiled primary Djinn table; Shoot/Reproduce/Suicide/DamageCounter/Loots semantics inspected"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Djinn object normalizes identically to selected definition; not server AI authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120520004521id_/http://forums.wildshadow.com/wiki/realm-mad-god/djinn",
+            "label": "May20,2012 archive explicitly describes117.1.3; broad behavior corroboration and three-second warning conflict"
+          },
+          {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "label": "February14,2012 Build122.0.1 EXP change; not exact ownership"
           }
         ]
       }
