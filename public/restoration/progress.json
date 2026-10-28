@@ -4940,12 +4940,13 @@
       "category": "dungeons",
       "icon": "assets/player/thessal-the-mermaid-goddess.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Underwater dungeon, same-instance player teleporting, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
-        "differences": [],
+        "differences": ["The current return is a death-relative Nexus portal. Build122.3.2 notes describe fixed dungeon exit sites; the exact Trench site and target destination remain unresolved."],
         "unknowns": [
-          "Original topology, oxygen parameters and vent geometry, full target choreography, Hermit entrance probability, reward eligibility/rates and King Alexander target deployment."
+          "Original topology, oxygen cadence and vent geometry, full target choreography, Hermit entrance probability and reward eligibility/rates. King Alexander is documented in Thessal's question, not established as a deployed encounter.",
+          "Unprotected or earned-entry entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
         ],
         "sources": [
           {
@@ -4968,22 +4969,22 @@
             "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
             "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target oxygen cadence, vent radius and placement remain reconstruction; the later comparator uses a greater-than-100ms ground gate, not an authenticated original 150ms timer."],
+            "sources": [{"url": "https://wikiwiki.jp/rmd/version/build122.3.2", "label": "April 2012 release notes explicitly add Thessal's death air pocket"}],
             "group": "layout"
           },
           {
             "id": "dungeons:ocean-trench:wounded-thessal-response",
             "name": "Wounded Thessal and response gifts",
-            "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
+            "expected": "Wounded Thessal asks Is King Alexander alive? The documented answer is He lives and reigns and conquers the world, followed by up to three Coral Gifts. This optional encounter is separate from the normal clear.",
             "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off.",
-            "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "partial",
+            "historical": "partial",
+            "differences": ["The June 13, 2012 Wild Shadow-hosted guide describes a failed-response shotgun rage; the current reconstruction expires wounded Thessal without that attack."],
+            "unknowns": ["The original trigger is explicitly unknown in the period guide. The reconstructed 10% death roll and 12-second deadline come from the later modified7.0 comparator; the undated Japanese guide instead says 15 seconds. Exact failure trigger, barrage timing and counts remain unresolved."],
+            "sources": [{"url": "https://web.archive.org/web/20120613202818id_/http://forums.wildshadow.com/wiki/realm-mad-god/thessal-mermaid-goddess", "label": "June 13, 2012 guide: question, answer in image hovertext, gifts and lethal failure attack"}],
             "group": "boss"
           }
         ]
@@ -5886,12 +5887,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four equipment slots and eight carried slots support class-compatible equipment, reversible bonuses, swaps, pickup and drops. Native controls include hotkeys, ground use, contextual clicks, equipment comparison, tier/UT/dose labels and unusable-item highlighting. The pre-124 contextual-click rules also cover equipping or using a container item with a full inventory.",
+        "expected": "Four equipment slots and eight ordinary carried slots, without a separate potion belt or stack. Class SlotTypes govern equipment eligibility, not item level. Pre-124 container double-click picks up with space; with full inventory it equips compatible gear or uses a consumable. Build 124.0 (October 5, 2012) changed that full-inventory behavior; dedicated nine-potion stacks arrived in Build 4.0 (October 31 test / November 2 production). Native controls also include reversible bonuses, swaps, drops, hotkeys, ground use, equipment comparison, tier/UT/dose labels and unusable-item highlighting.",
         "differences": [],
         "unknowns": [
-          "Original contextual clicks with full inventory, tooltips and item equip requirements.",
-          "Rules for the later potion-stacking system must not be imported into 123.5.1.",
-          "Was a separate potion belt or stash available, rather than ordinary inventory slots?"
+          "Original authoritative server inventory commit/refusal and synchronization timing is not recovered; current durable atomic policy is retained."
         ],
         "sources": [
           {
@@ -5901,19 +5900,31 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.0",
             "label": "Build 123.4.0 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "October 5, 2012: full-inventory contextual-click change"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012: dedicated potion slots and nine-potion stacks"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as",
+            "label": "Selected-era client mirror: contextual click and full-inventory dispatch"
           }
         ],
         "checks": [
           {
             "id": "gear:ability-activation-contract",
             "name": "Ability validation and cooldown continuity",
-            "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
+            "expected": "Equipped class-compatible ability, enough MP, valid aim, no pause/Quiet and the existing accepted-cast deadline are required. Changing abilities does not replace that deadline; the next accepted cast uses the newly equipped item's cooldown.",
             "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending.",
             "implementation": "present",
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original server policy for starting a cooldown after a rejected cast, reconnect or world transfer. The recreation retains accepted-spend timing."
+              "Selected client starts its per-player timer before USEITEM and initializes it to zero on a new Player. Original server rejection/reconnect/transfer cooldown policy is not recovered; the recreation retains accepted-spend timing."
             ],
             "sources": [
               {
@@ -5970,10 +5981,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Minor/normal/Greater Magic restore 50/100/200 MP; consumable, Greater soulbound; permitted ground use.",
+        "expected": "Selected Minor/normal/Greater Magic definitions restore 50/100/200 MP up to the effective maximum; consumable, Greater soulbound; permitted accessible-ground use. Definition presence does not establish original deployment.",
         "differences": [],
         "unknowns": [
-          "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
+          "Full-MP spending and Quiet consumption follow selected-client eligibility and compiled Kithio reconstruction, not recovered original server policy; exact 123.5.1 ground eligibility remains unconfirmed.",
+          "May 1, 2012 Wild Shadow documentation lists Minor Magic at Butcher, Bonegrind and Forbidden Jungle, while the August 5, 2012 Japanese page lists no acquisition. Greater Magic is listed as unreleased on a March 13, 2013 Japanese page. Exact target-build deployment and acquisition continuity remain unresolved.",
           "Exact original MP-restoration text hue remains unrecovered; Kithio purple and Trapped white conflict. Light blue 6084e0 is a later-reference reconstruction, not authenticated 123.5.1 RGB."
         ],
         "sources": [
@@ -5984,6 +5996,30 @@
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/entities/player/Player.UseItem.cs#L140",
             "label": "Later FSoD light-blue 6084e0 comparator; reconstruction, not original 123.5.1 hue"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L88-L102",
+            "label": "Compiled comparator consumes at full MP; does not authenticate original server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L2116-L2154",
+            "label": "Modified 7.0 comparator: all three potion definitions normalize identically to selected data"
+          },
+          {
+            "url": "https://web.archive.org/web/20120430102741id_/http://forums.wildshadow.com/wiki/realm-mad-god/magic-potion",
+            "label": "April 30, 2012 capture: normal Magic restores100 MP and is consumed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120501002624id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-magic-potion",
+            "label": "May 1, 2012 capture: Minor restores50 MP; lists Butcher, Bonegrind and Jungle drops"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Minor%20Magic%20Potion",
+            "label": "Minor page last modified August 5, 2012:50 MP, no acquisition; conflicts with May capture"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Greater%20Magic%20Potion",
+            "label": "Greater page last modified March 13, 2013:200 MP, unreleased, no acquisition"
           }
         ]
       }
@@ -5997,14 +6033,32 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Six +1 base-stat potions plus Life/Mana +5, bounded by target class caps.",
-        "differences": [],
+        "differences": [
+          "The selected 123.5.1 definitions, current server and pinned modified 7.0 client agree on all eight potion increments and all 13 class-cap rows. Equipment bonuses do not count toward base caps. Kithio and Trapped clamp final gains but consume capped potions; this project preserves its capped-use refusal. Comparator agreement is not independent original-server evidence."
+        ],
         "unknowns": [
-          "Original consumption at the stat cap, partial final +5 increases, and the complete class-cap table."
+          "Original 123.5.1 server consumption at cap and partial final Life/Mana gains remain unconfirmed. The February 2012 wiki says maxed potions have no effect, not whether they are consumed; the selected definitions specify increments/caps, not consumption policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L87-L151",
+            "label": "Compiled Kithio UseItem and restoration helpers; IncrementStat at lines 658-678 clamps silently"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PlayersCXML.dat",
+            "label": "Modified 7.0 comparator: class caps; EquipCXML supplies matching potion increments"
+          },
+          {
+            "url": "https://web.archive.org/web/20120208173158id_/http://forums.wildshadow.com/wiki/realm-mad-god/stat-increase-potions",
+            "label": "February 2012 capture, text marked build 120: six +1 potions, Life +5, no effect at max; no consumption rule"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 FAQ: class-specific maxima exclude equipment boosts"
           }
         ],
         "checks": [
@@ -6014,10 +6068,23 @@
             "expected": "Stat potions update committed stats without a success chat message. HP/MP restoration feedback reflects the actual gain, not an unclipped advertised amount.",
             "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no stat-potion success chat, fictitious gain or success feedback on rejected consumption; review revision-bound native evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": [
+              "Kithio clips HP/MP notification amounts to actual gain and increments permanent stats silently. Selected and 7.0 clients do not add success chat on INVRESULT. Existing mana color remains a qualified later-server reconstruction."
+            ],
+            "unknowns": [
+              "Original server stat-potion chat policy and exact MP notification hue remain unconfirmed; client-side silence alone cannot establish server-side silence."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L105-L151",
+                "label": "Kithio HP/MP helpers publish actual clipped gain; permanent stat handler at lines 658-678 is silent"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/messaging/impl/GameServerConnection.as#L1666-L1672",
+                "label": "Modified 7.0 INVRESULT adds no success chat; cannot establish original server policy"
+              }
+            ],
             "group": "behavior"
           }
         ]
@@ -6034,12 +6101,24 @@
         "expected": "Health and Magic each have seven soulbound doses, restore 125 per dose, replace with successor and remove final dose.",
         "differences": [],
         "unknowns": [
-          "Original consumption at full HP/MP or while Sick, and both seven-dose sequences."
+          "Independent original-server consumption/refund at full HP/MP or while Sick; exact 123.5.1 continuity of April/June 2012 guides. Kithio lacks a Sick healing guard, unlike period documentation and modified 7.0; retain current no-heal policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L89-L149",
+            "label": "Compiled Kithio: successor replacement, ineffective-use consumption and capped restoration; no Sick healing guard"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422182039id_/http://forums.wildshadow.com/wiki/realm-mad-god/elixirs",
+            "label": "April 22, 2012 capture: Soulbound, up to seven doses, 125 HP/MP per use"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June 13, 2012 capture: Sick prevents healing, not proof of dose consumption/refund"
           }
         ]
       }
@@ -6052,15 +6131,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four self tinctures +15 DEX/DEF or +75 max HP/MP; four range-six effusions +30 or +150; 30 seconds. Nearby allies, not formal party.",
-        "differences": [],
+        "expected": "Four self tinctures +15 DEX/DEF or +75 maximum HP/MP; four range-six effusions +30 or +150 for nearby allies, not formal party; 30 seconds per dose. Overlapping same-stat boosts diminish by successive halves, rounded down, without refreshing timers. The reconstruction ranks active doses strongest-first, excludes the exact six-tile boundary, does not instantly refill HP/MP, clamps on expiry and discards temporary boosts on reconnect.",
+        "differences": [
+          "The May29,2012 Wild Shadow guide documents halving, separate timers and range6. Compiled Kithio instead adds every dose at full strength and halves aura range to3. Preserve selected range6; correct full-strength stacking. Modified7.0 ActivateBoost supplies strongest-first ranking/re-ranking as reconstruction, not independent target-era proof."
+        ],
         "unknowns": [
-          "Original stacking, refresh, range-boundary and temporary maximum-stat rules."
+          "Exact 123.5.1 mixed-strength ordering/expiry re-ranking, inclusive boundary and temporary-maximum clamp/reconnect policy remain historically unresolved. Dated guide tables settle equal-dose halving, not those server details. Tracked in server issue884.",
+          "Prepared native items do not prove original acquisition, effusion distribution or drop probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120529033324id_/http://forums.wildshadow.com/wiki/realm-mad-god/tinctures-and-effusions",
+            "label": "May29,2012 Wild Shadow capture: values, range6, half-rounded-down overlaps and separate30-second timers"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ActivateBoost.cs",
+            "label": "Modified7.0 comparator: descending live-dose ranking, per-stat halving and re-ranking on expiry"
           }
         ]
       }
@@ -6094,10 +6184,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s.",
-        "differences": [],
+        "expected": "Selected 123.5.1: Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s. Consumed without HP/MP/stat cost.",
+        "differences": [
+          "Current condition engine retains the later deadline; compiled Kithio and related Trapped replace remaining duration. Independent target-era mixed-duration overlap is unresolved."
+        ],
         "unknowns": [
-          "Historical refresh/overlap and deployment; complete visual/AI condition fidelity."
+          "Original mixed-duration overwrite, exact production acquisition/drop probabilities and full visual/AI condition fidelity remain unaccepted (issues 886, 942, 943, 946). July 19, 2012 test notes list Ghost Rum's 6s/4s; an August 4 player comment reports its drop, not exact September deployment."
         ],
         "sources": [
           {
@@ -6159,11 +6251,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Remove Invisible, apply Hexed for 30s; target announcement explicitly fixes Mad Lab blue pools removing pet transformation.",
+        "expected": "Consume 0xc41 once, remove Invisible and apply Hexed for 30s without adding Speedy or Stunned. The selected client chooses one of 44 Hexable appearances until cured/expired; Mad Lab DeHexxer actors cure the transformation, not arbitrary water.",
         "differences": [],
         "unknowns": [
-          "Which terrain cures the transformation?",
-          "Original transformed appearance, Speedy interaction and lifecycle."
+          "Original pool boundaries and complete source-versus-combat cure mask; actor geometry/source separation remain reconstruction.",
+          "Original refresh/stacking and duration continuity across world changes, relogin or restart; target acquisition remains unverified."
         ],
         "sources": [
           {
@@ -6173,6 +6265,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Transformation%20Potion",
+            "label": "Potion page: own text dated September 8, 2012; later comment separate"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/ObjectLibrary.as",
+            "label": "Pinned original-client Hexable list registration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Modified 7.0 presentation comparator, not original-server authority"
           }
         ]
       }
@@ -6211,16 +6315,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Thirteen declared ordinary keys create mapped portals, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Placement/failure permissions require historical qualification; destinations separate.",
-        "differences": [],
+        "expected": "Thirteen soulbound consumable keys create their declared portals at the user position, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Current ordinary keys share a commit-time60s entrance window; original adventures remain separate.",
+        "differences": [
+          "Kithio's compiled Create uses PortalDesc.TimeoutTime, which hardcodes30s. This project deliberately uses60s following the June2012 general dungeon guide; that guide does not independently specify keyed entrances.",
+          "Rejected Incantations are retained deliberately, unlike June2012 misuse-consumption guidance. Original-client rejected-slot retry remains failed in issue867; fresh-slot success is not a complete unlock acceptance pass."
+        ],
         "unknowns": [
-          "Historical permitted worlds, placement, admission and lifetime policy.",
-          "The original complete adventures behind keys remain separate dungeon requirements."
+          "The June21,2011 Arqade answer independently supports Nexus use, not Vault or exact123.5.1 continuity. Target world exclusions, overlapping placement/interaction priority, keyed lifetime and admission capacity/range remain unresolved in issue890.",
+          "The original complete adventures behind keys remain separate dungeon requirements. Full Incantation acceptance and its original range/unlocked lifetime remain tracked in issue867."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Descriptors.cs#L261-L283",
+            "label": "Compiled comparator's PortalDesc hardcodes30s; not original123.5.1 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023836id_/http://forums.wildshadow.com/wiki/realm-mad-god/dungeons",
+            "label": "June9,2012 capture: general entrances last one minute and any player can enter; not an exact keyed-timeout rule"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/23337/can-i-use-dungeon-keys-in-the-nexus",
+            "label": "May27,2011 question / June21 answer: purchased-key Nexus-use witness, no Vault claim"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602012050id_/http://forums.wildshadow.com/wiki/realm-mad-god/wine-cellar-incantation",
+            "label": "June2,2012 capture: misuse consumes Incantation without effect, unlike deliberate rejection-safe reconstruction"
           }
         ]
       }
@@ -6233,15 +6356,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Equipped ring grants +20 HP/MP and +2 six other stats; protects from death without later curse. Detailed recovery policy incompletely documented.",
+        "expected": "Selected 0xb3e is a nonsoulbound ring: +20 HP/MP, +2 six other stats and Resurrects. Worn-only consumption, Nexus return and retained other items are supported; current full post-consumption HP/MP recovery remains a reconstruction.",
         "differences": [],
         "unknowns": [
-          "Historical recovery resources/destination, equipment retention and once-only fame/death semantics."
+          "Kithio/Trapped set twice base HP/MP; modified 7.0 returns at 1 HP without refilling MP and adds Soulbound. Neither overrides the selected definition or proves original 123.5.1 recovery.",
+          "Dated 123.5.1 confirmation of HP/MP recovery policy and precise original death/Fame bookkeeping. The item page's full-resource/retention paragraph is undated; wiki history requests returned 403 and the requested Wild Shadow archive returned 404. Issue #891 tracks the remainder."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L438-L466",
+            "label": "Compiled Kithio: worn-only consumption and Nexus return before death processing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build116.5",
+            "label": "June 9, 2011 test: breakage, Nexus return and full HP"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build117.0.1",
+            "label": "June 19, 2011 release: one-time resurrection when worn"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Amulet%20of%20Resurrection",
+            "label": "Undated full HP/MP and item retention; September 19, 2011 no-grave comments"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012 release: later curse change, not a target-build rule"
           }
         ]
       }
@@ -6257,7 +6401,8 @@
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
         "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
+          "Firecracker 100 armor-piercing damage, ten pulses, random jumps/colors, Small radius1 and Large radius2/3 with a longer first gap are reconstruction. A July6,2012 player comment reports roughly30 damage without controlled conditions; original damage/timing/range/color rules remain unresolved.",
+          "Castle 10HP/<3 tiles/1s/30s, recipient eligibility and additive stacking are reconstruction, not recovered historical constants. Period Sand Pail descriptions support five uses and nearby healing only; historically earned acquisition is not verified."
         ],
         "sources": [
           {
@@ -6266,7 +6411,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "label": "Build 123.3.2: July4,2012 fireworks sale through July9"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Large%20Firecracker",
+            "label": "Large Firecracker: July6,2012 approximate-damage comment; not a controlled measurement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sand%20Pail",
+            "label": "Sand Pail: five uses and nearby healing; August17,2012 image timestamps do not date every claim"
           }
         ]
       }
@@ -6302,17 +6455,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Six directly identified temporary eggs: Purple attacks, White heals, Blue paralyzes, Orange stasises, Green slows and Yellow bleeds. Numeric lifetime/AI and any seventh variant require separate historical proof.",
+        "expected": "Six selected temporary eggs. The May 31, 2012 table gives White 60s, 25HP/0.5s; all others 30s: Purple 35 damage/0.3s, Blue Paralyze5s/1s, Orange Stasis5s/2s, Green Slow10s/0.3s and Yellow Bleed300 over10s/1s. No selected Red Drake egg.",
         "differences": [],
         "unknowns": [
-          "Independent target-era numeric AI/lifetime source.",
-          "Original concurrency/replacement, damage attribution and cross-world rules.",
-          "No evidenced seventh egg."
+          "Exact 123.5.1 continuity of the May 2012 numeric table; original range, targeting, follow and defense rules.",
+          "Original concurrency/replacement, damage attribution and travel/disconnect/death persistence. Eight-companion cap, no player damage credit and travel cleanup remain project policies; see server issue894.",
+          "Red Drake 0x1406 exists in selected and modified7.0 XML, but no selected egg activates it. Do not infer a seventh egg."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531235024id_/http://forums.wildshadow.com/wiki/realm-mad-god/drake-eggs",
+            "label": "May 31, 2012 capture: six drakes, lifetimes, strengths and intervals"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PetsCXML.dat",
+            "label": "Modified7.0 companion definitions, including Red Drake object but not a seventh egg"
           }
         ]
       }

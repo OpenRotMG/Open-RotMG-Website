@@ -8,6 +8,26 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('six native drakes pass without accepting original policy or a seventh egg',()=>{
+  const data=catalogue(),evidence=ledger(),id='style:summon-a-drake',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.deepEqual(evidence.results[id].evidence,['drakes-research-4006cea','drakes-native-16583cb']);
+  assert.match(feature.audit.unknowns.join(' '),/damage attribution.*travel\/disconnect\/death/);
+  assert.match(feature.audit.unknowns.join(' '),/Do not infer a seventh egg/);
+});
+
+test('Magic Potion consumption passes without accepting deployment or original hue',()=>{
+  const data=catalogue(),evidence=ledger(),id='gear:magic-potions',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['magic-potions-research-3389a2c','source'],['magic-potions-regression-62c38f4','regression'],['magic-potions-native-3389a2c','native']]){
+    assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
+  }
+  assert.equal(evidence.results[id].evidence.length,9);
+  assert.match(feature.audit.unknowns.join(' '),/deployment.*unresolved/);assert.match(feature.audit.unknowns.join(' '),/RGB/);
+});
+
 test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics',()=>{
   const data=catalogue(),evidence=ledger(),ids=['dungeons:mad-lab','dungeons:mad-lab:ordinary-lab-and-gas','dungeons:mad-lab:coil-secret-and-pool-chain'];
   validateEvidence(data,evidence);
@@ -310,13 +330,15 @@ test('Stars hiscores do not accept original Legends or all class-star rules',()=
   assert.equal(evidence.sources['star-hiscores-browser-f7f6c60'].revision,'f7f6c605aea2f751c3e7df22146a5e1d34f1328e');
 });
 
-test('Native Dexterity reconciliation does not accept whole combat or inventory',()=>{
+test('Inventory native verification does not imply historical acceptance',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   const ids=['realm:shoot-and-take-damage','gear:inventory-and-equipment'];
-  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(row.feature,evidence),false);
+  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,id===ids[0]?'not-run':'passed');assert.equal(accepted(row.feature,evidence),false);
     for(const ref of ['native-dex-regression-c531740','native-dex-native-e736c05']){assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);}}
   assert.equal(evidence.sources['native-dex-regression-c531740'].revision,'c531740f75ffc977c55dfaa31bca5b509fc8469b');
   assert.equal(evidence.sources['native-dex-native-e736c05'].revision,'e736c0573a644947566dcd206abac5f23fcd5fa6');
+  for(const id of [ids[1],'gear:ability-activation-contract']){assert.equal(evidence.results[id].status,'passed');assert.equal(records(data).find(r=>r.id===id).rule.historical,'partial');}
+  for(const [id,ref] of [[ids[1],'inventory-native-c5f52f74'],['gear:ability-activation-contract','ability-contract-native-7a756fca'],['gear:ability-activation-contract','ability-refusals-native-d6caa5d1']])assert(evidence.results[id].evidence.includes(ref));
 });
 
 test('Ability cooldown evidence does not accept complete classes',()=>{
