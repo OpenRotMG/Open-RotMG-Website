@@ -5197,19 +5197,35 @@
         "historical": "partial",
         "expected": "Historically available beach-party destination, party encounter and consumables; distinguish event/calendar access from permanent access and contest prizes from drops.",
         "differences": [
-          "Server PR278 adds a reconstructed Beachzone. Each new Realm has a 1-in-200 chance of an announced inland Beach Bum whose defeat opens the portal 50% of the time. The island layout, the non-attacking Masked Party God's silent full-health recovery every 5 seconds unless Stunned, and its four drinks at 10% each are reconstructions. Permanent rare-spawn access stands in for the unresolved target event/calendar availability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/278"
+          "PR278 reconstructs the island, 1/200 Realm Bum spawn, 50% entrance portal, five-second full recovery unless Stunned and four independent 10% drink rolls with >10%-HP private eligibility. Modified7.0 instead rolls four drinks at 20% under an integer-damage threshold of 0.1 and contains no healing behavior. Neither is authenticated original AI.",
+          "The 123.5.0-labeled guide describes Bum access plus a 400-Fame key sale on August16–21,2012. The event archive's Beach Ball + Bahama Sunrise contest prizes are not a boss-drop table. Exact target availability outside that sale remains unresolved.",
+          "Selected client definitions retain Party God 30000HP/300DEF and Bum 1000HP/100DEF. Later modified7.0 uses 10/15DEF, while the May2013-captured Release2.0 boss guide says 80DEF. These conflicts do not authorize changing selected stats. Requested December2012 archive URLs redirect to May2013 captures."
         ],
         "unknowns": [
-          "Target calendar/key distribution; layout; Party God lifecycle and actual drop policy."
+          "Exact 123.5.1 availability outside the documented August2012 key sale and the rare Bum trigger/spawn/portal probabilities.",
+          "Exact island geometry and Party God recovery amount, cadence, damage-window and stun interaction. The later guide and wiki disagree; no authenticated target AI was recovered.",
+          "Original private reward eligibility and four drink probabilities. A prepared native drop cannot establish rates; the selected soulbound key also conflicts with the guide's public-bag description."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/Official%20Events/forum",
-            "label": "forum wiki page (date unconfirmed)"
+            "label": "August16–21,2012 Beach Party Madness and Best Beach Party Scene contest prizes"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515192458id_/https://forums.wildshadow.com/wiki/realm-mad-god/beachzone",
+            "label": "May15,2013 capture, guide labeled123.5.0: island, Bum access and August2012 400-Fame key sale"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Beachzone.cs",
+            "label": "Modified7.0 dance and 20% drink comparator; no healing behavior"
+          },
+          {
+            "url": "https://web.archive.org/web/20130515202028id_/https://forums.wildshadow.com/wiki/realm-mad-god/masked-party-god",
+            "label": "May15,2013 capture, boss guide labeledRelease2.0: 80DEF and an unspecified damage window, not exact123.5.1 AI"
           }
         ]
       }
