@@ -7,6 +7,75 @@
       "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/869#issuecomment-6477784880 . Fresh selected SWF07ae4fc3 extraction matches all19 complete current sword definitions. May24,2012 build121 table independently corroborates T0–T12/three UTs, Glass30–210, Demon two shots/40degrees and Stone340–390/rate60%. Modified7.0 matches16 full definitions; Splendor/Majesty renumber and lose Tier, Admin renumbers/adds Soulbound, Def Test is extra. Selected/7.0 Player and compiled Kithio shoot/collision engines inspected. Two further checks: original November5,2012 hacking announcement and later item-release/balance histories. Existing source acquisition includes three UT sources and weapon tiers through12, not upper/admin distribution.",
       "limitations": "Research, not gameplay or original-server recovery. Earlier-build table and later release histories do not prove every September123.5.1 acquisition/drop/credit policy. Original collision tolerance/RNG endpoints remain unresolved; Kithio's Paralyzed/Attack bug is not imported. No balance, availability or authority change. Historical partial."
     },
+    "castle-armor-quiet-native-0e590235": {
+      "kind": "native",
+      "revision": "0e590235a16f84f3a995effb30beba122010d87e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Native spawner armor and replacement defeats increment kills 0→1→2 before expiry with fresh same-parent identities; XP18050/fame18 unchanged. Separate western Living Floor contact applies Quiet, MP0 and no Weak. Jobs c311ad2d6bc14ea385c6965e79ef585b and f0c5eaf94fc043a3a6e30d1f8a2478a2 pass with empty cleanup errors.",
+      "limitations": "Prepared starts/gear; armor uses temporary +100 attack and Invincible, tower uses Invulnerable which preserves conditions. One western tower context, not the complete route or final barrier. Earlier expired-target false positive is rejected, not reused. No historical or unassisted acceptance.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-authored-armor-native-c0147979": {
+      "kind": "native",
+      "revision": "c014797965c7edcf313c2a0b357bca59f5835da1",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Authored parent-null Haunted Armor actually defeated by native piercing bow; credited kills 0→1, XP18050 and fame18 unchanged. Job f59491428513437b8bd7b538bb2ea7fd passes. Final exact predicate rejects two retained expiry-only examples and accepts three actual armor kills.",
+      "limitations": "Prepared scene, supplied legal-max stats/gear, temporary +100 attack and Invincible. A prior attempt also killed a roaming Pet and correctly failed isolation; final startup begins combat before adds arrive. Proves selected current reward mapping, not original-versus-respawn historical intent or full traversal.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-guardian-left-partial-84080b7": {
+      "kind": "native",
+      "revision": "84080b703cc5dad19d8606ba2e84818405873fe4",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Left-first native fixture credits guardian, bound sword and survivor as three actual kills; observes shield/release, one earned Chamber portal and native Defense pickup. XP18050→18861→18861→19672. QA 72d2f4fab0254260ad9180d099dd68b3 is globally failed, not passed.",
+      "limitations": "Fresh second participant fails native ingress clock monotonicity before shared admission. No shared Chamber destination proved; survivor was full HP, so recovery heal magnitude was not exercised. Prepared arena, protection, temporary attack and mana fills; not earned route, ordinary difficulty, exact original choreography or probabilities.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:guardian-survivor-and-chamber"
+      ]
+    },
+    "castle-guardian-right-partial-59ce2ab": {
+      "kind": "native",
+      "revision": "59ce2ab721f528e52ffadda22c4084016340e958",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Reverse defeat order likewise credits three actual native kills, sword-gated survivor release, one earned Chamber portal and private Defense pickup. QA 23ef9a3efdfe4ee09746f69530987c7f remains failed after the same fresh-participant native ingress clock regression.",
+      "limitations": "No successful shared Chamber admission, recovery healing magnitude or full entrance route. Prepared protection, temporary attack and mana fills. Positive earlier observations do not relabel the failed take as passing; exact original choreography, sword chance and XP rounding remain unaccepted.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:guardian-survivor-and-chamber"
+      ]
+    },
+    "castle-traversal-partial-a02271b": {
+      "kind": "native",
+      "revision": "a02271b9c39542ad69638d4d00ce6ef671748b2f",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1137#issuecomment-6477663373",
+      "method": "Native movement and ordinary populated rooms from authored entrance, without relocation, reach approximately (48.84,113.5); 77 kills and XP22415. QA 66fc109964f84d6e9909b2dd23c59415 ends in permanent character death at a protection boundary and remains failed.",
+      "limitations": "Final three-deep wall and entrance-to-guardian traversal not completed. Earlier central-tower/routing input-rate disconnects and failed/cancelled/dead takes are retained. No guard relaxed, no character resumed/revived. Separate armor/tower successes cannot pass this component; earned arrival, teleport denial and shared Chamber entry remain unaccepted.",
+      "checks": [
+        "dungeons:oryx-s-castle",
+        "dungeons:oryx-s-castle:mandatory-route-and-armor"
+      ]
+    },
+    "castle-source-48b16697": {
+      "kind": "source",
+      "revision": "48b16697a0ee57cc955b4b16a6563db1f3b13026",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/48b16697a0ee57cc955b4b16a6563db1f3b13026/src/endgame.rs",
+      "method": "Compared eight selected Castle definitions with pinned modified 7.0 XML; inspected all 54 Kithio/7.0 behavior-table files, later Castle tables and engine semantics; decoded current candidate map. Read February 2012 anti-rush and August 2012 armor-reward announcements, then checked a build-123.3.2 drop diary and dated limits of later guides.",
+      "limitations": "Source presence is not gameplay acceptance. Exact geometry/spawn cohorts, original-versus-replacement historical armor rewards, activation/choreography, sword probability and loot rates remain qualified. Full anchors/disposition: https://github.com/OpenRotMG/Open-RotMG-Server/issues/866#issuecomment-6476616760. Later forks are not independent historical witnesses; a guessed Wayback guardian URL returned 404.",
+      "checks": ["dungeons:oryx-s-castle", "dungeons:oryx-s-castle:mandatory-route-and-armor", "dungeons:oryx-s-castle:guardian-survivor-and-chamber"]
+    },
     "jungle-journey-native-c945d8a": {
       "kind": "native",
       "revision": "c945d8a6c55525f7a7175b5ee78d2c55fe3491c9",
@@ -4796,9 +4865,9 @@
     "dungeons:mad-lab:ordinary-lab-and-gas": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-acid-native-6115e97"]},
     "dungeons:mad-lab:coil-secret-and-pool-chain": {"status":"not-run","evidence":["mad-lab-source-69806e2","mad-lab-secret-native-6115e97","creation-source-e61760a","creation-regression-e61760a","creation-native-1690c53","madlab-pool-source-1e4332d","madlab-pool-regression-294c511","madlab-pool-native-294c511"]},
     "dungeons:beachzone": {"status":"not-run","evidence":["beachzone-source-b587298","portal-window-source-4d44727"]},
-    "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
-    "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"not-run","evidence":[]},
-    "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"not-run","evidence":[]},
+    "dungeons:oryx-s-castle": {"status":"not-run","evidence":["endgame-fauna-source-4992445","castle-source-48b16697","castle-armor-quiet-native-0e590235","castle-authored-armor-native-c0147979","castle-guardian-left-partial-84080b7","castle-guardian-right-partial-59ce2ab","castle-traversal-partial-a02271b"]},
+    "dungeons:oryx-s-castle:mandatory-route-and-armor": {"status":"failed","evidence":["castle-source-48b16697","castle-armor-quiet-native-0e590235","castle-authored-armor-native-c0147979","castle-traversal-partial-a02271b"]},
+    "dungeons:oryx-s-castle:guardian-survivor-and-chamber": {"status":"failed","evidence":["castle-source-48b16697","castle-guardian-left-partial-84080b7","castle-guardian-right-partial-59ce2ab"]},
     "dungeons:oryx-s-chamber": {"status":"not-run","evidence":["endgame-fauna-source-4992445"]},
     "dungeons:oryx-s-chamber:oryx-one-phase-and-minion-contract": {"status":"not-run","evidence":[]},
     "dungeons:oryx-s-chamber:incantation-unlock-transaction": {"status":"not-run","evidence":[]},
