@@ -5406,11 +5406,16 @@
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
         "differences": [
           "Server PR581 places a Wine Barrel on each of 38 free inside room corners. Barrels block movement, fall to ordinary shots and give no loot or XP; the corner rule and count are reconstructions: https://github.com/OpenRotMG/Open-RotMG-Server/pull/581",
-          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit."
+          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit.",
+          "Research at server 09889dd4: current Oryx 2 uses a <=20% threshold, 10-second shield, individual transition spinners, opening chase and five-live-Henchman replenishment. The pinned 2013 comparator and December 2013 description instead support a 30% branch and radial rings, with conflicting timing/summon policies. None is authenticated 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Current loot gives each >10%-damage contributor a Vitality potion and independent table-row rolls with uniform tier-pool selection. Comparator top-damager, threshold and per-candidate probability semantics differ; original rates/recipients are not established.",
+          "The 140x132 authored map has two right-side spawn regions and no dedicated WineSpill objects in its dictionary. Selected spill definitions are aesthetic; exact placement and target map byte fidelity remain unverified."
         ],
         "unknowns": [
-          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
-          "Barrel proximity triggers, summons, contents and loot require positive period evidence; zero XP does not establish zero loot."
+          "Exact 123.5.1 phase thresholds/timing, Henchman lifetime/death policy, Goo hit immunity and loot recipients/rates remain unresolved after checking pinned source and dated claims: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Exact map, barrel density/positions and decorative spill placement remain reconstructed. Empty barrels have a November 2012 witness; no positive target-period barrel proximity/summon rule was established.",
+          "The 120-second locked entrance has a December 2013 witness, not a native expiry-boundary or authenticated target-continuity pass; unlocked-portal lifetime remains unresolved.",
+          "Prepared protected boss mechanics are verified separately from full unprotected entry/route/reward/return acceptance; the parent remains not-run."
         ],
         "sources": [
           {
@@ -5420,6 +5425,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+            "label": "December 2013 Oryx2 capture (page says11.1.0), not authenticated123.5.1 AI"
           }
         ],
         "checks": [
@@ -5429,7 +5438,7 @@
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
             "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Barrel placement on every free inside room corner, 38 on the current map, is a reconstruction; no period source gives barrel positions or density."
             ],
@@ -5452,7 +5461,7 @@
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
             "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Bile speed, one Goo per second and the 20-Goo cap come from a commented-out line in a later community server, and the 6-second Goo life reuses its projectile lifetime. A Japanese wiki says Bile circles its Henchman; random wandering follows a 2016 RealmEye page.",
               "Purple Goo stays an ordinary hittable, killable enemy with no XP or loot, a chosen simplification: a 2015 RealmEye snapshot already says it cannot be hit or damaged except by poison."
@@ -5474,6 +5483,10 @@
               {
                 "url": "https://web.archive.org/web/20150726201317/http://www.realmeye.com:80/wiki/purple-goo",
                 "label": "RealmEye Purple Goo, July 2015 snapshot: cannot be hit except by poison"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com:80/wiki/wine-cellar",
+                "label": "December 2013 Cellar: distinct Goo and Drunk threats; mixed-era strategy text"
               }
             ],
             "group": "layout"
@@ -5484,10 +5497,25 @@
             "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
             "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "known-differences",
+            "differences": [
+              "Current <=20% / 10-second preparation and individual spinner output differ from the pinned 2013 comparator and December 2013 22500-HP/radial-ring description. Opening chases at2 tiles/s and rage at8; original movement/timing are not established.",
+              "Five-live-Henchman replenishment every5 seconds and60-second child expiry differ from the December2013 four-max/12-second/all-Henchmen-die description and later birth-counted Spawn semantics.",
+              "Strictly >10%-damage eligibility, per-contributor Vitality and uniform tier-row selection are reconstructions, not the comparator top-damager/separate-threshold/per-candidate policy."
+            ],
+            "unknowns": [
+              "Original threshold/timing, summon/death policy and loot recipient/probability semantics remain unresolved. Protected native dagger defeat, actual reward/no-duplicate and same-character return are recorded, but full unprotected gameplay acceptance remains not-run."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oryx2.cs",
+                "label": "Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+                "label": "December 2013 Oryx2 capture:22500HP transition; claim labelled11.1.0"
+              }
+            ],
             "group": "rewards"
           }
         ]
