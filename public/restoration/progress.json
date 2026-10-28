@@ -3480,9 +3480,13 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Flayer/Veteran and population-owner Flayer God 0x647–649; selected God projectile applies Quiet10s.",
-        "differences": [],
+        "differences": [
+          "Current initial3/2 and live-child4/3 refills every10s differ from compiled Kithio lifetime births2/3 and self-density2 reproduction every60s. Current God alternates two2s streams rather than Kithio's independent400ms green/1000ms star; followers omit its0.5 prediction.",
+          "Current God ability3 rate10%, one-success-per-tier rolls and private allocation differ from Kithio's15% and candidate-expanded shared rolls. Comparator values are not authenticated123.5.1 probabilities."
+        ],
         "unknowns": [
-          "Target reproduction, exact attack cadence and reward probabilities."
+          "Exact123.5.1 population/replacement/self-reproduction, attack clocks/prediction, orphan/protection behavior and reward allocation/rates, including Snake Pit17%. May19,2012 guides support mechanics but have obsolete stats; issue835 retains the source/engine comparison and remaining checks.",
+          "The17-check prepared native encounter does not accept earned traversal/survival, multiplayer rewards, item pickup/reconnect or a rolled Snake Pit journey. Whole-feature gameplay remains not-run."
         ],
         "sources": [
           {
