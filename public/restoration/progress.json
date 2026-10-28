@@ -2961,10 +2961,11 @@
         "expected": "Crystal activation/reset/release, Prisoner combat, Steeds/Clones, cleanup and rewards; target123.5.1 removes Steed/Clone Stasis immunity.",
         "differences": [
           "Server PR293 places one finite Mysterious Crystal on Mountains terrain in each new Realm, outside ordinary respawns, with the existing activation and Prisoner combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/293",
-          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555"
+          "Server PR555 adds the six stat potions at 50% to the Prisoner's private bag, after the Crystal Wand and Sword at 2% from PR518, as Trapped's ordered first-success rolls. These 2013 comparator rates are not authenticated 123.5.1 rates; the period wiki gives ??%. Damage dealt to the Crystal no longer earns Prisoner drops or level assist credit. The 1-damage eligibility threshold and dropped duplicates differ from Trapped, which requires more than 100 damage and gives duplicates to another player: https://github.com/OpenRotMG/Open-RotMG-Server/pull/555",
+          "Selected Crystal HP1000000 matches the modified7.0 client; compiled Kithio AI allows three lifetime Steed births. June2012 instead describes HP55000/six Steeds. Current Daisy step8 is vulnerable where Kithio shields it; warning movement omits Follow. Kithio also has different loot thresholds/rates, including guaranteed Vitality. These remain disclosed reconstruction differences, not authenticated target rules: https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301"
         ],
         "unknowns": [
-          "Target thresholds/reset, timings, placement, reward policy and loaded minion condition susceptibility."
+          "Exact123.5.1 thresholds/reset, phase and shield timings, placement distribution and reward rates/eligibility remain unresolved. Compiled comparator semantics and dated Steed/Clone evidence are recorded at https://github.com/OpenRotMG/Open-RotMG-Server/issues/825#issuecomment-6461532301 . Loaded minion susceptibility still needs the bounded native check."
         ],
         "sources": [
           {
@@ -2978,6 +2979,26 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
             "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Crystal.cs",
+            "label": "Compiled Kithio comparator; strict HP gates, immediate Heal, lifetime Spawn counts and differing loot, not authenticated original AI"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_TestingObjectsCXML.dat",
+            "label": "Modified7.0 Prisoner, Clone and Steed definitions normalize identically to selected XML; sparse projectile IDs are not C# array ordinals"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MountainsCXML.dat",
+            "label": "Modified7.0 Crystal definition matches selected XML, including million HP, Mountains and PerRealmMax1"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Crystal%20Prisoner%20Clone",
+            "label": "Clone page last modified September7,2012:17s lifetime,85-damage shots every1.4s, no shield/Weak or drops"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613203408id_/http://forums.wildshadow.com/wiki/crystal-prisoner-steed-0",
+            "label": "Earlier Steed description supports stats/Weak2s/no drops but its immunity claim predates the123.5.1 correction"
           }
         ]
       }
