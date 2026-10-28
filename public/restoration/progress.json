@@ -5901,16 +5901,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Each evidenced instant-heal consumable uses its own amount, consumes once and caps at effective maximum HP. Definitions include Minor50/Health100/Greater200; Greater deployment is unresolved. Dose succession and mixed/area/cure effects belong to existing consumable bundles, not extra potion-size points.",
-        "differences": [],
+        "expected": "Minor/Health/Greater instant-heal definitions restore 50/100/200 HP, consume once and cap at effective maximum HP. The reconstruction consumes ineffective full-HP/Sick uses; Sick blocks healing. Greater obtainability remains unresolved. Dose succession and mixed/area/cure effects are separate consumable bundles.",
+        "differences": [
+          "Compiled Kithio consumes ineffective uses and caps at Stats+Boost, but lacks a Sick guard. Build122 documents Sick disabling healing; modified7.0 consumes before its guarded heal. These are reconstruction anchors, not recovered original-server code."
+        ],
         "unknowns": [
-          "Was Greater Health Potion obtainable in 123.5.1?",
-          "Does using a potion at full HP or while Sick consume it?"
+          "Was Greater Health Potion obtainable in 123.5.1? Its selected definition and modern drop lists do not prove target-era deployment; tracked in server issue880.",
+          "Independent target-era server evidence for full-HP/Sick consumption versus refund remains missing; selected-client dispatch and community comparators alone do not settle it."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427021641id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-health-potion",
+            "label": "April27,2012 capture: Minor restores50HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427030354id_/http://forums.wildshadow.com/wiki/realm-mad-god/health-potion",
+            "label": "April27,2012 capture: Health restores100HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing; no consumption/refund policy stated"
           }
         ]
       }
