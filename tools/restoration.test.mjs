@@ -437,6 +437,10 @@ test('controls research retains prior passes without accepting the missing chat 
   for(const check of feature.audit.checks){assert.equal(check.historical,'partial');assert.equal(evidence.results[check.id].status,'passed');assert(evidence.results[check.id].evidence.includes('controls-display-research-d15f321'));}
   assert.equal(evidence.sources['controls-display-research-d15f321'].kind,'source');
   assert.equal(evidence.sources['controls-minimap-sight-native-544ff3f'].revision,'544ff3f239fef79e531be00919fe3625b38a30d2');
+  const native=evidence.sources['controls-display-native-e4d8ef46'];
+  assert.equal(native.kind,'native');assert.deepEqual(native.checks,[feature.id,'social:chat']);
+  assert.match(native.method,/13 assertions/);assert.match(native.limitations,/No offensive-language filtering acceptance/);
+  for(const id of native.checks){assert.equal(evidence.results[id].status,'not-run');assert(evidence.results[id].evidence.includes('controls-display-native-e4d8ef46'));}
 });
 
 test('minimap menu passes only its cross-revision functional scope and preserves prior evidence',()=>{
