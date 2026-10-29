@@ -3810,7 +3810,8 @@
         "historical": "partial",
         "expected": "Ordinary Red/Purple/Green Gelatinous Cubes (0x60e-0x610), separate from Cube God followers: ShorePlains, 70HP/0DEF, wandering and 2/1/5 projectiles. Complete selected definitions match pinned modified 7.0 XML; period guides list4XP, current ceiling-rounded award is5.",
         "differences": [
-          "Current radius5/nonpredictive aiming differs from compiled Kithio radius8/predictive0.2; global bounded replenishment and home-limited wandering do not reproduce its local densityMax5/radius10 reproduction and randomized movement. Trapped instead has randomized attack cooldowns. Current5XP versus guide4XP follows the shared ceiling-rounding policy already qualified by progression research, not a cube-specific repair. These are reconstruction choices, not recovered original AI."
+          "Current radius5/nonpredictive aiming differs from compiled Kithio radius8/predictive0.2; global bounded replenishment and home-limited wandering do not reproduce its local densityMax5/radius10 reproduction and randomized movement. Trapped instead has randomized attack cooldowns. Current5XP versus guide4XP follows the shared ceiling-rounding policy already qualified by progression research, not a cube-specific repair. These are reconstruction choices, not recovered original AI.",
+          "Native display holds at destinations during stalls: intentional UX, not historical interpolation."
         ],
         "unknowns": [
           "Original production spawn counts/density and XML Spawn policy. Trapped uses ShorePlains area/150, clipped Gaussian groups and Bandit/Cube weights0.4/0.2/0.2/0.2; current relative XML selection and legal placement are reconstructed.",
