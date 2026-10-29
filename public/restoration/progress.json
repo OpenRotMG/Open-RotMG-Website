@@ -7999,10 +7999,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slowed fixes movement at 0.004 tiles/ms before terrain multiplication; it overrides Speed and Speedy. Terrain/sinking behavior is a separate acceptance dimension.",
-        "differences": [],
+        "expected": "Slowed fixes player movement at 0.004 tiles/ms before terrain multiplication, overriding Speed and Speedy; Paralyzed still stops movement. Sink is visual, while Quicksand's Sinking multiplier decreases from .6 toward .1 over 18 MOVE callbacks and resets off Sinking ground. Selected terrain table and cleanse/lifecycle reconstruction are pinned in issue937.",
+        "differences": [
+          "Current reapplication retains the longer deadline; compiled Kithio replaces it. The June2012 guide estimates roughly three tiles/second and says Invulnerable blocks negative effects, conflicting with the selected client/current reconstruction. Neither is sufficient to override selected behavior or reopen PR1071."
+        ],
         "unknowns": [
-          "Complete target terrain/sinking table, lifecycle and cleanse policy."
+          "Original123.5.1 reapplication/rounding, authoritative MOVE cadence, version-specific immunity, exact cleanse mask and portal/disconnect/death policy remain historically partial. Current transient effects are not serialized in Character. Native Slowed and Quicksand passes are separate: combined Slowed/Quicksand, ordinary-water/lava rates and fresh disconnect/death-boundary gameplay remain unverified in issue937."
         ],
         "sources": [
           {

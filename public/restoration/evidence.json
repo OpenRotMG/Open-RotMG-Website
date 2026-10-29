@@ -1,6 +1,30 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "slowed-native-6218ec19": {
+      "kind":"native", "revision":"6218ec197c555a2e308792effda391593b5e28f7", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1219#issuecomment-6486633255", "checks":["condition:4"],
+      "method":"Clean QAd6586c45 passes8 checks/29250game ms with two native Warriors. Natural web Slowed overlaps ordinary Golden Helm Speedy;500ms input windows move2.008tiles at Speed50 and1.912 at prepared effective70. Invincible blocks new hits, Slowed expires and movement recovers4.641tiles. Fresh Holy Water clears Slowed, preserves Speedy, commits one inventory revision and moves6.865tiles. Ordinary Nexus escape retains the same living Warrior without Slowed. Casee24f65d4, ELFe33ad676, client0282b3a4/Ruffle.16; published Slowed/expired viewport crops byte-verified. Cold QA6fa247c4 checks exact final case bytes, SQLite/FKs, no deaths,27 absent child PIDs, cleanup[] and zeroERRORs/sevenWARNs.",
+      "limitations":"Prepared level/gear/placement, protection and temporary+20Speed, not earned progression or a frame-timing/FPS benchmark. Absolute first cold-window probe failed; later comparisons assert observed movement, not precise rendering cadence. No combined Slowed/Quicksand, every-terrain, disconnect/death-boundary or historical acceptance. Rejected native-teleport prototype/fencing/cleanup failures remain failures; no authority, ACK/lease, persistence or permanent-death rule changed."
+    },
+    "slowed-terrain-native-e27afe5d": {
+      "kind":"native", "revision":"e27afe5daae736cf58669235687f75daf358f51d", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1219#issuecomment-6486633255", "checks":["condition:4"],
+      "method":"Clean QA19f11bee reuses the existing Quicksand scenario with explicit60-second Invincible to isolate terrain from combat.25 recorded assertions/18450game ms verify actual generated Quicksand, stationary sinking, capped slow walk, dry-ground exit/recovery, reentry reset, progressive slowing again, same-character Nexus escape and resumed movement. Case1ce02746; same ELFe33ad676/client0282b3a4/Ruffle.16. Cold QA6fa247c4 verifies final case equality, SQLite/FKs, no deaths,21 absent child PIDs, cleanup[] and zeroERRORs/WARNs.",
+      "limitations":"Sinking is tested separately from Slowed. Prepared Rogue/position/protection, not ordinary-risk combat or an exact original map/cadence claim. Unprotected QAc9e0935d passed through reentry then died to Tomb combat; read-only SQLite retains its one committed death. Bad corridor inference and duplicate-case prototype are not accepted and the duplicate source was removed. No gameplay or shared harness change."
+    },
+    "slowed-regression-4bc71cb5": {
+      "kind":"regression", "revision":"4bc71cb54632851065ce37d6f1f44851368329ad", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40806599255", "checks":["condition:4"],
+      "method":"CI passes294 Rust tests, warning-denied Clippy, formatting and QA lifecycle. New focused motor regression verifies fixed Slowed speed at baseSpeed0/50/75, Slowed-over-Speedy precedence, longer-deadline retention after shorter reapplication, exact expiry and overriding Paralyzed. Existing protection/ACK and Purification regressions remain separate. Later PR1219 changes only native case preparation, not Rust gameplay.",
+      "limitations":"Server-motor and simulated timer checks are not native frame timing or historical policy proof. Initial baseSpeed100 fixture fails ordinary class-cap validation and was corrected, not worked around. Source alone does not accept every terrain or lifecycle boundary."
+    },
+    "slowed-research-5bcb5193": {
+      "kind":"source", "revision":"5bcb5193c4638ce09f071cf18b69b28469c1dfd1", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/5bcb5193c4638ce09f071cf18b69b28469c1dfd1/data/grounds.xml", "checks":["condition:4"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/937#issuecomment-6486070917 . Selected123.5.1 Player._J_N_/_01w, ground parser and network MOVE callback distinguish fixed4tiles/s Slowed from visual Sink and progressive Sinking to.1 at level18. Enumerated all173 selected grounds,36 explicit movement entries and10 NoWalk entries. Modified7.0 has identical Speed/Sink/Sinking/NoWalk fields for all173 selected IDs; only0x84 is renamed. Compiled Kithio Ground/Effects do not set movement; UseItem's NegativeEffs includes Slowed. Additional Entity.cs timer and June13,2012 status-page checks expose replace-versus-longest and approximate3tiles/s/Invulnerable conflicts. April17,2012 Holy Water supports generic cleansing, not an exact mask; mutable Japanese2020 text is not a2012 witness.",
+      "limitations":"Source comparison, not native or historical acceptance. Original reapplication/rounding, MOVE cadence, immunity, full cleanse mask and portal/disconnect/death policy unresolved. Kithio aura targeting bug is not imported; current client-owned movement, transient admission reset, longest deadline, ACK/lease, permanent death and once-only rewards remain unchanged. No comparator code/assets copied."
+    },
     "guild-roster-native-0cf063b1": {
       "kind":"native", "revision":"0cf063b16fb5bd25fe453b9a7939b7dc722c8ca4", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1197#issuecomment-6485175211", "checks":["social:guild-roster"],
@@ -6248,7 +6272,7 @@
     "access:player-art-editor": {"status":"not-run","evidence":[]},
     "condition:2": {"status":"not-run","evidence":[]},
     "condition:3": {"status":"not-run","evidence":[]},
-    "condition:4": {"status":"not-run","evidence":[]},
+    "condition:4": {"status":"not-run","evidence":["slowed-research-5bcb5193","slowed-native-6218ec19","slowed-terrain-native-e27afe5d","slowed-regression-4bc71cb5"]},
     "condition:5": {"status":"not-run","evidence":[]},
     "condition:6": {"status":"not-run","evidence":[]},
     "condition:7": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
