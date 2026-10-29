@@ -1,6 +1,45 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review."},
   "sources": {
+    "world09-source-ddf3791": {
+      "kind": "source",
+      "revision": "ddf379139b60cb4601d1f05dd1c6fcaaf779f34f",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/ddf379139b60cb4601d1f05dd1c6fcaaf779f34f",
+      "checks": [
+        "realm:map-world-09",
+        "realm:map-registration",
+        "realm:great-coil-snake"
+      ],
+      "method": "PR1224 registers image-guided World9 with explicit authored cells, habitats and encounters; shared Coil/chest spawning preserves structures.",
+      "limitations": "Not recovered original data or gameplay proof; historical identity and image-derived rights remain unverified."
+    },
+    "world09-regression-938d83e": {
+      "kind": "regression",
+      "revision": "938d83ee8162bcbb490b652c7054d38a76851e42",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40833285169",
+      "checks": [
+        "realm:map-world-09",
+        "realm:map-registration",
+        "realm:great-coil-snake"
+      ],
+      "method": "Required CI passes 377 Rust tests, formatting, strict Clippy and lifecycle checks on the exact merged tree. Both populated World9 Realms retain landmarks/lava and connect every arrival/site without lava crossings. Local Node: 20 passed.",
+      "limitations": "Initial connectivity in two deterministic Realms only; not later-state, historical or whole-bank acceptance."
+    },
+    "world09-native-4bf2154": {
+      "kind": "native",
+      "revision": "4bf215453e9a42f3aa4be18dca83bb9cd7ce44ad",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1224#issuecomment-6490612447",
+      "checks": [
+        "realm:map-world-09",
+        "realm:map-registration",
+        "realm:great-coil-snake"
+      ],
+      "method": "Clean same-tree native runs pass 11 journey and 5 hazard checks: traversal, Coil defeat/XP, original chest-item drag, collision, lava damage and survival. Four ground-244 damage commits; no cleanup errors.",
+      "limitations": "Prepared Archers/gear/stats/positions are unearned. Representative checks, not whole-bank acceptance. NPC damage is separate; no Jungle portal appeared (unchanged 20% roll). Earlier failures remain retained; history/rights unverified."
+    },
     "berserk-correction-source-d35bb9c": {"kind":"source","revision":"d35bb9caf506f14ecd2c887ff1de6feb678ab424","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/d35bb9caf506f14ecd2c887ff1de6feb678ab424/src/world/reconciliation.rs","checks":["condition:20","realm:shoot-and-take-damage"],"method":"PR824 shares normal_attack_period between admitted native shots and discarded shots during GOTO correction, including the selected 1.5 Berserk multiplier and existing recently expired allowance. Discarded shots advance protocol counters without creating authoritative projectiles or shot credit; genuine cadence violations still fail with diagnostics. Merged code was inspected alongside the regression and remains present at 22bdb462.","limitations":"Source inspection, not rendered native firing, measured original tolerance or the reporter's exact live state. Production logs lacked the player's buff state. Dazed, placement, ownership, ACK and movement policies are separate; no condition/combat acceptance promotion."},
     "berserk-correction-regression-dd30ce7": {"kind":"regression","revision":"dd30ce7fe564bb1acbe8a9c51a641c2448e5b887","date":"2026-10-27","url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40514032154","checks":["condition:20","realm:shoot-and-take-damage"],"method":"Inspected PR824 final-head CI log: 98 Rust tests pass, including native_berserk_shots_survive_position_correction. The actual test covers active/recently expired/expired or absent Berserk, Dazed, discarded counters with no authoritative projectile/shot increment, real overspeed rejection and firing after GOTO ACK. This is the existing merged regression; no new test or gameplay run was added for this audit.","limitations":"Synthetic World/native-protocol fixture, not an ordinary-client gameplay take, full condition interactions or authenticated original admission tolerance. The PR body's earlier 96-test local count is not this 98-test integration result. Whole feature statuses remain not-run."},
     "legends-seeded-eligibility-source-61c4334": {"kind":"source","revision":"61c43345fb545075d745b56256a7553082c3584f","date":"2026-10-28","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/61c43345fb545075d745b56256a7553082c3584f/src/store/legends.rs","checks":["heroes:legends-highscores"],"method":"PR1053 applies the same death-snapshot lifetime-completeness predicate before the ranked LIMIT20 query and to MyFameListElem. Accounts recorded in shore_bots need complete lifetime history; human snapshots do not gain that restriction. Direct archived Fame lookup remains unchanged. Inspected merge diff and current 22bdb462 source.","limitations":"Modern bot-competition eligibility, not original 123.5.1 guest/bot policy, a new native Legends run or new death/reward acceptance. Existing separately bound UI/death/tint/own-row observations retain their original revisions and preparation limits."},
@@ -6168,12 +6207,12 @@
     "realm:map-world-06": {"status":"not-run","evidence":[]},
     "realm:map-world-07": {"status":"not-run","evidence":[]},
     "realm:map-world-08": {"status":"not-run","evidence":[]},
-    "realm:map-world-09": {"status":"not-run","evidence":[]},
+    "realm:map-world-09": {"status":"passed","evidence":["world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
     "realm:map-world-10": {"status":"not-run","evidence":[]},
     "realm:map-world-11": {"status":"not-run","evidence":[]},
     "realm:map-world-12": {"status":"not-run","evidence":[]},
     "realm:map-world-13": {"status":"not-run","evidence":[]},
-    "realm:map-registration": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a"]},
+    "realm:map-registration": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a","world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
     "realm:biome-zones": {"status":"not-run","evidence":["partial-differences-source-4992445","classic-lowland-regression-39778f0","classic-lowland-native-39778f0","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-habitats-native-08a2922"]},
     "realm:water-network": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a"]},
     "realm:road-network": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1","partial-differences-source-4992445","realm-research-2297a7a","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74"]},
@@ -6228,7 +6267,7 @@
     "realm:undead-hobbit-mage": {"status":"not-run","evidence":["realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df","undead-hobbits-research-8eebdc2","undead-hobbits-native-f8d9e54"]},
     "realm:elf-wizard": {"status":"not-run","evidence":["elf-family-native-b633c1c","elf-escort-source-048aecc","elf-escort-regression-048aecc","realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
     "realm:goblin-mage": {"status":"passed","evidence":["goblin-rewards-native-833bd50","goblin-research-02428f2","goblin-regression-02428f2","goblin-attacks-native-02428f2","goblin-budget-native-353dfe0","goblin-integration-c602d5d","realm-loot-regression-e222284","period-loot-source-1f488df","period-loot-regression-1f488df"]},
-    "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064"]},
+    "realm:great-coil-snake": {"status":"passed","evidence":["coil-research-0e8b12c","coil-native-19939a5","coil-encounter-native-aa1cd0b","coil-habitat-source-578c4c3","coil-habitat-regression-578c4c3","coil-habitat-native-578c4c3","temple-ground-regression-52cb11f","temple-plants-regression-48bd41d","coil-chest-ceiling-regression-31ac67b","landmark-chest-trials-regression-09eb8b7","temple-anchor-regression-ecb7064","world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
     "realm:scorpion-queen": {"status":"not-run","evidence":["scorpion-research-d1eaafc","scorpion-native-64c516b","scorpion-native-partial-8437763"]},
     "realm:bandit-leader": {"status":"not-run","evidence":["bandit-research-0e8b12c","bandit-native-04e78a2"]},
     "realm:lord-of-the-lost-lands": {"status":"not-run","evidence":["realm-completion-regression-a972cb3","lost-lands-research-3587c31","lost-lands-regression-a39b589","lost-lands-native-attempt-ee5f323","lost-lands-source-followup-67ba7b7","lost-lands-followup-48a3be9","lost-lands-native-partial-8a0f099","lost-lands-native-47523d6"]},
