@@ -1,6 +1,33 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "character-switch-native-7b051236": {
+      "kind": "native",
+      "revision": "7b051236d193d8d3dbf94b8ac4ea1eb35adbacbb",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1211#issuecomment-6485096583",
+      "checks": ["access:character-slots"],
+      "method": "Clean QAfe5ef679 passes six assertions: real carried-slot4→5 potion drag/revision1→2, four native shots, Change Characters, durable living inventory/revision/shots checked in SQLite before Play, same-account1/character1 reentry with player578331→578332, retained state and working native movement. Selection renders the living Wizard and600-Gold second-slot offer. Capacity1/100Gold unchanged. Source7b051236, caseaf49c553, ELFef8bbf86, client0282b3a4 and Ruffle.16/bundle579236cd are pinned in the public receipt. Integrity/FKs pass, zero backend ERRORs, cleanup errors[] and owned processes retired. Reuses PR154 purchase/second-creation/selection and refusal/restart receipts separately.",
+      "limitations": "Prepared level-one Wizard/Nexus position/equipment and one unearned potion, not earned progression, fresh purchase execution, real payment, mail or production acceptance. Fresh account has not completed Tutorial; ordinary reentry goes Nexus→Tutorial, not map-position persistence. QA5fc09ecc missed the rendered carried row; QA51021f6b changed screens during controller resume setup. Final case corrects only row coordinates/start sequencing, with authority/ACK/lease/permanence/reward rules unchanged. Earlier queued entry-hook drafts were cancelled before gameplay. The one current Rust slot-filter pass is a preset-capacity guard, not retired financial tests. Original economic continuity and flush/ACK/crash timing remain historical partial."
+    },
+    "character-slots-research-7c4aa51e": {
+      "kind": "source",
+      "revision": "7c4aa51e79e175ffbf66b03c619cf679f57c080c",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/7c4aa51e79e175ffbf66b03c619cf679f57c080c/docs/character-slots.md",
+      "checks": ["access:character-slots"],
+      "method": "Issue927 reconciliation at server30f27d73. Fresh hash-pinned123.5.1 export: capacity/price from list metadata; credentials-only purchase, registration/balance gate, always-present Buy row and Change Characters COMPLETE dispatch. Compiled/registered Kithio charges100 and starts at1; Trapped's matching handler is not independent. Modified7.0 client has a Fame branch but its server chooses Gold/configured SlotCost. Additional dated checks: November5,2011 WordPress one-free-slot/600-currently/usually1000 and March29,2012 Arqade statue-to-selection answer, not its2015 Options answer. Mutable Japanese August4,2012 package section values two slots600+800 and cap14. Retain PR154 reconstruction, not comparator economics; no gameplay-policy change or imported reference code.",
+      "limitations": "Historical partial: independently dated full123.5.1 initial-capacity/cap/tier/sale policy and original autosave/disconnect flush/ACK/crash semantics remain unresolved. Dated-backup403 and official-promotion429/unrelated later index do not establish policy. Current commitment/ownership fences are modern safeguards. Source inspection and this research record are not a native pass."
+    },
+    "character-slots-pr154-0c6fa5ed": {
+      "kind": "native",
+      "revision": "0c6fa5ed4fdab9b408b75eca680b6a64cb51df39",
+      "date": "2026-10-17",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/154#issuecomment-6237587188",
+      "checks": ["access:character-slots"],
+      "method": "Reused PR154 receipt: normally created Wizard retained through native registration; only disposable virtual wallet prepared100→600. Native Buy debits600→0, capacity2 and next800 quote; ordinary second-Wizard creation and selections2→1→2 preserve both living saves. The receipt states native purchase/store/HTTP source hashes match integrated feature head; unrelated yell integration and later backup-only correction are not fresh native execution.",
+      "limitations": "Revision-bound older native evidence, not fresh-main acceptance or earned Gold/real payment/production verification. The receipt also records HTTP/store refusal, tier/cap, concurrency, death/delete reuse and restart/backup tests; many regressions were subsequently retired and are not current guards. Timer collisions fail visibly; distinct timers use current durable price without stale-quote protection."
+    },
     "password-change-native-ebcee307": {
       "kind":"native", "revision":"ebcee30732619e86abc9fe49d4ef0ea463267c98", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1209#issuecomment-6485041219", "checks":["access:change-password"],
@@ -6168,7 +6195,7 @@
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
     "access:change-password": {"status":"passed","evidence":["password-change-research-0a57c83b","password-change-native-7d8b511f","password-change-regression-ebcee307","password-change-native-ebcee307"]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},
-    "access:character-slots": {"status":"not-run","evidence":[]},
+    "access:character-slots": {"status":"passed","evidence":["character-slots-research-7c4aa51e","character-slots-pr154-0c6fa5ed","character-switch-native-7b051236"]},
     "access:character-deletion": {"status":"passed","evidence":["character-deletion-research-8d1d7cb6","character-deletion-native-9d43d7b7","character-deletion-http-8d1d7cb6"]},
     "access:server-selection": {"status":"not-run","evidence":["server-selection-research-7c8e1cf6","server-selection-usage-native-110abdcd","server-selection-native-4d2e7ffb"]},
     "access:reconnect-safely": {"status": "not-run","evidence": ["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808","idle-warnings-resets-native-b693808","idle-first-return-durable-native-b693808","recovered-account-source-794eccf","restart-notice-source-794eccf"]},
