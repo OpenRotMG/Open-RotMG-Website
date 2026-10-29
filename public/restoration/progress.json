@@ -7917,10 +7917,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Quiet has a synchronized condition state. Mana depletion and natural-regeneration suppression are comparator-supported working rules; exact target potion/aura and ability exceptions remain unresolved.",
-        "differences": [],
+        "expected": "Quiet drains MP, suppresses natural MP regeneration and refuses equipped abilities. Magic/MagicNova still consume but cannot grant MP to Quiet recipients; curing or expiry permits recovery. These are tested reconstruction rules, not exact original-server acceptance.",
+        "differences": [
+          "Existing authority policy drains immediately and suppresses committed mana grants. Kithio grants Magic/MagicNova mana before its next Quiet drain tick. Our max-deadline reapplication differs from its direct duration replacement; no gameplay change is made in issue935."
+        ],
         "unknowns": [
-          "Target potion/MagicNova handling, zero-cost ability acceptance, drain cadence and reapplication/cure policy."
+          "Exact123.5.1 sub-tick drain/transient grants, shorter reapplication and cure timing, and original aura range/recipient exceptions remain historical questions in issue935. Selected definitions contain108 equipped abilities, none zero-cost; client cost checks do not prove a hypothetical zero-cost server exception.",
+          "Native Priest Purification of Quiet and death/replacement boundaries are not covered by the new Quiet journey. Existing zero-damage hit/duplicate ACK, recovery, potion and group-recipient regressions and prior Sprite God expiry evidence remain separately scoped."
         ],
         "sources": [
           {
@@ -7930,6 +7933,18 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs",
+            "label": "Compiled Kithio comparison: potion/nova grants and Quiet cleanse list"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Entity.cs",
+            "label": "Kithio engine: replacement durations and zero-duration cure"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture: zero-damage boomerang inflicts Quiet for ten seconds"
           }
         ]
       }
