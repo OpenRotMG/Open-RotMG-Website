@@ -7373,12 +7373,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The recovered 123.5.1 client opens to character selection and supports entering the game.",
-        "differences": [],
-        "unknowns": [],
+        "differences": [
+          "Map-editor JSON and direct debug-world entry are unsupported. The public pixel-art maker is a separate feature."
+        ],
+        "unknowns": [
+          "The recovered client hides its map editor without an Admin flag; original 123.5.1 server enforcement and exceptional debug-world access remain unverified. See server issue 918."
+        ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_C_Q_.as#L56-L59",
+            "label": "Recovered-source map-editor Admin menu gate; not original-server permission proof"
           }
         ]
       }
@@ -7412,15 +7420,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity.",
-        "differences": [],
+        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity. Account verify authenticates the new credentials; it is not email confirmation.",
+        "differences": [
+          "Current registration sends no automatic email; PR745 requires an explicit authenticated send. March/October 2012 guide revisions describe an initial email after registration, but exact 123.5.1 continuity is unresolved."
+        ],
         "unknowns": [
-          "Original initial verification-email and confirmation policy."
+          "Exact 123.5.1 initial-send, retry and delivery rules, and external confirmation/token/challenge policy; precise remainder tracked in server issue920."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 guide revision: initial email, link confirmation and apparently retained unconfirmed accounts; not original server internals"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=7&action=source",
+            "label": "October 9, 2012 revision retains those passages; not proof of exact selected-build continuity"
           }
         ]
       }
@@ -7454,18 +7472,27 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. Confirmation happens outside the client; the immediate Sent label does not establish delivery.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved. The immediate Sent label does not establish delivery.",
         "differences": [
-          "Uses modern 24-hour single-use hashed links, bounded explicit requests and an explicit browser confirmation button; registration sends no automatic email. Earlier registration-guide evidence describes initial mail and link confirmation, not these reconstructed safeguards."
+          "Uses modern 24-hour single-use hashed links, bounded explicit sends and an explicit browser confirmation button; registration sends no automatic email. Period guide describes an initial email and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
           "Exact 123.5.1 external endpoint/parameters and token generation, expiry, replacement/replay and challenge rules. Retained older guide images show realmofthemadgod.appspot.com/account/v, but their attachment timestamps do not prove target-build continuity; tracked in server issue922.",
-          "Exact target initial-send, queue/retry, throttling and delivery rules, including continuity of the March/October 2012 guide observations reported in issue920. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement."
+          "Exact target initial-send, queue/retry, throttling and delivery rules and continuity of the period guide observations; tracked in server issue920 and issue922. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement.",
+          "CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions; target challenge policy remains unresolved."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 revision: initial email, link-only confirmation and apparently playable unconfirmed accounts"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=11&action=source",
+            "label": "September 10, 2016 revision adds CAPTCHA; do not backdate current-page wording or attachment dates"
           },
           {
             "url": "https://wikiwiki.jp/rmd/アカウント登録",
