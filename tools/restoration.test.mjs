@@ -8,6 +8,42 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('gallery ordinary passes do not certify administrative export or original history',()=>{
+  const data=catalogue(),evidence=ledger(),id='access:player-art-gallery',feature=data.features.find(f=>f.id===id);validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.deepEqual(evidence.results[id].evidence,['gallery-research-53587151','gallery-native-41ba534a','gallery-cold-http-41ba534a']);
+  assert.match(feature.audit.differences.join(' '),/does not issue gallery Admin/);
+  assert.match(evidence.sources['gallery-native-41ba534a'].method,/17 native assertions/);assert.match(evidence.sources['gallery-cold-http-41ba534a'].method,/12 HTTP assertions/);
+});
+
+test('Guild Hall first-upgrade acceptance does not certify original layouts or every tier',()=>{
+  const data=catalogue(),evidence=ledger(),id='social:guild-hall',component=id+':shared-access-and-first-upgrade',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(evidence.results[component].status,'passed');
+  for(const kind of ['native','regression'])assert(evidence.results[component].evidence.some(ref=>evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
+  assert.match(feature.audit.unknowns.join(' '),/250,000.*production price/);
+});
+
+test('reconnect research preserves idle proof without accepting original server timing',()=>{
+  const data=catalogue(),evidence=ledger(),id='access:reconnect-safely',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(evidence.results[id].status,'passed');
+  assert.equal(evidence.results['access:idle-disconnect'].status,'passed');
+  assert.equal(evidence.sources['reconnect-native-aa4e65d0'].kind,'native');
+  assert(evidence.results[id].evidence.includes('reconnect-native-aa4e65d0'));
+  assert(evidence.results['access:world-loading-presentation'].evidence.includes('reconnect-native-aa4e65d0'));
+  assert(evidence.results[id].evidence.includes('idle-first-return-durable-native-b693808'));
+  assert.equal(evidence.results['access:world-loading-presentation'].status,'not-run');
+  assert.match(feature.audit.unknowns.join(' '),/expiry, reuse and death\/transfer/);
+  for(const record of [feature,...feature.audit.checks]){
+    const rule=record.audit??record;assert.equal(rule.historical,'partial');
+    assert(evidence.results[record.id].evidence.includes('reconnect-research-a07c62f8'));
+  }
+  assert.match(evidence.sources['reconnect-research-a07c62f8'].limitations,/not native minimum-display\/fade/);
+});
+
 test('Tutorial research keeps whole-feature acceptance separate from period reward identities',()=>{
   const data=catalogue(),evidence=ledger(),id='home:tutorial-and-kitchen',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
@@ -64,14 +100,14 @@ test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics
   assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
 });
 
-test('stable 211 parents and 70 components remain separate from evidence',()=>{
+test('stable 211 parents and 71 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
-  assert.equal(new Set(rows.map(r=>r.id)).size,281);
-  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,70);
+  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,282);
+  assert.equal(new Set(rows.map(r=>r.id)).size,282);
+  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,71);
   assert.equal(rows.filter(r=>r.id.startsWith('realm:map-world-')).length,13);
   assert.equal(digest(data.features.map(f=>f.id)),'d4590c87ab5751a89132a40ed16a37258b5f407ba70d9f5be84724a113b9fa3a');
-  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'27e5eec1f99db6d2e0c2a0846cbce7471def7dbf165f78679f58a53b33b59bed');
+  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'6c077c8c43e3cc970fa4fa6f3cb0350713c364707bd913c0138f920cf13f1226');
   assert(data.features.every(f=>!accepted(f,evidence)));
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
@@ -409,6 +445,21 @@ test('shield stun receipts do not accept complete classes, bosses or conditions'
   for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);}
 });
 
+test('controls research retains prior passes without accepting the missing chat filter',()=>{
+  const data=catalogue(),evidence=ledger(),feature=data.features.find(f=>f.id==='access:controls-and-display');
+  validateEvidence(data,evidence);
+  assert.equal(feature.audit.implementation,'partial');assert.equal(feature.audit.historical,'partial');
+  assert.match(feature.audit.differences.join(' '),/empty cleanText/);
+  assert.equal(evidence.results[feature.id].status,'not-run');assert.equal(accepted(feature,evidence),false);
+  for(const check of feature.audit.checks){assert.equal(check.historical,'partial');assert.equal(evidence.results[check.id].status,'passed');assert(evidence.results[check.id].evidence.includes('controls-display-research-d15f321'));}
+  assert.equal(evidence.sources['controls-display-research-d15f321'].kind,'source');
+  assert.equal(evidence.sources['controls-minimap-sight-native-544ff3f'].revision,'544ff3f239fef79e531be00919fe3625b38a30d2');
+  const native=evidence.sources['controls-display-native-e4d8ef46'];
+  assert.equal(native.kind,'native');assert.deepEqual(native.checks,[feature.id,'social:chat']);
+  assert.match(native.method,/13 assertions/);assert.match(native.limitations,/No offensive-language filtering acceptance/);
+  for(const id of native.checks){assert.equal(evidence.results[id].status,'not-run');assert(evidence.results[id].evidence.includes('controls-display-native-e4d8ef46'));}
+});
+
 test('minimap menu passes only its cross-revision functional scope and preserves prior evidence',()=>{
   const data=catalogue(),evidence=ledger(),id='access:minimap-player-menu',old='minimap-both-invisible-native-9ad87c2';
   validateEvidence(data,evidence);
@@ -417,7 +468,7 @@ test('minimap menu passes only its cross-revision functional scope and preserves
     ['minimap-guild-edge-native-d9f3eb2','d9f3eb27dd8d78a5049cff4b2cecb3a45c6abfed','2026-10-24'],
     ['minimap-guild-pause-native-21b5980','21b5980f2ccd057ddf5f53c10a472d774b6126a8','2026-10-24']
   ];
-  assert.deepEqual(evidence.results[id],{status:'passed',evidence:[old,...receipts.map(([ref])=>ref)]});
+  assert.deepEqual(evidence.results[id],{status:'passed',evidence:[old,...receipts.map(([ref])=>ref),'controls-display-research-d15f321']});
   for(const [ref,revision,date] of receipts){
     const source=evidence.sources[ref];assert.equal(source.kind,'native');assert.equal(source.revision,revision);assert.equal(source.date,date);
     assert.equal(source.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018');assert.deepEqual(source.checks,[id]);

@@ -6894,7 +6894,7 @@
         "unknowns": [
           "Original Nexus boundary metric/equality, death-notice audience and general killer-article rule. GDC slide 54 shows 'a Knight of Oryx' and 'a Pet of Oryx', not an algorithm for every cause.",
           "Exact 123.5.1 continuity and audiences for other announcements and per-enemy taunt text/timing. Kithio's compiled Taunt defaults to strict 15-tile proximity with an authored broadcast override; that does not establish the player-chat metric.",
-          "Historical filtering vocabulary and complete native preference persistence, bubble on/off and class-unlock overlay acceptance. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Remaining whole-feature gameplay acceptance is not-run; bounded receipts do not accept every lifecycle/ignore/death path."
+          "Historical filtering vocabulary/integration and complete native class-unlock overlay acceptance remain unresolved. Controls/display receipt e4d8ef46 covers bounded preference persistence and nearby speech-bubble Off/On, not every setting/platform or full Chat. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Whole-feature gameplay remains not-run; bounded receipts do not accept every lifecycle/ignore/death path."
         ],
         "sources": [
           {
@@ -7326,21 +7326,61 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Guild-shared hall with membership-gated access, Board/Chronicle and Leader+ Guild-Fame upgrade merchant. Selected binary has upgrade prices10000/100000/250000. Exact deployed target layouts/facilities remain unresolved.",
-        "differences": [],
+        "expected": "Guild-shared membership-gated hall, Board/Chronicle and Leader+ Guild-Fame upgrades. Selected 123.5.1 prices are 10,000/100,000/250,000, with replacement after an empty interval. Guill (May 2017) and Pet Yard/Quest Room/Wardrobe access (February 2017) are later additions, not target facilities.",
+        "differences": [
+          "The four attributed realm-src maps are candidates, not authenticated 123.5.1 layouts. Current teleport restriction agrees with modified 7.0 realm-src, but 2013 Trapped enables teleports and hardcodes ghall3. The five-minute, transfer-grant-aware replacement policy is this server's reconstruction; realm-src replaces an empty hall immediately. See server issue916."
+        ],
         "unknowns": [
-          "Exact original hall layouts, facilities and teleport policy.",
-          "Whether the listed 10,000/100,000/250,000 upgrade prices were used in production.",
-          "Whether Guill, a shared bank or other later hall facilities existed at this build."
+          "Exact original four layouts, all facilities and hall teleport policy. Conflicting community implementations do not establish production behavior.",
+          "Independent target-era confirmation of the third 250,000 production price. Revision1 of the March29,2012 Arqade answer reports 10,000/100,000; selected definitions establish all three intended prices. February2012 test notes explicitly reduce prices to 100/1,000/2,500 for testing only.",
+          "No checked target definition or period guide establishes a shared item bank; this is not proof of historical absence. Whole-feature native acceptance, higher-tier hall transitions and earned progression remain separate from first-upgrade/revocation checks in issue916. Board/Chronicle journeys are separately tracked in issues914/915."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
-          },
-          {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/GuildMerchant.as",
+            "label": "Selected GuildMerchant: XML price, Guild Fame currency and rank requirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 Build122 announcement: Founder authority and Guild Fame hall spending"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build121.5.2#guildfame",
+            "label": "February2012 test announcement: explicitly reduced test-only upgrade prices"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/revisions/59804/1",
+            "label": "March29,2012 original answer revision: 10,000/100,000 upgrades and Board/Chronicle facilities, verified via revisions API"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/GuildHall.jw",
+            "label": "Modified 7.0 comparator: four candidate maps and restrictTp=true, not target provenance"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/GuildHall.cs",
+            "label": "2013 comparator: AllowTeleport=true and fixed ghall3, conflicts with modified 7.0"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2017#patch-27-7-x14",
+            "label": "2017 patch notes: February28 convenience portals and May18 introduction of Guill"
+          }
+        ],
+        "checks": [
+          {
+            "id": "social:guild-hall:shared-access-and-first-upgrade",
+            "name": "Shared access, first upgrade and revocation",
+            "group": "admission",
+            "implementation": "present",
+            "historical": "partial",
+            "expected": "Two members share a membership-gated hall. A permitted upgrade spends Guild Fame once, retains the occupied hall and appears after idle reclamation. Removal revokes access.",
+            "acceptance": "Observe both native members, nonmember/rank/funds refusals, first purchase and duplicate refusal, occupied reentry, idle level2 replacement and cancelled/confirmed removal. Preserve living identities, inventory and personal Fame.",
+            "differences": [],
+            "unknowns": ["Exact original layout, teleport and replacement policies remain unresolved in the parent feature. Prepared membership/Fame do not establish earned progression or higher-tier native transitions."],
+            "sources": []
           }
         ]
       }
@@ -7781,9 +7821,13 @@
         "expected": "World transfers carry the character, destination and connection key; connection failures display an error rather than silently creating another character. Original key lifetime and death/transfer interactions remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original connection-key expiry, reuse and death/transfer race behavior."
+          "Original connection-key expiry, reuse and death/transfer race behavior. Current 120-second admission and 2400-tick grant expiry are reconstruction policy, not recovered original-server timing."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/_1f.as#L1207-L1210",
+            "label": "Recovered 123.5.1 reconnect character, destination and key continuity"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -7796,22 +7840,22 @@
             "expected": "The recovered local client warns at ten/fifteen minutes and exits at twenty; a matching original server AFK policy is not established.",
             "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Original-server AFK policy is not established; recovered client thresholds and existing native idle receipts are separate evidence."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_0H__.as","label":"Recovered 123.5.1 client idle thresholds and Stage input resets"}],
             "group": "behavior"
           },
           {
             "id": "access:world-loading-presentation",
             "name": "Destination loading and input release",
-            "expected": "Destination loading must survive initialization, then fade and stop consuming input when play is ready.",
+            "expected": "The recovered loader waits for initialization and five 200ms timer intervals, fades over 0.4 seconds, disables mouse input at fade start and removes itself on completion. Initialization may precede embedded movie readiness.",
             "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact native minimum-display/fade timing and terminal failed-load presentation need executed evidence, not just source constants or settled arrival screenshots."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_02a.as","label":"Recovered loader readiness, timing, input release and removal"}],
             "group": "behavior"
           }
         ]
@@ -7823,17 +7867,52 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request.",
-        "differences": [],
+        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request. Preferences are local to the browser/profile and origin, not account-synced. Minimap zoom and explored terrain belong to the current map instance; they are not saved options.",
+        "differences": [
+          "The filter preference is saved, but current server text packets supply empty cleanText, so offensive-language filtering is not implemented end to end. This existing social:chat limitation is not a newly discovered regression: https://github.com/OpenRotMG/Open-RotMG-Server/issues/904"
+        ],
         "unknowns": [
-          "Original minimap zoom, marker and fog lifecycle, saved preferences and graphics behavior."
+          "Original server tile-reveal radius, wall/visibility policy and persistence across world sessions are not established by client bitmap code; the current radius-20/Snake Pit policy remains reconstruction. Original filtering vocabulary and rules are also unrecovered; Kithio's unchanged-text cleanText does not implement a filter.",
+          "Selected SWF and related community code establish rendering rules, not authenticated official provenance or original Flash/Ruffle equivalence. Period controls describe build119.0.5 or early123, not every123.5.1 option."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+            "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+            "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+            "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+            "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 14, 2012 capture, page explicitly last updated 119.0.5: options and zoom defaults"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/52728",
+            "label": "February 29, 2012 answer: enable rotation and choose 45 or 0 degrees (Q/E tentative)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+            "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/minimap/view/MiniMap.as",
+            "label": "Modified 7.0 minimap comparator: related zoom/bitmap design, not independent 2012 evidence"
           }
         ],
         "checks": [
@@ -7843,10 +7922,17 @@
             "expected": "Live vitals, effective maxima, signed modifiers, cap colors and stat hover text must agree with selected rendering rules.",
             "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Selected definitions and existing native receipts agree on cap/boost color priority; independent period observation of every signed/maxima case and original Flash equivalence remains absent."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/Stats.as",
+                "label": "Selected-era Stats: six stats, signed boosts and base-cap gold priority"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7855,10 +7941,21 @@
             "expected": "Overlapping markers must resolve to a usable group/menu with eligible teleport choices.",
             "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Related client code is not independent historical corroboration of all edge-overlap, lock/pause/Invisible permissions; retain existing cross-revision native passes without blanket historical acceptance."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+                "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0D_B_/_06M_.as",
+                "label": "Selected-era group menu: snapshot membership, map permission and first eligible teleport target"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7867,10 +7964,29 @@
             "expected": "Duplicate bindings, local persistence, tab-scoped reset, chat-focus gating and deactivation release are separate from saved preferences.",
             "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Build123 note corroborates an options/movement fix, not all duplicate-key, tab-reset or deactivation timing details across original Flash platforms."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+                "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+                "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+                "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+              },
+              {
+                "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+                "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+              }
+            ],
             "group": "behavior"
           }
         ]
@@ -7887,9 +8003,9 @@
         "expected": "Music, Sound Effects and Weapon Sounds each have a saved on/off toggle. The splash screen also has mute; no original volume sliders are established.",
         "differences": [],
         "unknowns": [
-          "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified.",
-          "Original server distance cutoff for damage sounds from quest targets outside local view."
+          "Original audio-corpus bytes and deployment provenance. The selected client requests sorc.mp3 at 0.3 gain; its preserved 7.0 copy is served unchanged. The modified Kithio mirror instead requests Menu2.mp3 at 0.65 and is not authoritative for this track.",
+          "Original availability of monster/tress_death and spell/heal_nova. Both are metadata-only in the selected client, not demonstrated missing playback triggers. All 149 statically client-resolvable paths are present; 176 of 178 total catalogued paths match the pinned preservation source and fully decode non-silent.",
+          "Complete native SFX event timing, including whether preloaded enter_realm and use_key were originally triggered by the server. Original server distance cutoff for damage sounds from quest targets outside local view remains unknown; the current strict 20-tile cutoff is an engineering locality policy."
         ],
         "sources": [
           {
@@ -7899,6 +8015,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Character.as",
             "label": "Selected-version Character.damage plays hurt/death audio without a distance check"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/web/music/sorc.mp3",
+            "label": "Preserved 7.0 comparator track, not authenticated original-host bytes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/sound/SoundEffectLibrary.as",
+            "label": "Modified 7.0 comparator separates SFX and weapon-sound selection"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 FAQ describes disabling music through Sound options; its Escape shortcut is not the selected client's O binding"
           }
         ]
       }
@@ -7911,15 +8039,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, retrieve a bitmap into the editor, and confirm owner deletion. Collected bitmaps can be downloaded as spritesheet.png. Recovery of the original hosted gallery is a separate question.",
-        "differences": [],
+        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, load a bitmap into the editor, and cancel or confirm owner deletion. In the selected client, collecting bitmaps and downloading spritesheet.png require the gallery Admin flag; ordinary owners receive deletion controls, not collection controls.",
+        "differences": [
+          "Only locally saved art is available; the original player and Wild Shadow corpus has not been recovered.",
+          "The local API does not issue gallery Admin. Bitmap collection/export is therefore not reachable through ordinary accounts, and no native administrative export acceptance is recorded.",
+          "Reconstruction orders by descending creation ID, even after overwrite. A mixed-era Japanese guide describes ID ordering for tagged searches and newest-update ordering otherwise; its exact target-era applicability remains unresolved."
+        ],
         "unknowns": [
-          "Original corpus, ordering/retention and historical authorization policy."
+          "Original corpus recovery, retention/moderation policy, target-era ordering and backend administrator authorization remain unresolved. Client Mine/Admin affordances do not establish original server enforcement.",
+          "The requested pre-2013 Japanese guide capture redirects to April 29, 2017 (page modified April 17, 2017). Its later login/save warning and ordering text are not automatically 123.5.1 policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_0w.as",
+            "label": "Selected client thumbnail: Mine deletion versus Admin collection and ID copying"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_in.as",
+            "label": "Selected client filters, 24-item pagination, confirmation and admin spritesheet download"
+          },
+          {
+            "url": "https://web.archive.org/web/20170429175439id_/http://wikiwiki.jp/rmd/?Pixel%20Editor",
+            "label": "April 2017 capture of mixed-era guide; ordering and ownership observations are not target-dated"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Design%20Next%20Dungeon%20Art",
+            "label": "December 19, 2012 guide links Production Draw and comma-separated submission tags; not an original corpus"
           }
         ]
       }
@@ -7953,10 +8102,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Quiet has a synchronized condition state. Mana depletion and natural-regeneration suppression are comparator-supported working rules; exact target potion/aura and ability exceptions remain unresolved.",
-        "differences": [],
+        "expected": "Quiet drains MP, suppresses natural MP regeneration and refuses equipped abilities. Magic/MagicNova still consume but cannot grant MP to Quiet recipients; curing or expiry permits recovery. These are tested reconstruction rules, not exact original-server acceptance.",
+        "differences": [
+          "Existing authority policy drains immediately and suppresses committed mana grants. Kithio grants Magic/MagicNova mana before its next Quiet drain tick. Our max-deadline reapplication differs from its direct duration replacement; no gameplay change is made in issue935."
+        ],
         "unknowns": [
-          "Target potion/MagicNova handling, zero-cost ability acceptance, drain cadence and reapplication/cure policy."
+          "Exact123.5.1 sub-tick drain/transient grants, shorter reapplication and cure timing, and original aura range/recipient exceptions remain historical questions in issue935. Selected definitions contain108 equipped abilities, none zero-cost; client cost checks do not prove a hypothetical zero-cost server exception.",
+          "Native Priest Purification of Quiet, active-Quiet world transfer and death/replacement boundaries are not covered by the new Quiet journey. Existing zero-damage hit/duplicate ACK, recovery, potion and group-recipient regressions and prior Sprite God expiry evidence remain separately scoped."
         ],
         "sources": [
           {
@@ -7966,6 +8118,18 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs",
+            "label": "Compiled Kithio comparison: potion/nova grants and Quiet cleanse list"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Entity.cs",
+            "label": "Kithio engine: replacement durations and zero-duration cure"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture: zero-damage boomerang inflicts Quiet for ten seconds"
           }
         ]
       }
