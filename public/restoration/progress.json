@@ -7419,12 +7419,32 @@
         "expected": "A locally retained guest identity loads saved progress and can be converted to a registered account without replacing that progress.",
         "differences": [],
         "unknowns": [
-          "Original guest expiry and retention policy."
+          "Original 123.5.1 server-side inactivity/expiry/deletion schedule and retention guarantees remain unverified. The selected client retains a local GUID, not an expiry policy. The secondary build124.0 close-game loss report concerns the following release; whether it describes identity replacement or server deletion is unresolved. Research disposition: server issue919; gameplay receipts remain bound to their original revisions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs",
+            "label": "Compiled Kithio Database: UUID/password lookup and guest registration, not original retention policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/web/WebAccount.as",
+            "label": "Modified7.0 client: OSRotMG identity storage, not independent 2012 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: leave/return, cookie loss and registration; no server expiry duration"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=76",
+            "label": "April18,2012 00:25:36 Bahamut reply: cookie-dependent guest access and registration advice"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "Secondary October5,2012 build124.0 report: guest retention changed after123.5.1; note addition date unverified"
           }
         ]
       }
