@@ -70,7 +70,12 @@ def assemble():
     (dist / 'client.swf').write_bytes(swf)
     build.update(server=expected['server'], client_swf_sha256=hashlib.sha256(swf).hexdigest())
     (dist / 'diagnostics-build.json').write_text(json.dumps(build))
-    (dist / '2010/index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=https://www.openrotmg.org/2010/"><title>July 2010 Preview</title><link rel="canonical" href="https://www.openrotmg.org/2010/"></head><body><a href="https://www.openrotmg.org/2010/">Open the July 2010 preview</a></body></html>')
+    preview = dist / '2010/index.html'
+    head = re.search(r'<head>(.*?)</head>', preview.read_text(), re.S)
+    if head is None:
+        raise ValueError('2010 preview is missing its document head')
+    head = re.sub(r'<script\b.*?</script>', '', head[1], flags=re.S)
+    preview.write_text(f'<!doctype html><html lang="en"><head>{head}<meta http-equiv="refresh" content="0;url=https://www.openrotmg.org/2010/"></head><body><a href="https://www.openrotmg.org/2010/">Open the July 2010 preview</a></body></html>')
     print(json.dumps({'server': build['server'], 'client': build['client'], 'client_swf_sha256': build['client_swf_sha256']}))
 
 
