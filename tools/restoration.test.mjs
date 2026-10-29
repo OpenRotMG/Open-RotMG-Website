@@ -113,15 +113,18 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
-test('Worlds4–5 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+test('Worlds4–5 and11 playable acceptance keeps historical and map-bank gaps explicit',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  for(const n of ['04','05']){
+  for(const n of ['04','05','11']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
     assert.match(row.rule.unknowns.join(' '),/authored.*reuse rights remain unverified/);
   }
-  for(const n of ['06','07','08','10','11','12','13'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
+  const world11=rows.find(r=>r.id==='realm:map-world-11');
+  assert.match(world11.rule.acceptance,/northern lake, southwest spur and snow\/rock distribution/);
+  assert.match(evidence.sources['world11-native-64613d2'].method,/northern lake, southwest spur and snow\/rock/);
+  for(const n of ['06','07','08','10','12','13'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 

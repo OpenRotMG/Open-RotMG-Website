@@ -1,6 +1,39 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review."},
   "sources": {
+    "world11-source-a0d1aaf": {
+      "kind": "source",
+      "revision": "a0d1aaf68ac886250c104d09893f8ace1c1f126a",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/a0d1aaf68ac886250c104d09893f8ace1c1f126a",
+      "checks": [
+        "realm:map-world-11"
+      ],
+      "method": "Full 2100-square authored reconstruction, 95 tuples, 56 sites and 577 retained lava cells. Held-pixel choices, immutable bounded raster witnesses and terrain-only habitat refinements are explicit; frozen research and prior lava capability remain pinned.",
+      "limitations": "Authored values, not recovered original fields. Historical identity/extent, hidden fields, placement/RNG and reuse rights remain unverified."
+    },
+    "world11-regression-64613d2": {
+      "kind": "regression",
+      "revision": "64613d2166895c888d97def3e7c79f9696fa1125",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40905928169",
+      "checks": [
+        "realm:map-world-11"
+      ],
+      "method": "PR CI passes 378 Rust tests, formatting, strict Clippy and QA lifecycle. Fully populated constructors check both Realms, landmarks/lava, arrivals and access. Independent 30-check full-cell audit and actual Rust emitter reproduce the WMAP exactly.",
+      "limitations": "Initial population and representative routes, not every later dynamic state. Substantive KEEP is separate from retained review output/tool-budget failures."
+    },
+    "world11-native-64613d2": {
+      "kind": "native",
+      "revision": "64613d2166895c888d97def3e7c79f9696fa1125",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1230#issuecomment-6501641932",
+      "checks": [
+        "realm:map-world-11"
+      ],
+      "method": "Main eb1d4188 passes12 checks: loading/four arrivals, 46.4 tiles over14,350 measured world milliseconds, actual900HP Coil defeat/270XP, initial chest item2576 drag/revision1→2, temple collision, six positive ground244 damage commits, three survivors and identity. Auxiliary d008ddc4 passes7 wood/GoldSand Oasis checks; geography2d22160b passes10 northern lake, southwest spur and snow/rock loading/movement/survival checks. All11 captures inspected; cleanup-error lists empty.",
+      "limitations": "Clean feature64613d2; explicit storage-only native adapter, not frozen-tool reproduction. Legal but unearned gear/stats/positions; main/auxiliary clearance read-only, geography uses a prior read-only snapshot. Each campaign honors the three-client cap. Failed lookup/ordinary-Oasis fixture assumptions retained. No resurrection, invulnerability, forced loot/NPCs or HP/condition/timer overrides; concurrent NPC damage excluded from lava attribution. Oasis visibility/traversal does not certify boss defeat or its complete attack pattern."
+    },
     "world05-source-64a5b97": {
       "kind": "source",
       "revision": "64a5b97613c3975c54499ca23dca909afc8d96ae",
@@ -6314,7 +6347,7 @@
     "realm:map-world-08": {"status":"not-run","evidence":[]},
     "realm:map-world-09": {"status":"passed","evidence":["world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
     "realm:map-world-10": {"status":"not-run","evidence":[]},
-    "realm:map-world-11": {"status":"not-run","evidence":[]},
+    "realm:map-world-11": {"status":"passed","evidence":["world11-source-a0d1aaf","world11-regression-64613d2","world11-native-64613d2"]},
     "realm:map-world-12": {"status":"not-run","evidence":[]},
     "realm:map-world-13": {"status":"not-run","evidence":[]},
     "realm:map-registration": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a","world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
