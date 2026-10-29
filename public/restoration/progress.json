@@ -6881,16 +6881,20 @@
       "category": "social",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
+        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists current-world players. Permanent deaths announce name, level and killer. Reaching level 20 announces '<name> achieved level 20'. The selected client renders class unlocks as local level-up overlays.",
         "differences": [
           "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
           "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540",
-          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553"
+          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553",
+          "Level-20 notices follow the existing durable progress commit, once per transition. GDC Europe 2012 slide 54 corroborates the wording; compiled Kithio CheckLevelUp supplies current-world scope, which remains reconstructed rather than exact target-build audience proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+          "The selected client's language preference requires nonempty server cleanText, but current chat encoding supplies an empty string. Offensive-language filtering is not accepted as implemented; no historical vocabulary was recovered. Kithio's unchanged-text cleanText and the later 7.0 client are not substitutes for the target filter."
         ],
         "unknowns": [
-          "Original Nexus boundary metric, death-notice audience boundaries and killer grammar, other announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original Nexus boundary metric/equality, death-notice audience and general killer-article rule. GDC slide 54 shows 'a Knight of Oryx' and 'a Pet of Oryx', not an algorithm for every cause.",
+          "Exact 123.5.1 continuity and audiences for other announcements and per-enemy taunt text/timing. Kithio's compiled Taunt defaults to strict 15-tile proximity with an authored broadcast override; that does not establish the player-chat metric.",
+          "Historical filtering vocabulary and complete native preference persistence, bubble on/off and class-unlock overlay acceptance. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Remaining whole-feature gameplay acceptance is not-run; bounded receipts do not accept every lifecycle/ignore/death path."
         ],
         "sources": [
           {
@@ -6903,7 +6907,15 @@
           },
           {
             "url": "https://media.gdcvault.com/gdceurope2012/Presentations/Social%20%26%20Online%20Games%20Summit/Ethan_Levy_Social%26Online_GameDesignIs.pdf#page=54",
-            "label": "August 2012 GDC Europe screenshot: yellow name, level and killer death notices below level 20"
+            "label": "August 2012 GDC Europe slide 54: level-20 announcement, low-level death notices and two killer-article examples; predates 123.5.1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L185-L211",
+            "label": "Compiled Kithio CheckLevelUp: name achieved level 20, current-world audience; community reconstruction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 2012 capture, page last updated 119.0.5: chat history, preferences and partial /help; earlier than target"
           }
         ]
       }
@@ -7169,9 +7181,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Register creation costs1000 personal Fame; creator becomes Founder; maximum50 account members. Invitation acceptance joins named guild. Selected UI permits20 ASCII letters/spaces.",
-        "differences": [],
+        "differences": [
+          "Whitespace collapse/trim, ASCII-case-insensitive uniqueness and last-member deletion/name reuse are reconstruction supported by later server comparators, not recovered original server rules."
+        ],
         "unknowns": [
-          "Original name normalization, uniqueness, one-star/chosen-name eligibility, dissolution and name reuse."
+          "Exact target production normalization, case/error order, chosen-name/one-star enforcement and dissolution/name reuse remain unresolved in server issue911.",
+          "Native unnamed/zero-star guild refusal,50-member boundary and dissolution/name-reuse journeys remain unexecuted."
         ],
         "sources": [
           {
@@ -7185,6 +7200,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528161500id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "May2012 guide: unique names, Founder, Accept and Register renunciation"
           }
         ]
       }
@@ -7197,16 +7216,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client Accept/Reject panel lasts20seconds.",
-        "differences": [],
+        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client panel lasts20seconds; Reject/timeout close it locally without a rejection packet.",
+        "differences": [
+          "Current same-world/known/20-tile guard,60-second server lifetime and acceptance-time inviter-authority recheck are reconstruction policies, not recovered original numbers."
+        ],
         "unknowns": [
-          "Original invitation expiry and distance limits; the client’s 20-second panel does not establish server expiry.",
-          "Rejection, replacement and inviter-departure behavior."
+          "Original server invitation expiry and exact distance; the February17,2012 guide says nearby but supplies no number.",
+          "Original server replacement and inviter-departure semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 capture: nearby invites, Accept, Chronicle removal and renunciation; stale four-rank paragraph"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/panels/GuildInvitePanel.as",
+            "label": "Modified7.0 comparator:20-second panel and local Reject; not original server expiry"
           }
         ]
       }
@@ -7222,7 +7251,7 @@
         "expected": "Ranks0/10/20/30/40. Officer changes0↔10; Leader changes lower targets up to30; Founder changes non-Founders up to30. No change to same rank or promotion to Founder. Removal requires Officer+ and strictly lower target.",
         "differences": [],
         "unknowns": [
-          "Original Founder succession and behavior of guilds without a Founder."
+          "A May 6, 2012 player experiment supports no automatic Founder succession, Leader-managed founderless guilds and a former Founder rejoining as Initiate. Exact 123.5.1 continuity and original behavior when no Leader remains are unconfirmed; tracked in server issue913."
         ],
         "sources": [
           {
@@ -7232,6 +7261,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/founderless-guild.html",
+            "label": "May 6, 2012 player experiment: Founder leaves, Leader remains, former Founder rejoins as Initiate"
           }
         ]
       }
@@ -7320,15 +7353,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Recovered panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses 50-unit ordinary cutoff and 500ms refresh. Exact original replication/bag policy unresolved.",
-        "differences": [],
+        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Selected panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses a 50-unit ordinary cutoff and 500ms refresh. Compiled Kithio retains whole-world player identity, nearby ordinary entities and account-filtered bags; packet and rendered audiences differ.",
+        "differences": [
+          "Current reconstruction uses 20-unit ordinary visibility and ally-shot range, 50ms simulation and nominal 100ms NEW_TICK. Kithio uses radius15, ally shots within25 and default20 TPS; related Trapped declares30 TPS. These are comparator differences, not authenticated original-server defects."
+        ],
         "unknowns": [
-          "Original replication timing and radius, audiences for attacks/enemies/drops, and behavior under latency or departure."
+          "Original production replication cadence/radii and delayed-packet/departure ordering; numeric comparator policies are not original measurements.",
+          "Target-build continuity of January2012 private-drop/public-redrop evidence and exact original bag attribution/expiry policy remain unresolved. See issue917 and loot issue878."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Update.cs",
+            "label": "Compiled Kithio player/entity/container replication comparator"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: same-map player markers and public dropped items"
+          },
+          {
+            "url": "https://www.eurobricks.com/forum/forums/topic/64657-realm-of-the-mad-god/?do=findComment&comment=1169753",
+            "label": "January12,2012 discussion quoting owner-only Soulbound loot visibility"
           }
         ]
       }
@@ -7342,12 +7390,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The recovered 123.5.1 client opens to character selection and supports entering the game.",
-        "differences": [],
-        "unknowns": [],
+        "differences": [
+          "Map-editor JSON and direct debug-world entry are unsupported. The public pixel-art maker is a separate feature."
+        ],
+        "unknowns": [
+          "The recovered client hides its map editor without an Admin flag; original 123.5.1 server enforcement and exceptional debug-world access remain unverified. See server issue 918."
+        ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_C_Q_.as#L56-L59",
+            "label": "Recovered-source map-editor Admin menu gate; not original-server permission proof"
           }
         ]
       }
@@ -7363,12 +7419,32 @@
         "expected": "A locally retained guest identity loads saved progress and can be converted to a registered account without replacing that progress.",
         "differences": [],
         "unknowns": [
-          "Original guest expiry and retention policy."
+          "Original 123.5.1 server-side inactivity/expiry/deletion schedule and retention guarantees remain unverified. The selected client retains a local GUID, not an expiry policy. The secondary build124.0 close-game loss report concerns the following release; whether it describes identity replacement or server deletion is unresolved. Research disposition: server issue919; gameplay receipts remain bound to their original revisions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs",
+            "label": "Compiled Kithio Database: UUID/password lookup and guest registration, not original retention policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/web/WebAccount.as",
+            "label": "Modified7.0 client: OSRotMG identity storage, not independent 2012 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: leave/return, cookie loss and registration; no server expiry duration"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=76",
+            "label": "April18,2012 00:25:36 Bahamut reply: cookie-dependent guest access and registration advice"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "Secondary October5,2012 build124.0 report: guest retention changed after123.5.1; note addition date unverified"
           }
         ]
       }
@@ -7381,15 +7457,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity.",
-        "differences": [],
+        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity. Account verify authenticates the new credentials; it is not email confirmation.",
+        "differences": [
+          "Current registration sends no automatic email; PR745 requires an explicit authenticated send. March/October 2012 guide revisions describe an initial email after registration, but exact 123.5.1 continuity is unresolved."
+        ],
         "unknowns": [
-          "Original initial verification-email and confirmation policy."
+          "Exact 123.5.1 initial-send, retry and delivery rules, and external confirmation/token/challenge policy; precise remainder tracked in server issue920."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 guide revision: initial email, link confirmation and apparently retained unconfirmed accounts; not original server internals"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=7&action=source",
+            "label": "October 9, 2012 revision retains those passages; not proof of exact selected-build continuity"
           }
         ]
       }
@@ -7446,18 +7532,35 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved. The immediate Sent label does not establish delivery.",
         "differences": [
-          "Uses modern 24-hour single-use confirmation links and bounded explicit email requests; original token, initial-send and delivery policies are not recovered."
+          "Uses modern 24-hour single-use hashed links, bounded explicit sends and an explicit browser confirmation button; registration sends no automatic email. Period guide describes an initial email and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
-          "Target external confirmation endpoint/token lifecycle.",
-          "Initial email trigger and delivery rules."
+          "Exact 123.5.1 external endpoint/parameters and token generation, expiry, replacement/replay and challenge rules. Retained older guide images show realmofthemadgod.appspot.com/account/v, but their attachment timestamps do not prove target-build continuity; tracked in server issue922.",
+          "Exact target initial-send, queue/retry, throttling and delivery rules and continuity of the period guide observations; tracked in server issue920 and issue922. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement.",
+          "CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions; target challenge policy remains unresolved."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 revision: initial email, link-only confirmation and apparently playable unconfirmed accounts"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=11&action=source",
+            "label": "September 10, 2016 revision adds CAPTCHA; do not backdate current-page wording or attachment dates"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アカウント登録",
+            "label": "Retained email/Account verified images show older /account/v endpoint; mixed-era page and 2010 attachment timestamps do not date target server policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20130923115857id_/http://community.kabam.com/forums/showthread.php?201428-Email-Verification-Now-Required!-Read-Me!",
+            "label": "Original September 16, 2013 Kabam announcement: mandatory verification, replacement email and link confirmation; later than target"
           }
         ]
       }
