@@ -1,6 +1,12 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "registration-research-24398fa0": {
+      "kind":"source", "revision":"24398fa0fc9b1083bf8e77faea3f07473e55bdd5", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/24398fa0fc9b1083bf8e77faea3f07473e55bdd5/docs/registration.md", "checks":["access:registration","access:email-verification"],
+      "method":"Fresh selected SWF07ae4fc3/JPEXS26.3.0 account export (QAd41bfcfa/1bf6e0cc) separates success-only credential update, account verify, VerifiedEmail child presence, unverified Continue and explicit resend. Compiled/routed Kithio resend is a stub and registration uses customized username/email; related Trapped is not independent. Modified7.0 registration agrees only on guest GUID and success-only credential replacement. Follow-up Japanese guide revisions March22/October9,2012 describe initial email, link-only confirmation and apparently retained/playable unconfirmed accounts. September10,2016 revision adds CAPTCHA; official January14,2012 FAQ supplies no token policy. Serverf59986f6 already contains PR745 explicit-only modern verification and PR1050 recovery.",
+      "limitations":"Research only, not newly executed gameplay or original-server recovery. Exact123.5.1 initial-send/queue/retry/delivery, endpoint/token generation/expiry/replay/challenge rules and period-guide continuity remain issue920. Registration historical partial and verification known-differences retained. Existing native refusal/conversion and delivery receipts, including failed later Nexus transfers and one-recipient limits, remain revision-bound and unchanged. No automatic sending, quota, authentication, ownership, persistence, gameplay, hosting or new framework change."
+    },
     "shared-world-native-5b8be3a5": {
       "kind":"native", "revision":"5b8be3a587b657eeff8af89ef9b1f416a308494b", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1203#issuecomment-6484276762", "checks":["social:share-a-living-world"],
@@ -6036,9 +6042,9 @@
     "social:share-a-living-world": {"status":"not-run","evidence":["enemy-prediction-source-12b706a","enemy-prediction-regression-12b706a","shared-world-research-5ec66912","shared-world-native-5b8be3a5"]},
     "access:client": {"status":"passed","evidence":["client-entry-research-f1c1cea7","client-entry-regression-f1c1cea7","client-entry-native-9a178951","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "access:guest-accounts": {"status":"passed","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
-    "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
+    "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registration-research-24398fa0"]},
     "access:login": {"status": "not-run","evidence": ["registered-credential-login-native-eb85988","recovered-account-source-794eccf"]},
-    "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45"]},
+    "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45","registration-research-24398fa0"]},
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
     "access:change-password": {"status":"not-run","evidence":[]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},

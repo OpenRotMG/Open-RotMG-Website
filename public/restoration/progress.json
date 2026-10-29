@@ -7420,15 +7420,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity.",
-        "differences": [],
+        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity. Account verify authenticates the new credentials; it is not email confirmation.",
+        "differences": [
+          "Current registration sends no automatic email; PR745 requires an explicit authenticated send. March/October 2012 guide revisions describe an initial email after registration, but exact 123.5.1 continuity is unresolved."
+        ],
         "unknowns": [
-          "Original initial verification-email and confirmation policy."
+          "Exact 123.5.1 initial-send, retry and delivery rules, and external confirmation/token/challenge policy; precise remainder tracked in server issue920."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 guide revision: initial email, link confirmation and apparently retained unconfirmed accounts; not original server internals"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=7&action=source",
+            "label": "October 9, 2012 revision retains those passages; not proof of exact selected-build continuity"
           }
         ]
       }
@@ -7462,18 +7472,26 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved.",
         "differences": [
-          "Uses modern 24-hour single-use confirmation links and bounded explicit email requests; original token, initial-send and delivery policies are not recovered."
+          "Uses modern 24-hour single-use hashed links, bounded explicit sends and an explicit browser confirmation button; registration sends no automatic email. Period guide describes an initial email and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
-          "Target external confirmation endpoint/token lifecycle.",
-          "Initial email trigger and delivery rules."
+          "Exact 123.5.1 external endpoint, token generation/expiry/replay and challenge policy; CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions.",
+          "Exact target initial-send, retry and delivery rules and continuity of the period guide's observations; tracked in server issue920."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 revision: initial email, link-only confirmation and apparently playable unconfirmed accounts"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=11&action=source",
+            "label": "September 10, 2016 revision adds CAPTCHA; do not backdate current-page wording or attachment dates"
           }
         ]
       }
