@@ -1678,12 +1678,13 @@
           "The initial Ent Ancient now remains stationary in its four post-evaluation form-preparation phases, including outside its usual home leash, matching the compiled primary community reference's absence of movement in those states. Twelve real-World NPC-step cases cover inside/outside-home positions and unchanged earlier/Actual Ent controls. One prepared ordinary-client witness kept the same living initial Ent at unchanged XY across 1150 game ms. HP, timers, tiers, summons and ownership are unchanged; outgoing-transition movement, deferred entry, full AI/RNG/runtime equivalence and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/924",
           "Ent follower loot now follows compiled Kithio: a 2% Tincture of Dexterity roll for Ent, none for Sapling. Forced-success rewards reproduce both former Magic Potion entries and preserve the mummy control. This is not an authenticated original rate or full-family acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/commit/2425fe48d14282546bd5c764e0c9b8f3522f5ddc",
           "Seventeen native checks cover prepared SmallGroup evaluation through Sprite, Actual Ent, Ent and Sapling defeats, loot pickup and cold saved progress. Supplied legal stats/gear, positioning, protection and resource refills exclude earned progression/survival; one branch does not accept the whole family or its history: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1021#issuecomment-6452236236",
-        "Actual Greater Nature Sprite (0x924) now remains stationary and produces no shot specifications before 1000ms on its existing active clock, ahead of the shared home leash, matching the compiled primary community setup state. Parent Greater Nature Sprite and Actual Ent motors remain unchanged. Seven added real-World NPC-step rows cover entry reset and ages 0/999/1000 inside/outside the leash, retaining earlier controls. A prepared normal-client witness naturally transformed an owned sprite and kept the same living, unconditioned 3600-HP replacement at unchanged XY over 400 game ms, ages 300-700. Legal gear/stats are unearned; fresh runs and inputs differ. Native firing/rate, exact deferred entry and transition ticks, later prioritization, full AI/RNG and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1040"
+        "Actual Greater Nature Sprite (0x924) now remains stationary and produces no shot specifications before 1000ms on its existing active clock, ahead of the shared home leash, matching the compiled primary community setup state. Parent Greater Nature Sprite and Actual Ent motors remain unchanged. Seven added real-World NPC-step rows cover entry reset and ages 0/999/1000 inside/outside the leash, retaining earlier controls. A prepared normal-client witness naturally transformed an owned sprite and kept the same living, unconditioned 3600-HP replacement at unchanged XY over 400 game ms, ages 300-700. Legal gear/stats are unearned; fresh runs and inputs differ. Native firing/rate, exact deferred entry and transition ticks, later prioritization, full AI/RNG and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1040",
+          "PR1139 repairs the observed Ent 0x921 public-Soulbound packaging failure by assigning an already-rolled unique Tincture of Dexterity to one random positive-damage contributor. Existing twice-per-contributor, capped-at-eight attempts/dedup remain, not the comparator's single 2% roll. Old-runtime World failure and 242 green Rust tests verify the allocation; prepared native images are context, not tincture pickup proof. This is account-bound safety, not original rates or whole-family acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1139#issuecomment-6479389549"
         ],
         "unknowns": [
           "May 20, 2012 build-122.3.2 guide/Kithio: nominal 1600ms growth, final stage at 14400ms; Trapped adds a 2000ms opening. Guide sizes imply 140 to 320; compiled Kithio gradually targets 160 to 340; Rust snaps. 123.5.1 continuity, entry ticks and full shield/armor handoff remain unverified.",
           "Original Grove count distribution/placement probabilities are unknown. Kithio counts lifetime births: 3 saplings/Actual Ent, 2 Ents/Actual Sprite; reconstruction caps living encounter totals at 3/23, with 90000ms sapling expiry. Toss geometry/spawn clocks differ. Retain population/ownership safeguards pending target-policy resolution.",
-          "May 16, 2012 build-118 Ent/Sapling pages identify parents, not independent spawn sites. Selected/modified-7.0 XML matches for 0x91f to 0x924 do not prove exhaustive original family/spawn scope. Actual Sprite rewards, exact probabilities/recipient semantics and full branch coverage remain unresolved."
+          "May 16, 2012 build-118 Ent/Sapling pages identify parents, not independent spawn sites. Selected/modified-7.0 XML matches for 0x91f to 0x924 do not prove exhaustive original family/spawn scope. Actual Sprite rewards, original recipient semantics, existing twice-per-contributor/cap-eight versus source single-roll frequencies and full branch coverage remain unresolved."
         ],
         "sources": [
           {
@@ -1721,6 +1722,10 @@
           {
             "url": "https://web.archive.org/web/20120516154733id_/http://forums.wildshadow.com/wiki/realm-mad-god/ent-sapling",
             "label": "May 16, 2012 capture, marked build 118: Sapling parent and no drops"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/loot/Loots.cs#L65-L70",
+            "label": "Compiled one-contributor Soulbound allocation; leftover shared duplicate conflicts with local safety"
           }
         ]
       }
@@ -2780,18 +2785,29 @@
         "historical": "known-differences",
         "expected": "Lord of the Lost Lands was introduced in build 121.0.0; build 122.0.1 fixed kill awards and increased health. The encounter includes activation, protection, combatants and rewards.",
         "differences": [
-          "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. Full native encounter completion and original reward-rate fidelity are not claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+          "PR380 connects the existing combat AI to a prevalidated transparent highland site and earned admission, with GPL community-reference private item rolls above 1% contribution. Real-World defeat and account-bound pickup/SQLite living-reload regressions pass. PR380's regression evidence alone does not establish native completion or original reward-rate fidelity: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
           "PR601 adds the same guard to the Lord's transparent native cell. This is a local safety invariant, not authenticated original placement; Kithio's event registry comments the Lord out. Native checks are prepared, not earned encounters: https://github.com/OpenRotMG/Open-RotMG-Server/pull/601",
           "Issue817's May21,2012 build123 capture supports selected HP70000/DEF45 and Crystal HP6000; modified7.0 instead uses DEF30/Crystal HP5000. The archive describes initially surrounding crystals, unlike current unshielded activation; later AI clocks/reward rates and Rust>1% eligibility (comparator uses raw damage) remain reconstruction: https://github.com/OpenRotMG/Open-RotMG-Server/issues/817#issuecomment-6460946883",
-          "PR1088's fresh native attempts also stop before Lord combat; reward assertions remain unexecuted, not acceptance. Trapped's wandering stub and a current Japanese Crystal page do not resolve original encounter numbers: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1088#issuecomment-6462195687"
+          "PR1088's fresh native attempts also stop before Lord combat; reward assertions remain unexecuted, not acceptance. Trapped's wandering stub and a current Japanese Crystal page do not resolve original encounter numbers: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1088#issuecomment-6462195687",
+          "PR1118's failed 8a0f099 take reaches timed Lord defeat after native crystal kills, with 975 XP persisted for both contributors; post-death aiming stops pickup/reconnect. Later budget/status failures, rejected overlapping protection and a native cofighter's committed permanent death remain failures. No resurrection or weakened guard is used. Prepared stats/gear, Invulnerable/+100 Attack and scout/native teleport are not earned progression or ordinary survival: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1118#issuecomment-6482031419",
+          "At47523d6, prepared Archer QA bd5cd1ce passes20 native checks through late cooperative Lord defeat, source-bound private Dragonsoul Sword pickup and durable Nexus retention. Same-Realm combat/pickup stays within one60s protection epoch; Nexus is excluded from its clock comparison. This replaces Warrior/helm coverage, not equivalent classes or an expiry-safety fix. The failed2c7c85e6 Protection Crystal death and all earlier failed takes/deaths remain permanent; whole-feature gameplay stays not-run and history known-differences: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1118#issuecomment-6487480052"
         ],
         "unknowns": [
-          "Original phase clocks, initial shielding, spawn counts/replenishment, contribution eligibility and reward probabilities, including the period T7-armor listing absent from the later table."
+          "Original phase clocks, initial shielding, spawn counts/replenishment, contribution eligibility and reward probabilities, including the period T7-armor listing absent from the later table.",
+          "Current level-20 quest XP caps at 975. Kithio supports that cap formula but uses weighted sharing and assigned-quest checks, unlike current nearby-player allocation; original XP distribution remains unverified."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20120521061126id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-lost-lands",
+            "label": "May 21, 2012 build-123 capture; qualitative encounter and selected stats, not exact clocks/rates"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/DamageCounter.cs#L75-L96",
+            "label": "Compiled community XP-cap/sharing comparator, not authenticated original distribution"
           }
         ]
       }
