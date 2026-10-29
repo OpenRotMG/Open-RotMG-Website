@@ -975,12 +975,13 @@
             "name": "Classic World 1 identity",
             "expected": "Identify the documented Classic World 1 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Register an explicitly authored playable reconstruction; track historical identity and rights separately. Apply the geography, ecology and interaction checks independently. Register northern inlets and the western spur.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 1, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Server PR334's registered image-guided World 1 reconstruction is now reverified. Original identity, native extent, hidden fields, registration and reuse rights remain unverified.",
               "Engineered bindings add five Ghost Kings, seven Cyclops Gods, eight Oasis Giants and six Red Demons beside the existing Groves and six Liches. This does not authenticate original coordinates, geometry or registration: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
-              "NEW habitat reconstruction yields HighSand55,987, MidForest165,843 and LowSand89,202 cells. HighPlains remains unassigned because this reconstruction has no snowy support. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
+              "NEW habitat reconstruction yields HighSand55,987, MidForest165,843 and LowSand89,202 cells. HighPlains remains unassigned because this reconstruction has no snowy support. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1",
+              "PR1227 revalidates constructor coverage and representative native play: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1227"
             ],
             "unknowns": [],
             "sources": [],
@@ -991,12 +992,13 @@
             "name": "Classic World 2 identity",
             "expected": "Identify the documented Classic World 2 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the southwestern lobe, deep west bay and north/east lobes. Inspect declared unknown pixels, footprint masks and scenery substitutions. Verify the 864 source-bound Lava Blend cells, ground damage and retention during normal Realm construction.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 2, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Server PR334's registered image-guided World 2 reconstruction is now reverified. Original identity, native extent, hidden fields, registration and reuse rights remain unverified.",
               "Engineered bindings add one eroded Ghost King tower, six Cyclops castles and eight Red Demon fissures. Remaining sampled Ghost requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
-              "NEW habitat reconstruction yields HighSand42,840, HighPlains29,588, MidForest111,439 and LowSand209,576 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
+              "NEW habitat reconstruction yields HighSand42,840, HighPlains29,588, MidForest111,439 and LowSand209,576 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1",
+              "PR1227 revalidates constructor coverage and representative native play: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1227"
             ],
             "unknowns": [],
             "sources": [],
@@ -1007,12 +1009,13 @@
             "name": "Classic World 3 identity",
             "expected": "Identify the documented Classic World 3 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Compare the image-guided reconstruction with its source at registered scale and orientation. Verify coast/road geometry, habitats, sites, scenery and every arrival route; a similar minimap is not sufficient. Compare the north/east lobe and large southern bay. Inspect reviewed supports and blended-detail decisions, including the 629 source-bound Lava Blend cells, ground damage and retention during normal Realm construction; a generated recipe is not recovered elevation data.",
-            "implementation": "partial",
+            "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Server PR334 registers an image-guided engineering reconstruction of World 3, not recovered map data; source identity, native dimensions, registration and rights remain unverified.",
+              "Server PR334's registered image-guided World 3 reconstruction is now reverified. Original identity, native extent, hidden fields, registration and reuse rights remain unverified.",
               "Engineered bindings add four Ghost King towers, three Cyclops castles and six Red Demon fissures. Remaining sampled Ghost/Cyclops requests generate elsewhere; original coordinates remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
-              "NEW habitat reconstruction yields HighSand36,173, HighPlains22,117, MidForest139,317 and LowSand165,467 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1"
+              "NEW habitat reconstruction yields HighSand36,173, HighPlains22,117, MidForest139,317 and LowSand165,467 cells. HighPlains uses existing snowy ground106. Other cell fields and authored sites are preserved; original boundaries remain unknown: https://github.com/OpenRotMG/Open-RotMG-Server/commit/3d84c93007c035516478c3d477917dc8ad6fe7a1",
+              "PR1227 revalidates constructor coverage and representative native play: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1227"
             ],
             "unknowns": [],
             "sources": [],
