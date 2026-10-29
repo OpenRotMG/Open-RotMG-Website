@@ -7574,9 +7574,11 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Authenticated current-password/new-password change preserves account identity; rejected changes leave credentials intact. This does not imply self-service email change.",
-        "differences": [],
+        "differences": [
+          "Serialized authentication, active/pending/fenced ownership refusal, atomic Argon2 replacement and pending-grant revocation are deliberate modern safety policy, not recovered original-server behavior."
+        ],
         "unknowns": [
-          "Historical session invalidation and concurrent change policy."
+          "Original123.5.1 server session-invalidation timing and concurrent-change winner/refusal policy remain unresolved. Selected client, related private servers, the2013 API catalogue, undated support mirror and January14,2012 FAQ do not establish those internals; see server issue925."
         ],
         "sources": [
           {

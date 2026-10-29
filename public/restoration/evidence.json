@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "password-change-research-0a57c83b": {
+      "kind":"source", "revision":"0a57c83b36dc6cc681bdd2d317f35720646f5f85", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/0a57c83b36dc6cc681bdd2d317f35720646f5f85/docs/change-password.md", "checks":["access:change-password"],
+      "method":"Selected123.5.1 form requires current/new length>=5 and matching confirmation, sends guid/password/newPassword and updates cached credentials only on Success. Compiled/routed Kithio verifies then separately updates the same account; follow-up Database.Verify and five-worker Program inspection expose non-atomic comparator ordering, not observed original-server behavior. Related Trapped is not independent. Modified7.0 client task/mediator and server handler agree on the bounded form contract. The October9,2013 API catalogue lists the same fields plus ignore; undated preserved support text says changes use Accounts. January14,2012 official FAQ describes logout, not password-change invalidation.",
+      "limitations":"Source research only. Original123.5.1 session invalidation and concurrent-change winner/refusal remain unresolved in issue925 and the row. Current ownership refusal, serialized authentication, Argon2 and pending-grant revocation remain deliberate modern safety. No imported implementation/assets, runtime/mail/production/authority/death/ACK/lease change or original-server acceptance. Direct DECA reset article403 and unhelpful searches do not prove historical absence."
+    },
+    "password-change-native-7d8b511f": {
+      "kind":"native", "revision":"7d8b511f2eea0357185723d5f8862c9ab9f76347", "date":"2026-10-17",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/156#issuecomment-6238787224", "checks":["access:change-password"],
+      "method":"Reused PR156 receipt: native password change returns to Current account, verifies with updated cached credentials and preserves unrelated durable state. Superseded-old retry fails. After an actual server restart, the reloaded native client authenticates with the replacement and loads the same native-created saved Wizard.",
+      "limitations":"Prior revision-bound receipt, not a freshly repeated restart/current-main or original-server acceptance. Prepared disposable local registered account; later game LOAD separately increments discovered tiles. The original broader ownership/concurrency tests passed at this revision but PR715 retired most of those guards; do not claim they remain current regressions."
+    },
     "guest-retention-research-1605c361": {
       "kind": "source",
       "revision": "1605c361b324bbc85230df62bc22cc909f43e8b0",
@@ -6088,7 +6100,7 @@
     "access:login": {"status": "not-run","evidence": ["registered-credential-login-native-eb85988","recovered-account-source-794eccf"]},
     "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45","registration-research-24398fa0","email-verification-research-631d5dc"]},
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
-    "access:change-password": {"status":"not-run","evidence":[]},
+    "access:change-password": {"status":"not-run","evidence":["password-change-research-0a57c83b","password-change-native-7d8b511f"]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},
     "access:character-slots": {"status":"not-run","evidence":[]},
     "access:character-deletion": {"status":"not-run","evidence":[]},
