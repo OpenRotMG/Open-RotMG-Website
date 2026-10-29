@@ -7578,12 +7578,17 @@
           "Email and Discord recovery use expiring, single-use reset links instead of emailing a password. Discord recovery still requires an explicit account link."
         ],
         "unknowns": [
-          "Original password regeneration and invalidation, and recovery-email delivery."
+          "Exact original password generation, old-password/session invalidation timing and target-build email delivery.",
+          "Continuity from the July 2012 support translation to 123.5.1, and whether self-service email change existed. The period guide documents newly emailed passwords and contacting support from the old address; a later 2013 API catalogue links an unreadable email-change thread."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120716020422id_/http://wikiwiki.jp/rmd/?Customer%20Support#support5-1",
+            "label": "July 16, 2012 support translation: newly emailed password and support-mediated email change"
           }
         ]
       }
@@ -7597,14 +7602,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Authenticated current-password/new-password change preserves account identity; rejected changes leave credentials intact. This does not imply self-service email change.",
-        "differences": [],
+        "differences": [
+          "Serialized authentication, active/pending/fenced ownership refusal, atomic Argon2 replacement and pending-grant revocation are deliberate modern safety policy, not recovered original-server behavior."
+        ],
         "unknowns": [
-          "Historical session invalidation and concurrent change policy."
+          "Original123.5.1 server session-invalidation timing and concurrent-change winner/refusal policy remain unresolved. Selected client, related private servers, the2013 API catalogue, undated support mirror and January14,2012 FAQ do not establish those internals; see server issue925."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_Q_A_/_ag.as",
+            "label": "Pinned selected-era password form comparator, not original-server session policy"
           }
         ]
       }
@@ -7647,16 +7658,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "List and select living characters, create within capacity, and buy additional slots at the advertised price. Change Characters returns to selection while preserving the living character. Original starting capacity, maximum slots and prices remain unresolved.",
-        "differences": [],
+        "expected": "List/select living saves, create within capacity, and buy additional slots at the advertised Gold price. The selected client consumes server capacity/price and sends credentials without an expected quote. Change Characters returns to selection without death; March29,2012 describes the Nexus statue workflow.",
+        "differences": [
+          "Retained PR154 reconstruction starts with1 slot, caps at14, and prices additional slots600/800/1000 Gold. The cap retains a1000 quote but rejects purchase. Atomic purchase receipts, successful-timer replay refusal and ownership/session fences are modern safeguards; distinct timers use current durable prices, not stale displayed quotes."
+        ],
         "unknowns": [
-          "Original initial capacity, maximum and complete pricing schedule.",
-          "In-world character-switching persistence timing."
+          "Independently dated complete123.5.1 initial-capacity/cap/tier/sale schedule. November5,2011 describes one free slot and600 currently/usually1000; the mutable Japanese August4,2012 package section values two slots600+800 and names cap14. Neither proves target continuity; dated-backup requests returned403. Compiled Kithio's flat100 and modified7.0's Fame branch are customized comparators, not target policy.",
+          "Original disconnect/autosave flush, ACK and crash-durability timing. Selected Change dispatches COMPLETE, not an explicit save/death packet. Modern committed departure and tested reconnect behavior do not recover the original server's durability semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/59796",
+            "label": "March29,2012 statue-to-selection answer; later2015 Options answer is separate"
+          },
+          {
+            "url": "https://gamingwithme.wordpress.com/2011/11/05/realm-of-the-mad-god-permadeath-mmo/",
+            "label": "November5,2011 one-free-slot and600 currently/usually1000 description, not target price continuity"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/課金について#biginners",
+            "label": "Mutable guide's August4,2012 offer:600+800 slot valuation and cap14; not independently dated full target schedule"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/account/purchaseCharSlot.cs#L34-L51",
+            "label": "Compiled primary comparator charges100 with no inspected cap; not target economic policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as#L37-L62",
+            "label": "Modified7.0 request/retry/model update; customized Fame branch is not123.5.1 authority"
           }
         ]
       }
@@ -7706,14 +7739,30 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "The client lists advertised servers, locations, usage and restricted access, remembers a preference and selects an eligible server. Full/busy selection and admission are separate checks.",
+        "expected": "The client reads advertised server coordinates and access metadata, shows Normal/Crowded/Full, saves a preferred server and selects an eligible endpoint. Full-server selection and backend admission are separate checks.",
         "differences": [
           "Only one server endpoint is advertised; multi-region server selection is not implemented."
         ],
         "unknowns": [
-          "Original full/busy server presentation and region-specific server lists."
+          "Exact 123.5.1 production region roster, coordinates, capacities and original backend admission policy remain unverified. February 2012 server additions do not establish the later roster (#929)."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/Server.as",
+            "label": "123.5.1 comparator: Crowded >=0.66; Full >=1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_0M_L_.as",
+            "label": "123.5.1 comparator: saved preferred-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build120.0.3",
+            "label": "November 28, 2011 release notes: less-crowded nearest-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "February 20–25, 2012 additions: region names and title-screen selection"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
