@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "weak-native-8b2fc1f9": {
+      "kind":"native", "revision":"8b2fc1f9eb583e1135700fba235f9fd65e0cce5d", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1220#issuecomment-6486774975", "checks":["condition:3"],
+      "method":"Clean QA146f4e43 passes12 assertions/68700 game ms with two ordinary native clients on private displays: real Arachna Weak through Invulnerable; Attack75 bow raw5–19 and boss HP loss; allied native Damaging still leaves Weak damage5–19; ordinary approach and quiver raw105/112, first miss then108 actual damage after Defense4; Holy Water consumes once/revision1→2, clears Weak but retains Damaging; another hit reapplies; Invincible blocks new hits after protection expiry and existing Weak expires. Same Archer retains gear; final original shows Weak on the other participant only. Client0282b3a4/Ruffle.16, case27323b1e, ELF5ebe678a. Cold QA1880fd4e verifies committed case, SQLite/FKs, two living characters/zero deaths, unchanged100-Gold wallets,29 retired child PIDs absent, cleanup[],QA0/reclaimed, zero backend ERRORs; seven WARNs retained. Repeat QA9b1cc9bf passes all12/68800 game ms and lands its first quiver; cold QAd327cab3 matches both Weak cases/ELF/state and all29/11/25 retired children, and anonymously byte-matches four published images. Repeat has zero ERRORs/13 WARNs. Receipt: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1220#issuecomment-6486809529 .",
+      "limitations":"Prepared level20/classes/gear/protections, not earned progression, public deployment or performance acceptance. Refresh and departure boundaries are separate regressions, not a native reconnect/death journey. Initial loading/log-sampling, prohibited native teleport and single-shot misses remain failed case evidence; final case preserves correction/ACK/lease guards and requires a real hit within five ordinary casts. Original authoritative rounding, non-Shoot damage and lifecycle/refresh/cleanse policy stay historical partial under936. No runtime policy or shared test infrastructure changed."
+    },
+    "weak-regression-8b2fc1f9": {
+      "kind":"regression", "revision":"8b2fc1f9eb583e1135700fba235f9fd65e0cce5d", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1220#issuecomment-6486774975", "checks":["condition:3"],
+      "method":"Two focused combat regressions pin odd-draw truncation, Attack0/15/75 with Weak/Damaging combinations, native Shoot's unchanged109 draw and50 MP cost, ACK-only Weak application through Invulnerable, duplicate-hit refusal, later-deadline refresh, exact expiry and departure isolation. Serial QAb830826a passes all295 Rust tests; warning-denied all-target Clippy QA5a5cb933 and formatting pass. Rust source is unchanged through8b2fc1f9.",
+      "limitations":"Deterministic prepared worlds and direct lifecycle calls, not original-server recovery or native departure/death acceptance. Initial fixture exceeded Archer caps and was corrected. Parallel QA6925cdf6 has294 passes and one unrelated bootstrap Elapsed; it remains a failure, not a pass. Current no-shortening timers and ephemeral statuses are tested reconstruction policy, not authenticated period semantics."
+    },
+    "weak-combat-native-554d273e": {
+      "kind":"native", "revision":"554d273e5b6971871c15f6718176b053917aeb0e", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1220#issuecomment-6486774975", "checks":["condition:3"],
+      "method":"QA5d39db9b passes seven assertions/26450 game ms: real HP loss after Invulnerable expires, Weak/Slowed overlap and expiry under Invincible, paired native staff shots and same living Wizard/equipment. Case d9ff2a1e is unchanged at8b2fc1f9. Same client/ELF as the Archer run; cold QA1880fd4e verifies SQLite/FKs, one living character/zero deaths,100Gold,11 retired child PIDs absent, cleanup[],QA0/reclaimed, zero ERRORs/eight WARNs.",
+      "limitations":"Prepared combat fixture, not earned progression, native cure or original history. The prior case tried to observe HP loss by14950ms while15000ms protection was still active; a bounded3000ms idle before its10000ms damage window corrects only that test timing. An intermediate12000ms input was correctly rejected by the unchanged action cap. No runtime or admission guard changed."
+    },
     "weak-research-3f45c9bb": {
       "kind":"source", "revision":"3f45c9bbe7662eb39ae107322a0af224e361de3a", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/3f45c9bbe7662eb39ae107322a0af224e361de3a/src/world.rs#L4559-L4573", "checks":["condition:3"],
@@ -6331,7 +6349,7 @@
     "access:player-art-gallery": {"status":"not-run","evidence":[]},
     "access:player-art-editor": {"status":"not-run","evidence":[]},
     "condition:2": {"status":"not-run","evidence":[]},
-    "condition:3": {"status":"not-run","evidence":["weak-research-3f45c9bb"]},
+    "condition:3": {"status":"passed","evidence":["weak-research-3f45c9bb","weak-regression-8b2fc1f9","weak-native-8b2fc1f9","weak-combat-native-554d273e"]},
     "condition:4": {"status":"not-run","evidence":[]},
     "condition:5": {"status":"not-run","evidence":[]},
     "condition:6": {"status":"not-run","evidence":[]},
