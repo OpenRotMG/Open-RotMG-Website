@@ -7781,9 +7781,13 @@
         "expected": "World transfers carry the character, destination and connection key; connection failures display an error rather than silently creating another character. Original key lifetime and death/transfer interactions remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original connection-key expiry, reuse and death/transfer race behavior."
+          "Original connection-key expiry, reuse and death/transfer race behavior. Current 120-second admission and 2400-tick grant expiry are reconstruction policy, not recovered original-server timing."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/_1f.as#L1207-L1210",
+            "label": "Recovered 123.5.1 reconnect character, destination and key continuity"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -7796,22 +7800,22 @@
             "expected": "The recovered local client warns at ten/fifteen minutes and exits at twenty; a matching original server AFK policy is not established.",
             "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Original-server AFK policy is not established; recovered client thresholds and existing native idle receipts are separate evidence."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_0H__.as","label":"Recovered 123.5.1 client idle thresholds and Stage input resets"}],
             "group": "behavior"
           },
           {
             "id": "access:world-loading-presentation",
             "name": "Destination loading and input release",
-            "expected": "Destination loading must survive initialization, then fade and stop consuming input when play is ready.",
+            "expected": "The recovered loader waits for initialization and five 200ms timer intervals, fades over 0.4 seconds, disables mouse input at fade start and removes itself on completion. Initialization may precede embedded movie readiness.",
             "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact native minimum-display/fade timing and terminal failed-load presentation need executed evidence, not just source constants or settled arrival screenshots."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_02a.as","label":"Recovered loader readiness, timing, input release and removal"}],
             "group": "behavior"
           }
         ]
