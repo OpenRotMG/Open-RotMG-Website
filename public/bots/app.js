@@ -48,7 +48,7 @@ export function intentionRows(intent) {
   // The server prefixes steps with Activity; per-tick targets and reflex details are not useful overview text.
   const activities = {
     busy: 'Finishing an action', surviving: 'Staying safe', trading: 'Trading with other players',
-    'sorting gear': 'Sorting equipment', restocking: 'Getting health potions',
+    'sorting gear': 'Sorting equipment',
     'at an event': 'Taking part in a realm event', 'using items': 'Using a potion',
     socializing: 'Meeting other players', banking: 'Sorting items in the Vault',
     'hanging out in Nexus': 'Spending time in the Nexus',

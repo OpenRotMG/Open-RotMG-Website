@@ -319,8 +319,8 @@ test('newly visible bots refresh the catalogue before switching and list errors 
 test('overview uses plain broad activities, not per-tick targets or internal policy explanations', () => {
   assert.deepEqual(intentionRows(intent).slice(0, 2), [['Trying to', 'Max permanent Speed'], ['Progress', '30 / 50 Speed']]);
   assert.deepEqual(intentionRows(intent).at(-1), ['Recent activity', 'Exploring and fighting']);
-  const supply = {...intent, mode: 'necessary', step: 'restocking: returning to remembered loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan};
-  assert.deepEqual(intentionRows(supply).at(-1), ['Recent activity', 'Getting health potions']);
+  const supply = {...intent, mode: 'necessary', step: 'banking: returning to remembered loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan};
+  assert.deepEqual(intentionRows(supply).at(-1), ['Recent activity', 'Sorting items in the Vault']);
   assert(!intentionRows(supply).some(([label]) => ['Why', 'Then', 'Required interruption'].includes(label)));
   for (const [step, summary] of [['surviving: under threat, dodging', 'Staying safe'], ['socializing: following Someone', 'Meeting other players'], ['banking: storing loot', 'Sorting items in the Vault'], ['Return to Nexus before logout', 'Returning to the Nexus to log out']]) assert.equal(intentionRows({...intent, step}).at(-1)[1], summary);
   const uncounted = {...intent, goal: {...intent.goal, current: null, target: null, unit: null}};
@@ -338,13 +338,13 @@ test('recent activity changes at most every ten seconds; unchanged descriptions 
   await h.emit({frame, age_ms: 0});const first = h.nodes['#intention'].children[0];
   await h.emit({frame: {...frame, intent: {...intent, step: 'adventuring: fighting Easily Enraged Bunny', reason: 'different internal transition'}}, age_ms: 0});
   assert.equal(h.nodes['#intention'].children[0], first);
-  const supply = {...frame, intent: {...intent, mode: 'necessary', step: 'restocking: walking to loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan}};
+  const supply = {...frame, intent: {...intent, mode: 'necessary', step: 'banking: walking to loot', reason: 'Restore the carried health reserve from observed supplies', resume: intent.plan}};
   await h.emit({frame: supply, age_ms: 0});assert.equal(h.nodes['#intention'].children[0], first);
   await h.advance(9999);
   await h.emit({frame: {...supply, intent: {...supply.intent, goal: {...intent.goal, current: 31}}}, age_ms: 0});
-  assert.match(visible(), /31 \/ 50 Speed/);assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Getting health potions|carried health reserve/);
-  await h.advance(1);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Getting health potions/);
-  await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  assert.match(visible(), /31 \/ 50 Speed/);assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Sorting items in the Vault|carried health reserve/);
+  await h.advance(1);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Sorting items in the Vault/);
+  await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Sorting items in the Vault/);
   h.send();await h.advance(10000);await h.emit({frame: {...frame, intent: {...intent, step: 'surviving: dodging'}}, age_ms: 0});assert.match(visible(), /Staying safe/);
 });
 
@@ -353,18 +353,18 @@ test('world-transfer feed gaps hide unavailable data without bypassing the activ
   const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
   await h.emit({frame, age_ms: 0});await h.advance(500);
   await h.emit({frame: null, age_ms: 0});assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /No decision intention/);
-  const supply = {...frame, intent: {...intent, step: 'restocking: returning to remembered loot'}};
-  await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Getting health potions/);
+  const supply = {...frame, intent: {...intent, step: 'banking: returning to remembered loot'}};
+  await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Exploring and fighting/);assert.doesNotMatch(visible(), /Sorting items in the Vault/);
   await h.emit({frame: {...frame, intent: undefined}, age_ms: 0});assert.equal(visible(), '');
   await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Exploring and fighting/);
-  await h.advance(9500);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  await h.advance(9500);await h.emit({frame: supply, age_ms: 0});assert.match(visible(), /Sorting items in the Vault/);
 });
 
 test('new goals, characters and selection reset immediately; unavailable data never stays visible', async t => {
   const h = harness(t);await flush();h.send();
   const visible = () => h.nodes['#intention'].children.flatMap(list => list.children.map(child => child.textContent)).join(' | ');
   await h.emit({frame, age_ms: 0});
-  await h.emit({frame: {...frame, intent: {...intent, goal: {...intent.goal, id: 2}, step: 'restocking: waiting'}}, age_ms: 0});assert.match(visible(), /Getting health potions/);
+  await h.emit({frame: {...frame, intent: {...intent, goal: {...intent.goal, id: 2}, step: 'banking: waiting'}}, age_ms: 0});assert.match(visible(), /Sorting items in the Vault/);
   await h.emit({frame: {...frame, character: 2, intent: {...intent, goal: {...intent.goal, id: 2}, step: 'trading: waiting'}}, age_ms: 0});assert.match(visible(), /Trading with other players/);
   await h.emit({frame: {...frame, intent: undefined}, age_ms: 0});assert.equal(visible(), '');assert.match(h.nodes['#intention-status'].textContent, /Intentions unavailable/);
   assert.equal(h.nodes['#view-status'].textContent, '');assert.equal(h.nodes['#telemetry-status'].textContent, '');
