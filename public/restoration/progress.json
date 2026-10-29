@@ -6699,11 +6699,12 @@
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
         "differences": [
           "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
-          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior."
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior.",
+          "PR1193 verifies the six current proximity overlays, minimap backtracking, authored ring equip, starter ability use and Kitchen/Nexus/Tutorial continuity in three prepared contexts. The selected client saves needsTutorial=false on Tutorial construction, not completion. Neither this local preference nor the native receipt proves earned first-run admission or the complete historical journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1193"
         ],
         "unknowns": [
           "Complete first-adventure layout and instructional/admission fidelity; the May 2012 page describes a solo Tutorial, while this change preserves the existing server admission policy.",
-          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward policy. The mutable enemy wiki describes flee at 100 HP and full potions; selected Kithio uses below 90 HP and Minor Potions. The target Kitchen layout and instance sharing remain unverified."
+          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward probabilities. The May 19, 2012 Bonegrind page (updated build122.3.2) lists Minor Health and Minor Magic Potions, unlike the mutable enemy wiki's full potions, but supplies no probabilities or flee threshold. Selected Kithio uses below90HP. Target Kitchen layout and instance sharing remain unverified."
         ],
         "sources": [
           {
@@ -6721,6 +6722,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/Bonegrind%20the%20Butcher",
             "label": "Mutable enemy wiki: corroborates blades and flee dialogue but conflicts on HP threshold and rewards"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225245id_/http://forums.wildshadow.com/wiki/realm-mad-god/bonegrind-butcher",
+            "label": "May 2012 capture, updated build122.3.2: Minor Health and Minor Magic rewards; no probabilities or flee threshold"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/https://forums.wildshadow.com/node/41768",
+            "label": "February 13, 2012 build122 announcement: Tutorial/Kitchen polished; no exact layout"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605125421id_/https://forums.wildshadow.com/node/149494",
+            "label": "October 9, 2012 Release2 announcement: extended Nexus/shop/guild Tutorial is later than target"
           }
         ]
       }
@@ -6756,18 +6769,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
+        "expected": "Named Realm selection, live population, Enter/Full availability and denied entry. Locked is selected by the client LockedPortal definition, not simply a closed Realm. January 2012 documentation describes 85-player counters and up to eight portals; exact 123.5.1 continuity, name pool and population accounting remain unresolved.",
         "differences": [
           "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-        "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability. Revision-bound regression and native after evidence do not establish the broader historical name/capacity or full/locked obligations: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998"
+          "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
+          "Issue901 distinguishes full-but-visible Realm entrances from closed/hidden entrances and XML-locked Wine Cellars. Kithio WorldClosed removes the portal; modified 7.0 ClosePortal instead clears Usable. These related comparators are not independent historical votes. The two/three-Realm limit and reservation-inclusive occupancy remain explicit reconstruction policies: https://github.com/OpenRotMG/Open-RotMG-Server/issues/901",
+          "Clean native 6ca925d passed eight bounded browsing checks, including live Full/refusal, reopening, both destinations and inventory/identity-preserving Nexus returns. An identical-revision attempt stopped at the tick-ACK guard during return; an unchanged retry passing does not explain or fix it. Prepared one-slot capacity and characters are not an 85-player load, earned journey, native closure or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1191#issuecomment-6483478106"
         ],
         "unknowns": [
-          "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."
+          "Exact 123.5.1 name pool, continuity of the January 2012 85-player/eight-portal description, and population accounting across dungeons/in-flight reservations. Current reconstruction allows two or three Realms and hides closed entrances. Native closure/removal/replacement and the unexplained tick-ACK-stop take on an otherwise passing browsing revision remain tracked in server issue901."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012 capture: named Realms, 85-player counters, up to eight portals (not exact 123.5.1 continuity)"
+          },
+          {
+            "url": "https://chronicawesome.wordpress.com/2012/02/22/realm-of-the-mad-god/",
+            "label": "February 22, 2012 player account: 85-player Realms and Medusa/Cyclops labels; other gameplay interpretations are not adopted"
           }
         ]
       }
@@ -6819,12 +6842,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
+        "expected": "Personal Gold and spendable account Fame are separate from living-character Fame and Guild Fame. Death credits account Fame; supported Nexus purchases debit the selected wallet. Period reports support 100 starting Gold; exact 123.5.1 deployment, complete Fame formulas and original spending policy remain partial.",
         "differences": [
           "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
         ],
         "unknowns": [
-          "Historical starting balances, complete Fame formulas and exact original earnings/spending policy remain unresolved. Current code separately stores Gold and account Fame, credits the committed death award once, and atomically debits the selected wallet for supported purchases; source presence is not a completed native economy journey."
+          "A May 2011 firsthand report and September 2012 spending report support 100 Gold; Kithio's 1000 and April 2013's 50 must not be copied into 123.5.1. Exact target-era continuity, full Fame formulas and original earnings/spending policy remain unresolved. Prepared rewards and store transactions do not establish an earned native death-to-purchase journey. Research and remaining scope: https://github.com/OpenRotMG/Open-RotMG-Server/issues/903#issuecomment-6482538664"
         ],
         "sources": [
           {
@@ -6837,13 +6860,15 @@
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
             "expected": "The project deliberately replaces historical payment offers with a Gold guide and rewards. Each account receives 75 Gold for Blue (13 stars), 150 for Red (26), 250 for Orange (39), 750 for Yellow (52) and 2500 for White (65), once per rank.",
-            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. The selected client fetches offers dynamically; undated modern price tables are not recovered 123.5.1 offers. Do not reactivate obsolete processors or test real payments.",
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards."
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards. The selected client originally required registration and opened a payment overlay; the guide bypasses that obsolete overlay."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Exact 123.5.1 offers, regional/platform availability and active processor deployment remain unresolved. The client /credits parser is not a recovered server response."
+            ],
             "sources": [],
             "group": "behavior"
           }
@@ -7004,15 +7029,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based lock/unlock list 0 and persisted loading; nearby panel prioritizes locked players and exempts them from ordinary distance cutoff. No global/offline tracking requirement established.",
+        "expected": "Account-based lock/unlock list 0 and persisted loading. The selected client displays six peers, sorted by lock descending, distance ascending, then object ID; unlocked peers beyond 50 tiles are omitted. Locks bypass that cutoff only for peers in the current map, not offline/global tracking.",
         "differences": [],
         "unknowns": [
-          "Original list limit and retention, and nearby-panel ordering across reconnects and characters."
+          "Original saved-list capacity, eviction and retention across sessions/characters are unresolved. Six displayed slots are not a saved-list cap; Kithio's cap sketch is commented out and its handler is a no-op. The current wiki's 50-entry/oldest-eviction claim is undated. See server issue908.",
+          "Native death-to-Continue-to-replacement panel ordering, six-slot saturation and equal-distance ties are not executed; the account-storage regression is not native replacement acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Pinned selected-client party sorting and account-keyed locks"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build100",
+            "label": "Build100 test-context party description, not saved-list retention proof"
           }
         ]
       }
@@ -7025,15 +7059,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based ignore/unignore list1, persistent loading and chat suppression. Period announcement explicitly permits ignoring players in private guild hall/vault; exact channel/interaction coverage unresolved.",
-        "differences": [],
+        "expected": "Selected123.5.1 client stores ignored account IDs in list1 and describes /ignore as chat suppression. June12,2012 Build123.3 announcement explicitly permits private Guild Hall/Vault targets. The six-member client constant limits the party panel, not the ignore dictionary.",
+        "differences": [
+          "Current server suppresses public/yell/tell/guild chat and guild invitations from ignored senders, but not trade requests. Selected client trade/invite handlers do not filter ignores; this does not establish original server policy."
+        ],
         "unknowns": [
-          "Original list cap, offline targeting details and effects on trade/invites versus chat-only suppression."
+          "Original numeric ignore cap and offline targeting policy remain unresolved. Kithio's six-entry editor is commented out and its registered packet handler is a TODO; Trapped's active six-entry editor is a later comparator, not target-era proof.",
+          "Named whispers, guild invitations and Guild Hall targeting still need bounded native verification. Public/yell/guild suppression, private Vault targeting, trade cancellation and reconnect are bounded prepared checks, not whole-feature acceptance."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June12,2012 Build123.3 announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Selected client account dictionaries and visible party limit"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Party.as",
+            "label": "Modified7.0 account-list comparator, not target-era authority"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -7050,12 +7095,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Eligible same-map player teleporting, including Ocean Trench; paused/invisible targets rejected and rejection must not activate cooldown. Exact target successful cooldown and landing policy remain unresolved.",
+        "expected": "Eligible same-map player teleporting, including Ocean Trench. Selected 123.5.1 client uses a 10000ms cooldown after dispatch and rejects paused/invisible targets before dispatch or cooldown. Current server lands at the target's current valid position; this is reconstruction, not authenticated original landing policy.",
         "differences": [],
         "unknowns": [
-          "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Selected client establishes a ten-second dispatch cooldown, not the original server's independent successful/rejected-request timing, landing offset, world restrictions or race handling.",
           "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
-          "Whether the original server also rejected direct requests targeting invisible players."
+          "Build 123.0.0 notes (April 23, 2012 Japanese date) say invisible-Rogue attempts never activate cooldown; the selected client achieves this before dispatch. Original direct-packet rejection remains unverified. Kithio charges cooldown before target lookup; modified 7.0 rejects invisible/paused targets first, so comparator policies are not interchangeable."
         ],
         "sources": [
           {
@@ -7081,6 +7126,18 @@
           {
             "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
             "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L228-L263",
+            "label": "Selected-client source: 10000ms dispatch cooldown; paused/invisible refusal precedes dispatch and timer assignment"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/52946/is-teleporting-possible/52947#52947",
+            "label": "March 1, 2012 answer: chat/name/minimap teleport and a short cooldown; exact ten-second answer on this page is June 4, 2015, not 2012"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat",
+            "label": "April 2012 guide: wait for dungeon rushers, then teleport in Lair/Sprite/Abyss/Trench; no exact cooldown or landing offset"
           }
         ]
       }
