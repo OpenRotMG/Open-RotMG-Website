@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "quiet-native-8c28e4f": {
+      "kind": "native",
+      "revision": "8c28e4fa7cdd1ed5fb2334ef990bf4df088a231d",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1221#issuecomment-6486298520",
+      "checks": ["condition:2"],
+      "method": "Clean QAd1ec02fb passes10 native checks/9150 game ms: natural Castle floor Quiet drains385 to0 through Invulnerable; normal Magic Potion and Quiet-caster MagicNova consume once with no caster grant; same-instance unquiet peer receives100 while peer MagicNova cannot restore the Quiet recipient. Native spell at0MP has no cooldown/inventory effect; staff fire defeats the actual source. Holy Water consumes/clears Quiet, regeneration resumes, subsequent peer nova restores mana and the80MP spell succeeds. Ordinary Nexus transfer retains the same living character/consumptions/revision4. Cold QAf872a569 verifies SQLite/FKs, saved MP32/base/gear/revision4, zero deaths/ERRORs, cleanup[] and all recorded child PIDs absent. Case5465279a/runner5c28b36d/controllerc1c17470/ELF7cb1c8ed/client0282b3a4/Ruffle.16. Two published images show rendered Quiet/consumption and cure; initial loading-overlay capture is excluded.",
+      "limitations": "Prepared local level20/stats/gear/consumables, HP protection and temporary Attack+100, not earned progression, ordinary-risk survival or public hosting. Native zero-MP spell input can stop at the client cost gate; server refusal is separately covered by Rust. Failedcbbed8ca has invalid Wisdom;7b31cf21 ends during build setup;85b3893a uses a separate Castle instance. None is a pass. No native Priest Quiet cleanse, active-Quiet transfer or death/replacement acceptance. Exact original drain/transient grants, refresh/cure and aura exceptions remain partial in935; whole-condition gameplay stays not-run."
+    },
     "quiet-regression-76e5bae": {
       "kind": "regression",
       "revision": "76e5baeab3b2d78c8bb020c3620752faed225243",
@@ -6329,7 +6338,7 @@
     "access:sound-and-music": {"status":"not-run","evidence":["selected-client-ui-source-2bf948c","quest-audio-source-88b271f","quest-audio-regression-88b271f","quest-audio-native-88b271f","audio-inventory-regression-30f27d7","audio-controls-native-afea3d9"]},
     "access:player-art-gallery": {"status":"not-run","evidence":[]},
     "access:player-art-editor": {"status":"not-run","evidence":[]},
-    "condition:2": {"status":"not-run","evidence":["quiet-research-76e5bae","quiet-regression-76e5bae","quiet-expiry-native-f495cd1"]},
+    "condition:2": {"status":"not-run","evidence":["quiet-research-76e5bae","quiet-regression-76e5bae","quiet-expiry-native-f495cd1","quiet-native-8c28e4f"]},
     "condition:3": {"status":"not-run","evidence":[]},
     "condition:4": {"status":"not-run","evidence":[]},
     "condition:5": {"status":"not-run","evidence":[]},
