@@ -113,9 +113,9 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
-test('Worlds4–5,10–11 and13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+test('Worlds4–5 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  for(const n of ['04','05','10','11','13']){
+  for(const n of ['04','05','10','11','12','13']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
@@ -131,7 +131,11 @@ test('Worlds4–5,10–11 and13 playable acceptance keeps historical and map-ban
   assert.match(world13.rule.acceptance,/paired north\/south bodies and central connection/);
   assert.match(evidence.sources['world13-native-4f32e2f'].method,/northern-body, central-connection and southern-body/);
   assert.match(evidence.sources['world13-native-4f32e2f'].limitations,/not a continuous end-to-end north\/south walk/);
-  for(const n of ['06','07','08','12'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
+  const world12=rows.find(r=>r.id==='realm:map-world-12');
+  assert.match(world12.rule.acceptance,/five lobes and lake\/road joins/);
+  assert.match(evidence.sources['world12-native-2604cfa'].method,/five source lobes and three lake\/road joins/);
+  assert.match(evidence.sources['world12-native-2604cfa'].limitations,/not a continuous end-to-end walk/);
+  for(const n of ['06','07','08'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 
