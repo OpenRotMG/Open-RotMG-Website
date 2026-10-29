@@ -6789,16 +6789,20 @@
       "category": "social",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
+        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists current-world players. Permanent deaths announce name, level and killer. Reaching level 20 announces '<name> achieved level 20'. The selected client renders class unlocks as local level-up overlays.",
         "differences": [
           "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
           "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540",
-          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553"
+          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553",
+          "Level-20 notices follow the existing durable progress commit, once per transition. GDC Europe 2012 slide 54 corroborates the wording; compiled Kithio CheckLevelUp supplies current-world scope, which remains reconstructed rather than exact target-build audience proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+          "The selected client's language preference requires nonempty server cleanText, but current chat encoding supplies an empty string. Offensive-language filtering is not accepted as implemented; no historical vocabulary was recovered. Kithio's unchanged-text cleanText and the later 7.0 client are not substitutes for the target filter."
         ],
         "unknowns": [
-          "Original Nexus boundary metric, death-notice audience boundaries and killer grammar, other announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original Nexus boundary metric/equality, death-notice audience and general killer-article rule. GDC slide 54 shows 'a Knight of Oryx' and 'a Pet of Oryx', not an algorithm for every cause.",
+          "Exact 123.5.1 continuity and audiences for other announcements and per-enemy taunt text/timing. Kithio's compiled Taunt defaults to strict 15-tile proximity with an authored broadcast override; that does not establish the player-chat metric.",
+          "Historical filtering vocabulary and complete native preference persistence, bubble on/off and class-unlock overlay acceptance. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Remaining whole-feature gameplay acceptance is not-run; bounded receipts do not accept every lifecycle/ignore/death path."
         ],
         "sources": [
           {
@@ -6811,7 +6815,15 @@
           },
           {
             "url": "https://media.gdcvault.com/gdceurope2012/Presentations/Social%20%26%20Online%20Games%20Summit/Ethan_Levy_Social%26Online_GameDesignIs.pdf#page=54",
-            "label": "August 2012 GDC Europe screenshot: yellow name, level and killer death notices below level 20"
+            "label": "August 2012 GDC Europe slide 54: level-20 announcement, low-level death notices and two killer-article examples; predates 123.5.1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L185-L211",
+            "label": "Compiled Kithio CheckLevelUp: name achieved level 20, current-world audience; community reconstruction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 2012 capture, page last updated 119.0.5: chat history, preferences and partial /help; earlier than target"
           }
         ]
       }
