@@ -4371,6 +4371,24 @@
         "access:login"
       ]
     },
+    "client-entry-research-f1c1cea7": {
+      "kind":"source", "revision":"f1c1cea787aacfa723c46df6eae249affd41ffb6", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/issues/918#issuecomment-6483953981", "checks":["access:client"],
+      "method":"Fresh selected client0282b3a4 SWF07ae4fc3 decompilation verifies build123.5.1, XML Admin-gated map-editor menu and supplied-JSON test world-6. Pinned Kithio agrees on routing but its Hello branch is permissive, not original-server authority. Related Trapped is not independent corroboration; modified7.0 TitleView also gates EDITOR on isAdmin. Additional Pixel Editor guide image revisions in January/February/April2012 and April5,2013 testing notes concern public sprite art, not map/debug-world access.",
+      "limitations":"Recovered client definitions and private-server comparators are not authenticated original deployment/permission evidence. Current guide has later edits; image timestamps do not date every claim. Original-server enforcement and exceptional debug access remain explicitly unknown. No gameplay policy changed or source/assets copied; history stays partial. Failed Stanford fetch and guessed wiki404s do not prove absence."
+    },
+    "client-entry-regression-f1c1cea7": {
+      "kind":"regression", "revision":"f1c1cea787aacfa723c46df6eae249affd41ffb6", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40791654090", "checks":["access:client"],
+      "method":"Focused real-socket test refuses wrong build, ungranted debug world-6 and supplied map JSON without changing the saved character, then accepts ordinary LOAD. All285 Rust tests pass locally on retained binary806d79ac; CI passes formatting, warning-denied Clippy, the Rust suite and QA lifecycle. Rust sources are unchanged through9a178951.",
+      "limitations":"Prepared protocol regression, not native browser refusal rendering, original-server policy or exhaustive malformed-input/security acceptance. Redundant queued local suite/Clippy jobs were cancelled; the separately executed retained-binary suite and CI are the passing receipts."
+    },
+    "client-entry-native-9a178951": {
+      "kind":"native", "revision":"9a17895193995342a5c49aa856445fabdf4effab", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1198#issuecomment-6484314784", "checks":["access:client"],
+      "method":"Clean QAd2339032 passes four checks over7450 game ms on client0282b3a4/Ruffle.16: title/selection/LOAD, actual movement, normal Tutorial→Nexus reconnect retaining account1/character1/items/revision1 across a new player object, and ordinary listing without Admin. Four frames inspected. Cold QA699c0be8 matches committed cased450622e, verifies the living saved Wizard/HP100/MP100/starter items/revision1, SQLite/FKs, zero deaths/credentials, ten retired processes, cleanup[] and reclaimed scratch. Zero backend ERRORs; six WARNs retained.",
+      "limitations":"Protected prepared initial character/position, not unprepared CREATE, earned progression, fresh browser/server restart or all account operations. Earlier native guest refusal/conversion/login/durability receipts are reused at their own revisions with old ACK failures preserved. Failed inspector-clock and transfer-gap capture pilots remain excluded; final capture occurs after settled reconnect. No performance, production or historical acceptance, and no authority/death/durability/ACK/lease changes."
+    },
     "paused-area-source-a886831": {
       "kind": "source",
       "revision": "a88683102733c22b33cc0b7adb5b9ae6076478b3",
@@ -5965,7 +5983,7 @@
     "social:guild-roster": {"status":"not-run","evidence":[]},
     "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf"]},
     "social:share-a-living-world": {"status":"not-run","evidence":["enemy-prediction-source-12b706a","enemy-prediction-regression-12b706a"]},
-    "access:client": {"status":"not-run","evidence":[]},
+    "access:client": {"status":"passed","evidence":["client-entry-research-f1c1cea7","client-entry-regression-f1c1cea7","client-entry-native-9a178951","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "access:guest-accounts": {"status":"passed","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
     "access:login": {"status": "not-run","evidence": ["registered-credential-login-native-eb85988","recovered-account-source-794eccf"]},
