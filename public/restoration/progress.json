@@ -6842,12 +6842,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
+        "expected": "Personal Gold and spendable account Fame are separate from living-character Fame and Guild Fame. Death credits account Fame; supported Nexus purchases debit the selected wallet. Period reports support 100 starting Gold; exact 123.5.1 deployment, complete Fame formulas and original spending policy remain partial.",
         "differences": [
           "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
         ],
         "unknowns": [
-          "Historical starting balances, complete Fame formulas and exact original earnings/spending policy remain unresolved. Current code separately stores Gold and account Fame, credits the committed death award once, and atomically debits the selected wallet for supported purchases; source presence is not a completed native economy journey."
+          "A May 2011 firsthand report and September 2012 spending report support 100 Gold; Kithio's 1000 and April 2013's 50 must not be copied into 123.5.1. Exact target-era continuity, full Fame formulas and original earnings/spending policy remain unresolved. Prepared rewards and store transactions do not establish an earned native death-to-purchase journey. Research and remaining scope: https://github.com/OpenRotMG/Open-RotMG-Server/issues/903#issuecomment-6482538664"
         ],
         "sources": [
           {
@@ -6860,13 +6860,15 @@
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
             "expected": "The project deliberately replaces historical payment offers with a Gold guide and rewards. Each account receives 75 Gold for Blue (13 stars), 150 for Red (26), 250 for Orange (39), 750 for Yellow (52) and 2500 for White (65), once per rank.",
-            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. The selected client fetches offers dynamically; undated modern price tables are not recovered 123.5.1 offers. Do not reactivate obsolete processors or test real payments.",
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards."
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards. The selected client originally required registration and opened a payment overlay; the guide bypasses that obsolete overlay."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Exact 123.5.1 offers, regional/platform availability and active processor deployment remain unresolved. The client /credits parser is not a recovered server response."
+            ],
             "sources": [],
             "group": "behavior"
           }
@@ -6914,10 +6916,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Private /tell to selected recipients across worlds and servers, sender echo, and native counterpart history/reply navigation. Build121 explicitly announces cross-server tells. Offline delivery and exact error/ignore policy remain unresolved.",
-        "differences": [],
+        "expected": "Addressed /tell or /t with sender echo. The selected client records incoming senders and outgoing recipients, excluding guild chat and consecutive duplicates; Tab and Shift+Tab navigate a clamped counterpart history that resets with a new TextBox. The January 10, 2012 Build 121 announcement explicitly enables tells across servers; June 12 Build 123.3 extends /ignore to private Guild Hall/Vault occupants.",
+        "differences": [
+          "Current routing spans worlds within one server process, not independent server processes. Offline targets error; ignored recipients receive nothing while the sender retains its echo. These are current reconstruction policies, not fully established original-server rules."
+        ],
         "unknowns": [
-          "Original cross-server routing, offline errors, ignore rules and recipient history."
+          "Original relay internals, offline queuing/error wording and exact ignore feedback remain unresolved in server issue905. Source agreement alone does not establish historical or whole-feature gameplay acceptance."
         ],
         "sources": [
           {
@@ -6926,7 +6930,23 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "label": "Build 121.0.0 release-note transcription, not independent of the original announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/commands/WorldCommand.cs#L130-L187",
+            "label": "Compiled Kithio TellCommand: online named recipients, sender echo and refusal; comparator, not original-server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TextBox.as#L174-L197",
+            "label": "Modified 7.0 counterpart-history comparison; selected SWF checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134508id_/http://forums.wildshadow.com/node/29614",
+            "label": "January 10, 2012 Build 121 announcement: tells across all servers"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 Build 123.3 announcement: ignore private-area occupants"
           }
         ]
       }
@@ -7057,15 +7077,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based ignore/unignore list1, persistent loading and chat suppression. Period announcement explicitly permits ignoring players in private guild hall/vault; exact channel/interaction coverage unresolved.",
-        "differences": [],
+        "expected": "Selected123.5.1 client stores ignored account IDs in list1 and describes /ignore as chat suppression. June12,2012 Build123.3 announcement explicitly permits private Guild Hall/Vault targets. The six-member client constant limits the party panel, not the ignore dictionary.",
+        "differences": [
+          "Current server suppresses public/yell/tell/guild chat and guild invitations from ignored senders, but not trade requests. Selected client trade/invite handlers do not filter ignores; this does not establish original server policy."
+        ],
         "unknowns": [
-          "Original list cap, offline targeting details and effects on trade/invites versus chat-only suppression."
+          "Original numeric ignore cap and offline targeting policy remain unresolved. Kithio's six-entry editor is commented out and its registered packet handler is a TODO; Trapped's active six-entry editor is a later comparator, not target-era proof.",
+          "Named whispers, guild invitations and Guild Hall targeting still need bounded native verification. Public/yell/guild suppression, private Vault targeting, trade cancellation and reconnect are bounded prepared checks, not whole-feature acceptance."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June12,2012 Build123.3 announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Selected client account dictionaries and visible party limit"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Party.as",
+            "label": "Modified7.0 account-list comparator, not target-era authority"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -7191,7 +7222,7 @@
         "expected": "Ranks0/10/20/30/40. Officer changes0↔10; Leader changes lower targets up to30; Founder changes non-Founders up to30. No change to same rank or promotion to Founder. Removal requires Officer+ and strictly lower target.",
         "differences": [],
         "unknowns": [
-          "Original Founder succession and behavior of guilds without a Founder."
+          "A May 6, 2012 player experiment supports no automatic Founder succession, Leader-managed founderless guilds and a former Founder rejoining as Initiate. Exact 123.5.1 continuity and original behavior when no Leader remains are unconfirmed; tracked in server issue913."
         ],
         "sources": [
           {
@@ -7201,6 +7232,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/founderless-guild.html",
+            "label": "May 6, 2012 player experiment: Founder leaves, Leader remains, former Founder rejoins as Initiate"
           }
         ]
       }
@@ -7213,10 +7248,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Members read guild-shared text; Officer+ edits with Save/Cancel and returned saved text through authenticated requests. No historical numeric cap established.",
-        "differences": [],
+        "expected": "Members read guild-shared text; Officer+ edits. Selected123.5.1 Save posts complete text and displays the returned body; Cancel restores cached text without saving. No original server cap or conflict rule established.",
+        "differences": [
+          "Current4096-UTF16-unit cap, control-character rejection, verbatim allowed-text storage and transactional last-writer-wins are reconstruction/safety policies, not recovered2012 server rules. The later7.0 comparator additionally URL-decodes parsed form text; its corruption of literal plus/percent data is not imported."
+        ],
         "unknowns": [
-          "Original text length, normalization and simultaneous-edit behavior."
+          "Original server length cap, Unicode/newline normalization or filtering, and simultaneous-save policy remain unresolved in server issue914. Client text has CR line separators and no explicit maxChars or revision token; that does not establish server behavior."
         ],
         "sources": [
           {
