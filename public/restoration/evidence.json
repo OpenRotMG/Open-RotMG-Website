@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "guild-ranks-native-112d9857": {
+      "kind":"native", "revision":"112d9857f17390167217a1f0e78a5ba437bd2cfc", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/issues/913#issuecomment-6484083284", "checks":["social:guild-ranks"],
+      "method":"Clean QAc4a02bcb passes38 checks/465750 active game ms with three owned ordinary native clients: real Guild Hall entry/Chronicle requests, all lower-rank promotions/demotions, Officer0↔10 without appointing Officers, Leader appointment but co-Leader refusal, Initiate/Member hidden controls, actual promotion and renunciation cancellations, Founder departure without succession, and remaining Leader reconnect/roster. Inspected captures show both authority perspectives. Cold QA7ded515f verifies committed case98903b11,SQLite/FKs,one guild/two rank30 members,three living characters/zero deaths,14 rank commits/one self-removal and220 retired owned processes. Client0282b3a4/Ruffle.16; cleanup[],QA0/reclaimed.",
+      "limitations":"Prepared level/membership, not earned creation/invitation eligibility, former-Founder native rejoin, non-self removal, upgrades or original-server fidelity. Whole-feature remains not-run/history partial. Earlier portal-boundary309f6830, reconnect-capture4eedcea8 and out-of-reach Chronicle c744e6ea failures are retained, not passes. Zero backend ERRORs;655 slow-world-tick,214 latency and two slow-coordination WARNs retained, no performance claim. No authority, ACK, lease, movement, death or reward guard changed. Historical remainder stays in issue913."
+    },
+    "guild-ranks-regression-88cba821": {
+      "kind":"regression", "revision":"88cba8216b6c801e5e79c97f81d6c88ce1104302", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/issues/913#issuecomment-6484083284", "checks":["social:guild-ranks"],
+      "method":"QA4073e4aa passes283/283 Rust tests with two test threads. New guild tests check294 permission combinations, outside/equal/higher authority, unchanged/invalid/Founder rank refusals, co-Leader removal refusal, successful rank writes and Store reopen of a founderless guild. Rust bytes unchanged through native112d9857.",
+      "limitations":"Direct Store and predicate execution with prepared relations, not native packet races, earned membership or historical succession proof. Earlier Cargo separator parsing and cold revision/warning expectation failures are retained. No runtime gameplay change."
+    },
+    "guild-ranks-research-7486d765": {
+      "kind":"source", "revision":"7486d765e2c415d26e40cd27d6b55bff94b28392", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/7486d765e2c415d26e40cd27d6b55bff94b28392/src/store/guilds.rs#L30-L41", "checks":["social:guild-ranks"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/913#issuecomment-6483344585 . Selected123.5.1 _07E_ permission predicates and Chronicle confirmation flow agree with the current Store. Pinned Kithio compiled handlers do not implement guild ranks; modified7.0 GuildUtil agrees, but its server permits Officers to appoint Officers and is not authoritative. February2012 build122 release notes introduce Founder without retrofitting existing guilds. May28,2012 Wild Shadow Guilds capture describes rank management; May6,2012 Anticosmic first-person experiment reports no succession, Leader upgrades, former Founder rejoining as Initiate and equal Leaders.",
+      "limitations":"Source review, not original server recovery or native acceptance. May2012 report does not prove exact123.5.1 continuity or original behavior when no Leader remains. Modern support article returned403; build124.0.0 lead returned404. No comparator code/assets imported and no gameplay policy changed. Historical remainder stays in issue913."
+    },
     "whispers-native-02c9e9a": {
       "kind":"native", "revision":"02c9e9af0d5156f352e1bf79416d71004442f92b", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1199#issuecomment-6484064530", "checks":["social:whispers"],
@@ -5942,7 +5960,7 @@
     "social:teleport-to-players": {"status":"not-run","evidence":["player-teleport-native-97b3166e","player-teleport-regression-077f73ae","player-teleport-research-077f73ae","invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2","trench-teleport-source-e316eea","trench-teleport-native-e316eea"]},
     "social:create-and-join-a-guild": {"status":"not-run","evidence":[]},
     "social:guild-invitations-and-removal": {"status":"not-run","evidence":[]},
-    "social:guild-ranks": {"status":"not-run","evidence":[]},
+    "social:guild-ranks": {"status":"not-run","evidence":["guild-ranks-research-7486d765","guild-ranks-regression-88cba821","guild-ranks-native-112d9857"]},
     "social:guild-board": {"status":"not-run","evidence":["guild-board-research-92e634b2","guild-board-native-a3fdc308","guild-board-api-a3fdc308"]},
     "social:guild-roster": {"status":"not-run","evidence":[]},
     "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf"]},
