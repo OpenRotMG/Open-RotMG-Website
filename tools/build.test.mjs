@@ -215,7 +215,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(restorationCss, /\.category-links a \{ display: inline-block;/);
   assert.doesNotMatch(restorationCss, /feature-grid|border-radius/);
   assert.equal(progress.features.length, 211);
-  assert.equal(requirements.length, 281);
+  assert.equal(requirements.length, 282);
   assert.match(restorationPage, /id="roadmap"/);
   assert.match(restorationPage, /id="search"/);
   assert.doesNotMatch(restorationPage, /Historical evidence score|RESTORATION_PERCENT|RESTORATION_WORK/);
