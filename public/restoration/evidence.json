@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "guild-hall-research-306cebba": {
+      "kind": "source",
+      "revision": "306cebbaa09dddd103a91d301bd202dcd61dc08d",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/306cebbaa09dddd103a91d301bd202dcd61dc08d/src/store/guilds.rs",
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/916#issuecomment-6483916537 . Reconciled merged PR104 and main6a78ee77, selected 123.5.1 XML/GuildMerchant, pinned modified 7.0 client and realm-src hall engine/maps, and Trapped's conflicting teleport/layout policy. Checked February2012 test and production announcements, the March29 Arqade original revision1 (Unix1333039689) via Stack Exchange revisions API and 2017 patch notes. Selected prices10000/100000/250000; test prices100/1000/2500 are explicitly not production. Guill and convenience portals are 2017 additions.",
+      "limitations": "Not gameplay acceptance or authenticated map provenance. The original March29 Arqade revision reports only the first two prices; its 2020 edit is a CommonMark migration. Original teleport policy, exact original layouts/facilities, third production price and shared item-bank history remain unresolved. The archived February17 guide is stale on ranks; an unrelated Eurobricks fetch and unreadable Reddit proposal were not used as corroboration.",
+      "checks": ["social:guild-hall"]
+    },
     "locks-native-2f8c8e06": {
       "kind":"native", "revision":"2f8c8e06c24631c638d7a2896aa782d11b1d6fab", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1189#issuecomment-6483607406", "checks":["social:lock-players"],
@@ -5885,7 +5894,8 @@
     "social:guild-ranks": {"status":"not-run","evidence":[]},
     "social:guild-board": {"status":"not-run","evidence":[]},
     "social:guild-roster": {"status":"not-run","evidence":[]},
-    "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf"]},
+    "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf","guild-hall-research-306cebba"]},
+    "social:guild-hall:shared-access-and-first-upgrade": {"status": "not-run","evidence": []},
     "social:share-a-living-world": {"status":"not-run","evidence":["enemy-prediction-source-12b706a","enemy-prediction-regression-12b706a"]},
     "access:client": {"status":"not-run","evidence":[]},
     "access:guest-accounts": {"status":"passed","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},

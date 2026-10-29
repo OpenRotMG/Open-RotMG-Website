@@ -8,6 +8,15 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Guild Hall first-upgrade acceptance does not certify original layouts or every tier',()=>{
+  const data=catalogue(),evidence=ledger(),id='social:guild-hall',component=id+':shared-access-and-first-upgrade',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(evidence.results[component].status,'passed');
+  for(const kind of ['native','regression'])assert(evidence.results[component].evidence.some(ref=>evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
+  assert.match(feature.audit.unknowns.join(' '),/250,000.*production price/);
+});
+
 test('Tutorial research keeps whole-feature acceptance separate from period reward identities',()=>{
   const data=catalogue(),evidence=ledger(),id='home:tutorial-and-kitchen',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);

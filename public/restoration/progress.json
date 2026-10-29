@@ -7260,21 +7260,61 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Guild-shared hall with membership-gated access, Board/Chronicle and Leader+ Guild-Fame upgrade merchant. Selected binary has upgrade prices10000/100000/250000. Exact deployed target layouts/facilities remain unresolved.",
-        "differences": [],
+        "expected": "Guild-shared membership-gated hall, Board/Chronicle and Leader+ Guild-Fame upgrades. Selected 123.5.1 prices are 10,000/100,000/250,000, with replacement after an empty interval. Guill (May 2017) and Pet Yard/Quest Room/Wardrobe access (February 2017) are later additions, not target facilities.",
+        "differences": [
+          "The four attributed realm-src maps are candidates, not authenticated 123.5.1 layouts. Current teleport restriction agrees with modified 7.0 realm-src, but 2013 Trapped enables teleports and hardcodes ghall3. The five-minute, transfer-grant-aware replacement policy is this server's reconstruction; realm-src replaces an empty hall immediately. See server issue916."
+        ],
         "unknowns": [
-          "Exact original hall layouts, facilities and teleport policy.",
-          "Whether the listed 10,000/100,000/250,000 upgrade prices were used in production.",
-          "Whether Guill, a shared bank or other later hall facilities existed at this build."
+          "Exact original four layouts, all facilities and hall teleport policy. Conflicting community implementations do not establish production behavior.",
+          "Independent target-era confirmation of the third 250,000 production price. Revision1 of the March29,2012 Arqade answer reports 10,000/100,000; selected definitions establish all three intended prices. February2012 test notes explicitly reduce prices to 100/1,000/2,500 for testing only.",
+          "No checked target definition or period guide establishes a shared item bank; this is not proof of historical absence. Whole-feature native acceptance, higher-tier hall transitions, revocation and complete Board/Chronicle journeys remain separate from bounded hall checks in issue916."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
-          },
-          {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/GuildMerchant.as",
+            "label": "Selected GuildMerchant: XML price, Guild Fame currency and rank requirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 Build122 announcement: Founder authority and Guild Fame hall spending"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build121.5.2#guildfame",
+            "label": "February2012 test announcement: explicitly reduced test-only upgrade prices"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/revisions/59804/1",
+            "label": "March29,2012 original answer revision: 10,000/100,000 upgrades and Board/Chronicle facilities, verified via revisions API"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/GuildHall.jw",
+            "label": "Modified 7.0 comparator: four candidate maps and restrictTp=true, not target provenance"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/GuildHall.cs",
+            "label": "2013 comparator: AllowTeleport=true and fixed ghall3, conflicts with modified 7.0"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2017#patch-27-7-x14",
+            "label": "2017 patch notes: February28 convenience portals and May18 introduction of Guill"
+          }
+        ],
+        "checks": [
+          {
+            "id": "social:guild-hall:shared-access-and-first-upgrade",
+            "name": "Shared access, first upgrade and revocation",
+            "group": "admission",
+            "implementation": "present",
+            "historical": "partial",
+            "expected": "Two members share a membership-gated hall. A permitted upgrade spends Guild Fame once, retains the occupied hall and appears after idle reclamation. Removal revokes access.",
+            "acceptance": "Observe both native members, nonmember/rank/funds refusals, first purchase and duplicate refusal, occupied reentry, idle level2 replacement and cancelled/confirmed removal. Preserve living identities, inventory and personal Fame.",
+            "differences": [],
+            "unknowns": ["Exact original layout, teleport and replacement policies remain unresolved in the parent feature. Prepared membership/Fame do not establish earned progression or higher-tier native transitions."],
+            "sources": []
           }
         ]
       }
