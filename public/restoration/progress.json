@@ -3849,10 +3849,6 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Shore.cs",
             "label": "Modified7.0 comparator: independent4% potions and1% PirateCave; not original probability proof"
-          },
-          {
-            "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/183ac53c063a023576a0a10b6625469dc7e6ee62/src/crypto/interpolation.rs",
-            "label": "Native display clamp; AI/ACK unchanged"
           }
         ]
       }
