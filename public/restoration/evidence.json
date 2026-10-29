@@ -1,6 +1,42 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "quiet-native-8c28e4f": {
+      "kind": "native",
+      "revision": "8c28e4fa7cdd1ed5fb2334ef990bf4df088a231d",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1221#issuecomment-6486298520",
+      "checks": ["condition:2"],
+      "method": "Clean QAd1ec02fb passes10 native checks/9150 game ms: natural Castle floor Quiet drains385 to0 through Invulnerable; normal Magic Potion and Quiet-caster MagicNova consume once with no caster grant; same-instance unquiet peer receives100 while peer MagicNova cannot restore the Quiet recipient. Native spell at0MP has no cooldown/inventory effect; staff fire defeats the actual source. Holy Water consumes/clears Quiet, regeneration resumes, subsequent peer nova restores mana and the80MP spell succeeds. Ordinary Nexus transfer retains the same living character/consumptions/revision4. Cold QAf872a569 verifies SQLite/FKs, saved MP32/base/gear/revision4, zero deaths/ERRORs, cleanup[] and all recorded child PIDs absent. Case5465279a/runner5c28b36d/controllerc1c17470/ELF7cb1c8ed/client0282b3a4/Ruffle.16. Two published images show rendered Quiet/consumption and cure; initial loading-overlay capture is excluded.",
+      "limitations": "Prepared local level20/stats/gear/consumables, HP protection and temporary Attack+100, not earned progression, ordinary-risk survival or public hosting. Native zero-MP spell input can stop at the client cost gate; server refusal is separately covered by Rust. Failedcbbed8ca has invalid Wisdom;7b31cf21 ends during build setup;85b3893a uses a separate Castle instance. None is a pass. No native Priest Quiet cleanse, active-Quiet transfer or death/replacement acceptance. Exact original drain/transient grants, refresh/cure and aura exceptions remain partial in935; whole-condition gameplay stays not-run."
+    },
+    "quiet-regression-76e5bae": {
+      "kind": "regression",
+      "revision": "76e5baeab3b2d78c8bb020c3620752faed225243",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/76e5baeab3b2d78c8bb020c3620752faed225243/src/world/recovery_tests.rs",
+      "checks": ["condition:2"],
+      "method": "QAa566c56d passes291 Rust tests including the new target-local Quiet reapplication guard: immediate MP/fraction reset, shorter reapplication preserves the old deadline, longer application extends it, exact2200ms expiry resumes fractional recovery, and the other player remains unaffected. Existing tests cover zero-damage acknowledged hits/duplicate refusal, mana potion commit boundaries, group-recipient eligibility, Purification and temporary-effect persistence. Strict all-target Clippy QAda21a9d4 and formatting QAe769a7b5 pass.",
+      "limitations": "The new guard records existing reconstruction behavior, not original reapplication fidelity. Unit fixtures and simulated transaction results are not native gameplay or database durability. The full-suite job was launched before committing the guard; its passing output includes that guard and the Rust file matches this revision."
+    },
+    "quiet-research-76e5bae": {
+      "kind": "source",
+      "revision": "76e5baeab3b2d78c8bb020c3620752faed225243",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/76e5baeab3b2d78c8bb020c3620752faed225243/examples/testing/quiet.mjs",
+      "checks": ["condition:2"],
+      "method": "Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/935#issuecomment-6485249147 . Fresh QAa34c434c inspects compiled Kithio Effects/UseItem/Player/Entity and selected123.5.1 plus modified7.0 clients. Five complete item definitions normalize identically: three mana potions, Pollen Powder and Holy Water. All108 selected equipped abilities have positive MP cost. Kithio drains on player ticks, suppresses regeneration, grants Magic/MagicNova before that drain and lists Quiet among cleansed effects. Additional checks: Kithio Entity replaces durations directly, including zero for cure; official September19,2025 public-testing rework is later than the target. May28,2012 Sprite God capture documents zero-damage ten-second Quiet.",
+      "limitations": "Community lineage is not independent original-server proof. Immediate drain, no transient committed grant, max-deadline reapplication and explicit ability refusal remain existing reconstruction/authority choices. Kithio halves nova range and its group-cleanse lambda targets the caster; modified7.0 differs. Exact123.5.1 sub-tick, shorter-refresh, cure, aura and hypothetical zero-cost policies remain issue935. No runtime change or third-party source/assets imported."
+    },
+    "quiet-expiry-native-f495cd1": {
+      "kind": "native",
+      "revision": "f495cd19455b8196b9d82fe5a6dd2ebd450f34e5",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1129#issuecomment-6475443490",
+      "checks": ["condition:2"],
+      "method": "Reused, not rerun: PR1129 QAf3e5fead records natural zero-damage Sprite God Quiet draining MP385 to0 through Invulnerable. After native source defeat, Quiet expires and MP recovers to4 during the orphan observation interval. The pinned combat test also checks acknowledged Quiet, ten-second duration and duplicate-hit non-extension.",
+      "limitations": "Prepared local level20 Wizard/stats/gear/protection and scout-selected natural family, not earned progression or original timing acceptance. This is the Quiet subset of the existing Sprite God receipt, not a fresh whole-condition run or proof of cure/aura/ability/death boundaries."
+    },
     "guild-hall-native-b65db3e5": {
       "kind":"native", "revision":"b65db3e56411a5bb81f7cc4b308e18093bfff73d", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1214#issuecomment-6485880534", "checks":["social:guild-hall","social:guild-hall:shared-access-and-first-upgrade"],
@@ -6327,7 +6363,7 @@
     "access:sound-and-music": {"status":"not-run","evidence":["selected-client-ui-source-2bf948c","quest-audio-source-88b271f","quest-audio-regression-88b271f","quest-audio-native-88b271f","audio-inventory-regression-30f27d7","audio-controls-native-afea3d9"]},
     "access:player-art-gallery": {"status":"not-run","evidence":["gallery-research-53587151","gallery-native-41ba534a","gallery-cold-http-41ba534a"]},
     "access:player-art-editor": {"status":"not-run","evidence":[]},
-    "condition:2": {"status":"not-run","evidence":[]},
+    "condition:2": {"status":"not-run","evidence":["quiet-research-76e5bae","quiet-regression-76e5bae","quiet-expiry-native-f495cd1","quiet-native-8c28e4f"]},
     "condition:3": {"status":"not-run","evidence":[]},
     "condition:4": {"status":"not-run","evidence":[]},
     "condition:5": {"status":"not-run","evidence":[]},
