@@ -7241,8 +7241,8 @@
         "expected": "Guild Chronicle lists the guild name, current Guild Fame, member names/ranks/contribution Fame and open slots up to 50 members. Authorized rank/removal actions refresh the screen after success.",
         "differences": [],
         "unknowns": [
-          "Historical ordering, pagination and departed/rejoined contribution handling.",
-          "No established online/last-seen/class/location requirement."
+          "Selected client requests all 50 members at offset 0, scrolls received order and reloads after successful rank/removal actions. Exact original server ordering/tie-break and departed/rejoined contribution retention remain unresolved in issue915; modified7.0 is comparator evidence, not original-service proof.",
+          "No online/last-seen/class/location field is consumed by the selected Chronicle classes. Native full-capacity scrolling, nonzero death contribution and removed-member rejoin journeys are not yet accepted."
         ],
         "sources": [
           {
