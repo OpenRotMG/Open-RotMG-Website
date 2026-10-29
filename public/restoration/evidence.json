@@ -13,10 +13,10 @@
       "method":"Clean QA19f11bee reuses the existing Quicksand scenario with explicit60-second Invincible to isolate terrain from combat.25 recorded assertions/18450game ms verify actual generated Quicksand, stationary sinking, capped slow walk, dry-ground exit/recovery, reentry reset, progressive slowing again, same-character Nexus escape and resumed movement. Case1ce02746; same ELFe33ad676/client0282b3a4/Ruffle.16. Cold QA6fa247c4 verifies final case equality, SQLite/FKs, no deaths,21 absent child PIDs, cleanup[] and zeroERRORs/WARNs.",
       "limitations":"Sinking is tested separately from Slowed. Prepared Rogue/position/protection, not ordinary-risk combat or an exact original map/cadence claim. Unprotected QAc9e0935d passed through reentry then died to Tomb combat; read-only SQLite retains its one committed death. Bad corridor inference and duplicate-case prototype are not accepted and the duplicate source was removed. No gameplay or shared harness change."
     },
-    "slowed-regression-4bc71cb5": {
-      "kind":"regression", "revision":"4bc71cb54632851065ce37d6f1f44851368329ad", "date":"2026-10-29",
-      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40806599255", "checks":["condition:4"],
-      "method":"CI passes294 Rust tests, warning-denied Clippy, formatting and QA lifecycle. New focused motor regression verifies fixed Slowed speed at baseSpeed0/50/75, Slowed-over-Speedy precedence, longer-deadline retention after shorter reapplication, exact expiry and overriding Paralyzed. Existing protection/ACK and Purification regressions remain separate. Later PR1219 changes only native case preparation, not Rust gameplay.",
+    "slowed-regression-e27afe5d": {
+      "kind":"regression", "revision":"e27afe5daae736cf58669235687f75daf358f51d", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40808931180", "checks":["condition:4"],
+      "method":"Final-head CI passes295 Rust tests, warning-denied Clippy, formatting and QA lifecycle. New focused motor regression verifies fixed Slowed speed at baseSpeed0/50/75, Slowed-over-Speedy precedence, longer-deadline retention after shorter reapplication, exact expiry and overriding Paralyzed. Existing protection/ACK and Purification regressions remain separate. No Rust gameplay change.",
       "limitations":"Server-motor and simulated timer checks are not native frame timing or historical policy proof. Initial baseSpeed100 fixture fails ordinary class-cap validation and was corrected, not worked around. Source alone does not accept every terrain or lifecycle boundary."
     },
     "slowed-research-5bcb5193": {
@@ -6389,7 +6389,7 @@
     "access:player-art-editor": {"status":"not-run","evidence":[]},
     "condition:2": {"status":"not-run","evidence":["quiet-research-76e5bae","quiet-regression-76e5bae","quiet-expiry-native-f495cd1","quiet-native-8c28e4f"]},
     "condition:3": {"status":"not-run","evidence":[]},
-    "condition:4": {"status":"not-run","evidence":["slowed-research-5bcb5193","slowed-native-6218ec19","slowed-terrain-native-e27afe5d","slowed-regression-4bc71cb5"]},
+    "condition:4": {"status":"not-run","evidence":["slowed-research-5bcb5193","slowed-native-6218ec19","slowed-terrain-native-e27afe5d","slowed-regression-e27afe5d"]},
     "condition:5": {"status":"not-run","evidence":[]},
     "condition:6": {"status":"not-run","evidence":[]},
     "condition:7": {"status":"not-run","evidence":["shield-stun-regression-06b5675","shield-stun-native-545f79e"]},
