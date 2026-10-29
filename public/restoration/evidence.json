@@ -1,6 +1,42 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "chat-routing-native-aa680e6": {
+      "kind": "native",
+      "revision": "aa680e631aaa58db8bad62a352b8f6373de9f21b",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+      "checks": ["social:chat"],
+      "method": "Clean QA64620c99 passes7 Nexus checks and QA40037ceb passes5 Sprite World checks with two owned native clients each, unchanged client0282b3a4/Ruffle.16 and case45119539. Reviewed captures show far Nexus exclusion/sender echo, Nexus-wide /yell, nearby names/stars/bubble, local /help, current-world /who, usage/unknown-command errors, empty-input cancellation and PageUp/PageDown history. Sprite chat reaches a peer beyond20 tiles; /yell refuses. Ordinary Insert reconnects only the speaker to Nexus, where its new message is not shown to the dungeon listener. Cold QA56412906 checks the exact public-event sequence/audiences, rosters/refusals, both living saved characters at20/18050XP with unchanged empty inventory, SQLite/FKs,42 absent owned PIDs and empty cleanup errors.",
+      "limitations": "Prepared level20, positions and bounded dungeon protection, not earned progression or complete ignore/rate/death/preference/unlock acceptance. Performance warnings and one MOVE discarded by the existing GOTO-before-ACK guard are retained, not a latency pass. Earlier unsupported-key, transient reconnect-read and peer-LOAD failures remain excluded. No testing SDK or semantic guard changed; reconnection uses the existing native driver rather than observing an unavailable actor mid-transfer."
+    },
+    "level20-chat-regression-880d3ea": {
+      "kind": "regression",
+      "revision": "880d3ea67725ced98510d7333d3fa01f0a68842e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+      "checks": ["social:chat"],
+      "method": "QAd223c1a6 passes all279 Rust tests. The new level20 regression uses a real Store progress transaction and a witness60 tiles away: exact system sender/object/stars/bubble/recipient fields and wording, no early notice, no lower-level/capped-XP notice, failed-commit refusal and duplicate-completion rejection. Existing permanent-death chat regressions also pass.",
+      "limitations": "Prepared in-memory characters and injected commit failure, not original-server audience proof or complete native lifecycle acceptance. The first test attempt selected another actor's queued reservation and failed the existing guard; the corrected fixture selects its owned actor rather than weakening reservation checks."
+    },
+    "level20-chat-native-880d3ea": {
+      "kind": "native",
+      "revision": "880d3ea67725ced98510d7333d3fa01f0a68842e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+      "checks": ["social:chat"],
+      "method": "Baseline QA70c1682d at4927b7e has unchanged production source and passes13 existing leveling checks but no visible level20 notice. Clean candidate QAe0fdec09 passes14, with 'Guest1 achieved level 20' visible to its native witness and one logged current-world notice to two players. Native combat crosses prepared19→20 and1→2 thresholds; ordinary Nexus reconnect and further capped XP do not repeat the event. Cold read-only QAbce8264e independently sums real kills, matches exact saved XP/levels for all three living characters in each take, passes SQLite/FKs and verifies54 owned PIDs absent. Both cleanups are empty; two public crops anonymously download byte-identically with game pixels unchanged.",
+      "limitations": "Prepared thresholds/gear/stats and bounded protection, not earned1→20, every class, a native death screen or exact target-era audience. Before kills award3XP; candidate kills award25XP (Bonegrind plus four Butchers), so images are not an identical combat trajectory. Case inputs are unchanged except two added assertion lines (final SHA15be6baf); selected client0282b3a4/Ruffle.16 is unchanged. Queue-deadline, incorrect fixture reservation and fixed-XP postflight assumptions remain excluded failed attempts."
+    },
+    "chat-research-880d3ea": {
+      "kind": "source",
+      "revision": "880d3ea67725ced98510d7333d3fa01f0a68842e",
+      "date": "2026-10-28",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/880d3ea67725ced98510d7333d3fa01f0a68842e/src/world.rs#L5383-L5455",
+      "checks": ["social:chat"],
+      "method": "Selected SWF07ae4fc3 handles /help locally, saves chat history, gates server cleanText by filterLanguage and draws local prerequisite-unlock overlays. Current server text_to supplies empty cleanText. Kithio d15f321 project explicitly compiles ChatManager, WorldCommand, Player.Leveling and Taunt: current-world ordinary chat/roster, level20 wording, and authored taunt proximity/broadcast are comparator behavior. Rendered GDC Europe2012 slide54 independently shows 'Hallon achieved level 20' and low-level death notices with 'a Knight of Oryx'/'a Pet of Oryx'. January2012 controls documents history/preferences; modified7.0 onText a13c855 logs unknown-object text but does not reproduce the selected filter branch.",
+      "limitations": "GDC screenshot predates September2012 target and does not establish exact build/audience or a general killer-article rule. No original chat metric, filtering vocabulary or complete per-enemy continuity recovered. Kithio taunt distance is not proof of the player-chat boundary. October/November release notes and modern wiki party/emote features are not target specifications. Source inspection does not accept native preference persistence, unlock overlays or full chat."
+    },
     "guild-ranks-native-112d9857": {
       "kind":"native", "revision":"112d9857f17390167217a1f0e78a5ba437bd2cfc", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/issues/913#issuecomment-6484083284", "checks":["social:guild-ranks"],
@@ -5969,7 +6005,7 @@
     "home:buy-from-merchants": {"status":"passed","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d","merchant-purchases-source-b537b4d","merchant-regression-bc0d2d4","merchant-purchases-native-b537b4d"]},
     "home:gold-and-fame-balances": {"status": "not-run","evidence": ["wallets-native-6eeb28e","wallets-regression-b8f23e1","merchant-purchases-native-b537b4d","wallets-research-bff1292","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7","wallet-source-794eccf"]},
     "home:realm-gold-offers": {"status":"passed","evidence":["wallets-native-6eeb28e","wallets-regression-b8f23e1","wallets-research-bff1292","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
-    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30","chat-star-transform-regression-0277516","chat-star-transform-native-0277516","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445"]},
+    "social:chat": {"status":"not-run","evidence":["oryx-count-regression-41e462f","oryx-count-native-829a4c1","chat-badge-native-86e55e4","chat-colors-regression-439a741","chat-colors-native-439a741","chat-scope-regression-b5b1542","chat-scope-native-b5b1542","death-chat-regression-bf18a30","death-chat-native-bf18a30","chat-star-transform-regression-0277516","chat-star-transform-native-0277516","selected-client-ui-source-2bf948c","item-chat-guild-source-4992445","chat-research-880d3ea","level20-chat-regression-880d3ea","level20-chat-native-880d3ea","chat-routing-native-aa680e6"]},
     "social:whispers": {"status":"not-run","evidence":["whispers-research-a4df74d","whispers-native-02c9e9a"]},
     "social:guild-chat": {"status":"not-run","evidence":["guild-chat-research-0c00c1ba","guild-chat-native-eedd6572"]},
     "social:trade-with-players": {"status":"passed","evidence":["trade-lifecycle-native-eb85988","trade-conservation-native-eb85988","trade-durable-reconnect-native-eb85988","trade-clock-source-b45c281","trade-clock-regression-b45c281","trade-clock-controller-b45c281","trade-clock-native-b45c281","trade-range-source-7ad5d05","trade-request-source-5f03584","trade-request-regression-5f03584","trade-request-native-5f03584","trade-research-07a0afd9"]},
