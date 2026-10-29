@@ -36,6 +36,7 @@ def package(root, client, revision, output):
     if any((client / name).is_symlink() for name in names):
         raise ValueError('Symlink in client build')
     files = {'site/' + n: d for n, d in files.items()} | {'client/' + n: (client / n).read_bytes() for n in names}
+    files['helper/deploy.py'] = (Path(__file__).parent / 'deploy.py').read_bytes()
     metadata = {'revision': revision, 'client_revision': actual,
                 'manifest': {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}}
     with tarfile.open(output, 'w:gz') as archive:

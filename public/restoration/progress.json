@@ -1411,7 +1411,8 @@
         "differences": [
           "Server PR336 implements independent Realm closure, queued transfers and departure-gated replacement. Exhaustive earned multiplayer closure journeys remain deferred: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
           "PR380 adds entering-player welcome, actual finishing-player reactions and a last-living-root notice alongside PR348's periodic family counts. Packet tests verify local audiences and once-only delivery; a native guest visibly receives the welcome. A bounded native Chamber attempt failed its SHOOT acknowledgement guard, so no full earned finale is claimed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
-          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192"
+          "PR1039 extends controlled server verification through durable same-character Castle arrival. A later native take visibly delivers the finishing-player reaction to killer and observer and credits one of 45 roots once; third-player admission and cold persistence are verified separately. Its quadratic artifact writer is cancelled, not called a full-case or earned-clear pass: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1039#issuecomment-6460929192",
+          "PR1084's earlier native walking take credits a Cyclops, Red Demon and transformed Ent once and admits one Cube God. It fails on route steering with 38 encounters remaining, not a completed closure/Castle journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
         ],
         "unknowns": [
           "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
@@ -1427,7 +1428,8 @@
           {
             "url": "https://wikiwiki.jp/rmd/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88#jded12e1",
             "label": "Gameplay documentation: random remaining boss-family counts every two minutes, with singular wording; page also contains later additions"
-          }
+          },
+          {"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/messaging/impl/GameServerConnection.as#L1680-L1690","label":"Later modified 7.0 client comparator: reconnect preserves character ID; not original eligibility or timing proof"}
         ],
         "checks": [
           {
@@ -1438,7 +1440,8 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"
+              "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
+              "PR1084's partial native take binds one Cyclops death to one Cube God admission. It does not complete that event or establish probability or repeatability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990"
             ],
             "unknowns": [
               "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
@@ -4953,12 +4956,13 @@
       "category": "dungeons",
       "icon": "assets/player/thessal-the-mermaid-goddess.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
         "expected": "Underwater dungeon, same-instance player teleporting, oxygen display/depletion/air restoration, sea creatures, Thessal, Mana reward and death air pocket. Target topology, encounter rules and entrance policy remain qualified.",
-        "differences": [],
+        "differences": ["The current return is a death-relative Nexus portal. Build122.3.2 notes describe fixed dungeon exit sites; the exact Trench site and target destination remain unresolved."],
         "unknowns": [
-          "Original topology, oxygen parameters and vent geometry, full target choreography, Hermit entrance probability, reward eligibility/rates and King Alexander target deployment."
+          "Original topology, oxygen cadence and vent geometry, full target choreography, Hermit entrance probability and reward eligibility/rates. King Alexander is documented in Thessal's question, not established as a deployed encounter.",
+          "Unprotected or earned-entry entrance-to-exit traversal, oxygen-preserving reconnect and low-contribution multiplayer rewards remain unverified in issue861."
         ],
         "sources": [
           {
@@ -4981,22 +4985,22 @@
             "expected": "Oxygen depletion/recovery and the boss-death air pocket must support real traversal and escape.",
             "acceptance": "Cross vent boundaries, deplete oxygen, verify actual HP loss/death attribution, then test loot/return, overlapping pockets and reconnect without a stuck or reset oxygen state.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact target oxygen cadence, vent radius and placement remain reconstruction; the later comparator uses a greater-than-100ms ground gate, not an authenticated original 150ms timer."],
+            "sources": [{"url": "https://wikiwiki.jp/rmd/version/build122.3.2", "label": "April 2012 release notes explicitly add Thessal's death air pocket"}],
             "group": "layout"
           },
           {
             "id": "dungeons:ocean-trench:wounded-thessal-response",
             "name": "Wounded Thessal and response gifts",
-            "expected": "The optional question/answer encounter is separate from the normal boss clear; its original production predicate remains qualified.",
+            "expected": "Wounded Thessal asks Is King Alexander alive? The documented answer is He lives and reigns and conquers the world, followed by up to three Coral Gifts. This optional encounter is separate from the normal clear.",
             "acceptance": "Exercise the supported natural predicate, correct/wrong/late responses and once-only gifts. Research original wording, response window and probability before historical sign-off.",
-            "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "implementation": "partial",
+            "historical": "partial",
+            "differences": ["The June 13, 2012 Wild Shadow-hosted guide describes a failed-response shotgun rage; the current reconstruction expires wounded Thessal without that attack."],
+            "unknowns": ["The original trigger is explicitly unknown in the period guide. The reconstructed 10% death roll and 12-second deadline come from the later modified7.0 comparator; the undated Japanese guide instead says 15 seconds. Exact failure trigger, barrage timing and counts remain unresolved."],
+            "sources": [{"url": "https://web.archive.org/web/20120613202818id_/http://forums.wildshadow.com/wiki/realm-mad-god/thessal-mermaid-goddess", "label": "June 13, 2012 guide: question, answer in image hovertext, gifts and lethal failure attack"}],
             "group": "boss"
           }
         ]
@@ -5081,7 +5085,7 @@
         ],
         "unknowns": [
           "Original map distribution, precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
-          "Full ordinary disconnect/reconnect and every whole-dungeon acceptance path still need separately scoped results."
+          "Live-combat interruption and empty-instance retirement remain untested; supplied gear/party are not earned or unprotected-survival evidence."
         ],
         "sources": [
           {
@@ -5103,6 +5107,14 @@
           {
             "url": "https://www.youtube.com/watch?v=DSrzfLhuP4k",
             "label": "2013 video static samples: asymmetric lamps, rug and Realm Portal label; not playback timing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.4.0",
+            "label": "July 2012 testing and access-release poll; not proof of released spawn/chance values"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Maggot",
+            "label": "October 27, 2012 page calls Maggot an unused Locker enemy; does not establish Sack placement"
           }
         ],
         "checks": [
@@ -5115,7 +5127,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Shared discovery and late arrival were executed; a full ordinary disconnect/reconnect is not separately recorded."
+              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated."
             ],
             "sources": [
               {
@@ -5165,12 +5177,16 @@
               "Active selected crew, bounded ghost regrowth, Roger-owned Souls and armor cycles are implemented. Unproven Maggot/Sack content is not spawned."
             ],
             "unknowns": [
-              "Original sack presence, complete collision/destructible/revisit behavior and precise crew timing lack full historical sign-off."
+              "Original Sack placement, prop/room distribution and precise crew timing remain unresolved; no active Sack lifecycle is authenticated."
             ],
             "sources": [
               {
                 "url": "https://wikiwiki.jp/rmd/Davy%20Jones%27s%20Locker",
                 "label": "Historical Locker guide: shared colored keys and ordinary access"
+              },
+              {
+                "url": "https://wikiwiki.jp/rmd/Maggot",
+                "label": "2012 unused-Maggot lead; does not establish active Sack placement"
               }
             ],
             "group": "population"
@@ -5422,11 +5438,16 @@
         "expected": "Committed shared Incantation entry, corridors/barrels and Drunk/Slowed/Sick threats, Oryx2/rewards/return; teleport disabled; wall wine pools aesthetic.",
         "differences": [
           "Server PR581 places a Wine Barrel on each of 38 free inside room corners. Barrels block movement, fall to ordinary shots and give no loot or XP; the corner rule and count are reconstructions: https://github.com/OpenRotMG/Open-RotMG-Server/pull/581",
-          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit."
+          "Each Henchman of Oryx also summons one Bile, which wanders and leaves Purple Goo that Slows and Sickens and fades after 6 seconds. Bile speed, one Goo per second and the 20-Goo cap follow a disabled line in a later community server, and Goo stays hittable and killable although a 2015 RealmEye page says it cannot be hit.",
+          "Research at server 09889dd4: current Oryx 2 uses a <=20% threshold, 10-second shield, individual transition spinners, opening chase and five-live-Henchman replenishment. The pinned 2013 comparator and December 2013 description instead support a 30% branch and radial rings, with conflicting timing/summon policies. None is authenticated 123.5.1 AI: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Current loot gives each >10%-damage contributor a Vitality potion and independent table-row rolls with uniform tier-pool selection. Comparator top-damager, threshold and per-candidate probability semantics differ; original rates/recipients are not established.",
+          "The 140x132 authored map has two right-side spawn regions and no dedicated WineSpill objects in its dictionary. Selected spill definitions are aesthetic; exact placement and target map byte fidelity remain unverified."
         ],
         "unknowns": [
-          "Target boss thresholds/timing, hazard and destructible completeness, topology, loot rates and portal lifetime.",
-          "Barrel proximity triggers, summons, contents and loot require positive period evidence; zero XP does not establish zero loot."
+          "Exact 123.5.1 phase thresholds/timing, Henchman lifetime/death policy, Goo hit immunity and loot recipients/rates remain unresolved after checking pinned source and dated claims: https://github.com/OpenRotMG/Open-RotMG-Server/issues/868#issuecomment-6478101386",
+          "Exact map, barrel density/positions and decorative spill placement remain reconstructed. Empty barrels have a November 2012 witness; no positive target-period barrel proximity/summon rule was established.",
+          "The 120-second locked entrance has a December 2013 witness, not a native expiry-boundary or authenticated target-continuity pass; unlocked-portal lifetime remains unresolved.",
+          "Prepared protected boss mechanics are verified separately from full unprotected entry/route/reward/return acceptance; the parent remains not-run."
         ],
         "sources": [
           {
@@ -5436,6 +5457,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+            "label": "December 2013 Oryx2 capture (page says11.1.0), not authenticated123.5.1 AI"
           }
         ],
         "checks": [
@@ -5445,7 +5470,7 @@
             "expected": "The period announcement requires destructible barrels; selected Wine Barrel has 3000 HP and zero XP.",
             "acceptance": "Place barrels naturally, destroy with ordinary damage and verify shared removal, opened collision and no XP/clear credit. Placement density and any summons, contents or loot still need period evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Barrel placement on every free inside room corner, 38 on the current map, is a reconstruction; no period source gives barrel positions or density."
             ],
@@ -5468,7 +5493,7 @@
             "expected": "A persistent Slowed/Sick trail is not replaced by radial damage. Vintner wine attacks and decorative spills are distinct.",
             "acceptance": "Reach natural Bile/Goo, cross a real persistent trail and take the selected effects. Verify Vintner Drunk attacks separately; clean ground and decorative spills must not become guessed hazards.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "known-differences",
             "differences": [
               "Bile speed, one Goo per second and the 20-Goo cap come from a commented-out line in a later community server, and the 6-second Goo life reuses its projectile lifetime. A Japanese wiki says Bile circles its Henchman; random wandering follows a 2016 RealmEye page.",
               "Purple Goo stays an ordinary hittable, killable enemy with no XP or loot, a chosen simplification: a 2015 RealmEye snapshot already says it cannot be hit or damaged except by poison."
@@ -5490,6 +5515,10 @@
               {
                 "url": "https://web.archive.org/web/20150726201317/http://www.realmeye.com:80/wiki/purple-goo",
                 "label": "RealmEye Purple Goo, July 2015 snapshot: cannot be hit except by poison"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com:80/wiki/wine-cellar",
+                "label": "December 2013 Cellar: distinct Goo and Drunk threats; mixed-era strategy text"
               }
             ],
             "group": "layout"
@@ -5500,10 +5529,25 @@
             "expected": "Oryx 2 phases, henchmen, rewards and living-character return need their own sign-off.",
             "acceptance": "Exercise the full fight and terminal lifecycle, collect actual eligible rewards and return with the same living character. A barrel fix does not verify the boss, and a boss kill does not verify barrels.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "known-differences",
+            "differences": [
+              "Current <=20% / 10-second preparation and individual spinner output differ from the pinned 2013 comparator and December 2013 22500-HP/radial-ring description. Opening chases at2 tiles/s and rage at8; original movement/timing are not established.",
+              "Five-live-Henchman replenishment every5 seconds and60-second child expiry differ from the December2013 four-max/12-second/all-Henchmen-die description and later birth-counted Spawn semantics.",
+              "Strictly >10%-damage eligibility, per-contributor Vitality and uniform tier-row selection are reconstructions, not the comparator top-damager/separate-threshold/per-candidate policy."
+            ],
+            "unknowns": [
+              "Original threshold/timing, summon/death policy and loot recipient/probability semantics remain unresolved. Protected native dagger defeat, actual reward/no-duplicate and same-character return are recorded, but full unprotected gameplay acceptance remains not-run."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oryx2.cs",
+                "label": "Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
+              },
+              {
+                "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
+                "label": "December 2013 Oryx2 capture:22500HP transition; claim labelled11.1.0"
+              }
+            ],
             "group": "rewards"
           }
         ]
@@ -5653,16 +5697,32 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot17 compatibility and individual rate/damage/wave/shot count/spread; ordinary two-shot zero-gap staves must remain distinct from Extreme Prejudice, Crystal Serpent and Anatis. Deployment is separately qualified.",
+        "expected": "Slot17 compatibility and individual damage, rate, parity-alternating waves, shot count/spread and first-target/cover collision. Ordinary paired zero-gap staves remain distinct from EP ten-way36degree/40%, Crystal Serpent110% and Anatis single-shot25%. Embedded upper tiers do not establish ordinary availability.",
         "differences": [],
         "unknowns": [
-          "Original availability of Anatis and upper-tier staves.",
-          "Each staff’s trajectories and collision behavior."
+          "Exact first Anatis release and target123.5.1 acquisition/drop schedules. April15,2012 trading advertisements establish advertised possession, not first release or a completed trade. Period staff tables corroborate T0–T12, not ordinary T13/T14 drops.",
+          "Original server collision tolerance and damage RNG endpoints. Earned acquisition, native range/cover boundaries and staff-specific death-fame acceptance remain unverified; bounded prepared checks are not whole-feature acceptance. Track #873."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L909-L944",
+            "label": "Pinned selected-version client firing engine; XML-derived consecutive pellets and centered spread"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234149/http://forums.wildshadow.com/wiki/realm-mad-god/staves",
+            "label": "May24,2012 capture labelled122.3.2: T0–T12, EP and Crystal Serpent parameters"
+          },
+          {
+            "url": "https://web.archive.org/web/20120415023228/http://forums.wildshadow.com/forum/51",
+            "label": "April15,2012 trading index advertises Anatis Staff; no first-release/drop-policy claim"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=2",
+            "label": "Additional August8,2011 equipment guide lists Astral and Cosmic; editable, not a frozen2011 snapshot"
           }
         ]
       }
@@ -5678,13 +5738,29 @@
         "expected": "Slot6 compatibility and exact reversible additive bonuses/fame behavior for evidenced tiered and named leathers, including Snake Skin, Coral Silk and Spectral Cloth. Embedded upper tiers are not automatically obtainable requirements.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable roster and upper-tier availability.",
-          "Original equipment changes and stat-cap interactions."
+          "Original-server proof of boosts above capped base stats and Wyrmhide/Leviathan unavailability. The June 2012 table lists wiki T0–T12 plus Snake Skin/Coral Silk; current source loot reaches selected tier13 and all three named UTs, not selected14/15.",
+          "Target-dated Spectral Cloth fame: selected 123.5.1/Kithio give 2%, but the May 2013 archived item page gives 4%. The date and reason for that change remain unknown."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120604225529id_/http://forums.wildshadow.com/wiki/realm-mad-god/leather-armor",
+            "label": "June 2012 leather roster and exact tiered/Snake Skin/Coral Silk stats and fame; marked build122"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605151311id_/https://forums.wildshadow.com/node/123422",
+            "label": "August 3, 2012 announcement: Davy Jones and new Trickster set; no individual item values"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508120647id_/https://forums.wildshadow.com/wiki/spectral-cloth-armor",
+            "label": "May 2013 Spectral Cloth: matching equip stats, later 4% fame conflicts with selected 2%"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs",
+            "label": "Compiled community reconstruction: reset equipped boosts, publish base plus boost, save base separately"
           }
         ]
       }
@@ -5697,15 +5773,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot7 restrictions, exact reversible defense and fame behavior for evidenced heavy armor; do not invent a unique-heavy-armor requirement or infer upper-tier deployment from XML.",
+        "expected": "Warrior/Knight/Paladin Slot7 eligibility, exact reversible defense and equipped-only fame for the selected 15 tiered heavy armors. No unique-heavy-armor requirement or ordinary Dominion/Annihilation acquisition inferred from embedded definitions.",
         "differences": [],
         "unknowns": [
-          "Upper-tier availability and any unique heavy-armor variants outside the recovered definitions."
+          "September2012 continuity of upper-tier unavailability and absence of additional unique heavy variants; the May/June2012 catalogues are earlier observations, while November's exploit notice and modern release histories are later evidence.",
+          "Independent target-era proof of equipment above capped base defense and exact original drop/credit probabilities. Prepared inventory and fame regressions do not establish earned acquisition."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/items.xml",
+            "label": "Pinned Kithio definitions agree on all 15 selected defense/fame values; comparator, not deployment proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610192324id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/heavy-armor",
+            "label": "June10,2012 catalogue: three classes, T0-T12 defense/fame, no unique heavy armor listed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120524234154id_/http://forums.wildshadow.com/wiki/realm-mad-god/armor",
+            "label": "May24,2012 armor table explicitly marks Dominion/Annihilation unreleased"
           }
         ]
       }
@@ -5718,10 +5807,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slot14 compatibility and reversible exact individual stat/fame bonuses. Preserve Tlatoani's lack of DEF and distinct Chasuble/Mad Scientist bonuses; use target-buffed Mad Scientist values.",
+        "expected": "All 18 selected Slot14 robe definitions match. Equipped bonuses add above base caps and reverse on removal; only equipped items count toward death fame. Tlatoani has no DEF. Chasuble grants 10 DEF, 50 MP, 4 VIT/WIS and 3% fame. Target-buffed Mad Scientist grants 4 ATT, 13 DEF, 5 WIS, 2 VIT, 55 MP and 5% fame. Current rewards cover armor tiers 1–13 and three UT robes; embedded Star Mother/Ancient Intellect do not establish obtainable drops.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable robe roster, upper-tier availability and stat-cap interactions."
+          "Exact 123.5.1 upper-tier availability and original acquisition, recipient and drop-rate rules remain unresolved; supplied native equipment is not earned acquisition.",
+          "May/June 2012 Wild Shadow sources give Chasuble 2% fame versus the selected client's 3%; the transition date remains unresolved. Historical evidence and remaining gameplay: https://github.com/OpenRotMG/Open-RotMG-Server/issues/876"
         ],
         "sources": [
           {
@@ -5746,8 +5836,8 @@
         "expected": "Slot9 compatibility and reversible exact individual stat/fame bonuses for evidenced deployed rings. Use target Experimental Ring and changed Divine Faith; resurrection and seasonal acquisition remain separate bundles.",
         "differences": [],
         "unknowns": [
-          "Complete obtainable ring roster, developer Crown availability and seasonal calendar.",
-          "Original bonuses and tooltip presentation."
+          "Complete target-era acquisition, recipient/drop probabilities and Minor Defense tutorial continuity; legitimate Crown distribution and exact swimming-award dates. Later Crown +700 WIS/Soulbound and Ring Pop are not selected definitions. America and medals are event prizes, not evidenced recurring seasonal drops. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/877#issuecomment-6479962237",
+          "Native earned acquisition and death-Fame/tooltip comparison across classes remain separate from prepared equip/remove checks. Selected stat/Fame definitions are verified; exact original rounding and complete target-production continuity remain unresolved. Resurrection and seasonal acquisition remain separate bundles."
         ],
         "sources": [
           {
@@ -5773,7 +5863,7 @@
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",
-          "When private bags become public, who can see them, and what survives reconnecting."
+          "Original private-to-public conversion, lifetime and reconnect persistence remain unverified. Current reconstruction keeps private bags account-owned until their nominal 60-second removal deadline; pending inventory reservations defer removal. Same-world reentry does not reset that deadline. Collected items persist, while uncollected world bags are not saved. Native reconnect remains untested."
         ],
         "sources": [
           {
@@ -5790,7 +5880,7 @@
           },
           {
             "url": "https://forums.anandtech.com/threads/realm-of-the-mad-god.2228194/post-33073282",
-            "label": "2012 player account: purple god sacks can only be looted by their owner"
+            "label": "February 29, 2012 post33073282: purple god sacks can only be looted by their owner; no timer or numeric threshold"
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Container.as#L26-L35",
@@ -5808,9 +5898,9 @@
             "expected": "Bag appearance, eight-slot chunks, ownership and item Soulbound restrictions are distinct.",
             "acceptance": "Mix rarity metadata within and across nine-plus rewards; verify lossless packaging, expiry and one owner per colored god bag. A contributing bot must neither observe nor collect another owner's bag. Brown shared loot and tradable equipment remain distinct from private bag permissions. Successful equipment must survive simultaneous private potion rolls for solo and grouped contributors.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": ["Exact original appearance allocation and public/private bag-generation rules remain unverified; current acceptance combines deterministic tests with reused prepared native evidence."],
+            "unknowns": ["Selected/modified7.0 bag slots, put flags and textures agree, and a February29,2012 account supports owner-only purple god sacks. Exact original appearance allocation, public/private generation, timing and winner selection remain unverified. Existing gameplay acceptance is retained, not inferred from this research."],
             "sources": [],
             "group": "behavior"
           }
@@ -5825,12 +5915,10 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four equipment slots and eight carried slots support class-compatible equipment, reversible bonuses, swaps, pickup and drops. Native controls include hotkeys, ground use, contextual clicks, equipment comparison, tier/UT/dose labels and unusable-item highlighting. The pre-124 contextual-click rules also cover equipping or using a container item with a full inventory.",
+        "expected": "Four equipment slots and eight ordinary carried slots, without a separate potion belt or stack. Class SlotTypes govern equipment eligibility, not item level. Pre-124 container double-click picks up with space; with full inventory it equips compatible gear or uses a consumable. Build 124.0 (October 5, 2012) changed that full-inventory behavior; dedicated nine-potion stacks arrived in Build 4.0 (October 31 test / November 2 production). Native controls also include reversible bonuses, swaps, drops, hotkeys, ground use, equipment comparison, tier/UT/dose labels and unusable-item highlighting.",
         "differences": [],
         "unknowns": [
-          "Original contextual clicks with full inventory, tooltips and item equip requirements.",
-          "Rules for the later potion-stacking system must not be imported into 123.5.1.",
-          "Was a separate potion belt or stash available, rather than ordinary inventory slots?"
+          "Original authoritative server inventory commit/refusal and synchronization timing is not recovered; current durable atomic policy is retained."
         ],
         "sources": [
           {
@@ -5840,19 +5928,31 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.0",
             "label": "Build 123.4.0 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "October 5, 2012: full-inventory contextual-click change"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012: dedicated potion slots and nine-potion stacks"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_E_6.as",
+            "label": "Selected-era client mirror: contextual click and full-inventory dispatch"
           }
         ],
         "checks": [
           {
             "id": "gear:ability-activation-contract",
             "name": "Ability validation and cooldown continuity",
-            "expected": "Ability eligibility, MP, aiming, rejected-use behavior and item-swap cooldown continuity need independent checks.",
+            "expected": "Equipped class-compatible ability, enough MP, valid aim, no pause/Quiet and the existing accepted-cast deadline are required. Changing abilities does not replace that deadline; the next accepted cast uses the newly equipped item's cooldown.",
             "acceptance": "Cast then swap to a different-cooldown ability; compare client refusal and server policy. Test insufficient MP, incompatible/empty slot, pause/Quiet, blocked teleport and rejection without spending.",
             "implementation": "present",
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Original server policy for starting a cooldown after a rejected cast, reconnect or world transfer. The recreation retains accepted-spend timing."
+              "Selected client starts its per-player timer before USEITEM and initializes it to zero on a new Player. Original server rejection/reconnect/transfer cooldown policy is not recovered; the recreation retains accepted-spend timing."
             ],
             "sources": [
               {
@@ -5873,16 +5973,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Each evidenced instant-heal consumable uses its own amount, consumes once and caps at effective maximum HP. Definitions include Minor50/Health100/Greater200; Greater deployment is unresolved. Dose succession and mixed/area/cure effects belong to existing consumable bundles, not extra potion-size points.",
-        "differences": [],
+        "expected": "Minor/Health/Greater instant-heal definitions restore 50/100/200 HP, consume once and cap at effective maximum HP. The reconstruction consumes ineffective full-HP/Sick uses; Sick blocks healing. Greater obtainability remains unresolved. Dose succession and mixed/area/cure effects are separate consumable bundles.",
+        "differences": [
+          "Compiled Kithio consumes ineffective uses and caps at Stats+Boost, but lacks a Sick guard. Build122 documents Sick disabling healing; modified7.0 consumes before its guarded heal. These are reconstruction anchors, not recovered original-server code."
+        ],
         "unknowns": [
-          "Was Greater Health Potion obtainable in 123.5.1?",
-          "Does using a potion at full HP or while Sick consume it?"
+          "Was Greater Health Potion obtainable in 123.5.1? Its selected definition and modern drop lists do not prove target-era deployment; tracked in server issue880.",
+          "Independent target-era server evidence for full-HP/Sick consumption versus refund remains missing; selected-client dispatch and community comparators alone do not settle it."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427021641id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-health-potion",
+            "label": "April27,2012 capture: Minor restores50HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://web.archive.org/web/20120427030354id_/http://forums.wildshadow.com/wiki/realm-mad-god/health-potion",
+            "label": "April27,2012 capture: Health restores100HP, consumed with use; listed drop sources"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing; no consumption/refund policy stated"
           }
         ]
       }
@@ -5895,10 +6009,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Minor/normal/Greater Magic restore 50/100/200 MP; consumable, Greater soulbound; permitted ground use.",
+        "expected": "Selected Minor/normal/Greater Magic definitions restore 50/100/200 MP up to the effective maximum; consumable, Greater soulbound; permitted accessible-ground use. Definition presence does not establish original deployment.",
         "differences": [],
         "unknowns": [
-          "Historical full-MP spending and Quiet policy; exact ground eligibility and deployment of each size.",
+          "Full-MP spending and Quiet consumption follow selected-client eligibility and compiled Kithio reconstruction, not recovered original server policy; exact 123.5.1 ground eligibility remains unconfirmed.",
+          "May 1, 2012 Wild Shadow documentation lists Minor Magic at Butcher, Bonegrind and Forbidden Jungle, while the August 5, 2012 Japanese page lists no acquisition. Greater Magic is listed as unreleased on a March 13, 2013 Japanese page. Exact target-build deployment and acquisition continuity remain unresolved.",
           "Exact original MP-restoration text hue remains unrecovered; Kithio purple and Trapped white conflict. Light blue 6084e0 is a later-reference reconstruction, not authenticated 123.5.1 RGB."
         ],
         "sources": [
@@ -5909,6 +6024,30 @@
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/realm/entities/player/Player.UseItem.cs#L140",
             "label": "Later FSoD light-blue 6084e0 comparator; reconstruction, not original 123.5.1 hue"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L88-L102",
+            "label": "Compiled comparator consumes at full MP; does not authenticate original server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L2116-L2154",
+            "label": "Modified 7.0 comparator: all three potion definitions normalize identically to selected data"
+          },
+          {
+            "url": "https://web.archive.org/web/20120430102741id_/http://forums.wildshadow.com/wiki/realm-mad-god/magic-potion",
+            "label": "April 30, 2012 capture: normal Magic restores100 MP and is consumed"
+          },
+          {
+            "url": "https://web.archive.org/web/20120501002624id_/http://forums.wildshadow.com/wiki/realm-mad-god/minor-magic-potion",
+            "label": "May 1, 2012 capture: Minor restores50 MP; lists Butcher, Bonegrind and Jungle drops"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Minor%20Magic%20Potion",
+            "label": "Minor page last modified August 5, 2012:50 MP, no acquisition; conflicts with May capture"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Greater%20Magic%20Potion",
+            "label": "Greater page last modified March 13, 2013:200 MP, unreleased, no acquisition"
           }
         ]
       }
@@ -5922,14 +6061,32 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Six +1 base-stat potions plus Life/Mana +5, bounded by target class caps.",
-        "differences": [],
+        "differences": [
+          "The selected 123.5.1 definitions, current server and pinned modified 7.0 client agree on all eight potion increments and all 13 class-cap rows. Equipment bonuses do not count toward base caps. Kithio and Trapped clamp final gains but consume capped potions; this project preserves its capped-use refusal. Comparator agreement is not independent original-server evidence."
+        ],
         "unknowns": [
-          "Original consumption at the stat cap, partial final +5 increases, and the complete class-cap table."
+          "Original 123.5.1 server consumption at cap and partial final Life/Mana gains remain unconfirmed. The February 2012 wiki says maxed potions have no effect, not whether they are consumed; the selected definitions specify increments/caps, not consumption policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L87-L151",
+            "label": "Compiled Kithio UseItem and restoration helpers; IncrementStat at lines 658-678 clamps silently"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PlayersCXML.dat",
+            "label": "Modified 7.0 comparator: class caps; EquipCXML supplies matching potion increments"
+          },
+          {
+            "url": "https://web.archive.org/web/20120208173158id_/http://forums.wildshadow.com/wiki/realm-mad-god/stat-increase-potions",
+            "label": "February 2012 capture, text marked build 120: six +1 potions, Life +5, no effect at max; no consumption rule"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 FAQ: class-specific maxima exclude equipment boosts"
           }
         ],
         "checks": [
@@ -5939,10 +6096,23 @@
             "expected": "Stat potions update committed stats without a success chat message. HP/MP restoration feedback reflects the actual gain, not an unclipped advertised amount.",
             "acceptance": "Drink while missing only part of the advertised HP/MP, test caps and stale/failed operations, and expire a boost. Verify no stat-potion success chat, fictitious gain or success feedback on rejected consumption; review revision-bound native evidence.",
             "implementation": "present",
-            "historical": "unreviewed",
-            "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "historical": "partial",
+            "differences": [
+              "Kithio clips HP/MP notification amounts to actual gain and increments permanent stats silently. Selected and 7.0 clients do not add success chat on INVRESULT. Existing mana color remains a qualified later-server reconstruction."
+            ],
+            "unknowns": [
+              "Original server stat-potion chat policy and exact MP notification hue remain unconfirmed; client-side silence alone cannot establish server-side silence."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L105-L151",
+                "label": "Kithio HP/MP helpers publish actual clipped gain; permanent stat handler at lines 658-678 is silent"
+              },
+              {
+                "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/messaging/impl/GameServerConnection.as#L1666-L1672",
+                "label": "Modified 7.0 INVRESULT adds no success chat; cannot establish original server policy"
+              }
+            ],
             "group": "behavior"
           }
         ]
@@ -5959,12 +6129,24 @@
         "expected": "Health and Magic each have seven soulbound doses, restore 125 per dose, replace with successor and remove final dose.",
         "differences": [],
         "unknowns": [
-          "Original consumption at full HP/MP or while Sick, and both seven-dose sequences."
+          "Independent original-server consumption/refund at full HP/MP or while Sick; exact 123.5.1 continuity of April/June 2012 guides. Kithio lacks a Sick healing guard, unlike period documentation and modified 7.0; retain current no-heal policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L89-L149",
+            "label": "Compiled Kithio: successor replacement, ineffective-use consumption and capped restoration; no Sick healing guard"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422182039id_/http://forums.wildshadow.com/wiki/realm-mad-god/elixirs",
+            "label": "April 22, 2012 capture: Soulbound, up to seven doses, 125 HP/MP per use"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June 13, 2012 capture: Sick prevents healing, not proof of dose consumption/refund"
           }
         ]
       }
@@ -5977,15 +6159,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Four self tinctures +15 DEX/DEF or +75 max HP/MP; four range-six effusions +30 or +150; 30 seconds. Nearby allies, not formal party.",
-        "differences": [],
+        "expected": "Four self tinctures +15 DEX/DEF or +75 maximum HP/MP; four range-six effusions +30 or +150 for nearby allies, not formal party; 30 seconds per dose. Overlapping same-stat boosts diminish by successive halves, rounded down, without refreshing timers. The reconstruction ranks active doses strongest-first, excludes the exact six-tile boundary, does not instantly refill HP/MP, clamps on expiry and discards temporary boosts on reconnect.",
+        "differences": [
+          "The May29,2012 Wild Shadow guide documents halving, separate timers and range6. Compiled Kithio instead adds every dose at full strength and halves aura range to3. Preserve selected range6; correct full-strength stacking. Modified7.0 ActivateBoost supplies strongest-first ranking/re-ranking as reconstruction, not independent target-era proof."
+        ],
         "unknowns": [
-          "Original stacking, refresh, range-boundary and temporary maximum-stat rules."
+          "Exact 123.5.1 mixed-strength ordering/expiry re-ranking, inclusive boundary and temporary-maximum clamp/reconnect policy remain historically unresolved. Dated guide tables settle equal-dose halving, not those server details. Tracked in server issue884.",
+          "Prepared native items do not prove original acquisition, effusion distribution or drop probabilities."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120529033324id_/http://forums.wildshadow.com/wiki/realm-mad-god/tinctures-and-effusions",
+            "label": "May29,2012 Wild Shadow capture: values, range6, half-rounded-down overlaps and separate30-second timers"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ActivateBoost.cs",
+            "label": "Modified7.0 comparator: descending live-dose ranking, per-stat halving and re-ranking on expiry"
           }
         ]
       }
@@ -5996,17 +6189,32 @@
       "category": "gear",
       "icon": "assets/player/coral-juice.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Individual restorative drinks, Coral Juice dual restoration, Healing Ichor, range-ten Snake Oil/Pollen Powder; include Beachzone compound boost/intoxication cocktails. Wine Cellar drinks do not implicitly cause Drunk.",
-        "differences": [],
+        "expected": "Ten wines restore150 HP or MP without Drunk, except Fire Water230HP; Ichor150 HP, Coral100 HP+100 MP, Snake Oil100 HP/Pollen100 MP within range10 including self. Four Beach cocktails each boost two selected stats and apply Drunk15s; selected Lime boosts last30s, the others20s.",
+        "differences": [
+          "All18 selected drink definitions match recovered123.5.1 and modified7.0, but the ten wines have no current production loot candidates. Prepared consumption does not establish ordinary acquisition.",
+          "Kithio halves nova range; modified7.0/current reconstruction use full range. May2013 Beach wiki says Lime20s versus selected/7.0 XML30s. Preserve selected definitions and current authority rather than importing conflicting comparator rules."
+        ],
         "unknowns": [
-          "Production loot/distribution, historical range/self/resource rejection semantics."
+          "Exact target-era drop schedules and ordinary wine acquisition; historical self/range-edge/recipient eligibility and full-resource/Sick/Quiet consumption or refund; Lime20-versus30s continuity. Bounded prepared gameplay is separate from full acquisition/history acceptance. Research and remaining work: server issue885."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat",
+            "label": "All18 complete drink objects match selected123.5.1; modified7.0 agreement is not original-server behavior proof"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162737id_/http://forums.wildshadow.com/wiki/realm-mad-god/wines",
+            "label": "May28,2012: ten wines, Fire Water230HP/others150HP or MP; Cellar and Castle minion drops, not exact probabilities"
+          },
+          {
+            "url": "https://web.archive.org/web/20130516012303id_/https://forums.wildshadow.com/wiki/realm-mad-god/beach-party-madness-drinks",
+            "label": "May2013 retrospective August2012 event account; Lime20s conflicts with selected30s"
           }
         ]
       }
@@ -6019,10 +6227,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s.",
-        "differences": [],
+        "expected": "Selected 123.5.1: Pirate Rum Drunk 30s; Magic Mushroom Hallucinating 30s; Ghost Pirate Rum Drunk 6s plus Invisible 4s. Consumed without HP/MP/stat cost.",
+        "differences": [
+          "Current condition engine retains the later deadline; compiled Kithio and related Trapped replace remaining duration. Independent target-era mixed-duration overlap is unresolved."
+        ],
         "unknowns": [
-          "Historical refresh/overlap and deployment; complete visual/AI condition fidelity."
+          "Original mixed-duration overwrite, exact production acquisition/drop probabilities and full visual/AI condition fidelity remain unaccepted (issues 886, 942, 943, 946). July 19, 2012 test notes list Ghost Rum's 6s/4s; an August 4 player comment reports its drop, not exact September deployment."
         ],
         "sources": [
           {
@@ -6040,15 +6250,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "100 HP heal, conditional Speedy clear when Hexed, then negative-condition removal; exact historical negative set/order consequences unresolved.",
-        "differences": [],
+        "expected": "Heal 100 HP before cleansing, so Sick blocks that use's heal. Clear Speedy only when Hexed, then clear Quiet, Weak, Slowed, Sick, Dazed, Stunned, Blind, Hallucinating, Drunk, Confused, Paralyzed, Bleeding, Armor Broken and Hexed. Preserve other buffs; the selected client restores its class texture when Hexed clears. Ineffective full-HP/Sick uses consume in this reconstruction.",
+        "differences": [
+          "Compiled Kithio supplies the 14-effect cleanse list but omits the Sick heal guard and conditional-clear activation. Selected XML order and the February 2012 Sick rule take precedence; modified 7.0 implements both guards. The later client restores skins instead of the selected client's objectType texture."
+        ],
         "unknowns": [
-          "Historical negative-condition set, Sick/heal ordering and transformation presentation restoration."
+          "Independent target-version evidence for the exact cleanse mask and ineffective-use consumption/refund remains missing. The June 2012 status page predates Hexed and also lists enemy Stasis and attack Armor Pierce, so it is not an exact player cleanse contract. Track server issue887.",
+          "Prepared native checks are not earned Coffin/Lord Ruthven acquisition or exhaustive acceptance of every hostile condition, green-pool reapplication and multiplayer scope."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs#L14-L86",
+            "label": "Compiled primary reconstruction:14-effect NegativeEffs, not independently authenticated official behavior"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/player/Player.UseItem.cs#L851-L903",
+            "label": "Modified7.0 comparator guards Heal with Sick and conditionally clears Speedy; not a2012 specification"
+          },
+          {
+            "url": "https://web.archive.org/web/20120417215230id_/http://forums.wildshadow.com/wiki/realm-mad-god/holy-water",
+            "label": "April17,2012 capture:100HP and removal of negative effects; no exact mask or Sick ordering"
+          },
+          {
+            "url": "https://web.archive.org/web/20120613202533id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "June13,2012 capture: Sick cannot be healed; positive Speedy/Berserk and negative effects, before MadLab/Hexed"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1#original",
+            "label": "Transcribed February14,2012 Build122 announcement: Sick disables healing"
           }
         ]
       }
@@ -6061,11 +6294,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Remove Invisible, apply Hexed for 30s; target announcement explicitly fixes Mad Lab blue pools removing pet transformation.",
+        "expected": "Consume 0xc41 once, remove Invisible and apply Hexed for 30s without adding Speedy or Stunned. The selected client chooses one of 44 Hexable appearances until cured/expired; Mad Lab DeHexxer actors cure the transformation, not arbitrary water.",
         "differences": [],
         "unknowns": [
-          "Which terrain cures the transformation?",
-          "Original transformed appearance, Speedy interaction and lifecycle."
+          "Original pool boundaries and complete source-versus-combat cure mask; actor geometry/source separation remain reconstruction.",
+          "Original refresh/stacking and duration continuity across world changes, relogin or restart; target acquisition remains unverified."
         ],
         "sources": [
           {
@@ -6075,6 +6308,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Transformation%20Potion",
+            "label": "Potion page: own text dated September 8, 2012; later comment separate"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/ObjectLibrary.as",
+            "label": "Pinned original-client Hexable list registration"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Modified 7.0 presentation comparator, not original-server authority"
           }
         ]
       }
@@ -6090,8 +6335,8 @@
         "expected": "The normal soulbound XP Booster doubles XP until level 20 or death. It does not increase Fame.",
         "differences": [],
         "unknowns": [
-          "Original repeated-use, reconnect and level-20 crossing behavior.",
-          "Was the separate XP Booster Test item ever distributed?"
+          "Original repeated-use consumption, reconnect persistence and level-20 kill/queue splitting remain unverified. Duplicate refusal, durable boost state and whole-crossing-award doubling are reconstruction choices, not authenticated original boundaries.",
+          "No distribution witness for XP Booster Test (0xc43) was established from the selected XML, 123.5.0 production/testing notes or inspected comparators. Its presence does not prove availability; it remains unsupported. Modified 7.0 timers must not be imported into 123.5.1."
         ],
         "sources": [
           {
@@ -6101,6 +6346,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
             "label": "Build 123.5.0 release notes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_EquipCXML.dat#L6231-L6258",
+            "label": "Modified 7.0 comparator: added timers are not target-version rules"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build123.5.0",
+            "label": "August 25 / September 5, 2012 testing notes; no Test-item distribution claim"
           }
         ]
       }
@@ -6113,16 +6366,35 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Thirteen declared ordinary keys create mapped portals, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Placement/failure permissions require historical qualification; destinations separate.",
-        "differences": [],
+        "expected": "Thirteen soulbound consumable keys create their declared portals at the user position, including Sprite→Glowing Portal. Incantation instead unlocks Locked Wine Cellar. Current ordinary keys share a commit-time60s entrance window; original adventures remain separate.",
+        "differences": [
+          "Kithio's compiled Create uses PortalDesc.TimeoutTime, which hardcodes30s. This project deliberately uses60s following the June2012 general dungeon guide; that guide does not independently specify keyed entrances.",
+          "Rejected Incantations are retained deliberately, unlike June2012 misuse-consumption guidance. Original-client rejected-slot retry remains failed in issue867; fresh-slot success is not a complete unlock acceptance pass."
+        ],
         "unknowns": [
-          "Historical permitted worlds, placement, admission and lifetime policy.",
-          "The original complete adventures behind keys remain separate dungeon requirements."
+          "The June21,2011 Arqade answer independently supports Nexus use, not Vault or exact123.5.1 continuity. Target world exclusions, overlapping placement/interaction priority, keyed lifetime and admission capacity/range remain unresolved in issue890.",
+          "The original complete adventures behind keys remain separate dungeon requirements. Full Incantation acceptance and its original range/unlocked lifetime remain tracked in issue867."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Descriptors.cs#L261-L283",
+            "label": "Compiled comparator's PortalDesc hardcodes30s; not original123.5.1 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023836id_/http://forums.wildshadow.com/wiki/realm-mad-god/dungeons",
+            "label": "June9,2012 capture: general entrances last one minute and any player can enter; not an exact keyed-timeout rule"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/23337/can-i-use-dungeon-keys-in-the-nexus",
+            "label": "May27,2011 question / June21 answer: purchased-key Nexus-use witness, no Vault claim"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602012050id_/http://forums.wildshadow.com/wiki/realm-mad-god/wine-cellar-incantation",
+            "label": "June2,2012 capture: misuse consumes Incantation without effect, unlike deliberate rejection-safe reconstruction"
           }
         ]
       }
@@ -6135,15 +6407,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Equipped ring grants +20 HP/MP and +2 six other stats; protects from death without later curse. Detailed recovery policy incompletely documented.",
+        "expected": "Selected 0xb3e is a nonsoulbound ring: +20 HP/MP, +2 six other stats and Resurrects. Worn-only consumption, Nexus return and retained other items are supported; current full post-consumption HP/MP recovery remains a reconstruction.",
         "differences": [],
         "unknowns": [
-          "Historical recovery resources/destination, equipment retention and once-only fame/death semantics."
+          "Kithio/Trapped set twice base HP/MP; modified 7.0 returns at 1 HP without refilling MP and adds Soulbound. Neither overrides the selected definition or proves original 123.5.1 recovery.",
+          "Dated 123.5.1 confirmation of HP/MP recovery policy and precise original death/Fame bookkeeping. The item page's full-resource/retention paragraph is undated; wiki history requests returned 403 and the requested Wild Shadow archive returned 404. Issue #891 tracks the remainder."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L438-L466",
+            "label": "Compiled Kithio: worn-only consumption and Nexus return before death processing"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build116.5",
+            "label": "June 9, 2011 test: breakage, Nexus return and full HP"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build117.0.1",
+            "label": "June 19, 2011 release: one-time resurrection when worn"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Amulet%20of%20Resurrection",
+            "label": "Undated full HP/MP and item retention; September 19, 2011 no-grave comments"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0",
+            "label": "November 2, 2012 release: later curse change, not a target-build rule"
           }
         ]
       }
@@ -6159,7 +6452,8 @@
         "expected": "Small/Large Firecrackers summon Lil/Big Firecracker for advertised monster damage; five-dose Sand Pail summons healing Sand Castle. Historical July stock was time-limited.",
         "differences": [],
         "unknowns": [
-          "Historical firecracker damage/timing/lifetime and Castle healing/range/lifetime remain unknown. Castle 10HP/<3 tiles/1s/30s and recipient/stacking rules are engineering reconstruction, not recovered historical constants."
+          "Firecracker 100 armor-piercing damage, ten pulses, random jumps/colors, Small radius1 and Large radius2/3 with a longer first gap are reconstruction. A July6,2012 player comment reports roughly30 damage without controlled conditions; original damage/timing/range/color rules remain unresolved.",
+          "Castle 10HP/<3 tiles/1s/30s, recipient eligibility and additive stacking are reconstruction, not recovered historical constants. Period Sand Pail descriptions support five uses and nearby healing only; historically earned acquisition is not verified."
         ],
         "sources": [
           {
@@ -6168,7 +6462,15 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "label": "Build 123.3.2: July4,2012 fireworks sale through July9"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Large%20Firecracker",
+            "label": "Large Firecracker: July6,2012 approximate-damage comment; not a controlled measurement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Sand%20Pail",
+            "label": "Sand Pail: five uses and nearby healing; August17,2012 image timestamps do not date every claim"
           }
         ]
       }
@@ -6179,19 +6481,30 @@
       "category": "style",
       "icon": "assets/player/black-cat.png",
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "All target-era pet choices and generators, following, persistence and loss/transfer behavior, including Baby as one companion. Historically deployed roster, acquisition and exact lifecycle remain qualified; modern feeding/fusion is not imported.",
-        "differences": [],
+        "expected": "Target-era companions, generators, following, persistence and loss/transfer behavior, including Baby. Selected definitions contain 66 generators; this is not a historically obtainable roster. Modern feeding/fusion is excluded.",
+        "differences": [
+          "Source inspection finds generic owner-follow/toggle behavior for Beach Ball, not buddy tossing, and one saved selection rather than Valentine's reported multiple hearts. These special behaviors are not accepted by the generic summon checks."
+        ],
         "unknowns": [
-          "Complete obtainable pet roster, seasonal shops, and original loss/transfer rules.",
-          "Original following distances, replacement and continued ownership after seasonal sales.",
-          "Was Beach Ball Generator obtainable in 123.5.1, and how did buddy play work?"
+          "Which of the 66 selected generators were actually obtainable in 123.5.1? The June 10, 2012 forum capture lists 34 known pets and explicitly says some were unreleased; the modified 7.0 catalogue adds later pets.",
+          "Complete target-build acquisition, manual shop rotations, seasonal retention and original loss/transfer exceptions remain tracked in server issue893. Prepared generator fixtures do not prove acquisition.",
+          "Exact original following/warp distances, cooldown scope and special Valentine behavior remain unresolved; the later PetFollow comparator differs from this reconstruction.",
+          "The preserved event table dates Beach Ball's 700 Gold sale to August 16–21, 2012, before 123.5.1. Retained use in the target build and buddy-play routing/range/timing still need period evidence and dedicated gameplay checks."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120610080612id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/pets",
+            "label": "June 2012 forum capture: unreleased pets, reusable generators, manual shop rotation and consumable event pets"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Official%20Events",
+            "label": "Preserved event table: Beach Party Madness, August 16–21, 2012"
           }
         ]
       }
@@ -6204,17 +6517,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Six directly identified temporary eggs: Purple attacks, White heals, Blue paralyzes, Orange stasises, Green slows and Yellow bleeds. Numeric lifetime/AI and any seventh variant require separate historical proof.",
+        "expected": "Six selected temporary eggs. The May 31, 2012 table gives White 60s, 25HP/0.5s; all others 30s: Purple 35 damage/0.3s, Blue Paralyze5s/1s, Orange Stasis5s/2s, Green Slow10s/0.3s and Yellow Bleed300 over10s/1s. No selected Red Drake egg.",
         "differences": [],
         "unknowns": [
-          "Independent target-era numeric AI/lifetime source.",
-          "Original concurrency/replacement, damage attribution and cross-world rules.",
-          "No evidenced seventh egg."
+          "Exact 123.5.1 continuity of the May 2012 numeric table; original range, targeting, follow and defense rules.",
+          "Original concurrency/replacement, damage attribution and travel/disconnect/death persistence. Eight-companion cap, no player damage credit and travel cleanup remain project policies; see server issue894.",
+          "Red Drake 0x1406 exists in selected and modified7.0 XML, but no selected egg activates it. Do not infer a seventh egg."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120531235024id_/http://forums.wildshadow.com/wiki/realm-mad-god/drake-eggs",
+            "label": "May 31, 2012 capture: six drakes, lifetimes, strengths and intervals"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_PetsCXML.dat",
+            "label": "Modified7.0 companion definitions, including Red Drake object but not a seventh egg"
           }
         ]
       }
@@ -6227,16 +6548,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed clothing/accessory color choices, native previews, one-use application and persistent appearance, preserving the other texture channel. Historical palette/stock and complete native rendering remain unverified.",
-        "differences": [],
+        "expected": "Selected definitions contain141 names/channel (282 items,139 RGBs): clothing0x1000–0x108c/accessory0x1100–0x118c. Aqua/Cyan and Fuchsia/Magenta are aliases. One-use soulbound dyes replace only Tex1 or Tex2. Nexus proximity previews override rendering within one tile; leaving cancels without consuming or saving the trial color.",
+        "differences": [
+          "Current120Gold clothing-dye/60Gold accessory-dye base offers and recovered Nexus stock are reconstruction, not authenticated123.5.1 sale prices/rotation. Kithio compiles UseItem but lacks Dye activation; later Trapped/modified7.0 channel handling is comparator evidence, not original-server authority."
+        ],
         "unknowns": [
-          "Complete original palette and seasonal availability.",
-          "Preview, cancellation and rendered appearance of each color."
+          "Authenticated deployed123.5.1 palette versus bundled definitions, seasonal availability and original prices/restock remain issue895. The2013 St Patrick’s bundle,2015 fitting-room palette and2017 Japanese141-color list do not date the entire roster to the target.",
+          "PR1180 verifies all282 dyes on a prepared Wizard, Black clothing/Turquoise accessory previews and cancellation, and durable Nexus reconnect. All141 merchant-color previews, every class/skin, earned acquisition and historical acceptance remain open. PR296 retains its separately qualified earned ground-use, full-backpack and refusal receipts."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_DyesCXML.dat",
+            "label": "Modified7.0 agrees on282 item identities, channels, colors and consumption flags"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/54ad7c77f33b32d20165493f38053897761f2a04/dyes.js",
+            "label": "September2015 external fitting-room palette matches141 names/RGBs, not target stock"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アイテム売り場",
+            "label": "March15–19,2013 St Patrick’s bundle; later prices/rotation are not123.5.1 proof"
           }
         ]
       }
@@ -6249,15 +6584,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Original deployed textile patterns, encoded scale variants, native previews, application and persistence in both texture channels. Seasonal possession is distinct from permanent shop sale; complete target roster/rendering remain unverified.",
+        "expected": "Selected 123.5.1 has71 pattern pairs (142 items): Large selects clothing/Tex1, Small accessory/Tex2; encoded high byte chooses4x4/5x5/9x9/10x10 atlas, not avatar scale. Verify native preview/application, once-only consumption, other-channel preservation and persistent appearance; embedded possession is not permanent shop availability.",
         "differences": [],
         "unknowns": [
-          "Original pattern and scale variants, their appearance, and seasonal shop inventories."
+          "Exact target-deployed and seasonal shop rosters/windows/prices. Selected142 definitions and the later100G textile table do not replace provisional120G offers or prove permanent sale; see issue896.",
+          "Full all-pattern/all-class visual, tooltip and mask fidelity, earned acquisition and cold browser/server restart continuity. Representative atlas/channel captures and prior ground-use receipts are bounded acceptance, not whole-feature certification."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/atomizer/fitting/blob/8f610f6fb4eb8c3a5caeeb4bc075ab670c5dc906/dyes.js",
+            "label": "September27,2012 fitting-room roster:Shamrock commented out, not proof of sale windows"
+          },
+          {
+            "url": "https://web.archive.org/web/20120901000000id_/http://forums.wildshadow.com/node/80502",
+            "label": "April22,2012 Build123 announcement:missing dye/textile pixels fixed"
           }
         ]
       }
@@ -6270,14 +6614,16 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Safe lobby, escape/spawn, facilities, fountains and destination bindings. The older community server selects the client's blue background (2); modified 7.0 world settings instead select 0. Exact target layout and fountain policy remain unresolved.",
+        "expected": "Safe lobby, escape/spawn, facilities and destination bindings. Selected Sheep, fountain and portal definitions match runtime; they do not specify healing or deployed map data. January 2012 documents Sheep and HP fountains. Documented Crier announcements begin in later Build 4.3; selected 123.5.1 XML has no Crier.",
         "differences": [
-          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
+          "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304",
+          "Rust heals every eligible nearby player by 100 HP per second without restoring MP. January 5, 2012 describes one recipient and 100 HP every 1-2 seconds; Trapped uses nearest-player healing with a randomized 600ms interval, while modified 7.0 heals multiple recipients. Target continuity remains unresolved, not an automatic policy correction.",
+          "The current 142x130 map matches pinned Trapped cells except one added merchant; it has 16 spawn cells, eight fountains and 28 Sheep. Sheep presence is implemented, but wandering/baa behavior is not verified; the mixed-era Japanese page says 25. The 123.4 minimap supports broad room arrangement, not exact 123.5.1 tiles."
         ],
         "unknowns": [
-          "Original 123.5.1 layout, spawn points and destination bindings.",
-          "Fountain timing, MP healing and recipient rules.",
-          "Were Sheep and the Nexus Crier present, and what did the Crier say?"
+          "Exact original 123.5.1 layout, spawn cells and destination deployment remain in issue 897.",
+          "Target fountain cadence, MP and recipient-policy continuity remain in issue 897; current all-recipient behavior is reconstruction, not recovered original server logic.",
+          "Original Sheep count/script and target deployment remain in issue 897. Selected XML has no Crier; November 6, 2012 Build 4.3 and January 25, 2013 Build 10 messages must not be backported as 123.5.1 dialogue."
         ],
         "sources": [
           {
@@ -6295,6 +6641,18 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
             "label": "Conflicting modified 7.0 Nexus: background 0"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012: Sheep/baa and single-recipient 100 HP fountains; target continuity unverified"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_4.0.0#v430",
+            "label": "November 6, 2012 Crier introduction; later than target build 123"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_10.0.0",
+            "label": "January 25, 2013 Crier return, not 123.5.1 dialogue"
           }
         ]
       }
@@ -6307,12 +6665,15 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-shared eight-item chests retain items across character deaths. The June 2012 Nexus wiki describes twenty chests, one initially available and nineteen purchasable for 500 Gold each. The older community server selects blue background 2, also visible in the linked Vault tutorial's thumbnail; modified 7.0 settings instead select 0.",
+        "expected": "Selected client: eight-item chests shared by all account characters. The June2,2012 Nexus capture describes twenty chests, one free and nineteen at500 Gold. Current93x81 map exactly matches Trapped and matches compiled Kithio after its version-zero prefix. This is comparator provenance, not recovered official production layout.",
         "differences": [
           "Server PR304 sends background 2 for Nexus and Vault worlds and 0 elsewhere, following the 2013 community server and the client's NexusBackground dispatch. Modified 7.0 settings choose 0, so the target backend choice is not authenticated: https://github.com/OpenRotMG/Open-RotMG-Server/pull/304"
         ],
         "unknowns": [
-          "Exact 123.5.1 map, chest ordering and purchase presentation; the dated capacity and price evidence predates this build."
+          "Current purchases preserve the clicked cell's durable identity. Kithio/Trapped instead assign saved chest lists to distance-sorted cells on reload. Original reload/equal-distance ordering is not established; existing player storage is not reordered.",
+          "Exact 123.5.1 production layout, equal-distance chest ordering, purchase presentation/bonus policy and continuity of the June capacity/price remain issue898. Kithio uses100 Gold; modified7.0 uses750 Fame. A September archive request redirects to the same June capture, not a later witness.",
+          "The mutable Japanese Vault page mixes a2016 map,120 chests and bonus items; its ordering chart is not target-dated. Build124.0 notes place Gift Chests on October5,2012, after the target. No expanded map, gifts or bonus items are inferred.",
+          "Whole-feature native acceptance still requires registered purchase/refusal and death-to-replacement storage access. Store/world regressions are not those native journeys; see issue898."
         ],
         "sources": [
           {
@@ -6334,7 +6695,12 @@
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Vault.jw",
             "label": "Conflicting modified 7.0 Vault: background 0"
-          }
+          },
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/worlds/Vault.cs","label":"Compiled Kithio: eight slots, distance ordering and versioned copy of the same map"},
+          {"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/SellableObject.cs","label":"Kithio chest price100 Gold, not current500"},
+          {"url":"https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/entities/vendors/ClosedVaultChest.cs","label":"Modified7.0 price750 Fame, not target authority"},
+          {"url":"https://wikiwiki.jp/rmd/Vault","label":"Mutable mixed-era page:120 chests,2016 map and undated ordering/bonus policy"},
+          {"url":"https://wikiwiki.jp/rmd/version/build124.0","label":"Following build: Gift Chests added October5,2012"}
         ]
       }
     },
@@ -6349,11 +6715,12 @@
         "expected": "Tutorial instruction/action progression, first-run lifecycle, /tutorial reentry, encounters and exits. Preserve separate Kitchen handling as a recovered-client lead; target production deployment/admission and the complete first-adventure map/script remain unresolved.",
         "differences": [
           "Server PR526 sends the Tutorial's Kitchen Portal to a Kitchen built from the unchanged 2013 Trapped map, whose Random Realm Portal leads to a Realm. Opening a fresh Kitchen on every use is a reconstruction; Trapped reuses the first Kitchen its portal opened: https://github.com/OpenRotMG/Open-RotMG-Server/pull/526",
-          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior."
+          "Server PR728 (https://github.com/OpenRotMG/Open-RotMG-Server/pull/728) enables both encounter worlds without changing the six selected tutorial prompts, first-run/reentry handlers, maps or PR526 portal policy. Compiled Kithio supplies chicken movement/reproduction, Guard/Butcher attacks and Bonegrind's pursuit, rotating volleys and sticky flee below 30% HP. Hen/Butcher/Bonegrind use independent public Minor Potion rolls once per death, not once per contributor. These are reconstruction choices, not authenticated target-server behavior.",
+          "PR1193 verifies the six current proximity overlays, minimap backtracking, authored ring equip, starter ability use and Kitchen/Nexus/Tutorial continuity in three prepared contexts. The selected client saves needsTutorial=false on Tutorial construction, not completion. Neither this local preference nor the native receipt proves earned first-run admission or the complete historical journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1193"
         ],
         "unknowns": [
           "Complete first-adventure layout and instructional/admission fidelity; the May 2012 page describes a solo Tutorial, while this change preserves the existing server admission policy.",
-          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward policy. The mutable enemy wiki describes flee at 100 HP and full potions; selected Kithio uses below 90 HP and Minor Potions. The target Kitchen layout and instance sharing remain unverified."
+          "Exact 123.5.1 phase timing, interrupted sequence behavior and reward probabilities. The May 19, 2012 Bonegrind page (updated build122.3.2) lists Minor Health and Minor Magic Potions, unlike the mutable enemy wiki's full potions, but supplies no probabilities or flee threshold. Selected Kithio uses below90HP. Target Kitchen layout and instance sharing remain unverified."
         ],
         "sources": [
           {
@@ -6371,6 +6738,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/Bonegrind%20the%20Butcher",
             "label": "Mutable enemy wiki: corroborates blades and flee dialogue but conflicts on HP threshold and rewards"
+          },
+          {
+            "url": "https://web.archive.org/web/20120519225245id_/http://forums.wildshadow.com/wiki/realm-mad-god/bonegrind-butcher",
+            "label": "May 2012 capture, updated build122.3.2: Minor Health and Minor Magic rewards; no probabilities or flee threshold"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/https://forums.wildshadow.com/node/41768",
+            "label": "February 13, 2012 build122 announcement: Tutorial/Kitchen polished; no exact layout"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605125421id_/https://forums.wildshadow.com/node/149494",
+            "label": "October 9, 2012 Release2 announcement: extended Nexus/shop/guild Tutorial is later than target"
           }
         ]
       }
@@ -6383,10 +6762,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Choose/change registered account name; client maximum ten ASCII letters, unique-name UI and subsequent Gold-priced rename. Client advertises 1000 Gold; authoritative original enforcement, minimum length, default-name pool and first-choice rank remain unresolved.",
-        "differences": [],
+        "expected": "Registered first-name choice and later Gold-priced rename. Selected client caps ten ASCII letters, its account dialog rejects empty input, and its Nexus panel reads the supplied first-choice star requirement and advertises 1000 Gold. Compiled Kithio has a 45-name pool and UUID-hash selection; this is not recovered original server policy.",
+        "differences": [
+          "Current reconstruction requires 3–10 ASCII letters, uses Guest{id} defaults and case-insensitive human uniqueness, and permits first choice without earned stars (local Nexus nstar:0). Selected client and primary comparator do not establish the three-letter minimum. Kithio's embedded Nexus also declares nstar:0, with nstar export disabled. First choice is free; subsequent choices cost 1000 Gold in game, not through HTTP. Bot-name displacement is project policy."
+        ],
         "unknowns": [
-          "Original minimum length, generated-name distribution, rank gate, reserved/profanity rules and server-side rename price."
+          "Original server minimum, default-name distribution, first-choice rank enforcement, reserved/profanity policy and authoritative rename price. Mutable wiki lists and related community implementations are not independent target-era proof."
         ],
         "sources": [
           {
@@ -6404,18 +6785,28 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Named Realm selection, live population and Enter/Full/Locked availability with denied entry. Exact target name pool, numerical capacity and population binding are unresolved; modern wiki capacity is not target proof.",
+        "expected": "Named Realm selection, live population, Enter/Full availability and denied entry. Locked is selected by the client LockedPortal definition, not simply a closed Realm. January 2012 documentation describes 85-player counters and up to eight portals; exact 123.5.1 continuity, name pool and population accounting remain unresolved.",
         "differences": [
           "Server PR336 supports two or three configured named Realms and reservation-aware capacity refusal. Prepared native views on the bf55d26 feature code verify two distinct portals; this does not establish historical capacity or an earned encounter journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/336#issuecomment-6360711579",
-        "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability. Revision-bound regression and native after evidence do not establish the broader historical name/capacity or full/locked obligations: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998"
+          "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
+          "Issue901 distinguishes full-but-visible Realm entrances from closed/hidden entrances and XML-locked Wine Cellars. Kithio WorldClosed removes the portal; modified 7.0 ClosePortal instead clears Usable. These related comparators are not independent historical votes. The two/three-Realm limit and reservation-inclusive occupancy remain explicit reconstruction policies: https://github.com/OpenRotMG/Open-RotMG-Server/issues/901",
+          "Clean native 6ca925d passed eight bounded browsing checks, including live Full/refusal, reopening, both destinations and inventory/identity-preserving Nexus returns. An identical-revision attempt stopped at the tick-ACK guard during return; an unchanged retry passing does not explain or fix it. Prepared one-slot capacity and characters are not an 85-player load, earned journey, native closure or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1191#issuecomment-6483478106"
         ],
         "unknowns": [
-          "Original name pool, capacity, number of concurrent selectable Realms and full/locked presentation equivalence."
+          "Exact 123.5.1 name pool, continuity of the January 2012 85-player/eight-portal description, and population accounting across dungeons/in-flight reservations. Current reconstruction allows two or three Realms and hides closed entrances. Native closure/removal/replacement and the unexplained tick-ACK-stop take on an otherwise passing browsing revision remain tracked in server issue901."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120105233803id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "January 5, 2012 capture: named Realms, 85-player counters, up to eight portals (not exact 123.5.1 continuity)"
+          },
+          {
+            "url": "https://chronicawesome.wordpress.com/2012/02/22/realm-of-the-mad-god/",
+            "label": "February 22, 2012 player account: 85-player Realms and Medusa/Cyclops labels; other gameplay interpretations are not adopted"
           }
         ]
       }
@@ -6433,7 +6824,7 @@
           "Recovered snapshot stock is not automatically replenished or rotated. Finite sampled countdowns are resumed from world creation; a sampled New marker lasts one minute without inventing an original expiry. Known prices remain fixed reconstruction values, discounted prices round upward, and unpriced stock is unavailable."
         ],
         "unknowns": [
-          "Complete 123.5.1 price/rank/stock matrix, original price randomization and rounding, rotation pools, restock rules, and the full lifetime of offers sampled as New. The preserved shop table mixes periods."
+          "Complete 123.5.1 price/rank/stock matrix, randomization/rounding, rotation pools, sold-out replenishment and the full lifetime of sampled New offers. The mixed-era table's Cloth Bazaar cycle and later pet/equipment prices are not target evidence. The 123.5.0 announcement names a 390-Gold Lab Key, but it is not configured or stocked in the recovered Nexus snapshot. The later comparator's 50-Gold Lab Key is not target pricing evidence."
         ],
         "sources": [
           {
@@ -6447,6 +6838,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/アイテム売り場",
             "label": "Preserved shop tables: cosmetic/consumable discounts and rank requirements; mixed periods and uncertain prices"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build123.5.0",
+            "label": "Build-specific shop additions: 390-Gold Lab Key and 100-Gold XP Booster, not a complete matrix"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build_7.0.0",
+            "label": "December 2012 equipment-sales experiment and price changes are later than the target"
           }
         ]
       }
@@ -6459,12 +6858,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Personal Gold and spendable account Fame are separate balances, distinct from living-character Fame and Guild Fame. Fame is earned on death and can be spent in the Nexus. Original starting balances, formulas and spending rules remain unresolved.",
+        "expected": "Personal Gold and spendable account Fame are separate from living-character Fame and Guild Fame. Death credits account Fame; supported Nexus purchases debit the selected wallet. Period reports support 100 starting Gold; exact 123.5.1 deployment, complete Fame formulas and original spending policy remain partial.",
         "differences": [
           "Project extension: registered accounts can convert spendable account Fame to Gold at 2 Fame per Gold with the /swap chat command. This is not a 123.5.1 exchange: https://github.com/OpenRotMG/Open-RotMG-Server/pull/483"
         ],
         "unknowns": [
-          "Historical starting balances, complete Fame formulas and exact original earnings/spending policy remain unresolved. Current code separately stores Gold and account Fame, credits the committed death award once, and atomically debits the selected wallet for supported purchases; source presence is not a completed native economy journey."
+          "A May 2011 firsthand report and September 2012 spending report support 100 Gold; Kithio's 1000 and April 2013's 50 must not be copied into 123.5.1. Exact target-era continuity, full Fame formulas and original earnings/spending policy remain unresolved. Prepared rewards and store transactions do not establish an earned native death-to-purchase journey. Research and remaining scope: https://github.com/OpenRotMG/Open-RotMG-Server/issues/903#issuecomment-6482538664"
         ],
         "sources": [
           {
@@ -6477,13 +6876,15 @@
             "id": "home:realm-gold-offers",
             "name": "Intentional Gold-interface replacement",
             "expected": "The project deliberately replaces historical payment offers with a Gold guide and rewards. Each account receives 75 Gold for Blue (13 stars), 150 for Red (26), 250 for Orange (39), 750 for Yellow (52) and 2500 for White (65), once per rank.",
-            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. Label the substitution and research original offers separately; do not reactivate obsolete processors or test real payments.",
+            "acceptance": "Verify invocation/cancel and wallet refresh without purchasing. The selected client fetches offers dynamically; undated modern price tables are not recovered 123.5.1 offers. Do not reactivate obsolete processors or test real payments.",
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards."
+              "The project intentionally replaces historical payment processors with a Gold guide and rewards, including issue #421's custom class-star payments. These are not historical rewards. The selected client originally required registration and opened a payment overlay; the guide bypasses that obsolete overlay."
             ],
-            "unknowns": [],
+            "unknowns": [
+              "Exact 123.5.1 offers, regional/platform availability and active processor deployment remain unresolved. The client /credits parser is not a recovered server response."
+            ],
             "sources": [],
             "group": "behavior"
           }
@@ -6496,16 +6897,20 @@
       "category": "social",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes player names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists players. Permanent deaths announce name, level and killer. Original level-20, taunt and class-unlock announcements remain unresolved.",
+        "expected": "Ordinary chat reaches the current Realm or dungeon; Nexus chat is local to 15 squares, with /yell reaching all Nexus players. Includes names, speech bubbles, saved history, filtering and native commands. /help lists commands; /who lists current-world players. Permanent deaths announce name, level and killer. Reaching level 20 announces '<name> achieved level 20'. The selected client renders class unlocks as local level-up overlays.",
         "differences": [
           "The Nexus-only proximity rule no longer restricts ordinary Realm and dungeon chat. Current-world, ignore, lifecycle and rate-limit guards remain. Strict Euclidean distance at the Nexus boundary remains reconstructed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/525",
           "Permanent-death notices use current-world system text after commit. Scope follows pinned community servers; an August 2012 screenshot corroborates wording and low-level notices: https://github.com/OpenRotMG/Open-RotMG-Server/pull/540",
-          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553"
+          "Client PR19 preserves the original chat star's authored 3-pixel vertical offset using a Flash-compatible graphic holder. Native evidence covers one prepared zero-star local-chat case, not complete chat or text-layout acceptance: https://github.com/OpenRotMG/Open-RotMG-Client/pull/19#issuecomment-6397192553",
+          "Level-20 notices follow the existing durable progress commit, once per transition. GDC Europe 2012 slide 54 corroborates the wording; compiled Kithio CheckLevelUp supplies current-world scope, which remains reconstructed rather than exact target-build audience proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1190",
+          "The selected client's language preference requires nonempty server cleanText, but current chat encoding supplies an empty string. Offensive-language filtering is not accepted as implemented; no historical vocabulary was recovered. Kithio's unchanged-text cleanText and the later 7.0 client are not substitutes for the target filter."
         ],
         "unknowns": [
-          "Original Nexus boundary metric, death-notice audience boundaries and killer grammar, other announcement text/audiences, enemy taunts and unlock notices; complete UI preference integration."
+          "Original Nexus boundary metric/equality, death-notice audience and general killer-article rule. GDC slide 54 shows 'a Knight of Oryx' and 'a Pet of Oryx', not an algorithm for every cause.",
+          "Exact 123.5.1 continuity and audiences for other announcements and per-enemy taunt text/timing. Kithio's compiled Taunt defaults to strict 15-tile proximity with an authored broadcast override; that does not establish the player-chat metric.",
+          "Historical filtering vocabulary/integration and complete native class-unlock overlay acceptance remain unresolved. Controls/display receipt e4d8ef46 covers bounded preference persistence and nearby speech-bubble Off/On, not every setting/platform or full Chat. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Whole-feature gameplay remains not-run; bounded receipts do not accept every lifecycle/ignore/death path."
         ],
         "sources": [
           {
@@ -6518,7 +6923,15 @@
           },
           {
             "url": "https://media.gdcvault.com/gdceurope2012/Presentations/Social%20%26%20Online%20Games%20Summit/Ethan_Levy_Social%26Online_GameDesignIs.pdf#page=54",
-            "label": "August 2012 GDC Europe screenshot: yellow name, level and killer death notices below level 20"
+            "label": "August 2012 GDC Europe slide 54: level-20 announcement, low-level death notices and two killer-article examples; predates 123.5.1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L185-L211",
+            "label": "Compiled Kithio CheckLevelUp: name achieved level 20, current-world audience; community reconstruction"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 2012 capture, page last updated 119.0.5: chat history, preferences and partial /help; earlier than target"
           }
         ]
       }
@@ -6531,10 +6944,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Private /tell to selected recipients across worlds and servers, sender echo, and native counterpart history/reply navigation. Build121 explicitly announces cross-server tells. Offline delivery and exact error/ignore policy remain unresolved.",
-        "differences": [],
+        "expected": "Addressed /tell or /t with sender echo. The selected client records incoming senders and outgoing recipients, excluding guild chat and consecutive duplicates; Tab and Shift+Tab navigate a clamped counterpart history that resets with a new TextBox. The January 10, 2012 Build 121 announcement explicitly enables tells across servers; June 12 Build 123.3 extends /ignore to private Guild Hall/Vault occupants.",
+        "differences": [
+          "Current routing spans worlds within one server process, not independent server processes. Offline targets error; ignored recipients receive nothing while the sender retains its echo. These are current reconstruction policies, not fully established original-server rules."
+        ],
         "unknowns": [
-          "Original cross-server routing, offline errors, ignore rules and recipient history."
+          "Original relay internals, offline queuing/error wording and exact ignore feedback remain unresolved in server issue905. Source agreement alone does not establish historical or whole-feature gameplay acceptance."
         ],
         "sources": [
           {
@@ -6543,7 +6958,23 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "label": "Build 121.0.0 release-note transcription, not independent of the original announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/commands/WorldCommand.cs#L130-L187",
+            "label": "Compiled Kithio TellCommand: online named recipients, sender echo and refusal; comparator, not original-server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TextBox.as#L174-L197",
+            "label": "Modified 7.0 counterpart-history comparison; selected SWF checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134508id_/http://forums.wildshadow.com/node/29614",
+            "label": "January 10, 2012 Build 121 announcement: tells across all servers"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 Build 123.3 announcement: ignore private-area occupants"
           }
         ]
       }
@@ -6556,20 +6987,29 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Current members exchange /g or /guild messages; production122 also documents guild sign-on notices.",
+        "expected": "Every guild rank can exchange green, guild-only /g and /guild messages across servers. Build122 adds guild-member sign-on notices.",
         "differences": [],
         "unknowns": [
-          "Original cross-server routing and notice frequency.",
-          "Which ignored messages or member states prevent guild chat?"
+          "Original distributed routing implementation and exact sign-on/reconnect frequency. Current routing crosses worlds in one process; later modified7.0 uses InterServer and a1800-second LastSeen threshold, not established target rules.",
+          "Original ignore and unavailable-member exceptions. Current message recipients exclude accounts ignoring the sender; guild notices do not use that filter. Dead/departing/quarantined participants cannot chat; Paused alone is not prohibited.",
+          "Cold sign-on, membership revocation during chat and terminal-member native journeys remain unverified; prepared membership is not earned guild creation or invitation acceptance. See server issue906."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 Wild Shadow capture: all ranks, both aliases, green guild-only cross-server chat; four-rank text omits build122 Founder correction"
           },
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
+            "url": "https://web.archive.org/web/20120216201111id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 build122 announcement, captured February16: guild-member sign-on notification, no frequency specified"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ChatManager.cs",
+            "label": "Modified7.0 comparator: InterServer guild-ID routing, message ignore filter and separate announcements; not original server proof"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/realm/ConnectManager.cs#L301-L309",
+            "label": "Modified7.0 comparator:1800-second LastSeen sign-on threshold, not established target frequency"
           }
         ]
       }
@@ -6585,10 +7025,15 @@
         "expected": "Players request a trade, receive a private chat confirmation, offer eligible inventory, accept both offers or cancel. Space and eligibility failures must be shown. Changed offers invalidate earlier acceptance; settlement must not duplicate or lose items. The server settling interval follows pause-aware elapsed time, not world tick counts.",
         "differences": [
           "The current server retains a 3000ms pause-excluding stable-offer interval, while the selected client counts 2999ms. Bots also retain their original tick-based minimum.",
-          "Server PR427 removes the 2-tile limit on same-world player trades: requests resolve by name in the world, and distance no longer interrupts an open trade. This follows the 2013 community trade handler, not a recovered 123.5.1 distance rule: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427"
+          "Server PR427 removes the 2-tile limit on same-world player trades. Kithio and the related July 2013 Trapped handler resolve names within a world without a distance gate; February/June 2012 Trade System captures say 10 tiles, while the July 2011 test117.5 guide says 15. Exact 123.5.1 distance remains unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/427",
+          "Current ordinary guests can trade and targets match exact-case names. The 2012 guide prohibits guest/unnamed trading; compiled Kithio requires NameChosen on both sides and matches case-insensitively. No star/guild-rank gate appears in its request path or the selected client Trade menu, which does not establish original server permissions.",
+          "Current request expiry silently uses 20000 simulation milliseconds (400 steps), separate from the elapsed stable-offer guard. Kithio subtracts elapsed tick deltas from a 20000ms request counter and sends a timeout notice. Neither establishes the original production expiry contract.",
+          "Current settlement places received goods only in backpack slots. The June 2012 guide and Kithio comparator describe compatible empty equipment slots being filled automatically. No auto-equip or safety-policy change is made by this research."
         ],
         "unknowns": [
-          "Original server-side name/rank restrictions, distance, request timeout, item eligibility, confirmation delay and exact requester-confirmation wording."
+          "Exact 123.5.1 account/name/rank gates, case matching and distance; period guides and community reconstruction do not resolve target continuity.",
+          "Original request expiry clock/notice, complete server-side item eligibility and automatic equipment placement.",
+          "Original server settling enforcement and exact requester wording. Selected client countdown is confirmed as 2999ms using getTimer(); current 3000ms enforcement and Kithio requester text remain reconstruction choices."
         ],
         "sources": [
           {
@@ -6606,6 +7051,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
             "label": "Compiled Kithio reconstruction: separate requester chat confirmation after recipient notification; not official server wording"
+          },
+          {
+            "url": "https://web.archive.org/web/20120216040435id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "February 2012 capture: 10-tile initiation, named accounts and renewed approval, not exact target continuity"
+          },
+          {
+            "url": "https://web.archive.org/web/20120608005457id_/http://forums.wildshadow.com/wiki/realm-mad-god/trade-system",
+            "label": "June 2012 capture additionally describes overflow refusal and automatic equipment placement"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build117.5",
+            "label": "July 2011 test-build guide: 15 tiles, not a 123.5.1 distance specification"
           }
         ]
       }
@@ -6618,15 +7075,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based lock/unlock list 0 and persisted loading; nearby panel prioritizes locked players and exempts them from ordinary distance cutoff. No global/offline tracking requirement established.",
+        "expected": "Account-based lock/unlock list 0 and persisted loading. The selected client displays six peers, sorted by lock descending, distance ascending, then object ID; unlocked peers beyond 50 tiles are omitted. Locks bypass that cutoff only for peers in the current map, not offline/global tracking.",
         "differences": [],
         "unknowns": [
-          "Original list limit and retention, and nearby-panel ordering across reconnects and characters."
+          "Original saved-list capacity, eviction and retention across sessions/characters are unresolved. Six displayed slots are not a saved-list cap; Kithio's cap sketch is commented out and its handler is a no-op. The current wiki's 50-entry/oldest-eviction claim is undated. See server issue908.",
+          "Native death-to-Continue-to-replacement panel ordering, six-slot saturation and equal-distance ties are not executed; the account-storage regression is not native replacement acceptance."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Pinned selected-client party sorting and account-keyed locks"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build100",
+            "label": "Build100 test-context party description, not saved-list retention proof"
           }
         ]
       }
@@ -6639,15 +7105,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Account-based ignore/unignore list1, persistent loading and chat suppression. Period announcement explicitly permits ignoring players in private guild hall/vault; exact channel/interaction coverage unresolved.",
-        "differences": [],
+        "expected": "Selected123.5.1 client stores ignored account IDs in list1 and describes /ignore as chat suppression. June12,2012 Build123.3 announcement explicitly permits private Guild Hall/Vault targets. The six-member client constant limits the party panel, not the ignore dictionary.",
+        "differences": [
+          "Current server suppresses public/yell/tell/guild chat and guild invitations from ignored senders, but not trade requests. Selected client trade/invite handlers do not filter ignores; this does not establish original server policy."
+        ],
         "unknowns": [
-          "Original list cap, offline targeting details and effects on trade/invites versus chat-only suppression."
+          "Original numeric ignore cap and offline targeting policy remain unresolved. Kithio's six-entry editor is commented out and its registered packet handler is a TODO; Trapped's active six-entry editor is a later comparator, not target-era proof.",
+          "Named whispers, guild invitations and Guild Hall targeting still need bounded native verification. Public/yell/guild suppression, private Vault targeting, trade cancellation and reconnect are bounded prepared checks, not whole-feature acceptance."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build123.3.0",
-            "label": "Build 123.3.0 release notes"
+            "url": "https://web.archive.org/web/20130605124251id_/https://forums.wildshadow.com/node/100145",
+            "label": "Willem's June12,2012 Build123.3 announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/_ez.as",
+            "label": "Selected client account dictionaries and visible party limit"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/objects/Party.as",
+            "label": "Modified7.0 account-list comparator, not target-era authority"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -6664,12 +7141,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Eligible same-map player teleporting, including Ocean Trench; paused/invisible targets rejected and rejection must not activate cooldown. Exact target successful cooldown and landing policy remain unresolved.",
+        "expected": "Eligible same-map player teleporting, including Ocean Trench. Selected 123.5.1 client uses a 10000ms cooldown after dispatch and rejects paused/invisible targets before dispatch or cooldown. Current server lands at the target's current valid position; this is reconstruction, not authenticated original landing policy.",
         "differences": [],
         "unknowns": [
-          "Original successful-teleport cooldown, landing offset, world restrictions and race handling.",
+          "Selected client establishes a ten-second dispatch cooldown, not the original server's independent successful/rejected-request timing, landing offset, world restrictions or race handling.",
           "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
-          "Whether the original server also rejected direct requests targeting invisible players."
+          "Build 123.0.0 notes (April 23, 2012 Japanese date) say invisible-Rogue attempts never activate cooldown; the selected client achieves this before dispatch. Original direct-packet rejection remains unverified. Kithio charges cooldown before target lookup; modified 7.0 rejects invisible/paused targets first, so comparator policies are not interchangeable."
         ],
         "sources": [
           {
@@ -6695,6 +7172,18 @@
           {
             "url": "https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=299",
             "label": "Old trading at 4:59.4: Nexus Teleport menu and visible 123.0.0 build; May 2013 upload, uncertain capture date, no successful teleport shown"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as#L228-L263",
+            "label": "Selected-client source: 10000ms dispatch cooldown; paused/invisible refusal precedes dispatch and timer assignment"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/questions/52946/is-teleporting-possible/52947#52947",
+            "label": "March 1, 2012 answer: chat/name/minimap teleport and a short cooldown; exact ten-second answer on this page is June 4, 2015, not 2012"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat",
+            "label": "April 2012 guide: wait for dungeon rushers, then teleport in Lair/Sprite/Abyss/Trench; no exact cooldown or landing offset"
           }
         ]
       }
@@ -6708,9 +7197,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Register creation costs1000 personal Fame; creator becomes Founder; maximum50 account members. Invitation acceptance joins named guild. Selected UI permits20 ASCII letters/spaces.",
-        "differences": [],
+        "differences": [
+          "Whitespace collapse/trim, ASCII-case-insensitive uniqueness and last-member deletion/name reuse are reconstruction supported by later server comparators, not recovered original server rules."
+        ],
         "unknowns": [
-          "Original name normalization, uniqueness, one-star/chosen-name eligibility, dissolution and name reuse."
+          "Exact target production normalization, case/error order, chosen-name/one-star enforcement and dissolution/name reuse remain unresolved in server issue911.",
+          "Native unnamed/zero-star guild refusal,50-member boundary and dissolution/name-reuse journeys remain unexecuted."
         ],
         "sources": [
           {
@@ -6724,6 +7216,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528161500id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "May2012 guide: unique names, Founder, Accept and Register renunciation"
           }
         ]
       }
@@ -6736,16 +7232,26 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client Accept/Reject panel lasts20seconds.",
-        "differences": [],
+        "expected": "Officer+ invitations identify inviter/guild; accepting joins that guild. Officer+ removes strictly lower ranks; voluntary self-renunciation supported. Client panel lasts20seconds; Reject/timeout close it locally without a rejection packet.",
+        "differences": [
+          "Current same-world/known/20-tile guard,60-second server lifetime and acceptance-time inviter-authority recheck are reconstruction policies, not recovered original numbers."
+        ],
         "unknowns": [
-          "Original invitation expiry and distance limits; the client’s 20-second panel does not establish server expiry.",
-          "Rejection, replacement and inviter-departure behavior."
+          "Original server invitation expiry and exact distance; the February17,2012 guide says nearby but supplies no number.",
+          "Original server replacement and inviter-departure semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120217160934id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "February17,2012 capture: nearby invites, Accept, Chronicle removal and renunciation; stale four-rank paragraph"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/panels/GuildInvitePanel.as",
+            "label": "Modified7.0 comparator:20-second panel and local Reject; not original server expiry"
           }
         ]
       }
@@ -6761,7 +7267,7 @@
         "expected": "Ranks0/10/20/30/40. Officer changes0↔10; Leader changes lower targets up to30; Founder changes non-Founders up to30. No change to same rank or promotion to Founder. Removal requires Officer+ and strictly lower target.",
         "differences": [],
         "unknowns": [
-          "Original Founder succession and behavior of guilds without a Founder."
+          "A May 6, 2012 player experiment supports no automatic Founder succession, Leader-managed founderless guilds and a former Founder rejoining as Initiate. Exact 123.5.1 continuity and original behavior when no Leader remains are unconfirmed; tracked in server issue913."
         ],
         "sources": [
           {
@@ -6771,6 +7277,10 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
             "label": "Build 122.0.1 release notes"
+          },
+          {
+            "url": "https://anticosmic.blogspot.com/2012/05/founderless-guild.html",
+            "label": "May 6, 2012 player experiment: Founder leaves, Leader remains, former Founder rejoins as Initiate"
           }
         ]
       }
@@ -6783,10 +7293,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Members read guild-shared text; Officer+ edits with Save/Cancel and returned saved text through authenticated requests. No historical numeric cap established.",
-        "differences": [],
+        "expected": "Members read guild-shared text; Officer+ edits. Selected123.5.1 Save posts complete text and displays the returned body; Cancel restores cached text without saving. No original server cap or conflict rule established.",
+        "differences": [
+          "Current4096-UTF16-unit cap, control-character rejection, verbatim allowed-text storage and transactional last-writer-wins are reconstruction/safety policies, not recovered2012 server rules. The later7.0 comparator additionally URL-decodes parsed form text; its corruption of literal plus/percent data is not imported."
+        ],
         "unknowns": [
-          "Original text length, normalization and simultaneous-edit behavior."
+          "Original server length cap, Unicode/newline normalization or filtering, and simultaneous-save policy remain unresolved in server issue914. Client text has CR line separators and no explicit maxChars or revision token; that does not establish server behavior."
         ],
         "sources": [
           {
@@ -6811,8 +7323,8 @@
         "expected": "Guild Chronicle lists the guild name, current Guild Fame, member names/ranks/contribution Fame and open slots up to 50 members. Authorized rank/removal actions refresh the screen after success.",
         "differences": [],
         "unknowns": [
-          "Historical ordering, pagination and departed/rejoined contribution handling.",
-          "No established online/last-seen/class/location requirement."
+          "Selected client requests all 50 members at offset 0, scrolls received order and reloads after successful rank/removal actions. Exact original server ordering/tie-break and departed/rejoined contribution retention remain unresolved in issue915; modified7.0 is comparator evidence, not original-service proof.",
+          "No online/last-seen/class/location field is consumed by the selected Chronicle classes. Native full-capacity scrolling, nonzero death contribution and removed-member rejoin journeys are not yet accepted."
         ],
         "sources": [
           {
@@ -6830,21 +7342,61 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Guild-shared hall with membership-gated access, Board/Chronicle and Leader+ Guild-Fame upgrade merchant. Selected binary has upgrade prices10000/100000/250000. Exact deployed target layouts/facilities remain unresolved.",
-        "differences": [],
+        "expected": "Guild-shared membership-gated hall, Board/Chronicle and Leader+ Guild-Fame upgrades. Selected 123.5.1 prices are 10,000/100,000/250,000, with replacement after an empty interval. Guill (May 2017) and Pet Yard/Quest Room/Wardrobe access (February 2017) are later additions, not target facilities.",
+        "differences": [
+          "The four attributed realm-src maps are candidates, not authenticated 123.5.1 layouts. Current teleport restriction agrees with modified 7.0 realm-src, but 2013 Trapped enables teleports and hardcodes ghall3. The five-minute, transfer-grant-aware replacement policy is this server's reconstruction; realm-src replaces an empty hall immediately. See server issue916."
+        ],
         "unknowns": [
-          "Exact original hall layouts, facilities and teleport policy.",
-          "Whether the listed 10,000/100,000/250,000 upgrade prices were used in production.",
-          "Whether Guill, a shared bank or other later hall facilities existed at this build."
+          "Exact original four layouts, all facilities and hall teleport policy. Conflicting community implementations do not establish production behavior.",
+          "Independent target-era confirmation of the third 250,000 production price. Revision1 of the March29,2012 Arqade answer reports 10,000/100,000; selected definitions establish all three intended prices. February2012 test notes explicitly reduce prices to 100/1,000/2,500 for testing only.",
+          "No checked target definition or period guide establishes a shared item bank; this is not proof of historical absence. Whole-feature native acceptance, higher-tier hall transitions and earned progression remain separate from first-upgrade/revocation checks in issue916. Board/Chronicle journeys are separately tracked in issues914/915."
         ],
         "sources": [
           {
-            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
-            "label": "Build 122.0.1 release notes"
-          },
-          {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/GuildMerchant.as",
+            "label": "Selected GuildMerchant: XML price, Guild Fame currency and rank requirement"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124909id_/http://forums.wildshadow.com/node/41768",
+            "label": "February13,2012 Build122 announcement: Founder authority and Guild Fame hall spending"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/test/build121.5.2#guildfame",
+            "label": "February2012 test announcement: explicitly reduced test-only upgrade prices"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/revisions/59804/1",
+            "label": "March29,2012 original answer revision: 10,000/100,000 upgrades and Board/Chronicle facilities, verified via revisions API"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/GuildHall.jw",
+            "label": "Modified 7.0 comparator: four candidate maps and restrictTp=true, not target provenance"
+          },
+          {
+            "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/GuildHall.cs",
+            "label": "2013 comparator: AllowTeleport=true and fixed ghall3, conflicts with modified 7.0"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/release-history-2017#patch-27-7-x14",
+            "label": "2017 patch notes: February28 convenience portals and May18 introduction of Guill"
+          }
+        ],
+        "checks": [
+          {
+            "id": "social:guild-hall:shared-access-and-first-upgrade",
+            "name": "Shared access, first upgrade and revocation",
+            "group": "admission",
+            "implementation": "present",
+            "historical": "partial",
+            "expected": "Two members share a membership-gated hall. A permitted upgrade spends Guild Fame once, retains the occupied hall and appears after idle reclamation. Removal revokes access.",
+            "acceptance": "Observe both native members, nonmember/rank/funds refusals, first purchase and duplicate refusal, occupied reentry, idle level2 replacement and cancelled/confirmed removal. Preserve living identities, inventory and personal Fame.",
+            "differences": [],
+            "unknowns": ["Exact original layout, teleport and replacement policies remain unresolved in the parent feature. Prepared membership/Fame do not establish earned progression or higher-tier native transitions."],
+            "sources": []
           }
         ]
       }
@@ -6857,15 +7409,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Recovered panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses 50-unit ordinary cutoff and 500ms refresh. Exact original replication/bag policy unresolved.",
-        "differences": [],
+        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Selected panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses a 50-unit ordinary cutoff and 500ms refresh. Compiled Kithio retains whole-world player identity, nearby ordinary entities and account-filtered bags; packet and rendered audiences differ.",
+        "differences": [
+          "Current reconstruction uses 20-unit ordinary visibility and ally-shot range, 50ms simulation and nominal 100ms NEW_TICK. Kithio uses radius15, ally shots within25 and default20 TPS; related Trapped declares30 TPS. These are comparator differences, not authenticated original-server defects."
+        ],
         "unknowns": [
-          "Original replication timing and radius, audiences for attacks/enemies/drops, and behavior under latency or departure."
+          "Original production replication cadence/radii and delayed-packet/departure ordering; numeric comparator policies are not original measurements.",
+          "Target-build continuity of January2012 private-drop/public-redrop evidence and exact original bag attribution/expiry policy remain unresolved. See issue917 and loot issue878."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Update.cs",
+            "label": "Compiled Kithio player/entity/container replication comparator"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: same-map player markers and public dropped items"
+          },
+          {
+            "url": "https://www.eurobricks.com/forum/forums/topic/64657-realm-of-the-mad-god/?do=findComment&comment=1169753",
+            "label": "January12,2012 discussion quoting owner-only Soulbound loot visibility"
           }
         ]
       }
@@ -6879,12 +7446,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The recovered 123.5.1 client opens to character selection and supports entering the game.",
-        "differences": [],
-        "unknowns": [],
+        "differences": [
+          "Map-editor JSON and direct debug-world entry are unsupported. The public pixel-art maker is a separate feature."
+        ],
+        "unknowns": [
+          "The recovered client hides its map editor without an Admin flag; original 123.5.1 server enforcement and exceptional debug-world access remain unverified. See server issue 918."
+        ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_C_Q_.as#L56-L59",
+            "label": "Recovered-source map-editor Admin menu gate; not original-server permission proof"
           }
         ]
       }
@@ -6900,12 +7475,32 @@
         "expected": "A locally retained guest identity loads saved progress and can be converted to a registered account without replacing that progress.",
         "differences": [],
         "unknowns": [
-          "Original guest expiry and retention policy."
+          "Original 123.5.1 server-side inactivity/expiry/deletion schedule and retention guarantees remain unverified. The selected client retains a local GUID, not an expiry policy. The secondary build124.0 close-game loss report concerns the following release; whether it describes identity replacement or server deletion is unresolved. Research disposition: server issue919; gameplay receipts remain bound to their original revisions."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/db/Database.cs",
+            "label": "Compiled Kithio Database: UUID/password lookup and guest registration, not original retention policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/web/WebAccount.as",
+            "label": "Modified7.0 client: OSRotMG identity storage, not independent 2012 authority"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: leave/return, cookie loss and registration; no server expiry duration"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=76",
+            "label": "April18,2012 00:25:36 Bahamut reply: cookie-dependent guest access and registration advice"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build124.0",
+            "label": "Secondary October5,2012 build124.0 report: guest retention changed after123.5.1; note addition date unverified"
           }
         ]
       }
@@ -6918,15 +7513,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity.",
-        "differences": [],
+        "expected": "Registering the current guest with email and password preserves its progress. A rejected registration must not replace the guest identity. Account verify authenticates the new credentials; it is not email confirmation.",
+        "differences": [
+          "Current registration sends no automatic email; PR745 requires an explicit authenticated send. March/October 2012 guide revisions describe an initial email after registration, but exact 123.5.1 continuity is unresolved."
+        ],
         "unknowns": [
-          "Original initial verification-email and confirmation policy."
+          "Exact 123.5.1 initial-send, retry and delivery rules, and external confirmation/token/challenge policy; precise remainder tracked in server issue920."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 guide revision: initial email, link confirmation and apparently retained unconfirmed accounts; not original server internals"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=7&action=source",
+            "label": "October 9, 2012 revision retains those passages; not proof of exact selected-build continuity"
           }
         ]
       }
@@ -6939,15 +7544,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Authenticate registered email/password, load existing account progress, reject invalid credentials. Account verify is credential authentication, not email verification; logout returns to fresh guest identity.",
-        "differences": [],
+        "expected": "Authenticate registered email/password, load existing account progress, reject invalid credentials. Account verify is credential authentication, not email verification; logout clears saved credentials and returns to a fresh guest identity. Registered progress is accessible from another computer.",
+        "differences": [
+          "Current Argon2 authentication and shared 20-requests/minute IP admission are modern policy, not recovered original failed-password lockout rules. One active avatar per account remains an ownership invariant."
+        ],
         "unknowns": [
-          "Original logout, cross-device entry, concurrent sessions and lockout behavior."
+          "Exact 123.5.1 same-account concurrent-session refusal/takeover and disconnect-grace policy; Kithio refuses a second connection but is not independent production evidence.",
+          "Original failed-login threshold, account/IP scope and lockout duration. An undated MPGH five-attempt/half-hour search lead was not authenticated; later Steam/Exalt reports do not establish 123.5.1 policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ capture: registered cross-computer saves and explicit credential-clearing logout; earlier than target"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=76",
+            "label": "April 18, 2012 00:25 reply: browser log out/register and two DIFFERENT accounts; not same-account concurrency"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/account/verify.cs",
+            "label": "Compiled Kithio verify handler: credentials to Account/Error, not email confirmation"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/RealmManager.cs#L64-L74",
+            "label": "Kithio TryConnect: AccountId-keyed TryAdd refuses concurrent ownership; disconnect removes the key"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/web/commands/WebLogoutCommand.as",
+            "label": "Modified 7.0 logout comparator clears credentials and invalidates selection; not 2012 proof"
           }
         ]
       }
@@ -6960,18 +7588,35 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved. The immediate Sent label does not establish delivery.",
         "differences": [
-          "Uses modern 24-hour single-use confirmation links and bounded explicit email requests; original token, initial-send and delivery policies are not recovered."
+          "Uses modern 24-hour single-use hashed links, bounded explicit sends and an explicit browser confirmation button; registration sends no automatic email. Period guide describes an initial email and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
-          "Target external confirmation endpoint/token lifecycle.",
-          "Initial email trigger and delivery rules."
+          "Exact 123.5.1 external endpoint/parameters and token generation, expiry, replacement/replay and challenge rules. Retained older guide images show realmofthemadgod.appspot.com/account/v, but their attachment timestamps do not prove target-build continuity; tracked in server issue922.",
+          "Exact target initial-send, queue/retry, throttling and delivery rules and continuity of the period guide observations; tracked in server issue920 and issue922. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement.",
+          "CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions; target challenge policy remains unresolved."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=6&action=source",
+            "label": "March 22, 2012 revision: initial email, link-only confirmation and apparently playable unconfirmed accounts"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=11&action=source",
+            "label": "September 10, 2016 revision adds CAPTCHA; do not backdate current-page wording or attachment dates"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アカウント登録",
+            "label": "Retained email/Account verified images show older /account/v endpoint; mixed-era page and 2010 attachment timestamps do not date target server policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20130923115857id_/http://community.kabam.com/forums/showthread.php?201428-Email-Verification-Now-Required!-Read-Me!",
+            "label": "Original September 16, 2013 Kabam announcement: mandatory verification, replacement email and link confirmation; later than target"
           }
         ]
       }
@@ -6989,12 +7634,17 @@
           "Email and Discord recovery use expiring, single-use reset links instead of emailing a password. Discord recovery still requires an explicit account link."
         ],
         "unknowns": [
-          "Original password regeneration and invalidation, and recovery-email delivery."
+          "Exact original password generation, old-password/session invalidation timing and target-build email delivery.",
+          "Continuity from the July 2012 support translation to 123.5.1, and whether self-service email change existed. The period guide documents newly emailed passwords and contacting support from the old address; a later 2013 API catalogue links an unreadable email-change thread."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120716020422id_/http://wikiwiki.jp/rmd/?Customer%20Support#support5-1",
+            "label": "July 16, 2012 support translation: newly emailed password and support-mediated email change"
           }
         ]
       }
@@ -7008,14 +7658,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Authenticated current-password/new-password change preserves account identity; rejected changes leave credentials intact. This does not imply self-service email change.",
-        "differences": [],
+        "differences": [
+          "Serialized authentication, active/pending/fenced ownership refusal, atomic Argon2 replacement and pending-grant revocation are deliberate modern safety policy, not recovered original-server behavior."
+        ],
         "unknowns": [
-          "Historical session invalidation and concurrent change policy."
+          "Original123.5.1 server session-invalidation timing and concurrent-change winner/refusal policy remain unresolved. Selected client, related private servers, the2013 API catalogue, undated support mirror and January14,2012 FAQ do not establish those internals; see server issue925."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_Q_A_/_ag.as",
+            "label": "Pinned selected-era password form comparator, not original-server session policy"
           }
         ]
       }
@@ -7028,15 +7684,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A saved living character retains its class, experience, level, equipment, permanent stats, appearance and records. Original save timing and entry HP/MP rules remain unresolved.",
+        "expected": "A saved living character retains its class, experience, level, equipment, permanent stats, appearance and records. Current reconstruction restores saved HP/MP without a full refill; original save cadence, crash boundaries and entry normalization remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original save cadence, crash boundaries and entry HP/MP normalization."
+          "Exact 123.5.1 autosave cadence and crash-loss boundaries; inspected community schedules are not original-server evidence.",
+          "Target-build entry HP/MP normalization; community comparators restore stored values, but period documentation gives no rule."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L167-L186",
+            "label": "Compiled Kithio snapshot and saved-vitals reconstruction, not official source"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ: autosave and return retention; no numeric schedule"
           }
         ]
       }
@@ -7049,16 +7714,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "List and select living characters, create within capacity, and buy additional slots at the advertised price. Change Characters returns to selection while preserving the living character. Original starting capacity, maximum slots and prices remain unresolved.",
-        "differences": [],
+        "expected": "List/select living saves, create within capacity, and buy additional slots at the advertised Gold price. The selected client consumes server capacity/price and sends credentials without an expected quote. Change Characters returns to selection without death; March29,2012 describes the Nexus statue workflow.",
+        "differences": [
+          "Retained PR154 reconstruction starts with1 slot, caps at14, and prices additional slots600/800/1000 Gold. The cap retains a1000 quote but rejects purchase. Atomic purchase receipts, successful-timer replay refusal and ownership/session fences are modern safeguards; distinct timers use current durable prices, not stale displayed quotes."
+        ],
         "unknowns": [
-          "Original initial capacity, maximum and complete pricing schedule.",
-          "In-world character-switching persistence timing."
+          "Independently dated complete123.5.1 initial-capacity/cap/tier/sale schedule. November5,2011 describes one free slot and600 currently/usually1000; the mutable Japanese August4,2012 package section values two slots600+800 and names cap14. Neither proves target continuity; dated-backup requests returned403. Compiled Kithio's flat100 and modified7.0's Fame branch are customized comparators, not target policy.",
+          "Original disconnect/autosave flush, ACK and crash-durability timing. Selected Change dispatches COMPLETE, not an explicit save/death packet. Modern committed departure and tested reconnect behavior do not recover the original server's durability semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/59796",
+            "label": "March29,2012 statue-to-selection answer; later2015 Options answer is separate"
+          },
+          {
+            "url": "https://gamingwithme.wordpress.com/2011/11/05/realm-of-the-mad-god-permadeath-mmo/",
+            "label": "November5,2011 one-free-slot and600 currently/usually1000 description, not target price continuity"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/課金について#biginners",
+            "label": "Mutable guide's August4,2012 offer:600+800 slot valuation and cap14; not independently dated full target schedule"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/account/purchaseCharSlot.cs#L34-L51",
+            "label": "Compiled primary comparator charges100 with no inspected cap; not target economic policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as#L37-L62",
+            "label": "Modified7.0 request/retry/model update; customized Fame branch is not123.5.1 authority"
           }
         ]
       }
@@ -7074,12 +7761,28 @@
         "expected": "The native client asks for confirmation before deleting the named character, supports cancellation, and reports success or failure.",
         "differences": [],
         "unknowns": [
-          "Original repeated-deletion, active-character and death/Fame-record policies."
+          "Original 123.5.1 retry/idempotence responses, active-session enforcement and deleted-character/death/Fame storage/retention remain unresolved. Kithio rejects absent rows without an active-session guard in its handler; modified 7.0 locks the account but reports success without checking row existence. These are reconstruction comparators, not recovered original policy. January 6, 2012 FAQ supports slot release only; its no-Fame anti-cheat erasure paragraph does not describe ordinary deletion."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/char/delete.cs",
+            "label": "Compiled/routed Kithio deletion comparator; account-scoped hard deletion, absent-row error, no death/Fame award"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/characters/deletion/service/DeleteCharacterTask.as",
+            "label": "Modified 7.0 client: credentials, charId/reason, two retries, success-only model update; not 123.5.1 policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/Database.cs#L970-L1025",
+            "label": "Modified 7.0 engine: unawaited deletion versus separate Death/Fame/Legends path; not original storage policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ: kill or delete to change class without another slot; earlier than target"
           }
         ]
       }
@@ -7092,14 +7795,30 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "The client lists advertised servers, locations, usage and restricted access, remembers a preference and selects an eligible server. Full/busy selection and admission are separate checks.",
+        "expected": "The client reads advertised server coordinates and access metadata, shows Normal/Crowded/Full, saves a preferred server and selects an eligible endpoint. Full-server selection and backend admission are separate checks.",
         "differences": [
           "Only one server endpoint is advertised; multi-region server selection is not implemented."
         ],
         "unknowns": [
-          "Original full/busy server presentation and region-specific server lists."
+          "Exact 123.5.1 production region roster, coordinates, capacities and original backend admission policy remain unverified. February 2012 server additions do not establish the later roster (#929)."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/Server.as",
+            "label": "123.5.1 comparator: Crowded >=0.66; Full >=1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_0M_L_.as",
+            "label": "123.5.1 comparator: saved preferred-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build120.0.3",
+            "label": "November 28, 2011 release notes: less-crowded nearest-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "February 20–25, 2012 additions: region names and title-screen selection"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -7118,9 +7837,13 @@
         "expected": "World transfers carry the character, destination and connection key; connection failures display an error rather than silently creating another character. Original key lifetime and death/transfer interactions remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original connection-key expiry, reuse and death/transfer race behavior."
+          "Original connection-key expiry, reuse and death/transfer race behavior. Current 120-second admission and 2400-tick grant expiry are reconstruction policy, not recovered original-server timing."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/_1f.as#L1207-L1210",
+            "label": "Recovered 123.5.1 reconnect character, destination and key continuity"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
@@ -7133,22 +7856,22 @@
             "expected": "The recovered local client warns at ten/fifteen minutes and exits at twenty; a matching original server AFK policy is not established.",
             "acceptance": "Check threshold boundaries and mouse/key resets, no duplicate warnings, then reconnect the same living character with unchanged inventory/progress.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Original-server AFK policy is not established; recovered client thresholds and existing native idle receipts are separate evidence."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_0H__.as","label":"Recovered 123.5.1 client idle thresholds and Stage input resets"}],
             "group": "behavior"
           },
           {
             "id": "access:world-loading-presentation",
             "name": "Destination loading and input release",
-            "expected": "Destination loading must survive initialization, then fade and stop consuming input when play is ready.",
+            "expected": "The recovered loader waits for initialization and five 200ms timer intervals, fades over 0.4 seconds, disables mouse input at fade start and removes itself on completion. Initialization may precede embedded movie readiness.",
             "acceptance": "Enter differently named worlds with fast/slow initialization; check correct destination, minimum display/fade, failed-load handling and no stale overlay. Do not fabricate missing animation frames.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": ["Exact native minimum-display/fade timing and terminal failed-load presentation need executed evidence, not just source constants or settled arrival screenshots."],
+            "sources": [{"url":"https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_02a.as","label":"Recovered loader readiness, timing, input release and removal"}],
             "group": "behavior"
           }
         ]
@@ -7160,17 +7883,52 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request.",
-        "differences": [],
+        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request. Preferences are local to the browser/profile and origin, not account-synced. Minimap zoom and explored terrain belong to the current map instance; they are not saved options.",
+        "differences": [
+          "The filter preference is saved, but current server text packets supply empty cleanText, so offensive-language filtering is not implemented end to end. This existing social:chat limitation is not a newly discovered regression: https://github.com/OpenRotMG/Open-RotMG-Server/issues/904"
+        ],
         "unknowns": [
-          "Original minimap zoom, marker and fog lifecycle, saved preferences and graphics behavior."
+          "Original server tile-reveal radius, wall/visibility policy and persistence across world sessions are not established by client bitmap code; the current radius-20/Snake Pit policy remains reconstruction. Original filtering vocabulary and rules are also unrecovered; Kithio's unchanged-text cleanText does not implement a filter.",
+          "Selected SWF and related community code establish rendering rules, not authenticated official provenance or original Flash/Ruffle equivalence. Period controls describe build119.0.5 or early123, not every123.5.1 option."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+            "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+            "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+            "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+            "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 14, 2012 capture, page explicitly last updated 119.0.5: options and zoom defaults"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/52728",
+            "label": "February 29, 2012 answer: enable rotation and choose 45 or 0 degrees (Q/E tentative)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+            "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/minimap/view/MiniMap.as",
+            "label": "Modified 7.0 minimap comparator: related zoom/bitmap design, not independent 2012 evidence"
           }
         ],
         "checks": [
@@ -7180,10 +7938,17 @@
             "expected": "Live vitals, effective maxima, signed modifiers, cap colors and stat hover text must agree with selected rendering rules.",
             "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Selected definitions and existing native receipts agree on cap/boost color priority; independent period observation of every signed/maxima case and original Flash equivalence remains absent."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/Stats.as",
+                "label": "Selected-era Stats: six stats, signed boosts and base-cap gold priority"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7192,10 +7957,21 @@
             "expected": "Overlapping markers must resolve to a usable group/menu with eligible teleport choices.",
             "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Related client code is not independent historical corroboration of all edge-overlap, lock/pause/Invisible permissions; retain existing cross-revision native passes without blanket historical acceptance."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+                "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0D_B_/_06M_.as",
+                "label": "Selected-era group menu: snapshot membership, map permission and first eligible teleport target"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7204,10 +7980,29 @@
             "expected": "Duplicate bindings, local persistence, tab-scoped reset, chat-focus gating and deactivation release are separate from saved preferences.",
             "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Build123 note corroborates an options/movement fix, not all duplicate-key, tab-reset or deactivation timing details across original Flash platforms."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+                "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+                "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+                "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+              },
+              {
+                "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+                "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+              }
+            ],
             "group": "behavior"
           }
         ]
@@ -7224,9 +8019,9 @@
         "expected": "Music, Sound Effects and Weapon Sounds each have a saved on/off toggle. The splash screen also has mute; no original volume sliders are established.",
         "differences": [],
         "unknowns": [
-          "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified.",
-          "Original server distance cutoff for damage sounds from quest targets outside local view."
+          "Original audio-corpus bytes and deployment provenance. The selected client requests sorc.mp3 at 0.3 gain; its preserved 7.0 copy is served unchanged. The modified Kithio mirror instead requests Menu2.mp3 at 0.65 and is not authoritative for this track.",
+          "Original availability of monster/tress_death and spell/heal_nova. Both are metadata-only in the selected client, not demonstrated missing playback triggers. All 149 statically client-resolvable paths are present; 176 of 178 total catalogued paths match the pinned preservation source and fully decode non-silent.",
+          "Complete native SFX event timing, including whether preloaded enter_realm and use_key were originally triggered by the server. Original server distance cutoff for damage sounds from quest targets outside local view remains unknown; the current strict 20-tile cutoff is an engineering locality policy."
         ],
         "sources": [
           {
@@ -7236,6 +8031,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Character.as",
             "label": "Selected-version Character.damage plays hurt/death audio without a distance check"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/web/music/sorc.mp3",
+            "label": "Preserved 7.0 comparator track, not authenticated original-host bytes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/sound/SoundEffectLibrary.as",
+            "label": "Modified 7.0 comparator separates SFX and weapon-sound selection"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 FAQ describes disabling music through Sound options; its Escape shortcut is not the selected client's O binding"
           }
         ]
       }
@@ -7248,15 +8055,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, retrieve a bitmap into the editor, and confirm owner deletion. Collected bitmaps can be downloaded as spritesheet.png. Recovery of the original hosted gallery is a separate question.",
-        "differences": [],
+        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, load a bitmap into the editor, and cancel or confirm owner deletion. In the selected client, collecting bitmaps and downloading spritesheet.png require the gallery Admin flag; ordinary owners receive deletion controls, not collection controls.",
+        "differences": [
+          "Only locally saved art is available; the original player and Wild Shadow corpus has not been recovered.",
+          "The local API does not issue gallery Admin. Bitmap collection/export is therefore not reachable through ordinary accounts, and no native administrative export acceptance is recorded.",
+          "Reconstruction orders by descending creation ID, even after overwrite. A mixed-era Japanese guide describes ID ordering for tagged searches and newest-update ordering otherwise; its exact target-era applicability remains unresolved."
+        ],
         "unknowns": [
-          "Original corpus, ordering/retention and historical authorization policy."
+          "Original corpus recovery, retention/moderation policy, target-era ordering and backend administrator authorization remain unresolved. Client Mine/Admin affordances do not establish original server enforcement.",
+          "The requested pre-2013 Japanese guide capture redirects to April 29, 2017 (page modified April 17, 2017). Its later login/save warning and ordering text are not automatically 123.5.1 policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_0w.as",
+            "label": "Selected client thumbnail: Mine deletion versus Admin collection and ID copying"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_in.as",
+            "label": "Selected client filters, 24-item pagination, confirmation and admin spritesheet download"
+          },
+          {
+            "url": "https://web.archive.org/web/20170429175439id_/http://wikiwiki.jp/rmd/?Pixel%20Editor",
+            "label": "April 2017 capture of mixed-era guide; ordering and ownership observations are not target-dated"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Design%20Next%20Dungeon%20Art",
+            "label": "December 19, 2012 guide links Production Draw and comma-separated submission tags; not an original corpus"
           }
         ]
       }
@@ -7290,10 +8118,13 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Quiet has a synchronized condition state. Mana depletion and natural-regeneration suppression are comparator-supported working rules; exact target potion/aura and ability exceptions remain unresolved.",
-        "differences": [],
+        "expected": "Quiet drains MP, suppresses natural MP regeneration and refuses equipped abilities. Magic/MagicNova still consume but cannot grant MP to Quiet recipients; curing or expiry permits recovery. These are tested reconstruction rules, not exact original-server acceptance.",
+        "differences": [
+          "Existing authority policy drains immediately and suppresses committed mana grants. Kithio grants Magic/MagicNova mana before its next Quiet drain tick. Our max-deadline reapplication differs from its direct duration replacement; no gameplay change is made in issue935."
+        ],
         "unknowns": [
-          "Target potion/MagicNova handling, zero-cost ability acceptance, drain cadence and reapplication/cure policy."
+          "Exact123.5.1 sub-tick drain/transient grants, shorter reapplication and cure timing, and original aura range/recipient exceptions remain historical questions in issue935. Selected definitions contain108 equipped abilities, none zero-cost; client cost checks do not prove a hypothetical zero-cost server exception.",
+          "Native Priest Purification of Quiet, active-Quiet world transfer and death/replacement boundaries are not covered by the new Quiet journey. Existing zero-damage hit/duplicate ACK, recovery, potion and group-recipient regressions and prior Sprite God expiry evidence remain separately scoped."
         ],
         "sources": [
           {
@@ -7303,6 +8134,18 @@
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
             "label": "Community server comparison: rotmg_svr (2013)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs",
+            "label": "Compiled Kithio comparison: potion/nova grants and Quiet cleanse list"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/Entity.cs",
+            "label": "Kithio engine: replacement durations and zero-duration cure"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528162648id_/http://forums.wildshadow.com/wiki/realm-mad-god/sprite-god",
+            "label": "May28,2012 capture: zero-damage boomerang inflicts Quiet for ten seconds"
           }
         ]
       }
@@ -7315,15 +8158,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Normal weapon damage uses multiplier 0.5 while Weak, irrespective of Attack; Weak overrides Damaging. Ability-Shoot damage must be distinguished from normal weapon damage.",
-        "differences": [],
+        "expected": "Weak fixes normal weapon damage at 0.5 times the base RNG draw, irrespective of Attack, before defense. It overrides Damaging. Selected 123.5.1 truncates the multiplied draw to int; ability-Shoot uses multiplier 1. Arachna projectile1 applies Weak for 5000ms; Holy Water cleanses it without clearing Damaging.",
+        "differences": [
+          "Kithio's compiled multiplier checks Paralyzed instead of Weak and scales Shoot/BulletNova with Attack and Damaging, conflicting with selected client weapon/Shoot paths. Current Rust retains the later reapplication deadline; Kithio replaces the duration. Neither comparator policy proves original server behavior."
+        ],
         "unknowns": [
-          "Complete historical authoritative rounding, non-weapon damage and cure/reapplication semantics."
+          "Original authoritative rounding versus selected-client prediction, non-Shoot ability scaling (especially BulletNova), shorter/longer reapplication and same-tick cleanse ordering, and transfer/reconnect/death retention remain unresolved under server issue936."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Selected 123.5.1 Player: Weak precedence, Shoot separation and integer damage"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114013804id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "January 14, 2012 capture: Weak sets Attack to 0, 50% base weapon damage"
           }
         ]
       }
@@ -7336,10 +8189,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Slowed fixes movement at 0.004 tiles/ms before terrain multiplication; it overrides Speed and Speedy. Terrain/sinking behavior is a separate acceptance dimension.",
-        "differences": [],
+        "expected": "Slowed fixes player movement at 0.004 tiles/ms before terrain multiplication, overriding Speed and Speedy; Paralyzed still stops movement. Sink is visual, while Quicksand's Sinking multiplier decreases from .6 toward .1 over 18 MOVE callbacks and resets off Sinking ground. Selected terrain table and cleanse/lifecycle reconstruction are pinned in issue937.",
+        "differences": [
+          "Current reapplication retains the longer deadline; compiled Kithio replaces it. The June2012 guide estimates roughly three tiles/second and says Invulnerable blocks negative effects, conflicting with the selected client/current reconstruction. Neither is sufficient to override selected behavior or reopen PR1071."
+        ],
         "unknowns": [
-          "Complete target terrain/sinking table, lifecycle and cleanse policy."
+          "Original123.5.1 reapplication/rounding, authoritative MOVE cadence, version-specific immunity, exact cleanse mask and portal/disconnect/death policy remain historically partial. Current transient effects are not serialized in Character. Native Slowed and Quicksand passes are separate: combined Slowed/Quicksand, ordinary-water/lava rates and fresh disconnect/death-boundary gameplay remain unverified in issue937."
         ],
         "sources": [
           {
