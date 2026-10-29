@@ -6847,10 +6847,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Private /tell to selected recipients across worlds and servers, sender echo, and native counterpart history/reply navigation. Build121 explicitly announces cross-server tells. Offline delivery and exact error/ignore policy remain unresolved.",
-        "differences": [],
+        "expected": "Addressed /tell or /t with sender echo. The selected client records incoming senders and outgoing recipients, excluding guild chat and consecutive duplicates; Tab and Shift+Tab navigate a clamped counterpart history that resets with a new TextBox. The January 10, 2012 Build 121 announcement explicitly enables tells across servers; June 12 Build 123.3 extends /ignore to private Guild Hall/Vault occupants.",
+        "differences": [
+          "Current routing spans worlds within one server process, not independent server processes. Offline targets error; ignored recipients receive nothing while the sender retains its echo. These are current reconstruction policies, not fully established original-server rules."
+        ],
         "unknowns": [
-          "Original cross-server routing, offline errors, ignore rules and recipient history."
+          "Original relay internals, offline queuing/error wording and exact ignore feedback remain unresolved in server issue905. Source agreement alone does not establish historical or whole-feature gameplay acceptance."
         ],
         "sources": [
           {
@@ -6859,7 +6861,23 @@
           },
           {
             "url": "https://wikiwiki.jp/rmd/version/build121.0.0",
-            "label": "Build 121.0.0 release notes"
+            "label": "Build 121.0.0 release-note transcription, not independent of the original announcement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/commands/WorldCommand.cs#L130-L187",
+            "label": "Compiled Kithio TellCommand: online named recipients, sender echo and refusal; comparator, not original-server policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/ui/TextBox.as#L174-L197",
+            "label": "Modified 7.0 counterpart-history comparison; selected SWF checked separately"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605134508id_/http://forums.wildshadow.com/node/29614",
+            "label": "January 10, 2012 Build 121 announcement: tells across all servers"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605124251id_/http://forums.wildshadow.com/node/100145",
+            "label": "June 12, 2012 Build 123.3 announcement: ignore private-area occupants"
           }
         ]
       }
