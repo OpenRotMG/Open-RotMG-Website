@@ -8,6 +8,25 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('reconnect research preserves idle proof without accepting original server timing',()=>{
+  const data=catalogue(),evidence=ledger(),id='access:reconnect-safely',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(evidence.results[id].status,'passed');
+  assert.equal(evidence.results['access:idle-disconnect'].status,'passed');
+  assert.equal(evidence.sources['reconnect-native-aa4e65d0'].kind,'native');
+  assert(evidence.results[id].evidence.includes('reconnect-native-aa4e65d0'));
+  assert(evidence.results['access:world-loading-presentation'].evidence.includes('reconnect-native-aa4e65d0'));
+  assert(evidence.results[id].evidence.includes('idle-first-return-durable-native-b693808'));
+  assert.equal(evidence.results['access:world-loading-presentation'].status,'not-run');
+  assert.match(feature.audit.unknowns.join(' '),/expiry, reuse and death\/transfer/);
+  for(const record of [feature,...feature.audit.checks]){
+    const rule=record.audit??record;assert.equal(rule.historical,'partial');
+    assert(evidence.results[record.id].evidence.includes('reconnect-research-a07c62f8'));
+  }
+  assert.match(evidence.sources['reconnect-research-a07c62f8'].limitations,/not native minimum-display\/fade/);
+});
+
 test('Tutorial research keeps whole-feature acceptance separate from period reward identities',()=>{
   const data=catalogue(),evidence=ledger(),id='home:tutorial-and-kitchen',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
