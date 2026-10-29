@@ -1,6 +1,39 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review."},
   "sources": {
+    "world05-source-64a5b97": {
+      "kind": "source",
+      "revision": "64a5b97613c3975c54499ca23dca909afc8d96ae",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/64a5b97613c3975c54499ca23dca909afc8d96ae",
+      "checks": [
+        "realm:map-world-05"
+      ],
+      "method": "Full 2100-square authored reconstruction, 150 tuples, 48 sites and 702 exposed lava cells. Missing-pixel, bounded raster and terrain-only habitat choices are explicit. The prior 112-cell lava policy remains pinned separately.",
+      "limitations": "Authored values, not recovered original fields. Frozen research, historical identity/extent, placement/RNG and reuse-rights uncertainty remain unchanged."
+    },
+    "world05-regression-0c07d67": {
+      "kind": "regression",
+      "revision": "0c07d673d19d11d7792a7eaec49b03355673f7a6",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40882647815",
+      "checks": [
+        "realm:map-world-05"
+      ],
+      "method": "PR CI passes 378 Rust tests, formatting, strict Clippy and QA lifecycle. Fully populated constructors check both Realms, landmarks/lava, arrivals and access. Independent 14,250-check cell audit and actual Rust emitter reproduce the WMAP exactly.",
+      "limitations": "Initial population and representative routes, not every later dynamic state. Substantive KEEP is separate from retained review output-budget failures."
+    },
+    "world05-native-0c07d67": {
+      "kind": "native",
+      "revision": "0c07d673d19d11d7792a7eaec49b03355673f7a6",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1229#issuecomment-6498091643",
+      "checks": [
+        "realm:map-world-05"
+      ],
+      "method": "Native d536b2ec passes 12 checks: loading/four arrivals, 37.6 tiles of movement, actual 900 HP Coil defeat/270 XP, initial chest reward drag, collision, three positive damage commits against lava ground type 244, three survivors and persistent identity. Separate one-participant 6ea49a95 passes 5 wooden-wall loading/collision/survival/identity checks. All 7 captures read; no cleanup errors.",
+      "limitations": "Dirty-precommit evidence bound by exact diff/input hashes, not an automated native tree snapshot. Legal but unearned gear/stats/positions; main lava clearance was read-only, wood landing from a prior read-only selection. Separate campaigns honor the three-client cap; failed fourth-client fixture retained. No resurrection, invulnerability, forced loot/NPCs or HP/condition/timer overrides; concurrent NPC damage excluded from lava attribution."
+    },
     "world04-source-6e9a8ae": {
       "kind": "source",
       "revision": "6e9a8aed432c2558c990513833d7ce8be6223a5a",
@@ -6275,7 +6308,7 @@
     "realm:map-world-02": {"status":"passed","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74","world01-03-source-reverification","world01-03-regression-reverification","world01-03-native-reverification"]},
     "realm:map-world-03": {"status":"passed","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","fissure-native-458ccc1","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-habitats-native-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74","world01-03-source-reverification","world01-03-regression-reverification","world01-03-native-reverification"]},
     "realm:map-world-04": {"status":"passed","evidence":["world04-source-6e9a8ae","world04-regression-f950c70","world04-native-f950c70"]},
-    "realm:map-world-05": {"status":"not-run","evidence":[]},
+    "realm:map-world-05": {"status":"passed","evidence":["world05-source-64a5b97","world05-regression-0c07d67","world05-native-0c07d67"]},
     "realm:map-world-06": {"status":"not-run","evidence":[]},
     "realm:map-world-07": {"status":"not-run","evidence":[]},
     "realm:map-world-08": {"status":"not-run","evidence":[]},
