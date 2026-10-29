@@ -1134,10 +1134,10 @@
             "name": "Classic World 13 identity",
             "expected": "Identify the documented Classic World 13 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Register an explicitly authored playable reconstruction; track historical identity and rights separately. Apply the geography, ecology and interaction checks independently. Register the paired north/south bodies and central connection. Do not label an approximate radial candidate a recovered original.",
-            "implementation": "missing",
+            "implementation": "present",
             "historical": "unreviewed",
-            "differences": ["This numbered World is not registered yet. Historical continuity and provenance remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
-            "unknowns": [],
+            "differences": ["PR1236 registers an authored 2000-square reconstruction with 23 Ent Groves, 4 Lich sites, 22 Coil temples and 2 Oases. Tests and normal-client checks cover arrivals, movement, combat, chest collection, temple/wood collision, living lava damage, both land bodies and the central connection: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236"],
+            "unknowns": ["The 122,926 held-cell resolutions, 48 selected-wall connection configs, bounded immutable-anchor choices, habitat tiers and one-pixel-per-tile transform are authored. Original identity/extent, hidden fields, placement/RNG and reuse rights remain unverified."],
             "sources": [],
             "group": "maps"
           },
@@ -1149,7 +1149,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1184,7 +1184,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1198,7 +1198,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1212,7 +1212,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1226,7 +1226,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1240,7 +1240,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1254,7 +1254,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1268,7 +1268,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eleven layouts: three FSOD maps plus authored Worlds 1–5 and 9–11. Worlds 6–8/12–13 remain absent; none is recovered original data."
+              "Twelve layouts: three FSOD maps plus authored Worlds 1–5, 9–11 and 13. Worlds 6–8/12 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1753,7 +1753,8 @@
           "The initial Lich now uses the compiled primary community reference's nominal Wander coefficients: .5 in Idle and Solo, .35 in both evaluation phases, or 3.515 and 2.6825 units/s through the existing conversion. Home/leash behavior, group preparations and Actual Lich are unchanged. Twenty-five real-World NPC-step cases cover these components and unchanged controls. A new native witness observed the same living, unshielded Lich moving within Solo over 1450 game ms with unchanged positive HP; this is motion evidence, not a speed measurement or all-phase proof. BEFORE reuses only an earlier admission scene, not a matched campaign. Entry centers, priority, transition clocks, collision, precision, RNG cadence, authenticity and original placement/configuration remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/987",
           "Actual Lich (0x91c) now retains the owned Phylactery Bearer chosen by its existing distance gate as its Protect anchor, rather than selecting the nearest bearer by kind again. The real-World regression includes divergent bearers and unchanged close/no-bearer controls, with ownership and missing-target checks. Native BEFORE observations bind a stopped gate/anchor mismatch for 500 actual game ms. AFTER observations retain the same living Actual Lich and owned group over 450 ms, but exercise close-bearer Wander, not direct native Protect-target proof. Both use legal unearned Archer gear and unmatched worlds/seeds. Original global selector order and eligibility, home centers, phase priority, clock/RNG and full runtime equivalence remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1002",
           "PR1075 restores distinct Mummy/King Tome/potion, Pharaoh weapon, Bearer egg/tincture/potion and Spirit T8/ring/tincture/potion pools from compiled Kithio. Mummies roll once per death; Bearer/Spirit tiers roll independently per candidate with existing soulbound/colored-bag ownership. Actual Lich private thresholds, AI and summon policy are unchanged. CI passes202 tests, formatting and strict Clippy at87292512; rates are reconstruction values, not measured original probabilities: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1075#issuecomment-6461083265",
-        "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091"
+        "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091",
+          "PR1236 binds 4 World13 Lich sites to retained Destructible Blue Wall354. The exact-layout qualifier preserves other layouts' wall352 requirement and ordinary AI, ownership and rewards: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236"
         ],
         "unknowns": [
           "Original complete branch populations remain unresolved. Compiled Kithio counts Spirit births per state; current encounter-wide living caps differ. Trapped and the undated Japanese Lich table disagree: https://github.com/OpenRotMG/Open-RotMG-Server/issues/793#issuecomment-6454994102",
@@ -1956,7 +1957,8 @@
           "Eight existing World1 oases now receive Oasis Giants and independent chests without redrawing palms or terrain. No additional oases generate there; original coordinates and density remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/commit/831ddde5ace696c55d8d64d10ddc8616acbf1e2d",
           "PR1066 corrects prediction values mistaken for angular offsets and Oasis armor tiers 5-7 to 4-6; preserves the compiled reference's lifetime birth cap. A bounded protected native combat/chest/Nexus journey passes, not whole-feature or historical acceptance. Exact protection/follow hysteresis remains a reconstruction difference: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1066#issuecomment-6460309356",
           "PR1230 binds two World11 Oases to retained GoldSand245. The exact-layout ground qualifier leaves other maps, ordinary AI, population top-ups and chest rolls unchanged. Native checks cover visibility/traversal, not Oasis defeat or its complete attack pattern: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1230",
-          "PR1233 binds one World10 Oasis to authored GoldSand245. Its exact-layout qualifier matches World11 while other maps retain their existing requirement. Ordinary AI, population top-ups and chest rolls are unchanged. Native checks cover visibility/traversal, not Oasis defeat or its complete attack pattern: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1233"
+          "PR1233 binds one World10 Oasis to authored GoldSand245. Its exact-layout qualifier matches World11 while other maps retain their existing requirement. Ordinary AI, population top-ups and chest rolls are unchanged. Native checks cover visibility/traversal, not Oasis defeat or its complete attack pattern: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1233",
+          "PR1236 binds two World13 Oases to authored GoldSand245. The exact-layout qualifier retains other maps' existing requirements. Ordinary AI, population top-ups and chest rolls are unchanged. Native checks cover visibility/traversal, not Oasis defeat or its complete attack pattern: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236"
         ],
         "unknowns": [
           "Exact 123.5.1 placement/density and continuity of the version-115 wiki's stats, drops and chest rates.",
@@ -2677,7 +2679,8 @@
           "PR1228 adds the same non-repainting binding for 16 World4 temples. AI, chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1228",
           "PR1229 binds 22 World5 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1229",
           "PR1230 binds 25 World11 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1230",
-          "PR1233 binds 17 World10 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1233"
+          "PR1233 binds 17 World10 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1233",
+          "PR1236 binds 22 World13 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236"
         ],
         "unknowns": [
           "Exact 123.5.1 temple count/mix/distribution, egg timing/batch counts, ring count/orientation/cloak policy and Jungle probability remain unresolved; source conflicts and checked leads are tracked in issue814. Trapped's 10–19 requested sites per variant and randomized initial egg delay are not guaranteed population or exact timing."
