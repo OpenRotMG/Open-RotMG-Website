@@ -62,7 +62,9 @@ class WebsiteDeploy(unittest.TestCase):
         for tree, revision in [(self.live, 'b' * 40), (self.live_client, self.client_revision)]:
             tree.with_suffix('.sha256.json').write_text(json.dumps(deploy.files(tree)))
             tree.with_suffix('.REVISION').write_text(revision)
-        for name, value in [('LIVE', self.live), ('CLIENT', self.live_client), ('STATE', self.root / 'state')]:
+        self.helper = self.root / 'installed-helper.py'
+        self.helper.write_text('old = 1\n')
+        for name, value in [('LIVE', self.live), ('CLIENT', self.live_client), ('STATE', self.root / 'state'), ('HELPER', self.helper)]:
             p = patch.object(deploy, name, value)
             p.start()
             self.addCleanup(p.stop)
@@ -72,7 +74,7 @@ class WebsiteDeploy(unittest.TestCase):
         self.addCleanup(capacity.stop)
 
     def test_low_capacity_rejects_before_staging_or_restart_and_retains_failed_receipt(self):
-        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        self.client_changed()
         trees = {tree: deploy.files(tree) for tree in [self.live, self.live_client]}
         metadata = {tree.with_suffix(suffix): tree.with_suffix(suffix).read_bytes()
                     for tree in trees for suffix in ['.REVISION', '.sha256.json']}
@@ -127,6 +129,12 @@ class WebsiteDeploy(unittest.TestCase):
     def publish(self):
         deploy.deploy(REV, self.client_revision, self.raw)
 
+    def client_changed(self, swf=True):
+        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        if swf:
+            (self.live_client / 'client.swf').write_text('previous swf')
+            self.live_client.with_suffix('.sha256.json').write_text(json.dumps(deploy.files(self.live_client)))
+
     def rewrite(self, transform):
         with tarfile.open(fileobj=io.BytesIO(self.raw)) as archive:
             entries = [(e.name, archive.extractfile(e).read()) for e in archive]
@@ -152,6 +160,7 @@ class WebsiteDeploy(unittest.TestCase):
         self.assertFalse((self.live_client / 'native-texture-editor.swf').exists())
         self.assertEqual(deploy.files(Path(status['previous_site'])), self.before)
         self.assertEqual((self.live / 'index.html').stat().st_mode & 0o777, 0o644)
+        self.assertEqual(self.helper.read_bytes(), (Path(deploy.__file__).parent / 'deploy.py').read_bytes())
 
     def updater(self):
         (self.root / 'backup.lock').touch()
@@ -160,31 +169,42 @@ class WebsiteDeploy(unittest.TestCase):
         (self.root / 'server.pem').write_text('private fixture')
         updater = SimpleNamespace(CONFIG=config, LAST_BACKUP=self.root / 'receipt.json', LIVE=self.root / 'server',
                                   start_backup=Mock(), rehearse=Mock(), warn_restart=Mock(), run=Mock(),
-                                  copy_db=Mock(side_effect=lambda src, dst: dst.write_text('frozen')), ready=Mock())
+                                  copy_db=Mock(side_effect=lambda src, dst: dst.write_text('frozen')), ready=Mock(),
+                                  restore_service=Mock(return_value='restored'))
         updater.stop_prepared = Mock(side_effect=lambda config, work: updater.run('systemctl', 'stop', 'openrotmg.service'))
         return updater
 
-    def test_readme_only_client_revision_rehearses_saves_restarts_and_retains_both_trees(self):
-        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+    def test_unchanged_swf_client_update_swaps_files_without_restarting(self):
+        self.client_changed(swf=False)
+        updater = self.updater()
+        with patch.object(deploy, 'current_main'), patch.object(deploy, 'verify_public'), \
+                patch.object(deploy, 'server_updater', return_value=updater):
+            self.publish()
+        updater.rehearse.assert_called_once()
+        updater.run.assert_not_called()
+        updater.stop_prepared.assert_not_called()
+        self.assertEqual(self.live_client.with_suffix('.REVISION').read_text().strip(), self.client_revision)
+        self.assertFalse(json.loads((deploy.STATE / 'status.json').read_text())['client_restarted'])
+
+    def test_changed_swf_rehearses_saves_restarts_and_retains_both_trees(self):
+        self.client_changed()
         updater = self.updater()
         with patch.object(deploy, 'current_main'), patch.object(deploy, 'verify_public'), \
                 patch.object(deploy, 'server_updater', return_value=updater), \
                 patch.object(deploy.subprocess, 'check_output', return_value='success'):
             self.publish()
         self.assertEqual(updater.start_backup.call_count, 2)
-        updater.rehearse.assert_called_once()
-        self.assertNotEqual(updater.rehearse.call_args.args[2]['client'], str(self.live_client))
         self.assertEqual([c.args for c in updater.run.call_args_list], [
             ('systemctl', 'stop', 'openrotmg.service'), ('systemctl', 'start', 'openrotmg.service')])
-        self.assertEqual(self.live_client.with_suffix('.REVISION').read_text().strip(), self.client_revision)
         receipt = json.loads((deploy.STATE / 'status.json').read_text())
+        self.assertTrue(receipt['client_restarted'])
         self.assertTrue(Path(receipt['previous_client']).is_dir())
         self.assertTrue((Path(receipt['recovery']) / 'cutover/game.db').is_file())
 
     def test_rehearsal_or_save_failure_never_exchanges_live_files(self):
         for step in ['rehearse', 'save']:
             updater = self.updater()
-            self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+            self.client_changed()
             if step == 'rehearse':
                 updater.rehearse.side_effect = ValueError('rehearsal failed')
             with patch.object(deploy, 'current_main'), patch.object(deploy, 'server_updater', return_value=updater), \
@@ -196,7 +216,7 @@ class WebsiteDeploy(unittest.TestCase):
             self.assertEqual(deploy.files(self.live), self.before)
 
     def test_changed_client_warning_preparation_stop_order_and_shared_arguments(self):
-        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        self.client_changed()
         updater = self.updater()
         events = []
         updater.rehearse.side_effect = lambda *args: events.append('rehearse')
@@ -217,7 +237,7 @@ class WebsiteDeploy(unittest.TestCase):
         updater.stop_prepared.assert_called_once()
 
     def test_shared_preparation_failures_never_stop_exchange_or_report_success(self):
-        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        self.client_changed()
         before_client = deploy.files(self.live_client)
         for message in ['SQL preparation failed', 'timeout before acceptance', 'timeout after acceptance',
                         'accepted response lost', 'stale receipt', 'process replaced',
@@ -241,7 +261,7 @@ class WebsiteDeploy(unittest.TestCase):
                 self.assertEqual(deploy.files(self.live_client), before_client)
 
     def test_stale_main_before_preparation_and_during_warning_never_stops(self):
-        self.live_client.with_suffix('.REVISION').write_text('c' * 40)
+        self.client_changed()
         for fail_at in [2, 3]:
             with self.subTest(main_check=fail_at):
                 updater = self.updater()
@@ -254,7 +274,7 @@ class WebsiteDeploy(unittest.TestCase):
                 exchange.assert_not_called()
                 self.assertEqual(updater.warn_restart.call_count, int(fail_at == 3))
 
-    def test_post_stop_failure_retains_stage_evidence_without_rollback_or_restart(self):
+    def test_post_stop_failure_retains_evidence_and_restores_service(self):
         for stage in ['shutdown_result', 'freeze_recovery', 'client_exchange', 'site_exchange',
                       'start', 'verify_running', 'backup_after_start']:
             with self.subTest(stage=stage):
@@ -280,11 +300,13 @@ class WebsiteDeploy(unittest.TestCase):
                         patch.object(deploy.subprocess, 'check_output', return_value=result), \
                         patch.object(deploy, 'atomic'), patch.object(deploy, 'exchange', side_effect=effects) as exchange, \
                         self.assertRaisesRegex(RuntimeError, 'Post-stop ' + stage):
-                    deploy.activate(site, client, work, REV, self.client_revision, True)
+                    deploy.activate(site, client, work, REV, self.client_revision, True, True)
                 evidence = json.loads((work / 'post-stop-failure.json').read_text())
                 self.assertEqual(evidence['stage'], stage)
                 self.assertEqual(evidence['previous_site'], str(site))
                 self.assertEqual(evidence['previous_client'], str(client))
+                self.assertEqual(evidence['restored'], 'restored')
+                updater.restore_service.assert_called_once()
                 self.assertLessEqual(exchange.call_count, 2)
                 calls = [c.args for c in updater.run.call_args_list]
                 self.assertEqual(calls.count(('systemctl', 'stop', 'openrotmg.service')), 1)

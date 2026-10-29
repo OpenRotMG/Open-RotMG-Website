@@ -26,6 +26,7 @@ REPO = 'https://github.com/OpenRotMG/Open-RotMG-Website.git'
 CLIENT_REPO = 'https://github.com/OpenRotMG/Open-RotMG-Client.git'
 ORIGIN = 'https://game.openrotmg.org/'
 LIMIT = 96 * 1024 * 1024
+HELPER = Path('/opt/openrotmg-site-deploy/deploy.py')
 
 
 def require(condition, message):
@@ -78,6 +79,8 @@ def payload(raw, revision, client_revision):
             and metadata['revision'] == revision and metadata['client_revision'] == client_revision,
             'Deployment revision mismatch')
     require({n: digest(d) for n, d in result.items()} == metadata['manifest'], 'Deployment archive checksum mismatch')
+    helper = result.pop('helper/deploy.py', None)
+    require(helper is not None, 'Deployment archive is missing its own deploy helper')
     require(all(n.startswith(('site/', 'client/')) for n in result), 'Unexpected deployment path')
     site = {n.removeprefix('site/'): d for n, d in result.items() if n.startswith('site/')}
     client = {n.removeprefix('client/'): d for n, d in result.items() if n.startswith('client/')}
@@ -92,7 +95,7 @@ def payload(raw, revision, client_revision):
             and re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+-openrotmg\.[0-9]+', build.get('runtime_version', '')),
             'A complete normal deployed client selection is required; local client builds cannot be deployed')
     require(build['runtime'] == digest(client['vendor/openrotmg.json'])[:16], 'Runtime provenance mismatch')
-    return site, client
+    return site, client, helper
 
 
 def current_main(revision, client_revision):
@@ -138,7 +141,7 @@ def server_updater():
     return module
 
 
-def activate(site, client, work, revision, client_revision, changed_client):
+def activate(site, client, work, revision, client_revision, changed_client, restart):
     if not changed_client:
         current_main(revision, client_revision)
         exchange(LIVE, site)
@@ -146,6 +149,14 @@ def activate(site, client, work, revision, client_revision, changed_client):
     update = server_updater()
     config = json.loads(update.CONFIG.read_text())
     update.rehearse(update.LIVE, work, {**config, 'client': str(client)})
+    if not restart:
+        # The running server caches only client.swf; every other client file is served from disk.
+        current_main(revision, client_revision)
+        exchange(CLIENT, client)
+        atomic(CLIENT.with_suffix('.REVISION'), (client_revision + '\n').encode())
+        atomic(CLIENT.with_suffix('.sha256.json'), json.dumps(files(CLIENT), sort_keys=True).encode())
+        exchange(LIVE, site)
+        return
     update.start_backup()
     with update.LAST_BACKUP.with_name('backup.lock').open('rb') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
@@ -175,22 +186,39 @@ def activate(site, client, work, revision, client_revision, changed_client):
             cutover = 'verify_running'
             update.ready(int(config['bind'].rsplit(':', 1)[1]))
         except BaseException as error:
-            post_stop_failure(work, cutover, error, site, client)
+            post_stop_failure(work, cutover, error, site, client, update, config)
     try:
         update.start_backup()
     except BaseException as error:
-        post_stop_failure(work, 'backup_after_start', error, site, client)
+        post_stop_failure(work, 'backup_after_start', error, site, client, update, config)
 
 
-def post_stop_failure(work, stage, error, site, client):
+def post_stop_failure(work, stage, error, site, client, update, config):
     failure = {'stage': stage, 'error': str(error), 'recovery': str(work),
                'previous_site': str(site), 'previous_client': str(client)}
     (work / 'post-stop-failure.json').write_text(json.dumps(failure, indent=2) + '\n')
-    raise RuntimeError(f'Post-stop {stage} failed: {error}; recovery: {work}') from error
+    try:
+        failure['restored'] = update.restore_service(config, work)
+    except BaseException as restore:
+        failure['restore_error'] = str(restore)
+    (work / 'post-stop-failure.json').write_text(json.dumps(failure, indent=2) + '\n')
+    raise RuntimeError(f'Post-stop {stage} failed: {error}; restored: {failure.get("restored")}; recovery: {work}') from error
+
+
+def install_helper(helper):
+    if helper == HELPER.read_bytes():
+        return False
+    compile(helper, str(HELPER), 'exec')
+    candidate = HELPER.with_name('deploy.py.new')
+    candidate.write_bytes(helper)
+    candidate.chmod(0o755)
+    candidate.replace(HELPER)
+    print(json.dumps({'site_deploy_helper': 'installed', 'sha256': digest(helper)}), flush=True)
+    return True
 
 
 def deploy(revision, client_revision, raw):
-    site, client = payload(raw, revision, client_revision)
+    site, client, helper = payload(raw, revision, client_revision)
     current_main(revision, client_revision)
     before = {}
     for tree in [LIVE, CLIENT]:
@@ -198,11 +226,12 @@ def deploy(revision, client_revision, raw):
         require(before[tree.name] == json.loads(tree.with_suffix('.sha256.json').read_text()),
                 'Live tree differs from its recorded manifest: ' + str(tree))
     changed_client = CLIENT.with_suffix('.REVISION').read_text().strip() != client_revision
+    restart = changed_client and before[CLIENT.name]['client.swf'] != digest(client['client.swf'])
     require(changed_client or before[CLIENT.name] == {n: digest(d) for n, d in client.items()},
             'Same client revision produced different files')
     STATE.mkdir(mode=0o700, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix=revision + '-', dir=STATE))
-    status = {'revision': revision, 'client_revision': client_revision, 'client_restarted': changed_client,
+    status = {'revision': revision, 'client_revision': client_revision, 'client_restarted': restart,
               'prior_revision': LIVE.with_suffix('.REVISION').read_text().strip(),
               'recovery': str(work), 'state': 'staging'}
     try:
@@ -212,7 +241,7 @@ def deploy(revision, client_revision, raw):
         status.update(previous_site=str(staged_site), previous_client=str(staged_client) if changed_client else None)
         (work / 'previous-metadata.json').write_text(json.dumps(before))
         status['state'] = 'activating'
-        activate(staged_site, staged_client, work, revision, client_revision, changed_client)
+        activate(staged_site, staged_client, work, revision, client_revision, changed_client, restart)
         status['state'] = 'activated_unverified'
         atomic(LIVE.with_suffix('.REVISION'), (revision + '\n').encode())
         manifest = {n: digest(d) for n, d in site.items()}
@@ -221,6 +250,7 @@ def deploy(revision, client_revision, raw):
         # /client.swf is intentionally rewritten with the production RSA key by the server.
         verify_public(manifest | public_client)
         status.update(state='deployed', files=len(manifest), client_files=len(client))
+        install_helper(helper)
     except Exception as error:
         status['error'] = str(error)
         raise
