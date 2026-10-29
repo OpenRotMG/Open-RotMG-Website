@@ -1,4 +1,4 @@
-export function socialMetadata(html, image, alt = 'Open RotMG amulet over historical Realm of the Mad God gameplay. Recreating the 2012 realm.') {
+export function socialMetadata(html, image, alt = 'Native Realm of the Mad God pixel art over historical gameplay.') {
   if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html)) return html;
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = html.match(/<meta name="description" content="([^"]+)"/m)?.[1];

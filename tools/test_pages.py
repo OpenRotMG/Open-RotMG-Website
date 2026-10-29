@@ -27,6 +27,7 @@ class PagesTest(unittest.TestCase):
         (self.server / 'data/sfx').mkdir(parents=True)
         (self.server / 'data/sfx/test.mp3').write_bytes(b'fixture audio')
         (self.root / 'dist/2010').mkdir(parents=True)
+        (self.root / 'dist/2010/index.html').write_text('<html><head><title>2010 Preview</title><meta property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"><meta name="twitter:image" content="https://openrotmg.org/2010/social.png?v=fixture"><script src="preview.js"></script></head><body>Game</body></html>')
         (self.root / 'dist/diagnostics-build.json').write_text(json.dumps(self.expected))
         self.snapshot = self.root / 'backend.json'
         self.snapshot.write_text(json.dumps(self.expected))
@@ -63,7 +64,11 @@ class PagesTest(unittest.TestCase):
         self.assertTrue((self.root / 'dist/sfx/test.mp3').is_file())
         build = json.loads((self.root / 'dist/diagnostics-build.json').read_text())
         self.assertEqual(build['client_swf_sha256'], hashlib.sha256(self.swf).hexdigest())
-        self.assertIn('https://www.openrotmg.org/2010/', (self.root / 'dist/2010/index.html').read_text())
+        preview = (self.root / 'dist/2010/index.html').read_text()
+        self.assertIn('https://www.openrotmg.org/2010/', preview)
+        self.assertIn('property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"', preview)
+        self.assertIn('name="twitter:image" content="https://openrotmg.org/2010/social.png?v=fixture"', preview)
+        self.assertNotIn('<script', preview)
 
     def test_backend_changes_before_or_during_download_cannot_publish_mixed_assets(self):
         changed = {**self.expected, 'process': 124}

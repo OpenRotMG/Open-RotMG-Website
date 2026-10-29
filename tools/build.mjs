@@ -2,7 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { join, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { validateEvidence, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 import { validateCatalogue as validateJulyCatalogue } from '../public/restoration/2010/catalogue.js';
 import { validateRoadmap } from '../public/restoration/2010/roadmap.js';
@@ -66,18 +66,21 @@ await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
 const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'bots/app.js'))).digest('hex');
 const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'bots/style.css'))).digest('hex');
-const socialImage = `social.png?v=${createHash('sha256').update(await readFile(join(dist, 'social.png'))).digest('hex').slice(0, 12)}`;
-const hiscoresSocialImage = `hiscores/social.png?v=${createHash('sha256').update(await readFile(join(dist, 'hiscores/social.png'))).digest('hex').slice(0, 12)}`;
 const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="{{BASE}}#bug-report">Report bug</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{SOCIAL_IMAGE}}', socialImage).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
-      const hiscores = path === join(dist, 'hiscores/index.html');
-      await writeFile(path, socialMetadata(html, site.href + (hiscores ? hiscoresSocialImage : socialImage), hiscores ? 'Amulet and Open RotMG wordmark over historical gameplay, with Knight, Wizard and Priest beside Hiscores.' : undefined));
+      if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html)) {
+        await writeFile(path, html);
+        continue;
+      }
+      const image = join(dirname(path), 'social.png');
+      const version = createHash('sha256').update(await readFile(image)).digest('hex').slice(0, 12);
+      await writeFile(path, socialMetadata(html, `${new URL(relative(dist, image), site).href}?v=${version}`));
     }
   }
 }

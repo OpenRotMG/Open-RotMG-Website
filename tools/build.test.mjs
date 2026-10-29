@@ -40,7 +40,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const customImage = `hiscores/social.png?v=${createHash('sha256').update(readFileSync(new URL('../public/hiscores/social.png', import.meta.url))).digest('hex').slice(0, 12)}`;
   const sharedHiscores = readFileSync(new URL('../dist/hiscores/index.html', import.meta.url), 'utf8');
   for (const key of ['og:image', 'twitter:image']) assert.ok(sharedHiscores.includes(`=\"${key}\" content=\"${site.href}${customImage}\"`));
-  assert.match(sharedHiscores, /Knight, Wizard and Priest beside Hiscores/);
+  assert.match(sharedHiscores, /Native Realm of the Mad God pixel art over historical gameplay/);
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   assert.ok(!home.includes(customImage));
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
@@ -249,10 +249,25 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal(social.readUInt32BE(16), 1200);
   assert.equal(social.readUInt32BE(20), 630);
   const socialHash = createHash('sha256').update(social).digest('hex');
-  assert.equal(socialHash, '243a2d1d875f6539c170e598bcb891476fdf24cae6a3caac52db83a31ae2f0b6');
+  assert.equal(socialHash, '7ccd76f1377b8ee7746b07d9c4457b109f5b681ab8bb08f8fd3029a7b6944879');
   const imageUrl = `${site.href}social.png?v=${socialHash.slice(0, 12)}`;
-  for (const html of [home, about]) assert.ok(html.includes(`property="og:image" content="${imageUrl}"`));
+  assert.ok(home.includes(`property="og:image" content="${imageUrl}"`));
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
+  const imageHashes = new Set();
+  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'bots/', 'branding/', 'draw/']) {
+    const html = readFileSync(new URL(`../dist/${page}index.html`, import.meta.url), 'utf8');
+    const png = readFileSync(new URL(`../dist/${page}social.png`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), 1200);
+    assert.equal(png.readUInt32BE(20), 630);
+    const hash = createHash('sha256').update(png).digest('hex');
+    imageHashes.add(hash);
+    const url = `${site.href}${page}social.png?v=${hash.slice(0, 12)}`;
+    for (const key of ['og:image', 'twitter:image']) {
+      assert.equal(html.split(`="${key}"`).length - 1, 1);
+      assert.ok(html.includes(`="${key}" content="${url}"`), page + key);
+    }
+  }
+  assert.equal(imageHashes.size, 11);
 });
 
 test('loading screen waits for movie data, not just runtime initialization', async () => {
