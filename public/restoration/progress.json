@@ -6894,7 +6894,7 @@
         "unknowns": [
           "Original Nexus boundary metric/equality, death-notice audience and general killer-article rule. GDC slide 54 shows 'a Knight of Oryx' and 'a Pet of Oryx', not an algorithm for every cause.",
           "Exact 123.5.1 continuity and audiences for other announcements and per-enemy taunt text/timing. Kithio's compiled Taunt defaults to strict 15-tile proximity with an authored broadcast override; that does not establish the player-chat metric.",
-          "Historical filtering vocabulary and complete native preference persistence, bubble on/off and class-unlock overlay acceptance. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Remaining whole-feature gameplay acceptance is not-run; bounded receipts do not accept every lifecycle/ignore/death path."
+          "Historical filtering vocabulary/integration and complete native class-unlock overlay acceptance remain unresolved. Controls/display receipt e4d8ef46 covers bounded preference persistence and nearby speech-bubble Off/On, not every setting/platform or full Chat. Selected-client source establishes local unlock UI, not a missing public class-unlock announcement. Whole-feature gameplay remains not-run; bounded receipts do not accept every lifecycle/ignore/death path."
         ],
         "sources": [
           {
@@ -7827,17 +7827,52 @@
       "category": "access",
       "icon": null,
       "audit": {
-        "implementation": "present",
+        "implementation": "partial",
         "historical": "partial",
-        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request.",
-        "differences": [],
+        "expected": "Saved controls and display preferences include camera rotation and centering, graphics and chat options, and minimap terrain, exploration, player markers and zoom. Chat options cover filtering, speech bubbles and trade/guild request popups; tutorial tips have their own preference. Hiding a request popup is not the same as rejecting the request. Preferences are local to the browser/profile and origin, not account-synced. Minimap zoom and explored terrain belong to the current map instance; they are not saved options.",
+        "differences": [
+          "The filter preference is saved, but current server text packets supply empty cleanText, so offensive-language filtering is not implemented end to end. This existing social:chat limitation is not a newly discovered regression: https://github.com/OpenRotMG/Open-RotMG-Server/issues/904"
+        ],
         "unknowns": [
-          "Original minimap zoom, marker and fog lifecycle, saved preferences and graphics behavior."
+          "Original server tile-reveal radius, wall/visibility policy and persistence across world sessions are not established by client bitmap code; the current radius-20/Snake Pit policy remains reconstruction. Original filtering vocabulary and rules are also unrecovered; Kithio's unchanged-text cleanText does not implement a filter.",
+          "Selected SWF and related community code establish rendering rules, not authenticated official provenance or original Flash/Ruffle equivalence. Period controls describe build119.0.5 or early123, not every123.5.1 option."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+            "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+            "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+            "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+            "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114024337id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/controls-and-commands",
+            "label": "January 14, 2012 capture, page explicitly last updated 119.0.5: options and zoom defaults"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/52728",
+            "label": "February 29, 2012 answer: enable rotation and choose 45 or 0 degrees (Q/E tentative)"
+          },
+          {
+            "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+            "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/minimap/view/MiniMap.as",
+            "label": "Modified 7.0 minimap comparator: related zoom/bitmap design, not independent 2012 evidence"
           }
         ],
         "checks": [
@@ -7847,10 +7882,17 @@
             "expected": "Live vitals, effective maxima, signed modifiers, cap colors and stat hover text must agree with selected rendering rules.",
             "acceptance": "Injure/recover, hover bars, equip/unequip and apply/expire boosts. Check uncapped, capped and negative-stat cases without inventing modern caps or 8/8 UI.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Selected definitions and existing native receipts agree on cap/boost color priority; independent period observation of every signed/maxima case and original Flash equivalence remains absent."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/Stats.as",
+                "label": "Selected-era Stats: six stats, signed boosts and base-cap gold priority"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7859,10 +7901,21 @@
             "expected": "Overlapping markers must resolve to a usable group/menu with eligible teleport choices.",
             "acceptance": "Hover/click overlapping and edge-clamped players, move membership and change locks/pause states. Check chosen target/error and permissions rather than always teleporting on a dot click.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Related client code is not independent historical corroboration of all edge-overlap, lock/pause/Invisible permissions; retain existing cross-revision native passes without blanket historical acceptance."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/ui/_ej.as",
+                "label": "Selected-era minimap: zoom steps, black terrain bitmap, marker colors and edge clamping"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0D_B_/_06M_.as",
+                "label": "Selected-era group menu: snapshot membership, map permission and first eligible teleport target"
+              }
+            ],
             "group": "behavior"
           },
           {
@@ -7871,10 +7924,29 @@
             "expected": "Duplicate bindings, local persistence, tab-scoped reset, chat-focus gating and deactivation release are separate from saved preferences.",
             "acceptance": "Rebind a used key, reset one options tab and preserve other settings. In an isolated client, verify chat/options/deactivation cannot leave movement or fire stuck.",
             "implementation": "present",
-            "historical": "unreviewed",
+            "historical": "partial",
             "differences": [],
-            "unknowns": [],
-            "sources": [],
+            "unknowns": [
+              "Build123 note corroborates an options/movement fix, not all duplicate-key, tab-reset or deactivation timing details across original Flash platforms."
+            ],
+            "sources": [
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/parameters/Parameters.as",
+                "label": "Selected-era Parameters: SharedObject defaults, flush and duplicate-key displacement"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0C_P_/Options.as",
+                "label": "Selected-era Options: local preferences, per-tab reset and popup-versus-chat choices"
+              },
+              {
+                "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/game/_07a.as",
+                "label": "Selected-era input: rotation gate, zoom, text focus and clearInput on deactivation"
+              },
+              {
+                "url": "https://web.archive.org/web/20130605152526id_/http://forums.wildshadow.com/node/80502",
+                "label": "April 22, 2012 Build 123 announcement: movement during options fix (2013 preservation)"
+              }
+            ],
             "group": "behavior"
           }
         ]
