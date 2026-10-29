@@ -7488,15 +7488,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Authenticate registered email/password, load existing account progress, reject invalid credentials. Account verify is credential authentication, not email verification; logout returns to fresh guest identity.",
-        "differences": [],
+        "expected": "Authenticate registered email/password, load existing account progress, reject invalid credentials. Account verify is credential authentication, not email verification; logout clears saved credentials and returns to a fresh guest identity. Registered progress is accessible from another computer.",
+        "differences": [
+          "Current Argon2 authentication and shared 20-requests/minute IP admission are modern policy, not recovered original failed-password lockout rules. One active avatar per account remains an ownership invariant."
+        ],
         "unknowns": [
-          "Original logout, cross-device entry, concurrent sessions and lockout behavior."
+          "Exact 123.5.1 same-account concurrent-session refusal/takeover and disconnect-grace policy; Kithio refuses a second connection but is not independent production evidence.",
+          "Original failed-login threshold, account/IP scope and lockout duration. An undated MPGH five-attempt/half-hour search lead was not authenticated; later Steam/Exalt reports do not establish 123.5.1 policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ capture: registered cross-computer saves and explicit credential-clearing logout; earlier than target"
+          },
+          {
+            "url": "https://forum.gamer.com.tw/C.php?bsn=20618&snA=76",
+            "label": "April 18, 2012 00:25 reply: browser log out/register and two DIFFERENT accounts; not same-account concurrency"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/account/verify.cs",
+            "label": "Compiled Kithio verify handler: credentials to Account/Error, not email confirmation"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/RealmManager.cs#L64-L74",
+            "label": "Kithio TryConnect: AccountId-keyed TryAdd refuses concurrent ownership; disconnect removes the key"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/web/commands/WebLogoutCommand.as",
+            "label": "Modified 7.0 logout comparator clears credentials and invalidates selection; not 2012 proof"
           }
         ]
       }
