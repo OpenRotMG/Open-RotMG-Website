@@ -7978,15 +7978,25 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Normal weapon damage uses multiplier 0.5 while Weak, irrespective of Attack; Weak overrides Damaging. Ability-Shoot damage must be distinguished from normal weapon damage.",
-        "differences": [],
+        "expected": "Weak fixes normal weapon damage at 0.5 times the base RNG draw, irrespective of Attack, before defense. It overrides Damaging. Selected 123.5.1 truncates the multiplied draw to int; ability-Shoot uses multiplier 1. Arachna projectile1 applies Weak for 5000ms; Holy Water cleanses it without clearing Damaging.",
+        "differences": [
+          "Kithio's compiled multiplier checks Paralyzed instead of Weak and scales Shoot/BulletNova with Attack and Damaging, conflicting with selected client weapon/Shoot paths. Current Rust retains the later reapplication deadline; Kithio replaces the duration. Neither comparator policy proves original server behavior."
+        ],
         "unknowns": [
-          "Complete historical authoritative rounding, non-weapon damage and cure/reapplication semantics."
+          "Original authoritative rounding versus selected-client prediction, non-Shoot ability scaling (especially BulletNova), shorter/longer reapplication and same-tick cleanse ordering, and transfer/reconnect/death retention remain unresolved under server issue936."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Player.as",
+            "label": "Selected 123.5.1 Player: Weak precedence, Shoot separation and integer damage"
+          },
+          {
+            "url": "https://web.archive.org/web/20120114013804id_/http://forums.wildshadow.com/wiki/realm-mad-god/status-effects",
+            "label": "January 14, 2012 capture: Weak sets Attack to 0, 50% base weapon damage"
           }
         ]
       }
