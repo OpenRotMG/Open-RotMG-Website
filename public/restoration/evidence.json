@@ -1,6 +1,15 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "character-switch-native-7b051236": {
+      "kind": "native",
+      "revision": "7b051236d193d8d3dbf94b8ac4ea1eb35adbacbb",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1211#issuecomment-6485096583",
+      "checks": ["access:character-slots"],
+      "method": "Clean QAfe5ef679 passes six assertions: real carried-slot4→5 potion drag/revision1→2, four native shots, Change Characters, durable living inventory/revision/shots checked in SQLite before Play, same-account1/character1 reentry with player578331→578332, retained state and working native movement. Selection renders the living Wizard and600-Gold second-slot offer. Capacity1/100Gold unchanged. Source7b051236, caseaf49c553, ELFef8bbf86, client0282b3a4 and Ruffle.16/bundle579236cd are pinned in the public receipt. Integrity/FKs pass, zero backend ERRORs, cleanup errors[] and owned processes retired. Reuses PR154 purchase/second-creation/selection and refusal/restart receipts separately.",
+      "limitations": "Prepared level-one Wizard/Nexus position/equipment and one unearned potion, not earned progression, fresh purchase execution, real payment, mail or production acceptance. Fresh account has not completed Tutorial; ordinary reentry goes Nexus→Tutorial, not map-position persistence. QA5fc09ecc missed the rendered carried row; QA51021f6b changed screens during controller resume setup. Final case corrects only row coordinates/start sequencing, with authority/ACK/lease/permanence/reward rules unchanged. Earlier queued entry-hook drafts were cancelled before gameplay. The one current Rust slot-filter pass is a preset-capacity guard, not retired financial tests. Original economic continuity and flush/ACK/crash timing remain historical partial."
+    },
     "character-slots-research-7c4aa51e": {
       "kind": "source",
       "revision": "7c4aa51e79e175ffbf66b03c619cf679f57c080c",
@@ -6129,7 +6138,7 @@
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
     "access:change-password": {"status":"not-run","evidence":[]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},
-    "access:character-slots": {"status":"not-run","evidence":["character-slots-research-7c4aa51e","character-slots-pr154-0c6fa5ed"]},
+    "access:character-slots": {"status":"passed","evidence":["character-slots-research-7c4aa51e","character-slots-pr154-0c6fa5ed","character-switch-native-7b051236"]},
     "access:character-deletion": {"status":"passed","evidence":["character-deletion-research-8d1d7cb6","character-deletion-native-9d43d7b7","character-deletion-http-8d1d7cb6"]},
     "access:server-selection": {"status":"not-run","evidence":[]},
     "access:reconnect-safely": {"status": "not-run","evidence": ["idle-runtime-source-e002d29","idle-runtime-regression-e14bfd0","idle-warnings-resets-native-e002d29","idle-first-return-durable-native-e002d29","idle-runtime-build-b693808","idle-warnings-resets-native-b693808","idle-first-return-durable-native-b693808","recovered-account-source-794eccf","restart-notice-source-794eccf"]},
