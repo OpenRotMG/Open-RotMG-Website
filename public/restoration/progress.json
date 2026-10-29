@@ -7911,15 +7911,36 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, retrieve a bitmap into the editor, and confirm owner deletion. Collected bitmaps can be downloaded as spritesheet.png. Recovery of the original hosted gallery is a separate question.",
-        "differences": [],
+        "expected": "Browse 24-thumbnail pages, filter Mine/All/Wild Shadow/type/tags, load a bitmap into the editor, and cancel or confirm owner deletion. In the selected client, collecting bitmaps and downloading spritesheet.png require the gallery Admin flag; ordinary owners receive deletion controls, not collection controls.",
+        "differences": [
+          "Only locally saved art is available; the original player and Wild Shadow corpus has not been recovered.",
+          "The local API does not issue gallery Admin. Bitmap collection/export is therefore not reachable through ordinary accounts, and no native administrative export acceptance is recorded.",
+          "Reconstruction orders by descending creation ID, even after overwrite. A mixed-era Japanese guide describes ID ordering for tagged searches and newest-update ordering otherwise; its exact target-era applicability remains unresolved."
+        ],
         "unknowns": [
-          "Original corpus, ordering/retention and historical authorization policy."
+          "Original corpus recovery, retention/moderation policy, target-era ordering and backend administrator authorization remain unresolved. Client Mine/Admin affordances do not establish original server enforcement.",
+          "The requested pre-2013 Japanese guide capture redirects to April 29, 2017 (page modified April 17, 2017). Its later login/save warning and ordering text are not automatically 123.5.1 policy."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_0w.as",
+            "label": "Selected client thumbnail: Mine deletion versus Admin collection and ID copying"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_0G_l/_in.as",
+            "label": "Selected client filters, 24-item pagination, confirmation and admin spritesheet download"
+          },
+          {
+            "url": "https://web.archive.org/web/20170429175439id_/http://wikiwiki.jp/rmd/?Pixel%20Editor",
+            "label": "April 2017 capture of mixed-era guide; ordering and ownership observations are not target-dated"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Design%20Next%20Dungeon%20Art",
+            "label": "December 19, 2012 guide links Production Draw and comma-separated submission tags; not an original corpus"
           }
         ]
       }
