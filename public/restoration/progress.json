@@ -7454,18 +7454,26 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Unverified account state and resend-verification-email operation; confirmation eventually changes returned verified state. Target confirmation mechanics remain unresolved.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. Confirmation happens outside the client; the immediate Sent label does not establish delivery.",
         "differences": [
-          "Uses modern 24-hour single-use confirmation links and bounded explicit email requests; original token, initial-send and delivery policies are not recovered."
+          "Uses modern 24-hour single-use hashed links, bounded explicit requests and an explicit browser confirmation button; registration sends no automatic email. Earlier registration-guide evidence describes initial mail and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
-          "Target external confirmation endpoint/token lifecycle.",
-          "Initial email trigger and delivery rules."
+          "Exact 123.5.1 external endpoint/parameters and token generation, expiry, replacement/replay and challenge rules. Retained older guide images show realmofthemadgod.appspot.com/account/v, but their attachment timestamps do not prove target-build continuity; tracked in server issue922.",
+          "Exact target initial-send, queue/retry, throttling and delivery rules, including continuity of the March/October 2012 guide observations reported in issue920. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アカウント登録",
+            "label": "Retained email/Account verified images show older /account/v endpoint; mixed-era page and 2010 attachment timestamps do not date target server policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20130923115857id_/http://community.kabam.com/forums/showthread.php?201428-Email-Verification-Now-Required!-Read-Me!",
+            "label": "Original September 16, 2013 Kabam announcement: mandatory verification, replacement email and link confirmation; later than target"
           }
         ]
       }
