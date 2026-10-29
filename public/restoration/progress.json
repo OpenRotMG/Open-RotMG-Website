@@ -800,7 +800,8 @@
         "historical": "partial",
         "expected": "Week/Month/All Time show ordinal rank, name, class/tints, four equipped items and TotalFame; selecting a row opens its archived fame details. An absent own character can appear unranked as MyFameListElem.",
         "differences": [
-          "Current reconstruction: 20 death characters, rolling 7/30-day windows, receipt total descending then death time/character ID ascending; multiple characters per account. Kithio's compiled endpoint instead groups by account, limits to 10 and uses a calendar-month interval. Trapped shares that query; modified7 uses 20 and 7/30 days. These are conflicting comparators, not established target deviations."
+          "Current reconstruction: 20 death characters, rolling 7/30-day windows, receipt total descending then death time/character ID ascending; multiple characters per account. Kithio's compiled endpoint instead groups by account, limits to 10 and uses a calendar-month interval. Trapped shares that query; modified7 uses 20 and 7/30 days. These are conflicting comparators, not established target deviations.",
+          "Current Legends eligibility excludes seeded or legacy bot death snapshots without complete earned lifetime history, from both ranked and unranked own rows. Complete-history bot lives and human legacy lives remain eligible; archived Fame details are retained. This is a modern competitive policy, not recovered 123.5.1 eligibility: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1053"
         ],
         "unknowns": [
           "Exact 123.5.1 capacity (10 versus 20), per-account uniqueness, rolling/reset boundaries and cutoff inclusion, equal-fame ties, guest/bot eligibility, expired own-row behavior and retention remain unresolved (#781). The September 28, 2011 Build118.7 quote and February 8–15, 2013 tournament summary establish top10 glow/reward thresholds, not list capacity or period algorithms.",
@@ -1509,7 +1510,8 @@
         "expected": "Stat/item/condition firing cadence, spread and trajectories; collision, cover, MultiHit, defense and compatible acknowledgement handling.",
         "differences": [
           "Trusting valid native client shot placement is intentional policy, not missing restoration.",
-          "PR1071 fixes the reproduced Invulnerable projectile-effect mismatch while preserving HP immunity, once-only hit snapshots and current native shot placement policy. Prepared native and synthetic boundary checks do not accept the whole combat feature. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071"
+          "PR1071 fixes the reproduced Invulnerable projectile-effect mismatch while preserving HP immunity, once-only hit snapshots and current native shot placement policy. Prepared native and synthetic boundary checks do not accept the whole combat feature. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1071",
+          "Server PR824 repairs the reproduced Berserk discarded-shot cadence error during position correction. Its synthetic protocol checks do not identify the original reporter's buff state or pass whole combat: https://github.com/OpenRotMG/Open-RotMG-Server/pull/824"
         ],
         "unknowns": [
           "Original-server RNG and hit/ACK arbitration remain unresolved. Selected-client trajectory/parity, RNG and defense rounding are source-reviewed in #789; exhaustive native trajectory/cover/MultiHit combinations remain unaccepted.",
@@ -7835,7 +7837,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "World transfers carry the character, destination and connection key; connection failures display an error rather than silently creating another character. Original key lifetime and death/transfer interactions remain unresolved.",
-        "differences": [],
+        "differences": [
+          "Current recovery policy: PR1222 attempts service restoration after failed update cutover while retaining and raising the failure. PR1223 removes persisted incident account fences; generation-scoped in-process ownership/finalization failures still refuse reuse. Neither source change establishes a native crash/restart or zero-loss recovery pass. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1222 https://github.com/OpenRotMG/Open-RotMG-Server/pull/1223"
+        ],
         "unknowns": [
           "Original connection-key expiry, reuse and death/transfer race behavior. Current 120-second admission and 2400-tick grant expiry are reconstruction policy, not recovered original-server timing."
         ],
@@ -8534,7 +8538,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Berserk multiplies calculated firing frequency by 1.5; Dazed takes precedence and returns minimum frequency. Weapon RateOfFire is separate.",
-        "differences": [],
+        "differences": [
+          "Server PR824 fixes valid Berserk shots being rejected during position correction by sharing the admitted/discarded cadence calculation. Existing active/recently expired allowance and overspeed refusal remain; protocol regressions are not native condition acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/824"
+        ],
         "unknowns": [
           "Target authoritative cadence tolerance and complete source-duration/refresh policies."
         ],
