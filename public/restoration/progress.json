@@ -7615,16 +7615,38 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "List and select living characters, create within capacity, and buy additional slots at the advertised price. Change Characters returns to selection while preserving the living character. Original starting capacity, maximum slots and prices remain unresolved.",
-        "differences": [],
+        "expected": "List/select living saves, create within capacity, and buy additional slots at the advertised Gold price. The selected client consumes server capacity/price and sends credentials without an expected quote. Change Characters returns to selection without death; March29,2012 describes the Nexus statue workflow.",
+        "differences": [
+          "Retained PR154 reconstruction starts with1 slot, caps at14, and prices additional slots600/800/1000 Gold. The cap retains a1000 quote but rejects purchase. Atomic purchase receipts, successful-timer replay refusal and ownership/session fences are modern safeguards; distinct timers use current durable prices, not stale displayed quotes."
+        ],
         "unknowns": [
-          "Original initial capacity, maximum and complete pricing schedule.",
-          "In-world character-switching persistence timing."
+          "Independently dated complete123.5.1 initial-capacity/cap/tier/sale schedule. November5,2011 describes one free slot and600 currently/usually1000; the mutable Japanese August4,2012 package section values two slots600+800 and names cap14. Neither proves target continuity; dated-backup requests returned403. Compiled Kithio's flat100 and modified7.0's Fame branch are customized comparators, not target policy.",
+          "Original disconnect/autosave flush, ACK and crash-durability timing. Selected Change dispatches COMPLETE, not an explicit save/death packet. Modern committed departure and tested reconnect behavior do not recover the original server's durability semantics."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://gaming.stackexchange.com/a/59796",
+            "label": "March29,2012 statue-to-selection answer; later2015 Options answer is separate"
+          },
+          {
+            "url": "https://gamingwithme.wordpress.com/2011/11/05/realm-of-the-mad-god-permadeath-mmo/",
+            "label": "November5,2011 one-free-slot and600 currently/usually1000 description, not target price continuity"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/課金について#biginners",
+            "label": "Mutable guide's August4,2012 offer:600+800 slot valuation and cap14; not independently dated full target schedule"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/account/purchaseCharSlot.cs#L34-L51",
+            "label": "Compiled primary comparator charges100 with no inspected cap; not target economic policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/account/core/services/BuyCharacterSlotTask.as#L37-L62",
+            "label": "Modified7.0 request/retry/model update; customized Fame branch is not123.5.1 authority"
           }
         ]
       }
