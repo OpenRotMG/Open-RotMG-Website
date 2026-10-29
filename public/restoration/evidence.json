@@ -1,6 +1,45 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review."},
   "sources": {
+    "world01-03-source-reverification": {
+      "kind": "source",
+      "revision": "37e59cd93c9bf011de2410127b1fe9fd0dca894e",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/37e59cd93c9bf011de2410127b1fe9fd0dca894e",
+      "checks": [
+        "realm:map-world-01",
+        "realm:map-world-02",
+        "realm:map-world-03"
+      ],
+      "method": "Test-only revalidation of existing 2100-square Worlds1–3. Full Directory construction checks both populated Realms per map, all four arrivals, authored actors/footprints and703/864/629 lava cells. Only 0x668 sites actually on ground244 use an uninterrupted walkable approach of at most8tiles; dry-anchor and World9 coverage remain.",
+      "limitations": "No runtime/map changes or historical authentication. Existing reconstruction choices, original identity/hidden fields and reuse-rights uncertainty remain."
+    },
+    "world01-03-regression-reverification": {
+      "kind": "regression",
+      "revision": "ac5a61095b98827a63134dbb551e9eb618af9b2c",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40858666193",
+      "checks": [
+        "realm:map-world-01",
+        "realm:map-world-02",
+        "realm:map-world-03"
+      ],
+      "method": "PR CI passes377 Rust tests, formatting, strict Clippy and QA lifecycle. Independently audited13,230,000 canonical cells; actual Rust build-realm --check reproduces all three WMAP byte streams exactly. Expanded constructor matrix also covers World9.",
+      "limitations": "Deterministic initial population and static cell audit, not every later dynamic state. No whole13-map-bank pass or historical-field recovery."
+    },
+    "world01-03-native-reverification": {
+      "kind": "native",
+      "revision": "ddf379139b60cb4601d1f05dd1c6fcaaf779f34f",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1227#issuecomment-6494379079",
+      "checks": [
+        "realm:map-world-01",
+        "realm:map-world-02",
+        "realm:map-world-03"
+      ],
+      "method": "Native jobs e3c23093(W1),d7dddc4a(W2),7a37646b(W3) each pass12 checks: full loading, four arrivals, approximately46/40/44 tiles of inland movement, actual900HP Coil defeat with270XP, untouched initial chest reward drag, obstacle collision, positive ground244 damage and three surviving characters. All18 client captures were read; cleanup errors are empty. Production source/map bytes remain unchanged; W2 includes the test-only working diff.",
+      "limitations": "Prepared legal but unearned Archers/gear/stats/positions. W2 selects an exposed canonical lava/dry landing pair by current NPC clearance; its earlier lethal fixture remains a failed run, not waived. Concurrent NPC damage is not attributed to lava. Representative gameplay, not every encounter phase; historical identity and rights remain unreviewed."
+    },
     "world09-source-ddf3791": {
       "kind": "source",
       "revision": "ddf379139b60cb4601d1f05dd1c6fcaaf779f34f",
@@ -6199,9 +6238,9 @@
     "hero:death": {"status": "passed","evidence": ["public-character-api-source-794eccf","death-research-a769594","death-record-regression-8ad64e2","death-native-8ad64e2"]},
     "heroes:gravestones": {"status":"passed","evidence":["gravestones-source-024dd96","gravestones-regression-024dd96","gravestones-native-024dd96"]},
     "realm:realm-generation": {"status":"not-run","evidence":["realm-road-rounding-source-84f9ec1","scenery-preservation-regression-c2decb2","classic-worlds-regression-923e502","classic-worlds-native-f27ecee","realm-research-2297a7a","realm-arrivals-regression-2d51647","realm-arrivals-native-53b05ce","realm-routes-native-ef75d74"]},
-    "realm:map-world-01": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-arrivals-regression-2d51647"]},
-    "realm:map-world-02": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74"]},
-    "realm:map-world-03": {"status":"not-run","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","fissure-native-458ccc1","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-habitats-native-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74"]},
+    "realm:map-world-01": {"status":"passed","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-arrivals-regression-2d51647","world01-03-source-reverification","world01-03-regression-reverification","world01-03-native-reverification"]},
+    "realm:map-world-02": {"status":"passed","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","authored-sites-native-831ddde","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74","world01-03-source-reverification","world01-03-regression-reverification","world01-03-native-reverification"]},
+    "realm:map-world-03": {"status":"passed","evidence":["classic-worlds-regression-923e502","classic-worlds-native-f27ecee","partial-differences-source-4992445","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","fissure-source-458ccc1","fissure-rebuild-458ccc1","fissure-native-458ccc1","authored-sites-source-831ddde","authored-sites-regression-831ddde","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-habitats-native-08a2922","realm-arrivals-regression-2d51647","realm-routes-native-ef75d74","world01-03-source-reverification","world01-03-regression-reverification","world01-03-native-reverification"]},
     "realm:map-world-04": {"status":"not-run","evidence":[]},
     "realm:map-world-05": {"status":"not-run","evidence":[]},
     "realm:map-world-06": {"status":"not-run","evidence":[]},

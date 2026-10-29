@@ -100,6 +100,19 @@ test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics
   assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
 });
 
+test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=>{
+  const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
+  for(const n of ['01','02','03']){
+    const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
+    assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');
+    assert.equal(evidence.results[id].status,'passed');
+    for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world01-03-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
+    assert.match(row.rule.differences.join(' '),/Original identity.*reuse rights remain unverified/);
+    if(n!=='01')assert.match(row.rule.acceptance,/Compare the image-guided reconstruction with its source at registered scale and orientation/);
+  }
+  for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
+});
+
 test('stable 211 parents and 71 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,282);
