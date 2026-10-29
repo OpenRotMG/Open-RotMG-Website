@@ -7309,12 +7309,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The recovered 123.5.1 client opens to character selection and supports entering the game.",
-        "differences": [],
-        "unknowns": [],
+        "differences": [
+          "Map-editor JSON and direct debug-world entry are unsupported. The public pixel-art maker is a separate feature."
+        ],
+        "unknowns": [
+          "The recovered client hides its map editor without an Admin flag; original 123.5.1 server enforcement and exceptional debug-world access remain unverified. See server issue 918."
+        ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/918#issuecomment-6483953981",
+            "label": "Selected client, server comparators and editor-access research"
           }
         ]
       }
