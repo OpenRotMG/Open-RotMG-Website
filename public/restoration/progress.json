@@ -7790,9 +7790,9 @@
         "expected": "Music, Sound Effects and Weapon Sounds each have a saved on/off toggle. The splash screen also has mute; no original volume sliders are established.",
         "differences": [],
         "unknowns": [
-          "Music asset identity/availability and audible output.",
-          "Complete SFX inventory, timing and independent toggle interactions. No file is served for two sound names in the selected object data, monster/tress_death and spell/heal_nova; whether the original server had them is unverified.",
-          "Original server distance cutoff for damage sounds from quest targets outside local view."
+          "Original audio-corpus bytes and deployment provenance. The selected client requests sorc.mp3 at 0.3 gain; its preserved 7.0 copy is served unchanged. The modified Kithio mirror instead requests Menu2.mp3 at 0.65 and is not authoritative for this track.",
+          "Original availability of monster/tress_death and spell/heal_nova. Both are metadata-only in the selected client, not demonstrated missing playback triggers. All 149 statically client-resolvable paths are present; 176 of 178 total catalogued paths match the pinned preservation source and fully decode non-silent.",
+          "Complete native SFX event timing, including whether preloaded enter_realm and use_key were originally triggered by the server. Original server distance cutoff for damage sounds from quest targets outside local view remains unknown; the current strict 20-tile cutoff is an engineering locality policy."
         ],
         "sources": [
           {
@@ -7802,6 +7802,18 @@
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/Character.as",
             "label": "Selected-version Character.damage plays hurt/death audio without a distance check"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/web/music/sorc.mp3",
+            "label": "Preserved 7.0 comparator track, not authenticated original-host bytes"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/com/company/assembleegameclient/sound/SoundEffectLibrary.as",
+            "label": "Modified 7.0 comparator separates SFX and weapon-sound selection"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 2012 FAQ describes disabling music through Sound options; its Escape shortcut is not the selected client's O binding"
           }
         ]
       }
