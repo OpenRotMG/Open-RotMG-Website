@@ -7628,15 +7628,24 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "A saved living character retains its class, experience, level, equipment, permanent stats, appearance and records. Original save timing and entry HP/MP rules remain unresolved.",
+        "expected": "A saved living character retains its class, experience, level, equipment, permanent stats, appearance and records. Current reconstruction restores saved HP/MP without a full refill; original save cadence, crash boundaries and entry normalization remain unresolved.",
         "differences": [],
         "unknowns": [
-          "Original save cadence, crash boundaries and entry HP/MP normalization."
+          "Exact 123.5.1 autosave cadence and crash-loss boundaries; inspected community schedules are not original-server evidence.",
+          "Target-build entry HP/MP normalization; community comparators restore stored values, but period documentation gives no rule."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.cs#L167-L186",
+            "label": "Compiled Kithio snapshot and saved-vitals reconstruction, not official source"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ: autosave and return retention; no numeric schedule"
           }
         ]
       }
