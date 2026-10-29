@@ -113,6 +113,15 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
+test('World4 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+  const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence),id='realm:map-world-04',row=rows.find(r=>r.id===id);
+  assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
+  for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world04-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
+  assert.match(row.rule.unknowns.join(' '),/authored.*reuse rights remain unverified/);
+  for(const n of ['05','06','07','08','10','11','12','13'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
+  for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
+});
+
 test('stable 211 parents and 71 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,282);
