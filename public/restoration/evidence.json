@@ -1,6 +1,24 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "guild-board-native-a3fdc308": {
+      "kind":"native", "revision":"a3fdc3086682574c24ec75e2e2ad3c687ad8c24a", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1196#issuecomment-6483963511", "checks":["social:guild-board"],
+      "method":"Clean QA62bdece6 passes9 checks/148550 game ms with two ordinary private-display clients0282b3a4/Ruffle16: normal hall entry, Founder Save/Cancel and exact returned literal text, Initiate cached view/reopen/read-only rendering, same-character Nexus reconnect/hall reentry and retained board. Cold QA891d4891 verifies case0333659e, SQLite/FKs, restored board/ranks40+0, two living characters/zero deaths,72 absent retired processes and anonymous byte equality of both inspected PNGs. Cleanup[],exit0/reclaimed; zero native ERRORs,98 performance WARNs.",
+      "limitations":"Prepared level5/unearned membership and comparator hall, not earned creation/invitation eligibility. No native Officer/Leader editing transitions, open-editor revocation or two-editor conflict UI acceptance; whole-feature not-run/history partial remain914. Earlier range/cached-panel/transfer-capture/table-route/CDP-body and expected-HTTP-ERROR failures are retained in the PR; queued cancellations are not passes. No gameplay, authority, persistence, ACK, lease or shared-harness changes; no performance claim."
+    },
+    "guild-board-api-a3fdc308": {
+      "kind":"regression", "revision":"a3fdc3086682574c24ec75e2e2ad3c687ad8c24a", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1196#issuecomment-6483963511", "checks":["social:guild-board"],
+      "method":"QA7359b8b5 normally reopens the closed owned native save and passes14 HTTP assertions: persisted text; lower-rank/nonmember/bad-credential read/write refusals; prepared Officer save; verbatim combining Unicode/CRLF/tab/whitespace/form text and plain/no-store replies;4096-UTF16 ASCII/surrogate boundaries; atomic oversize/control rejection; unconditional later overwrite; empty save; exact original text restoration. Six expected generic HTTP-denial ERRORs retained; exit0/reclaimed.",
+      "limitations":"HTTP regression/cold server reopen, not native permission-transition or concurrent-editor acceptance. Officer rank is an explicit local SQL fixture, restored to Initiate; no earned promotion claim. Current cap/control/verbatim-storage/overwrite policy remains reconstruction, not original-server recovery. Historical cap, filtering/normalization and conflict semantics remain914."
+    },
+    "guild-board-research-92e634b2": {
+      "kind":"source", "revision":"92e634b2d7851a0b6131b380048cccf837bb31be", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/92e634b2d7851a0b6131b380048cccf837bb31be/src/store/guilds.rs#L176-L211", "checks":["social:guild-board"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/914#issuecomment-6483375539 . February17,2012 Wild Shadow guild-guide capture permits all member reads and Leader/Officer edits; January11 Build121 transcription establishes shared text, not numeric limits. Selected123.5.1 _6e/_4L_, _0E_D_ and _03v establish authenticated full-text Save/returned body, cached Cancel, escaped/linkified display, conditional Edit and no explicit input cap/revision token. Modified7.0 GuildBoardWindow/EditBoard and authenticated rank20 setBoard agree on that flow. Follow-up common/Database.SetGuildBoard unconditionally assigns/flushes; AIR TextField documents default unlimited maxChars and CR-separated text. Inspected Kithio tree/database supplies no original board endpoint.",
+      "limitations":"Source research, not original-server recovery or native acceptance. Current4096-UTF16 cap, control rejection, verbatim permitted-text persistence and last-committed-writer are reconstruction/safety choices. Original cap, normalization/filtering and conflict semantics remain issue914.7.0 double form decoding is not imported. Fork ancestry is not independent evidence; current AIR docs are not a2012 production witness. Direct403/incorrect-path404 failures retained alongside successful retrievals; no comparator code/assets imported."
+    },
     "trade-research-07a0afd9": {
       "kind":"source", "revision":"07a0afd9abd25113065ace8da6d23c2264c7b432", "date":"2026-10-28",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/07a0afd9abd25113065ace8da6d23c2264c7b432/docs/trading.md", "checks":["social:trade-with-players"],
@@ -5802,7 +5820,7 @@
     "social:create-and-join-a-guild": {"status":"not-run","evidence":[]},
     "social:guild-invitations-and-removal": {"status":"not-run","evidence":[]},
     "social:guild-ranks": {"status":"not-run","evidence":[]},
-    "social:guild-board": {"status":"not-run","evidence":[]},
+    "social:guild-board": {"status":"not-run","evidence":["guild-board-research-92e634b2","guild-board-native-a3fdc308","guild-board-api-a3fdc308"]},
     "social:guild-roster": {"status":"not-run","evidence":[]},
     "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf"]},
     "social:share-a-living-world": {"status":"not-run","evidence":["enemy-prediction-source-12b706a","enemy-prediction-regression-12b706a"]},

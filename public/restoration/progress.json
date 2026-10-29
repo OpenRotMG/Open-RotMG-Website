@@ -7169,10 +7169,12 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Members read guild-shared text; Officer+ edits with Save/Cancel and returned saved text through authenticated requests. No historical numeric cap established.",
-        "differences": [],
+        "expected": "Members read guild-shared text; Officer+ edits. Selected123.5.1 Save posts complete text and displays the returned body; Cancel restores cached text without saving. No original server cap or conflict rule established.",
+        "differences": [
+          "Current4096-UTF16-unit cap, control-character rejection, verbatim allowed-text storage and transactional last-writer-wins are reconstruction/safety policies, not recovered2012 server rules. The later7.0 comparator additionally URL-decodes parsed form text; its corruption of literal plus/percent data is not imported."
+        ],
         "unknowns": [
-          "Original text length, normalization and simultaneous-edit behavior."
+          "Original server length cap, Unicode/newline normalization or filtering, and simultaneous-save policy remain unresolved in server issue914. Client text has CR line separators and no explicit maxChars or revision token; that does not establish server behavior."
         ],
         "sources": [
           {
