@@ -1038,10 +1038,10 @@
             "name": "Classic World 5 identity",
             "expected": "Identify the documented Classic World 5 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Register an explicitly authored playable reconstruction; track historical identity and rights separately. Apply the geography, ecology and interaction checks independently. Compare the deep eastern inlet and southern extensions; distinguish silhouette matching from a recovered river/biome variant.",
-            "implementation": "missing",
+            "implementation": "present",
             "historical": "unreviewed",
-            "differences": ["This numbered World is not registered yet. Historical continuity and provenance remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
-            "unknowns": [],
+            "differences": ["PR1229 registers an authored 2100-square reconstruction with 19 Ent Groves, 5 Lich sites, 22 Coil temples and 2 Oases. Tests and normal-client checks cover arrivals, movement, combat, chest collection, temple/wood collision and living lava damage: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1229"],
+            "unknowns": ["The 105,657 resolved pixels, 1,193 raster approximations, habitat tiers and 590 added exposed lava cells are authored. Original identity/extent, hidden fields, placement/RNG and reuse rights remain unverified."],
             "sources": [],
             "group": "maps"
           },
@@ -1149,7 +1149,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1184,7 +1184,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1198,7 +1198,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1212,7 +1212,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1226,7 +1226,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1240,7 +1240,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1254,7 +1254,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1268,7 +1268,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Eight layouts: three FSOD maps plus authored Worlds 1–4 and 9. Worlds 5–8/10–13 remain absent; none is recovered original data."
+              "Nine layouts: three FSOD maps plus authored Worlds 1–5 and 9. Worlds 6–8/10–13 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -2672,7 +2672,8 @@
           "Temple chest and Snake now keep fixed local community anchors A(30,30) and B(27.5,27.5) while the ruin planes rotate. Protected floor clearing follows the actual point, and habitat is checked there. Eligible sites can change; original coordinates, generation and placement remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/502",
           "April 19, 2012 guide (text labeled 122.3.2) supports surviving eggs hatching after five seconds into 1–2 snakes, unlike Kithio's 2500ms/proximity suicide and death transform. Kithio uses targeted ten-shot rings; the mixed-era Japanese page describes eight cloak-ignoring shots. Current fixed rings, two temples, child budget16 and 20% portal roll remain reconstruction, not proven original parameters: https://github.com/OpenRotMG/Open-RotMG-Server/issues/814#issuecomment-6454170994",
           "PR1224 binds World9 temples to ordinary Coils/chests; at that revision other layouts retained two procedural temples. AI, chest rolls and portal chance are unchanged.",
-          "PR1228 adds the same non-repainting binding for 16 World4 temples. AI, chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1228"
+          "PR1228 adds the same non-repainting binding for 16 World4 temples. AI, chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1228",
+          "PR1229 binds 22 World5 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1229"
         ],
         "unknowns": [
           "Exact 123.5.1 temple count/mix/distribution, egg timing/batch counts, ring count/orientation/cloak policy and Jungle probability remain unresolved; source conflicts and checked leads are tracked in issue814. Trapped's 10–19 requested sites per variant and randomized initial egg delay are not guaranteed population or exact timing."
