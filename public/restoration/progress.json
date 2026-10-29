@@ -7373,12 +7373,20 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "The recovered 123.5.1 client opens to character selection and supports entering the game.",
-        "differences": [],
-        "unknowns": [],
+        "differences": [
+          "Map-editor JSON and direct debug-world entry are unsupported. The public pixel-art maker is a separate feature."
+        ],
+        "unknowns": [
+          "The recovered client hides its map editor without an Admin flag; original 123.5.1 server enforcement and exceptional debug-world access remain unverified. See server issue 918."
+        ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_C_Q_.as#L56-L59",
+            "label": "Recovered-source map-editor Admin menu gate; not original-server permission proof"
           }
         ]
       }
