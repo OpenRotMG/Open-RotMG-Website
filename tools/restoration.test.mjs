@@ -73,14 +73,14 @@ test('Mad Lab prepared journeys do not accept unresolved whole-feature semantics
   assert.match(data.features.find(f=>f.id===ids[0]).audit.unknowns.join(' '),/cure mask/);
 });
 
-test('stable 211 parents and 70 components remain separate from evidence',()=>{
+test('stable 211 parents and 71 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,281);
-  assert.equal(new Set(rows.map(r=>r.id)).size,281);
-  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,70);
+  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,282);
+  assert.equal(new Set(rows.map(r=>r.id)).size,282);
+  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,71);
   assert.equal(rows.filter(r=>r.id.startsWith('realm:map-world-')).length,13);
   assert.equal(digest(data.features.map(f=>f.id)),'d4590c87ab5751a89132a40ed16a37258b5f407ba70d9f5be84724a113b9fa3a');
-  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'27e5eec1f99db6d2e0c2a0846cbce7471def7dbf165f78679f58a53b33b59bed');
+  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'6c077c8c43e3cc970fa4fa6f3cb0350713c364707bd913c0138f920cf13f1226');
   assert(data.features.every(f=>!accepted(f,evidence)));
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
