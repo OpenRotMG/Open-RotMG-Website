@@ -13,6 +13,24 @@
       "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/912#issuecomment-6483259854 . Inspected selected123.5.1 invitation panel and modified7.0 GuildInvitePanel/RegisterPanel/GuildUtil:20-second local panel, Reject/timeout without a server packet, Accept names the guild, cancellable self-renunciation and Officer+ strictly-lower removal. Compiled Kithio chat/commands supply no invitation handler. Compiled7.0 handlers replace a nullable pending guild ID without timer/range or acceptance-time inviter check; AddGuildMember enforces chosen name, one guild and50-member capacity. February17,2012 Wild Shadow guide specifies nearby invitations, Accept, Chronicle removal and renunciation but no exact expiry/range. February14 build122 announcement adds Founder removal of Leaders, unlike the guide's stale four-rank paragraph.",
       "limitations":"Source research only; not native acceptance or recovered original server semantics. Current20-tile/same-world/known guard,60-second lifetime and transactional inviter-authority recheck remain reconstruction policies. Original numeric range/expiry, server replacement and inviter-departure behavior remain unresolved in#912. No weaker comparator authority imported; no source reuse or licensing clearance inferred."
     },
+    "guild-create-native-60512f15": {
+      "kind":"native", "revision":"60512f159458a4589b4d6d8f58ad8447435d4be4", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1202#issuecomment-6484366590", "checks":["social:create-and-join-a-guild"],
+      "method":"Clean QA c3c624f7 passes19 assertions/289950 active game ms with two owned ordinary native clients0282b3a4/Ruffle.16: normal registration/first names, creation Cancel, empty/duplicate/unfunded refusals, space normalization, Founder40 and exactly1000 personal Fame spent, uninvited join refusal, actual Reject/Accept to Initiate0, denied Initiate invitation, both Tutorial/Nexus reconnects and retained identities/memberships/wallets. Cold QA579daeb8 matches committed cased6037249, SQLite/FKs, one guild/ranks40+0, wallets2000/0/lifetime3000/0, zero Guild Fame, two living characters/zero deaths and121 retired owned child PIDs. Cleanup[],exit0/reclaimed. Three inspected viewport crops anonymously byte-verified in QA75f4b169; CI checks pass.",
+      "limitations":"Prepared wallets3000/0 and living class Fame20, not earned progression. Native unnamed/zero-star guild refusal,50-member boundary and dissolution/name-reuse journeys remain unexecuted; whole-feature not-run/history partial remain911. Selected Register reapproach is required after form closure. Earlier setup timing, authenticated-map, native corner/receipt-budget, range/focus failures remain failed;88aac437 passed16 before a transfer-gap screenshot read failed. Final captures stable UI, without changing shared harness, authority, ACK/lease, movement, death or reward guards. Seven slow-tick/one latency/five expected-refusal WARNs, zero ERRORs; no performance or public-runtime claim."
+    },
+    "guild-create-research-d25b84d5": {
+      "kind":"source", "revision":"d25b84d58488253398b33c4b324ceb9e3140d14c", "date":"2026-10-28",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/d25b84d58488253398b33c4b324ceb9e3140d14c/examples/testing/guild-create.mjs", "checks":["social:create-and-join-a-guild"],
+      "method":"Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/911#issuecomment-6483247196 . Fresh JPEXS26.3 QA b1c87ddb exports four selected SWF07ae4fc3 classes: creation letters/spaces and max20, Register create/Renounce, Officer+ Invite and Accept/Reject20s panel. Read modified7.0 form/handlers/Database at pinned a13c855d/1855c017. Kithio project has no creation/join handler; Trapped593e4908 has last-member deletion but an incorrect Credits cost. January11,2012 Build121 supplies1000Fame/50members; February14 Build122 adds Founder. Additional February17 official-wiki archive describes unique20-character names/Accept/renunciation but retains stale four-rank wording; later7.0 Database explains uppercase name-key reservation/release and whitespace normalization. May28,2012 archive corrects Founder/five ranks but supplies no one-star/normalization/name-reuse rule; June/September requests redirect to that single capture. December2011 testing chosen-name/100Fame and mixed-era Japanese one-star text are qualified separately.",
+      "limitations":"Research, not original-server recovery, license clearance or gameplay acceptance. Exact production normalization/case/error order, chosen-name/one-star enforcement and dissolved-name reuse remain issue911. Initial exports selected no classes; corrected escaped names export four. Direct Japanese/support403s retained separately from successful web text retrieval. No gameplay, authority, account ownership, permanence, ACK/lease or hosting changes."
+    },
+    "registration-research-24398fa0": {
+      "kind":"source", "revision":"24398fa0fc9b1083bf8e77faea3f07473e55bdd5", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/24398fa0fc9b1083bf8e77faea3f07473e55bdd5/docs/registration.md", "checks":["access:registration","access:email-verification"],
+      "method":"Fresh selected SWF07ae4fc3/JPEXS26.3.0 account export (QAd41bfcfa/1bf6e0cc) separates success-only credential update, account verify, VerifiedEmail child presence, unverified Continue and explicit resend. Compiled/routed Kithio resend is a stub and registration uses customized username/email; related Trapped is not independent. Modified7.0 registration agrees only on guest GUID and success-only credential replacement. Follow-up Japanese guide revisions March22/October9,2012 describe initial email, link-only confirmation and apparently retained/playable unconfirmed accounts. September10,2016 revision adds CAPTCHA; official January14,2012 FAQ supplies no token policy. Serverf59986f6 already contains PR745 explicit-only modern verification and PR1050 recovery.",
+      "limitations":"Research only, not newly executed gameplay or original-server recovery. Exact123.5.1 initial-send/queue/retry/delivery, endpoint/token generation/expiry/replay/challenge rules and period-guide continuity remain issue920. Registration historical partial and verification known-differences retained. Existing native refusal/conversion and delivery receipts, including failed later Nexus transfers and one-recipient limits, remain revision-bound and unchanged. No automatic sending, quota, authentication, ownership, persistence, gameplay, hosting or new framework change."
+    },
     "shared-world-native-5b8be3a5": {
       "kind":"native", "revision":"5b8be3a587b657eeff8af89ef9b1f416a308494b", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1203#issuecomment-6484276762", "checks":["social:share-a-living-world"],
@@ -4366,7 +4384,7 @@
       "url": "https://github.com/OpenRotMG/Open-RotMG-Website/pull/39#issuecomment-6319796833",
       "method": "Separate genuinely normal original Guest2/Guest3 profiles/accounts2/3/characters2/3 natively exchanged two owned Health Potions for a backpack spell. One new commit advanced revisions2/1→3/2 with exact multiset conservation. Both ordinary reload→Play→same Wizard selector→Play reconnects visibly retained nondefault items; live owner/slot/revision state and SQLite matched before/after reconnect and final close. Original gameplay server HTTP bodies matched during reconnect; owned resources closed.",
       "limitations": "Same-profile guest durability, not prepared-actor reconnect or credential login. Public native-chat teleport used normal eligibility/cooldown, not dev mutation. Earlier separate A Nexus transfer FAILED ACK64 and stays retained; no all-world success or causal fix is implied. No source/harness/guard/security changes.",
-      "checks": ["social:trade-with-players", "access:guest-accounts"]
+      "checks": ["social:trade-with-players", "access:guest-accounts", "access:client"]
     },
     "keybinding-conflict-persistence-reset-native-eb85988": {
       "kind": "native",
@@ -4404,7 +4422,8 @@
       "limitations": "Client prepacket rejection is not backend proof; the separate server refusal is. This does not certify exhaustive password/Terms/duplicate-email/race/rate policy or historical authentication. Generated local test fields are redacted in published captures.",
       "checks": [
         "access:guest-accounts",
-        "access:registration"
+        "access:registration",
+        "access:client"
       ]
     },
     "guest-registration-conversion-native-eb85988": {
@@ -4416,7 +4435,8 @@
       "limitations": "No copied/prepared state or direct-API-as-native substitute. Old guest-auth revocation is source/log-observed, not independently runtime-certified. Broader guest/registration and historical-policy acceptance remain unrecorded.",
       "checks": [
         "access:guest-accounts",
-        "access:registration"
+        "access:registration",
+        "access:client"
       ]
     },
     "registered-credential-login-native-eb85988": {
@@ -4428,8 +4448,27 @@
       "limitations": "Both subsequent Nexus transfers FAILED with tick-ack backlog; those failures are retained, not world-success or a proven renderer/TMPDIR cause. Tutorial login is observed, not every-world reliability, external email/recovery/security, all classes or historical fidelity. Whole login umbrella stays not-run.",
       "checks": [
         "access:guest-accounts",
-        "access:login"
+        "access:login",
+        "access:client"
       ]
+    },
+    "client-entry-research-f1c1cea7": {
+      "kind":"source", "revision":"f1c1cea787aacfa723c46df6eae249affd41ffb6", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/f1c1cea787aacfa723c46df6eae249affd41ffb6/examples/testing/client-entry.mjs", "checks":["access:client"],
+      "method":"Fresh selected client0282b3a4 SWF07ae4fc3 decompilation verifies build123.5.1, XML Admin-gated map-editor menu and supplied-JSON test world-6. Pinned Kithio agrees on routing but its Hello branch is permissive, not original-server authority. Related Trapped is not independent corroboration; modified7.0 TitleView also gates EDITOR on isAdmin. Additional Pixel Editor guide image revisions in January/February/April2012 and April5,2013 testing notes concern public sprite art, not map/debug-world access.",
+      "limitations":"Recovered client definitions and private-server comparators are not authenticated original deployment/permission evidence. Current guide has later edits; image timestamps do not date every claim. Original-server enforcement and exceptional debug access remain explicitly unknown. No gameplay policy changed or source/assets copied; history stays partial. Failed Stanford fetch and guessed wiki404s do not prove absence."
+    },
+    "client-entry-regression-f1c1cea7": {
+      "kind":"regression", "revision":"f1c1cea787aacfa723c46df6eae249affd41ffb6", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40791654090", "checks":["access:client"],
+      "method":"Focused real-socket test refuses wrong build, ungranted debug world-6 and supplied map JSON without changing the saved character, then accepts ordinary LOAD. All285 Rust tests pass locally on retained binary806d79ac; CI passes formatting, warning-denied Clippy, the Rust suite and QA lifecycle. Rust sources are unchanged through9a178951.",
+      "limitations":"Prepared protocol regression, not native browser refusal rendering, original-server policy or exhaustive malformed-input/security acceptance. Redundant queued local suite/Clippy jobs were cancelled; the separately executed retained-binary suite and CI are the passing receipts."
+    },
+    "client-entry-native-9a178951": {
+      "kind":"native", "revision":"9a17895193995342a5c49aa856445fabdf4effab", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1198#issuecomment-6484314784", "checks":["access:client"],
+      "method":"Clean QAd2339032 passes four checks over7450 game ms on client0282b3a4/Ruffle.16: title/selection/LOAD, actual movement, normal Tutorial→Nexus reconnect retaining account1/character1/items/revision1 across a new player object, and ordinary listing without Admin. Four frames inspected. Cold QA699c0be8 matches committed cased450622e, verifies the living saved Wizard/HP100/MP100/starter items/revision1, SQLite/FKs, zero deaths/credentials, ten retired processes, cleanup[] and reclaimed scratch. Zero backend ERRORs; six WARNs retained.",
+      "limitations":"Protected prepared initial character/position, not unprepared CREATE, earned progression, fresh browser/server restart or all account operations. Earlier native guest refusal/conversion/login/durability receipts are reused at their own revisions with old ACK failures preserved. Failed inspector-clock and transfer-gap capture pilots remain excluded; final capture occurs after settled reconnect. No performance, production or historical acceptance, and no authority/death/durability/ACK/lease changes."
     },
     "paused-area-source-a886831": {
       "kind": "source",
@@ -6018,18 +6057,18 @@
     "social:lock-players": {"status":"not-run","evidence":["locks-research-e2f2d7ef","locks-regression-5658d3e5","locks-native-2f8c8e06"]},
     "social:ignore-players": {"status":"not-run","evidence":["ignore-research-b2026a26","ignore-native-de9c84ce"]},
     "social:teleport-to-players": {"status":"not-run","evidence":["player-teleport-native-97b3166e","player-teleport-regression-077f73ae","player-teleport-research-077f73ae","invisible-teleport-source-96b2b3f","invisible-teleport-regression-96b2b3f","invisible-teleport-native-96b2b3f","teleport-output-regression-c1ccadf","minimap-both-invisible-native-9ad87c2","trench-teleport-source-e316eea","trench-teleport-native-e316eea"]},
-    "social:create-and-join-a-guild": {"status":"not-run","evidence":[]},
+    "social:create-and-join-a-guild": {"status":"not-run","evidence":["guild-create-research-d25b84d5","guild-create-native-60512f15"]},
     "social:guild-invitations-and-removal": {"status":"not-run","evidence":["guild-invitations-research-5fb07d7e","guild-invitations-native-2ec70ada"]},
     "social:guild-ranks": {"status":"not-run","evidence":["guild-ranks-research-7486d765","guild-ranks-regression-88cba821","guild-ranks-native-112d9857"]},
     "social:guild-board": {"status":"not-run","evidence":["guild-board-research-92e634b2","guild-board-native-a3fdc308","guild-board-api-a3fdc308"]},
     "social:guild-roster": {"status":"not-run","evidence":[]},
     "social:guild-hall": {"status": "not-run","evidence": ["item-chat-guild-source-4992445","instance-allocation-source-794eccf"]},
     "social:share-a-living-world": {"status":"not-run","evidence":["enemy-prediction-source-12b706a","enemy-prediction-regression-12b706a","shared-world-research-5ec66912","shared-world-native-5b8be3a5"]},
-    "access:client": {"status":"not-run","evidence":[]},
+    "access:client": {"status":"passed","evidence":["client-entry-research-f1c1cea7","client-entry-regression-f1c1cea7","client-entry-native-9a178951","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
     "access:guest-accounts": {"status":"passed","evidence":["tutorial-continuity-native-96b2b3f","guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registered-credential-login-native-eb85988","trade-durable-reconnect-native-eb85988"]},
-    "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988"]},
+    "access:registration": {"status":"passed","evidence":["guest-registration-refusals-native-eb85988","guest-registration-conversion-native-eb85988","registration-research-24398fa0"]},
     "access:login": {"status": "not-run","evidence": ["registered-credential-login-native-eb85988","recovered-account-source-794eccf"]},
-    "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45"]},
+    "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45","registration-research-24398fa0"]},
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
     "access:change-password": {"status":"not-run","evidence":[]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},
