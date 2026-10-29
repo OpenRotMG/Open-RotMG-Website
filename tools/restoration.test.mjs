@@ -8,6 +8,14 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('gallery ordinary passes do not certify administrative export or original history',()=>{
+  const data=catalogue(),evidence=ledger(),id='access:player-art-gallery',feature=data.features.find(f=>f.id===id);validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.deepEqual(evidence.results[id].evidence,['gallery-research-53587151','gallery-native-41ba534a','gallery-cold-http-41ba534a']);
+  assert.match(feature.audit.differences.join(' '),/does not issue gallery Admin/);
+  assert.match(evidence.sources['gallery-native-41ba534a'].method,/17 native assertions/);assert.match(evidence.sources['gallery-cold-http-41ba534a'].method,/12 HTTP assertions/);
+});
+
 test('Guild Hall first-upgrade acceptance does not certify original layouts or every tier',()=>{
   const data=catalogue(),evidence=ledger(),id='social:guild-hall',component=id+':shared-access-and-first-upgrade',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
