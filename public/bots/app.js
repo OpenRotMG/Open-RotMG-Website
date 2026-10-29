@@ -77,13 +77,18 @@ export function start({document, window, backend, now = Date.now}) {
   const $ = selector => document.querySelector(selector);
   const origin = backend.url('/api/bots').origin;
   let selected = new URLSearchParams(window.location.search).get('bot'), active, bridge, refreshId = 0, available = new Set();
-  const options = new Map();
+  const options = new Map(), flag = document.createElement('p');
+  flag.id = 'flag';$('.intentions').prepend(flag);
   const current = session => active === session && !session.controller.signal.aborted;
   function label(entry) {
     const location = !entry.online ? 'Offline' : entry.world === null ? 'Location unavailable'
       : `${entry.world}${now() - entry.at > 15000 ? ' (stale)' : ''}`;
-    const text = `${entry.option.value} — ${location}`;
+    const text = `${entry.flag ? '⚠ ' : ''}${entry.option.value} — ${location}`;
     if (entry.option.textContent !== text) entry.option.textContent = text;
+  }
+  function showFlag() {
+    const text = options.get(selected)?.flag ?? '';
+    if (flag.textContent !== text) flag.textContent = text;
   }
   function locate(entry, sample) {
     if (entry.at === undefined || sample.at >= entry.at) Object.assign(entry, sample);
@@ -261,7 +266,9 @@ export function start({document, window, backend, now = Date.now}) {
       if (!response.ok) throw new Error(`bot list failed (HTTP ${response.status}): ${await response.text()}`);
       const list = await response.json();
       if (id !== refreshId) return false;
-      if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length)) throw new Error('malformed bot list');
+      if (!Array.isArray(list.bots) || !list.bots.every(bot => bot && typeof bot.name === 'string' && bot.name.length &&
+        (bot.flag == null || typeof bot.flag.text === 'string' && bot.flag.text.trim()))) throw new Error('malformed bot list');
+      const flags = new Map(list.bots.map(bot => [bot.name, bot.flag?.text]));
       const names = new Set(list.bots.map(bot => bot.name));
       if (names.size !== list.bots.length) throw new Error('duplicate bot identities in live list');
       const catalogue = list.bots.map(bot => ({name: bot.name, ...locationSample(bot, requested)}));
@@ -278,8 +285,9 @@ export function start({document, window, backend, now = Date.now}) {
         if (!available.has(name) && name !== selected && name !== bridge?.name) {
           picker.removeChild(entry.option);options.delete(name);continue;
         }
-        entry.online = available.has(name);entry.option.disabled = !entry.online;label(entry);
+        entry.online = available.has(name);entry.flag = flags.get(name);entry.option.disabled = !entry.online;label(entry);
       }
+      showFlag();
       for (const bot of catalogue) {
         // A catalogue request started before the current SSE cannot roll back a world handoff.
         if (active?.name === bot.name && active.received !== undefined && active.received >= requested) continue;
@@ -302,7 +310,7 @@ export function start({document, window, backend, now = Date.now}) {
   function change(event, target) {
     selected = event.target.value;
     window.history.replaceState(null, '', `?bot=${encodeURIComponent(selected)}`);
-    $('#status').textContent = '';if (active?.name !== selected) select(selected, target);
+    $('#status').textContent = '';showFlag();if (active?.name !== selected) select(selected, target);
   }
   $('#bot').addEventListener('change', change);window.addEventListener('message', message);
   const tick = window.setInterval(() => {
@@ -313,7 +321,7 @@ export function start({document, window, backend, now = Date.now}) {
   }, 1000);
   const polling = window.setInterval(() => {void refresh();}, 10000);
   void refresh();
-  return () => {++refreshId;stop();$('#view').replaceChildren();bridge = undefined;window.clearInterval(tick);window.clearInterval(polling);window.removeEventListener('message', message);$('#bot').removeEventListener('change', change);};
+  return () => {++refreshId;stop();flag.remove();$('#view').replaceChildren();bridge = undefined;window.clearInterval(tick);window.clearInterval(polling);window.removeEventListener('message', message);$('#bot').removeEventListener('change', change);};
 }
 
 if (typeof document !== 'undefined') start({document, window, backend: window.OpenRotMGBackend});

@@ -30,6 +30,8 @@ class Node {
   set value(value) {this.selected = this.tag === 'select' && !this.children.some(child => child.value === value) ? '' : value;}
   get value() {return this.selected;}
   replaceChildren(...children) {this.children = children;for (const child of children) child.parent = this;if (this.tag === 'select') this.value = children[0]?.value ?? '';}
+  prepend(child) {this.children.unshift(child);child.parent = this;}
+  remove() {this.parent.removeChild(this);}
   appendChild(child) {this.children.push(child);child.parent = this;if (this.tag === 'select' && this.selected === undefined) this.value = child.value;return child;}
   removeChild(child) {this.children.splice(this.children.indexOf(child), 1);child.parent = null;return child;}
   setAttribute(key, value) {this.attributes[key] = value;}
@@ -44,7 +46,7 @@ const bots = names => ({bots: names.map(name => ({name, frame, age_ms: 0})), llm
 const json = value => new Response(JSON.stringify(value), {headers: {'content-type': 'application/json'}});
 function harness(t, query = '', initial = bots(['Alpha', 'Beta']), {autoSelect = true, autoReady = true} = {}) {
   let clock = 0, nextTimer = 0;
-  const nodes = Object.fromEntries(['bot', 'status', 'view', 'view-status', 'telemetry-status', 'intention', 'intention-status'].map(id => [`#${id}`, new Node(id === 'bot' ? 'select' : '')]));
+  const nodes = Object.fromEntries(['#bot', '#status', '#view', '#view-status', '#telemetry-status', '#intention', '#intention-status', '.intentions'].map(id => [id, new Node(id === '#bot' ? 'select' : '')]));
   const listeners = {}, timers = new Map(), calls = [], lists = [json(initial)], streams = [], feeds = [], commands = [];
   const window = {location: {search: query}, history: {replaceState(...args) {window.path = args[2];}},
     addEventListener(type, callback) {listeners[type] = callback;}, removeEventListener(type) {delete listeners[type];},
@@ -213,6 +215,18 @@ test('retired guest options stay bounded without replacing live or selected iden
   picker.value = 'Guest20';picker.listeners.change({target: picker});
   h.lists.push(json(bots(['Guest20'])));await h.advance(10000);
   assert.deepEqual(picker.children.map(option => option.value), ['Guest20']);
+});
+
+test('flagged bots get a warning icon without reordering; the selected flag is one plain-text line', async t => {
+  const flagged = (list, name, text) => {list.bots.find(bot => bot.name === name).flag = {kind: 'looping', since_ms: 0, text};return list;};
+  const h = harness(t, '?bot=Alpha', flagged(bots(['Alpha', 'Beta']), 'Beta', '<b>Looping</b> for 21m.'));await flush();
+  const picker = h.nodes['#bot'], [alpha, beta] = picker.children, line = () => h.nodes['.intentions'].children[0].textContent;
+  assert.deepEqual([alpha.textContent, beta.textContent], ['Alpha — Realm', '⚠ Beta — Realm']);assert.equal(line(), '');
+  h.choose('Beta');assert.equal(line(), '<b>Looping</b> for 21m.');
+  const list = flagged(bots(['Beta', 'Alpha']), 'Alpha', 'Keeps fleeing.');list.bots[0].flag = null;
+  h.lists.push(json(list));await h.advance(10000);
+  assert.deepEqual(picker.children, [alpha, beta]);assert.deepEqual([alpha.textContent, beta.textContent], ['⚠ Alpha — Realm', 'Beta — Realm']);assert.equal(line(), '');
+  h.lists.push(json(flagged(bots(['Alpha', 'Beta']), 'Beta', '')));await h.advance(10000);assert.match(h.nodes['#status'].textContent, /malformed bot list/);
 });
 
 test('location age, missing worlds, catalogue failures and offline bots are explicit, never guessed', async t => {
