@@ -7725,14 +7725,30 @@
       "audit": {
         "implementation": "partial",
         "historical": "partial",
-        "expected": "The client lists advertised servers, locations, usage and restricted access, remembers a preference and selects an eligible server. Full/busy selection and admission are separate checks.",
+        "expected": "The client reads advertised server coordinates and access metadata, shows Normal/Crowded/Full, saves a preferred server and selects an eligible endpoint. Full-server selection and backend admission are separate checks.",
         "differences": [
           "Only one server endpoint is advertised; multi-region server selection is not implemented."
         ],
         "unknowns": [
-          "Original full/busy server presentation and region-specific server lists."
+          "Exact 123.5.1 production region roster, coordinates, capacities and original backend admission policy remain unverified. February 2012 server additions do not establish the later roster (#929)."
         ],
         "sources": [
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/net/Server.as",
+            "label": "123.5.1 comparator: Crowded >=0.66; Full >=1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_F_1/_0M_L_.as",
+            "label": "123.5.1 comparator: saved preferred-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build120.0.3",
+            "label": "November 28, 2011 release notes: less-crowded nearest-server selection"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/version/build122.0.1",
+            "label": "February 20–25, 2012 additions: region names and title-screen selection"
+          },
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
