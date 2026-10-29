@@ -1,6 +1,39 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review."},
   "sources": {
+    "world13-source-e1afa24": {
+      "kind": "source",
+      "revision": "e1afa24a5ce952a0e9bf5c9d4bf974cd8de13775",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/commit/e1afa24a5ce952a0e9bf5c9d4bf974cd8de13775",
+      "checks": [
+        "realm:map-world-13"
+      ],
+      "method": "Full 2000-square authored reconstruction, 189 tuples, 51 sites and 634 exact lava cells. Source coordinates preserve paired north/south bodies and their central connection. Explicit held-cell choices, 48 selected TombWall connection configs, immutable bounded underlays/raster witnesses and 689,727 terrain-only refinements remain distinct from frozen Stage4 research.",
+      "limitations": "Authored values, not recovered original fields. Historical identity/extent, hidden fields, placement/RNG and reuse rights remain unverified."
+    },
+    "world13-regression-4f32e2f": {
+      "kind": "regression",
+      "revision": "96e0a9411368ceb934dba0d4d5dd3a7b3bb2b340",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40947895270",
+      "checks": [
+        "realm:map-world-13"
+      ],
+      "method": "PR CI passes 380 Rust tests, formatting, strict Clippy and QA lifecycle. Populated constructors check both Realms, landmarks/lava, arrivals and access. An independent 31-check audit reconstructs all 4M final tuples. The current Rust emitter reproduces the WMAP exactly. An allowed-string counterexample proves CI connection-topology regression protection, not a production metadata topology validator. Actual CI checkout tree equals feature4f32e2f and the normal merge.",
+      "limitations": "Initial population and representative routes, not every later dynamic state. Substantive data/code/test KEEP is separate from measured, retained review output-budget overruns."
+    },
+    "world13-native-4f32e2f": {
+      "kind": "native",
+      "revision": "4f32e2f08b48396cc620434f97e85bd28c473301",
+      "date": "2026-10-29",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236#issuecomment-6507653225",
+      "checks": [
+        "realm:map-world-13"
+      ],
+      "method": "Main 7df1f26b passes 12 checks: loading/four arrivals, 47.583 tiles over 10,500 measured World.now milliseconds, actual 900HP Coil defeat/270XP, initial chest item2685 drag/revision1→2, temple collision, positive ground244 commits37/49/53/38/40, three survivors and identity. Auxiliary 83f6427f passes 7 wood/GoldSand Oasis checks. Geography 12be1fa7 passes 10 northern-body, central-connection and southern-body standing-tile/loading/movement/survival checks. The prior actual populated non-water component links all three samples across1,507,069cells. All 11 genuine captures inspected; cleanup-error lists empty.",
+      "limitations": "Clean feature4f32e2f; explicit storage-only native adapter, not frozen-tool reproduction. Legal but unearned gear/stats/positions; main/auxiliary clearance read-only, geography uses a prior read-only snapshot. At most three clients per campaign. Failed private World10 lookup retained; only private literals corrected. No resurrection, invulnerability, forced loot/NPCs or HP/condition/timer overrides. Concurrent NPC damage excluded from lava attribution. Native geography is representative local traversal plus actual populated connectivity, not a continuous end-to-end north/south walk. Oasis visibility/traversal does not certify boss defeat or its complete attack pattern."
+    },
     "world10-source-9b97979": {
       "kind": "source",
       "revision": "9b979790fa7712af96719f747907e57854faf008",
@@ -6385,7 +6418,7 @@
     "realm:map-world-10": {"status":"passed","evidence":["world10-source-9b97979","world10-regression-2170ded","world10-native-2170ded"]},
     "realm:map-world-11": {"status":"passed","evidence":["world11-source-a0d1aaf","world11-regression-64613d2","world11-native-64613d2"]},
     "realm:map-world-12": {"status":"not-run","evidence":[]},
-    "realm:map-world-13": {"status":"not-run","evidence":[]},
+    "realm:map-world-13": {"status":"passed","evidence":["world13-source-e1afa24","world13-regression-4f32e2f","world13-native-4f32e2f"]},
     "realm:map-registration": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a","world09-source-ddf3791","world09-regression-938d83e","world09-native-4bf2154"]},
     "realm:biome-zones": {"status":"not-run","evidence":["partial-differences-source-4992445","classic-lowland-regression-39778f0","classic-lowland-native-39778f0","shore-cubes-source-e105bff","shore-cubes-regression-e105bff","shore-cubes-native-e105bff","realm-habitats-source-08a2922","realm-habitats-regression-08a2922","realm-habitats-native-08a2922"]},
     "realm:water-network": {"status":"not-run","evidence":["partial-differences-source-4992445","realm-research-2297a7a"]},
