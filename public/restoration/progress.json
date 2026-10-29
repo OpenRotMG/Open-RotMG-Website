@@ -7509,13 +7509,14 @@
       "audit": {
         "implementation": "present",
         "historical": "known-differences",
-        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved.",
+        "expected": "Selected client checks VerifiedEmail child presence, offers authenticated resend when absent and permits Continue. March/October 2012 guide revisions describe initial email and link-only confirmation without a mandatory play gate; exact target server mechanics remain unresolved. The immediate Sent label does not establish delivery.",
         "differences": [
           "Uses modern 24-hour single-use hashed links, bounded explicit sends and an explicit browser confirmation button; registration sends no automatic email. Period guide describes an initial email and link confirmation, not these reconstructed safeguards."
         ],
         "unknowns": [
-          "Exact 123.5.1 external endpoint, token generation/expiry/replay and challenge policy; CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions.",
-          "Exact target initial-send, retry and delivery rules and continuity of the period guide's observations; tracked in server issue920."
+          "Exact 123.5.1 external endpoint/parameters and token generation, expiry, replacement/replay and challenge rules. Retained older guide images show realmofthemadgod.appspot.com/account/v, but their attachment timestamps do not prove target-build continuity; tracked in server issue922.",
+          "Exact target initial-send, queue/retry, throttling and delivery rules and continuity of the period guide observations; tracked in server issue920 and issue922. Kabam's September 16, 2013 mandatory-verification policy is later evidence, not a target play-gate requirement.",
+          "CAPTCHA is explicit in the September 10, 2016 guide revision, not its checked 2012 instructions; target challenge policy remains unresolved."
         ],
         "sources": [
           {
@@ -7529,6 +7530,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/::cmd/backup?page=アカウント登録&age=11&action=source",
             "label": "September 10, 2016 revision adds CAPTCHA; do not backdate current-page wording or attachment dates"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/アカウント登録",
+            "label": "Retained email/Account verified images show older /account/v endpoint; mixed-era page and 2010 attachment timestamps do not date target server policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20130923115857id_/http://community.kabam.com/forums/showthread.php?201428-Email-Verification-Now-Required!-Read-Me!",
+            "label": "Original September 16, 2013 Kabam announcement: mandatory verification, replacement email and link confirmation; later than target"
           }
         ]
       }
