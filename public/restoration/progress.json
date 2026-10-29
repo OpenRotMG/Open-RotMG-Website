@@ -7085,9 +7085,12 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Register creation costs1000 personal Fame; creator becomes Founder; maximum50 account members. Invitation acceptance joins named guild. Selected UI permits20 ASCII letters/spaces.",
-        "differences": [],
+        "differences": [
+          "Whitespace collapse/trim, ASCII-case-insensitive uniqueness and last-member deletion/name reuse are reconstruction supported by later server comparators, not recovered original server rules."
+        ],
         "unknowns": [
-          "Original name normalization, uniqueness, one-star/chosen-name eligibility, dissolution and name reuse."
+          "Exact target production normalization, case/error order, chosen-name/one-star enforcement and dissolution/name reuse remain unresolved in server issue911.",
+          "Native unnamed/zero-star guild refusal,50-member boundary and dissolution/name-reuse journeys remain unexecuted."
         ],
         "sources": [
           {
@@ -7101,6 +7104,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://web.archive.org/web/20120528161500id_/http://forums.wildshadow.com/wiki/realm-mad-god/guilds",
+            "label": "May2012 guide: unique names, Founder, Accept and Register renunciation"
           }
         ]
       }
