@@ -7287,15 +7287,30 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Recovered panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses 50-unit ordinary cutoff and 500ms refresh. Exact original replication/bag policy unresolved.",
-        "differences": [],
+        "expected": "Shared movement/combat/enemy/drop/departure state and nearby-player hover panel. Selected panel excludes self, prioritizes locks, limits six, sorts distance/object-ID, uses a 50-unit ordinary cutoff and 500ms refresh. Compiled Kithio retains whole-world player identity, nearby ordinary entities and account-filtered bags; packet and rendered audiences differ.",
+        "differences": [
+          "Current reconstruction uses 20-unit ordinary visibility and ally-shot range, 50ms simulation and nominal 100ms NEW_TICK. Kithio uses radius15, ally shots within25 and default20 TPS; related Trapped declares30 TPS. These are comparator differences, not authenticated original-server defects."
+        ],
         "unknowns": [
-          "Original replication timing and radius, audiences for attacks/enemies/drops, and behavior under latency or departure."
+          "Original production replication cadence/radii and delayed-packet/departure ordering; numeric comparator policies are not original measurements.",
+          "Target-build continuity of January2012 private-drop/public-redrop evidence and exact original bag attribution/expiry policy remain unresolved. See issue917 and loot issue878."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Update.cs",
+            "label": "Compiled Kithio player/entity/container replication comparator"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January6,2012 FAQ capture: same-map player markers and public dropped items"
+          },
+          {
+            "url": "https://www.eurobricks.com/forum/forums/topic/64657-realm-of-the-mad-god/?do=findComment&comment=1169753",
+            "label": "January12,2012 discussion quoting owner-only Soulbound loot visibility"
           }
         ]
       }
