@@ -7468,12 +7468,17 @@
           "Email and Discord recovery use expiring, single-use reset links instead of emailing a password. Discord recovery still requires an explicit account link."
         ],
         "unknowns": [
-          "Original password regeneration and invalidation, and recovery-email delivery."
+          "Exact original password generation, old-password/session invalidation timing and target-build email delivery.",
+          "Date of the preserved Wild Shadow support wording: it describes a newly emailed password and support-mediated email changes, but does not establish whether self-service email change existed in 123.5.1. A later 2013 API catalogue links an unreadable email-change thread."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Customer%20Support#support5-1",
+            "label": "Preserved Wild Shadow support wording (individual claim dates unresolved)"
           }
         ]
       }
