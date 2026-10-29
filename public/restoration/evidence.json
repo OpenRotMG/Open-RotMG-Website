@@ -1,6 +1,18 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes."},
   "sources": {
+    "password-change-native-ebcee307": {
+      "kind":"native", "revision":"ebcee30732619e86abc9fe49d4ef0ea463267c98", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/pull/1209#issuecomment-6485041219", "checks":["access:change-password"],
+      "method":"Clean QA01ad0989 passes10 assertions: ordinary native registration, short-current/new and confirmation mismatch with zero change requests, rendered wrong-current server refusal with unchanged verifier, native Success and updated cached credentials, old-credential refusal/new-credential same-account lookup, and native LOAD of the original living Wizard into Nexus. Separate authenticated HTTP change refuses active ownership and preserves the native session/items. Validation/error/success/game frames inspected. Client0282b3a4/SWF07ae4fc3/Ruffle.16, committed case6b7d944c, retained server2f710e23. Cold QA6148fcfe verifies case equality, SQLite/FKs, one registered account/living character, zero deaths and seven absent retired processes. Cleanup[],exit0/reclaimed; zero backend ERRORs/two expected refusal WARNs.",
+      "limitations":"Prepared initial character/equipment, not earned progression. API credential/ownership probes are not native login UI. PR156 restart/reload remains a separate earlier receipt, not freshly repeated. Pre-browser QA7a02dac3 expired during build preparation; canceled preparation/redundant-test jobs are excluded. No production/mail/authority/permanence/ACK/lease changes or historical acceptance. Original session invalidation and concurrent-change policy remain explicitly unresolved."
+    },
+    "password-change-regression-ebcee307": {
+      "kind":"regression", "revision":"ebcee30732619e86abc9fe49d4ef0ea463267c98", "date":"2026-10-29",
+      "url":"https://github.com/OpenRotMG/Open-RotMG-Server/actions/runs/40796709226", "checks":["access:change-password"],
+      "method":"Current-head CI passes289 Rust tests, formatting, warning-denied Clippy and QA lifecycle. Focused QA b589528f separately passes3 password/reset tests on unchanged Rust baseline30f27d73, including real-HTTP durable atomic password replacement, unrelated-state preservation, revoked grants, superseded-old refusal, reopen and injected rollback failure.",
+      "limitations":"Protocol/storage regressions are not rendered gameplay or original-server behavior. PR715 retired most of PR156's broader ownership/concurrency tests; their historical receipt is not a current guard. No new shared test infrastructure or runtime policy."
+    },
     "password-change-research-0a57c83b": {
       "kind":"source", "revision":"0a57c83b36dc6cc681bdd2d317f35720646f5f85", "date":"2026-10-29",
       "url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/0a57c83b36dc6cc681bdd2d317f35720646f5f85/docs/change-password.md", "checks":["access:change-password"],
@@ -6100,7 +6112,7 @@
     "access:login": {"status": "not-run","evidence": ["registered-credential-login-native-eb85988","recovered-account-source-794eccf"]},
     "access:email-verification": {"status":"passed","evidence":["email-verification-source-50684c9","email-verification-regression-50684c9","email-verification-native-475cd45","registration-research-24398fa0","email-verification-research-631d5dc"]},
     "access:account-recovery": {"status":"not-run","evidence":["email-recovery-source-7716160","email-recovery-regression-7716160","email-recovery-dialog-7716160"]},
-    "access:change-password": {"status":"not-run","evidence":["password-change-research-0a57c83b","password-change-native-7d8b511f"]},
+    "access:change-password": {"status":"passed","evidence":["password-change-research-0a57c83b","password-change-native-7d8b511f","password-change-regression-ebcee307","password-change-native-ebcee307"]},
     "access:character-persistence": {"status": "not-run","evidence": ["recovered-account-source-794eccf"]},
     "access:character-slots": {"status":"not-run","evidence":[]},
     "access:character-deletion": {"status":"not-run","evidence":[]},

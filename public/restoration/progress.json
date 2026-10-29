@@ -7584,6 +7584,10 @@
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/_Q_A_/_ag.as",
+            "label": "Pinned selected-era password form comparator, not original-server session policy"
           }
         ]
       }
