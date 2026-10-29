@@ -7640,12 +7640,28 @@
         "expected": "The native client asks for confirmation before deleting the named character, supports cancellation, and reports success or failure.",
         "differences": [],
         "unknowns": [
-          "Original repeated-deletion, active-character and death/Fame-record policies."
+          "Original 123.5.1 retry/idempotence responses, active-session enforcement and deleted-character/death/Fame storage/retention remain unresolved. Kithio rejects absent rows without an active-session guard in its handler; modified 7.0 locks the account but reports success without checking row existence. These are reconstruction comparators, not recovered original policy. January 6, 2012 FAQ supports slot release only; its no-Fame anti-cheat erasure paragraph does not describe ordinary deletion."
         ],
         "sources": [
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/server/char/delete.cs",
+            "label": "Compiled/routed Kithio deletion comparator; account-scoped hard deletion, absent-row error, no death/Fame award"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/characters/deletion/service/DeleteCharacterTask.as",
+            "label": "Modified 7.0 client: credentials, charId/reason, two retries, success-only model update; not 123.5.1 policy"
+          },
+          {
+            "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/Database.cs#L970-L1025",
+            "label": "Modified 7.0 engine: unawaited deletion versus separate Death/Fame/Legends path; not original storage policy"
+          },
+          {
+            "url": "https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq",
+            "label": "January 6, 2012 FAQ: kill or delete to change class without another slot; earlier than target"
           }
         ]
       }
