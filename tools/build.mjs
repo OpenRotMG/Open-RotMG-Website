@@ -85,7 +85,7 @@ async function render(directory) {
       }
       const image = join(dirname(path), 'social.png');
       const version = createHash('sha256').update(await readFile(image)).digest('hex').slice(0, 12);
-      await writeFile(path, socialMetadata(html, `${new URL(relative(dist, image), site).href}?v=${version}`, relative(dist,path)==='drop-rates/index.html' ? 'Eight preserved Realm item sprites on the Open RotMG drop rates catalogue share card.' : undefined));
+      await writeFile(path, socialMetadata(html, `${new URL(relative(dist, image), site).href}?v=${version}`, relative(dist,path)==='drop-rates/index.html' ? 'Eight preserved Realm item sprites above Drop rates, over historical gameplay.' : undefined));
     }
   }
 }

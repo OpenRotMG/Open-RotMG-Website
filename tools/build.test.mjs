@@ -90,7 +90,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
   assert.deepEqual(aboutLinks, [
-    [`${site.pathname}drop-rates/`, 'Drop rates', 'Loot, requirements and sources.'],
+    [`${site.pathname}drop-rates/`, 'Drop rates', 'Item drop rates and sources.'],
     [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
     [`${site.pathname}cctv/`, 'Bot CCTV', 'Watch bots play live.'],
     ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
