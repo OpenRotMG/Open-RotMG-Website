@@ -1,11 +1,13 @@
-#focus { font: 12px/1.8 Verdana, sans-serif; border: 1px solid #6b5a2e; background: #1d1a12; padding: 10px 10px 10px 30px; }
-#focus .check { color: #e0c27c; font-size: 12px; }
-.status-gap { color: #cb8585; }
-.status-needs-measurement, .status-needs-footage { color: #d9b477; }
-.status-ok { color: #acba92; }
-.not-drafted { color: #77766b; font-style: italic; }
-.roadmap-2012 .roadmap-area .check { text-align: left; }
-#claim-body h3 { font-size: 12px; margin: 16px 0 4px; }
-#claim-body code { background: #2a2a24; padding: 0 3px; }
-/* Buttons are inline-block, so without this the list bullet aligns with their last wrapped line. */
-#focus .check, .roadmap-2012 .roadmap-area .check { vertical-align: top; }
+.updated { color: #a1a197; font-size: 12px; }
+table { width: 100%; border-collapse: collapse; font: 12px/1.6 Verdana, sans-serif; }
+th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-top: 1px solid #262626; }
+thead th { color: #88887e; font-weight: normal; font-size: 11px; }
+.area th { padding-top: 18px; color: #ddd9c8; font-size: 13px; border-top: 0; }
+td:nth-child(2), td:nth-child(3) { white-space: nowrap; }
+td:last-child { color: #aaa99e; }
+.no { color: #cb8585; }
+.partly { color: #d9b477; }
+.unknown { color: #88887e; }
+.yes { color: #acba92; }
+@media (max-width: 600px) { td:nth-child(2) { white-space: normal; } }
+table + .updated { margin-top: 18px; }

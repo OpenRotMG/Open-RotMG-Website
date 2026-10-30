@@ -3,41 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'">
   <title>Bots · Open RotMG</title>
-  <meta name="description" content="How closely Open RotMG bots behave like Realm of the Mad God players in 2012, organized by place and situation.">
+  <meta name="description" content="How closely Open RotMG bots behave like Realm of the Mad God players in 2012.">
   <link rel="canonical" href="{{SITE_URL}}bots/">
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="{{BASE}}amulet-of-resurrection.png">
   <link rel="stylesheet" href="{{BASE}}style.css">
-  <link rel="stylesheet" href="{{BASE}}restoration/style.css">
   <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.js"></script>
 </head>
-<body class="restoration-page roadmap-2012">
+<body>
 <div class="site-shell">
   <main class="page-main">
-    <nav class="category-links" aria-label="Bots"><a href="./" aria-current="page">2012 players</a><a href="{{BASE}}cctv/">Watch bots live</a></nav>
-    <div class="restoration-intro">
-      <h1>Bots</h1>
-      <p class="progress-line">The players to recreate · 2012 footage</p>
-    </div>
-    <section aria-labelledby="focus-heading"><h2 id="focus-heading">Focus</h2><ol id="focus"></ol></section>
-    <section aria-labelledby="areas-heading"><h2 id="areas-heading">Places and situations</h2><div id="roadmap"></div></section>
-    <section id="claims" aria-labelledby="claims-heading">
-      <h2 id="claims-heading">Find behaviour claims</h2>
-      <form id="search-form" role="search"><fieldset id="filters" disabled>
-        <legend>Filter claims</legend>
-        <label>Search <input id="search" type="search" autocomplete="off" placeholder="trains, trade, Nexus..."></label>
-        <label>Place or situation <select id="area"><option value="">All</option></select></label>
-        <label>Status <select id="status"><option value="">Any status</option></select></label>
-        <button id="clear" type="button">Clear filters</button>
-      </fieldset></form>
-      <p id="visible-count" role="status" aria-live="polite"></p>
-      <div id="list"></div>
-    </section>
-    <p id="error" role="alert" hidden></p>
-    <noscript>JavaScript is required to show the bot behaviour scorecard.</noscript>
+    <h1>Bots</h1>
+    <p class="updated">Updated Oct 30, 2026 on production 1ce28f5 · <a href="{{BASE}}cctv/">Watch live</a></p>
+    <table>
+      <thead><tr><th>2012 behaviour</th><th>Footage</th><th>Bots</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr class="area"><th colspan="4">Godlands</th></tr>
+        <tr><td>Trains: loose crowds of level 20s moving between gods together</td><td><a href="https://www.youtube.com/watch?v=Nxy2qXlJplg&amp;t=65s">Nxy2qXlJplg 1:05</a></td><td class="no">No</td><td>1 of 16 level-20 Realm bots was fighting in the Godlands</td></tr>
+        <tr><td>Level 20s go there on purpose, often teleporting to the crowd</td><td>None</td><td class="no">No</td><td>Nothing steers level 20s toward the Godlands</td></tr>
+        <tr><td>God kills set the pace; the crowd moves on to the next god</td><td><a href="https://www.youtube.com/watch?v=Nxy2qXlJplg&amp;t=65s">Nxy2qXlJplg 1:05</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Players stop for god bags, then rejoin</td><td><a href="https://www.youtube.com/watch?v=H44UToO5faY">H44UToO5faY 0:00</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Low levels show up briefly, then leave or die</td><td>None</td><td class="unknown">Unknown</td><td>45 of 56 deaths in the first hour were levels 1–5</td></tr>
+        <tr class="area"><th colspan="4">Groups</th></tr>
+        <tr><td>Most Realm players are near other players</td><td><a href="https://www.youtube.com/watch?v=G08RmJiBdl8&amp;t=170s">G08RmJiBdl8 2:50</a></td><td class="no">No</td><td>95% of Realm bots had no bot within 10 tiles</td></tr>
+        <tr><td>Groups are loose: membership changes, everyone fires their own way</td><td><a href="https://www.youtube.com/watch?v=G08RmJiBdl8&amp;t=170s">G08RmJiBdl8 2:50</a></td><td class="unknown">Unknown</td><td>Too few groups to judge</td></tr>
+        <tr><td>Invitations, sometimes declined for existing friends</td><td><a href="https://www.youtube.com/watch?v=fubGzGmVqpI&amp;t=539s">fubGzGmVqpI 8:59</a></td><td class="partly">Partly</td><td>243 invitations and 160 joins per hour, but joined bots don't stay together</td></tr>
+        <tr><td>Short calls change what people do: <q>gods</q>, <q>TURN AROUND</q></td><td><a href="https://www.youtube.com/watch?v=Nxy2qXlJplg&amp;t=65s">Nxy2qXlJplg 1:05</a></td><td class="unknown">Unknown</td><td>Your <q>snake pit</q> call got no response</td></tr>
+        <tr><td>Leader stops, others wait or carry on, stragglers catch up</td><td><a href="https://www.youtube.com/watch?v=Whcxy3RJKIA&amp;t=1020s">Whcxy3RJKIA 17:00</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Groups scatter after a boss; a few linger at the loot</td><td><a href="https://www.youtube.com/watch?v=H44UToO5faY">H44UToO5faY 0:00</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Friends rejoin after a death</td><td><a href="https://www.youtube.com/watch?v=Whcxy3RJKIA&amp;t=280s">Whcxy3RJKIA 4:40</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Some HP requests get a heal and a <q>ty</q></td><td><a href="https://www.youtube.com/watch?v=xyUiQewDLg8">xyUiQewDLg8</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr class="area"><th colspan="4">Nexus</th></tr>
+        <tr><td>Trades actually happen</td><td><a href="https://www.youtube.com/watch?v=Ex_Ix3dlB4U&amp;t=290s">Ex_Ix3dlB4U 4:50</a></td><td class="no">No</td><td>0 bot trades per hour</td></tr>
+        <tr><td>Crowded, mostly low-star players</td><td><a href="https://www.youtube.com/watch?v=luV6wQzNZlg&amp;t=10s">luV6wQzNZlg 0:10</a></td><td class="no">No</td><td>3–6 of 60 bots in the Nexus at once</td></tr>
+        <tr><td>Steady trade chat in varied shapes</td><td><a href="https://www.youtube.com/watch?v=0z30kcUD1Pc&amp;t=42s">0z30kcUD1Pc 0:42</a></td><td class="partly">Partly</td><td>About 330 ads per hour; variety not checked</td></tr>
+        <tr><td>Short replies about real items: <q>for bow</q>, <q>lemme make room</q></td><td><a href="https://www.youtube.com/watch?v=0z30kcUD1Pc&amp;t=114s">0z30kcUD1Pc 1:54</a></td><td class="unknown">Unknown</td><td></td></tr>
+        <tr><td>Full inventory: Vault trip, then back to finish the deal</td><td><a href="https://www.youtube.com/watch?v=Ex_Ix3dlB4U&amp;t=105s">Ex_Ix3dlB4U 1:45</a></td><td class="partly">Partly</td><td>About 70 Vault trips per hour; none tied to a deal yet</td></tr>
+        <tr><td>A few traders stand for minutes repeating an ad</td><td><a href="https://www.youtube.com/watch?v=0z30kcUD1Pc&amp;t=42s">0z30kcUD1Pc 0:42</a></td><td class="partly">Partly</td><td>9% of visits last over 5 minutes</td></tr>
+        <tr><td>Most visitors pass through quickly</td><td>None</td><td class="yes">Yes</td><td>Median visit 43 s</td></tr>
+        <tr><td>Some stop to show gear or chat</td><td><a href="https://www.youtube.com/watch?v=4J4S4iGeLiw&amp;t=10s">4J4S4iGeLiw 0:10</a></td><td class="unknown">Unknown</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="updated">Not listed yet: Realm travel, Vault, Dungeons, boss fights, death and rebuilding, sessions.</p>
   </main>
   <footer class="site-footer">
     <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
@@ -45,9 +54,5 @@
     <nav aria-label="Project">{{PROJECT_NAV}}</nav>
   </footer>
 </div>
-<dialog id="claim-dialog" aria-labelledby="claim-title">
-  <div class="dialog-head"><div class="feature-heading"><img id="claim-icon" alt=""><h2 id="claim-title"></h2></div><button id="feature-close" type="button" aria-label="Close claim details">Close</button></div>
-  <div id="claim-body"></div>
-</dialog>
 </body>
 </html>
