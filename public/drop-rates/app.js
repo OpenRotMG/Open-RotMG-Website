@@ -1,71 +1,83 @@
-const sourceLabels={research:'Existing feature research (version qualifications apply)',general:'General loot and allocation research, not enemy-specific odds',period:'Archived period wiki (version coverage varies)',kithio:'Compiled Kithio comparison, not official backend data',trapped:'Retired Trapped provenance, not an approved authority',realmsrc:'Modified 7.0 comparison, not a 123.5.1 specification',fsod:'Later FSoD comparison, not a 123.5.1 specification'};
 export function rowsFor(data){
-  if(!data||!Array.isArray(data.groups)||!Array.isArray(data.items)||(data.revision!==null&&!/^[a-f0-9]{40}$/.test(data.revision)))throw Error('Malformed loot catalogue');
+  if(!data||!Array.isArray(data.groups)||!Array.isArray(data.items))throw Error('Malformed loot catalogue');
   const items=new Map(data.items.map(item=>[item.id,item])),rows=[];
   for(const group of data.groups){
-    if(!['independent','per_item','ordered','capped'].includes(group.mode)||!group.eligibility||!group.allocation)throw Error('Missing loot rules');
-    let survival=1,distribution=[1,0,0,0,0,0,0,0,0];
-    for(const [index,entry] of group.entries.entries()){
-      if(!Number.isFinite(entry.probability)||entry.probability<0||entry.probability>1||!entry.items.length)throw Error('Invalid loot probability');
-      const p=entry.probability/entry.items.length;
-      for(const id of entry.items){
-        const item=items.get(id);if(!item)throw Error('Unknown loot item '+id);
-        let chance=group.mode==='ordered'?survival*p:p;
-        if(group.mode==='capped'){
-          chance=p*[3,4,5,6,7].reduce((sum,cap)=>sum+distribution.slice(0,cap).reduce((a,b)=>a+b,0),0)/5;
-          const next=Array(9).fill(0);for(let n=0;n<9;n++){next[n]+=distribution[n]*(1-p);next[Math.min(8,n+1)]+=distribution[n]*p;}distribution=next;
-        }
-        rows.push({item,group,chance,index,balance:entry.balance,note:entry.note});
-      }
-      survival*=1-entry.probability;
+    if(!['independent','per_item','ordered','capped'].includes(group.mode)||!group.enemy?.name)throw Error('Missing loot rules');
+    for(const entry of group.entries)if(!Number.isFinite(entry.probability)||entry.probability<0||entry.probability>1||!entry.items.length)throw Error('Invalid loot probability');
+    const draws=group.entries.flatMap(entry=>entry.items.map(id=>({id,p:entry.probability/entry.items.length})));
+    for(const id of new Set(draws.map(draw=>draw.id))){
+      const item=items.get(id);if(!item)throw Error('Unknown loot item '+id);
+      let chance;
+      if(group.mode==='ordered'){
+        let survival=1;chance=0;
+        for(const entry of group.entries){if(entry.items.includes(id))chance+=survival*entry.probability/entry.items.length;survival*=1-entry.probability;}
+      }else if(group.mode==='capped'){
+        chance=[3,4,5,6,7].reduce((total,cap)=>{
+          let absent=Array(cap+1).fill(0);absent[0]=1;
+          for(const draw of draws){
+            const next=Array(cap+1).fill(0);next[cap]=absent[cap];
+            for(let n=0;n<cap;n++){next[n]+=absent[n]*(1-draw.p);if(draw.id!==id)next[n+1]+=absent[n]*draw.p;}
+            absent=next;
+          }
+          return total+1-absent.reduce((a,b)=>a+b,0);
+        },0)/5;
+      }else chance=1-draws.filter(draw=>draw.id===id).reduce((none,draw)=>none*(1-draw.p),1);
+      rows.push({item,group,chance});
     }
   }
-  return rows.sort((a,b)=>a.item.name.localeCompare(b.item.name)||a.group.enemy.name.localeCompare(b.group.enemy.name)||a.index-b.index);
+  return rows;
 }
-export function selectRows(rows,query,category){
-  const words=query.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  return rows.filter(row=>words.every(word=>(row.item.name+' '+row.group.enemy.name).toLowerCase().includes(word))&&(category==='all'||category==='unique'&&row.item.tier===null&&row.item.slot>0&&row.item.slot!==10||category==='rare'&&row.chance>0&&row.chance<.01-1e-12||category==='balance'&&row.balance));
+export function percentage(chance){return new Intl.NumberFormat('en',{maximumFractionDigits:4}).format(chance*100)+'%';}
+export function catalogueFor(data,art,sources){
+  const sprites=new Map(art.map(item=>[item.id,item])),catalogue=new Map();
+  for(const row of rowsFor(data)){
+    const sprite=sprites.get(row.item.id);if(!sprite||!Number.isInteger(sprite.bag)||sprite.bag<0||sprite.bag>4)throw Error('Missing item artwork or bag: '+row.item.name);
+    if(!catalogue.has(row.item.id))catalogue.set(row.item.id,{item:row.item,sprite,rates:new Map(),sources:[],npcs:new Set()});
+    const card=catalogue.get(row.item.id),key=row.chance.toPrecision(12);
+    if(!card.rates.has(key))card.rates.set(key,{chance:row.chance,npcs:new Set()});
+    card.rates.get(key).npcs.add(row.group.enemy.name);card.npcs.add(row.group.enemy.name);
+  }
+  const citations=new Map();
+  for(const source of sources){
+    const url=new URL(source.url);
+    if(url.protocol!=='https:'||url.hostname.endsWith('openrotmg.org')||url.pathname.includes('/Open-RotMG-'))throw Error('Invalid external rate source');
+    for(const rate of source.rates){
+      if(!Number.isFinite(rate.probability)||rate.probability<0||rate.probability>1||!rate.npc||!rate.items.length)throw Error('Invalid source drop rate');
+      for(const id of rate.items){
+        const card=catalogue.get(id);if(!card||!card.npcs.has(rate.npc))continue;
+        const key=id+'|'+rate.probability.toPrecision(12)+'|'+source.url;
+        if(!citations.has(key))citations.set(key,{card,chance:rate.probability,url:source.url,npcs:new Set()});
+        citations.get(key).npcs.add(rate.npc);
+      }
+    }
+  }
+  for(const citation of citations.values()){citation.card.sources.push({chance:citation.chance,url:citation.url,npcs:[...citation.npcs].sort()});}
+  return [...catalogue.values()].sort((a,b)=>a.item.name.localeCompare(b.item.name)).map(card=>({...card,rates:[...card.rates.values()].sort((a,b)=>b.chance-a.chance).map(rate=>({...rate,npcs:[...rate.npcs].sort()}))}));
 }
-export function odds(chance){return chance===0?['0%','Blocked by earlier rewards']:[new Intl.NumberFormat('en',{maximumFractionDigits:4}).format(chance*100)+'%',chance===1?'Guaranteed on this attempt':'1 in '+new Intl.NumberFormat('en',{maximumFractionDigits:1}).format(1/chance)];}
 async function json(url){const response=await fetch(url,{cache:'no-store',redirect:'error'});if(!response.ok)throw Error('Drop catalogue request failed ('+response.status+')');return response.json();}
 function element(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
-function sourceLink(url,label){const a=element('a',label);a.href=url;return a;}
 async function mount(){
   const status=document.querySelector('#status'),error=document.querySelector('#error'),catalogue=document.querySelector('#catalogue');
   try{
     if(!globalThis.OpenRotMGBackend)throw Error('Game backend configuration is missing');
     const [data,sources,art]=await Promise.all([json(OpenRotMGBackend.url('/api/drop-rates')),json('sources.json'),json('../hiscores/items.json')]);
-    if(!Array.isArray(sources))throw Error('Malformed source index');
-    for(const source of sources){if(!Object.hasOwn(sourceLabels,source.type)||!Array.isArray(source.enemies)||!/^https:\/\//.test(source.url))throw Error('Invalid research source');}
-    const rows=rowsFor(data),sprites=new Map(art.map(item=>[item.id,item]));
-    for(const row of rows)if(!sprites.has(row.item.id))throw Error('Missing selected-client sprite: '+row.item.name);
-    status.textContent=data.revision?'Live server '+data.revision.slice(0,12)+' · '+rows.length.toLocaleString()+' reward entries':'Local, unversioned server build · '+rows.length.toLocaleString()+' reward entries';
-    const search=document.querySelector('#search'),category=document.querySelector('#category'),target=document.querySelector('#drops');let page=0;
-    search.value=new URLSearchParams(location.search).get('q')??'';
+    const cards=catalogueFor(data,art,sources),bag=document.querySelector('#bag'),target=document.querySelector('#drops');
     function render(){
-      const filtered=selectRows(rows,search.value,category.value),pages=Math.max(1,Math.ceil(filtered.length/100));page=Math.min(page,pages-1);target.replaceChildren();
-      document.querySelector('#count').textContent=filtered.length.toLocaleString()+' matching reward entries';
-      for(const row of filtered.slice(page*100,(page+1)*100)){
-        const card=element('article',undefined,'drop'),head=element('div',undefined,'drop-head'),icon=element('span',undefined,'item-icon'),sprite=sprites.get(row.item.id);icon.style.backgroundPosition=`${-sprite.x*2}px ${-sprite.y*2}px`;icon.setAttribute('aria-hidden','true');
-        const title=element('div'),name=element('h2',row.item.name);title.append(name,element('p',row.group.enemy.name+' · '+row.group.channel,'enemy'));
-        if(row.balance)title.append(element('span','Owner-selected balance','badge'));
-        const [percent,oneIn]=odds(row.chance),chance=element('div',percent,'chance');chance.append(element('small',oneIn));head.append(icon,title,chance);
-        const rules=element('p',row.group.eligibility+' '+row.group.allocation+(row.note?' '+row.note:''),'rules');
-        const details=element('details',undefined,'sources'),list=element('ul');details.append(element('summary','Rules & sources'));
-        const rule=element('li',`Roll ${row.index+1}: ${row.group.mode.replace('_',' ')}; ${row.group.entries[row.index].items.length} candidate item(s).`);list.append(rule);
-        if(data.revision){for(const file of [...new Set([row.group.source_file,'src/loot.rs',row.group.rules_file])]){const li=element('li');li.append(sourceLink(`https://github.com/OpenRotMG/Open-RotMG-Server/blob/${data.revision}/${file}`,'Current implementation: '+file));list.append(li);}}
-        else list.append(element('li','Local source files: '+row.group.source_file+' and '+row.group.rules_file+'. No deployed revision is available.'));
-        const evidence=sources.filter(source=>source.enemies.includes(row.group.enemy.id));
-        for(const source of evidence){const li=element('li',sourceLabels[source.type]);li.append(sourceLink(source.url,source.url));list.append(li);}
-        details.append(element('p',row.balance?'This rate is a selected balance change, not a confirmed historical probability.':'Historical rate unverified. References may support item membership or mechanics without establishing these exact odds.'));
-        if(!evidence.some(source=>['period','kithio','research'].includes(source.type)))details.append(element('p','No enemy-specific period or primary reference is recorded. Historical odds remain unverified.'));
-        details.append(list);card.append(head,rules,details);target.append(card);
+      target.replaceChildren();
+      for(const card of cards.filter(card=>card.sprite.bag===Number(bag.value))){
+        const article=element('article',undefined,'drop'),head=element('div',undefined,'drop-head'),icon=element('span',undefined,'item-icon');icon.style.backgroundPosition=`${-card.sprite.x*2}px ${-card.sprite.y*2}px`;icon.setAttribute('aria-hidden','true');head.append(icon,element('h2',card.item.name));article.append(head);
+        const rates=element('ul',undefined,'rates');
+        for(const rate of card.rates){const li=element('li');li.append(element('span',percentage(rate.chance),'chance'),element('span',rate.npcs.join(', ')));rates.append(li);}
+        article.append(rates);
+        if(card.sources.length){
+          const details=element('details',undefined,'sources'),list=element('ul');details.append(element('summary','Sources'));
+          for(const source of card.sources){const li=element('li',percentage(source.chance)+' '+source.npcs.join(', ')+' '),link=element('a',source.url);link.href=source.url;li.append(link);list.append(li);}
+          details.append(list);article.append(details);
+        }
+        target.append(article);
       }
-      document.querySelector('#page').textContent=`Page ${page+1} of ${pages}`;document.querySelector('#previous').disabled=page===0;document.querySelector('#next').disabled=page===pages-1;
     }
-    for(const node of [search,category])node.addEventListener('input',()=>{page=0;render();});
-    document.querySelector('#previous').addEventListener('click',()=>{page--;render();});document.querySelector('#next').addEventListener('click',()=>{page++;render();});
-    catalogue.hidden=false;render();
-  }catch(cause){catalogue.hidden=true;status.textContent='Drop rates unavailable';error.hidden=false;error.textContent=cause.message;console.error(cause);}
+    bag.addEventListener('change',render);render();status.hidden=true;catalogue.hidden=false;
+  }catch(cause){catalogue.hidden=true;status.hidden=true;error.hidden=false;error.textContent=cause.message;console.error(cause);}
 }
 if(typeof document!=='undefined')mount();

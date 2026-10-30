@@ -64,6 +64,7 @@ await cp(join(root, 'public'), dist, { recursive: true });
 await cp(join(client, 'native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
 await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
+const dropRatesVersion = createHash('sha256').update(await readFile(join(dist, 'drop-rates/app.js'))).update(await readFile(join(dist, 'drop-rates/style.css'))).digest('hex').slice(0, 12);
 const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/app.js'))).digest('hex');
 const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/style.css'))).digest('hex');
 const favicons = (await Promise.all([16, 32, 48, 96, 192].map(async size => {
@@ -77,7 +78,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion).replace('</head>', `${favicons}\n</head>`);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{DROP_RATES_VERSION}}', dropRatesVersion).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion).replace('</head>', `${favicons}\n</head>`);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html)) {
         await writeFile(path, html);
@@ -85,7 +86,7 @@ async function render(directory) {
       }
       const image = join(dirname(path), 'social.png');
       const version = createHash('sha256').update(await readFile(image)).digest('hex').slice(0, 12);
-      await writeFile(path, socialMetadata(html, `${new URL(relative(dist, image), site).href}?v=${version}`, relative(dist,path)==='drop-rates/index.html' ? 'Eight preserved Realm item sprites on the Open RotMG drop rates catalogue share card.' : undefined));
+      await writeFile(path, socialMetadata(html, `${new URL(relative(dist, image), site).href}?v=${version}`, relative(dist,path)==='drop-rates/index.html' ? 'Eight preserved Realm item sprites above Drop rates, over historical gameplay.' : undefined));
     }
   }
 }
