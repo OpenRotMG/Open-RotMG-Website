@@ -1,0 +1,357 @@
+{
+ "focus": [
+  {
+   "rank": 1,
+   "claim": "godlands-1"
+  }
+ ],
+ "areas": [
+  {
+   "id": "godlands",
+   "name": "Godlands",
+   "kind": "place",
+   "icon": "ent-god.png",
+   "summary": "The central high-level band and its trains",
+   "drafted": true,
+   "measured": "1ce28f5, 2026-10-30 about 06:10 UTC",
+   "claims": [
+    {
+     "id": "godlands-1",
+     "section": "The place",
+     "text": "In the busy Realm, the Godlands has trains: loose crowds of level-20 players moving between gods together, firing in different directions, splitting and regrouping",
+     "evidence": "Godlands crowd with `gods` and `TURN AROUND` calls: [Nxy2qXlJplg 1:05–1:35](https://www.youtube.com/watch?v=Nxy2qXlJplg&t=65s). Godlands play: [ONwueEGCAEg 2:14, 4:29, 6:43](https://www.youtube.com/watch?v=ONwueEGCAEg&t=134s). Owner O15: about 40 players in the busiest Realm",
+     "now": "Of 16 level-20 bots in the Realm, 1 was hunting a godlands target; the other 15 were exploring or heading toward a remembered band. Almost no Realm bots are near another bot (see [Groups and trains](#area-groups))",
+     "status": "gap",
+     "status_note": "gap",
+     "focus": 1
+    },
+    {
+     "id": "godlands-2",
+     "section": "The place",
+     "text": "The busiest Realm holds most of the high-level population; quieter Realms exist",
+     "evidence": "Owner O15; train footage",
+     "now": "Realm size and level-20 share per Realm are unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "godlands-3",
+     "section": "The place",
+     "text": "Gods die often and the crowd moves on to the next one, so god kills set the train's rhythm",
+     "evidence": "[Nxy2qXlJplg 1:05–1:35](https://www.youtube.com/watch?v=Nxy2qXlJplg&t=65s)",
+     "now": "God kills per hour in the busy Realm are unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "godlands-4",
+     "section": "The place",
+     "text": "Deaths happen here, but a geared level 20 mostly survives a session",
+     "evidence": "Leveling video Oryx death; deaths to gods in footage",
+     "now": "5 level-20 deaths in the first live hour, mostly to gods (02:07–03:14 UTC)",
+     "status": "needs-footage",
+     "status_note": "needs footage (rate)"
+    },
+    {
+     "id": "godlands-5",
+     "section": "The people",
+     "text": "Level-20 players with gear go here deliberately, often by teleporting to the train on the minimap",
+     "evidence": "Owner C02/O7; footage",
+     "now": "Nothing points level-20 bots toward the Godlands, because the map-center target was removed. Teleports are not counted",
+     "status": "gap",
+     "status_note": "gap"
+    },
+    {
+     "id": "godlands-6",
+     "section": "The people",
+     "text": "Low-level players appear only briefly, by accident or by following someone, and usually leave or die",
+     "evidence": "Owner culture notes; unmeasured in footage",
+     "now": "Low levels die mostly to mid- and high-band monsters (45 of 56 first-hour deaths were levels 1–5); presence here is unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "godlands-7",
+     "section": "The people",
+     "text": "Players stop for god loot bags, then rejoin the crowd",
+     "evidence": "[Nxy2qXlJplg](https://www.youtube.com/watch?v=Nxy2qXlJplg&t=65s); Oryx aftermath [H44UToO5faY](https://www.youtube.com/watch?v=H44UToO5faY)",
+     "now": "Unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    }
+   ]
+  },
+  {
+   "id": "nexus",
+   "name": "Nexus",
+   "kind": "place",
+   "icon": "nexus-portal.png",
+   "summary": "The hub: arrivals, trade chat and deals",
+   "drafted": true,
+   "measured": "1ce28f5, 2026-10-30 05:08–06:09 UTC",
+   "claims": [
+    {
+     "id": "nexus-1",
+     "section": "The place",
+     "text": "Trades actually happen",
+     "evidence": "Completed exchanges and a 17-Life deal across Vault trips: [Ex_Ix3dlB4U 4:50–6:04](https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=290s). No footage gives a rate",
+     "now": "0 confirmed bot trades per hour",
+     "status": "gap",
+     "status_note": "gap"
+    },
+    {
+     "id": "nexus-2",
+     "section": "The place",
+     "text": "Visibly busy: many players at once, mostly low-star (blue)",
+     "evidence": "Public Nexus crowds: [G08RmJiBdl8 0:30–0:35](https://www.youtube.com/watch?v=G08RmJiBdl8&t=30s), [luV6wQzNZlg 0:10–1:00](https://www.youtube.com/watch?v=luV6wQzNZlg&t=10s). Readable names were 33 blue, 2 red and 5 unknown across sampled scenes; there is no headcount",
+     "now": "3–6 of 60 bots in Nexus at any moment",
+     "status": "gap",
+     "status_note": "gap (count needs footage)"
+    },
+    {
+     "id": "nexus-3",
+     "section": "The place",
+     "text": "Trade chat is a steady background, in varied shapes: priced offers, bare wants, bundles, shorthand, names",
+     "evidence": "[0z30kcUD1Pc 0:42, 1:54](https://www.youtube.com/watch?v=0z30kcUD1Pc&t=42s): `BUYING AMMY 8 DEF @SUPERWIL`, `selling ghostly !`. [Ex_Ix3dlB4U 1:25](https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=85s): `SELLING 4 SPD FOR 1 DEF`, `S>Gbow`, `BUYING VBOW`",
+     "now": "327 generated ads per hour (about 5 a minute); 410 public chat lines per hour in Nexus. Variety is unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement (variety)"
+    },
+    {
+     "id": "nexus-4",
+     "section": "The place",
+     "text": "People come and go constantly",
+     "evidence": "Footage shows turnover but was not timed",
+     "now": "274 bot arrivals per hour",
+     "status": "needs-footage",
+     "status_note": "needs footage (rate)"
+    },
+    {
+     "id": "nexus-5",
+     "section": "The place",
+     "text": "Commercial gold-site spam exists",
+     "evidence": "Several clips",
+     "now": "Bots never do this, and should not",
+     "status": "ok",
+     "status_note": "ok (excluded)"
+    },
+    {
+     "id": "nexus-6",
+     "section": "The place",
+     "text": "The first visit is quieter (tutorial context)",
+     "evidence": "[Fo_M0vXhtcQ 5:00–6:30](https://www.youtube.com/watch?v=Fo_M0vXhtcQ&t=300s)",
+     "now": "n/a: bots don't take the tutorial",
+     "status": "ok",
+     "status_note": "ok (counterexample only)"
+    },
+    {
+     "id": "nexus-7",
+     "section": "The people",
+     "text": "Most visitors pass through briefly on the way to a portal or the Vault",
+     "evidence": "Owner reading of C02/C10 and ordinary-play clips; untimed",
+     "now": "Median Nexus visit 43 s; 39% under 30 s",
+     "status": "needs-footage",
+     "status_note": "needs footage (timing)"
+    },
+    {
+     "id": "nexus-8",
+     "section": "The people",
+     "text": "A few traders stand for minutes, repeating a recognisable ad",
+     "evidence": "Repeated `@SUPERWIL` ads ([0z30kcUD1Pc](https://www.youtube.com/watch?v=0z30kcUD1Pc&t=42s))",
+     "now": "9% of visits are longer than 5 minutes; per-bot ad repetition is unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "nexus-9",
+     "section": "The people",
+     "text": "Answers to ads are short and about real state (`for bow`, `foor?`, `lemme make room`), with quick rejection of unsuitable offers",
+     "evidence": "[0z30kcUD1Pc 1:54](https://www.youtube.com/watch?v=0z30kcUD1Pc&t=114s); [Ex_Ix3dlB4U 1:45](https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=105s); owner C07/C08",
+     "now": "Unmeasured live, and with 0 trades there are probably few answers",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "nexus-10",
+     "section": "The people",
+     "text": "Full inventory leads to a Vault trip, then a return to the same spot to finish the deal",
+     "evidence": "[Ex_Ix3dlB4U 1:45](https://www.youtube.com/watch?v=Ex_Ix3dlB4U&t=105s), C08 rendezvous",
+     "now": "Vault livelock fixed; 71 bank errands completed in the first live hour (02:07–03:14 UTC); trade-linked Vault trips unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "nexus-11",
+     "section": "The people",
+     "text": "Some people stop to check gear or chat rather than trade",
+     "evidence": "[4J4S4iGeLiw 0:10–1:20](https://www.youtube.com/watch?v=4J4S4iGeLiw&t=10s) (gear showcase)",
+     "now": "Unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    }
+   ]
+  },
+  {
+   "id": "realm-travel",
+   "name": "Realm travel",
+   "kind": "place",
+   "icon": "ent.png",
+   "summary": "Beach to midlands: leveling and exploring",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "vault",
+   "name": "Vault",
+   "kind": "place",
+   "icon": "vault-chest.png",
+   "summary": "Storage trips and gear checks",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "snake-pit",
+   "name": "Snake Pit",
+   "kind": "place",
+   "icon": "stheno-the-snake-queen.png",
+   "summary": "Speed potions and Stheno",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "pirate-cave",
+   "name": "Pirate Cave",
+   "kind": "place",
+   "icon": "dreadstump-the-pirate-king.png",
+   "summary": "The first dungeon most players see",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "groups",
+   "name": "Groups and trains",
+   "kind": "situation",
+   "icon": "class-stars.png",
+   "summary": "Loose crowds, calls and invitations",
+   "drafted": true,
+   "measured": "1ce28f5, 2026-10-30 05:08–06:09 UTC",
+   "claims": [
+    {
+     "id": "groups-1",
+     "section": "The situation",
+     "text": "A large share of Realm players are near others; being alone is a minority state",
+     "evidence": "Road crowds in [G08RmJiBdl8 2:50–3:20, 6:50–7:20](https://www.youtube.com/watch?v=G08RmJiBdl8&t=170s); Godlands crowd in [Nxy2qXlJplg 1:05–1:35](https://www.youtube.com/watch?v=Nxy2qXlJplg&t=65s). Solo play also exists ([fubGzGmVqpI](https://www.youtube.com/watch?v=fubGzGmVqpI&t=153s)). No proportion is measured",
+     "now": "95% of Realm bots have no other bot within 10 tiles; 5% are in pairs; no groups of 3 or more",
+     "status": "gap",
+     "status_note": "gap"
+    },
+    {
+     "id": "groups-2",
+     "section": "The situation",
+     "text": "Groups are loose: they change shape and membership, people fire in different directions, and nobody holds a formation slot",
+     "evidence": "[G08RmJiBdl8 2:50–3:20](https://www.youtube.com/watch?v=G08RmJiBdl8&t=170s)",
+     "now": "Too few groups to judge",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-3",
+     "section": "The situation",
+     "text": "When the front player stops (loot, gear check), others keep going or wait briefly; stragglers catch up",
+     "evidence": "Owner C10 ([G08RmJiBdl8 285–330 s](https://www.youtube.com/watch?v=G08RmJiBdl8&t=285s)); [Whcxy3RJKIA 17:00–19:00](https://www.youtube.com/watch?v=Whcxy3RJKIA&t=1020s)",
+     "now": "Unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-4",
+     "section": "The situation",
+     "text": "Short calls change what people do: `gods`, `TURN AROUND`, `snake`",
+     "evidence": "[Nxy2qXlJplg 1:05–1:35](https://www.youtube.com/watch?v=Nxy2qXlJplg&t=65s)",
+     "now": "Bot calls are not counted per hour; the earlier owner test of `snake pit` got no response",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-5",
+     "section": "The situation",
+     "text": "Groups scatter after an event or boss; departure is staggered, with a few lingerers at the loot",
+     "evidence": "[H44UToO5faY 0:00–0:36](https://www.youtube.com/watch?v=H44UToO5faY)",
+     "now": "Unmeasured; belongs partly to the planned Boss fights page",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-6",
+     "section": "The people",
+     "text": "Most people join groups by teleporting to someone on the minimap, often but not always; novices may not know how",
+     "evidence": "Owner C02; O7",
+     "now": "Teleports are not counted separately from transfers",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-7",
+     "section": "The people",
+     "text": "Invitations happen, are sometimes declined, and conflict with existing friends",
+     "evidence": "[fubGzGmVqpI 8:59–9:47](https://www.youtube.com/watch?v=fubGzGmVqpI&t=539s) (`but i have my 2 best friends here`)",
+     "now": "243 invitations and 160 joins per hour, plus 468 settled without wording, yet bots are almost never near each other",
+     "status": "gap",
+     "status_note": "gap (joins don't produce togetherness)"
+    },
+    {
+     "id": "groups-8",
+     "section": "The people",
+     "text": "Friends survive death: the rebuilt character rejoins",
+     "evidence": "[Whcxy3RJKIA 4:40–5:44](https://www.youtube.com/watch?v=Whcxy3RJKIA&t=280s)",
+     "now": "Unmeasured; belongs to the planned Death page",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    },
+    {
+     "id": "groups-9",
+     "section": "The people",
+     "text": "Help is selective: an HP request gets a Priest heal and `ty`; not every request is answered",
+     "evidence": "Owner C10; Mad Lab `HP` / `go to the blue pool` ([xyUiQewDLg8](https://www.youtube.com/watch?v=xyUiQewDLg8))",
+     "now": "Unmeasured",
+     "status": "needs-measurement",
+     "status_note": "needs measurement"
+    }
+   ]
+  },
+  {
+   "id": "bosses",
+   "name": "Boss fights and aftermath",
+   "kind": "situation",
+   "icon": "oryx-the-mad-god-1.png",
+   "summary": "Fighting together, loot and scattering",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "death",
+   "name": "Death and rebuilding",
+   "kind": "situation",
+   "icon": "gravestone.png",
+   "summary": "Losing a character and coming back",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  },
+  {
+   "id": "session",
+   "name": "Session",
+   "kind": "situation",
+   "icon": "chat.png",
+   "summary": "How long people play and what fills it",
+   "drafted": false,
+   "measured": null,
+   "claims": []
+  }
+ ]
+}

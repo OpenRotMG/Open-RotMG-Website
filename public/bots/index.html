@@ -1,23 +1,53 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-  <meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; frame-src {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
-  <script src="{{BASE}}backend.js" defer></script>
-<title>Bot CCTV · Open RotMG</title><meta name="description" content="Watch Open RotMG gameplay bots live: what they see, where they aim and move, and why.">
-<link rel="canonical" href="{{SITE_URL}}bots/"><link rel="icon" href="/amulet-of-resurrection.png">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css?v={{BOTS_STYLE_VERSION}}"><script type="module" src="app.js?v={{BOTS_SCRIPT_VERSION}}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Bots · Open RotMG</title>
+  <meta name="description" content="How closely Open RotMG bots behave like Realm of the Mad God players in 2012, organized by place and situation.">
+  <link rel="canonical" href="{{SITE_URL}}bots/">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="{{BASE}}amulet-of-resurrection.png">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <link rel="stylesheet" href="{{BASE}}restoration/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
 </head>
-<body><div class="site-shell"><main class="page-main">
-<h1>Bot CCTV</h1>
-<p>Pick a live bot to watch what it sees, where it aims and moves, and why.</p>
-<p><label for="bot">Bot</label> <select id="bot"></select></p>
-<div class="cctv">
-<div class="game-view"><div id="view"></div><p id="status" role="status">Loading bots…</p><p id="view-status" role="status"></p></div>
-<aside class="intentions"><h2>Intentions</h2><div class="intention-body"><p id="telemetry-status" role="status"></p><p id="intention-status" role="status">No decision intention received.</p><div id="intention"></div></div></aside>
+<body class="restoration-page roadmap-2012">
+<div class="site-shell">
+  <main class="page-main">
+    <nav class="category-links" aria-label="Bots"><a href="./" aria-current="page">2012 players</a><a href="{{BASE}}cctv/">Watch bots live</a></nav>
+    <div class="restoration-intro">
+      <h1>Bots</h1>
+      <p class="progress-line">The players to recreate · 2012 footage</p>
+    </div>
+    <section aria-labelledby="focus-heading"><h2 id="focus-heading">Focus</h2><ol id="focus"></ol></section>
+    <section aria-labelledby="areas-heading"><h2 id="areas-heading">Places and situations</h2><div id="roadmap"></div></section>
+    <section id="claims" aria-labelledby="claims-heading">
+      <h2 id="claims-heading">Find behaviour claims</h2>
+      <form id="search-form" role="search"><fieldset id="filters" disabled>
+        <legend>Filter claims</legend>
+        <label>Search <input id="search" type="search" autocomplete="off" placeholder="trains, trade, Nexus..."></label>
+        <label>Place or situation <select id="area"><option value="">All</option></select></label>
+        <label>Status <select id="status"><option value="">Any status</option></select></label>
+        <button id="clear" type="button">Clear filters</button>
+      </fieldset></form>
+      <p id="visible-count" role="status" aria-live="polite"></p>
+      <div id="list"></div>
+    </section>
+    <p id="error" role="alert" hidden></p>
+    <noscript>JavaScript is required to show the bot behaviour scorecard.</noscript>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation</p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+  </footer>
 </div>
-</main><footer class="site-footer">
-<p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
-<p>2012 Realm of the Mad God reimplementation</p>
-<nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div></body></html>
+<dialog id="claim-dialog" aria-labelledby="claim-title">
+  <div class="dialog-head"><div class="feature-heading"><img id="claim-icon" alt=""><h2 id="claim-title"></h2></div><button id="feature-close" type="button" aria-label="Close claim details">Close</button></div>
+  <div id="claim-body"></div>
+</dialog>
+</body>
+</html>

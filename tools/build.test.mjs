@@ -46,9 +46,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
   const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');
-  const bots = readFileSync(new URL('../dist/bots/index.html', import.meta.url), 'utf8');
+  const bots = readFileSync(new URL('../dist/cctv/index.html', import.meta.url), 'utf8');
   for (const file of ['app.js', 'style.css']) {
-    const version = createHash('sha256').update(readFileSync(new URL(`../dist/bots/${file}`, import.meta.url))).digest('hex');
+    const version = createHash('sha256').update(readFileSync(new URL(`../dist/cctv/${file}`, import.meta.url))).digest('hex');
     assert.ok(bots.includes(`${file}?v=${version}`), `CCTV ${file} must change its URL with its contents`);
   }
   for (const html of [home, about, branding, gold, bots]) {
@@ -254,7 +254,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`property="og:image" content="${imageUrl}"`));
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
   const imageHashes = new Set();
-  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'bots/', 'branding/', 'draw/']) {
+  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'bots/', 'cctv/', 'branding/', 'draw/']) {
     const html = readFileSync(new URL(`../dist/${page}index.html`, import.meta.url), 'utf8');
     const png = readFileSync(new URL(`../dist/${page}social.png`, import.meta.url));
     assert.equal(png.readUInt32BE(16), 1200);
