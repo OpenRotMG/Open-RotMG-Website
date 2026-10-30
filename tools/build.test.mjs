@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
@@ -43,6 +43,16 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(sharedHiscores, /Native Realm of the Mad God pixel art over historical gameplay/);
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   assert.ok(!home.includes(customImage));
+  for (const file of readdirSync(new URL('../dist/', import.meta.url), {recursive: true}).filter(file => file.endsWith('.html'))) {
+    const html = readFileSync(new URL(`../dist/${file}`, import.meta.url), 'utf8');
+    assert.equal([...html.matchAll(/rel="icon"/g)].length, 5, file);
+    assert.doesNotMatch(html, /rel="icon"[^>]*amulet-of-resurrection/);
+    for (const size of [16, 32, 48, 96, 192]) {
+      const path = `icons/amulet-${size}.png`;
+      const version = createHash('sha256').update(readFileSync(new URL(`../dist/${path}`, import.meta.url))).digest('hex').slice(0, 12);
+      assert.ok(html.includes(`<link rel="icon" type="image/png" sizes="${size}x${size}" href="/${path}?v=${version}">`), file);
+    }
+  }
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
   const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');

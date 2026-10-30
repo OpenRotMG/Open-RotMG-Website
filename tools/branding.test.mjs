@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { runInNewContext } from 'node:vm';
 
 const script = readFileSync(new URL('../public/branding/copy.js', import.meta.url), 'utf8');
@@ -20,6 +21,22 @@ async function click(id, clipboard, field) {
   assert.equal(appended, status);
   return { status, errors };
 }
+
+test('favicon exports retain reviewed pixel-aligned artwork at their advertised sizes', () => {
+  // Pin the reviewed exports so a smoothing filter cannot silently blend the sprite's pixels.
+  for (const [size, hash] of [
+    [16, '96deb1d325ea8e82bfbd1b430f2e320a98bc4ee046eaba2c75d70aa8740d3029'],
+    [32, 'c8e6e65141c0f71db5025e03ea1557f9c7286708c8dd5f2aa40340c231ea6ab5'],
+    [48, '9ac7bcb99afc2b7d684c27e76634d4785ab93c1c910af67f883de86ef80a4687'],
+    [96, '371a75efc3ff41ffed31cac1cad1fa97e93feb0749b553ba35caf5282eb31461'],
+    [192, '9dda6b691afc29890363e294052c2f3c5f83b1aa346a1d65178a61d52a8f707c']
+  ]) {
+    const png = readFileSync(new URL(`../public/icons/amulet-${size}.png`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), size);
+    assert.equal(png.readUInt32BE(20), size);
+    assert.equal(createHash('sha256').update(png).digest('hex'), hash);
+  }
+});
 
 test('every copy control points to a unique readable field', () => {
   const ids = [...html.matchAll(/data-copy="([^"]+)"/g)].map(match => match[1]);
