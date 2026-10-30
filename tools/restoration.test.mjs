@@ -18,10 +18,10 @@ test('typed lock evidence does not promote whole-feature or original command acc
   }
   assert.match(feature.audit.unknowns.join(' '),/original 123\.5\.1 typed-command semantics are not authenticated/);
   assert.match(evidence.sources['lock-command-native-5fd61de2'].method,/passes9 assertions/);
-  assert.match(evidence.sources['lock-command-native-5fd61de2'].limitations,/not relabeleda051/);
-  const regression=evidence.sources['lock-command-regression-a051bf33'];
-  assert(evidence.results[id].evidence.includes('lock-command-regression-a051bf33'));assert.equal(regression.kind,'regression');assert.equal(regression.revision,'a051bf3379eee004fcdc185157be70fb8a1d0e8f');assert.deepEqual(regression.checks,[id]);
-  assert.match(regression.method,/passes408 Rust tests/);
+  assert.match(evidence.sources['lock-command-native-5fd61de2'].limitations,/not relabeledf0ff/);
+  const regression=evidence.sources['lock-command-regression-f0ff0d4c'];
+  assert(evidence.results[id].evidence.includes('lock-command-regression-f0ff0d4c'));assert.equal(regression.kind,'regression');assert.equal(regression.revision,'f0ff0d4c6b998871ca027d1b12899e5f759187f0');assert.deepEqual(regression.checks,[id]);
+  assert.match(regression.method,/passes409 Rust tests/);
 });
 
 test('gallery ordinary passes do not certify administrative export or original history',()=>{
