@@ -5260,7 +5260,7 @@
           "Server PR1147's prepared journeys verify key entry, ordinary rooms, first boss, Wisdom and same-character exit, plus a separate Creation defeat with no duplicate clear. Its no-Creation-reward observation belongs to that older revision; PR1252 adds the Defense reward. Current player-pool checks remain in PR1097. None accepts the full dungeon or original semantics: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147"
         ],
         "unknowns": [
-          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. Target-labeled footage t0f0_BWpBtw remains unviewed after YouTube blocked retrieval; its indexed green-minion healing claim is not accepted evidence. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
+          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. The full t0f0_BWpBtw uploader description is a retrospective 2013 edit attributing green-minion healing to Dr Terrible; target-labeled footage remains locally blocked and unviewed, so original helper behavior is not established. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
         ],
         "sources": [
           {
@@ -5284,7 +5284,8 @@
               "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures. Ordinary robots still lack rewards; Dr Terrible rewards Wisdom and Creation rewards Defense."
             ],
             "unknowns": [
-              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original room generation, ordinary loot and boss-helper healing semantics remain unverified; current comparator reconstruction is not target-era acceptance."
+              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original room generation, ordinary loot and boss-helper healing semantics remain unverified; current comparator reconstruction is not target-era acceptance.",
+              "The uploader retrospective does not identify the healing helpers or establish their count, amount, cadence or range; it does not supply an original boss-helper implementation contract."
             ],
             "sources": [
               {
@@ -5309,7 +5310,8 @@
               "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants and the slowed-pet revert remain absent. Server PR1252 gives Creation one private Defense potion per living damaging contributor, using the existing Lab allocation policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1252 Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
             "unknowns": [
-              "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. The mixed-era wiki guarantees Defense to at least one player, not every contributor. Our per-contributor guarantee is reconstruction; target-era allocation, other equipment and drop rates remain unresolved. Native acceptance is separate from historical fidelity."
+              "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. The mixed-era wiki guarantees Defense to at least one player, not every contributor. Our per-contributor guarantee is reconstruction; target-era allocation, other equipment and drop rates remain unresolved. Native acceptance is separate from historical fidelity.",
+              "Inspected retained frames show vats and Dr Terrible aftermath, not Creation or complete masks. The independent December2012 Creation lead remains unviewed; neither establishes original choreography, cloak/range, low-HP or slowed-pet reversion."
             ],
             "sources": [
               {
