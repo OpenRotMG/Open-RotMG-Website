@@ -113,9 +113,9 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
-test('Worlds4–6 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+test('Worlds4–7 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  for(const n of ['04','05','06','10','11','12','13']){
+  for(const n of ['04','05','06','07','10','11','12','13']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
@@ -139,7 +139,14 @@ test('Worlds4–6 and10–13 playable acceptance keeps historical and map-bank g
   assert.match(world6.rule.acceptance,/southwestern bay, northeastern projection and bottom extent/);
   assert.match(evidence.sources['world06-native-7765c8d'].method,/both bay rims, northeastern\/eastern projections, southern cape/);
   assert.match(evidence.sources['world06-native-7765c8d'].limitations,/not a continuous end-to-end walk/);
-  for(const n of ['07','08'])assert.equal(evidence.results['realm:map-world-'+n].status,'not-run');
+  const world7=rows.find(r=>r.id==='realm:map-world-07'),native7=evidence.sources['world07-native-f87d5b2'],regression7=evidence.sources['world07-regression-f87d5b2'];
+  assert.match(world7.rule.acceptance,/north lake.*elongated southern body.*mountain\/snow/);
+  assert.equal(native7.revision,'f87d5b2b7a972008a418e3eb0db0d08df1d188da');
+  assert.match(native7.method,/57 assertions.*20 Ent2335\/10 Lich2331\/21 Coil3522/);
+  assert.match(native7.limitations,/not continuous end-to-end walking.*unchanged0\.6 gate/);
+  assert.match(regression7.method,/without repainting authored cells.*normal dependency merge/);
+  assert.match(regression7.limitations,/failed393\/6 union suite/);
+  assert.equal(evidence.results['realm:map-world-08'].status,'not-run');
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 
