@@ -44,7 +44,7 @@ test('page has only the four bag filters, full results, short sources and matchi
  const html=readFileSync(new URL('../public/drop-rates/index.html',import.meta.url),'utf8');
  assert.match(html,/<option value="4">White bag<\/option><option value="3">Blue bag<\/option><option value="2">Cyan bag<\/option><option value="1">Purple bag/);
  assert.doesNotMatch(html,/Know what|historical odds|How to read|id="search"|id="category"|id="count"|previous|pagination|id="next"/);
- assert.match(html,/role="alert"/);
+ assert.match(html,/role="alert"/);assert.match(html,/app\.js\?v=\{\{DROP_RATES_VERSION\}\}/);assert.match(html,/style\.css\?v=\{\{DROP_RATES_VERSION\}\}/);
  const app=readFileSync(new URL('../public/drop-rates/app.js',import.meta.url),'utf8');
  assert.doesNotMatch(app,/Owner-selected|Historical rate unverified|General loot|Current implementation|source_file|eligibility|allocation|group.channel|toLocaleString|slice\(page/);
  const art=JSON.parse(readFileSync(new URL('../public/hiscores/items.json',import.meta.url)));assert(art.every(i=>Number.isInteger(i.bag)&&i.bag>=0&&i.bag<=4));assert.equal(art.find(i=>i.id===0xc02).bag,4);assert.equal(art.find(i=>i.id===0xa1f).bag,3);
