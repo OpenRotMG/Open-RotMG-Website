@@ -5670,7 +5670,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility is inclusive 1200/8000 at unchanged .001; other Septavius rewards retain the generic >800 gate.",
+        "expected": "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility remains inclusive 1200/8000; its owner-selected balance rate is now 1%, not authenticated original odds. Other Septavius rewards retain the generic >800 gate.",
         "differences": [],
         "unknowns": [
           "Original production acquisition of Thousand Shot and T13/T14 bows remains unproved. The February 6, 2012 Thousand Shot post describes testing code, not a released drop.",
@@ -5891,7 +5891,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. Private potion recipients remain eligible for successful equipment drops. The exact historical winner-selection rule is not recovered.",
+        "expected": "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. Private potion recipients remain eligible for successful equipment drops. The exact historical winner-selection rule is not recovered. Eight regular dungeon uniques now use an owner-selected 1% balance rate; their original odds remain unverified.",
         "differences": [],
         "unknowns": [
           "Conflicting Oryx public/private probabilities, incomplete period coverage and exact historical attribution/expiry remain unresolved.",

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="openrotmg-api" content="{{API_ORIGIN}}">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+<title>Drop rates · Open RotMG</title>
+<meta name="description" content="Explore Open RotMG loot, current drop rates, damage requirements and linked sources. Separate today's balance from historical evidence.">
+<link rel="canonical" href="{{SITE_URL}}drop-rates/">
+<link rel="stylesheet" href="{{BASE}}style.css"><link rel="stylesheet" href="style.css">
+<script src="{{BASE}}backend.js" defer></script><script type="module" src="app.js"></script>
+</head>
+<body><div class="site-shell"><main class="page-main">
+<header class="drops-heading"><img src="{{BASE}}restoration/assets/player/loot-bag.png" alt=""><div><p class="eyebrow">OPEN ROTMG</p><h1>Drop rates</h1><p>Know what you’re farming.</p></div></header>
+<p class="intro">Current server rules, not authenticated historical odds. Each entry links implementation and available evidence; owner-selected changes are labelled.</p>
+<details class="guide"><summary>How to read these rates</summary><p>Per reward attempt, not automatically per dungeon or player. Tier selection, roll order, chest caps, damage eligibility, ownership and repeats apply.</p><p>Period wiki/community evidence may establish membership or mechanics, not 123.5.1 odds. Missing historical evidence is marked unverified. Related forks are not independent witnesses. Retired sources: provenance only.</p></details>
+<p id="status" role="status">Loading current loot…</p><p id="error" role="alert" hidden></p>
+<section id="catalogue" hidden>
+<div class="filters"><label>Search item or enemy<input id="search" type="search" placeholder="Doom Bow, Malphas, Incantation…" maxlength="100"></label><label>Show<select id="category"><option value="unique">Untiered equipment</option><option value="all">All items</option><option value="rare">Rolls below 1%</option><option value="balance">Owner-selected balance</option></select></label></div>
+<p id="count" aria-live="polite"></p><div id="drops"></div>
+<nav class="pagination" aria-label="Drop results"><button id="previous" type="button">Previous</button><span id="page"></span><button id="next" type="button">Next</button></nav>
+</section>
+</main><footer class="site-footer"><p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p><p>2012 Realm of the Mad God reimplementation</p><nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div>
+</body></html>

@@ -90,6 +90,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
   assert.deepEqual(aboutLinks, [
+    [`${site.pathname}drop-rates/`, 'Drop rates', 'Loot, requirements and sources.'],
     [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
     [`${site.pathname}cctv/`, 'Bot CCTV', 'Watch bots play live.'],
     ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
@@ -265,7 +266,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`property="og:image" content="${imageUrl}"`));
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
   const imageHashes = new Set();
-  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'cctv/', 'branding/', 'draw/', 'bots/', 'bots/nexus/', 'bots/godlands/', 'bots/groups/', 'bots/combat/']) {
+  for (const page of ['', 'about/', 'drop-rates/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'cctv/', 'branding/', 'draw/', 'bots/', 'bots/nexus/', 'bots/godlands/', 'bots/groups/', 'bots/combat/']) {
     const html = readFileSync(new URL(`../dist/${page}index.html`, import.meta.url), 'utf8');
     if (page.startsWith('bots/')) {
       assert.doesNotMatch(html, /noindex/);
@@ -283,7 +284,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
       assert.ok(html.includes(`="${key}" content="${url}"`), page + key);
     }
   }
-  assert.equal(imageHashes.size, 16);
+  assert.equal(imageHashes.size, 17);
 });
 
 test('loading screen waits for movie data, not just runtime initialization', async () => {
