@@ -610,6 +610,10 @@ test('historical references cannot be implementation PRs or unpinned code',()=>{
   for(const url of ['https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs','https://openrotmg.org/restoration/','https://github.com/trapped/rotmg_svr/blob/main/file.cs'])assert.throws(()=>validateSources([{url,label:'probe'}],'probe'));
 });
 
+test('Trapped source labels identify retired provenance',()=>{
+  for(const {rule} of records(catalogue()))for(const source of rule.sources??[])if(source.url.startsWith('https://github.com/trapped/rotmg_svr/'))assert.match(source.label,/^Retired:/);
+});
+
 test('category and condition sprites stay original and distinct',()=>{
   const data=catalogue(),icons=Object.fromEntries(data.categories.map(c=>[c.id,c.icon]));assert.notEqual(icons.heroes,icons.access);
   assert.equal(icons.conditions,data.features.find(f=>f.name==='Armor broken').icon);
