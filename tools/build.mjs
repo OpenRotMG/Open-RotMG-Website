@@ -64,8 +64,8 @@ await cp(join(root, 'public'), dist, { recursive: true });
 await cp(join(client, 'native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
 await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
-const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'bots/app.js'))).digest('hex');
-const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'bots/style.css'))).digest('hex');
+const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/app.js'))).digest('hex');
+const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/style.css'))).digest('hex');
 const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="{{BASE}}#bug-report">Report bug</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {

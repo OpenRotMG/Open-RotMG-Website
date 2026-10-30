@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {events, viewMessage, selectionMessage, intentionRows, start} from '../public/bots/app.js';
+import {events, viewMessage, selectionMessage, intentionRows, start} from '../public/cctv/app.js';
 
 test('bot stream parser keeps partial messages and skips keep-alive comments', () => {
   const [first, rest] = events('data: {"a":1}\n\n:\n\ndata: {"b"');
@@ -375,8 +375,8 @@ test('new goals, characters and selection reset immediately; unavailable data ne
 });
 
 test('page keeps game and intentions, with fixed layout and exceptional-state announcements only', async () => {
-  const html = await readFile(new URL('../public/bots/index.html', import.meta.url), 'utf8');
-  const css = await readFile(new URL('../public/bots/style.css', import.meta.url), 'utf8');
+  const html = await readFile(new URL('../public/cctv/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../public/cctv/style.css', import.meta.url), 'utf8');
   assert.match(html, /frame-src \{\{API_ORIGIN\}\};/);
   for (const id of ['status', 'view-status', 'telemetry-status']) assert.match(html, new RegExp(`id="${id}" role="status"`));
   assert.match(css, /aspect-ratio:4\/3/);assert.match(css, /@media \(max-width:700px\)/);
