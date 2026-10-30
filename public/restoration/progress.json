@@ -1050,10 +1050,10 @@
             "name": "Classic World 6 identity",
             "expected": "Identify the documented Classic World 6 separately from private-server layouts. Exact continuity into 123.5.1, native dimensions and source rights still need confirmation.",
             "acceptance": "Register an explicitly authored playable reconstruction; track historical identity and rights separately. Apply the geography, ecology and interaction checks independently. Preserve the southwestern bay, northeastern projection and bottom extent rather than filling or cropping the source to make construction pass.",
-            "implementation": "missing",
+            "implementation": "present",
             "historical": "unreviewed",
-            "differences": ["This numbered World is not registered yet. Historical continuity and provenance remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/721"],
-            "unknowns": [],
+            "differences": ["PR1240 registers an authored 2100-square reconstruction with 25 Ent Groves, 5 Lich sites and 14 Coil temples. Tests and normal-client checks cover arrivals, inland movement, ordinary combat and chest collection, temple/wood collision, living lava damage, both southwestern bay rims, northeastern/eastern projections, the southern cape, two road/water joins, glyph scenery and the purple pool: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1240"],
+            "unknowns": ["The 3,459,032 prior private candidate cells were freshly adopted as authored values, alongside 950,968 explicit held-cell resolutions. Bounded raster/underlay choices, habitat tiers, the later 6,705-cell Grove correction and one-pixel-per-tile transform are authored. The bottom 6,300 editor-strip cells are explicitly exterior water without cropping. Dead Fir, decorative glyph/cross/wood roles and no authored Oasis are choices, not recovered identities or historical absence proof. Original extent, hidden fields, placement/RNG and reuse rights remain unverified."],
             "sources": [],
             "group": "maps"
           },
@@ -1149,7 +1149,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1184,7 +1184,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1198,7 +1198,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1212,7 +1212,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1226,7 +1226,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1240,7 +1240,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1254,7 +1254,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1268,7 +1268,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Thirteen layouts: three FSOD maps plus authored Worlds 1–5 and 9–13. Worlds 6–8 remain absent; none is recovered original data."
+              "Fourteen layouts: three FSOD maps plus authored Worlds 1–6 and 9–13. Worlds 7–8 remain absent; none is recovered original data."
             ],
             "unknowns": [],
             "sources": [],
@@ -1685,7 +1685,8 @@
           "Seventeen native checks cover prepared SmallGroup evaluation through Sprite, Actual Ent, Ent and Sapling defeats, loot pickup and cold saved progress. Supplied legal stats/gear, positioning, protection and resource refills exclude earned progression/survival; one branch does not accept the whole family or its history: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1021#issuecomment-6452236236",
         "Actual Greater Nature Sprite (0x924) now remains stationary and produces no shot specifications before 1000ms on its existing active clock, ahead of the shared home leash, matching the compiled primary community setup state. Parent Greater Nature Sprite and Actual Ent motors remain unchanged. Seven added real-World NPC-step rows cover entry reset and ages 0/999/1000 inside/outside the leash, retaining earlier controls. A prepared normal-client witness naturally transformed an owned sprite and kept the same living, unconditioned 3600-HP replacement at unchanged XY over 400 game ms, ages 300-700. Legal gear/stats are unearned; fresh runs and inputs differ. Native firing/rate, exact deferred entry and transition ticks, later prioritization, full AI/RNG and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1040",
           "PR1139 repairs the observed Ent 0x921 public-Soulbound packaging failure by assigning an already-rolled unique Tincture of Dexterity to one random positive-damage contributor. Existing twice-per-contributor, capped-at-eight attempts/dedup remain, not the comparator's single 2% roll. Old-runtime World failure and 242 green Rust tests verify the allocation; prepared native images are context, not tincture pickup proof. This is account-bound safety, not original rates or whole-family acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1139#issuecomment-6479389549",
-          "PR1237 binds 31 World12 Groves to retained Cherry Tree404 scenery. The Cherry remnant clipped by a temple remains scenery, not an overlapping authored actor. Ordinary AI, growth, ownership and rewards are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237"
+          "PR1237 binds 31 World12 Groves to retained Cherry Tree404 scenery. The Cherry remnant clipped by a temple remains scenery, not an overlapping authored actor. Ordinary AI, growth, ownership and rewards are unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237",
+          "PR1240 binds 25 World6 Groves to retained Cherry Tree scenery. The authored habitat correction changes bare Light Grass inside existing Grove bounds to permitted Mid Forest, not isolated spawn pixels or the runtime guard. Scenery, bounds, ordinary AI, growth, ownership and rewards remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1240"
         ],
         "unknowns": [
           "May 20, 2012 build-122.3.2 guide/Kithio: nominal 1600ms growth, final stage at 14400ms; Trapped adds a 2000ms opening. Guide sizes imply 140 to 320; compiled Kithio gradually targets 160 to 340; Rust snaps. 123.5.1 continuity, entry ticks and full shield/armor handoff remain unverified.",
@@ -1756,7 +1757,8 @@
           "PR1075 restores distinct Mummy/King Tome/potion, Pharaoh weapon, Bearer egg/tincture/potion and Spirit T8/ring/tincture/potion pools from compiled Kithio. Mummies roll once per death; Bearer/Spirit tiers roll independently per candidate with existing soulbound/colored-bag ownership. Actual Lich private thresholds, AI and summon policy are unchanged. CI passes202 tests, formatting and strict Clippy at87292512; rates are reconstruction values, not measured original probabilities: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1075#issuecomment-6461083265",
         "Haunted Spirit (0x91e) now remains stationary throughout its existing Attack window even beyond its home leash, matching the compiled primary community state's absence of movement. Eight added real-World NPC-step rows cover ages 6999/7000/9999/10000 inside/outside the leash and unchanged NewLocation controls. A prepared normal-client witness retained the same living, unconditioned 4000-HP owned spirit at unchanged XY for 1400 actual game ms within one Attack cycle, inside its home radius. This is a movement control, not native proof of the outside-leash correction. Legal gear/stats are unearned and runs differ. Existing clocks, shots, shielding, expiry and ownership remain; original deferred entry/transition ticks, NewLocation centers/prioritization, full AI/RNG/runtime parity and original placement/configuration/authenticity remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1091",
           "PR1236 binds 4 World13 Lich sites to retained Destructible Blue Wall354. The exact-layout qualifier preserves other layouts' wall352 requirement and ordinary AI, ownership and rewards: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236",
-          "PR1237 binds 8 World12 Lich sites to the existing wall352 support requirement. Mixed 352/354 scenery remains unchanged; no new layout qualifier or AI, ownership or reward rule is introduced: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237"
+          "PR1237 binds 8 World12 Lich sites to the existing wall352 support requirement. Mixed 352/354 scenery remains unchanged; no new layout qualifier or AI, ownership or reward rule is introduced: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237",
+          "PR1240 binds 5 World6 Lich sites to the existing wall352 support rule. Mixed blue-floor, wall352/354 and pillar381 scenery remains intact. No new layout qualifier, AI, ownership or reward rule is introduced: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1240"
         ],
         "unknowns": [
           "Original complete branch populations remain unresolved. Compiled Kithio counts Spirit births per state; current encounter-wide living caps differ. Trapped and the undated Japanese Lich table disagree: https://github.com/OpenRotMG/Open-RotMG-Server/issues/793#issuecomment-6454994102",
@@ -2683,7 +2685,8 @@
           "PR1230 binds 25 World11 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1230",
           "PR1233 binds 17 World10 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1233",
           "PR1236 binds 22 World13 temples without repainting. AI, independent chest rolls and the 20% optional portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1236",
-          "PR1237 binds 8 World12 temples without repainting. Ordinary AI, independent chest rolls and the optional 20% portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237"
+          "PR1237 binds 8 World12 temples without repainting. Ordinary AI, independent chest rolls and the optional 20% portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1237",
+          "PR1240 binds 14 World6 temples without structural repainting. Ordinary AI, independent chest rolls and the optional 20% portal drop remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1240"
         ],
         "unknowns": [
           "Exact 123.5.1 temple count/mix/distribution, egg timing/batch counts, ring count/orientation/cloak policy and Jungle probability remain unresolved; source conflicts and checked leads are tracked in issue814. Trapped's 10–19 requested sites per variant and randomized initial egg delay are not guaranteed population or exact timing."
