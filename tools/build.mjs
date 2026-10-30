@@ -64,15 +64,20 @@ await cp(join(root, 'public'), dist, { recursive: true });
 await cp(join(client, 'native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
 await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
-const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'bots/app.js'))).digest('hex');
-const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'bots/style.css'))).digest('hex');
+const botsScriptVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/app.js'))).digest('hex');
+const botsStyleVersion = createHash('sha256').update(await readFile(join(dist, 'cctv/style.css'))).digest('hex');
+const favicons = (await Promise.all([16, 32, 48, 96, 192].map(async size => {
+  const file = `icons/amulet-${size}.png`;
+  const version = createHash('sha256').update(await readFile(join(dist, file))).digest('hex').slice(0, 12);
+  return `<link rel="icon" type="image/png" sizes="${size}x${size}" href="${site.pathname}${file}?v=${version}">`;
+}))).join('\n');
 const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="{{BASE}}#bug-report">Report bug</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion).replace('</head>', `${favicons}\n</head>`);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html)) {
         await writeFile(path, html);

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
@@ -43,12 +43,22 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(sharedHiscores, /Native Realm of the Mad God pixel art over historical gameplay/);
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   assert.ok(!home.includes(customImage));
+  for (const file of readdirSync(new URL('../dist/', import.meta.url), {recursive: true}).filter(file => file.endsWith('.html'))) {
+    const html = readFileSync(new URL(`../dist/${file}`, import.meta.url), 'utf8');
+    assert.equal([...html.matchAll(/rel="icon"/g)].length, 5, file);
+    assert.doesNotMatch(html, /rel="icon"[^>]*amulet-of-resurrection/);
+    for (const size of [16, 32, 48, 96, 192]) {
+      const path = `icons/amulet-${size}.png`;
+      const version = createHash('sha256').update(readFileSync(new URL(`../dist/${path}`, import.meta.url))).digest('hex').slice(0, 12);
+      assert.ok(html.includes(`<link rel="icon" type="image/png" sizes="${size}x${size}" href="/${path}?v=${version}">`), file);
+    }
+  }
   const about = readFileSync(new URL('../dist/about/index.html', import.meta.url), 'utf8');
   const branding = readFileSync(new URL('../dist/branding/index.html', import.meta.url), 'utf8');
   const gold = readFileSync(new URL('../dist/gold/index.html', import.meta.url), 'utf8');
-  const bots = readFileSync(new URL('../dist/bots/index.html', import.meta.url), 'utf8');
+  const bots = readFileSync(new URL('../dist/cctv/index.html', import.meta.url), 'utf8');
   for (const file of ['app.js', 'style.css']) {
-    const version = createHash('sha256').update(readFileSync(new URL(`../dist/bots/${file}`, import.meta.url))).digest('hex');
+    const version = createHash('sha256').update(readFileSync(new URL(`../dist/cctv/${file}`, import.meta.url))).digest('hex');
     assert.ok(bots.includes(`${file}?v=${version}`), `CCTV ${file} must change its URL with its contents`);
   }
   for (const html of [home, about, branding, gold, bots]) {
@@ -81,12 +91,13 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
   assert.deepEqual(aboutLinks, [
     [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
-    [`${site.pathname}bots/`, 'Bot CCTV', 'Watch bots play live.'],
+    [`${site.pathname}cctv/`, 'Bot CCTV', 'Watch bots play live.'],
     ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
     [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
+    [`${site.pathname}bots/`, 'Bots', 'Bot behaviour tracker.'],
     [`${site.pathname}draw/`, 'Pixel editor', 'Original Flash editor.'],
     ['https://www.openrotmg.org/2010/', '2010 Preview', 'Visit an earlier realm.']
   ]);
@@ -254,7 +265,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`property="og:image" content="${imageUrl}"`));
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
   const imageHashes = new Set();
-  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'bots/', 'branding/', 'draw/']) {
+  for (const page of ['', 'about/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'cctv/', 'branding/', 'draw/']) {
     const html = readFileSync(new URL(`../dist/${page}index.html`, import.meta.url), 'utf8');
     const png = readFileSync(new URL(`../dist/${page}social.png`, import.meta.url));
     assert.equal(png.readUInt32BE(16), 1200);

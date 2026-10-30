@@ -1,23 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-  <meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; frame-src {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
-  <script src="{{BASE}}backend.js" defer></script>
-<title>Bot CCTV · Open RotMG</title><meta name="description" content="Watch Open RotMG gameplay bots live: what they see, where they aim and move, and why.">
-<link rel="canonical" href="{{SITE_URL}}bots/"><link rel="icon" href="/amulet-of-resurrection.png">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css?v={{BOTS_STYLE_VERSION}}"><script type="module" src="app.js?v={{BOTS_SCRIPT_VERSION}}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Bots · Open RotMG</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <link rel="stylesheet" href="{{BASE}}about/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body><div class="site-shell"><main class="page-main">
-<h1>Bot CCTV</h1>
-<p>Pick a live bot to watch what it sees, where it aims and moves, and why.</p>
-<p><label for="bot">Bot</label> <select id="bot"></select></p>
-<div class="cctv">
-<div class="game-view"><div id="view"></div><p id="status" role="status">Loading bots…</p><p id="view-status" role="status"></p></div>
-<aside class="intentions"><h2>Intentions</h2><div class="intention-body"><p id="telemetry-status" role="status"></p><p id="intention-status" role="status">No decision intention received.</p><div id="intention"></div></div></aside>
+<body class="about-page">
+<div class="site-shell">
+  <main class="page-main">
+    <div class="quiet-heading"><img src="{{BASE}}restoration/assets/player/warrior.png" alt=""><h1>Bots</h1></div>
+    <div class="quiet-columns">
+      <section><h2>Places</h2><ul class="link-rows">
+        <li><a href="nexus/"><img src="{{BASE}}restoration/assets/player/nexus-portal.png" alt=""><span><strong>Nexus</strong><small>5 behaviours · 2 missing</small></span><b aria-hidden="true">↗</b></a></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/ent.png" alt=""><span><strong>Realm travel</strong><small>Not listed yet</small></span></span></li>
+        <li><a href="godlands/"><img src="{{BASE}}restoration/assets/player/ent-god.png" alt=""><span><strong>Godlands</strong><small>4 behaviours · 1 missing · 2 need footage</small></span><b aria-hidden="true">↗</b></a></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/vault-chest.png" alt=""><span><strong>Vault</strong><small>Not listed yet</small></span></span></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/pirate-cave-key.png" alt=""><span><strong>Dungeons</strong><small>Not listed yet</small></span></span></li>
+      </ul></section>
+      <section><h2>Situations</h2><ul class="link-rows">
+        <li><a href="groups/"><img src="{{BASE}}restoration/assets/player/archer.png" alt=""><span><strong>Groups</strong><small>5 behaviours · 3 missing · 1 need footage</small></span><b aria-hidden="true">↗</b></a></li>
+        <li><a href="combat/"><img src="{{BASE}}restoration/assets/player/short-sword.png" alt=""><span><strong>Combat</strong><small>3 behaviours · 3 need footage</small></span><b aria-hidden="true">↗</b></a></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/oryx-the-mad-god-1.png" alt=""><span><strong>Boss fights</strong><small>Not listed yet</small></span></span></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/gravestone.png" alt=""><span><strong>Death and rebuilding</strong><small>Not listed yet</small></span></span></li>
+        <li><span class="unlisted"><img src="{{BASE}}restoration/assets/player/xp-booster.png" alt=""><span><strong>Sessions</strong><small>Not listed yet</small></span></span></li>
+      </ul></section>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation</p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+  </footer>
 </div>
-</main><footer class="site-footer">
-<p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
-<p>2012 Realm of the Mad God reimplementation</p>
-<nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div></body></html>
+</body>
+</html>

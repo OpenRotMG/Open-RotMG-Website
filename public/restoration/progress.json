@@ -1398,7 +1398,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Leveling.cs",
-            "label": "2013 community quest windows comparator, not official server code"
+            "label": "Retired: 2013 community quest windows comparator, not official server code"
           }
         ]
       }
@@ -1425,7 +1425,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/Oryx.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {"url":"https://web.archive.org/web/20120106105406id_/http://forums.wildshadow.com/wiki/realm-mad-god/faq","label":"January 6, 2012: finite Quests, replenishing minions and a two-minute lockout"},
           {"url":"https://web.archive.org/web/20120602012040id_/http://forums.wildshadow.com/wiki/realm-mad-god/game-objectives","label":"June 2, 2012: six named event bosses, Castle and Guardians; all players wording does not resolve dungeon eligibility"},
@@ -1701,15 +1701,15 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
-            "label": "Community Grove allocation: upper-exclusive Next(17, 25)"
+            "label": "Retired: Community Grove allocation: upper-exclusive Next(17, 25)"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.EntAncient.cs#L100-L215",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.EntAncient.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/Enemy.cs#L93-L117",
@@ -1770,7 +1770,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lich.cs#L17-L220",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -1807,7 +1807,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.GhostKing.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Tower.cs",
@@ -1873,7 +1873,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Deathmage.cs#L17-L96",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -1938,7 +1938,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.RedDemon.cs#L17-L89",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/LavaFissure.cs",
@@ -1977,7 +1977,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oasis.cs#L17-L92",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Oasis.cs",
@@ -2024,7 +2024,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Cyclops.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/setpieces/Castle.cs",
@@ -2075,7 +2075,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Phoenix.cs#L17-L123",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.Phoenix.cs",
@@ -2104,7 +2104,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tutorial.cs#L21-L28",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Tutorial.cs",
@@ -2157,7 +2157,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L687-L717",
-            "label": "Community behavior/loot comparator; engine semantics and original rates differ"
+            "label": "Retired: Community behavior/loot comparator; engine semantics and original rates differ"
           }
         ]
       }
@@ -2195,7 +2195,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L208-L250",
-            "label": "Alternate behavior and separate Warrior reward comparator; exact original rates remain unverified"
+            "label": "Retired: Alternate behavior and separate Warrior reward comparator; exact original rates remain unverified"
           }
         ]
       }
@@ -2220,7 +2220,7 @@
         "sources": [
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/Shambling.cs#L17-L79",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "reference-data/client-123.5.1.swf",
@@ -2228,7 +2228,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Retired: Community behavior/loot comparator; original rates remain unverified"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L231-L303",
@@ -2272,7 +2272,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L284-L304",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -2346,11 +2346,11 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L601-L678",
@@ -2448,7 +2448,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -2481,7 +2481,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L460-L518",
@@ -2530,7 +2530,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -2571,7 +2571,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -2601,7 +2601,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L231-L322",
@@ -2655,7 +2655,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 comparator; differs in movement, replenishment and loot"
+            "label": "Retired: 2013 comparator; differs in movement, replenishment and loot"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Lowland.cs#L293-L364",
@@ -2707,11 +2707,11 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/setpieces/SetPieces.cs",
-            "label": "Community temple-placement comparison: MidForest/MidPlains (2013), not a target-date population count"
+            "label": "Retired: Community temple-placement comparison: MidForest/MidPlains (2013), not a target-date population count"
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.ForbiddenJungle.cs",
@@ -2881,7 +2881,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-            "label": "Pinned community Tomb mechanics comparator, not official server code"
+            "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
           }
         ]
       }
@@ -2920,7 +2920,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SkullShrine.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -2952,7 +2952,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.CubeGod.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -3000,7 +3000,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/cond/PentaractStar.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -3141,7 +3141,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Crystal.cs#L674-L684",
-            "label": "2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
+            "label": "Retired: 2013 Trapped soul-bag comparator; not authenticated 123.5.1 rates"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Crystal.cs",
@@ -3271,7 +3271,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "Older comparator: nested King ownership differs from Kithio"
+            "label": "Retired: Older comparator: nested King ownership differs from Kithio"
           },
           {
             "url": "https://web.archive.org/web/20111127224752id_/http://forums.wildshadow.com/wiki/realm-mad-god/night-elf-king",
@@ -3312,7 +3312,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs#L225-L330",
-            "label": "Older comparator: nested King ownership, jittered local-density reproduction"
+            "label": "Retired: Older comparator: nested King ownership, jittered local-density reproduction"
           },
           {
             "url": "https://web.archive.org/web/20120216044213id_/http://forums.wildshadow.com/wiki/realm-mad-god/undead-dwarf-god",
@@ -3352,7 +3352,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs#L48-L119",
-            "label": "Older Orc comparator; randomized nearest/local-density semantics, not selected-version proof"
+            "label": "Retired: Older Orc comparator; randomized nearest/local-density semantics, not selected-version proof"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L52-L114",
@@ -3512,7 +3512,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.SnakePit.cs#L113-L164",
-            "label": "Python comparator; ordered loot weights are not independent drop odds"
+            "label": "Retired: Python comparator; ordered loot weights are not independent drop odds"
           },
           {
             "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_SnakePitCXML.dat",
@@ -3586,7 +3586,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.GhostKing.cs",
-            "label": "2013 Trapped comparator: Ghost King tosses only Ghost Master and Small/Medium/Large Ghosts"
+            "label": "Retired: 2013 Trapped comparator: Ghost King tosses only Ghost Master and Small/Medium/Large Ghosts"
           },
           {
             "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/wServer/logic/db/BehaviorDb.GhostKing.cs",
@@ -3659,7 +3659,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -3741,7 +3741,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -3803,7 +3803,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Older five-/ten-second comparator, not independent target-era AI"
+            "label": "Retired: Older five-/ten-second comparator, not independent target-era AI"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Midland.cs#L700-L737",
@@ -3842,7 +3842,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Shore.cs#L128-L156",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/terrain/Biome.cs#L198-L208",
@@ -4167,7 +4167,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
-            "label": "2013 community White Demon: Chasing(6, 9, 4) and a 10-tile predictive attack, not official server code"
+            "label": "Retired: 2013 community White Demon: Chasing(6, 9, 4) and a 10-tile predictive attack, not official server code"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/logic/db/BehaviorDb.Mountain.cs",
@@ -4219,7 +4219,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Mountain.cs",
-            "label": "2013 community Sprite God/Child: predictive fan and boomerang, catch-up yielding to wandering; not official server code"
+            "label": "Retired: 2013 community Sprite God/Child: predictive fan and boomerang, catch-up yielding to wandering; not official server code"
           },
           {
             "url": "https://wikiwiki.jp/rmd/Sprite%20Child",
@@ -4274,7 +4274,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.PirateCave.cs",
-            "label": "Compiled secondary comparator: boss HP gate, officer circling, fighters and passives; not original server authority"
+            "label": "Retired: Compiled secondary comparator: boss HP gate, officer circling, fighters and passives; not original server authority"
           }
         ],
         "checks": [
@@ -4672,7 +4672,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Undead_Lair.cs",
-            "label": "Older community Septavius: wandering runs alongside the attack queue"
+            "label": "Retired: Older community Septavius: wandering runs alongside the attack queue"
           },
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.UndeadLair.cs",
@@ -4830,7 +4830,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Abyss.cs#L224-L235",
-                "label": "Idol DEF/VIT candidate comparator; ordered weights are not original per-account rates"
+                "label": "Retired: Idol DEF/VIT candidate comparator; ordered weights are not original per-account rates"
               },
               {
                 "url": "https://bluenosersguide.weebly.com/abyss-of-demons.html",
@@ -4874,7 +4874,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-            "label": "Pinned community Tomb mechanics comparator, not official server code"
+            "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
           },
           {
             "url": "https://archive.org/details/youtube-Igu8lFDRHg0",
@@ -4912,7 +4912,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-                "label": "Pinned community Tomb mechanics comparator, not official server code"
+                "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
               }
             ],
             "group": "boss"
@@ -4931,7 +4931,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-                "label": "Pinned community Tomb mechanics comparator, not official server code"
+                "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
               }
             ],
             "group": "layout"
@@ -4950,7 +4950,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-                "label": "Pinned community Tomb mechanics comparator, not official server code"
+                "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
               }
             ],
             "group": "rewards"
@@ -4969,7 +4969,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
-                "label": "Pinned community Tomb mechanics comparator, not official server code"
+                "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
               }
             ],
             "group": "population"
@@ -5572,7 +5572,7 @@
             "sources": [
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Oryx2.cs",
-                "label": "Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
+                "label": "Retired: Pinned 2013 comparator:30% branch and randomized nominal8-second delay, not original server AI"
               },
               {
                 "url": "https://web.archive.org/web/20131221065150id_/http://www.realmeye.com/wiki/oryx-the-mad-god-2",
@@ -6667,7 +6667,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/Nexus.cs",
-            "label": "2013 community Nexus: background 2, not authenticated official policy"
+            "label": "Retired: 2013 community Nexus: background 2, not authenticated official policy"
           },
           {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/common/resources/worlds/Nexus.jw",
@@ -6717,7 +6717,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/Vault.cs",
-            "label": "2013 community Vault: background 2, not authenticated official policy"
+            "label": "Retired: 2013 community Vault: background 2, not authenticated official policy"
           },
           {
             "url": "https://www.youtube.com/watch?v=-vFTjK8lHLM",
@@ -7077,7 +7077,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Trade.cs#L42-L75",
-            "label": "2013 community trade handler: name-resolved requests with no distance check, not official server code"
+            "label": "Retired: 2013 community trade handler: name-resolved requests with no distance check, not official server code"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Trade.cs#L85-L94",
@@ -7409,7 +7409,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/worlds/GuildHall.cs",
-            "label": "2013 comparator: AllowTeleport=true and fixed ghall3, conflicts with modified 7.0"
+            "label": "Retired: 2013 comparator: AllowTeleport=true and fixed ghall3, conflicts with modified 7.0"
           },
           {
             "url": "https://www.realmeye.com/wiki/release-history-2017#patch-27-7-x14",
@@ -8166,7 +8166,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.UseItem.cs",
@@ -8502,7 +8502,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -8528,7 +8528,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.Effects.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           },
           {
             "url": "https://web.archive.org/web/20120418103926id_/http://forums.wildshadow.com/wiki/realm-mad-god/class-guide-paladin",
@@ -8644,7 +8644,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/realm/entities/player/Player.UseItem.cs",
-            "label": "Community server comparison: rotmg_svr (2013)"
+            "label": "Retired: Community server comparison: rotmg_svr (2013)"
           }
         ]
       }
@@ -8903,7 +8903,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Retired: Community behavior/loot comparator; original rates remain unverified"
           },
           {
             "url": "https://web.archive.org/web/20120519154640id_/http://forums.wildshadow.com/wiki/realm-mad-god/gray-blob",
@@ -8937,7 +8937,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Retired: Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -8963,7 +8963,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Retired: Community behavior/loot comparator; original rates remain unverified"
           }
         ]
       }
@@ -8989,7 +8989,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Midland.cs",
-            "label": "Community behavior/loot comparator; original rates remain unverified"
+            "label": "Retired: Community behavior/loot comparator; original rates remain unverified"
           },
           {
             "url": "https://web.archive.org/web/20120519205409id_/http://forums.wildshadow.com/wiki/realm-mad-god/black-bat",
@@ -9018,7 +9018,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -9043,7 +9043,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -9068,7 +9068,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Lowland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -9097,7 +9097,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -9127,7 +9127,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 ordered loot-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }
@@ -9160,7 +9160,7 @@
           },
           {
             "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Highland.cs",
-            "label": "2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
+            "label": "Retired: 2013 consumable-table comparator; not authenticated 123.5.1 probabilities"
           }
         ]
       }

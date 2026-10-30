@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+  <meta name="openrotmg-api" content="{{API_ORIGIN}}"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; frame-src {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+  <script src="{{BASE}}backend.js" defer></script>
+<title>Bot CCTV · Open RotMG</title><meta name="description" content="Watch Open RotMG gameplay bots live: what they see, where they aim and move, and why.">
+<link rel="canonical" href="{{SITE_URL}}cctv/">
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="style.css?v={{BOTS_STYLE_VERSION}}"><script type="module" src="app.js?v={{BOTS_SCRIPT_VERSION}}"></script>
+</head>
+<body><div class="site-shell"><main class="page-main">
+<h1>Bot CCTV</h1>
+<p>Pick a live bot to watch what it sees, where it aims and moves, and why.</p>
+<p><label for="bot">Bot</label> <select id="bot"></select></p>
+<div class="cctv">
+<div class="game-view"><div id="view"></div><p id="status" role="status">Loading bots…</p><p id="view-status" role="status"></p></div>
+<aside class="intentions"><h2>Intentions</h2><div class="intention-body"><p id="telemetry-status" role="status"></p><p id="intention-status" role="status">No decision intention received.</p><div id="intention"></div></div></aside>
+</div>
+</main><footer class="site-footer">
+<p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+<p>2012 Realm of the Mad God reimplementation</p>
+<nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div></body></html>
