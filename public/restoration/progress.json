@@ -4514,7 +4514,8 @@
         "expected": "Enter through a Great Coil Snake portal or key, traverse tribal rooms and Basilisk families, fight Totems and Mixcoatl, earn loot and leave through the completion portal. Production 122.0.1 introduced this dungeon.",
         "differences": [],
         "unknowns": [
-          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values."
+          "Original map/population/foliage distributions, exact selected-build Mixcoatl/Totem cadence and geometry, healing/Spirit lifecycle policy, Coil entrance probability and loot/allocation rates remain unresolved after issue856's source/engine audit. Current parameters are reconstruction, not recovered original server values.",
+          "Steam 64363218 shows contiguous green at visible build 122.0.1, not 123.5.1. Boss views 37613097/140469222 show internal floor interruptions without readable builds. Target grass patch scale/distribution/overlap and pad mask/material/rotation remain unknown; target-compatible adjacent views with cell anchors are needed, not guessed noise or holes."
         ],
         "sources": [
           {
@@ -4528,6 +4529,18 @@
           {
             "url": "https://web.archive.org/web/20120420071116id_/http://forums.wildshadow.com/wiki/realm-mad-god/forbidden-jungle",
             "label": "April2012 dungeon guide: approximate phases, conflicting12000HP, no exact odds"
+          },
+          {
+            "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=64363218",
+            "label": "Jungle arrival with visible 122.0.1 and contiguous green; not 123.5.1 geometry proof"
+          },
+          {
+            "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=37613097",
+            "label": "IceChaos boss-floor interruptions; no readable build, same source family as 37613098"
+          },
+          {
+            "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=140469222",
+            "label": "Another boss-floor view with internal brown interruptions; no readable build or recovered tile mask"
           }
         ],
         "checks": [
@@ -4540,12 +4553,17 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics."
+              "Exact target-era foliage/population distributions, healing recipient/timing rules and Spirit replacement/parent-death policy. Selected definitions distinguish breakable500HP plants, permanent blockers and nonblocking decorations; later comparator HealGroup/Spawn engines do not establish original semantics.",
+              "Visible 122.0.1 arrival grass does not establish 123.5.1 patch distribution/scale/overlap or foliage placement. Target-compatible adjacent views with cell anchors are needed."
             ],
             "sources": [
               {
                 "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_ForbiddenJungleCXML.dat",
                 "label": "Pinned modified7.0 client definitions, not original AI or probability authority"
+              },
+              {
+                "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=64363218",
+                "label": "Jungle arrival with visible 122.0.1 and contiguous green; not 123.5.1 placement proof"
               }
             ],
             "group": "layout"
