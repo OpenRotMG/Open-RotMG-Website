@@ -8,6 +8,19 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('typed lock evidence does not promote whole-feature or original command acceptance',()=>{
+  const data=catalogue(),evidence=ledger(),id='social:lock-players',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['lock-command-source-5fd61de2','source'],['lock-command-native-5fd61de2','native']]){
+    assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);
+    assert.equal(evidence.sources[ref].revision,'5fd61de295e66120cbd1bccc871c3c3bdcd47ba8');assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  assert.match(feature.audit.unknowns.join(' '),/original 123\.5\.1 typed-command semantics are not authenticated/);
+  assert.match(evidence.sources['lock-command-native-5fd61de2'].method,/passes9 assertions/);
+  assert.match(evidence.sources['lock-command-native-5fd61de2'].limitations,/not relabeleda051/);
+});
+
 test('gallery ordinary passes do not certify administrative export or original history',()=>{
   const data=catalogue(),evidence=ledger(),id='access:player-art-gallery',feature=data.features.find(f=>f.id===id);validateEvidence(data,evidence);
   assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);

@@ -7111,7 +7111,8 @@
         "differences": [],
         "unknowns": [
           "Original saved-list capacity, eviction and retention across sessions/characters are unresolved. Six displayed slots are not a saved-list cap; Kithio's cap sketch is commented out and its handler is a no-op. The current wiki's 50-entry/oldest-eviction claim is undated. See server issue908.",
-          "Native death-to-Continue-to-replacement panel ordering, six-slot saturation and equal-distance ties are not executed; the account-storage regression is not native replacement acceptance."
+          "Native death-to-Continue-to-replacement panel ordering, six-slot saturation and equal-distance ties are not executed; the account-storage regression is not native replacement acceptance.",
+          "Typed /lock uses saved-account name resolution from the modified 7.0 comparator; original 123.5.1 typed-command semantics are not authenticated."
         ],
         "sources": [
           {
