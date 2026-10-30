@@ -81,12 +81,13 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
   assert.deepEqual(aboutLinks, [
     [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
-    [`${site.pathname}bots/`, 'Bot CCTV', 'Watch bots play live.'],
+    [`${site.pathname}cctv/`, 'Bot CCTV', 'Watch bots play live.'],
     ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
     [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
+    [`${site.pathname}bots/`, 'Bots', 'Bot behaviour tracker.'],
     [`${site.pathname}draw/`, 'Pixel editor', 'Original Flash editor.'],
     ['https://www.openrotmg.org/2010/', '2010 Preview', 'Visit an earlier realm.']
   ]);
