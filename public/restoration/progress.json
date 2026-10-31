@@ -1298,7 +1298,7 @@
             "historical": "unreviewed",
             "differences": [
               "Regional targets now use compiled Kithio Oryx area divisors mapped to selected XML terrains (ShoreSand 100, ShorePlains 150, Low 200, MidPlains/MidForest 150, MidSand/HighPlains/HighForest 300, HighSand 250, Mountains 100). Species are still drawn by relative selected SpawnProb weights rather than Kithio's Oryx species table; neither is a recovered original frequency: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1272",
-              "Oryx now counts roots like compiled Kithio: solo bodies and family leaders fill the area target, while eagerly placed family members stand in for children Kithio roots summon only once active. Regional birth headroom and top-up arrival clearance are removed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1293"
+              "Initial fill counts roots like compiled Kithio Oryx Init; the 75% refill and 150% cull count every summoned body like EnsurePopulation, where eagerly placed followers count once their leader has been active or is gone. Regional birth headroom and top-up arrival clearance are removed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1305"
             ],
             "unknowns": [],
             "sources": [],
