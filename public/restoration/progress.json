@@ -1298,7 +1298,7 @@
             "historical": "unreviewed",
             "differences": [
               "Regional targets now use compiled Kithio Oryx area divisors mapped to selected XML terrains (ShoreSand 100, ShorePlains 150, Low 200, MidPlains/MidForest 150, MidSand/HighPlains/HighForest 300, HighSand 250, Mountains 100). Species are still drawn by relative selected SpawnProb weights rather than Kithio's Oryx species table; neither is a recovered original frequency: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1272",
-              "Compiled Kithio Oryx counts initially spawned root bodies, whereas this server budgets ordinary family bodies and birth headroom. Matching area divisors would not establish equivalent encounter density: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
+              "Oryx now counts roots like compiled Kithio: solo bodies and family leaders fill the area target, while eagerly placed family members stand in for children Kithio roots summon only once active. Regional birth headroom and top-up arrival clearance are removed: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1293"
             ],
             "unknowns": [],
             "sources": [],
@@ -1312,7 +1312,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Recovery now follows compiled Kithio Oryx and Reproduce: the 60s clock refills below 75% and culls above 150% while sparing bodies within 10 tiles of players, top-ups keep 16 tiles from players, and listed ordinary parents reproduce by Kithio density, radius and cooldown (PR1272, PR1280). Retained project differences: 20-tile simulation activation instead of Kithio active chunks, 12-tile birth player/arrival clearance, family-body accounting and birth headroom. Original recovery parameters and near/far gameplay remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1281"
+              "Recovery follows compiled Kithio Oryx and Reproduce: the 60s clock refills roots below 75% and culls roots (with their families) above 150% while sparing those within 10 tiles of players; top-ups keep 16 tiles from players; Reproduce clocks advance in Kithio's three-chunk active zone and births skip player/arrival clearance; Djinn reproduces while Idle (PR1272, PR1280, PR1281, PR1290, PR1293). Remaining project differences: NPC movement/attacks still simulate within 20 tiles, reproduction is batched per second and families are placed eagerly. Original recovery parameters remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1293"
             ],
             "unknowns": [],
             "sources": [],
