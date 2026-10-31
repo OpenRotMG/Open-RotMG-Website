@@ -1282,7 +1282,8 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "PR1033 retains 24 server-side arrival connections and the bounded World1 native smoke. PR1082 adds all eight native coastal-to-road journeys in the current World2/3 reconstructions, with shared identity and observed Road208 endpoints. These prepared, protected, full-map-planned journeys are not earned entry, whole-map or historical acceptance; east/west explicitly restrict random bank selection to the unchanged requested entry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1082#issuecomment-6464246162"
+              "PR1033 retains 24 server-side arrival connections and the bounded World1 native smoke. PR1082 adds all eight native coastal-to-road journeys in the current World2/3 reconstructions, with shared identity and observed Road208 endpoints. These prepared, protected, full-map-planned journeys are not earned entry, whole-map or historical acceptance; east/west explicitly restrict random bank selection to the unchanged requested entry: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1082#issuecomment-6464246162",
+              "Each reconstructed Realm now synthesizes 12 connected ShoreSand arrivals, keeping the original four axis arrivals at indexes 0-3 plus eight at 30-degree steps, and entry picks among them at random. This follows compiled Kithio's random Spawn-tile entry and its world1 count of 12; the arrivals are not recovered original Spawn regions. The native arrival/route cases now expect 12 arrivals but have not been rerun: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1276"
             ],
             "unknowns": [],
             "sources": [],
@@ -1296,7 +1297,7 @@
             "implementation": "partial",
             "historical": "unreviewed",
             "differences": [
-              "Regional targets use reconstructed area divisors from the 2013 Trapped server, and species are drawn by relative SpawnProb weights; neither is a recovered original frequency or grouping rule.",
+              "Regional targets now use compiled Kithio Oryx area divisors mapped to selected XML terrains (ShoreSand 100, ShorePlains 150, Low 200, MidPlains/MidForest 150, MidSand/HighPlains/HighForest 300, HighSand 250, Mountains 100). Species are still drawn by relative selected SpawnProb weights rather than Kithio's Oryx species table; neither is a recovered original frequency: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1272",
               "Compiled Kithio Oryx counts initially spawned root bodies, whereas this server budgets ordinary family bodies and birth headroom. Matching area divisors would not establish equivalent encounter density: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
             ],
             "unknowns": [],
@@ -1311,7 +1312,7 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Compiled Kithio refills below 75% and culls above 150% on its population clock. This server shares the refill threshold but uses bounded family-body budgets rather than the same root-body/culling policy. Original recovery parameters and near/far gameplay remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/785#issuecomment-6453027294"
+              "Recovery now follows compiled Kithio Oryx and Reproduce: the 60s clock refills below 75% and culls above 150% while sparing bodies within 10 tiles of players, top-ups keep 16 tiles from players, and listed ordinary parents reproduce by Kithio density, radius and cooldown (PR1272, PR1280). Retained project differences: 20-tile simulation activation instead of Kithio active chunks, 12-tile birth player/arrival clearance, family-body accounting and birth headroom. Original recovery parameters and near/far gameplay remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1281"
             ],
             "unknowns": [],
             "sources": [],
@@ -2735,7 +2736,8 @@
         "historical": "partial",
         "expected": "ShoreSand Scorpion Queen is level 1 with 100 HP, no DEF and no projectile of its own. Ordinary Poison Scorpions fire 7-damage Green Magic; the name does not establish a Poisoned effect.",
         "differences": [
-          "Bounded reconstruction starts five defenders on a two-tile formation, refills ten owned slots on fixed 10s attempts, and omits Queen self-reproduction/orphan adoption. Compiled Kithio instead starts two offset defenders, adds up to five lifetime Spawn births, separately reproduces scorpions below ten within radius ten, and Queens below two within radius forty. This comparator mismatch is not a proven target-era bug."
+          "Bounded reconstruction starts five defenders on a two-tile formation, refills ten owned slots on fixed 10s attempts, and omits Queen self-reproduction/orphan adoption. Compiled Kithio instead starts two offset defenders, adds up to five lifetime Spawn births, separately reproduces scorpions below ten within radius ten, and Queens below two within radius forty. This comparator mismatch is not a proven target-era bug.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Scorpion Queens reproduce themselves (density 2 within 40 tiles, 60s); the existing Poison Scorpion family reinforcement is retained as the Spawn/Reproduce approximation. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Original initial counts/placement, density versus ownership, refill clocks, Queen reproduction, orphan adoption/protection hysteresis/home leash and deployment density remain #815; bounded native coverage is not whole-feature acceptance.",
@@ -3221,7 +3223,8 @@
         "differences": [
           "At server55b6ab4d, continuous range6 chase/home leash and bounded two-initial/five-Pirate/five-Piratess camp with10s refill differ from compiled primary Follow duration/rest/hysteresis and60s same-type radius10 density reproduction. Older Trapped explains several current constants, not exact target fidelity.",
           "Nominal20% selected T1 weapon/armor and3% HP potion agree with primary and January2012 build118-labelled text. Current one tier roll/uniform item differs from primary independent0.2/N candidate rolls and contributor bag allocation.",
-          "No current Pirate/Piratess portal roll. January8,2020 patch says beach Pirates can now drop caves, but a January2012 key page already lists them. Do not apply today's drop table or infer original probability from a few kills."
+          "No current Pirate/Piratess portal roll. January8,2020 patch says beach Pirates can now drop caves, but a January2012 key page already lists them. Do not apply today's drop table or infer original probability from a few kills.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Piratess reproduces Pirate and Piratess (density 5 within 10 tiles, 60s). The Trapped-derived 10s Piratess family reinforcement is removed; its two initial Pirates remain as a stand-in for Kithio Oryx-table Pirates, so reproduced Piratesses arrive alone. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Exact123.5.1 movement, reproduction clocks/density/start counts, tier-roll allocation and conflicting portal documentation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/827#issuecomment-6462537681 . Prepared gameplay is separate from historical and whole-feature acceptance."
@@ -3491,7 +3494,8 @@
         "expected": "Shore Snake 0x602 has 5 HP, ShoreSand admission and 4-damage Green Magic. Snake Pit Fire/Brown/Yellow Pythons 0x225–227 have 200 HP, 5/20/5 DEF and 25-damage projectiles; they have no Realm spawn tags. Selected projectile speed/lifetime is 4 tiles/s for 2 seconds for Snake and 8 tiles/s for 2/3/3 seconds for Pythons, without status effects.",
         "differences": [
           "Comparator discrepancies, not adjudicated target bugs: Snake wanders at 6 tiles/s with bounded regional refill. Kithio uses Wander(0.8), converted by GetSpeed to 5.18 units per world-clock second, with local density-five reproduction. Build118 separately labels wander speed8; its unit equivalence is unverified. Fire continuously chases rather than the intermittent charge in period leads and Trapped.",
-          "Python rewards currently share Snake Oil (10%), T3 rings (5%) and T6 weapons (5%). Comparator species lists and ordered-versus-independent loot engines differ; the Japanese Fire/Yellow item lists also conflict with later Wild Shadow captures. These are not established target odds."
+          "Python rewards currently share Snake Oil (10%), T3 rings (5%) and T6 weapons (5%). Comparator species lists and ordered-versus-independent loot engines differ; the Japanese Fire/Yellow item lists also conflict with later Wild Shadow captures. These are not established target odds.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Ordinary Realm Snakes reproduce (density 5 within 10 tiles, 60s). Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Target-build production Python placement/admission and original Snake Pit room/population policy remain unresolved; selected XML and later maps do not recover the generator.",
@@ -3549,7 +3553,8 @@
         "expected": "Flayer/Veteran and population-owner Flayer God 0x647–649; selected God projectile applies Quiet10s.",
         "differences": [
           "Current initial3/2 and live-child4/3 refills every10s differ from compiled Kithio lifetime births2/3 and self-density2 reproduction every60s. Current God alternates two2s streams rather than Kithio's independent400ms green/1000ms star; followers omit its0.5 prediction.",
-          "Current God ability3 rate10%, one-success-per-tier rolls and private allocation differ from Kithio's15% and candidate-expanded shared rolls. Comparator values are not authenticated123.5.1 probabilities."
+          "Current God ability3 rate10%, one-success-per-tier rolls and private allocation differ from Kithio's15% and candidate-expanded shared rolls. Comparator values are not authenticated123.5.1 probabilities.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Flayer Gods reproduce (density 2 within 10 tiles, 60s); newborn Gods receive their Flayer family. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Exact123.5.1 population/replacement/self-reproduction, attack clocks/prediction, orphan/protection behavior and reward allocation/rates, including Snake Pit17%. May19,2012 guides support mechanics but have obsolete stats; issue835 retains the source/engine comparison and remaining checks.",
@@ -3718,7 +3723,8 @@
         "expected": "Fire/Ice/Magic Sprite0x624–626; selected Ice slows1.6s. Exclude Sprite God/Child and dungeon sprites.",
         "differences": [
           "Current movement uses the Trapped-style15 motor, not Kithio rate1.4/StayAbove. Regional MidPlains area/200 admission and60s refill are not Kithio same-species radius10/density2 reproduction.",
-          "Build118 wiki armor tier5 maps to selected tier6: period Chimera Hide Armor, Plate Mail and Robe of the Adept names reconcile the numbering, not original RNG."
+          "Build118 wiki armor tier5 maps to selected tier6: period Chimera Hide Armor, Plate Mail and Robe of the Adept names reconcile the numbering, not original RNG.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Fire, Ice and Magic Sprites reproduce their own kind (density 2 within 10 tiles, 60s). Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Original123.5.1 movement/elevation, local reproduction versus regional density, tick-exact cadence, equipment-pool/odds provenance and multiplayer reward/pickup/reconnect continuity. Research and bounded gameplay remain separate: https://github.com/OpenRotMG/Open-RotMG-Server/issues/839#issuecomment-6472186081"
@@ -3828,7 +3834,8 @@
         "expected": "Ordinary Red/Purple/Green Gelatinous Cubes (0x60e-0x610), separate from Cube God followers: ShorePlains, 70HP/0DEF, wandering and 2/1/5 projectiles. Complete selected definitions match pinned modified 7.0 XML; period guides list4XP, current ceiling-rounded award is5.",
         "differences": [
           "Current radius5/nonpredictive aiming differs from compiled Kithio radius8/predictive0.2; global bounded replenishment and home-limited wandering do not reproduce its local densityMax5/radius10 reproduction and randomized movement. Trapped instead has randomized attack cooldowns. Current5XP versus guide4XP follows the shared ceiling-rounding policy already qualified by progression research, not a cube-specific repair. These are reconstruction choices, not recovered original AI.",
-          "Native display holds at destinations during stalls: intentional UX, not historical interpolation."
+          "Native display holds at destinations during stalls: intentional UX, not historical interpolation.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Each Gelatinous Cube reproduces its own kind (density 5 within 10 tiles, 60s). Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "Original production spawn counts/density and XML Spawn policy. Trapped uses ShorePlains area/150, clipped Gaussian groups and Bandit/Cube weights0.4/0.2/0.2/0.2; current relative XML selection and legal placement are reconstructed.",
@@ -8917,7 +8924,8 @@
         "historical": "partial",
         "expected": "Pink Blob 0x205 and proximity-exploding Gray Blob 0x20d; one family distinct from splitting slimes.",
         "differences": [
-          "Untouched Gray Blob self-termination still makes no loot attempt. The period potion report does not establish its original damage-credit or reward rules."
+          "Untouched Gray Blob self-termination still makes no loot attempt. The period potion report does not establish its original damage-credit or reward rules.",
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Pink Blobs and searching Gray Blobs reproduce their own kind (density 5 within 10 tiles, 60s); Gray Blobs stop after their once-only creep. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
         ],
         "unknowns": [
           "123.5.1 operational population, timing, reward/withdrawal credit rules.",
@@ -8948,7 +8956,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Big/Little Green Slime 0x20e/f, with death splitting; exact target count unresolved.",
-        "differences": [],
+        "differences": [
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Big Green Slimes reproduce (density 5 within 10 tiles, 60s); newborns keep their scripted split family. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
+        ],
         "unknowns": [
           "Original split count and randomness, independent Little Slime spawning, density and rewards.",
           "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
@@ -8978,7 +8988,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Ordinary MidForest Red Spider0x202, single-shot wandering species; reproduction details qualified.",
-        "differences": [],
+        "differences": [
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Red Spiders reproduce (density 3 within 15 tiles, 45s), replacing the earlier fixed two-member 45s family. Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
+        ],
         "unknowns": [
           "Target reproduction, density, movement timing and rewards.",
           "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
@@ -9004,7 +9016,9 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Flying MidForest Black Bat0x204, charging close-range shooter.",
-        "differences": [],
+        "differences": [
+          "PR1280 adds compiled Kithio Reproduce for ordinary Realm parents: Black Bats reproduce (density 5 within 20 tiles, 20s). Births keep this server's 20-tile activation, 12-tile player/arrival clearance and regional budget: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1280"
+        ],
         "unknowns": [
           "Original target charge timing, targeting, population and rewards.",
           "Current reward rates and attempt/allocation rules are qualified community-comparator engineering choices, not recovered official 123.5.1 policy."
