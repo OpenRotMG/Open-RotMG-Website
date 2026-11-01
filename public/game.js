@@ -1,25 +1,51 @@
+let failed = false;
+// Ruffle's own failure screen blames the site; a dropped connection only needs a retry.
+function showFailure(detail, error) {
+  if (failed) return;
+  failed = true;
+  console.error(detail, error);
+  document.querySelector('#game').dataset.failed = 'true';
+  document.querySelector('#startup').hidden = false;
+  document.querySelector('#startup span').textContent = 'The game could not finish loading. Check your connection and try again.';
+  document.querySelector('#startup progress').hidden = true;
+  const retry = document.querySelector('#startup button');
+  retry.hidden = false;
+  retry.addEventListener('click', () => location.reload());
+  const notice = document.querySelector('#load-error');
+  notice.textContent = detail;
+  notice.hidden = false;
+}
+
 // Ruffle reports no download progress, so count its runtime and movie bytes as its own fetches stream them.
 function showDownloads(movie, movieName, runtimeSizes) {
   const bar = document.querySelector('#startup progress');
   const label = document.querySelector('#startup span');
   const vendor = new URL('/vendor/', document.baseURI);
   const send = window.fetch;
-  window.fetch = async (...request) => {
-    const response = await send(...request);
-    const url = new URL(response.url);
+  window.fetch = async (input, init) => {
+    const url = new URL(typeof input === 'string' || input instanceof URL ? input : input.url, document.baseURI);
     const runtime = url.origin === vendor.origin && url.pathname.startsWith(vendor.pathname) && url.pathname.endsWith('.wasm');
-    if (!runtime && url.href !== movie.href) return response;
+    if (!runtime && url.href !== movie.href) return send(input, init);
+    const interrupted = error => {
+      showFailure(`Download of ${url.pathname} failed: ${error.message}`, error);
+      throw error;
+    };
+    const response = await send(input, init).catch(interrupted);
+    if (!response.ok) interrupted(new Error(`HTTP ${response.status}`));
     // Pages gzips the runtime, so its streamed size comes from the build rather than Content-Length.
     const total = runtime ? runtimeSizes[url.pathname.slice(vendor.pathname.length)] : !response.headers.get('content-encoding') && Number(response.headers.get('content-length'));
     if (!total) throw new Error(`Unknown download size for ${url.pathname}`);
     const name = runtime ? 'game engine' : movieName;
+    const reader = response.body.getReader();
     let loaded = 0;
-    const counted = new Response(response.body.pipeThrough(new TransformStream({transform(chunk, output) {
-      loaded += chunk.length;
+    const counted = new Response(new ReadableStream({async pull(output) {
+      const {done, value} = await reader.read().catch(interrupted);
+      if (done) return output.close();
+      loaded += value.length;
       bar.value = loaded / total;
       label.textContent = `Downloading ${name}: ${(loaded / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`;
-      output.enqueue(chunk);
-    }})), response);
+      output.enqueue(value);
+    }}), response);
     Object.defineProperty(counted, 'url', {value: response.url});
     return counted;
   };
@@ -90,9 +116,5 @@ function showDownloads(movie, movieName, runtimeSizes) {
     }, {once: true});
   }
 })().catch(error => {
-  document.querySelector('#startup').hidden = true;
-  const notice = document.querySelector('#load-error');
-  notice.textContent = 'Client failed to load: ' + error.message;
-  notice.hidden = false;
-  console.error('Open RotMG client startup failed', error);
+  showFailure('Client failed to load: ' + error.message, error);
 });
