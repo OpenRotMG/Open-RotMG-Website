@@ -21,6 +21,8 @@ test('Manor teleport evidence does not promote whole-dungeon or historical accep
   assert.match(teleport.audit.unknowns.join(' '),/not a recovered Manor-specific world table/);
   assert.equal(evidence.sources['manor-teleport-native-e2fc09e2'].revision,'e2fc09e26d3fcf7595a407b1f1ca141f3df07fe8');
   assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/No accepted native replay/);
+  assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/profileNone Human Wizards.*no ability\/item consumption/);
+  assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/Frozen e2fc is not later-union active glow stat59/);
 });
 
 test('Legends glow evidence preserves aggregate status and frozen native provenance',()=>{
