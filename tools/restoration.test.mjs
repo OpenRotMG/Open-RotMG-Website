@@ -149,9 +149,9 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
-test('Worlds4–7 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+test('Worlds4–8 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  for(const n of ['04','05','06','07','10','11','12','13']){
+  for(const n of ['04','05','06','07','08','10','11','12','13']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
@@ -182,7 +182,11 @@ test('Worlds4–7 and10–13 playable acceptance keeps historical and map-bank g
   assert.match(native7.limitations,/not continuous end-to-end walking.*unchanged0\.6 gate/);
   assert.match(regression7.method,/without repainting authored cells.*normal dependency merge/);
   assert.match(regression7.limitations,/failed393\/6 union suite/);
-  assert.equal(evidence.results['realm:map-world-08'].status,'not-run');
+  const world8=rows.find(r=>r.id==='realm:map-world-08'),native8=evidence.sources['world08-native-5018360'];
+  assert.match(world8.rule.acceptance,/west-central lake\/bay system.*do not by themselves establish damaging lava/);
+  assert.equal(native8.revision,'50183602b79fd9d82f064accde12aa8a2e47771c');
+  assert.match(native8.method,/70 assertions.*17 Ent2335\/6 Lich2331\/11 Coil3522/);
+  assert.match(world8.rule.unknowns.join(' '),/not lava/);
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 
@@ -661,4 +665,26 @@ test('category and condition sprites stay original and distinct',()=>{
   const data=catalogue(),icons=Object.fromEntries(data.categories.map(c=>[c.id,c.icon]));assert.notEqual(icons.heroes,icons.access);
   assert.equal(icons.conditions,data.features.find(f=>f.name==='Armor broken').icon);
   for(const path of Object.values(icons)){const bytes=readFileSync(new URL('../public/restoration/'+path,import.meta.url));assert.equal(bytes.subarray(1,4).toString(),'PNG');assert(bytes.readUInt32BE(16)>0&&bytes.readUInt32BE(20)>0);}
+});
+
+
+test('god bag placement evidence preserves existing loot statuses and partial history',()=>{
+  const data=catalogue(),evidence=ledger(),id='gear:loot-and-ownership',component='gear:loot-bag-presentation',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks.find(c=>c.id===component).historical,'partial');assert.equal(accepted(feature,evidence),false);
+  const ref='god-loot-placement-source-f2c37955',source=evidence.sources[ref];
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  assert.equal(source.kind,'source');assert.equal(source.revision,'f2c3795538b84c95d4cf19bb1fa16753cd293dec');
+  assert.match(source.method,/identity-seeded cosmetic RNG.*World RNG, rolled contents and ownership policy unchanged/);
+  const regression='god-loot-placement-regression-c3165488';
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(regression));
+  assert.equal(evidence.sources[regression].kind,'regression');assert.match(evidence.sources[regression].method,/passes443 Rust tests.*next World RNG/);
+  assert.match(evidence.sources[regression].limitations,/not native simultaneous potion\+gear/);
+  const native=evidence.sources['god-loot-placement-native-gap-f2c37955'];
+  assert.equal(native.kind,'native');assert.match(native.method,/FAILED attempts retained, no new native pass/);
+  assert.match(native.limitations,/God-specific post-fix native placement\/pickup.*remain unverified/);
+  const common=evidence.sources['god-loot-common-native-d534980c'];
+  assert.equal(common.kind,'native');assert.match(common.method,/passes17 assertions\/121800game ms/);
+  assert.match(common.limitations,/NOT a native visual demonstration of Godscatter/);
 });
