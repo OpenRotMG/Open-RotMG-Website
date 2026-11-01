@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -49,6 +49,7 @@ if (local && execFileSync('git', ['-C', client, 'status', '--porcelain'], {encod
 execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { stdio: 'inherit' });
 const runtimeFiles = await readdir(join(client, 'vendor'));
 if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
+const runtimeSizes = JSON.stringify(Object.fromEntries(await Promise.all(runtimeFiles.filter(file => file.endsWith('.wasm')).map(async file => [file, (await stat(join(client, 'vendor', file))).size]))));
 
 const lock = JSON.parse(await readFile(join(client, 'ruffle/lock.json'), 'utf8'));
 const selection = local
@@ -78,7 +79,7 @@ async function render(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await render(path);
     else if (entry.name.endsWith('.html')) {
-      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{DROP_RATES_VERSION}}', dropRatesVersion).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion).replace('</head>', `${favicons}\n</head>`);
+      const html = (await readFile(path, 'utf8')).replaceAll('{{PROJECT_NAV}}', projectNav).replaceAll('{{SITE_URL}}', site.href).replaceAll('{{BASE}}', site.pathname).replaceAll('{{CLIENT_REVISION}}', revision).replaceAll('{{RUNTIME_SIZES}}', runtimeSizes).replaceAll('{{API_ORIGIN}}', api.origin).replaceAll('{{SOCKET_ORIGIN}}', socketOrigin).replaceAll('{{DROP_RATES_VERSION}}', dropRatesVersion).replaceAll('{{BOTS_SCRIPT_VERSION}}', botsScriptVersion).replaceAll('{{BOTS_STYLE_VERSION}}', botsStyleVersion).replace('</head>', `${favicons}\n</head>`);
       if (html.includes('{{')) throw new Error(`Unresolved template token: ${path}`);
       if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html)) {
         await writeFile(path, html);

@@ -22,11 +22,13 @@
   <main class="page-main">
     <h1 class="screen-reader">Open RotMG</h1>
     <p class="alpha-warning" role="note">Open RotMG is in early alpha. Saves will be reset before Beta release.</p>
-    <div id="game" data-mode="game" aria-label="Realm of the Mad God 123.5.1">
+    <div id="game" data-mode="game" data-runtime-sizes='{{RUNTIME_SIZES}}' aria-label="Realm of the Mad God 123.5.1">
       <div id="startup" role="status">
         <img src="{{BASE}}amulet-of-resurrection.png" width="96" height="96" alt="">
         <strong>Open RotMG</strong>
         <span>Loading client…</span>
+        <progress max="1" value="0"></progress>
+        <button type="button" hidden>Retry</button>
         <a href="https://ruffle.rs/">Powered by Ruffle</a>
       </div>
     </div>
