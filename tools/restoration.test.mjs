@@ -519,7 +519,8 @@ test('Oryx count announcements do not accept complete closure or chat',()=>{
 test('protected projectile contrast supports a seam without accepting whole conditions',()=>{
   const data=catalogue(),evidence=ledger(),ids=['condition:22','condition:24','condition:25'],refs=['protected-projectile-source-c4854b8','protected-projectile-native-pair-ef94d41'];
   validateEvidence(data,evidence);
-  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,id==='condition:25'?[...refs,'shield-stun-regression-06b5675','shield-stun-native-545f79e']:refs);}
+  const expected={'condition:22':[...refs,'tomb-edge-stasis-regression-83270a5a','tomb-edge-stasis-native-ff65a6f7'],'condition:24':refs,'condition:25':[...refs,'shield-stun-regression-06b5675','shield-stun-native-545f79e']};
+  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,expected[id]);}
   for(const ref of refs)assert.deepEqual(evidence.sources[ref].checks,ids);
   const pair=evidence.sources[refs[1]];assert.equal(pair.kind,'native');assert.equal(pair.revision,'ef94d412c8ea470b1f29cb5d2f00592319d95f34');
   assert.equal(pair.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081');assert.match(pair.method,/four-line corrective edit/);assert.match(pair.limitations,/not-run/);assert.match(pair.limitations,/not new native journeys/);

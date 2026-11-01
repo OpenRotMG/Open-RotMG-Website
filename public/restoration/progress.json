@@ -4994,7 +4994,7 @@
           {
             "id": "dungeons:tomb-of-the-ancients:ordinary-encounters",
             "name": "Ordinary Tomb passage families",
-            "expected": "Swarm Masters/followers, Jackals, Mummies/Scarabs, guardians and all six turrets use selected definitions with bounded producer ownership.",
+            "expected": "Swarm Masters/followers, Jackals, Mummies/Scarabs, guardians and all six turrets use selected definitions with bounded producer ownership. Source-qualified ordinary edge turrets accept Stasis; center variants remain unaffected.",
             "acceptance": "Source the deployed roster and packs, then verify natural projectiles/conditions, bounded followers, leader loss, XP/loot and traversal without extra controller completion credit.",
             "implementation": "present",
             "historical": "partial",
@@ -5006,6 +5006,10 @@
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
                 "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
+              },
+              {
+                "url": "https://anticosmic.blogspot.com/2013/02/the-mystic-way.html",
+                "label": "February 2013-dated Mystic guide: edge versus center Stasis; inspected archive begins in 2018"
               }
             ],
             "group": "population"
