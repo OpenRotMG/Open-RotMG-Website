@@ -23,6 +23,26 @@ test('Manor teleport evidence does not promote whole-dungeon or historical accep
   assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/No accepted native replay/);
 });
 
+test('Legends glow evidence preserves aggregate status and frozen native provenance',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:legends-highscores',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['legends-source-7499bb8','legends-native-fa35d54','legends-dyes-native-c3fed5d','legends-own-native-c3fed5d','legends-seeded-eligibility-source-61c4334'])assert(evidence.results[id].evidence.includes(ref));
+  for(const [ref,kind,revision] of [
+    ['legends-glow-source-9f3212fa','source','9f3212fa7c9a69ad66cfc33d49ac976c7bfba5e9'],
+    ['legends-glow-native-6cbd4578','native','6cbd45781f977353ca8a12abce574de449c27f64'],
+    ['legends-glow-regression-9f3212fa','regression','9f3212fa7c9a69ad66cfc33d49ac976c7bfba5e9'],
+  ]){
+    assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);
+    assert.equal(evidence.sources[ref].revision,revision);assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  assert.match(feature.audit.differences.join(' '),/top10 characters.*next entry.*20-row/);
+  assert.match(feature.audit.unknowns.join(' '),/not earned fixture progression/);
+  assert.match(evidence.sources['legends-glow-native-6cbd4578'].method,/passes5 assertions.*zero-fame archived life/);
+  assert.match(evidence.sources['legends-glow-native-6cbd4578'].limitations,/not relabeled at later integration heads/);
+  assert.match(evidence.sources['legends-glow-regression-9f3212fa'].method,/passes429 Rust tests/);
+});
+
 test('typed lock evidence does not promote whole-feature or original command acceptance',()=>{
   const data=catalogue(),evidence=ledger(),id='social:lock-players',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
@@ -514,7 +534,8 @@ test('Oryx count announcements do not accept complete closure or chat',()=>{
 test('protected projectile contrast supports a seam without accepting whole conditions',()=>{
   const data=catalogue(),evidence=ledger(),ids=['condition:22','condition:24','condition:25'],refs=['protected-projectile-source-c4854b8','protected-projectile-native-pair-ef94d41'];
   validateEvidence(data,evidence);
-  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,id==='condition:25'?[...refs,'shield-stun-regression-06b5675','shield-stun-native-545f79e']:refs);}
+  const expected={'condition:22':[...refs,'tomb-edge-stasis-regression-83270a5a','tomb-edge-stasis-native-ff65a6f7'],'condition:24':refs,'condition:25':[...refs,'shield-stun-regression-06b5675','shield-stun-native-545f79e']};
+  for(const id of ids){assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(data.features.find(f=>f.id===id),evidence),false);assert.deepEqual(evidence.results[id].evidence,expected[id]);}
   for(const ref of refs)assert.deepEqual(evidence.sources[ref].checks,ids);
   const pair=evidence.sources[refs[1]];assert.equal(pair.kind,'native');assert.equal(pair.revision,'ef94d412c8ea470b1f29cb5d2f00592319d95f34');
   assert.equal(pair.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/473#issuecomment-6387603081');assert.match(pair.method,/four-line corrective edit/);assert.match(pair.limitations,/not-run/);assert.match(pair.limitations,/not new native journeys/);
