@@ -4339,7 +4339,7 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Spider Den adventure including entrance, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
+        "expected": "Spider Den adventure including entrance, ordinary player teleporting, spiders, Arachna, web mechanics, rewards and completion. Distinguish wall-adjacent decorative SpiderWeb from slowing Arachna web-spoke projectiles; exact deployed phase sequence remains unresolved.",
         "differences": [],
         "unknowns": [
           "Exact 123.5.1 entrance probabilities, rounded-room templates, dressing distribution and Arachna phase sequence/geometry/timing. The fixed room graph and modified7.0 behavior remain reconstructions.",
@@ -4348,6 +4348,7 @@
           "Exact 123.5.1 boss-exit destination. Build123.4.4 footage around02:12-02:16 shows a cave arch followed by a Realm load, but boss-exit versus Cowardice identity and target-version continuity were not isolated. Current Nexus return is not historical acceptance."
         ],
         "sources": [
+        {"url":"https://anticosmic.blogspot.com/2012/04/fame-farming.html#tunnel_rat","label":"April2012 general teleport-to-clearer dungeon strategy includes Spider Den; not original server authentication"},
           {
             "url": "reference-data/client-123.5.1.swf",
             "label": "Original 123.5.1 client (SWF reference data)"
