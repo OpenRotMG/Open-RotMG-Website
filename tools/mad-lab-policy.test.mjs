@@ -10,8 +10,8 @@ test('Mad Lab ten-percent balance policy does not promote history or whole-featu
     const feature=data.features.find(f=>f.id===id);
     assert.equal(feature.audit.historical,'partial');assert.equal(evidence.results[id].status,'not-run');assert.equal(accepted(feature,evidence),false);
     assert.match(feature.audit.differences.join(' '),/new project balance policy, not an authenticated123\.5\.1 rate/);
-    for(const ref of ['madlab-rate-policy-source-38cac2b9','madlab-rate-policy-regression-38cac2b9']){
-      assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].revision,'38cac2b98fa83d8545e40e3e0a05a161901c0f96');
+    for(const ref of ['madlab-rate-policy-source-697bc662','madlab-rate-policy-regression-697bc662']){
+      assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].revision,'697bc6621e48534674b808c8d75fc0ac68e24700');
     }
   }
 });
