@@ -11,7 +11,7 @@ for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-te
   test(`${mode} resolves only its named root asset from the nested editor page`, async () => {
     for (const baseURI of ['http://127.0.0.1:18923/draw/', 'https://example.test/draw/?url=https://evil.example/movie.swf']) {
       let options;
-      const nodes = {'#game': {dataset: {mode}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
+      const nodes = {'#game': {dataset: {mode, runtimeSizes: '{}'}, append() {}}, '#startup': {}, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': {hidden: true}};
       const player = {addEventListener() {}, ruffle: () => ({load: async value => {options = value;}})};
       await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
         document: {baseURI, querySelector: key => nodes[key]}, URL, AbortSignal,
@@ -31,7 +31,7 @@ for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-te
 test('unknown or absent mode fails visibly without loading arbitrary content', async () => {
   for (const mode of [undefined, '', '../client.swf', 'https://evil.example/movie.swf']) {
     let loads = 0;
-    const nodes = {'#game': {dataset: {mode}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
+    const nodes = {'#game': {dataset: {mode, runtimeSizes: '{}'}, append() {}}, '#startup': {}, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': {hidden: true}};
     const player = {addEventListener() {}, ruffle: () => ({load: async () => {loads++;}})};
     await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
       document: {baseURI: 'https://example.test/draw/', querySelector: key => nodes[key]}, URL,

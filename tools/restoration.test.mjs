@@ -8,6 +8,26 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Legends glow evidence preserves aggregate status and frozen native provenance',()=>{
+  const data=catalogue(),evidence=ledger(),id='heroes:legends-highscores',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const ref of ['legends-source-7499bb8','legends-native-fa35d54','legends-dyes-native-c3fed5d','legends-own-native-c3fed5d','legends-seeded-eligibility-source-61c4334'])assert(evidence.results[id].evidence.includes(ref));
+  for(const [ref,kind,revision] of [
+    ['legends-glow-source-9f3212fa','source','9f3212fa7c9a69ad66cfc33d49ac976c7bfba5e9'],
+    ['legends-glow-native-6cbd4578','native','6cbd45781f977353ca8a12abce574de449c27f64'],
+    ['legends-glow-regression-9f3212fa','regression','9f3212fa7c9a69ad66cfc33d49ac976c7bfba5e9'],
+  ]){
+    assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);
+    assert.equal(evidence.sources[ref].revision,revision);assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  assert.match(feature.audit.differences.join(' '),/top10 characters.*next entry.*20-row/);
+  assert.match(feature.audit.unknowns.join(' '),/not earned fixture progression/);
+  assert.match(evidence.sources['legends-glow-native-6cbd4578'].method,/passes5 assertions.*zero-fame archived life/);
+  assert.match(evidence.sources['legends-glow-native-6cbd4578'].limitations,/not relabeled at later integration heads/);
+  assert.match(evidence.sources['legends-glow-regression-9f3212fa'].method,/passes429 Rust tests/);
+});
+
 test('typed lock evidence does not promote whole-feature or original command acceptance',()=>{
   const data=catalogue(),evidence=ledger(),id='social:lock-players',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
@@ -645,4 +665,26 @@ test('category and condition sprites stay original and distinct',()=>{
   const data=catalogue(),icons=Object.fromEntries(data.categories.map(c=>[c.id,c.icon]));assert.notEqual(icons.heroes,icons.access);
   assert.equal(icons.conditions,data.features.find(f=>f.name==='Armor broken').icon);
   for(const path of Object.values(icons)){const bytes=readFileSync(new URL('../public/restoration/'+path,import.meta.url));assert.equal(bytes.subarray(1,4).toString(),'PNG');assert(bytes.readUInt32BE(16)>0&&bytes.readUInt32BE(20)>0);}
+});
+
+
+test('god bag placement evidence preserves existing loot statuses and partial history',()=>{
+  const data=catalogue(),evidence=ledger(),id='gear:loot-and-ownership',component='gear:loot-bag-presentation',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks.find(c=>c.id===component).historical,'partial');assert.equal(accepted(feature,evidence),false);
+  const ref='god-loot-placement-source-f2c37955',source=evidence.sources[ref];
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  assert.equal(source.kind,'source');assert.equal(source.revision,'f2c3795538b84c95d4cf19bb1fa16753cd293dec');
+  assert.match(source.method,/identity-seeded cosmetic RNG.*World RNG, rolled contents and ownership policy unchanged/);
+  const regression='god-loot-placement-regression-c3165488';
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(regression));
+  assert.equal(evidence.sources[regression].kind,'regression');assert.match(evidence.sources[regression].method,/passes443 Rust tests.*next World RNG/);
+  assert.match(evidence.sources[regression].limitations,/not native simultaneous potion\+gear/);
+  const native=evidence.sources['god-loot-placement-native-gap-f2c37955'];
+  assert.equal(native.kind,'native');assert.match(native.method,/FAILED attempts retained, no new native pass/);
+  assert.match(native.limitations,/God-specific post-fix native placement\/pickup.*remain unverified/);
+  const common=evidence.sources['god-loot-common-native-d534980c'];
+  assert.equal(common.kind,'native');assert.match(common.method,/passes17 assertions\/121800game ms/);
+  assert.match(common.limitations,/NOT a native visual demonstration of Godscatter/);
 });
