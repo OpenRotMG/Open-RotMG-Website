@@ -266,7 +266,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`property="og:image" content="${imageUrl}"`));
   assert.ok(home.includes(`name="twitter:image" content="${imageUrl}"`));
   const imageHashes = new Set();
-  for (const page of ['', 'about/', 'drop-rates/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'cctv/', 'branding/', 'draw/', 'bots/', 'bots/nexus/', 'bots/godlands/', 'bots/groups/', 'bots/combat/']) {
+  for (const page of ['', 'about/', 'drop-rates/', 'hiscores/', 'gold/', 'updates/', 'restoration/', 'restoration/2010/', '2010/', 'cctv/', 'branding/', 'draw/', 'bots/', 'bots/nexus/', 'bots/godlands/', 'bots/groups/', 'bots/combat/', 'bots/trading/']) {
     const html = readFileSync(new URL(`../dist/${page}index.html`, import.meta.url), 'utf8');
     if (page.startsWith('bots/')) {
       assert.doesNotMatch(html, /noindex/);
@@ -284,7 +284,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
       assert.ok(html.includes(`="${key}" content="${url}"`), page + key);
     }
   }
-  assert.equal(imageHashes.size, 17);
+  assert.equal(imageHashes.size, 18);
 });
 
 test('loading screen waits for movie data, not just runtime initialization', async () => {
