@@ -325,7 +325,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
 });
 
 test('startup progress counts streamed runtime and movie bytes without touching other requests', async () => {
-  const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{"engine.wasm":8}'}, append() {}}, '#startup': {hidden: false}, '#startup progress': {}, '#startup span': {}, '#load-error': {hidden: true}};
+  const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{"engine.wasm":8}'}, append() {}}, '#startup': {hidden: false}, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': {hidden: true}};
   const served = {'https://example.test/vendor/engine.wasm': [8, {'content-encoding': 'gzip', 'content-length': '3'}], 'https://example.test/client.swf': [4, {'content-length': '4'}], 'https://example.test/vendor/other.wasm': [2, {}], 'https://example.test/sfx/a.mp3': [1, {}]};
   const window = {OpenRotMGDiagnostics: {start() {}}, fetch: async url => Object.defineProperty(new Response(new Uint8Array(served[url][0]), {headers: served[url][1]}), 'url', {value: url})};
   const seen = [];
@@ -342,7 +342,7 @@ test('startup progress counts streamed runtime and movie bytes without touching 
     await assert.rejects(window.fetch('https://example.test/vendor/other.wasm'), /Unknown download size for \/vendor\/other.wasm/);
   }})})})};
   await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
-    window, document: {baseURI: 'https://example.test/', querySelector: selector => nodes[selector]}, URL, Response, TransformStream, ...browserGlobals
+    window, document: {baseURI: 'https://example.test/', querySelector: selector => nodes[selector]}, URL, Response, ReadableStream, ...browserGlobals
   });
   assert.equal(nodes['#load-error'].hidden, true);
   assert.deepEqual(seen, [['Downloading game engine: 0.0 of 0.0 MB', 1], ['Downloading game client: 0.0 of 0.0 MB', 1], ['Downloading game client: 0.0 of 0.0 MB', 1]]);
@@ -383,14 +383,33 @@ test('legacy API rewrites leave same-origin game assets alone on port 8080', asy
   }
 });
 
+test('a connection lost mid-download replaces Ruffle\'s failure screen with a retry', async () => {
+  const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{"engine.wasm":8}'}, append() {}}, '#startup': {hidden: false}, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': {hidden: true}};
+  const dropped = new ReadableStream({start(output) {output.enqueue(new Uint8Array(3)); output.error(new TypeError('network error'));}});
+  const window = {OpenRotMGDiagnostics: {start() {}}, fetch: async url => Object.defineProperty(new Response(dropped), 'url', {value: url})};
+  window.RufflePlayer = {newest: () => ({createPlayer: () => ({addEventListener() {}, ruffle: () => ({load: async () => {
+    await (await window.fetch('https://example.test/vendor/engine.wasm')).arrayBuffer();
+  }})})})};
+  await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
+    window, document: {baseURI: 'https://example.test/', querySelector: selector => nodes[selector]}, URL, Response, ReadableStream, ...browserGlobals, console: {error() {}}
+  });
+  assert.equal(nodes['#startup'].hidden, false);
+  assert.match(nodes['#startup span'].textContent, /could not finish loading/);
+  assert.equal(nodes['#startup button'].hidden, false);
+  assert.equal(nodes['#load-error'].textContent, 'Download of /vendor/engine.wasm failed: network error');
+});
+
 test('startup failure shows an error instead of leaving the branding stuck', async () => {
-  const nodes = { '#startup': { hidden: false }, '#load-error': { hidden: true } };
+  const nodes = { '#game': { dataset: {} }, '#startup': { hidden: false }, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': { hidden: true } };
   const errors = [];
   await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
     window: {}, document: { querySelector: selector => nodes[selector] },
     console: { error: (...args) => errors.push(args) }
   });
-  assert.equal(nodes['#startup'].hidden, true);
+  assert.equal(nodes['#startup'].hidden, false);
+  assert.match(nodes['#startup span'].textContent, /could not finish loading.*try again/);
+  assert.equal(nodes['#startup progress'].hidden, true);
+  assert.equal(nodes['#startup button'].hidden, false);
   assert.equal(nodes['#load-error'].hidden, false);
   assert.match(nodes['#load-error'].textContent, /Pinned Ruffle runtime did not load/);
   assert.equal(errors.length, 1);
