@@ -19,8 +19,8 @@
 <div class="site-shell">
   <main class="page-main">
     <h1 class="screen-reader">Pixel editor</h1>
-    <div id="game" data-mode="editor" aria-label="Native 123.5.1 pixel editor">
-      <div id="startup" role="status"><strong>Pixel editor</strong><span>Loading editor…</span><a href="https://ruffle.rs/">Powered by Ruffle</a></div>
+    <div id="game" data-mode="editor" data-runtime-sizes='{{RUNTIME_SIZES}}' aria-label="Native 123.5.1 pixel editor">
+      <div id="startup" role="status"><strong>Pixel editor</strong><span>Loading editor…</span><progress max="1" value="0"></progress><a href="https://ruffle.rs/">Powered by Ruffle</a></div>
     </div>
     <noscript><p class="notice">JavaScript is required to load the native Flash editor through Ruffle.</p></noscript>
     <p id="load-error" class="notice" role="alert" hidden></p>

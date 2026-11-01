@@ -291,7 +291,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   let finish;
   let options;
   const ready = new Promise(resolve => { finish = resolve; });
-  const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false }, '#load-error': {hidden: true} };
+  const nodes = { '#game': { dataset: {mode: 'game', runtimeSizes: '{}'}, append() {} }, '#startup': { hidden: false }, '#load-error': {hidden: true} };
   let loaded, poll;
   const player = {addEventListener: (event, callback) => {assert.equal(event, 'loadeddata'); loaded = callback;}, ruffle: () => ({ load: config => { options = config; return ready; } }) };
   const boot = runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
@@ -324,11 +324,35 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   assert.match(nodes['#load-error'].textContent, /Game connection failed: Backend unavailable.*website and client are still available/);
 });
 
+test('startup progress counts streamed runtime and movie bytes without touching other requests', async () => {
+  const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{"engine.wasm":8}'}, append() {}}, '#startup': {hidden: false}, '#startup progress': {}, '#startup span': {}, '#load-error': {hidden: true}};
+  const served = {'https://example.test/vendor/engine.wasm': [8, {'content-encoding': 'gzip', 'content-length': '3'}], 'https://example.test/client.swf': [4, {'content-length': '4'}], 'https://example.test/vendor/other.wasm': [2, {}], 'https://example.test/sfx/a.mp3': [1, {}]};
+  const window = {OpenRotMGDiagnostics: {start() {}}, fetch: async url => Object.defineProperty(new Response(new Uint8Array(served[url][0]), {headers: served[url][1]}), 'url', {value: url})};
+  const seen = [];
+  const read = async url => {
+    const response = await window.fetch(url);
+    assert.equal(response.url, url);
+    await response.arrayBuffer();
+    seen.push([nodes['#startup span'].textContent, nodes['#startup progress'].value]);
+  };
+  window.RufflePlayer = {newest: () => ({createPlayer: () => ({addEventListener() {}, ruffle: () => ({load: async () => {
+    await read('https://example.test/vendor/engine.wasm');
+    await read('https://example.test/client.swf');
+    await read('https://example.test/sfx/a.mp3');
+    await assert.rejects(window.fetch('https://example.test/vendor/other.wasm'), /Unknown download size for \/vendor\/other.wasm/);
+  }})})})};
+  await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
+    window, document: {baseURI: 'https://example.test/', querySelector: selector => nodes[selector]}, URL, Response, TransformStream, ...browserGlobals
+  });
+  assert.equal(nodes['#load-error'].hidden, true);
+  assert.deepEqual(seen, [['Downloading game engine: 0.0 of 0.0 MB', 1], ['Downloading game client: 0.0 of 0.0 MB', 1], ['Downloading game client: 0.0 of 0.0 MB', 1]]);
+});
+
 test('legacy API rewrites leave same-origin game assets alone on port 8080', async () => {
   for (const port of [8080, 18923, 65535]) {
     const origin = `http://127.0.0.1:${port}`;
     let options;
-    const nodes = { '#game': { dataset: {mode: 'game'}, append() {} }, '#startup': { hidden: false } };
+    const nodes = { '#game': { dataset: {mode: 'game', runtimeSizes: '{}'}, append() {} }, '#startup': { hidden: false } };
     const player = { addEventListener() {}, ruffle: () => ({ load: config => { options = config; return Promise.resolve(); } }) };
     await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), {
       window: { OpenRotMGDiagnostics: {start: url => url.searchParams.set('diagnostics', 'test-session')}, RufflePlayer: { newest: () => ({ createPlayer: () => player }) } },

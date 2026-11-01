@@ -1,3 +1,30 @@
+// Ruffle reports no download progress, so count its runtime and movie bytes as its own fetches stream them.
+function showDownloads(movie, movieName, runtimeSizes) {
+  const bar = document.querySelector('#startup progress');
+  const label = document.querySelector('#startup span');
+  const vendor = new URL('/vendor/', document.baseURI);
+  const send = window.fetch;
+  window.fetch = async (...request) => {
+    const response = await send(...request);
+    const url = new URL(response.url);
+    const runtime = url.origin === vendor.origin && url.pathname.startsWith(vendor.pathname) && url.pathname.endsWith('.wasm');
+    if (!runtime && url.href !== movie.href) return response;
+    // Pages gzips the runtime, so its streamed size comes from the build rather than Content-Length.
+    const total = runtime ? runtimeSizes[url.pathname.slice(vendor.pathname.length)] : !response.headers.get('content-encoding') && Number(response.headers.get('content-length'));
+    if (!total) throw new Error(`Unknown download size for ${url.pathname}`);
+    const name = runtime ? 'game engine' : movieName;
+    let loaded = 0;
+    const counted = new Response(response.body.pipeThrough(new TransformStream({transform(chunk, output) {
+      loaded += chunk.length;
+      bar.value = loaded / total;
+      label.textContent = `Downloading ${name}: ${(loaded / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`;
+      output.enqueue(chunk);
+    }})), response);
+    Object.defineProperty(counted, 'url', {value: response.url});
+    return counted;
+  };
+}
+
 (async () => {
   if (!window.RufflePlayer) throw new Error('Pinned Ruffle runtime did not load.');
   const player = window.RufflePlayer.newest().createPlayer();
@@ -30,8 +57,10 @@
   }
   const browser = mode === 'game' ? Array.from(crypto.getRandomValues(new Uint8Array(32)), value => value.toString(16).padStart(2, '0')).join('') : null;
   const browserRules = browser ? [[/^https?:\/\/127\.0\.0\.1:8080\/char\/list$/, OpenRotMGBackend.url('/legacy-api/char/list').href + `?browser=${browser}`]] : [];
+  const movie = new URL(movies[mode], document.baseURI);
+  showDownloads(movie, mode === 'game' ? 'game client' : 'pixel editor', JSON.parse(document.querySelector('#game').dataset.runtimeSizes));
   await player.ruffle().load({
-    url: new URL(movies[mode], document.baseURI).href,
+    url: movie.href,
     autoplay: 'on',
     splashScreen: false,
     unmuteOverlay: 'hidden',
