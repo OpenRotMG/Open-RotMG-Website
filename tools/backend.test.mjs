@@ -19,7 +19,7 @@ test('backend requests use the declared game origin and reject foreign destinati
 
 test('an offline game API does not prevent the independent static client from loading', async () => {
   let movie;
-  const nodes = {'#game': {dataset: {mode: 'game'}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
+  const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{}'}, append() {}}, '#startup': {}, '#load-error': {hidden: true}};
   const context = {URL, AbortSignal, crypto: {getRandomValues: bytes => bytes.fill(1)},
     document: {baseURI: 'https://example.test/', querySelector: key => key.startsWith('meta[') ? {content: 'https://game.example.test'} : nodes[key]},
     fetch: async () => {throw Error('offline');}, console: {error() {}}, setInterval() {}, clearInterval() {}, addEventListener() {},
