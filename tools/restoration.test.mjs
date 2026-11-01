@@ -243,6 +243,21 @@ test('Spider Den egg and column acceptance does not accept every entrance or ori
   assert.match(feature.audit.unknowns.join(' '),/boss-exit destination/);
 });
 
+test('Arachna exit evidence separates prepared native return from parent-route units and history',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  for(const [ref,kind] of [['spider-exit-source-4ba942fa','source'],['spider-exit-regression-4ba942fa','regression'],['spider-exit-native-7684fd0e','native']]){
+    assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);
+  }
+  for(const kind of ['source','native','regression'])assert(evidence.results[id].evidence.includes(`spider-teleport-${kind}-2f96d35f`));
+  assert.match(feature.audit.differences.join(' '),/Arachna completion to Realm Portal0x704 instead of Nexus-only0x71d/);
+  assert.match(feature.audit.unknowns.join(' '),/not authenticated historical acceptance/);
+  const native=evidence.sources['spider-exit-native-7684fd0e'];
+  assert.equal(native.revision,'7684fd0e70c0e4070551b147955d86b0b42e43b8');
+  assert.match(native.limitations,/dirty7684fd0e/);assert.match(native.limitations,/not earned entry or native exact-parent journey/);
+});
+
 test('Ent and Ghost God bounded receipts do not accept original history or acquisition',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   for(const [name,native,regression,research] of [['ent-god','5d43505','5d43505','233f7d8'],['ghost-god','9e258e9','9e258e9','9e258e9']]){
