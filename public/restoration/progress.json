@@ -7208,10 +7208,11 @@
       "audit": {
         "implementation": "present",
         "historical": "partial",
-        "expected": "Eligible same-map player teleporting, including Ocean Trench. Selected 123.5.1 client uses a 10000ms cooldown after dispatch and rejects paused/invisible targets before dispatch or cooldown. Current server lands at the target's current valid position; this is reconstruction, not authenticated original landing policy.",
+        "expected": "Eligible same-map player teleporting, including Ocean Trench and Manor of the Immortals. Selected 123.5.1 client uses a 10000ms cooldown after dispatch and rejects paused/invisible targets before dispatch or cooldown. Current server lands at the target's current valid position; this is reconstruction, not authenticated original landing policy.",
         "differences": [],
         "unknowns": [
           "Selected client establishes a ten-second dispatch cooldown, not the original server's independent successful/rejected-request timing, landing offset, world restrictions or race handling.",
+          "Manor permission follows primary Kithio's generic World AllowTeleport=true default, not a recovered Manor-specific world table or authenticated original-server permission.",
           "Successful Nexus teleports in 123.5.1 remain unverified (#616). Build 123.0.0 trading footage shows a Nexus Teleport option at 4:59.4 but selects Trade. It was uploaded in May 2013 with an uncertain January 2012 title; the visible build, not that title, is the version evidence. Primary Kithio enables Nexus teleports, while an undated later guide excludes them.",
           "Build 123.0.0 notes (April 23, 2012 Japanese date) say invisible-Rogue attempts never activate cooldown; the selected client achieves this before dispatch. Original direct-packet rejection remains unverified. Kithio charges cooldown before target lookup; modified 7.0 rejects invisible/paused targets first, so comparator policies are not interchangeable."
         ],

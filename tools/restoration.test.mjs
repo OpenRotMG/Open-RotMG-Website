@@ -8,6 +8,21 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('Manor teleport evidence does not promote whole-dungeon or historical acceptance',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  for(const id of ['social:teleport-to-players','dungeons:manor-of-the-immortals']){
+    const feature=data.features.find(f=>f.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+    for(const [ref,kind] of [['manor-teleport-source-d5e541c0','source'],['manor-teleport-regression-d5e541c0','regression'],['manor-teleport-native-e2fc09e2','native']]){
+      assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);assert(evidence.sources[ref].checks.includes(id));
+    }
+  }
+  const teleport=data.features.find(f=>f.id==='social:teleport-to-players');
+  assert.match(teleport.audit.unknowns.join(' '),/not a recovered Manor-specific world table/);
+  assert.equal(evidence.sources['manor-teleport-native-e2fc09e2'].revision,'e2fc09e26d3fcf7595a407b1f1ca141f3df07fe8');
+  assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/No accepted native replay/);
+});
+
 test('typed lock evidence does not promote whole-feature or original command acceptance',()=>{
   const data=catalogue(),evidence=ledger(),id='social:lock-players',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
