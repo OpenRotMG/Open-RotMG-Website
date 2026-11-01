@@ -4938,7 +4938,7 @@
           {
             "id": "dungeons:tomb-of-the-ancients:sarcophagus-awakening",
             "name": "Sarcophagus awakening gate",
-            "expected": "Defeat every objective sarcophagus to awaken the three untouched bosses once; optional treasure and surviving worshippers do not gate awakening.",
+            "expected": "Defeat every objective sarcophagus to awaken the three untouched bosses once; optional treasure and surviving worshippers do not gate awakening. Source-qualified Sarcophagi have eight bound worshippers.",
             "acceptance": "Resolve required sarcophagi/priest/treasure participation first. Test the last required defeat, one-time awakening, reconnect and late join without guessing an activation threshold.",
             "implementation": "present",
             "historical": "partial",
@@ -4950,6 +4950,10 @@
               {
                 "url": "https://github.com/trapped/rotmg_svr/blob/593e490803fe0ad168ead408cacd5287d778acfe/wServer/logic/db/BehaviorDb.Tomb.cs",
                 "label": "Retired: Pinned community Tomb mechanics comparator, not official server code"
+              },
+              {
+                "url": "https://web.archive.org/web/20130502034124/http://forums.wildshadow.com/wiki/realm-mad-god/tomb-ancients",
+                "label": "Archived wiki labels123.0.0: eight sentries, not authenticated123.5.1 generator or AI"
               }
             ],
             "group": "boss"
