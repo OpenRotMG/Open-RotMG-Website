@@ -659,5 +659,8 @@ test('god bag placement evidence preserves existing loot statuses and partial hi
   assert.match(evidence.sources[regression].limitations,/not native simultaneous potion\+gear/);
   const native=evidence.sources['god-loot-placement-native-gap-f2c37955'];
   assert.equal(native.kind,'native');assert.match(native.method,/FAILED attempts retained, no new native pass/);
-  assert.match(native.limitations,/Post-fix native placement\/pickup.*remain unverified/);
+  assert.match(native.limitations,/God-specific post-fix native placement\/pickup.*remain unverified/);
+  const common=evidence.sources['god-loot-common-native-d534980c'];
+  assert.equal(common.kind,'native');assert.match(common.method,/passes17 assertions\/121800game ms/);
+  assert.match(common.limitations,/NOT a native visual demonstration of Godscatter/);
 });
