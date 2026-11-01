@@ -653,7 +653,7 @@ test('god bag placement evidence preserves existing loot statuses and partial hi
   for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
   assert.equal(source.kind,'source');assert.equal(source.revision,'f2c3795538b84c95d4cf19bb1fa16753cd293dec');
   assert.match(source.method,/identity-seeded cosmetic RNG.*World RNG, rolled contents and ownership policy unchanged/);
-  const regression='god-loot-placement-regression-f2c37955';
+  const regression='god-loot-placement-regression-d534980c';
   for(const key of [id,component])assert(evidence.results[key].evidence.includes(regression));
   assert.equal(evidence.sources[regression].kind,'regression');assert.match(evidence.sources[regression].method,/pass426 Rust tests.*next World RNG/);
   assert.match(evidence.sources[regression].limitations,/not native simultaneous potion\+gear/);
