@@ -129,9 +129,9 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const id of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[id].status,'not-run');
 });
 
-test('Worlds4–7 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
+test('Worlds4–8 and10–13 playable acceptance keeps historical and map-bank gaps explicit',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  for(const n of ['04','05','06','07','10','11','12','13']){
+  for(const n of ['04','05','06','07','08','10','11','12','13']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
@@ -162,7 +162,11 @@ test('Worlds4–7 and10–13 playable acceptance keeps historical and map-bank g
   assert.match(native7.limitations,/not continuous end-to-end walking.*unchanged0\.6 gate/);
   assert.match(regression7.method,/without repainting authored cells.*normal dependency merge/);
   assert.match(regression7.limitations,/failed393\/6 union suite/);
-  assert.equal(evidence.results['realm:map-world-08'].status,'not-run');
+  const world8=rows.find(r=>r.id==='realm:map-world-08'),native8=evidence.sources['world08-native-5018360'];
+  assert.match(world8.rule.acceptance,/west-central lake\/bay system.*do not by themselves establish damaging lava/);
+  assert.equal(native8.revision,'50183602b79fd9d82f064accde12aa8a2e47771c');
+  assert.match(native8.method,/70 assertions.*17 Ent2335\/6 Lich2331\/11 Coil3522/);
+  assert.match(world8.rule.unknowns.join(' '),/not lava/);
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 
