@@ -13,7 +13,7 @@ test('Manor teleport evidence does not promote whole-dungeon or historical accep
   for(const id of ['social:teleport-to-players','dungeons:manor-of-the-immortals']){
     const feature=data.features.find(f=>f.id===id);
     assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
-    for(const [ref,kind] of [['manor-teleport-source-d5e541c0','source'],['manor-teleport-regression-d5e541c0','regression'],['manor-teleport-native-e2fc09e2','native']]){
+    for(const [ref,kind] of [['manor-teleport-source-d5e541c0','source'],['manor-teleport-regression-d5e541c0','regression'],['manor-teleport-native-e2fc09e2','native'],['manor-teleport-union-regression-fed15938','regression']]){
       assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);assert(evidence.sources[ref].checks.includes(id));
     }
   }
