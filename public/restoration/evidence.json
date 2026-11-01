@@ -1,6 +1,42 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review. The 2026-10-30 incremental audit checks23 server/18 website merges and no client merges since PR455 at servercfc803f/site6c26a57. It reconciles map coverage and new orbit/news/progress/reward changes using source and existing CI, not fresh native acceptance. PR1254 retires Trapped as authority; retained citations/tables are legacy provenance, not approval. The reported72-file original-Kithio text comparison is scoped, not whole-package authentication."},
   "sources": {
+    "class-quest-source-19990338": {
+      "kind": "source",
+      "revision": "199903383cc6818f53221583f40c019e03b9558e",
+      "date": "2026-11-01",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/199903383cc6818f53221583f40c019e03b9558e/src/world.rs#L5485-L5554",
+      "checks": [
+        "heroes:living-fame",
+        "heroes:class-stars"
+      ],
+      "method": "Issue1313 adds one post-commit notification seam in World::finish_progress. A positive previous account-class next goal reached by the committed snapshot emits green Class Quest Complete! once to the owner and strictly-within25-tile players who already know the owner. Existing reservation/lifetime acknowledgement, failed-commit fencing, Fame thresholds, rewards and output guards remain unchanged. Reaching2000 uses the previous positive goal rather than comparing the terminal sentinel.",
+      "limitations": "Reconstruction from pinned compiled Kithio plus selected-client terminal semantics, not authenticated original-server timing/audience. Source inspection is not gameplay acceptance or a new whole-feature review."
+    },
+    "class-quest-regression-0e51e9f0": {
+      "kind": "regression",
+      "revision": "0e51e9f05474f1e4ad6f83b514b74ecbba7a6b9b",
+      "date": "2026-11-01",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0e51e9f05474f1e4ad6f83b514b74ecbba7a6b9b/src/world/class_quest_tests.rs",
+      "checks": [
+        "heroes:living-fame",
+        "heroes:class-stars"
+      ],
+      "method": "Private QA3541723e passes459 Rust tests, strict all-target Clippy, formatting and release build on clean0e51e9f0. New packet tests cover first20/150/400/800/2000, positive prior goal, existing class records, below/after-terminal progress, one multi-threshold event, duplicate completion refusal, failed-commit silence and self/24-tile known versus25-tile/unknown audiences. Desired unfixed QAc5bece64 fails19->20 with no notification.",
+      "limitations": "Controlled World execution, not earned progression, every-client native visibility, official historical fidelity or production. Initial helper compile/reservation mistakes, CLI argument error and fullgate454pass/2 load-sensitive failures remain failures; none of their guards were changed. The native take is separately bound to0e51 and is not replayed at later Realm-density integration."
+    },
+    "class-quest-native-0e51e9f0": {
+      "kind": "native",
+      "revision": "0e51e9f05474f1e4ad6f83b514b74ecbba7a6b9b",
+      "date": "2026-11-01",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/0e51e9f05474f1e4ad6f83b514b74ecbba7a6b9b/examples/testing/class-quest-notification.mjs",
+      "checks": [
+        "heroes:living-fame",
+        "heroes:class-stars"
+      ],
+      "method": "Clean private-display QAf38d3b2e passes3 checks/8000game ms with selected client4d171652/Ruffle.16. An explicitly prepared unloaded19-Fame Wizard uses ordinary native staff fire to defeat the authored Tutorial Chicken God: savedXP19999->20005, Fame19->20, one kill, same living character/670HP, zero deaths, SQLite/FK checks clean, cleanupErrors empty. Actual crossing PNG shows new class text overlaid with the simultaneous enemy Quest Complete message. Casef567206b490860549642784f2536a9c53149da11a731013fa621e7ce5d7c421b; ELFdaef2998575441cb4d08cc3ad180952be4d12ce29990404d5c90345fbcc3e0a8.",
+      "limitations": "Prepared supplied level20/stats/equipment, not an earned19-Fame journey. No health/protection, NPC/phase, ACK or clock override. Screenshot does not establish isolated legibility, packet ordering or five native thresholds; deterministic tests establish exact payload/audience. Failed initial cold compile (zero gameplay), unprotected Limon death and Tutorial stale-target baseline remain retained, not full native passes or a pixel-matched pair. No accepted-take replay, relabeling at later heads, whole-feature/history or production acceptance."
+    },
     "density-two-thirds-source-1ff09c0": {"kind":"source","revision":"1ff09c0551eb2cf333aacc682f0e47c03032af6a","date":"2026-11-01","url":"https://github.com/OpenRotMG/Open-RotMG-Server/blob/1ff09c0551eb2cf333aacc682f0e47c03032af6a/src/world/population_density.rs","checks":["realm:population-ecology"],"method":"PR1347 sets each Realm terrain target to two thirds of the Kithio area divisor result after owner live-play feedback; seed 12351 creation drops from 25154 to 16783 ordinary bodies.","limitations":"Owner-selected tuning, not Kithio or original 123.5.1 density."},
     "tomb-sentry-census-regression-4aac8c71": {
       "kind": "regression",
@@ -6667,11 +6703,11 @@
     "heroes:sorcerer": {"status":"not-run","evidence":["sorcerer-source-8ac76ae","sorcerer-regression-b0f8829","sorcerer-native-b50f9cb"]},
     "heroes:choose-and-unlock-classes": {"status":"not-run","evidence":["classes-source-a519629","classes-regression-a519629","classes-native-a519629","classes-source-af9eb8e","classes-regression-af9eb8e","classes-native-af9eb8e"]},
     "heroes:level-to-20": {"status":"passed","evidence":["level-to-20-source-aa7a175","level-to-20-regression-f6fd638","level-to-20-native-c15024f"]},
-    "heroes:living-fame": {"status":"not-run","evidence":["living-fame-source-3a3b6ab","living-fame-regression-3a3b6ab","living-fame-native-3a3b6ab","living-fame-terminal-0d67046","living-fame-mouseleave-7a0918c"]},
+    "heroes:living-fame": {"status":"not-run","evidence":["living-fame-source-3a3b6ab","living-fame-regression-3a3b6ab","living-fame-native-3a3b6ab","living-fame-terminal-0d67046","living-fame-mouseleave-7a0918c","class-quest-native-0e51e9f0","class-quest-regression-0e51e9f0","class-quest-source-19990338"]},
     "heroes:fame-bonuses": {"status":"not-run","evidence":["fame-shipment-regression-8647a46","fame-research-59e9f64","fame-death-native-f092cc0","fame-restored-archive-native-f092cc0","fame-regression-f092cc0","fame-combat-native-f092cc0"]},
     "heroes:lifetime-combat-statistics": {"status":"not-run","evidence":["fame-shipment-regression-8647a46","fame-research-59e9f64","fame-death-native-f092cc0","fame-restored-archive-native-f092cc0","fame-regression-f092cc0","fame-combat-native-f092cc0"]},
     "heroes:equipment-fame-bonus": {"status":"not-run","evidence":["fame-shipment-regression-8647a46","fame-research-59e9f64","fame-death-native-f092cc0","fame-restored-archive-native-f092cc0","fame-regression-f092cc0","fame-combat-native-f092cc0"]},
-    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","class-star-death-total-regression-ca50d79","class-stars-source-110230e","class-stars-regression-382342d","class-stars-native-382342d"]},
+    "heroes:class-stars": {"status":"not-run","evidence":["star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","class-star-death-total-regression-ca50d79","class-stars-source-110230e","class-stars-regression-382342d","class-stars-native-382342d","class-quest-native-0e51e9f0","class-quest-regression-0e51e9f0","class-quest-source-19990338"]},
     "heroes:legends-highscores": {"status":"not-run","evidence":["legends-source-7499bb8","legends-regression-7499bb8","legends-native-fa35d54","star-hiscores-api-cc09377","star-hiscores-browser-f7f6c60","public-character-api-source-794eccf","legends-context-source-c3fed5d","legends-dyes-native-c3fed5d","legends-own-native-c3fed5d","legends-seeded-eligibility-source-61c4334","legends-seeded-eligibility-regression-61baeec","legends-glow-source-9f3212fa","legends-glow-native-6cbd4578","legends-glow-regression-9f3212fa"]},
     "heroes:recover-hp-and-mp": {"status":"not-run","evidence":["recovery-source-86714cf","recovery-regression-6673dd5","recovery-native-86714cf","paladin-source-be449856","paladin-integration-17f0e961"]},
     "hero:death": {"status": "passed","evidence": ["public-character-api-source-794eccf","death-research-a769594","death-record-regression-8ad64e2","death-native-8ad64e2"]},

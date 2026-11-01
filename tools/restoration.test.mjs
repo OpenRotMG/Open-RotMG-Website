@@ -25,6 +25,21 @@ test('Manor teleport evidence does not promote whole-dungeon or historical accep
   assert.match(evidence.sources['manor-teleport-native-e2fc09e2'].limitations,/Frozen e2fc is not later-union active glow stat59/);
 });
 
+test('class-quest notification receipts preserve whole-feature and historical limits',()=>{
+  const data=catalogue(),evidence=ledger(),ids=['heroes:living-fame','heroes:class-stars'];
+  validateEvidence(data,evidence);
+  for(const id of ids){
+    const feature=data.features.find(f=>f.id===id);
+    assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+    for(const ref of ['class-quest-source-19990338','class-quest-regression-0e51e9f0','class-quest-native-0e51e9f0']){
+      assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);
+    }
+  }
+  const native=evidence.sources['class-quest-native-0e51e9f0'];
+  assert.equal(native.revision,'0e51e9f05474f1e4ad6f83b514b74ecbba7a6b9b');
+  assert.match(native.method,/passes3 checks\/8000game ms/);assert.match(native.limitations,/isolated legibility/);
+});
+
 test('Legends glow evidence preserves aggregate status and frozen native provenance',()=>{
   const data=catalogue(),evidence=ledger(),id='heroes:legends-highscores',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);

@@ -665,7 +665,8 @@
         "differences": [],
         "unknowns": [
           "Exact123.5.1 base-XP curve/carry and live-record publication cadence remain unresolved. Linear unboosted XP/1000 follows compiled Kithio, not authenticated original server code.",
-          "Selected client uses -1 in its local terminal class-quest helper and accepts nonpositive HUD goals; the original server's terminal wire sentinel remains unverified."
+          "Selected client uses -1 in its local terminal class-quest helper and accepts nonpositive HUD goals; the original server's terminal wire sentinel remains unverified.",
+          "Original123.5.1 class-quest notification timing, audience and final-star handling remain unauthenticated. Issue1313 reconstructs Kithio's green Class Quest Complete! feedback after committed first-time thresholds, including2000, without changing Fame or rewards."
         ],
         "sources": [
           {
@@ -683,6 +684,10 @@
           {
             "url": "https://anticosmic.blogspot.com/2012/04/fame-farming.html",
             "label": "Later-edited April2012-path guide describes a conflicting curve; individual claims are not dated to123.5.1"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L174-L184",
+            "label": "Primary compiled comparator: class-quest notification wording, green color and nearby audience; terminal comparison needs selected-client correction, not official-history proof"
           }
         ]
       }
@@ -760,7 +765,8 @@
           "Server PR452 scores each class by its best committed death total, including death bonuses, while living characters count base Fame. This follows the modified 7.0 comparator's greater-of-current-and-final rule; a 2021 base-only rule is later, and 123.5.1 BestFame timing is not recovered: https://github.com/OpenRotMG/Open-RotMG-Server/pull/452"
         ],
         "unknowns": [
-          "Exact 123.5.1 BestFame publication timing (live threshold, save, reconnect or death) remains unrecovered. Kithio/Trapped save CurrentFame without a death-total classstats update; modified 7.0 saves max(current,final). A revised April-2012 blog preserved in April 2014 supports bonus-inclusive stars but cannot date each claim to 123.5.1. See server issue780 for the research disposition."
+          "Exact 123.5.1 BestFame publication timing (live threshold, save, reconnect or death) remains unrecovered. Kithio/Trapped save CurrentFame without a death-total classstats update; modified 7.0 saves max(current,final). A revised April-2012 blog preserved in April 2014 supports bonus-inclusive stars but cannot date each claim to 123.5.1. See server issue780 for the research disposition.",
+          "Original123.5.1 class-quest notification timing, audience and final-star handling remain unauthenticated. Issue1313 reconstructs Kithio's green Class Quest Complete! feedback after committed first-time thresholds, including2000, without changing Fame or rewards."
         ],
         "sources": [
           {
@@ -786,6 +792,10 @@
           {
             "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=200210&count=20&maxlength=0&enddate=1625097600",
             "label": "Official June 29, 2021 Star Ranks announcement introduces base Fame without death bonuses; later than target"
+          },
+          {
+            "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Server%20Source/wServer/realm/entities/player/Player.Leveling.cs#L174-L184",
+            "label": "Primary compiled comparator: class-quest notification wording, green color and nearby audience; terminal comparison needs selected-client correction, not official-history proof"
           }
         ]
       }
