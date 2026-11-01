@@ -642,3 +642,22 @@ test('category and condition sprites stay original and distinct',()=>{
   assert.equal(icons.conditions,data.features.find(f=>f.name==='Armor broken').icon);
   for(const path of Object.values(icons)){const bytes=readFileSync(new URL('../public/restoration/'+path,import.meta.url));assert.equal(bytes.subarray(1,4).toString(),'PNG');assert(bytes.readUInt32BE(16)>0&&bytes.readUInt32BE(20)>0);}
 });
+
+
+test('god bag placement evidence preserves existing loot statuses and partial history',()=>{
+  const data=catalogue(),evidence=ledger(),id='gear:loot-and-ownership',component='gear:loot-bag-presentation',feature=data.features.find(f=>f.id===id);
+  validateEvidence(data,evidence);
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks.find(c=>c.id===component).historical,'partial');assert.equal(accepted(feature,evidence),false);
+  const ref='god-loot-placement-source-f2c37955',source=evidence.sources[ref];
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
+  assert.equal(source.kind,'source');assert.equal(source.revision,'f2c3795538b84c95d4cf19bb1fa16753cd293dec');
+  assert.match(source.method,/identity-seeded cosmetic RNG.*World RNG, rolled contents and ownership policy unchanged/);
+  const regression='god-loot-placement-regression-f2c37955';
+  for(const key of [id,component])assert(evidence.results[key].evidence.includes(regression));
+  assert.equal(evidence.sources[regression].kind,'regression');assert.match(evidence.sources[regression].method,/pass426 Rust tests.*next World RNG/);
+  assert.match(evidence.sources[regression].limitations,/not native simultaneous potion\+gear/);
+  const native=evidence.sources['god-loot-placement-native-gap-f2c37955'];
+  assert.equal(native.kind,'native');assert.match(native.method,/FAILED attempts retained, no new native pass/);
+  assert.match(native.limitations,/Post-fix native placement\/pickup.*remain unverified/);
+});
