@@ -785,10 +785,33 @@ test('unknown deep links fail visibly instead of opening an arbitrary nearby che
   assert.equal(env.nodes.error.hidden,false);assert.match(env.nodes.error.textContent,/Unknown check link/);assert.equal(errors.length,1);
 });
 
+test('prepared Nexus closure evidence does not certify earned or historical completion', () => {
+  const data = JSON.parse(read('public/restoration/progress.json'));
+  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  const native = evidence.sources['nexus-closure-prepared-native-49986bc'];
+  const camera = evidence.sources['quake-selected-as3-d035245'];
+  for (const id of ['realm:realm-closure', 'home:browse-realm-portals']) {
+    assert.equal(evidence.results[id].status, 'not-run');
+    assert.equal(data.features.find(row => row.id === id).audit.historical, 'partial');
+    assert.ok(evidence.results[id].evidence.includes('nexus-closure-prepared-native-49986bc'));
+  }
+  assert.equal(native.kind, 'native');
+  assert.equal(native.revision, '49986bcd708f2ea53f09f3f540c0e61cd4a4a957');
+  assert.match(native.method, /passed nine prepared native assertions/);
+  for (const limit of [/one-HP final Cyclops/, /temporary protection/, /Not earned normal49/, /not an independent cold-database or restart test/, /not a proc-exe-at-run attestation/, /Earlier dirty c7629c2/]) assert.match(native.limitations, limit);
+  assert.equal(camera.kind, 'source');
+  assert.match(camera.url, new RegExp('/' + camera.revision + '/client\\.swf$'));
+  assert.match(camera.method, /raw effect14 to synthetic selector13/);
+  assert.match(camera.method, /without an automatic timed stop/);
+  assert.match(camera.limitations, /not independent raw-ABC\/P-code or native-render verification/);
+  assert.match(camera.limitations, /not a transfer\/replacement timer/);
+  assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
+});
+
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '7c1ae7b333d11c7bb511184e32c3f3d9e3d19844c1716370fcc3127e2bb25a9d');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '231fa457af137fe45aa2f755640b9cd4d7755cd4a6bea30267d696c823e8aefb');
+  assert.equal(digest(bytes), 'e286a18426f22054c30bbfdbc35cf58801647feae9a09f8892f17012abe779d3');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '637cc1d037d81073529ce6c3479129091aadf6a4bc7c6b1dd859639174f07b65');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
