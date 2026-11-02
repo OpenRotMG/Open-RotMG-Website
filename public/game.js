@@ -63,7 +63,7 @@ function showDownloads(movie, movieName, runtimeSizes) {
   }, {once: true});
   window.OpenRotMGDiagnostics.start(socketEndpoint, player);
   // Pages may still have the pre-controls movie cached under its old URL.
-  const movies = {game: '/client.swf?mobile-camera=1', editor: '/draw/native-texture-editor.swf'};
+  const movies = {game: '/client.swf?mobile-camera=2', editor: '/draw/native-texture-editor.swf'};
   const mode = document.querySelector('#game').dataset.mode;
   if (!Object.hasOwn(movies, mode)) throw new Error(`Unknown client mode: ${mode}`);
   if (mode === 'game') OpenRotMGMobile.start(player);
