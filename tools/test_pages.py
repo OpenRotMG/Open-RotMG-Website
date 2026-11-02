@@ -31,7 +31,7 @@ class PagesTest(unittest.TestCase):
         (self.root / 'dist/diagnostics-build.json').write_text(json.dumps(self.expected))
         self.snapshot = self.root / 'backend.json'
         self.snapshot.write_text(json.dumps(self.expected))
-        body = b'fixture movie transport'
+        body = b'\x08\x00\x00\x18\x01\x00\x40\x00\x00\x00'  # RECT, frame header, ShowFrame, End
         self.swf = b'CWS\x0a' + (len(body) + 8).to_bytes(4, 'little') + zlib.compress(body)
         for name, value in [('ROOT', self.root), ('SNAPSHOT', self.snapshot)]:
             self.patch(pages, name, value)
@@ -59,11 +59,14 @@ class PagesTest(unittest.TestCase):
         self.patch(pages, 'identity', return_value=self.expected)
         self.patch(pages, 'download', return_value=self.swf)
         pages.assemble()
-        self.assertEqual((self.root / 'dist/client.swf').read_bytes(), self.swf)
+        movie = (self.root / 'dist/client.swf').read_bytes()
+        self.assertIn(b'openrotmg-mobile-camera\x00', movie)
+        self.assertEqual(movie[8:], pages.with_mobile_camera(b'FWS' + self.swf[3:8] + zlib.decompress(self.swf[8:]))[8:])
         self.assertTrue((self.root / 'dist/vendor/ruffle.js').is_file())
         self.assertTrue((self.root / 'dist/sfx/test.mp3').is_file())
         build = json.loads((self.root / 'dist/diagnostics-build.json').read_text())
-        self.assertEqual(build['client_swf_sha256'], hashlib.sha256(self.swf).hexdigest())
+        self.assertEqual(build['client_swf_sha256'], hashlib.sha256(movie).hexdigest())
+        self.assertEqual(build['client_source_swf_sha256'], hashlib.sha256(self.swf).hexdigest())
         preview = (self.root / 'dist/2010/index.html').read_text()
         self.assertIn('https://www.openrotmg.org/2010/', preview)
         self.assertIn('property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"', preview)

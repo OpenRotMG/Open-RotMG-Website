@@ -7,6 +7,7 @@ import shutil
 import sys
 import urllib.request
 import zlib
+from mobile_camera import with_mobile_camera
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / '.local/pages-backend.json'
@@ -67,8 +68,10 @@ def assemble():
         raise ValueError('Pages client/runtime differs from the deployed game')
     shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'vendor', dist / 'vendor')
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
-    (dist / 'client.swf').write_bytes(swf)
-    build.update(server=expected['server'], client_swf_sha256=hashlib.sha256(swf).hexdigest())
+    mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)
+    (dist / 'client.swf').write_bytes(mobile)
+    build.update(server=expected['server'], client_source_swf_sha256=hashlib.sha256(swf).hexdigest(),
+                 client_swf_sha256=hashlib.sha256(mobile).hexdigest())
     (dist / 'diagnostics-build.json').write_text(json.dumps(build))
     preview = dist / '2010/index.html'
     head = re.search(r'<head>(.*?)</head>', preview.read_text(), re.S)

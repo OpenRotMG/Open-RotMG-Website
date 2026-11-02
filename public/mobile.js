@@ -1,4 +1,4 @@
-// Thumb controls drive the unmodified Flash client by synthesising the keyboard and mouse input Ruffle already handles.
+// Thumb controls use the same input path as the keyboard and mouse in the preserved client.
 window.OpenRotMGMobile = {
   start(player) {
     const root = document.documentElement;
@@ -6,88 +6,152 @@ window.OpenRotMGMobile = {
     const viewport = document.querySelector('meta[name="viewport"]');
     const desktopViewport = viewport.content;
     const cursor = document.querySelector('#aim-cursor');
-    const names = {KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', Insert: 'Insert', Space: ' ', Enter: 'Enter'};
-    const held = new Set();
-    // The 123.5.1 client draws its 600x600 map left of the sidebar with the player 25px below the map centre.
-    const centre = {x: 300, y: 325};
+    const keyboard = player.shadowRoot.querySelector('#virtual-keyboard');
+    if (!keyboard) throw new Error('Ruffle mobile keyboard is not available.');
+    const names = {KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', KeyQ: 'q', KeyE: 'e', Insert: 'Insert', Space: ' '};
+    const held = new Set(), releases = [];
+    let cameraMode = false;
+    const emit = (type, key, code = '') => player.dispatchEvent(new KeyboardEvent(type, {key, code, bubbles: true}));
     const key = (code, down) => {
       if (held.has(code) === down) return;
       down ? held.add(code) : held.delete(code);
-      // Ruffle ignores keys unless its element has focus, and tapping these controls must not take it away.
       player.focus({preventScroll: true});
-      window.dispatchEvent(new KeyboardEvent(down ? 'keydown' : 'keyup', {code, key: names[code], bubbles: true}));
+      emit(down ? 'keydown' : 'keyup', names[code], code);
     };
-    const mouse = (type, u, v) => {
+    const press = (name, code = '') => { emit('keydown', name, code); emit('keyup', name, code); };
+
+    // Native keys and Ruffle's input listener both insert text. Only committed input may insert characters.
+    let composing = false, deletion;
+    for (const type of ['keydown', 'keyup']) keyboard.addEventListener(type, event => {
+      if (event.key === 'Backspace' || event.key === 'Delete') deletion = type === 'keydown' ? event.key : undefined;
+      if (!event.ctrlKey && !event.metaKey && (event.key.length === 1 || event.isComposing || ['Unidentified', 'Process'].includes(event.key))) event.stopPropagation();
+    });
+    const commit = () => {
+      if (composing) return;
+      const text = keyboard.value;
+      keyboard.value = '';
+      for (const char of text) press(char);
+    };
+    keyboard.addEventListener('paste', event => event.stopPropagation());
+    keyboard.addEventListener('input', event => {
+      event.stopImmediatePropagation();
+      if (!event.isComposing) commit();
+    }, true);
+    keyboard.addEventListener('compositionstart', () => { composing = true; });
+    // Safari can end composition after its final input; defer so either event ordering commits only once.
+    keyboard.addEventListener('compositionend', () => { composing = false; setTimeout(commit, 0); });
+    keyboard.addEventListener('beforeinput', event => {
+      const name = {deleteContentBackward: 'Backspace', deleteContentForward: 'Delete'}[event.inputType];
+      // Android keyboards can report deletion only through beforeinput, without a Backspace key event.
+      if (!composing && name && deletion !== name) press(name, name);
+    });
+
+    let x = 300, y = 325, pressed = false;
+    const mouse = type => {
       const canvas = player.shadowRoot.querySelector('canvas');
       if (!canvas) throw new Error('Game canvas is not available for mobile aiming.');
       const box = canvas.getBoundingClientRect();
-      const x = Math.min(599, Math.max(0, centre.x + (u - .5) * 600));
-      const y = Math.min(599, Math.max(0, centre.y + (v - .5) * 600));
       cursor.style.left = `${x / 800 * 100}%`;
       cursor.style.top = `${y / 600 * 100}%`;
       cursor.hidden = false;
-      // A pointer ID that is never active keeps Ruffle's setPointerCapture from stealing the thumb's real touch.
-      canvas.dispatchEvent(new PointerEvent(type, {view: window, pointerId: 9999, pointerType: 'mouse', isPrimary: true, button: 0, buttons: type === 'pointerup' ? 0 : 1, bubbles: true, composed: true,
+      // An inactive ID prevents Ruffle's capture from stealing the real thumb touch.
+      canvas.dispatchEvent(new PointerEvent(type, {view: window, pointerId: 9999, pointerType: 'mouse', isPrimary: true, button: 0, buttons: pressed ? 1 : 0, bubbles: true, composed: true,
         clientX: box.left + x / 800 * box.width, clientY: box.top + y / 600 * box.height}));
     };
-    // Each control follows only the finger that pressed it, so both thumbs work at once.
-    const track = (element, move, end) => element.addEventListener('pointerdown', down => {
-      down.preventDefault();
-      if (element.dataset.pointer) return;
-      element.dataset.pointer = down.pointerId;
-      element.setPointerCapture(down.pointerId);
-      const box = element.getBoundingClientRect();
+    const track = (element, move, end) => {
+      let pointer;
+      const release = () => {
+        if (pointer === undefined) return;
+        const id = pointer;
+        pointer = undefined;
+        delete element.dataset.pointer;
+        element.style.removeProperty('--u'); element.style.removeProperty('--v');
+        end();
+        if (element.hasPointerCapture(id)) element.releasePointerCapture(id);
+      };
+      releases.push(release);
       const at = event => {
+        const box = element.getBoundingClientRect();
         const u = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
         const v = Math.min(1, Math.max(0, (event.clientY - box.top) / box.height));
-        element.style.setProperty('--u', u);
-        element.style.setProperty('--v', v);
+        element.style.setProperty('--u', u); element.style.setProperty('--v', v);
         move(u, v, event.type);
       };
-      const moved = event => { if (event.pointerId === down.pointerId) at(event); };
-      const released = event => {
-        if (event.pointerId !== down.pointerId) return;
-        element.removeEventListener('pointermove', moved);
-        element.removeEventListener('lostpointercapture', released);
-        delete element.dataset.pointer;
-        element.style.removeProperty('--u');
-        element.style.removeProperty('--v');
-        end();
-      };
-      element.addEventListener('pointermove', moved);
-      element.addEventListener('lostpointercapture', released);
-      at(down);
-    });
-    track(document.querySelector('#move-stick'), (u, v) => {
+      element.addEventListener('pointerdown', event => {
+        event.preventDefault();
+        if (pointer !== undefined) return;
+        pointer = event.pointerId;
+        element.dataset.pointer = pointer;
+        element.setPointerCapture(pointer);
+        at(event);
+      });
+      element.addEventListener('pointermove', event => { if (event.pointerId === pointer) at(event); });
+      for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) element.addEventListener(type, event => { if (event.pointerId === pointer) release(); });
+    };
+    const releaseAll = () => releases.forEach(release => release());
+    addEventListener('blur', releaseAll);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
+    const move = (u, v) => {
       const x = u - .5, y = v - .5, length = Math.hypot(x, y);
-      // sin(22.5°) splits the stick into eight directions; the centre is a dead zone.
+      // sin(22.5°) divides the stick into eight directions, outside its dead zone.
       const near = length > .12 ? .383 * length : Infinity;
-      key('KeyW', y < -near); key('KeyS', y > near); key('KeyA', x < -near); key('KeyD', x > near);
-    }, () => ['KeyW', 'KeyA', 'KeyS', 'KeyD'].forEach(code => key(code, false)));
-    let aim;
+      const up = y < -near, left = x < -near, right = x > near;
+      key('KeyW', up); key('KeyS', y > near);
+      key('KeyA', left && !(cameraMode && up)); key('KeyD', right && !(cameraMode && up));
+      key('KeyQ', cameraMode && up && left); key('KeyE', cameraMode && up && right);
+    };
+    track(document.querySelector('#move-stick'), move, () => move(.5, .5));
+    let dx = 0, dy = 0, frame, last;
+    const tick = now => {
+      const length = Math.hypot(dx, dy);
+      const speed = length > .12 ? 650 * Math.min(1, (length - .12) / .38) / length : 0;
+      const dt = Math.min((now - last) / 1000, .05);
+      last = now;
+      x = Math.min(799, Math.max(0, x + dx * speed * dt));
+      y = Math.min(599, Math.max(0, y + dy * speed * dt));
+      mouse('pointermove');
+      frame = requestAnimationFrame(tick);
+    };
     track(document.querySelector('#aim-pad'), (u, v, type) => {
-      aim = [u, v];
-      if (type === 'pointerdown') {
-        player.focus({preventScroll: true});
-        // A finger leaving the canvas marks the mouse outside the stage, which would hide the map from the click.
-        mouse('pointerenter', u, v);
-      }
-      mouse('pointermove', u, v);
-      if (type === 'pointerdown') mouse('pointerdown', u, v);
-    }, () => mouse('pointerup', ...aim));
+      dx = u - .5; dy = v - .5;
+      if (type !== 'pointerdown') return;
+      player.focus({preventScroll: true});
+      mouse('pointerenter'); mouse('pointermove');
+      pressed = true;
+      mouse('pointerdown');
+      last = performance.now();
+      frame = requestAnimationFrame(tick);
+    }, () => {
+      cancelAnimationFrame(frame);
+      pressed = false;
+      mouse('pointerup');
+    });
     for (const button of document.querySelectorAll('#mobile-controls [data-code]')) track(button, () => key(button.dataset.code, true), () => key(button.dataset.code, false));
-    const keyboardButton = document.querySelector('#mobile-keyboard');
-    keyboardButton.addEventListener('pointerdown', event => event.preventDefault());
-    keyboardButton.addEventListener('click', () => {
-      const keyboard = player.shadowRoot.querySelector('#virtual-keyboard');
-      if (!keyboard) throw new Error('Ruffle mobile keyboard is not available.');
-      if (player.shadowRoot.activeElement !== keyboard) {
-        key('Enter', true);
-        key('Enter', false);
+    const cameraButton = document.querySelector('#mobile-camera');
+    const camera = enabled => {
+      const api = player.ruffle();
+      let acknowledged = false;
+      api.traceObserver = message => { if (message === `openrotmg.camera:${enabled ? 'on' : 'off'}`) acknowledged = true; };
+      player.focus({preventScroll: true});
+      try { press(enabled ? 'F13' : 'F14', enabled ? 'F13' : 'F14'); }
+      finally { api.traceObserver = null; }
+      const notice = document.querySelector('#load-error');
+      const message = 'Camera rotate is unavailable. Wait for the client to finish loading, then try again.';
+      if (!acknowledged) {
+        notice.textContent = message; notice.hidden = false;
+        throw new Error(message);
       }
-      // iOS zooms into small text fields even when page zoom gestures are disabled.
+      if (notice.textContent === message) notice.hidden = true;
+      cameraMode = enabled;
+      cameraButton.setAttribute('aria-pressed', String(enabled));
+    };
+    cameraButton.addEventListener('click', () => { releaseAll(); camera(!cameraMode); });
+    const keyboardButton = document.querySelector('#mobile-keyboard');
+    for (const button of [keyboardButton, cameraButton]) button.addEventListener('pointerdown', event => event.preventDefault());
+    keyboardButton.addEventListener('click', () => {
+      releaseAll();
+      // Do not send Enter: a keyboard is also needed for shortcuts and login fields, not just chat.
       keyboard.style.fontSize = '16px';
-      // Refocus within the tap so a dismissed phone keyboard reopens, using Ruffle's own text/IME handling.
       player.focus({preventScroll: true});
       keyboard.focus({preventScroll: true});
     });
@@ -95,11 +159,12 @@ window.OpenRotMGMobile = {
     const enter = () => {
       root.classList.add('mobile');
       viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
-      // Safari ignores user-scalable, so pinches are cancelled directly.
       document.addEventListener('gesturestart', block);
       document.addEventListener('touchmove', block, {passive: false});
     };
     document.querySelector('#mobile-exit').addEventListener('click', () => {
+      releaseAll();
+      if (cameraMode) camera(false);
       root.classList.remove('mobile');
       viewport.content = desktopViewport;
       document.removeEventListener('gesturestart', block);
@@ -107,9 +172,7 @@ window.OpenRotMGMobile = {
       if (document.fullscreenElement) void document.exitFullscreen().catch(error => console.error('Leaving fullscreen failed', error));
     });
     link.addEventListener('click', event => {
-      event.preventDefault();
-      enter();
-      // iPhone Safari has no element fullscreen; the fixed layout alone keeps the page still there.
+      event.preventDefault(); enter();
       if (document.fullscreenEnabled) void root.requestFullscreen({navigationUI: 'hide'}).catch(error => console.error('Fullscreen request failed', error));
     });
     if (location.hash === '#mobile-controls') enter();
