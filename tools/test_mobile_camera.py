@@ -19,6 +19,8 @@ class MobileCameraTest(unittest.TestCase):
         self.assertEqual(result[14:16], struct.pack('<H', 82 << 6 | 63))
         self.assertIn(b'openrotmg.camera:on', result)
         self.assertIn(b'openrotmg.camera:off', result)
+        self.assertIn(b'openrotmg.keyboard:text', result)
+        self.assertIn(b'openrotmg.keyboard:shortcuts', result)
         self.assertNotIn(b'ExternalInterface', result, 'camera commands must not require JavaScript access')
         self.assertIn(b'centerOnPlayer', result)
         self.assertIn(b'allowRotation', result)
@@ -32,4 +34,4 @@ class MobileCameraTest(unittest.TestCase):
                 with_mobile_camera(source)
 
     def test_bytecode_is_deterministic(self):
-        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), 'b0cd45ddb69f6680a9b11d7cab9a4e4218e244dab08f1d21e841864d56f1cdc2')
+        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), '02453c8b6aa96d00b0a32d0335dc392f698ac349a5b79e395db8eab5d66b5724')

@@ -19,9 +19,23 @@ window.OpenRotMGMobile = {
       emit(down ? 'keydown' : 'keyup', names[code], code);
     };
     const press = (name, code = '') => { emit('keydown', name, code); emit('keyup', name, code); };
+    const native = code => {
+      const api = player.ruffle();
+      let reply;
+      api.traceObserver = message => { if (message.startsWith('openrotmg.')) reply = message; };
+      try { press(code, code); }
+      finally { api.traceObserver = null; }
+      return reply;
+    };
+    const editingText = () => {
+      const reply = native('F15');
+      if (reply === 'openrotmg.keyboard:text') return true;
+      if (reply === 'openrotmg.keyboard:shortcuts') return false;
+      throw new Error('Native keyboard focus is unavailable. Reload the game client.');
+    };
 
-    // Native keys and Ruffle's input listener both insert text. Only committed input may insert characters.
-    let composing = false, deletion;
+    // Native keys and Ruffle's input listener both insert text. Text fields receive only committed input.
+    let composing = false, deletion, shortcutPrefix = '', shortcutsRequested = false;
     for (const type of ['keydown', 'keyup']) keyboard.addEventListener(type, event => {
       if (event.key === 'Backspace' || event.key === 'Delete') deletion = type === 'keydown' ? event.key : undefined;
       if (!event.ctrlKey && !event.metaKey && (event.key.length === 1 || event.isComposing || ['Unidentified', 'Process'].includes(event.key))) event.stopPropagation();
@@ -30,14 +44,23 @@ window.OpenRotMGMobile = {
       if (composing) return;
       const text = keyboard.value;
       keyboard.value = '';
-      for (const char of text) press(char);
+      const sent = text.toLowerCase().startsWith(shortcutPrefix.toLowerCase()) ? shortcutPrefix.length : 0;
+      shortcutPrefix = '';
+      for (const char of text.slice(sent)) press(char);
     };
     keyboard.addEventListener('paste', event => event.stopPropagation());
     keyboard.addEventListener('input', event => {
       event.stopImmediatePropagation();
-      if (!event.isComposing) commit();
+      if (composing || event.isComposing) {
+        const text = keyboard.value;
+        // Phone IMEs buffer single letters such as I; shortcuts must act immediately, but never inside a text field.
+        if (shortcutsRequested && /^[a-z0-9]*$/i.test(text) && !editingText()) {
+          for (const char of text.slice(shortcutPrefix.length)) press(char);
+          shortcutPrefix = text;
+        }
+      } else commit();
     }, true);
-    keyboard.addEventListener('compositionstart', () => { composing = true; });
+    keyboard.addEventListener('compositionstart', () => { composing = true; shortcutPrefix = ''; });
     // Safari can end composition after its final input; defer so either event ordering commits only once.
     keyboard.addEventListener('compositionend', () => { composing = false; setTimeout(commit, 0); });
     keyboard.addEventListener('beforeinput', event => {
@@ -47,13 +70,28 @@ window.OpenRotMGMobile = {
     });
 
     let x = 300, y = 325, pressed = false;
+    const mouseDeadZone = .04, mouseSpeed = 1300;
+    const drawCursor = () => {
+      cursor.style.left = `${x / 800 * 100}%`;
+      cursor.style.top = `${y / 600 * 100}%`;
+      cursor.hidden = false;
+    };
+    // Only taps/drags set aim; incidental hover after the phone keyboard closes must not overwrite it.
+    for (const type of ['pointerdown', 'pointermove']) player.addEventListener(type, event => {
+      const canvas = player.shadowRoot.querySelector('canvas');
+      if (!root.classList.contains('mobile') || !event.isTrusted || event.composedPath()[0] !== canvas) return;
+      if (event.type === 'pointermove' && !event.buttons) { event.stopImmediatePropagation(); return; }
+      if (event.type === 'pointerdown') shortcutsRequested = false;
+      const box = canvas.getBoundingClientRect();
+      x = Math.min(799, Math.max(0, (event.clientX - box.left) / box.width * 800));
+      y = Math.min(599, Math.max(0, (event.clientY - box.top) / box.height * 600));
+      drawCursor();
+    }, true);
     const mouse = type => {
       const canvas = player.shadowRoot.querySelector('canvas');
       if (!canvas) throw new Error('Game canvas is not available for mobile aiming.');
       const box = canvas.getBoundingClientRect();
-      cursor.style.left = `${x / 800 * 100}%`;
-      cursor.style.top = `${y / 600 * 100}%`;
-      cursor.hidden = false;
+      drawCursor();
       // An inactive ID prevents Ruffle's capture from stealing the real thumb touch.
       canvas.dispatchEvent(new PointerEvent(type, {view: window, pointerId: 9999, pointerType: 'mouse', isPrimary: true, button: 0, buttons: pressed ? 1 : 0, bubbles: true, composed: true,
         clientX: box.left + x / 800 * box.width, clientY: box.top + y / 600 * box.height}));
@@ -97,14 +135,13 @@ window.OpenRotMGMobile = {
       const near = length > .12 ? .383 * length : Infinity;
       const up = y < -near, left = x < -near, right = x > near;
       key('KeyW', up); key('KeyS', y > near);
-      key('KeyA', left && !(cameraMode && up)); key('KeyD', right && !(cameraMode && up));
-      key('KeyQ', cameraMode && up && left); key('KeyE', cameraMode && up && right);
+      key('KeyA', left); key('KeyD', right);
     };
     track(document.querySelector('#move-stick'), move, () => move(.5, .5));
     let dx = 0, dy = 0, frame, last;
     const tick = now => {
       const length = Math.hypot(dx, dy);
-      const speed = length > .12 ? 650 * Math.min(1, (length - .12) / .38) / length : 0;
+      const speed = length > mouseDeadZone ? mouseSpeed * Math.min(1, (length - mouseDeadZone) / (.5 - mouseDeadZone)) / length : 0;
       const dt = Math.min((now - last) / 1000, .05);
       last = now;
       x = Math.min(799, Math.max(0, x + dx * speed * dt));
@@ -114,6 +151,10 @@ window.OpenRotMGMobile = {
     };
     track(document.querySelector('#aim-pad'), (u, v, type) => {
       dx = u - .5; dy = v - .5;
+      if (cameraMode) {
+        key('KeyQ', dx < -mouseDeadZone); key('KeyE', dx > mouseDeadZone);
+        return;
+      }
       if (type !== 'pointerdown') return;
       player.focus({preventScroll: true});
       mouse('pointerenter'); mouse('pointermove');
@@ -122,19 +163,17 @@ window.OpenRotMGMobile = {
       last = performance.now();
       frame = requestAnimationFrame(tick);
     }, () => {
+      key('KeyQ', false); key('KeyE', false);
       cancelAnimationFrame(frame);
+      if (cameraMode) return;
       pressed = false;
       mouse('pointerup');
     });
     for (const button of document.querySelectorAll('#mobile-controls [data-code]')) track(button, () => key(button.dataset.code, true), () => key(button.dataset.code, false));
     const cameraButton = document.querySelector('#mobile-camera');
     const camera = enabled => {
-      const api = player.ruffle();
-      let acknowledged = false;
-      api.traceObserver = message => { if (message === `openrotmg.camera:${enabled ? 'on' : 'off'}`) acknowledged = true; };
       player.focus({preventScroll: true});
-      try { press(enabled ? 'F13' : 'F14', enabled ? 'F13' : 'F14'); }
-      finally { api.traceObserver = null; }
+      const acknowledged = native(enabled ? 'F13' : 'F14') === `openrotmg.camera:${enabled ? 'on' : 'off'}`;
       const notice = document.querySelector('#load-error');
       const message = 'Camera rotate is unavailable. Wait for the client to finish loading, then try again.';
       if (!acknowledged) {
@@ -143,6 +182,7 @@ window.OpenRotMGMobile = {
       }
       if (notice.textContent === message) notice.hidden = true;
       cameraMode = enabled;
+      if (enabled) { x = 300; y = 150; mouse('pointerenter'); mouse('pointermove'); }
       cameraButton.setAttribute('aria-pressed', String(enabled));
     };
     cameraButton.addEventListener('click', () => { releaseAll(); camera(!cameraMode); });
@@ -150,6 +190,8 @@ window.OpenRotMGMobile = {
     for (const button of [keyboardButton, cameraButton]) button.addEventListener('pointerdown', event => event.preventDefault());
     keyboardButton.addEventListener('click', () => {
       releaseAll();
+      // Automatic keyboard focus belongs to text fields; this explicit button also enables shortcut input.
+      shortcutsRequested = true;
       // Do not send Enter: a keyboard is also needed for shortcuts and login fields, not just chat.
       keyboard.style.fontSize = '16px';
       player.focus({preventScroll: true});
@@ -165,6 +207,7 @@ window.OpenRotMGMobile = {
     document.querySelector('#mobile-exit').addEventListener('click', () => {
       releaseAll();
       if (cameraMode) camera(false);
+      shortcutsRequested = false;
       root.classList.remove('mobile');
       viewport.content = desktopViewport;
       document.removeEventListener('gesturestart', block);

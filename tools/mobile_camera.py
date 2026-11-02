@@ -31,11 +31,12 @@ class Code:
 
 
 def camera_abc():
-    # Native F13/F14 commands change the real settings and acknowledge via trace, without script access or UI automation.
+    # Native commands acknowledge camera changes and keyboard focus via trace, without script access or UI automation.
     names = ['getDefinitionByName', 'setInterval', 'clearInterval', 'trace', 'root', 'stage', 'addEventListener',
              'keyCode', 'data_', 'centerOnPlayer', 'allowRotation', 'length', 'push', '0', '1',
-             'openrotmgCameraState', 'openrotmgCameraTimer', 'void']
-    strings = ['', 'flash.utils'] + names + ['com.company.assembleegameclient.parameters.Parameters', 'keyDown', 'openrotmg.camera:on', 'openrotmg.camera:off']
+             'openrotmgCameraState', 'openrotmgCameraTimer', 'void', 'focus']
+    parameters_class = 'com.company.assembleegameclient.parameters.Parameters'
+    strings = ['', 'flash.utils'] + names + [parameters_class, 'keyDown', 'openrotmg.camera:on', 'openrotmg.camera:off', 'openrotmg.keyboard:text', 'openrotmg.keyboard:shortcuts']
     qname = {name: index + 1 for index, name in enumerate(names)}
     pool = b'\0\0\0' + u30(len(strings))
     pool += b''.join(u30(len(s.encode())) + s.encode() for s in strings[1:])
@@ -48,7 +49,7 @@ def camera_abc():
     def text(value):
         return b'\x2c' + u30(strings.index(value))
 
-    parameters = op(0x5D, 'getDefinitionByName') + text(strings[-4]) + op(0x46, 'getDefinitionByName') + b'\x01'
+    parameters = op(0x5D, 'getDefinitionByName') + text(parameters_class) + op(0x46, 'getDefinitionByName') + b'\x01'
     stage = b'\xd1' + op(0x66, 'root') + op(0x66, 'stage')
     install = Code()
     install.add(parameters + b'\xd5\xd1' + op(0x66, 'root'))
@@ -63,7 +64,9 @@ def camera_abc():
     state = op(0x60, 'openrotmgCameraState')
     data = b'\xd3'
     command = Code()
-    command.add(b'\xd1' + op(0x66, 'keyCode') + b'\xd6\xd2\x24\x7c')
+    command.add(b'\xd1' + op(0x66, 'keyCode') + b'\xd6\xd2\x24\x7e')
+    command.branch(0x13, 'keyboard')
+    command.add(b'\xd2\x24\x7c')
     command.branch(0x13, 'accept')
     command.add(b'\xd2\x24\x7d')
     command.branch(0x14, 'return')
@@ -83,7 +86,13 @@ def camera_abc():
         command.add(data + state + op(0x66, index) + op(0x61, name))
     command.add(state + b'\x24\0' + op(0x61, 'length'))
     command.label('ack')
-    command.add(op(0x5D, 'trace') + text('openrotmg.camera:off') + op(0x4F, 'trace') + b'\x01')
+    command.add(op(0x5D, 'trace') + text('openrotmg.camera:off') + op(0x4F, 'trace') + b'\x01\x47')
+    command.label('keyboard')
+    command.add(parameters + op(0x66, 'root') + op(0x66, 'stage') + op(0x66, 'focus'))
+    command.branch(0x12, 'shortcuts')
+    command.add(op(0x5D, 'trace') + text('openrotmg.keyboard:text') + op(0x4F, 'trace') + b'\x01\x47')
+    command.label('shortcuts')
+    command.add(op(0x5D, 'trace') + text('openrotmg.keyboard:shortcuts') + op(0x4F, 'trace') + b'\x01')
     command.label('return')
     command.add(b'\x47')
 
