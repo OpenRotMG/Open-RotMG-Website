@@ -5169,11 +5169,11 @@
         "historical": "known-differences",
         "expected": "Davy Jones’s Locker includes entrance and key access, a traversable pirate dungeon, Davy, rewards and an exit. Original Ghost Ship access conditions, layout and encounter behavior remain unresolved.",
         "differences": [
-          "The lost original maze generator is replaced by a connected 25-room reconstruction.",
+          "Layout stamps templates cut from one captured live instance plus 2013-2018 minimap shapes; template choice, joins and door colouring are reconstructed from six layouts and 100 pre-2020 runs, not a recovered generator.",
           "Encounter and drop tuning follows compared community references, not a certified original server build."
         ],
         "unknowns": [
-          "Original map distribution, precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
+          "Original template weights and rates are fitted to lower bounds from partial footage; precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
           "Live-combat interruption and empty-instance retirement remain untested; supplied gear/party are not earned or unprotected-survival evidence."
         ],
         "sources": [
@@ -5204,6 +5204,18 @@
           {
             "url": "https://wikiwiki.jp/rmd/Maggot",
             "label": "October 27, 2012 page calls Maggot an unused Locker enemy; does not establish Sack placement"
+          },
+          {
+            "url": "https://github.com/ossimc82/fabiano-swagger-of-doom/blob/6fd20aad4a7905b13f25389c68368a942a2b68cb/maps/jm%27s/Nilly/davyjones.jm",
+            "label": "Client capture of one live Locker instance; undated, earliest commit 2015-05-10; source of the layout templates"
+          },
+          {
+            "url": "https://web.archive.org/web/20130916/http://img3.imageshack.us/img3/8746/mapzoomed.png",
+            "label": "Wild Shadow wiki Locker layout minimap, Wayback 2013-09-16"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/davy-jones-s-locker/2",
+            "label": "RealmEye Locker layout minimap, 2014-03-18 revision"
           }
         ],
         "checks": [
@@ -5226,6 +5238,14 @@
               {
                 "url": "https://gaming.stackexchange.com/questions/92600/why-do-i-have-a-purple-key",
                 "label": "Period shared-key HUD discussion and original forum lead"
+              },
+              {
+                "url": "https://youtu.be/3BJGr4JLXu0?t=8",
+                "label": "August 2012 guide run: purple door in the start room's top wall"
+              },
+              {
+                "url": "https://youtu.be/2C8h5dswJmg?t=281",
+                "label": "October 2012 run: red gate opens on contact with the key held; dead-end room behind it"
               }
             ],
             "group": "layout"
