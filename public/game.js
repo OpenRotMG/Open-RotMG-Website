@@ -65,6 +65,7 @@ function showDownloads(movie, movieName, runtimeSizes) {
   const movies = {game: '/client.swf', editor: '/draw/native-texture-editor.swf'};
   const mode = document.querySelector('#game').dataset.mode;
   if (!Object.hasOwn(movies, mode)) throw new Error(`Unknown client mode: ${mode}`);
+  if (mode === 'game') OpenRotMGMobile.start(player);
   if (mode === 'game') void OpenRotMGBackend.fetch('/health', {cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000)}).then(response => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
   }).catch(error => {
@@ -92,6 +93,8 @@ function showDownloads(movie, movieName, runtimeSizes) {
     unmuteOverlay: 'hidden',
     preferredRenderer: 'wgpu-webgl',
     openUrlMode: 'confirm',
+    // A held touch, such as dragging an item, must not open Ruffle's menu.
+    contextMenu: 'rightClickOnly',
     allowScriptAccess: false,
     logLevel: 'warn',
     credentialAllowList: [socketEndpoint.origin.replace(/^ws/, 'http')],

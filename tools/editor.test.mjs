@@ -16,7 +16,7 @@ for (const [mode, path] of [['game', '/client.swf'], ['editor', '/draw/native-te
       await runInNewContext(script, {window: {RufflePlayer: {newest: () => ({createPlayer: () => player})}, OpenRotMGDiagnostics: {start() {}}},
         document: {baseURI, querySelector: key => nodes[key]}, URL, AbortSignal,
         OpenRotMGBackend: {url: path => new URL(path, baseURI), fetch: async () => ({ok: true})}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}},
-        fetch: async () => ({ok: true, json: async () => ({tab: 'a'.repeat(64)})}), setInterval: () => 1, clearInterval() {}, addEventListener() {}});
+        fetch: async () => ({ok: true, json: async () => ({tab: 'a'.repeat(64)})}), setInterval: () => 1, clearInterval() {}, addEventListener() {}, OpenRotMGMobile: {start() {}}});
       const origin = new URL(baseURI).origin;
       assert.equal(options.url, origin + path);
       const offset = mode === 'game' ? 1 : 0;

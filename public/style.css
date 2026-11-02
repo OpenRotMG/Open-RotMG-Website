@@ -45,6 +45,28 @@ p { margin: 0 0 15px; }
 #bug-form button:disabled { cursor: wait; border-color: #555; color: #aaa; }
 .screen-reader { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 [hidden] { display: none !important; }
+html:not(.mobile) #mobile-controls { display: none; }
+.mobile, .mobile body { overflow: hidden; overscroll-behavior: none; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+.mobile .site-footer, .mobile .alpha-warning { display: none; }
+.mobile .page-main { position: fixed; inset: 0; display: grid; grid: "game game" auto "left right" 1fr "exit exit" auto / 1fr 1fr; place-items: end center; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); --pad: min(44vw, 30dvh); }
+.mobile #game { grid-area: game; max-width: none; }
+.mobile #load-error { position: fixed; inset: 0 0 auto; z-index: 2; background: #000d; }
+#mobile-controls { display: contents; }
+.mobile-side { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.mobile-side:first-child { grid-area: left; }
+.mobile-side:nth-child(2) { grid-area: right; }
+#move-stick, #aim-pad { position: relative; width: var(--pad); aspect-ratio: 1; border: 2px solid #555; background: radial-gradient(circle, #666 0 3px, #111 4px); touch-action: none; }
+/* The round stick keeps a square touch area so a thumb near its corner still lands on it. */
+#move-stick { border: 0; background: radial-gradient(closest-side, #666 0 3px, #111 4px calc(100% - 2px), #555 calc(100% - 2px) 100%, transparent 100%); }
+#move-stick span, #aim-pad span { position: absolute; left: calc(var(--u, .5) * 100%); top: calc(var(--v, .5) * 100%); width: 36%; aspect-ratio: 1; border-radius: 50%; background: #f0c16055; translate: -50% -50%; pointer-events: none; }
+#aim-pad span { width: 16%; background: #cb8585aa; }
+#aim-pad:not([data-pointer]) span { display: none; }
+.mobile-side button { width: var(--pad); padding: 12px 0; font-weight: bold; color: #f5f5f5; background: #303030; border: 1px solid #999; border-radius: 6px; touch-action: none; }
+#mobile-exit { grid-area: exit; padding: 10px; border: 0; background: none; color: #91918a; text-decoration: underline; }
+@media (orientation: landscape) {
+  .mobile .page-main { grid: "left game right" 1fr "exit game ." auto / 1fr auto 1fr; --pad: min(20vw, 55dvh); }
+  .mobile #game { align-self: center; width: auto; height: min(100dvh, (100vw - 2 * var(--pad) - 32px) * .75); }
+}
 @media (max-width: 600px) {
   .site-shell { max-width: calc(100% - 16px); padding: 12px; margin: 16px auto; min-height: calc(100svh - 32px); }
   .site-footer { font-size: 10px; }
