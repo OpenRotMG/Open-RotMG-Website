@@ -5104,9 +5104,11 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
-        "differences": [],
+        "differences": [
+          "Layout stamps templates cut from one captured live instance plus 2014-2023 minimap shapes; template choice, socket and branch rules are reconstructed from seven layouts and 154 pre-rework runs, not a recovered generator."
+        ],
         "unknowns": [
-          "Original layout/spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
+          "Original template weights, spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -5129,6 +5131,22 @@
           {
             "url": "https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven",
             "label": "May 2012 Lord Ruthven wiki: transformations and life steal"
+          },
+          {
+            "url": "https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/bin/resources/worlds/manor.wmap",
+            "label": "Client capture of one live Manor instance; undated, earliest public copy 2017-01-31; source of the room templates"
+          },
+          {
+            "url": "https://web.archive.org/web/20130521232703/http://forums.wildshadow.com/sites/default/files/manoroftheimmortals.png",
+            "label": "Wild Shadow wiki Manor example layout, on the page by 2013-05-08"
+          },
+          {
+            "url": "https://www.realmeye.com/wiki/manor-of-the-immortals/9",
+            "label": "RealmEye Manor layout minimap, 2014-03-19 revision"
+          },
+          {
+            "url": "https://youtu.be/ENLJy-w6F8Q",
+            "label": "July 2012 run starting on the moat walkway with the Portal of Cowardice"
           }
         ],
         "checks": [
@@ -5141,7 +5159,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
-            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"}],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"},{"url":"https://wikiwiki.jp/rmd/Manor%20of%20the%20Immortals","label":"Japanese wiki Manor page: hidden rooms behind bookshelves and coffins enclosed by shelves; mixed-era"}],
             "group": "layout"
           },
           {
