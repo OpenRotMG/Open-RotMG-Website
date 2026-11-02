@@ -1,13 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts} from '../public/hiscores/app.js';
+import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts,achievementSets,achievementDate} from '../public/hiscores/app.js';
+
+test('achievement board ranks committed counts including zero and ties',()=>{
+ assert.equal(boards.achievements?.title,'Achievements');
+ const players=[{account:3,name:'Zero',achievements:0},{account:2,name:'Second',achievements:2},{account:1,name:'First',achievements:2}];
+ assert.deepEqual(ranked(players,'achievements').map(p=>[p.account,p.rank]),[[1,1],[2,1],[3,3]]);
+});
 
 test('existing ranking boards and competition ties remain stable',()=>{
  assert.equal(boards.base_fame.title,'Living fame');
  assert.equal(boards.base_fame.description,'Highest fame of an alive character per account.');
  for(const board of Object.keys(boards)){
-  const players=[{account:3,name:'Third',[board]:10},{account:2,name:'Second',[board]:10},{account:1,name:'First',[board]:20}];
+  const players=[{account:3,name:'Third',[board]:10},{account:2,name:'Second',[board]:10},{account:1,name:'First',[board]:board==='achievements'?12:20}];
   assert.deepEqual(ranked(players,board).map(p=>[p.account,p.rank]),[[1,1],[2,2],[3,2]]);
   assert.equal(players[0].account,3);
   for(const value of [undefined,-1,1.5,NaN])assert.throws(()=>ranked([{account:1,name:'Bad',[board]:value}],board),/Malformed/);
@@ -61,8 +67,26 @@ test('hiscores links use original pixel artwork and the selected uncluttered lay
  assert.ok(app.includes('dialog.showModal()'));assert.ok(app.includes("dialog.addEventListener('click'"));
  assert.ok(app.includes("el('span','set-percent'"));
  for(const removed of ['player-subline','character-column','equipment-heading'])assert.ok(!index.includes(removed)&&!app.includes(removed));
- assert.ok(app.includes("el(board==='collection'?'a':'span','player-name',player.name)"));
- assert.ok(app.includes('playerLink.href=`?board=collection&player=${player.account}`'));
+ assert.ok(app.includes("el(profileBoard?'a':'span','player-name',player.name)"));
+ assert.ok(app.includes('playerLink.href=`?board=${board}&player=${player.account}`'));
+});
+
+test('achievement profiles validate all twelve criteria, earned dates and difficulty rewards',()=>{
+ const catalog=Array.from({length:12},(_,i)=>({id:String.fromCharCode(97+i),name:`Fixture ${i}`,criterion:`Do fixture ${i}`,difficulty:i<5?'Easy':i<10?'Medium':'Hard',gold:i<5?10:i<10?25:100}));
+ const earned=[{id:'a',earned_at:1735689600}],original=structuredClone(catalog),groups=achievementSets(catalog,earned);
+ assert.deepEqual(groups.map(g=>[g.difficulty,g.items.length]),[['Easy',5],['Medium',5],['Hard',2]]);
+ assert.equal(groups[0].items[0].earned_at,1735689600);assert.equal(groups[0].items[1].earned_at,null);assert.deepEqual(catalog,original);
+ assert.match(achievementDate(1735689600),/1 January 2025.*00:00:00.*UTC/);assert.equal(achievementDate(null),'Not yet obtained');
+ for(const bad of [0,-1,NaN,1.5,8640000000001])assert.throws(()=>achievementDate(bad),/Malformed/);
+ for(const bad of [[...earned,...earned],[{id:'unknown',earned_at:1}],[{id:'a',earned_at:0}]])assert.throws(()=>achievementSets(catalog,bad),/Malformed/);
+ for(const bad of [catalog.slice(1),[catalog[0],...catalog.slice(0,11)],catalog.map((d,i)=>i===0?{...d,gold:100}:d)])assert.throws(()=>achievementSets(bad,earned),/Malformed/);
+ assert.throws(()=>ranked([{account:1,name:'Bad',achievements:13}],'achievements'),/Malformed/);
+});
+
+test('achievement detail dialog is accessible and API errors remain visible',async()=>{
+ const index=await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8'),app=await readFile(new URL('../public/hiscores/app.js',import.meta.url),'utf8');
+ for(const text of ['id="achievements"','id="achievement-dialog" aria-labelledby="achievement-name"','aria-label="Close achievement details"','aria-label="Achievement progress"'])assert.ok(index.includes(text));
+ assert.ok(app.includes('renderAchievements(profile,scores)'));assert.ok(app.includes('status.textContent=error.message'));assert.ok(app.includes("redirect:'error'"));
 });
 
 test('ownership percentages count zero-item players and reject invalid counts rather than guess',()=>{

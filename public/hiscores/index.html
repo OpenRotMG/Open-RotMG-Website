@@ -15,6 +15,7 @@
 </header>
 <nav class="board-tabs" aria-label="Hiscore categories">
 <a href="?board=collection"><img src="/restoration/assets/player/loot-bag.png" alt="">Collection</a>
+<a href="?board=achievements">Achievements</a>
 <a href="?board=total_fame"><img src="icons/fame.png" alt="">Total fame</a>
 <a href="?board=base_fame"><img src="/restoration/assets/player/wizard.png" alt="">Living fame</a>
 <a href="?board=stars"><img src="icons/stars.svg" alt="">Stars</a>
@@ -29,6 +30,10 @@
 <header class="collection-header"><div><a class="all-players" href="?board=collection">← All players</a><h2 id="title"></h2></div><div class="collection-total"><strong id="collected"></strong><progress id="collection-progress" aria-label="Collection progress"></progress></div></header>
 <div id="sets"></div>
 </section>
+<section id="achievements" hidden>
+<header class="collection-header"><div><a class="all-players" href="?board=achievements">← All players</a><h2 id="achievement-title"></h2></div><div class="collection-total"><strong id="achievement-total"></strong><progress id="achievement-progress" aria-label="Achievement progress"></progress></div></header>
+<div id="achievement-sets"></div>
+</section>
 </main><footer class="site-footer">
 <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
 <p>2012 Realm of the Mad God reimplementation</p><nav aria-label="Project">{{PROJECT_NAV}}</nav>
@@ -37,5 +42,10 @@
 <button id="item-close" type="button" aria-label="Close item details">×</button>
 <div id="item-preview" aria-hidden="true"></div><h2 id="item-name"></h2>
 <dl><dt>Obtained</dt><dd id="item-date"></dd><dt>Collected by</dt><dd id="item-owners"></dd></dl>
+</dialog>
+<dialog id="achievement-dialog" aria-labelledby="achievement-name">
+<button id="achievement-close" type="button" aria-label="Close achievement details">×</button>
+<h2 id="achievement-name"></h2><p id="achievement-criterion"></p>
+<dl><dt>Reward</dt><dd id="achievement-gold"></dd><dt>Obtained</dt><dd id="achievement-date"></dd></dl>
 </dialog>
 </body></html>
