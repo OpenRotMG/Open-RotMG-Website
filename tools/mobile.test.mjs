@@ -7,7 +7,7 @@ function fixture(hash = '') {
   const element = (box = {left: 0, top: 0, width: 100, height: 100}) => ({listeners: {}, dataset: {}, style: {setProperty() {}, removeProperty() {}},
     addEventListener(type, fn) { (this.listeners[type] ??= []).push(fn); }, removeEventListener(type, fn) { this.listeners[type] = this.listeners[type].filter(f => f !== fn); },
     fire(type, event) { for (const fn of this.listeners[type] ?? []) fn({type, preventDefault() {}, ...event}); }, setPointerCapture() {}, getBoundingClientRect: () => box});
-  const nodes = {'#move-stick': element(), '#aim-pad': element({left: 200, top: 0, width: 100, height: 100}), '#mobile-exit': element(), 'a[href="/#mobile-controls"]': element(), 'meta[name="viewport"]': {content: 'width=device-width, initial-scale=1'}};
+  const nodes = {'#aim-cursor': {...element(), hidden: true}, '#mobile-keyboard': element(), '#move-stick': element(), '#aim-pad': element({left: 200, top: 0, width: 100, height: 100}), '#mobile-exit': element(), 'a[href="/#mobile-controls"]': element(), 'meta[name="viewport"]': {content: 'width=device-width, initial-scale=1'}};
   const buttons = [Object.assign(element(), {dataset: {code: 'Insert'}}), Object.assign(element(), {dataset: {code: 'Space'}})];
   const sent = [], canvas = {getBoundingClientRect: () => ({left: 0, top: 0, width: 400, height: 300}), dispatchEvent: event => sent.push(event)};
   let focused = 0;
@@ -16,8 +16,10 @@ function fixture(hash = '') {
     document: {documentElement: {classList: new Set()}, fullscreenEnabled: false, addEventListener() {}, removeEventListener() {}, querySelector: selector => { assert(selector in nodes, selector); return nodes[selector]; }, querySelectorAll: () => buttons}};
   context.document.documentElement.classList.remove = context.document.documentElement.classList.delete;
   runInNewContext(readFileSync(new URL('../public/mobile.js', import.meta.url), 'utf8'), context);
-  context.window.OpenRotMGMobile.start({focus: () => focused++, shadowRoot: {querySelector: () => canvas}});
-  return {...nodes, buttons, sent, root: context.document.documentElement, focused: () => focused,
+  const shadowRoot = {activeElement: null, querySelector: selector => selector === 'canvas' ? canvas : keyboard};
+  const keyboard = {style: {}, focus(options) { assert.equal(options.preventScroll, true); shadowRoot.activeElement = this; }};
+  context.window.OpenRotMGMobile.start({focus: () => focused++, shadowRoot});
+  return {...nodes, buttons, sent, shadowRoot, keyboard, root: context.document.documentElement, focused: () => focused,
     keys: () => sent.filter(event => event.type.startsWith('key')).map(event => `${event.type === 'keydown' ? '+' : '-'}${event.code}`)};
 }
 
@@ -37,6 +39,9 @@ test('stick holds eight-way WASD while the aim pad follows a second thumb', () =
   pad.fire('pointermove', {pointerId: 2, clientX: 300, clientY: 0});
   pad.fire('lostpointercapture', {pointerId: 2});
   assert.deepEqual(f.sent.slice(-2).map(event => [event.type, event.clientX, event.clientY, event.buttons]), [['pointermove', 299.5, 12.5, 1], ['pointerup', 299.5, 12.5, 0]]);
+  assert.equal(f['#aim-cursor'].hidden, false);
+  assert.equal(f['#aim-cursor'].style.left, '74.875%');
+  assert.equal(f['#aim-cursor'].style.top, `${25 / 600 * 100}%`, 'cursor remains at the last target after release, including edge clamping');
   stick.fire('lostpointercapture', {pointerId: 1});
   assert.deepEqual(f.keys().slice(-1), ['-KeyS']);
   assert.equal(stick.dataset.pointer, undefined);
@@ -49,6 +54,17 @@ test('buttons hold Nexus and ability keys with the game focused', () => {
   f.buttons[1].fire('lostpointercapture', {pointerId: 4});
   assert.deepEqual(f.keys(), ['+Space', '+Insert', '-Space']);
   assert.equal(f.focused(), 3);
+});
+
+test('keyboard button opens chat and focuses Ruffle’s mobile input without submitting an already-focused field', () => {
+  const f = fixture();
+  assert.equal(f['#aim-cursor'].hidden, true);
+  f['#mobile-keyboard'].fire('click', {});
+  assert.deepEqual(f.keys(), ['+Enter', '-Enter']);
+  assert.equal(f.shadowRoot.activeElement, f.keyboard);
+  assert.equal(f.keyboard.style.fontSize, '16px');
+  f['#mobile-keyboard'].fire('click', {});
+  assert.deepEqual(f.keys(), ['+Enter', '-Enter'], 'opening the keyboard again must not submit chat or a focused login field');
 });
 
 test('the footer link and a shared link enter mobile mode, and exit restores the page', () => {

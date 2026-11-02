@@ -5,7 +5,8 @@ window.OpenRotMGMobile = {
     const link = document.querySelector('a[href="/#mobile-controls"]');
     const viewport = document.querySelector('meta[name="viewport"]');
     const desktopViewport = viewport.content;
-    const names = {KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', Insert: 'Insert', Space: ' '};
+    const cursor = document.querySelector('#aim-cursor');
+    const names = {KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', Insert: 'Insert', Space: ' ', Enter: 'Enter'};
     const held = new Set();
     // The 123.5.1 client draws its 600x600 map left of the sidebar with the player 25px below the map centre.
     const centre = {x: 300, y: 325};
@@ -22,6 +23,9 @@ window.OpenRotMGMobile = {
       const box = canvas.getBoundingClientRect();
       const x = Math.min(599, Math.max(0, centre.x + (u - .5) * 600));
       const y = Math.min(599, Math.max(0, centre.y + (v - .5) * 600));
+      cursor.style.left = `${x / 800 * 100}%`;
+      cursor.style.top = `${y / 600 * 100}%`;
+      cursor.hidden = false;
       // A pointer ID that is never active keeps Ruffle's setPointerCapture from stealing the thumb's real touch.
       canvas.dispatchEvent(new PointerEvent(type, {view: window, pointerId: 9999, pointerType: 'mouse', isPrimary: true, button: 0, buttons: type === 'pointerup' ? 0 : 1, bubbles: true, composed: true,
         clientX: box.left + x / 800 * box.width, clientY: box.top + y / 600 * box.height}));
@@ -72,6 +76,21 @@ window.OpenRotMGMobile = {
       if (type === 'pointerdown') mouse('pointerdown', u, v);
     }, () => mouse('pointerup', ...aim));
     for (const button of document.querySelectorAll('#mobile-controls [data-code]')) track(button, () => key(button.dataset.code, true), () => key(button.dataset.code, false));
+    const keyboardButton = document.querySelector('#mobile-keyboard');
+    keyboardButton.addEventListener('pointerdown', event => event.preventDefault());
+    keyboardButton.addEventListener('click', () => {
+      const keyboard = player.shadowRoot.querySelector('#virtual-keyboard');
+      if (!keyboard) throw new Error('Ruffle mobile keyboard is not available.');
+      if (player.shadowRoot.activeElement !== keyboard) {
+        key('Enter', true);
+        key('Enter', false);
+      }
+      // iOS zooms into small text fields even when page zoom gestures are disabled.
+      keyboard.style.fontSize = '16px';
+      // Refocus within the tap so a dismissed phone keyboard reopens, using Ruffle's own text/IME handling.
+      player.focus({preventScroll: true});
+      keyboard.focus({preventScroll: true});
+    });
     const block = event => event.preventDefault();
     const enter = () => {
       root.classList.add('mobile');
