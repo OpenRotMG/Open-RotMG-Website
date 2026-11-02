@@ -8,6 +8,28 @@ const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
+test('event-zone evidence records preparation without promoting gameplay or history',()=>{
+  const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
+  const rows=[['realm:skull-shrine','passed','partial'],['realm:cube-god','not-run','partial'],['realm:pentaract','passed','partial'],['realm:grand-sphinx','not-run','known-differences'],['realm:lord-of-the-lost-lands','not-run','known-differences']];
+  const ids=rows.map(([id])=>id),refs=['realm-event-zone-source-be9d76f1','realm-event-zone-regression-be9d76f1'];
+  for(const [id,status,historical] of rows){
+    const feature=data.features.find(f=>f.id===id);
+    assert.deepEqual(evidence.results[id].evidence.slice(-2),refs);
+    assert.equal(evidence.results[id].status,status);assert.equal(feature.audit.historical,historical);assert.equal(accepted(feature,evidence),false);
+  }
+  for(const [index,ref] of refs.entries()){
+    const source=evidence.sources[ref];
+    assert.equal(source.kind,index===0?'source':'regression');assert.equal(source.revision,'be9d76f1724bb81430bbf26a706a9a0ebf7ce2a5');assert.deepEqual(source.checks,ids);
+    assert.deepEqual(Object.entries(evidence.results).filter(([,result])=>result.evidence.includes(ref)).map(([id])=>id).sort(),[...ids].sort());
+    assert.match(source.limitations,/not native proc, defeat, earned progression or historical proof/);
+  }
+  assert.match(evidence.sources[refs[0]].method,/Mountains through MidForest1\.\.7/);
+  assert.match(evidence.sources[refs[0]].limitations,/unmerged public PR1377/);
+  assert.match(evidence.sources[refs[1]].method,/flat256x256.*6\+1\+1/);
+  assert.match(evidence.sources[refs[1]].method,/482 passed,0 failed,0 ignored,0 filtered/);
+  assert.match(evidence.sources[refs[1]].limitations,/RED ELF hash was not captured/);
+});
+
 test('Manor teleport evidence does not promote whole-dungeon or historical acceptance',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   for(const id of ['social:teleport-to-players','dungeons:manor-of-the-immortals']){
