@@ -8,7 +8,7 @@ window.OpenRotMGMobile = {
     const cursor = document.querySelector('#aim-cursor');
     const keyboard = player.shadowRoot.querySelector('#virtual-keyboard');
     if (!keyboard) throw new Error('Ruffle mobile keyboard is not available.');
-    const names = {KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd', KeyQ: 'q', KeyE: 'e', Insert: 'Insert', Space: ' '};
+    const names = {KeyQ: 'q', KeyE: 'e', Insert: 'Insert', Space: ' '};
     const held = new Set(), releases = [];
     let cameraMode = false;
     const emit = (type, key, code = '') => player.dispatchEvent(new KeyboardEvent(type, {key, code, bubbles: true}));
@@ -19,13 +19,22 @@ window.OpenRotMGMobile = {
       emit(down ? 'keydown' : 'keyup', names[code], code);
     };
     const press = (name, code = '') => { emit('keydown', name, code); emit('keyup', name, code); };
-    const native = code => {
-      const api = player.ruffle();
+    const native = (code, character = code) => {
+      const api = player.ruffle(), observer = api.traceObserver;
       let reply;
       api.traceObserver = message => { if (message.startsWith('openrotmg.')) reply = message; };
-      try { press(code, code); }
-      finally { api.traceObserver = null; }
+      try { press(character, code); }
+      finally { api.traceObserver = observer; }
       return reply;
+    };
+    const acknowledged = (reply, expected, control) => {
+      const notice = document.querySelector('#load-error');
+      const message = `${control} is unavailable. Enter the game, or reload the client and try again.`;
+      if (reply !== expected) {
+        notice.textContent = message; notice.hidden = false;
+        throw new Error(`${message} Expected ${expected}; received ${String(reply)}.`);
+      }
+      if (notice.textContent === message) notice.hidden = true;
     };
     const editingText = () => {
       const reply = native('F15');
@@ -131,15 +140,30 @@ window.OpenRotMGMobile = {
     const releaseAll = () => releases.forEach(release => release());
     addEventListener('blur', releaseAll);
     document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAll(); });
-    const move = (u, v) => {
-      const x = u - .5, y = v - .5, length = Math.hypot(x, y);
-      // sin(22.5°) divides the stick into eight directions, outside its dead zone.
-      const near = length > .12 ? .383 * length : Infinity;
-      const up = y < -near, left = x < -near, right = x > near;
-      key('KeyW', up); key('KeyS', y > near);
-      key('KeyA', left); key('KeyD', right);
+    let moving = false;
+    const stopMove = () => {
+      if (!moving) return;
+      moving = false;
+      player.focus({preventScroll: true});
+      acknowledged(native('F17'), 'openrotmg.move:off', 'Movement');
     };
-    track(document.querySelector('#move-stick'), move, () => move(.5, .5));
+    const move = (u, v) => {
+      const x = u - .5, y = v - .5;
+      if (Math.hypot(x, y) <= .12) { stopMove(); return; }
+      if (!moving) {
+        player.focus({preventScroll: true});
+        const reply = native('F16');
+        if (reply === 'openrotmg.move:idle') return;
+        acknowledged(reply, 'openrotmg.move:ready', 'Movement');
+        moving = true;
+      }
+      // The native bridge retains input gating and status effects, without quantizing the stick to WASD.
+      const angle = (Math.round(Math.atan2(y, x) / (2 * Math.PI) * 3600) + 3600) % 3600;
+      const reply = native('F16', String.fromCharCode(0xe000 + angle));
+      if (reply !== 'openrotmg.move:direction') stopMove();
+      acknowledged(reply, 'openrotmg.move:direction', 'Movement');
+    };
+    track(document.querySelector('#move-stick'), move, stopMove);
     let lastX, lastY, startX, startY, rotationX, activation, ready = false, dragging = false;
     const rotate = () => {
       if (!cameraMode || !ready) return;
@@ -192,13 +216,25 @@ window.OpenRotMGMobile = {
     };
     cameraButton.addEventListener('click', () => { releaseAll(); camera(!cameraMode); });
     const keyboardButton = document.querySelector('#mobile-keyboard');
-    for (const button of [keyboardButton, cameraButton]) button.addEventListener('pointerdown', event => event.preventDefault());
-    keyboardButton.addEventListener('click', () => {
+    const chatButton = document.querySelector('#mobile-chat');
+    const zoomIn = document.querySelector('#mobile-zoom-in'), zoomOut = document.querySelector('#mobile-zoom-out');
+    for (const button of [keyboardButton, cameraButton, chatButton, zoomIn, zoomOut]) button.addEventListener('pointerdown', event => event.preventDefault());
+    const openKeyboard = () => {
       releaseAll();
       // Do not send Enter: a keyboard is also needed for shortcuts and login fields, not just chat.
       keyboard.style.fontSize = '16px';
       player.focus({preventScroll: true});
       keyboard.focus({preventScroll: true});
+    };
+    keyboardButton.addEventListener('click', openKeyboard);
+    chatButton.addEventListener('click', () => {
+      releaseAll(); player.focus({preventScroll: true});
+      acknowledged(native('F20'), 'openrotmg.chat:ready', 'Chat');
+      openKeyboard();
+    });
+    for (const [button, code] of [[zoomIn, 'F18'], [zoomOut, 'F19']]) button.addEventListener('click', () => {
+      releaseAll(); player.focus({preventScroll: true});
+      acknowledged(native(code), 'openrotmg.zoom:done', 'Minimap zoom');
     });
     const block = event => event.preventDefault();
     const enter = () => {

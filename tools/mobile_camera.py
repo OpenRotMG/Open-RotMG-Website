@@ -1,3 +1,4 @@
+import math
 import struct
 
 
@@ -32,25 +33,36 @@ class Code:
 
 
 def camera_abc():
-    # Native commands acknowledge camera changes and keyboard focus via trace, without script access or UI automation.
     names = ['getDefinitionByName', 'setInterval', 'clearInterval', 'trace', 'root', 'stage', 'addEventListener',
              'keyCode', 'data_', 'centerOnPlayer', 'allowRotation', 'cameraAngle', 'defaultCameraAngle',
              'openrotmgCameraTimer', 'void', 'focus', 'target', 'parent', 'player_',
-             'openrotmgMouseMap', 'dispatchEvent']
+             'openrotmgMouseMap', 'dispatchEvent', 'openrotmgMoveGame', 'openrotmgMoving', 'openrotmgMoveAngle',
+             'mui_', 'map_', 'numChildren', 'getChildAt', '_-Dk', '_-ky', '_-vr', 'x', 'y', 'Math', 'cos', 'sin',
+             'stopImmediatePropagation', 'text', 'charCodeAt', 'preventDefault', 'moveRight', 'miniMapZoomIn', 'miniMapZoomOut', 'chat', 'charCode']
     parameters_class = 'com.company.assembleegameclient.parameters.Parameters'
-    strings = ['', 'flash.utils'] + names + [parameters_class, 'keyDown', 'openrotmg.camera:on', 'openrotmg.camera:off', 'openrotmg.keyboard:text', 'openrotmg.keyboard:shortcuts',
-              'mouseDown', 'mouseUp', 'deactivate', 'flash.events.MouseEvent']
+    strings = ['', 'flash.utils'] + names + [parameters_class, 'keyDown', 'keyUp', 'openrotmg.camera:on', 'openrotmg.camera:off',
+              'openrotmg.keyboard:text', 'openrotmg.keyboard:shortcuts', 'mouseDown', 'mouseUp', 'deactivate', 'flash.events.MouseEvent',
+              'flash.events.KeyboardEvent', 'textInput', 'openrotmg.move:ready', 'openrotmg.move:idle', 'openrotmg.move:direction',
+              'openrotmg.move:off', 'openrotmg.zoom:done', 'openrotmg.chat:ready', 'openrotmg.chat:idle', '_-iX']
     qname = {name: index + 1 for index, name in enumerate(names)}
-    pool = b'\0\0\0' + u30(len(strings))
-    pool += b''.join(u30(len(s.encode())) + s.encode() for s in strings[1:])
-    pool += b'\x03\x16\x00\x16\x01\x00' + u30(len(names) + 1)
-    pool += b''.join(b'\x07' + u30(2 if name in names[:3] else 1) + u30(strings.index(name)) for name in names)
+    pool = b'\x04' + u30(0xe000) + u30(0xe000 + 3600) + u30(0xffff) + b'\0\x02' + struct.pack('<d', math.tau / 3600)
+    pool += u30(len(strings)) + b''.join(u30(len(s.encode())) + s.encode() for s in strings[1:])
+    # Player's movement slots use its protected namespace; public QNames cannot resolve them.
+    pool += b'\x04\x16\0\x16\x01\x18' + u30(strings.index('_-iX')) + b'\0' + u30(len(names) + 1)
+    pool += b''.join(b'\x07' + u30(3 if name in ['_-Dk', '_-ky'] else 2 if name in names[:3] else 1)
+                     + u30(strings.index(name)) for name in names)
 
     def op(code, name):
         return bytes([code]) + u30(qname[name])
 
     def text(value):
         return b'\x2c' + u30(strings.index(value))
+
+    def call(method, arguments=b'', count=0):
+        return bytes([0x40, method, 0x20]) + arguments + bytes([0x41, count])
+
+    def trace(value):
+        return op(0x5D, 'trace') + text(value) + op(0x4F, 'trace') + b'\x01'
 
     def reset_camera(data):
         return (data + b'\x26' + op(0x61, 'centerOnPlayer')
@@ -59,44 +71,89 @@ def camera_abc():
                 + data + b'\x24\0' + op(0x61, 'defaultCameraAngle'))
 
     parameters = op(0x5D, 'getDefinitionByName') + text(parameters_class) + op(0x46, 'getDefinitionByName') + b'\x01'
-    stage = b'\xd1' + op(0x66, 'root') + op(0x66, 'stage')
+    root = parameters + op(0x66, 'root')
+    stage = root + op(0x66, 'stage')
+    data = parameters + op(0x66, 'data_')
+    find_game = call(4, root, 1)
+    send_key = lambda key, event: call(8, key + text(event), 2) + b'\x29'
+    send_pair = lambda key: send_key(key, 'keyDown') + send_key(key, 'keyUp')
     install = Code()
     install.add(parameters + b'\xd5\xd1' + op(0x66, 'root'))
     install.branch(0x12, 'return')
     install.add(stage)
     install.branch(0x12, 'return')
-    install.add(b'\xd1' + op(0x66, 'data_'))
+    install.add(data)
     install.branch(0x12, 'return')
-    install.add(b'\xd1' + op(0x66, 'data_') + b'\xd6' + reset_camera(b'\xd2'))
-    install.add(stage + text('keyDown') + b'\x40\x01' + op(0x4F, 'addEventListener') + b'\x02')
-    for event, method in [('mouseDown', 2), ('mouseUp', 3), ('deactivate', 3)]:
-        install.add(stage + text(event) + bytes([0x40, method, 0x26]) + op(0x4F, 'addEventListener') + b'\x03')
+    install.add(reset_camera(data))
+    for event, method, capture, priority in [('keyDown', 1, False, 1000), ('keyDown', 6, False, -1000),
+                                             ('keyUp', 6, False, -1000), ('textInput', 7, False, 1000),
+                                             ('mouseDown', 2, True, 0), ('mouseUp', 3, True, 0), ('deactivate', 3, True, 0)]:
+        install.add(stage + text(event) + bytes([0x40, method, 0x26 if capture else 0x27, 0x25])
+                    + u30(priority & 0xffff) + op(0x4F, 'addEventListener') + b'\x04')
     install.add(op(0x5D, 'clearInterval') + op(0x60, 'openrotmgCameraTimer') + op(0x4F, 'clearInterval') + b'\x01')
     install.label('return')
     install.add(b'\x47')
 
-    data = b'\xd3'
     command = Code()
-    command.add(b'\xd1' + op(0x66, 'keyCode') + b'\xd6\xd2\x24\x7e')
-    command.branch(0x13, 'keyboard')
-    command.add(b'\xd2\x24\x7c')
-    command.branch(0x13, 'accept')
-    command.add(b'\xd2\x24\x7d')
-    command.branch(0x14, 'return')
-    command.label('accept')
-    command.add(parameters + op(0x66, 'data_') + b'\xd7\xd2\x24\x7c')
-    command.branch(0x14, 'off')
-    command.add(data + b'\x27' + op(0x61, 'centerOnPlayer') + data + b'\x26' + op(0x61, 'allowRotation'))
-    command.add(op(0x5D, 'trace') + text('openrotmg.camera:on') + op(0x4F, 'trace') + b'\x01\x47')
+    # Internal binding events must not recursively invoke reserved mobile commands after a player remaps keys.
+    command.add(b'\xd1' + op(0x66, 'charCode') + b'\x2d\x03')
+    command.branch(0x13, 'return')
+    command.add(b'\xd1' + op(0x66, 'keyCode') + b'\xd6\xd2\x2d\x01')
+    command.branch(0x15, 'keys')
+    command.add(b'\xd2\x2d\x02')
+    command.branch(0x18, 'keys')
+    command.add(b'\xd1' + op(0x4F, 'stopImmediatePropagation') + b'\0' + op(0x60, 'openrotmgMoving'))
+    command.branch(0x12, 'return')
+    command.add(b'\x64\xd2\x2d\x01\xa1\x2f\x01\xa2' + op(0x61, 'openrotmgMoveAngle') + call(5) + b'\x29')
+    command.add(trace('openrotmg.move:direction') + b'\x47')
+    command.label('keys')
+    for key, label in [(124, 'on'), (125, 'off'), (126, 'keyboard'), (127, 'move'), (128, 'stop'), (129, 'zoom_in'), (130, 'zoom_out'), (131, 'chat')]:
+        command.add(b'\xd2\x25' + u30(key))
+        command.branch(0x13, label)
+    command.add(b'\x47')
+    command.label('on')
+    command.add(data + b'\x27' + op(0x61, 'centerOnPlayer') + data + b'\x26' + op(0x61, 'allowRotation') + trace('openrotmg.camera:on') + b'\x47')
     command.label('off')
-    command.add(reset_camera(data))
-    command.add(op(0x5D, 'trace') + text('openrotmg.camera:off') + op(0x4F, 'trace') + b'\x01\x47')
+    command.add(reset_camera(data) + trace('openrotmg.camera:off') + b'\x47')
     command.label('keyboard')
-    command.add(parameters + op(0x66, 'root') + op(0x66, 'stage') + op(0x66, 'focus'))
+    command.add(stage + op(0x66, 'focus'))
     command.branch(0x12, 'shortcuts')
-    command.add(op(0x5D, 'trace') + text('openrotmg.keyboard:text') + op(0x4F, 'trace') + b'\x01\x47')
+    command.add(trace('openrotmg.keyboard:text') + b'\x47')
     command.label('shortcuts')
-    command.add(op(0x5D, 'trace') + text('openrotmg.keyboard:shortcuts') + op(0x4F, 'trace') + b'\x01')
+    command.add(trace('openrotmg.keyboard:shortcuts') + b'\x47')
+    command.label('move')
+    command.add(b'\xd1' + op(0x4F, 'stopImmediatePropagation') + b'\0' + stage + op(0x66, 'focus'))
+    command.branch(0x11, 'move_idle')
+    command.add(find_game + b'\xd7\xd3')
+    command.branch(0x12, 'move_idle')
+    command.add(b'\xd3' + op(0x66, 'map_') + op(0x66, 'player_'))
+    command.branch(0x12, 'move_idle')
+    command.add(b'\x64\xd3' + op(0x61, 'openrotmgMoveGame') + b'\x64\x26' + op(0x61, 'openrotmgMoving'))
+    command.add(send_key(data + op(0x66, 'moveRight'), 'keyDown') + trace('openrotmg.move:ready') + b'\x47')
+    command.label('move_idle')
+    command.add(trace('openrotmg.move:idle') + b'\x47')
+    command.label('stop')
+    command.add(b'\xd1' + op(0x4F, 'stopImmediatePropagation') + b'\0' + op(0x60, 'openrotmgMoving'))
+    command.branch(0x12, 'stop_ack')
+    command.add(b'\x64\x27' + op(0x61, 'openrotmgMoving') + send_key(data + op(0x66, 'moveRight'), 'keyUp'))
+    command.label('stop_ack')
+    command.add(trace('openrotmg.move:off') + b'\x47')
+    for label, binding in [('zoom_in', 'miniMapZoomIn'), ('zoom_out', 'miniMapZoomOut')]:
+        command.label(label)
+        command.add(find_game)
+        command.branch(0x12, 'return')
+        command.add(send_pair(data + op(0x66, binding)) + trace('openrotmg.zoom:done') + b'\x47')
+    command.label('chat')
+    command.add(find_game)
+    command.branch(0x12, 'chat_idle')
+    command.add(stage + op(0x66, 'focus'))
+    command.branch(0x11, 'chat_ready')
+    command.add(send_pair(data + op(0x66, 'chat')) + stage + op(0x66, 'focus'))
+    command.branch(0x12, 'chat_idle')
+    command.label('chat_ready')
+    command.add(trace('openrotmg.chat:ready') + b'\x47')
+    command.label('chat_idle')
+    command.add(trace('openrotmg.chat:idle'))
     command.label('return')
     command.add(b'\x47')
 
@@ -122,18 +179,86 @@ def camera_abc():
     mouse_up.label('return')
     mouse_up.add(b'\x47')
 
-    initializer = (b'\xd0\x30\xd0' + op(0x5D, 'setInterval') + b'\x40\0\x24\x0a'
+    find = Code()
+    find.add(text('mui_') + b'\xd1\xb4')
+    find.branch(0x12, 'children')
+    find.add(b'\xd1\x48')
+    find.label('children')
+    find.add(text('numChildren') + b'\xd1\xb4')
+    find.branch(0x12, 'empty')
+    find.add(b'\x24\0\xd6')
+    find.label('loop')
+    find.add(b'\xd2\xd1' + op(0x66, 'numChildren'))
+    find.branch(0x18, 'empty')
+    find.add(call(4, b'\xd1\xd2' + op(0x46, 'getChildAt') + b'\x01', 1) + b'\xd7\xd3')
+    find.branch(0x12, 'next')
+    find.add(b'\xd3\x48')
+    find.label('next')
+    find.add(b'\xc2\x02')
+    find.branch(0x10, 'loop')
+    find.label('empty')
+    find.add(b'\x20\x48')
+
+    # Reuse native input gating and status-effect handling; never replace rotation or move a paused/text-focused player.
+    apply = Code()
+    apply.add(op(0x60, 'openrotmgMoving'))
+    apply.branch(0x12, 'return')
+    apply.add(op(0x60, 'openrotmgMoveGame') + b'\xd5\xd1' + op(0x66, 'parent'))
+    apply.branch(0x12, 'return')
+    apply.add(b'\xd1' + op(0x66, 'map_') + op(0x66, 'player_') + b'\xd6\xd2')
+    apply.branch(0x12, 'return')
+    apply.add(b'\xd2' + op(0x66, '_-Dk') + b'\xd7\xd3')
+    apply.branch(0x12, 'return')
+    apply.add(b'\xd3' + op(0x66, 'x'))
+    apply.branch(0x11, 'moving')
+    apply.add(b'\xd3' + op(0x66, 'y'))
+    apply.branch(0x12, 'return')
+    apply.label('moving')
+    apply.add(b'\xd2' + op(0x66, '_-ky') + b'\x63\x04' + stage + op(0x66, 'focus'))
+    apply.branch(0x12, 'direction')
+    apply.add(b'\xd2\x24\0\x24\0\x24\0' + op(0x4F, '_-vr') + b'\x03')
+    apply.branch(0x10, 'rotation')
+    apply.label('direction')
+    apply.add(b'\xd2\x24\0')
+    for function in ['cos', 'sin']:
+        apply.add(op(0x60, 'Math') + op(0x60, 'openrotmgMoveAngle') + op(0x46, function) + b'\x01')
+    apply.add(op(0x4F, '_-vr') + b'\x03')
+    apply.label('rotation')
+    apply.add(b'\xd2\x62\x04' + op(0x61, '_-ky'))
+    apply.label('return')
+    apply.add(b'\x47')
+    late = call(5) + b'\x29\x47'
+
+    text_input = Code()
+    text_input.add(op(0x60, 'openrotmgMoving'))
+    text_input.branch(0x12, 'return')
+    text_input.add(b'\xd1' + op(0x66, 'text') + b'\x24\0' + op(0x46, 'charCodeAt') + b'\x01\xd6\xd2\x2d\x01')
+    text_input.branch(0x15, 'return')
+    text_input.add(b'\xd2\x2d\x02')
+    text_input.branch(0x18, 'return')
+    text_input.add(b'\xd1' + op(0x4F, 'preventDefault') + b'\0')
+    text_input.label('return')
+    text_input.add(b'\x47')
+
+    dispatch = (stage + op(0x5D, 'getDefinitionByName') + text('flash.events.KeyboardEvent')
+                + op(0x46, 'getDefinitionByName') + b'\x01\xd2\x26\x27\x2d\x03\xd1\x42\x05'
+                + op(0x4F, 'dispatchEvent') + b'\x01\x47')
+    initializer = (b'\xd0\x30\x64\x27' + op(0x61, 'openrotmgMoving') + b'\x64\x24\0' + op(0x61, 'openrotmgMoveAngle')
+                   + b'\xd0' + op(0x5D, 'setInterval') + b'\x40\0\x24\x0a'
                    + op(0x46, 'setInterval') + b'\x02' + op(0x68, 'openrotmgCameraTimer') + b'\x47')
-    methods = b''.join(u30(args) + u30(qname['void']) + b'\0' * (args + 2) for args in [0, 1, 1, 1, 0])
-    traits = b''.join(u30(qname[name]) + b'\0' + u30(index + 1) + b'\0\0'
-                      for index, name in enumerate(['openrotmgCameraTimer', 'openrotmgMouseMap']))
+    arities = [0, 1, 1, 1, 1, 0, 1, 1, 2, 0]
+    methods = b''.join(u30(args) + u30(0 if index == 4 else qname['void']) + b'\0' * (args + 2) for index, args in enumerate(arities))
+    globals_ = ['openrotmgCameraTimer', 'openrotmgMouseMap', 'openrotmgMoveGame', 'openrotmgMoving', 'openrotmgMoveAngle']
+    traits = b''.join(u30(qname[name]) + b'\0' + u30(index + 1) + b'\0\0' for index, name in enumerate(globals_))
 
     def body(method, code, locals_, scope):
-        return bytes([method, 4, locals_, scope, 1]) + u30(len(code)) + code + b'\0\0'
+        return bytes([method, 9, locals_, scope, 1]) + u30(len(code)) + code + b'\0\0'
 
-    return (struct.pack('<HH', 16, 46) + pool + b'\x05' + methods + b'\0\0\x01\x04\x02' + traits + b'\x05'
-            + body(0, install.finish(), 3, 1) + body(1, command.finish(), 4, 1)
-            + body(2, mouse_down.finish(), 3, 1) + body(3, mouse_up.finish(), 3, 1) + body(4, initializer, 1, 0))
+    bodies = [body(0, install.finish(), 2, 1), body(1, command.finish(), 4, 1), body(2, mouse_down.finish(), 3, 1),
+              body(3, mouse_up.finish(), 3, 1), body(4, find.finish(), 4, 1), body(5, apply.finish(), 5, 1),
+              body(6, late, 2, 1), body(7, text_input.finish(), 3, 1), body(8, dispatch, 3, 1), body(9, initializer, 1, 0)]
+    return (struct.pack('<HH', 16, 46) + pool + u30(len(arities)) + methods + b'\0\0\x01\x09' + u30(len(globals_))
+            + traits + u30(len(bodies)) + b''.join(bodies))
 
 
 def with_mobile_camera(source):

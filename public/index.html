@@ -35,8 +35,14 @@
       <div id="aim-cursor" aria-hidden="true" hidden></div>
     </div>
     <div id="mobile-controls">
-      <div class="mobile-side"><div id="move-stick" aria-label="Move"><span></span></div><button type="button" data-code="Insert">Nexus</button></div>
-      <div class="mobile-side"><div id="aim-pad" aria-label="Tap to click; hold to aim or rotate Q/E while firing"><span></span></div><button type="button" data-code="Space">Ability</button></div>
+      <div class="mobile-side">
+        <div class="mobile-shortcuts"><button id="mobile-chat" type="button" aria-label="Open chat" title="Chat"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3h16v13H9l-5 5V3Z"/><path d="M8 8h8M8 12h5"/></svg></button></div>
+        <div id="move-stick" aria-label="Move in any direction"><span></span></div><button type="button" data-code="Insert">Nexus</button>
+      </div>
+      <div class="mobile-side">
+        <div class="mobile-shortcuts" role="group" aria-label="Minimap zoom"><button id="mobile-zoom-out" type="button" aria-label="Zoom minimap out" title="Zoom minimap out">−</button><button id="mobile-zoom-in" type="button" aria-label="Zoom minimap in" title="Zoom minimap in">+</button></div>
+        <div id="aim-pad" aria-label="Tap to click; hold to aim or rotate Q/E while firing"><span></span></div><button type="button" data-code="Space">Ability</button>
+      </div>
       <div id="mobile-toolbar"><button id="mobile-keyboard" type="button">Keyboard</button><button id="mobile-camera" type="button" aria-pressed="false">Camera rotate</button><button id="mobile-exit" type="button">Exit mobile controls</button></div>
     </div>
     <noscript><p class="notice">JavaScript is required to load the preserved Flash client through Ruffle.</p></noscript>

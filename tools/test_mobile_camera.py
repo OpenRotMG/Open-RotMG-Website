@@ -28,6 +28,8 @@ class MobileCameraTest(unittest.TestCase):
         self.assertIn(b'defaultCameraAngle', result)
         self.assertIn(b'openrotmgMouseMap', result)
         self.assertIn(b'mouseUp', result)
+        for name in [b'openrotmg.move:ready', b'openrotmg.move:direction', b'openrotmg.move:off', b'openrotmg.chat:ready', b'openrotmg.zoom:done', b'miniMapZoomIn', b'miniMapZoomOut', b'_-Dk', b'_-ky', b'_-vr', b'preventDefault', b'charCode']:
+            self.assertIn(name, result)
         self.assertNotIn(b'openrotmgCameraState', result, 'camera off must reset, not restore saved settings')
         self.assertNotIn(b'save', result, 'camera mode must not persistently change the player’s preferences')
         with self.assertRaisesRegex(ValueError, 'already present'):
@@ -45,4 +47,4 @@ class MobileCameraTest(unittest.TestCase):
         self.assertEqual(code.finish(), b'\x09\x10\xfb\xff\xff')
 
     def test_bytecode_is_deterministic(self):
-        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), '3fb3b0c25225ba20a8742d5a8a4dd05febce7ad283b19a50f14b866679a4bbde')
+        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), '4ad7802be1282a102bce4454da369cb0bb9117a60b54fdeb0691cf6f2ad4a6d8')
