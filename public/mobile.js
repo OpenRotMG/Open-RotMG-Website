@@ -35,7 +35,12 @@ window.OpenRotMGMobile = {
     };
 
     // Native keys and Ruffle's input listener both insert text. Text fields receive only committed input.
-    let composing = false, deletion, shortcutPrefix = '', shortcutsRequested = false;
+    let composing = false, deletion, shortcutPrefix = '';
+    const sendShortcuts = text => {
+      if (!root.classList.contains('mobile') || !/^[a-z0-9]*$/i.test(text) || editingText()) return;
+      for (const char of text.slice(shortcutPrefix.length)) press(char);
+      shortcutPrefix = text;
+    };
     for (const type of ['keydown', 'keyup']) keyboard.addEventListener(type, event => {
       if (event.key === 'Backspace' || event.key === 'Delete') deletion = type === 'keydown' ? event.key : undefined;
       if (!event.ctrlKey && !event.metaKey && (event.key.length === 1 || event.isComposing || ['Unidentified', 'Process'].includes(event.key))) event.stopPropagation();
@@ -54,23 +59,21 @@ window.OpenRotMGMobile = {
       if (composing || event.isComposing) {
         const text = keyboard.value;
         // Phone IMEs buffer single letters such as I; shortcuts must act immediately, but never inside a text field.
-        if (shortcutsRequested && /^[a-z0-9]*$/i.test(text) && !editingText()) {
-          for (const char of text.slice(shortcutPrefix.length)) press(char);
-          shortcutPrefix = text;
-        }
+        sendShortcuts(text);
       } else commit();
     }, true);
     keyboard.addEventListener('compositionstart', () => { composing = true; shortcutPrefix = ''; });
     // Safari can end composition after its final input; defer so either event ordering commits only once.
     keyboard.addEventListener('compositionend', () => { composing = false; setTimeout(commit, 0); });
     keyboard.addEventListener('beforeinput', event => {
+      if (event.inputType === 'insertCompositionText' && typeof event.data === 'string') sendShortcuts(event.data);
       const name = {deleteContentBackward: 'Backspace', deleteContentForward: 'Delete'}[event.inputType];
       // Android keyboards can report deletion only through beforeinput, without a Backspace key event.
       if (!composing && name && deletion !== name) press(name, name);
     });
 
     let x = 300, y = 325, pressed = false;
-    const mouseDeadZone = .04, mouseSpeed = 1300;
+    const rotationDeadZone = .08;
     const drawCursor = () => {
       cursor.style.left = `${x / 800 * 100}%`;
       cursor.style.top = `${y / 600 * 100}%`;
@@ -81,7 +84,6 @@ window.OpenRotMGMobile = {
       const canvas = player.shadowRoot.querySelector('canvas');
       if (!root.classList.contains('mobile') || !event.isTrusted || event.composedPath()[0] !== canvas) return;
       if (event.type === 'pointermove' && !event.buttons) { event.stopImmediatePropagation(); return; }
-      if (event.type === 'pointerdown') shortcutsRequested = false;
       const box = canvas.getBoundingClientRect();
       x = Math.min(799, Math.max(0, (event.clientX - box.left) / box.width * 800));
       y = Math.min(599, Math.max(0, (event.clientY - box.top) / box.height * 600));
@@ -113,7 +115,7 @@ window.OpenRotMGMobile = {
         const u = Math.min(1, Math.max(0, (event.clientX - box.left) / box.width));
         const v = Math.min(1, Math.max(0, (event.clientY - box.top) / box.height));
         element.style.setProperty('--u', u); element.style.setProperty('--v', v);
-        move(u, v, event.type);
+        move(u, v, event.type, event);
       };
       element.addEventListener('pointerdown', event => {
         event.preventDefault();
@@ -138,36 +140,39 @@ window.OpenRotMGMobile = {
       key('KeyA', left); key('KeyD', right);
     };
     track(document.querySelector('#move-stick'), move, () => move(.5, .5));
-    let dx = 0, dy = 0, frame, last;
-    const tick = now => {
-      const length = Math.hypot(dx, dy);
-      const speed = length > mouseDeadZone ? mouseSpeed * Math.min(1, (length - mouseDeadZone) / (.5 - mouseDeadZone)) / length : 0;
-      const dt = Math.min((now - last) / 1000, .05);
-      last = now;
-      x = Math.min(799, Math.max(0, x + dx * speed * dt));
-      y = Math.min(599, Math.max(0, y + dy * speed * dt));
-      mouse('pointermove');
-      frame = requestAnimationFrame(tick);
+    let lastX, lastY, startX, startY, rotationX, activation, ready = false, dragging = false;
+    const rotate = () => {
+      if (!cameraMode || !ready) return;
+      key('KeyQ', rotationX < .5 - rotationDeadZone); key('KeyE', rotationX > .5 + rotationDeadZone);
     };
-    track(document.querySelector('#aim-pad'), (u, v, type) => {
-      dx = u - .5; dy = v - .5;
-      if (cameraMode) {
-        key('KeyQ', dx < -mouseDeadZone); key('KeyE', dx > mouseDeadZone);
-        return;
+    track(document.querySelector('#aim-pad'), (u, v, type, event) => {
+      rotationX = u;
+      if (type === 'pointerdown') {
+        ready = dragging = false;
+        startX = event.clientX; startY = event.clientY;
+        // Quick taps click in place; only a held gesture can steer or rotate.
+        activation = setTimeout(() => { ready = true; rotate(); }, 150);
+        player.focus({preventScroll: true});
+        mouse('pointerenter'); mouse('pointermove');
+        pressed = true;
+        mouse('pointerdown');
+      } else if (!cameraMode && ready && (dragging || Math.hypot(event.clientX - startX, event.clientY - startY) > 8)) {
+        dragging = true;
+        const area = player.getBoundingClientRect();
+        // A fixed 1.5× thumb-to-cursor ratio has no time dependence, acceleration or drift.
+        x = Math.min(799, Math.max(0, x + (event.clientX - lastX) * 800 / area.width * 1.5));
+        y = Math.min(599, Math.max(0, y + (event.clientY - lastY) * 600 / area.height * 1.5));
+        mouse('pointermove');
       }
-      if (type !== 'pointerdown') return;
-      player.focus({preventScroll: true});
-      mouse('pointerenter'); mouse('pointermove');
-      pressed = true;
-      mouse('pointerdown');
-      last = performance.now();
-      frame = requestAnimationFrame(tick);
+      lastX = event.clientX; lastY = event.clientY;
+      rotate();
     }, () => {
+      clearTimeout(activation);
+      ready = false;
       key('KeyQ', false); key('KeyE', false);
-      cancelAnimationFrame(frame);
-      if (cameraMode) return;
       pressed = false;
-      mouse('pointerup');
+      // The real thumb is outside the canvas; Ruffle must hit the game map, not just the stage, on release.
+      mouse('pointerenter'); mouse('pointerup');
     });
     for (const button of document.querySelectorAll('#mobile-controls [data-code]')) track(button, () => key(button.dataset.code, true), () => key(button.dataset.code, false));
     const cameraButton = document.querySelector('#mobile-camera');
@@ -190,8 +195,6 @@ window.OpenRotMGMobile = {
     for (const button of [keyboardButton, cameraButton]) button.addEventListener('pointerdown', event => event.preventDefault());
     keyboardButton.addEventListener('click', () => {
       releaseAll();
-      // Automatic keyboard focus belongs to text fields; this explicit button also enables shortcut input.
-      shortcutsRequested = true;
       // Do not send Enter: a keyboard is also needed for shortcuts and login fields, not just chat.
       keyboard.style.fontSize = '16px';
       player.focus({preventScroll: true});
@@ -207,7 +210,6 @@ window.OpenRotMGMobile = {
     document.querySelector('#mobile-exit').addEventListener('click', () => {
       releaseAll();
       if (cameraMode) camera(false);
-      shortcutsRequested = false;
       root.classList.remove('mobile');
       viewport.content = desktopViewport;
       document.removeEventListener('gesturestart', block);

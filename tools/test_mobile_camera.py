@@ -1,7 +1,7 @@
 import hashlib
 import struct
 import unittest
-from mobile_camera import camera_abc, with_mobile_camera
+from mobile_camera import Code, camera_abc, with_mobile_camera
 
 
 class MobileCameraTest(unittest.TestCase):
@@ -24,6 +24,11 @@ class MobileCameraTest(unittest.TestCase):
         self.assertNotIn(b'ExternalInterface', result, 'camera commands must not require JavaScript access')
         self.assertIn(b'centerOnPlayer', result)
         self.assertIn(b'allowRotation', result)
+        self.assertIn(b'cameraAngle', result)
+        self.assertIn(b'defaultCameraAngle', result)
+        self.assertIn(b'openrotmgMouseMap', result)
+        self.assertIn(b'mouseUp', result)
+        self.assertNotIn(b'openrotmgCameraState', result, 'camera off must reset, not restore saved settings')
         self.assertNotIn(b'save', result, 'camera mode must not persistently change the player’s preferences')
         with self.assertRaisesRegex(ValueError, 'already present'):
             with_mobile_camera(result)
@@ -33,5 +38,11 @@ class MobileCameraTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 with_mobile_camera(source)
 
+    def test_backward_branch_targets_are_verifiable_avm2_labels(self):
+        code = Code()
+        code.label('loop')
+        code.branch(0x10, 'loop')
+        self.assertEqual(code.finish(), b'\x09\x10\xfb\xff\xff')
+
     def test_bytecode_is_deterministic(self):
-        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), '02453c8b6aa96d00b0a32d0335dc392f698ac349a5b79e395db8eab5d66b5724')
+        self.assertEqual(hashlib.sha256(camera_abc()).hexdigest(), '3fb3b0c25225ba20a8742d5a8a4dd05febce7ad283b19a50f14b866679a4bbde')

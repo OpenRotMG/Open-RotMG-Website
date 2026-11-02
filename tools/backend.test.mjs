@@ -28,7 +28,7 @@ test('an offline game API does not prevent the independent static client from lo
   runInNewContext(backend, context);
   await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), context);
   await new Promise(setImmediate);
-  assert.equal(movie.url, 'https://example.test/client.swf?mobile-camera=2');
+  assert.equal(movie.url, 'https://example.test/client.swf?mobile-camera=3');
   assert.equal(movie.socketProxy[0].proxyUrl, 'wss://game.example.test/game');
   assert.equal(nodes['#load-error'].hidden, false);
   assert.match(nodes['#load-error'].textContent, /Game server unavailable/);
