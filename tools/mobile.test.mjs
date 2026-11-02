@@ -4,76 +4,150 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 
 function fixture(hash = '') {
-  const element = (box = {left: 0, top: 0, width: 100, height: 100}) => ({listeners: {}, dataset: {}, style: {setProperty() {}, removeProperty() {}},
-    addEventListener(type, fn) { (this.listeners[type] ??= []).push(fn); }, removeEventListener(type, fn) { this.listeners[type] = this.listeners[type].filter(f => f !== fn); },
-    fire(type, event) { for (const fn of this.listeners[type] ?? []) fn({type, preventDefault() {}, ...event}); }, setPointerCapture() {}, getBoundingClientRect: () => box});
-  const nodes = {'#aim-cursor': {...element(), hidden: true}, '#mobile-keyboard': element(), '#move-stick': element(), '#aim-pad': element({left: 200, top: 0, width: 100, height: 100}), '#mobile-exit': element(), 'a[href="/#mobile-controls"]': element(), 'meta[name="viewport"]': {content: 'width=device-width, initial-scale=1'}};
+  const element = (box = {left: 0, top: 0, width: 100, height: 100}) => ({listeners: {}, dataset: {}, attributes: {}, style: {setProperty() {}, removeProperty() {}},
+    addEventListener(type, fn, capture) { (this.listeners[type] ??= []).push({fn, capture}); },
+    removeEventListener(type, fn) {this.listeners[type] = (this.listeners[type] ?? []).filter(listener => listener.fn !== fn);},
+    fire(type, event = {}) {
+      const e = {type, key: '', preventDefault() {}, stopPropagation() {this.stopped = true;}, stopImmediatePropagation() {this.immediate = true;}, ...event};
+      for (const {fn} of [...this.listeners[type] ?? []].sort((a, b) => Boolean(b.capture) - Boolean(a.capture))) { fn(e); if (e.immediate) break; }
+      return e;
+    },
+    setAttribute(name, value) {this.attributes[name] = value;},
+    setPointerCapture(id) {this.capture = id;}, hasPointerCapture(id) {return this.capture === id;}, releasePointerCapture() {delete this.capture;}, getBoundingClientRect: () => box});
+  const nodes = {'#load-error': {...element(), hidden: true}, '#aim-cursor': {...element(), hidden: true}, '#mobile-keyboard': element(), '#mobile-camera': element(), '#move-stick': element(), '#aim-pad': element({left: 200, top: 0, width: 100, height: 100}), '#mobile-exit': element(), 'a[href="/#mobile-controls"]': element(), 'meta[name="viewport"]': {content: 'width=device-width, initial-scale=1'}};
   const buttons = [Object.assign(element(), {dataset: {code: 'Insert'}}), Object.assign(element(), {dataset: {code: 'Space'}})];
-  const sent = [], canvas = {getBoundingClientRect: () => ({left: 0, top: 0, width: 400, height: 300}), dispatchEvent: event => sent.push(event)};
-  let focused = 0;
-  const context = {window: {dispatchEvent: event => sent.push(event)}, location: {hash}, console,
-    KeyboardEvent: class { constructor(type, init) { Object.assign(this, {type, ...init}); } }, PointerEvent: class { constructor(type, init) { Object.assign(this, {type, ...init}); } },
-    document: {documentElement: {classList: new Set()}, fullscreenEnabled: false, addEventListener() {}, removeEventListener() {}, querySelector: selector => { assert(selector in nodes, selector); return nodes[selector]; }, querySelectorAll: () => buttons}};
-  context.document.documentElement.classList.remove = context.document.documentElement.classList.delete;
-  runInNewContext(readFileSync(new URL('../public/mobile.js', import.meta.url), 'utf8'), context);
+  const sent = [], timers = [], frames = new Map(), events = element();
+  const canvas = {getBoundingClientRect: () => ({left: 0, top: 0, width: 400, height: 300}), dispatchEvent: event => sent.push(event)};
+  let focused = 0, now = 0, sequence = 0, settings = [true, false], previous;
+  const api = {};
   const shadowRoot = {activeElement: null, querySelector: selector => selector === 'canvas' ? canvas : keyboard};
-  const keyboard = {style: {}, focus(options) { assert.equal(options.preventScroll, true); shadowRoot.activeElement = this; }};
-  context.window.OpenRotMGMobile.start({focus: () => focused++, shadowRoot});
-  return {...nodes, buttons, sent, shadowRoot, keyboard, root: context.document.documentElement, focused: () => focused,
-    keys: () => sent.filter(event => event.type.startsWith('key')).map(event => `${event.type === 'keydown' ? '+' : '-'}${event.code}`)};
+  const keyboard = Object.assign(element(), {value: '', focus(options) { assert.equal(options.preventScroll, true); shadowRoot.activeElement = this; }});
+  // The real runtime registers this before mobile controls. Capture must suppress its duplicate insertion path.
+  keyboard.addEventListener('input', () => { throw Error('Ruffle input handler must not receive the same text again'); });
+  const document = {...element(), documentElement: {classList: new Set()}, fullscreenEnabled: false,
+    querySelector: selector => { assert(selector in nodes, selector); return nodes[selector]; }, querySelectorAll: () => buttons};
+  document.documentElement.classList.remove = document.documentElement.classList.delete;
+  const player = {focus: () => focused++, shadowRoot, ruffle: () => api, dispatchEvent(event) {
+    sent.push(event);
+    if (event.type !== 'keydown') return;
+    if (event.code === 'F13') {previous ??= settings; settings = [false, true]; api.traceObserver?.('openrotmg.camera:on');}
+    if (event.code === 'F14') {settings = previous; previous = undefined; api.traceObserver?.('openrotmg.camera:off');}
+  }};
+  const context = {window: {}, location: {hash}, console, document, performance: {now: () => now},
+    KeyboardEvent: class { constructor(type, init) { Object.assign(this, {type, ...init}); } }, PointerEvent: class { constructor(type, init) { Object.assign(this, {type, ...init}); } },
+    addEventListener: events.addEventListener.bind(events), requestAnimationFrame: fn => { frames.set(++sequence, fn); return sequence; }, cancelAnimationFrame: id => frames.delete(id), setTimeout: fn => timers.push(fn)};
+  runInNewContext(readFileSync(new URL('../public/mobile.js', import.meta.url), 'utf8'), context);
+  context.window.OpenRotMGMobile.start(player);
+  const advance = ms => { for (let t = 0; t < ms; t += 20) { now += 20; const batch = [...frames.values()]; frames.clear(); batch.forEach(fn => fn(now)); } };
+  return {...nodes, buttons, sent, shadowRoot, keyboard, document, events, api, root: document.documentElement, focused: () => focused, advance, settings: () => settings,
+    flush: () => {while (timers.length) timers.shift()();},
+    keys: () => sent.filter(event => event.type.startsWith('key') && !['F13', 'F14'].includes(event.code)).map(event => `${event.type === 'keydown' ? '+' : '-'}${event.code || event.key}`)};
 }
 
-test('stick holds eight-way WASD while the aim pad follows a second thumb', () => {
-  const f = fixture(), stick = f['#move-stick'], pad = f['#aim-pad'];
-  stick.fire('pointerdown', {pointerId: 1, clientX: 50, clientY: 52});
-  assert.deepEqual(f.keys(), [], 'the centre is a dead zone');
+const down = (element, pointerId, clientX, clientY) => element.fire('pointerdown', {pointerId, clientX, clientY});
+
+test('mouse joystick moves continuously without teleporting, reaches the sidebar, and retains its position', () => {
+  const f = fixture(), stick = f['#move-stick'], aim = f['#aim-pad'];
+  down(stick, 1, 90, 10);
+  down(aim, 2, 300, 50);
+  assert.deepEqual(f.keys(), ['+KeyW', '+KeyD']);
+  assert.equal(f.sent.at(-1).clientX, 150, 'pressing the right edge starts at the retained cursor, not the edge');
+  f.advance(1000);
+  assert.equal(f['#aim-cursor'].style.left, '99.875%', 'the minimap and inventory are reachable');
+  const last = f.sent.at(-1).clientX;
+  aim.fire('pointermove', {pointerId: 2, clientX: 250, clientY: 50});
+  f.advance(100);
+  assert.equal(f.sent.at(-1).clientX, last, 'neutral stick stops the cursor');
+  aim.fire('pointerup', {pointerId: 2});
+  assert.equal(f.sent.at(-1).type, 'pointerup');
+  assert.equal(f.sent.at(-1).buttons, 0);
+  down(aim, 3, 250, 50);
+  aim.fire('pointerup', {pointerId: 3});
+  assert.deepEqual(f.sent.slice(-4).map(event => [event.type, event.clientX]), [['pointerenter', last], ['pointermove', last], ['pointerdown', last], ['pointerup', last]], 'a neutral tap clicks the sidebar at the retained cursor');
+  stick.fire('pointercancel', {pointerId: 1});
+  assert.deepEqual(f.keys().slice(-2), ['-KeyW', '-KeyD']);
+});
+
+test('camera mode changes actual native settings, maps forward diagonals to Q/E, and restores settings on exit', () => {
+  const f = fixture(), stick = f['#move-stick'];
+  f['#mobile-camera'].fire('click');
+  assert.deepEqual(f.settings(), [false, true]);
+  assert.equal(f['#mobile-camera'].attributes['aria-pressed'], 'true');
+  down(stick, 1, 10, 10);
+  assert.deepEqual(f.keys(), ['+KeyW', '+KeyQ']);
   stick.fire('pointermove', {pointerId: 1, clientX: 90, clientY: 10});
-  pad.fire('pointerdown', {pointerId: 2, clientX: 200, clientY: 50});
-  stick.fire('pointerdown', {pointerId: 3, clientX: 0, clientY: 50});
-  stick.fire('pointermove', {pointerId: 1, clientX: 50, clientY: 95});
-  assert.deepEqual(f.keys(), ['+KeyW', '+KeyD', '-KeyW', '+KeyS', '-KeyD'], 'diagonals press two keys and a second finger on the stick is ignored');
-  // The pad's left edge aims 300 stage pixels left of the player at (300, 325) on the 800x600 stage.
-  assert.deepEqual(f.sent.filter(event => event.type.startsWith('pointer')).map(event => [event.type, event.clientX, event.clientY, event.pointerType]),
-    [['pointerenter', 0, 162.5, 'mouse'], ['pointermove', 0, 162.5, 'mouse'], ['pointerdown', 0, 162.5, 'mouse']]);
-  pad.fire('pointermove', {pointerId: 1, clientX: 300, clientY: 0});
-  pad.fire('pointermove', {pointerId: 2, clientX: 300, clientY: 0});
-  pad.fire('lostpointercapture', {pointerId: 2});
-  assert.deepEqual(f.sent.slice(-2).map(event => [event.type, event.clientX, event.clientY, event.buttons]), [['pointermove', 299.5, 12.5, 1], ['pointerup', 299.5, 12.5, 0]]);
-  assert.equal(f['#aim-cursor'].hidden, false);
-  assert.equal(f['#aim-cursor'].style.left, '74.875%');
-  assert.equal(f['#aim-cursor'].style.top, `${25 / 600 * 100}%`, 'cursor remains at the last target after release, including edge clamping');
-  stick.fire('lostpointercapture', {pointerId: 1});
-  assert.deepEqual(f.keys().slice(-1), ['-KeyS']);
-  assert.equal(stick.dataset.pointer, undefined);
+  assert.deepEqual(f.keys().slice(-2), ['-KeyQ', '+KeyE']);
+  stick.fire('pointermove', {pointerId: 1, clientX: 0, clientY: 50});
+  assert.deepEqual(f.keys().slice(-3), ['-KeyW', '+KeyA', '-KeyE']);
+  stick.fire('pointermove', {pointerId: 1, clientX: 10, clientY: 90});
+  assert.equal(f.keys().at(-1), '+KeyS');
+  f['#mobile-exit'].fire('click');
+  assert.deepEqual(f.settings(), [true, false]);
+  assert.equal(f['#mobile-camera'].attributes['aria-pressed'], 'false');
+  assert.deepEqual(f.keys().slice(-2), ['-KeyS', '-KeyA']);
 });
 
-test('buttons hold Nexus and ability keys with the game focused', () => {
+test('missing native camera support is visible and never labels the mode enabled', () => {
   const f = fixture();
-  f.buttons[1].fire('pointerdown', {pointerId: 4, clientX: 1, clientY: 1});
-  f.buttons[0].fire('pointerdown', {pointerId: 5, clientX: 1, clientY: 1});
-  f.buttons[1].fire('lostpointercapture', {pointerId: 4});
-  assert.deepEqual(f.keys(), ['+Space', '+Insert', '-Space']);
-  assert.equal(f.focused(), 3);
+  Object.defineProperty(f.api, 'traceObserver', {set() {}});
+  assert.throws(() => f['#mobile-camera'].fire('click'), /Camera rotate is unavailable/);
+  assert.equal(f['#load-error'].hidden, false);
+  assert.notEqual(f['#mobile-camera'].attributes['aria-pressed'], 'true');
 });
 
-test('keyboard button opens chat and focuses Ruffle’s mobile input without submitting an already-focused field', () => {
+test('keyboard opens without Enter, and native key plus input inserts each character only once', () => {
   const f = fixture();
-  assert.equal(f['#aim-cursor'].hidden, true);
-  f['#mobile-keyboard'].fire('click', {});
-  assert.deepEqual(f.keys(), ['+Enter', '-Enter']);
+  f['#mobile-keyboard'].fire('click');
+  assert.deepEqual(f.keys(), []);
   assert.equal(f.shadowRoot.activeElement, f.keyboard);
   assert.equal(f.keyboard.style.fontSize, '16px');
-  f['#mobile-keyboard'].fire('click', {});
-  assert.deepEqual(f.keys(), ['+Enter', '-Enter'], 'opening the keyboard again must not submit chat or a focused login field');
+  for (const char of 'test@example.com') {
+    assert.equal(f.keyboard.fire('keydown', {key: char}).stopped, true);
+    f.keyboard.value = char; f.keyboard.fire('input');
+    assert.equal(f.keyboard.fire('keyup', {key: char}).stopped, true);
+  }
+  assert.deepEqual(f.keys(), [...'test@example.com'].flatMap(char => ['+' + char, '-' + char]));
+  assert.equal(f.keyboard.value, '');
+  assert.equal(f.keyboard.fire('paste').stopped, true, 'paste also uses the one committed-input path');
 });
 
-test('the footer link and a shared link enter mobile mode, and exit restores the page', () => {
+test('IME commits only once with either composition event ordering and supports Android deletion', () => {
+  for (const trailingInput of [true, false]) {
+    const f = fixture();
+    f.keyboard.fire('compositionstart');
+    for (const value of ['n', 'ni', '你']) { f.keyboard.value = value; f.keyboard.fire('input', {isComposing: true}); }
+    assert.deepEqual(f.keys(), []);
+    f.keyboard.fire('compositionend');
+    if (trailingInput) f.keyboard.fire('input', {isComposing: false});
+    f.flush();
+    assert.deepEqual(f.keys(), ['+你', '-你']);
+    f.keyboard.fire('beforeinput', {inputType: 'deleteContentBackward'});
+    assert.deepEqual(f.keys().slice(-2), ['+Backspace', '-Backspace']);
+    f.keyboard.fire('keydown', {key: 'Backspace'});
+    f.keyboard.fire('beforeinput', {inputType: 'deleteContentBackward'});
+    assert.equal(f.keys().length, 4, 'an identified native Backspace is not also synthesized');
+  }
+});
+
+test('independent thumbs, cancellation and backgrounding release all held input', () => {
+  const f = fixture(), stick = f['#move-stick'], aim = f['#aim-pad'];
+  down(stick, 1, 90, 10); down(stick, 3, 0, 50);
+  down(aim, 2, 300, 50); f.advance(20);
+  down(f.buttons[1], 4, 1, 1);
+  assert.deepEqual(f.keys(), ['+KeyW', '+KeyD', '+Space']);
+  f.events.fire('blur');
+  assert.deepEqual(f.keys().slice(-3), ['-KeyW', '-KeyD', '-Space']);
+  assert.equal(f.sent.findLast(event => event.type.startsWith('pointer')).type, 'pointerup');
+  assert.equal(aim.dataset.pointer, undefined);
+  const count = f.sent.length;
+  f.advance(100); assert.equal(f.sent.length, count);
+});
+
+test('footer and shared links enter mobile mode, and exit restores the page', () => {
   const f = fixture();
-  assert(!f.root.classList.has('mobile'));
-  f['a[href="/#mobile-controls"]'].fire('click', {});
+  f['a[href="/#mobile-controls"]'].fire('click');
   assert(f.root.classList.has('mobile'));
-  assert.match(f['meta[name="viewport"]'].content, /user-scalable=no/);
-  f['#mobile-exit'].fire('click', {});
+  f['#mobile-exit'].fire('click');
   assert(!f.root.classList.has('mobile'));
   assert.equal(f['meta[name="viewport"]'].content, 'width=device-width, initial-scale=1');
   assert(fixture('#mobile-controls').root.classList.has('mobile'));

@@ -304,7 +304,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   assert.equal(options.splashScreen, false);
   assert.equal(options.openUrlMode, 'confirm');
   assert.equal(options.contextMenu, 'rightClickOnly');
-  assert.equal(options.url, 'https://example.test/client.swf');
+  assert.equal(options.url, 'https://example.test/client.swf?mobile-camera=1');
   assert.equal(options.socketProxy[0].proxyUrl, 'wss://game.example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
   assert.equal(options.socketProxy[0].port, 2050);
@@ -327,7 +327,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
 
 test('startup progress counts streamed runtime and movie bytes without touching other requests', async () => {
   const nodes = {'#game': {dataset: {mode: 'game', runtimeSizes: '{"engine.wasm":8}'}, append() {}}, '#startup': {hidden: false}, '#startup span': {}, '#startup progress': {}, '#startup button': {hidden: true, addEventListener() {}}, '#load-error': {hidden: true}};
-  const served = {'https://example.test/vendor/engine.wasm': [8, {'content-encoding': 'gzip', 'content-length': '3'}], 'https://example.test/client.swf': [4, {'content-length': '4'}], 'https://example.test/vendor/other.wasm': [2, {}], 'https://example.test/sfx/a.mp3': [1, {}]};
+  const served = {'https://example.test/vendor/engine.wasm': [8, {'content-encoding': 'gzip', 'content-length': '3'}], 'https://example.test/client.swf?mobile-camera=1': [4, {'content-length': '4'}], 'https://example.test/vendor/other.wasm': [2, {}], 'https://example.test/sfx/a.mp3': [1, {}]};
   const window = {OpenRotMGDiagnostics: {start() {}}, fetch: async url => Object.defineProperty(new Response(new Uint8Array(served[url][0]), {headers: served[url][1]}), 'url', {value: url})};
   const seen = [];
   const read = async url => {
@@ -338,7 +338,7 @@ test('startup progress counts streamed runtime and movie bytes without touching 
   };
   window.RufflePlayer = {newest: () => ({createPlayer: () => ({addEventListener() {}, ruffle: () => ({load: async () => {
     await read('https://example.test/vendor/engine.wasm');
-    await read('https://example.test/client.swf');
+    await read('https://example.test/client.swf?mobile-camera=1');
     await read('https://example.test/sfx/a.mp3');
     await assert.rejects(window.fetch('https://example.test/vendor/other.wasm'), /Unknown download size for \/vendor\/other.wasm/);
   }})})})};
