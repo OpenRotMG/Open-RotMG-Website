@@ -23,7 +23,7 @@ test('an offline game API does not prevent the independent static client from lo
   const context = {URL, AbortSignal, crypto: {getRandomValues: bytes => bytes.fill(1)},
     document: {baseURI: 'https://example.test/', querySelector: key => key.startsWith('meta[') ? {content: 'https://game.example.test'} : nodes[key]},
     fetch: async () => {throw Error('offline');}, console: {error() {}}, setInterval() {}, clearInterval() {}, addEventListener() {},
-    OpenRotMGDiagnostics: {start() {}}, RufflePlayer: {newest: () => ({createPlayer: () => ({addEventListener() {}, ruffle: () => ({load: async config => {movie = config;}})})})}};
+    OpenRotMGDiagnostics: {start() {}}, OpenRotMGMobile: {start() {}}, RufflePlayer: {newest: () => ({createPlayer: () => ({addEventListener() {}, ruffle: () => ({load: async config => {movie = config;}})})})}};
   context.window = context;
   runInNewContext(backend, context);
   await runInNewContext(readFileSync(new URL('../public/game.js', import.meta.url), 'utf8'), context);

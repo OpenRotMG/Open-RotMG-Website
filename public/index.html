@@ -15,6 +15,7 @@
   <script src="{{BASE}}vendor/ruffle.js?v={{CLIENT_REVISION}}" defer></script>
   <script src="{{BASE}}diagnostics.js" defer></script>
   <script src="{{BASE}}bug-report.js" defer></script>
+  <script src="{{BASE}}mobile.js" defer></script>
   <script src="{{BASE}}game.js" defer></script>
 </head>
 <body class="game-page">
@@ -31,6 +32,11 @@
         <button type="button" hidden>Retry</button>
         <a href="https://ruffle.rs/">Powered by Ruffle</a>
       </div>
+    </div>
+    <div id="mobile-controls">
+      <div class="mobile-side"><div id="move-stick" aria-label="Move"><span></span></div><button type="button" data-code="Insert">Nexus</button></div>
+      <div class="mobile-side"><div id="aim-pad" aria-label="Aim and shoot"><span></span></div><button type="button" data-code="Space">Ability</button></div>
+      <button id="mobile-exit" type="button">Exit mobile controls</button>
     </div>
     <noscript><p class="notice">JavaScript is required to load the preserved Flash client through Ruffle.</p></noscript>
     <p id="load-error" class="notice" role="alert" hidden></p>

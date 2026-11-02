@@ -73,7 +73,7 @@ const favicons = (await Promise.all([16, 32, 48, 96, 192].map(async size => {
   const version = createHash('sha256').update(await readFile(join(dist, file))).digest('hex').slice(0, 12);
   return `<link rel="icon" type="image/png" sizes="${size}x${size}" href="${site.pathname}${file}?v=${version}">`;
 }))).join('\n');
-const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="{{BASE}}#bug-report">Report bug</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
+const projectNav = '<div><a href="{{BASE}}">Game</a><a href="{{BASE}}about/">About</a><a href="{{BASE}}hiscores/">Hiscores</a></div>\n      <div><a href="{{BASE}}#bug-report">Report bug</a><a href="{{BASE}}#mobile-controls">Mobile controls</a><a href="https://discord.gg/EwZWNzzYwP">Discord</a></div>';
 async function render(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);

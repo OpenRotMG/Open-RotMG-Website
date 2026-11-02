@@ -8,7 +8,7 @@ import { runInNewContext } from 'node:vm';
 import { validateEvidence, referenceClient, referenceSha256 } from '../public/restoration/catalogue.js';
 
 const browserTab = 'a'.repeat(64);
-const browserGlobals = {OpenRotMGBackend: {url: path => new URL(path, 'https://game.example.test'), fetch: async () => ({ok: true})}, fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}};
+const browserGlobals = {OpenRotMGBackend: {url: path => new URL(path, 'https://game.example.test'), fetch: async () => ({ok: true})}, fetch: async () => {throw new Error('Linking must not gate game startup');}, crypto: {getRandomValues: bytes => {bytes.fill(0xaa);return bytes;}}, AbortSignal, setInterval: () => 1, clearInterval() {}, addEventListener() {}, OpenRotMGMobile: {start() {}}};
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = overrides => spawnSync(process.execPath, ['tools/build.mjs'], {
   cwd: root, env: { ...process.env, ...overrides }, encoding: 'utf8'
@@ -200,8 +200,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     const rows = [...nav.matchAll(/<div>(.*?)<\/div>/sg)].map(match => match[1]);
     assert.equal(rows.length, 2);
     assert.deepEqual([...rows[0].matchAll(/href="([^"]+)"/g)].map(match => match[1]), [site.pathname, `${site.pathname}about/`, `${site.pathname}hiscores/`]);
-    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/#bug-report', 'https://discord.gg/EwZWNzzYwP']);
-    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Hiscores', 'Report bug', 'Discord']);
+    assert.deepEqual([...rows[1].matchAll(/href="([^"]+)"/g)].map(match => match[1]), ['/#bug-report', '/#mobile-controls', 'https://discord.gg/EwZWNzzYwP']);
+    assert.deepEqual([...nav.matchAll(/<a[^>]*>(.*?)<\/a>/g)].map(match => match[1]), ['Game', 'About', 'Hiscores', 'Report bug', 'Mobile controls', 'Discord']);
     assert.equal((html.match(/class="site-signature"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /site-header|site-nav|client-title\.png|Local design|Local concept/);
     assert.ok(html.includes('<footer class="site-footer">'));
@@ -303,6 +303,7 @@ test('loading screen waits for movie data, not just runtime initialization', asy
   await new Promise(setImmediate);
   assert.equal(options.splashScreen, false);
   assert.equal(options.openUrlMode, 'confirm');
+  assert.equal(options.contextMenu, 'rightClickOnly');
   assert.equal(options.url, 'https://example.test/client.swf');
   assert.equal(options.socketProxy[0].proxyUrl, 'wss://game.example.test/game?diagnostics=test-session');
   assert.equal(options.socketProxy[0].host, '127.0.0.1');
