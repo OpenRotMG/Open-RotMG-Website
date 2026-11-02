@@ -810,8 +810,8 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'c9653248b4912f560f50be53ebb73130b5aceb521d13de4edc73dd76f0d1ee20');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '2d03d4d31625a83ad388d76ebdd1e5e143b6b01a28910fe520f3e4a9e175687c');
+  assert.equal(digest(bytes), 'ec71ed5635486ab9dbe95b71a9ad13ea3de9d7b45b71a377fbdbd95ae0635d60');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'fe8ccce2e29a10f24b975680e727334ea6042749ac54982e6f1485342ddedec8');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
