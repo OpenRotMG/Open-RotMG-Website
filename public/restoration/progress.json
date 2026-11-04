@@ -4350,9 +4350,9 @@
           "Server4ba942fa corrects only Arachna completion to Realm Portal0x704 instead of Nexus-only0x71d; existing return-route, closed-Realm refusal, durable publication and teleport policies stay unchanged: https://github.com/dginovker/Open-RotMG-Server/commit/4ba942fa84f376ff0c201bc79204024ee6898c54"
         ],
         "unknowns": [
-          "Exact 123.5.1 entrance probabilities, rounded-room templates, dressing distribution and Arachna phase sequence/geometry/timing. The fixed room graph and modified7.0 behavior remain reconstructions.",
+          "Exact 123.5.1 entrance probabilities, whether the arena decor was re-rolled per run, and the dressing and spider distributions, which are fitted to one capture and eight 2012 layouts. Arachna's aimed cadence and lead remain low confidence.",
           "Target-version continuity of the build117.0.1-labelled public reward rates and later comparator personal Ichor guarantee; a native drop does not measure probabilities.",
-          "Whether historical server logic slowed players on ordinary floor webs. Selected and modified7.0 SpiderWeb classes only render beside walls; neither class implements Slowed.",
+          "Whether historical server logic slowed players on ordinary floor webs. Selected and modified7.0 SpiderWeb classes only render beside walls; neither class implements Slowed. 2012 footage shows webs only on walls and no Slowed outside Arachna's spokes.",
           "Exact 123.5.1 boss-exit destination. Build123.4.4 footage around02:12-02:16 shows a cave arch followed by a Realm load, but boss-exit versus Cowardice identity and target-version continuity were not isolated. The earlier prepared Nexus return is superseded by a candidate Realm-Portal correction with prepared native destination proof and separate unit parent-route checks, not authenticated historical acceptance."
         ],
         "sources": [
@@ -4382,6 +4382,18 @@
             "label": "Original February 13, 2012 Build 122 announcement: aesthetic eggs, surrounding pillars and boss-dropped exits"
           },
           {
+            "url": "https://youtu.be/dBsMNoIQK14",
+            "label": "June 11, 2012 full run with an unrotated camera: start room, nine rooms, arena and web spokes"
+          },
+          {
+            "url": "https://youtu.be/8Uv7XGMabZI?t=322",
+            "label": "May 27, 2012 solo Arachna fight on Build 123.0.0: wake, spokes, ring and exit at the arena centre"
+          },
+          {
+            "url": "https://youtu.be/oMP3hUIl3qI",
+            "label": "November 13, 2012 run after 123.5.1: the same chain layout and web"
+          },
+          {
             "url": "https://github.com/moistosaurus/realm-src/blob/1855c017eab870d13f0b61b1cf0b9e66a01922ff/wServer/logic/db/BehaviorDb.SpiderDen.cs",
             "label": "Modified7.0 comparator: nine radial web spokes, timed attack transition and two sac triggers; not recovered original AI"
           },
@@ -4400,7 +4412,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Build 123.4.4 footage supports Spider Dirt Wall material, not exact 123.5.1 column count/spacing. Four cover offsets and decorative-web sites remain a bounded reconstruction."
+              "Eight 2012 arenas match the captured arena on 97.5-99.9% of cells with the four pillars at its positions; whether its decor was re-rolled per run is unsettled. Egg sac density per room (about 35% of rooms without sacs, the rest about 3 per 100 tiles) is fitted to eight layouts."
             ],
             "sources": [
               {
@@ -4414,6 +4426,10 @@
               {
                 "url": "https://web.archive.org/web/20120201105109id_/http://forums.wildshadow.com/wiki/realm-mad-god/spider-den",
                 "label": "February 1, 2012 captured guide distinguishes green sacs hatching on shots or contact"
+              },
+              {
+                "url": "https://youtu.be/loE5O2fvjpU?t=3",
+                "label": "February 16, 2012, three days after Build 122: a first room full of sacs and the arena pillars already in place"
               },
               {
                 "url": "https://github.com/Zolmex/kithio-as3-source/blob/d15f321edcce0ef890001890c6991c25a1b0f718/Rotmg123.5.1/src/com/company/assembleegameclient/objects/SpiderWeb.as",
