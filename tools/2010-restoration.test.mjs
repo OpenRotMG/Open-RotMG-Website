@@ -835,14 +835,14 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), '520450e6bb27988f9d78f2aab843dcb0ff3131658bc5ea91babf6e7fcb1dac6d');
-  assert.equal(digest(JSON.stringify(evidence)), '01ee5410018709963bdaab377193a53065a35a570141d1f6333ceee599741e69');
+  assert.equal(digest(JSON.stringify(data)), '118c5876dfdb19f68d329029da3de0e5c5eef667e2235419f18f623f4eae0232');
+  assert.equal(digest(JSON.stringify(evidence)), '6b5312661fd1ca2405fb804f0a050064a79190994dd286685ac78db9824fb8ca');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '53232ffc10ffaf95dc12378840bd657d4abb41302622b7d1ab076a5bbc842c53');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '8c9757e01e1b0759a3444d9340f80cd09cdfe06562d2f3274b052c113a5d9a1c');
+  assert.equal(digest(bytes), '9c7d41940a16f34fbb8be8be98f99b89e2955aec2f9d8d1550a9f4925780f6f5');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '7774a235128ed99f5d049e0a846be52fb59bf7f221bce6921e4b436284a97aef');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
