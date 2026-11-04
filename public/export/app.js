@@ -28,7 +28,6 @@ async function readBounded(response, limit) {
     if (!complete) await reader.cancel();
     reader.releaseLock();
   }
-  if (length !== null && Number(length) !== size) throw invalid();
   return new Blob(chunks, {type: 'application/json'});
 }
 export async function exportAccount(email, password, fetchImpl = globalThis.OpenRotMGBackend.fetch) {

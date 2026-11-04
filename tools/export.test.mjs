@@ -1,6 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createServer} from 'node:http';
+import {gzipSync, brotliCompressSync} from 'node:zlib';
 import {exportAccount} from '../public/export/app.js';
 
 const save = {format: 1, content: '123.5.1', exported_at: 1793700000, name: 'Synthetic only'};
@@ -47,11 +49,59 @@ test('no successful mock fallback: export refuses corrupt JSON, wrong envelope, 
   for (const disposition of ['', 'inline', 'attachment; filename="../account.json"', 'attachment; filename="owner@example.test.json"', 'attachment; filename="openrotmg-account-0.json"', 'attachment; filename="openrotmg-account-1793700000.json', 'attachment; filename=openrotmg-account-1793700000.json"', 'attachment; filename="openrotmg-account-9007199254740992.json"']) {
     await assert.rejects(submit(response(undefined, {headers: {...headers, 'content-disposition': disposition}})), /invalid export response/);
   }
-  for (const changed of [{'content-type': 'text/html'}, {'content-type': 'application/octet-stream'}, {'cache-control': 'public'}, {'cache-control': ''}, {'content-length': '2'}]) {
+  for (const changed of [{'content-type': 'text/html'}, {'content-type': 'application/octet-stream'}, {'cache-control': 'public'}, {'cache-control': ''}, {'content-length': 'invalid'}]) {
     await assert.rejects(submit(response(undefined, {headers: {...headers, ...changed}})), /invalid export response/);
   }
   await assert.rejects(submit(response(undefined, {status: 201})), /invalid export response/);
   assert.equal((await submit(response(undefined, {headers: {...headers, 'content-disposition': 'attachment; filename=openrotmg-account-1793700000.json'}}))).filename, 'openrotmg-account-1793700000.json');
+});
+
+test('export handles real HTTP compressed success, conflict, decoded limits and interrupted transport', async t => {
+  let status, encoding, body, truncated = false;
+  const server = createServer(async (request, reply) => {
+    let received = '';
+    for await (const chunk of request) received += chunk;
+    assert.equal(request.url, '/api/account/export');
+    assert.deepEqual(JSON.parse(received), {email: 'owner@example.test', password: 'synthetic-password'});
+    const encoded = encoding === 'gzip' ? gzipSync(body) : brotliCompressSync(body);
+    assert.notEqual(encoded.length, Buffer.byteLength(body));
+    reply.writeHead(status, {...headers, 'content-encoding': encoding, 'content-length': encoded.length, connection: 'close'});
+    reply.end(truncated ? encoded.subarray(0, encoded.length - 8) : encoded);
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const origin = `http://127.0.0.1:${server.address().port}`;
+  const request = () => exportAccount('owner@example.test', 'synthetic-password', (path, options) => fetch(new URL(path, origin), options));
+  try {
+    for (encoding of ['gzip', 'br']) {
+      await t.test(`${encoding} success preserves decoded attachment bytes`, async () => {
+        status = 200; body = JSON.stringify(save);
+        const result = await request();
+        assert.equal(await result.blob.text(), body);
+        assert.equal(result.filename, 'openrotmg-account-1793700000.json');
+      });
+      await t.test(`${encoding} conflict keeps static leave-game instructions`, async () => {
+        status = 409; body = JSON.stringify({error: 'owner@example.test synthetic-password '.repeat(10)});
+        await assert.rejects(request(), {message: 'Leave the game on every device, wait for your character to finish saving, then try again.'});
+      });
+    }
+    encoding = 'gzip';
+    for (const [code, limit] of [[200, 32 * 1024 * 1024], [409, 4096]]) {
+      await t.test(`compressed ${code} rejects oversized decoded bytes`, async () => {
+        status = code;
+        const json = JSON.stringify(code === 200 ? save : {error: 'synthetic only'});
+        body = json + ' '.repeat(limit + 1 - Buffer.byteLength(json));
+        assert.ok(gzipSync(body).length < limit);
+        await assert.rejects(request(), /invalid export response/);
+      });
+    }
+    await t.test('truncated real gzip transport remains a connection error', async () => {
+      status = 200; body = JSON.stringify(save); truncated = true;
+      await assert.rejects(request(), /Check your connection/);
+    });
+  } finally {
+    server.closeAllConnections();
+    await new Promise(resolve => server.close(resolve));
+  }
 });
 
 test('export bounds declared and streamed bytes, cancels oversized bodies and reports interrupted streams', async () => {
