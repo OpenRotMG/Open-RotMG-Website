@@ -808,8 +808,52 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const manor1384 = {"fingerprints":{"manor-intact-visibility-source-88f8f118":"226079b5fc113889fd7645a4f3fb577832c315d1ffbb5ea9814e654067ac0b39","manor-prepared-initial-visibility-native-aab37bf5":"faee09660e21fe59e9daad6ebdcb3cfe80d5ae9ba646da14574c0e78c3280cbf"},"note":"Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged.","ids":["dungeons:manor-of-the-immortals","dungeons:manor-of-the-immortals:secret-shelves-and-coffins"]};
+function peelManor1384(data, evidence) {
+  const refs = Object.keys(manor1384.fingerprints);
+  for (const [ref, hash] of Object.entries(manor1384.fingerprints)) {
+    assert.equal(digest(JSON.stringify(evidence.sources[ref])), hash);
+    assert.deepEqual(evidence.sources[ref].checks, manor1384.ids);
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...manor1384.ids].sort());
+    delete evidence.sources[ref];
+  }
+  const audit = data.features.find(row => row.id === manor1384.ids[0]).audit;
+  assert.equal(audit.historical, 'partial');
+  assert.equal(audit.differences.filter(note => note === manor1384.note).length, 1);
+  assert.deepEqual(audit.differences.splice(-1), [manor1384.note]);
+  for (const [index, id] of manor1384.ids.entries()) {
+    const row = evidence.results[id];
+    assert.equal(row.status, index ? 'passed' : 'not-run');
+    assert.equal(row.evidence.filter(ref => refs.includes(ref)).length, refs.length);
+    assert.deepEqual(row.evidence.splice(-refs.length), refs);
+  }
+}
+
+test('1384 initial-only payload inverse preserves every actual51d value and rejects narrow mutations', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+  const preserve = (data, evidence) => {
+    peelManor1384(data, evidence);
+    assert.equal(digest(JSON.stringify(data)), 'a9436497cd9f27e6a077540eb9389a605325b9268cb471a376265b4240c2cdc9');
+    assert.equal(digest(JSON.stringify(evidence)), 'f0f9ab9844a0772335eab4b32ff266c7deb0bedb206f42b8571936a3eeef51cf');
+  };
+  preserve(...fresh());
+  for (const mutate of [
+    (data, evidence) => evidence.sources[Object.keys(manor1384.fingerprints)[1]].method += 'altered payload',
+    data => data.features.find(row => row.id === manor1384.ids[0]).audit.differences.push('altered new note'),
+    data => data.features.find(row => row.id === manor1384.ids[0]).audit.unknowns.push('extra old value'),
+    (data, evidence) => evidence.sources['unknown-manor-record'] = {kind:'source'},
+    (data, evidence) => evidence.sources['manor-layout-research-0af41a3'].limitations += 'altered old source',
+    (data, evidence) => evidence.results[manor1384.ids[0]].evidence.push(Object.keys(manor1384.fingerprints)[0]),
+    (data, evidence) => evidence.results[manor1384.ids[0]].status = 'passed',
+    (data, evidence) => evidence.results['unknown-manor-result'] = {status:'not-run',evidence:[]},
+  ]) {
+    const pair = fresh(); mutate(...pair); assert.throws(() => preserve(...pair));
+  }
+});
+
 const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
 function peelPopulation1344(data, evidence) {
+  peelManor1384(data, evidence);
   const refs = Object.keys(population1344.fingerprints);
   for (const [ref, hash] of Object.entries(population1344.fingerprints)) {
     assert.ok(Object.hasOwn(evidence.sources, ref));
@@ -888,8 +932,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '4662c881e51f4ae0a3ba21679bfeb3fc1cb1a0c4d9cbad2e41f92af98be699eb');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '31b4923c9d6cca1de49104e7b3e7453daaf86162c0759cc1dcebb19df074e4c9');
+  assert.equal(digest(bytes), '16232fa35b0d2b899180c2cdfdb8baa379913e9b01661b53be80b1ceff0e524b');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '63b7569281dbae51730a3279619ee7e87b942e0b87c747c5cd000b73776425eb');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
