@@ -71,16 +71,16 @@ test('hiscores links use original pixel artwork and the selected uncluttered lay
  assert.ok(app.includes('playerLink.href=`?board=${board}&player=${player.account}`'));
 });
 
-test('achievement profiles validate all twelve criteria, earned dates and difficulty rewards',()=>{
- const catalog=Array.from({length:12},(_,i)=>({id:String.fromCharCode(97+i),name:`Fixture ${i}`,criterion:`Do fixture ${i}`,difficulty:i<5?'Easy':i<10?'Medium':'Hard',gold:i<5?10:i<10?25:100}));
+test('achievement profiles validate all thirteen criteria, earned dates and difficulty rewards',()=>{
+ const catalog=Array.from({length:13},(_,i)=>({id:String.fromCharCode(97+i),name:`Fixture ${i}`,criterion:`Do fixture ${i}`,difficulty:i<5?'Easy':i<11?'Medium':'Hard',gold:i<5?10:i<11?25:100}));
  const earned=[{id:'a',earned_at:1735689600}],original=structuredClone(catalog),groups=achievementSets(catalog,earned);
- assert.deepEqual(groups.map(g=>[g.difficulty,g.items.length]),[['Easy',5],['Medium',5],['Hard',2]]);
+ assert.deepEqual(groups.map(g=>[g.difficulty,g.items.length]),[['Easy',5],['Medium',6],['Hard',2]]);
  assert.equal(groups[0].items[0].earned_at,1735689600);assert.equal(groups[0].items[1].earned_at,null);assert.deepEqual(catalog,original);
  assert.match(achievementDate(1735689600),/1 January 2025.*00:00:00.*UTC/);assert.equal(achievementDate(null),'Not yet obtained');
  for(const bad of [0,-1,NaN,1.5,8640000000001])assert.throws(()=>achievementDate(bad),/Malformed/);
  for(const bad of [[...earned,...earned],[{id:'unknown',earned_at:1}],[{id:'a',earned_at:0}]])assert.throws(()=>achievementSets(catalog,bad),/Malformed/);
- for(const bad of [catalog.slice(1),[catalog[0],...catalog.slice(0,11)],catalog.map((d,i)=>i===0?{...d,gold:100}:d)])assert.throws(()=>achievementSets(bad,earned),/Malformed/);
- assert.throws(()=>ranked([{account:1,name:'Bad',achievements:13}],'achievements'),/Malformed/);
+ for(const bad of [catalog.slice(1),[catalog[0],...catalog.slice(0,12)],catalog.map((d,i)=>i===0?{...d,gold:100}:d)])assert.throws(()=>achievementSets(bad,earned),/Malformed/);
+ assert.throws(()=>ranked([{account:1,name:'Bad',achievements:14}],'achievements'),/Malformed/);
 });
 
 test('achievement detail dialog is accessible and API errors remain visible',async()=>{

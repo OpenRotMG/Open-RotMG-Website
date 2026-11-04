@@ -11,7 +11,7 @@ export function ranked(players, board) {
   if (!Array.isArray(players)) throw new Error('Malformed hiscores response');
   const seen = new Set();
   for (const p of players) {
-    if (!Number.isSafeInteger(p.account) || p.account < 1 || seen.has(p.account) || typeof p.name !== 'string' || !Number.isSafeInteger(p[board]) || p[board] < 0 || (board==='achievements' && p[board]>12)) throw new Error('Malformed hiscores player');
+    if (!Number.isSafeInteger(p.account) || p.account < 1 || seen.has(p.account) || typeof p.name !== 'string' || !Number.isSafeInteger(p[board]) || p[board] < 0 || (board==='achievements' && p[board]>13)) throw new Error('Malformed hiscores player');
     seen.add(p.account);
   }
   const sorted = [...players].sort((a, b) => b[board] - a[board] || a.account - b.account);
@@ -142,9 +142,9 @@ function renderCollection(profile,catalog,scores) {
 }
 export function achievementSets(catalog, earned) {
   const tiers={Easy:10,Medium:25,Hard:100},ids=new Set(),dates=new Map();
-  if (!Array.isArray(catalog)||catalog.length!==12||!Array.isArray(earned)) throw new Error('Malformed achievement response');
+  if (!Array.isArray(catalog)||catalog.length!==13||!Array.isArray(earned)) throw new Error('Malformed achievement response');
   for (const d of catalog) {
-    if (!/^[a-z][a-z_]*$/.test(d.id)||ids.has(d.id)||!Object.hasOwn(tiers,d.difficulty)||d.gold!==tiers[d.difficulty]||typeof d.name!=='string'||!d.name||typeof d.criterion!=='string'||!d.criterion) throw new Error('Malformed achievement catalog');
+    if (!/^[a-z][a-z0-9_]*$/.test(d.id)||ids.has(d.id)||!Object.hasOwn(tiers,d.difficulty)||d.gold!==tiers[d.difficulty]||typeof d.name!=='string'||!d.name||typeof d.criterion!=='string'||!d.criterion) throw new Error('Malformed achievement catalog');
     ids.add(d.id);
   }
   for (const row of earned) {
@@ -152,7 +152,7 @@ export function achievementSets(catalog, earned) {
     dates.set(row.id,row.earned_at);
   }
   const groups=Object.entries(tiers).map(([difficulty,gold])=>({difficulty,gold,items:catalog.filter(d=>d.difficulty===difficulty).map(d=>({...d,earned_at:dates.has(d.id)?dates.get(d.id):null}))}));
-  if (groups.some((g,i)=>g.items.length!==[5,5,2][i])) throw new Error('Malformed achievement difficulties');
+  if (groups.some((g,i)=>g.items.length!==[5,6,2][i])) throw new Error('Malformed achievement difficulties');
   return groups;
 }
 export function achievementDate(time) {
@@ -164,8 +164,8 @@ function renderAchievements(profile,scores) {
   const groups=achievementSets(scores.achievement_catalog,profile.earned),dialog=document.querySelector('#achievement-dialog');
   if (typeof profile.name!=='string') throw new Error('Malformed achievement profile');
   document.querySelector('#achievement-title').textContent=`${profile.name}’s achievements`;
-  document.querySelector('#achievement-total').textContent=`${profile.earned.length} / 12`;
-  const progress=document.querySelector('#achievement-progress');progress.max=12;progress.value=profile.earned.length;
+  document.querySelector('#achievement-total').textContent=`${profile.earned.length} / 13`;
+  const progress=document.querySelector('#achievement-progress');progress.max=13;progress.value=profile.earned.length;
   document.querySelector('#achievement-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{const b=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<b.left||event.clientX>b.right||event.clientY<b.top||event.clientY>b.bottom))dialog.close();});
   const sets=document.querySelector('#achievement-sets');
