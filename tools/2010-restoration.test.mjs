@@ -808,9 +808,56 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
+function peelPopulation1344(data, evidence) {
+  const refs = Object.keys(population1344.fingerprints);
+  for (const [ref, hash] of Object.entries(population1344.fingerprints)) {
+    assert.ok(Object.hasOwn(evidence.sources, ref));
+    assert.equal(digest(JSON.stringify(evidence.sources[ref])), hash);
+    delete evidence.sources[ref];
+  }
+  const audit = data.features.find(row => row.id === 'home:browse-realm-portals').audit;
+  assert.equal(audit.historical, 'partial');
+  assert.deepEqual(audit.differences.splice(-2), population1344.notes);
+  assert.equal(audit.unknowns[0].split(population1344.newClause).length, 2);
+  audit.unknowns[0] = audit.unknowns[0].replace(population1344.newClause, population1344.oldClause);
+  assert.deepEqual(audit.sources.splice(-2), population1344.period);
+  for (const [id, expected] of [['home:browse-realm-portals', refs], ['realm:realm-closure', [refs[2]]]]) {
+    const row = evidence.results[id];
+    assert.equal(row.status, 'not-run');
+    assert.equal(row.evidence.filter(ref => refs.includes(ref)).length, expected.length);
+    assert.deepEqual(row.evidence.splice(-expected.length), expected);
+  }
+}
+
+test('1344 prepared pool and two-life closure evidence preserve actual69d values without promoting whole-feature/history acceptance', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+  const preserve = (data, evidence) => {
+    peelPopulation1344(data, evidence);
+    assert.equal(digest(JSON.stringify(data)), '65f9e71b33ac67233aa5e31150ae8d58424a9ebfac71223ed40c6c6ec86bd295');
+    assert.equal(digest(JSON.stringify(evidence)), 'd9258c21b2d0776d5b64b60fe632399a1e6517389013c34effb409e3bdaf3357');
+  };
+  preserve(...fresh());
+  for (const mutate of [
+    (data, evidence) => evidence.results['home:browse-realm-portals'].status = 'passed',
+    data => data.features.find(row => row.id === 'home:browse-realm-portals').audit.historical = 'known-differences',
+    (data, evidence) => evidence.sources['nexus-closure-prepared-native-49986bc'].method += 'changed old evidence',
+    (data, evidence) => evidence.sources[Object.keys(population1344.fingerprints)[0]].method += 'incorrect new payload',
+    (data, evidence) => evidence.sources['realm-population-extra-fake'] = {kind: 'source'},
+    (data, evidence) => delete evidence.sources[Object.keys(population1344.fingerprints)[0]],
+    data => data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(),
+    (data, evidence) => evidence.results['home:browse-realm-portals'].evidence.push(Object.keys(population1344.fingerprints)[0]),
+    data => data.scope.target = 'different target',
+    (data, evidence) => evidence.sourceReview.unexpected = true,
+  ]) {
+    const pair = fresh();mutate(...pair);assert.throws(() => preserve(...pair));
+  }
+});
+
 test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
   const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  peelPopulation1344(data, evidence);
   const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
   const ids = ['realm:realm-closure', 'realm:event-admission'];
   const closure = data.features.find(row => row.id === ids[0]);
@@ -841,8 +888,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'a457206b883b0c059655b437b0c0e1457dffb4479565e71a47fa94dc492e562e');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '8c9757e01e1b0759a3444d9340f80cd09cdfe06562d2f3274b052c113a5d9a1c');
+  assert.equal(digest(bytes), '4662c881e51f4ae0a3ba21679bfeb3fc1cb1a0c4d9cbad2e41f92af98be699eb');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '31b4923c9d6cca1de49104e7b3e7453daaf86162c0759cc1dcebb19df074e4c9');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
