@@ -835,14 +835,14 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), '118c5876dfdb19f68d329029da3de0e5c5eef667e2235419f18f623f4eae0232');
-  assert.equal(digest(JSON.stringify(evidence)), '6b5312661fd1ca2405fb804f0a050064a79190994dd286685ac78db9824fb8ca');
+  assert.equal(digest(JSON.stringify(data)), '2d542f17d7b661ac4b83d20643eb79813d57a2420cdc2ce7a08aa0697585b3e4');
+  assert.equal(digest(JSON.stringify(evidence)), 'a1aad2e7f99aa898fcf96027160d84babc4c6414eeb70c21b2a91ecbc7fd1db7');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '9c7d41940a16f34fbb8be8be98f99b89e2955aec2f9d8d1550a9f4925780f6f5');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '7774a235128ed99f5d049e0a846be52fb59bf7f221bce6921e4b436284a97aef');
+  assert.equal(digest(bytes), '46e90930954b5d6ece2066218e384124d56f78c85893d79caddfc80df18c7470');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '36fddec159260f4f44de8f81f64482ac7d9900b52ca9ae440cc18eef44fe3875');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);

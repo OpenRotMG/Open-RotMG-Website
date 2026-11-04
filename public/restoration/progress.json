@@ -5535,14 +5535,24 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Chamber access, Oryx1 phases/summons/rewards, locked Cellar and Incantation unlock; teleport disabled; target minions stasis-susceptible and give small XP.",
-        "differences": [],
+        "differences": [
+          "Oryx's chase speed, the chase-grid and rage cadences, Assassin counts and his own dance attacks are estimates; per-phase invulnerability windows are not modelled."
+        ],
         "unknowns": [
-          "Full target-era choreography/taunts, loot eligibility/rates and original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
+          "Oryx1 phase order, lengths, taunts, rage and loot are measured from five 2012 fights; phase weights, the pool switch, loot recipient rules and the original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://youtu.be/w5koziG9P1M?t=148",
+            "label": "September 13, 2012 group fight on Build 123.5.1: wake, random phases, rage heal"
+          },
+          {
+            "url": "https://youtu.be/fzgFSFVN8nY?t=344",
+            "label": "August 10, 2012 solo fight: the whole randomized fight in real time"
           }
         ],
         "checks": [
@@ -5553,9 +5563,9 @@
             "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs.",
             "implementation": "present",
             "historical": "partial",
-            "differences": ["Current bounded cycle omits planets/moons and the chasing grid described in the June 2012 build 123.0.0 guide; continuity into 123.5.1 is not established. Later Valor's written dance-two subgraph loops until the HP transition, unlike the current repeating 85-second scheduler."],
-            "unknowns": ["Exact target-era phase selection/timings, taunts and loot recipient/probability rules remain open in server issue #867. June guide describes three outer artifacts versus current/later-comparator four. The five inspected definitions match modified 7.0; that does not authenticate choreography."],
-            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
+            "differences": ["No White Moons appear in 2012 footage, so none are spawned; a stun burst during the white planets and per-phase invulnerability windows are not modelled."],
+            "unknowns": ["Phase weights and the pool switch near 48k HP are fitted; the heal count (7 in one HP overlay, 8 in the Japanese wiki), Oryx's own dance attacks and loot recipient rules remain open in server issue #867."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://youtu.be/ZdjeB9t-n5w","label":"June 28, 2012 duo fight in real time: artifacts, gaze, dance, black planets, chase grid and rage"},{"url":"https://web.archive.org/web/20120614192502id_/http://forums.wildshadow.com/node/80667","label":"April-May 2012 log of 100 Oryx kills: soulbound drops after Build 123"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
             "group": "boss"
           },
           {
