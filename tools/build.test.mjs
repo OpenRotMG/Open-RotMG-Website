@@ -72,6 +72,14 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
+  for (const page of ['export', 'single-player']) {
+    const html = readFileSync(new URL(`../dist/${page}/index.html`, import.meta.url), 'utf8');
+    const version = createHash('sha256').update(readFileSync(new URL(`../dist/${page}/social.png`, import.meta.url))).digest('hex').slice(0, 12);
+    assert.ok(html.includes(`rel="canonical" href="${site.href}${page}/"`));
+    for (const key of ['og:image', 'twitter:image']) assert.ok(html.includes(`="${key}" content="${site.href}${page}/social.png?v=${version}"`));
+    assert.doesNotMatch(html, /noindex|\u2014|\{\{/);
+    assert.match(html, /Native Realm of the Mad God pixel art over historical gameplay/);
+  }
   assert.match(gold, /You cannot buy Gold in Open RotMG\./);
   assert.match(gold, /<h2>One-time Gold<\/h2>/);
   assert.match(gold, /<h2>Repeatable Gold<\/h2>/);
@@ -82,10 +90,10 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.equal((gold.match(/Per 1,000 views/g) ?? []).length, 2);
   assert.deepEqual([...gold.matchAll(/<li>(\d+) <img/g)].map(match => Number(match[1])), [100, 100, 50, 75, 150, 250, 750, 2500, 100, 100, 50]);
   assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 12);
+  assert.match(gold, /<li>x <img[^>]+>: Use <code>\/swap<\/code> in game to trade Fame for Gold, 2:1\.<\/li>/);
   for (const [amount, colour, stars] of [[75,'Blue',13],[150,'Red',26],[250,'Orange',39],[750,'Yellow',52],[2500,'White',65]]) {
     assert.match(gold, new RegExp(`<li>${amount} <img[^>]+>: Reach ${colour} Star rank \\(${stars} stars\\)\\.`));
   }
-  assert.match(gold, /Use <code>\/swap<\/code> in game to trade Fame for Gold, 2:1\./);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
@@ -96,6 +104,8 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     ['https://openrotmgeye.com/', 'OpenEye', 'Community Site.'],
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
+    [`${site.pathname}export/`, 'Export save', 'Copy your personal account progress.'],
+    [`${site.pathname}single-player/`, 'Single-player', 'Offline edition preview.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
     [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
     [`${site.pathname}bots/`, 'Bots', 'Bot behaviour tracker.'],
@@ -154,6 +164,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
   assert.ok(sitemap.includes(`<loc>${site.href}gold/</loc>`));
+  for (const page of ['export', 'single-player']) assert.ok(sitemap.includes(`<loc>${site.href}${page}/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));
