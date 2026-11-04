@@ -81,11 +81,11 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.match(gold, /Make a YouTube video about Open RotMG/);
   assert.equal((gold.match(/Per 1,000 views/g) ?? []).length, 2);
   assert.deepEqual([...gold.matchAll(/<li>(\d+) <img/g)].map(match => Number(match[1])), [100, 100, 50, 75, 150, 250, 750, 2500, 100, 100, 50]);
-  assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 11);
+  assert.equal((gold.match(/src="coin.svg" width="12" height="12" alt="Gold"/g) ?? []).length, 12);
   for (const [amount, colour, stars] of [[75,'Blue',13],[150,'Red',26],[250,'Orange',39],[750,'Yellow',52],[2500,'White',65]]) {
     assert.match(gold, new RegExp(`<li>${amount} <img[^>]+>: Reach ${colour} Star rank \\(${stars} stars\\)\\.`));
   }
-  assert.match(gold, /Each star-rank reward is paid once per account\. Existing ranks count, too\./);
+  assert.match(gold, /Use <code>\/swap<\/code> in game to trade Fame for Gold, 2:1\./);
   assert.ok(existsSync(new URL('../dist/gold/coin.svg', import.meta.url)));
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));

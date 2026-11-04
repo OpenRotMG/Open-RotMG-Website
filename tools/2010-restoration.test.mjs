@@ -808,10 +808,41 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
+  const data = JSON.parse(read('public/restoration/progress.json'));
+  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
+  const ids = ['realm:realm-closure', 'realm:event-admission'];
+  const closure = data.features.find(row => row.id === ids[0]);
+  const event = closure.audit.checks.find(row => row.id === ids[1]);
+  for (const [index, ref] of refs.entries()) {
+    const source = evidence.sources[ref];
+    assert.equal(source.kind, index ? 'regression' : 'source');
+    assert.equal(source.revision, '6dd0f153512a988bb896a76eca172a60911b2699');
+    if (!index) assert.ok(source.url.includes('/' + source.revision + '/src/world/realm_events.rs'));
+    assert.deepEqual(source.checks, ids);
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...ids].sort());
+  }
+  assert.match(evidence.sources[refs[1]].method, /494 Rust tests passed, zero failed, ignored or filtered/);
+  assert.match(evidence.sources[refs[1]].limitations, /not a kill-through-endgame integration test/);
+  assert.match(evidence.sources[refs[0]].limitations, /does not verify the reported Reborn quest arrow/);
+  assert.equal(closure.audit.historical, 'partial');
+  assert.equal(event.historical, 'known-differences');
+  assert.match(closure.audit.differences.pop(), /^PR1402 fixes unrelated quest kills/);
+  assert.match(event.differences.pop(), /^PR1402 lets another defeated root/);
+  for (const id of ids) {
+    assert.equal(evidence.results[id].status, 'not-run');
+    assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
+  }
+  for (const ref of refs) delete evidence.sources[ref];
+  assert.equal(digest(JSON.stringify(data)), '520450e6bb27988f9d78f2aab843dcb0ff3131658bc5ea91babf6e7fcb1dac6d');
+  assert.equal(digest(JSON.stringify(evidence)), '01ee5410018709963bdaab377193a53065a35a570141d1f6333ceee599741e69');
+});
+
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'ec71ed5635486ab9dbe95b71a9ad13ea3de9d7b45b71a377fbdbd95ae0635d60');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '9d9812ff48f2e364fff38a23e3f0d8d6f1d0472545f88e90a4700d7e925c4353');
+  assert.equal(digest(bytes), '53232ffc10ffaf95dc12378840bd657d4abb41302622b7d1ab076a5bbc842c53');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '8c9757e01e1b0759a3444d9340f80cd09cdfe06562d2f3274b052c113a5d9a1c');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
