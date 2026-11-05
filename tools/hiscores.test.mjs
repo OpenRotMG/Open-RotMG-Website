@@ -95,7 +95,7 @@ test('achievement profiles validate all thirteen criteria, earned dates and diff
 test('achievement detail dialog is accessible and API errors remain visible',async()=>{
  const index=await readFile(new URL('../public/hiscores/index.html',import.meta.url),'utf8'),app=await readFile(new URL('../public/hiscores/app.js',import.meta.url),'utf8');
  for(const text of ['id="achievements"','id="achievement-dialog" aria-labelledby="achievement-name"','aria-label="Close achievement details"','aria-label="Achievement progress"'])assert.ok(index.includes(text));
- assert.ok(app.includes('renderAchievements(profile,scores,reviewedAccounts(findings))'));
+ assert.ok(app.includes('renderAchievements(profile,scores,reviewedAccounts(scores.reviewed_accounts))'));
  assert.ok(app.includes("addBadge(document.querySelector('#achievement-title'),profile.account,reviewed)"));assert.ok(app.includes('status.textContent=error.message'));assert.ok(app.includes("redirect:'error'"));
 });
 
