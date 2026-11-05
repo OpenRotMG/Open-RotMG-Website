@@ -5126,7 +5126,8 @@
         "historical": "partial",
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [
-          "Layout stamps templates cut from one captured live instance plus 2014-2023 minimap shapes; template choice, socket and branch rules are reconstructed from seven layouts and 154 pre-rework runs, not a recovered generator."
+          "Layout stamps templates cut from one captured live instance plus 2014-2023 minimap shapes; template choice, socket and branch rules are reconstructed from seven layouts and 154 pre-rework runs, not a recovered generator.",
+        "Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged."
         ],
         "unknowns": [
           "Original template weights, spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
