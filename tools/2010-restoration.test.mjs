@@ -832,6 +832,9 @@ function peelManor1384(data, evidence) {
 test('1384 initial-only payload inverse preserves every actualb3c value and rejects narrow mutations', () => {
   const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
   const preserve = (data, evidence) => {
+    assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^Current pool b76d8f52 passes eight/);
+    assert.equal(evidence.results['home:browse-realm-portals'].evidence.pop(), 'realm-portals-native-b76d8f52');
+    delete evidence.sources['realm-portals-native-b76d8f52'];
     peelManor1384(data, evidence);
     assert.equal(digest(JSON.stringify(data)), '6fdc017db42fb25c58d733a0d05b196ff885c1df7cadc441c4a3864d22f0a0f7');
     assert.equal(digest(JSON.stringify(evidence)), 'f36c972602ff62ad382b8ca1273cc6d8f146de6d530545c8b676d99ed243f53f');
@@ -851,12 +854,13 @@ test('1384 initial-only payload inverse preserves every actualb3c value and reje
   }
 });
 
-const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
+const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed', 'realm-portals-native-b76d8f52'];
 function removeRealmSdkEvidence(data, evidence) {
   peelManor1384(data, evidence);
   const closure = data.features.find(row => row.id === 'realm:realm-closure');
   assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
   assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
+  assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^Current pool b76d8f52 passes eight/);
   assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^PR1414 passes eight/);
   for (const ref of realmSdkRefs) {
     for (const id of evidence.sources[ref].checks) evidence.results[id].evidence = evidence.results[id].evidence.filter(key => key !== ref);
@@ -876,6 +880,9 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[0]].limitations, /Synthetic pending-event fixture.*not an earned event/);
   assert.match(evidence.sources[realmSdkRefs[1]].limitations, /does not explain or waive.*tick-ACK-stop/);
   assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
+  assert.equal(evidence.sources[realmSdkRefs[3]].revision, 'b76d8f52006185dbf7e49c25385a2391448701e1');
+  assert.match(evidence.sources[realmSdkRefs[3]].method, /eight native.*51429wallms.*two original accounts/);
+  assert.match(evidence.sources[realmSdkRefs[3]].limitations, /not production72.*earned closure.*tick-ACK-stop remains unexplained.*no whole-feature or historical promotion/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
   assert.equal(digest(JSON.stringify(data)), '92f50f4a2cf76c6eb8c0e6cd6dc0c001f7a13aa97d403831bbd24e9b3b0ba2f7');
@@ -964,8 +971,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'ab178e66294bdfb0668abecb84a2c6857e4bae23142d985542ec2bf0428de9db');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '0eddfcfc7b1ae3114d5d01bd696b10426a19f54f340e0a6e70031722b225f735');
+  assert.equal(digest(bytes), '0e8c7212cc0ee896a83741c96be8384f1ec29b6a93a6c7611ca16397efbc5d75');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'e6f7f4321b6b031f5fe4b5a2689f6af01a26d5837f5882568ccb0d2819eb14f4');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
