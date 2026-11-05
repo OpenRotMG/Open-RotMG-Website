@@ -1,6 +1,41 @@
 {
   "sourceReview": {"revision":"a4192e078aad779f34a75db310fd8085a8f3d3c4","date":"2026-10-20","url":"https://github.com/OpenRotMG/Open-RotMG-Website/blob/63f9b4f87bd7134d764a168edc5e1d715cd766a7/public/restoration/progress.json","qualification":"No later audit has re-checked every row, and this was not a gameplay test. Rows changed later cite their own PRs or source receipts; rows without a later citation were not re-audited and may be stale. Server PR395 (2026-10-24) and PR715 (2026-10-27) retired many Rust and launcher regressions; those receipts are revision-bound history, not guards on current main. The 2026-10-27 incremental audit checked recent PR coverage and outstanding implementation rows at server 794eccf, client 4f855c1 and website 69adc69; it does not rebaseline this whole-catalogue review or turn prepared checks into full acceptance. Unbound PR/test claims are not passes. The 2026-10-29 incremental PR audit inventoried 238 server and 235 website merges since PR218, reconciled uncited candidates and sampled existing evidence at server 22bdb462 and website b3d03ef8. Most fleet findings were already recorded. It adds omitted Berserk/Legends/recovery source and existing-CI receipts without new tests, native runs or acceptance promotions; this is not a new whole-catalogue review. The 2026-10-30 incremental audit checks23 server/18 website merges and no client merges since PR455 at servercfc803f/site6c26a57. It reconciles map coverage and new orbit/news/progress/reward changes using source and existing CI, not fresh native acceptance. PR1254 retires Trapped as authority; retained citations/tables are legacy provenance, not approval. The reported72-file original-Kithio text comparison is scoped, not whole-package authentication."},
   "sources": {
+    "realm-credit-caller-regression-12020c1b": {
+      "kind": "regression",
+      "revision": "12020c1b46d0c656cf1d695de8938d2cac534198",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1409#issuecomment-6632229761",
+      "checks": [
+        "realm:realm-closure",
+        "realm:event-admission"
+      ],
+      "method": "PR1409 calls real defeat_entity and Directory.endgame_step twice with an already-pending event and occupied reserved sites. It verifies unrelated credit once, retention of the pending source, unchanged reserves, open admission and independent other Realm. Restoring the pre1402 Waiting result fails this regression; restoring current behavior passes. Pinned Rust1.94.1 targeted runs pass. Public CI41840478878 passes499 Rust tests; its executed merge tree equals the final ddd87d33 merge tree.",
+      "limitations": "Synthetic pending-event fixture at the actual caller boundary, not an earned event, native kill, admission/completion, full clear, Castle journey, rendered Phoenix arrow or historical policy. Counterfactual failure remains recorded. This adds a stronger regression subcheck without changing whole-feature gameplay or historical statuses."
+    },
+    "realm-portals-native-e1c678d8": {
+      "kind": "native",
+      "revision": "e1c678d8bf6f7a3b738e6529bd6481bbc8235e76",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084",
+      "checks": [
+        "home:browse-realm-portals"
+      ],
+      "method": "Fresh managed run fd3e79021ae84bfa879adfdc2b3c4f3e uses clean final mergee1c678d8 and current clientc8ca97152e09869af06d5f3b01e876ff6f0ce392 with patched Ruffle0.7.1-openrotmg.16. Eight assertions pass: differently named entrances, occupancy-specific Full, refusal preserving the exact living Nexus session and inventory, reopening after departure, exact distinct Realm destinations, both original lives and identity/equipment/XP/inventory-revision round trips. Actual Full and reopened native PNGs are inspected and publicly attached. Command0, reclaimed successful service, cleanup errors empty;137173wallms. Each browser uses its distinct owned creation receipt.",
+      "limitations": "Two prepared local characters and one-slot test capacity, not production72/85-player load, ordinary progression, earned closure or historical name/capacity/accounting policy. Patched current client is not pristine original-SWF fidelity proof. The earlier 47b061f6/client4d take and failed setup/owner-collision takes remain separately scoped. This successful current-input run does not explain or waive the old identical-revision tick-ACK-stop in PR1191. No cold-restart, process-attestation or whole-feature historical acceptance."
+    },
+    "realm-replacement-native-8837a2ed": {
+      "kind": "native",
+      "revision": "8837a2ede5efb9a03bb1ffdaf3567b39a0a668f7",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084",
+      "checks": [
+        "realm:realm-closure",
+        "home:browse-realm-portals"
+      ],
+      "method": "Fresh managed run32fa07ebfe1d42688af41ae45c522977 uses clean8837a2ed and current clientc8ca97152e09869af06d5f3b01e876ff6f0ce392. Nine prepared native assertions pass: original entrance round trip, refusal to repeat closure preparation after enrollment, native defeat of the prepared final hero, selected entrance disappearance, real-countdown same-character Castle handoff, fresh legal replacement, independent stationary other entrance, replacement-portal entry and living identity/inventory/revision preservation. Command0, reclaimed successful service, cleanup errors empty;236871wallms.",
+      "limitations": "Prepared final one-HP hero, temporary protection and lowered test capacity. Not an earned normal roster clear or earned event completion. Native input/state checks do not independently establish rendered Castle/camera-shake pixels, every eligible recipient, forced pending-departure suppression, measured two-second publication delay, cold database/restart durability, production load or historical policy. This run is bound to candidate8837a2ed, not relabeled as execution at the final merge."
+    },
     "realm-event-zone-source-be9d76f1": {
       "kind": "source",
       "revision": "be9d76f1724bb81430bbf26a706a9a0ebf7ce2a5",
@@ -6848,6 +6883,40 @@
       ],
       "method": "Pinned original SWF SHA25607ae4fc3ca021a5bf08bbf94f057f7620be18b85e01abd763b3a198382e8fa48. Retained hash-bound AS3 enum/parser/remapping maps raw effect14 to synthetic selector13 calling the camera; final case13 is not wire effect13. The camera ramps amplitude toward0.5 over10000ms, without an automatic timed stop in the inspected class. Corrected research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/787#issuecomment-6559527007",
       "limitations": "Retained-AS3 interpretation, not independent raw-ABC/P-code or native-render verification; the derivative enum is not the authority. The ten-second amplitude ramp is not a transfer/replacement timer or exact123.5.1 server-timing proof. Current effect14 needs no numerical correction; eight-second handoff and two-second post-departure publication remain reconstruction. No new trace, decompile or native run."
+    },
+    "realm-population-policy-a42d227": {
+      "kind": "source",
+      "revision": "a42d22765387247ee1d9855bc10d6cd07d007407",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/blob/a42d22765387247ee1d9855bc10d6cd07d007407/src/world/realm_population.rs",
+      "checks": [
+        "home:browse-realm-portals"
+      ],
+      "method": "Population allocation serializes one pending build, counts current slots separately from retained closed predecessors and protects players, admissions, initial-entry holds, reconnect grants, dungeon returns and collective routes. Initial count is configurable one to eight, default two; normal 72-player is unchanged. One empty spare is requested when possible. Surplus retirement needs another empty spare and continuous 300-second empty/dependency-free grace plus creation age. The final source preserves incoming public native-custody/testing changes without shipping the private test adapters.",
+      "limitations": "Numerical allocation/retirement rules are explicit reconstruction policy. Period sources establish population dependence, not these exact thresholds or target-version fidelity. Source inspection is not native execution of the new public SDK or final union executable."
+    },
+    "realm-population-prepared-native-p2-69714806": {
+      "kind": "native",
+      "revision": "69714806a162bacd0385b57f54c6df29df226fa3",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344",
+      "checks": [
+        "home:browse-realm-portals"
+      ],
+      "method": "P2 QA f1879f738d2f41768f85c02e73399fa0 passed: two original native Priests entered distinct normal 72-player Realms; exactly one empty spare grew the pool from two to three; one original entered that new Realm and escaped; a dependency-free empty surplus retired while another usable spare remained, its World/portal were absent, and both original characters returned alive to Nexus with unchanged items/base stats/XP. One original 500 ms native screenshot was reviewed.",
+      "limitations": "Prepared level20 numerical fixtures, seeds1344/1345, supplied gear and no stat overrides; not earned progression, a filled72-player admission/refusal run or representative load. Native server ELF da1de84886edb638c1a4d2b5f8ae960cde7aa70243b512279a0385e285148652 is private 69714806 plus actual readiness/observation seams, not the final public union ELF. Nexus game_ms is not policy age; the matched retirement/dependency-zero/removal/spare events support source-conditioned 300-second policy evidence only. Earlier failed runs remain failed; whole-feature status/history are unchanged."
+    },
+    "realm-population-prepared-native-c4-69714806": {
+      "kind": "native",
+      "revision": "69714806a162bacd0385b57f54c6df29df226fa3",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344",
+      "checks": [
+        "home:browse-realm-portals",
+        "realm:realm-closure"
+      ],
+      "method": "C4 QA83fb78365be749fe8426a202883868a7 passed: actual first-group atomic observations bound both original living READY actors to the same Realm before shot input. Accepted ordinary shots defeated the matched final hero. Ordered sealing/forced two-recipient Castle transfer/durable departure/publication preceded both original exact-successor3 LOADs and Nexus return. Both lived with original items/base stats/inventory revision and450 additional XP each. The original 500 ms Castle screenshot shows both characters and was reviewed.",
+      "limitations": "Pre-enrollment one-HP final Cyclops, singleton remaining-hero roster, cleared event reserves and arrival at the hero; other NPCs remain. Supplied level20 gear, seeds1344/1345 and no character stat/protection/AI overrides. Not an earned 49-encounter clear, whole-history acceptance, independent live 120 s or 2 s intervals certification or exact quake frames. Directory deadlines/order/publication guards are source-conditioned; post-transfer budget is explicitly conservative charged wall time, not a Castle-to-Directory clock comparison. Old C/C2/C3 failures are preserved. This uses private 69714806 observation-adapted ELF da1de84886edb638c1a4d2b5f8ae960cde7aa70243b512279a0385e285148652, not execution of the final public SDK/union. Whole-feature status remains not-run and historical partial."
     }
   },
   "results": {
@@ -6905,8 +6974,33 @@
     "realm:enemy-pursuit-and-collision": {"status":"not-run","evidence":["white-demon-range-regression-40a227b","white-demon-range-native-271002f","activation-radius-source-3c9a23a","visible-npc-simulation-source-b066eae"]},
     "realm:encounter-clock-semantics": {"status":"not-run","evidence":["visible-npc-simulation-source-b066eae"]},
     "realm:find-your-next-quest": {"status":"passed","evidence":["quest-window-source-d32bba3","quest-boss-source-7c4b974","quest-window-regression-a92ae06","quest-audio-source-88b271f","quest-audio-regression-88b271f","quest-audio-native-88b271f","quest-research-source-0af5f97","quest-selection-regression-0af5f97","quest-guidance-native-e191cdb"]},
-    "realm:realm-closure": {"status": "not-run","evidence": ["quest-event-source-322c425","quest-event-regression-322c425","oryx-count-regression-41e462f","oryx-count-native-829a4c1","realm-completion-regression-a972cb3","realm-welcome-native-9051115","closure-reward-regression-ebf04d1","castle-arrival-regression-ece8d95","castle-protocol-native-ece8d95","replacement-preparation-source-794eccf","realm-closure-regression-37199a5","realm-closure-native-partial-37199a5","castle-reconnect-client-a13c855","realm-closure-native-partial-42660ae","nexus-closure-prepared-native-49986bc","quake-selected-as3-d035245","realm-pending-credit-source-6dd0f153","realm-pending-credit-regression-6dd0f153"]},
-    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115","realm-closure-native-partial-42660ae","realm-pending-credit-source-6dd0f153","realm-pending-credit-regression-6dd0f153"]},
+    "realm:realm-closure": {
+      "status": "not-run",
+      "evidence": [
+        "quest-event-source-322c425",
+        "quest-event-regression-322c425",
+        "oryx-count-regression-41e462f",
+        "oryx-count-native-829a4c1",
+        "realm-completion-regression-a972cb3",
+        "realm-welcome-native-9051115",
+        "closure-reward-regression-ebf04d1",
+        "castle-arrival-regression-ece8d95",
+        "castle-protocol-native-ece8d95",
+        "replacement-preparation-source-794eccf",
+        "realm-closure-regression-37199a5",
+        "realm-closure-native-partial-37199a5",
+        "castle-reconnect-client-a13c855",
+        "realm-closure-native-partial-42660ae",
+        "nexus-closure-prepared-native-49986bc",
+        "quake-selected-as3-d035245",
+        "realm-pending-credit-source-6dd0f153",
+        "realm-pending-credit-regression-6dd0f153",
+        "realm-population-prepared-native-c4-69714806",
+        "realm-credit-caller-regression-12020c1b",
+        "realm-replacement-native-8837a2ed"
+      ]
+    },
+    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115","realm-closure-native-partial-42660ae","realm-pending-credit-source-6dd0f153","realm-pending-credit-regression-6dd0f153","realm-credit-caller-regression-12020c1b"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":["walk-dodge-source-5ee46b7","walk-dodge-native-5ee46b7","quicksand-native-5ee46b7","walk-dodge-collision-native-59e9f64","native-client-policy-a6e6b21","native-client-policy-regression-a6e6b21","native-client-policy-public-a925e79","movement-combat-source-4992445","selected-client-ui-source-2bf948c","native-movement-source-4e3c253","native-movement-regression-4e3c253","native-movement-native-dec809c","collision-slide-source-6b253a1","collision-slide-regression-6b253a1","collision-slide-native-6b253a1","progress-save-source-cfc803f","progress-save-regression-cb122554"]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-shot-policy-source-8fecf3d","native-shot-policy-native-8fecf3d","native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445","combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe","berserk-correction-source-d35bb9c","berserk-correction-regression-dd30ce7"]},
     "access:combat-status-feedback": {"status":"not-run","evidence":["combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe"]},
@@ -7120,7 +7214,24 @@
     "home:vault": {"status":"not-run","evidence":["void-background-source-15c1e17","void-background-regression-2e116c1","vault-research-d41caf26","vault-native-cc2cbebb","vault-regression-610ea798"]},
     "home:tutorial-and-kitchen": {"status":"not-run","evidence":["tutorial-prompts-native-96b2b3f","tutorial-continuity-native-96b2b3f","kitchen-transfer-failure-native-96b2b3f","kitchen-transfer-native-f319c16","partial-differences-source-4992445","tutorial-encounters-source-f807a22","tutorial-encounters-regression-f807a22","tutorial-encounters-native-3d0fb76","kitchen-encounters-native-940cb49","chicken-combat-exit-native-c33aa99","tutorial-research-f76c012","tutorial-lessons-native-21d1872"]},
     "home:choose-your-name": {"status": "not-run","evidence": ["name-claim-source-794eccf", "name-choice-research-08fb78dc", "name-choice-native-08fb78dc", "name-choice-regression-08fb78dc"]},
-    "home:browse-realm-portals": {"status": "not-run","evidence": ["crowd-entry-regression-460dfdc","crowd-entry-native-460dfdc","instance-allocation-source-794eccf","replacement-preparation-source-794eccf","realm-portals-research-bc0d2d4","realm-portals-regression-53cd07c","realm-portals-native-6ca925d","nexus-closure-prepared-native-49986bc"]},
+    "home:browse-realm-portals": {
+      "status": "not-run",
+      "evidence": [
+        "crowd-entry-regression-460dfdc",
+        "crowd-entry-native-460dfdc",
+        "instance-allocation-source-794eccf",
+        "replacement-preparation-source-794eccf",
+        "realm-portals-research-bc0d2d4",
+        "realm-portals-regression-53cd07c",
+        "realm-portals-native-6ca925d",
+        "nexus-closure-prepared-native-49986bc",
+        "realm-population-policy-a42d227",
+        "realm-population-prepared-native-p2-69714806",
+        "realm-population-prepared-native-c4-69714806",
+        "realm-portals-native-e1c678d8",
+        "realm-replacement-native-8837a2ed"
+      ]
+    },
     "home:buy-from-merchants": {"status":"passed","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d","merchant-purchases-source-b537b4d","merchant-regression-bc0d2d4","merchant-purchases-native-b537b4d"]},
     "home:gold-and-fame-balances": {"status": "not-run","evidence": ["wallets-native-6eeb28e","wallets-regression-b8f23e1","merchant-purchases-native-b537b4d","wallets-research-bff1292","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e","fame-swap-source-8f5d3d7","wallet-source-794eccf"]},
     "home:realm-gold-offers": {"status":"passed","evidence":["wallets-native-6eeb28e","wallets-regression-b8f23e1","wallets-research-bff1292","class-star-gold-regression-3cf9c2e","class-star-gold-native-3cf9c2e"]},
