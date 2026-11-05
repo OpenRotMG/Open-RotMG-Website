@@ -1433,7 +1433,8 @@
           "PR1084's earlier native walking take credits a Cyclops, Red Demon and transformed Ent once and admits one Cube God. It fails on route steering with 38 encounters remaining, not a completed closure/Castle journey: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990",
           "PR1356 adds nine prepared native closure/Castle/replacement checks at clean49986bc. One-HP final Cyclops setup and protection are not an earned clear; identity/items/revision observations are warm, not cold-restart proof: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1356",
           "Retained selected-client AS3 supports raw effect14 through remapped selector13. Its ten-second camera amplitude ramp is not a transfer timer; independent raw-ABC/P-code and native-render binding remain unverified. See the execution evidence for the pinned artifact and correction.",
-          "PR1402 fixes unrelated quest kills being withheld behind a pending event. Its source and unit regression do not establish an earned clear, event completion or native Castle arrival: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1402"
+          "PR1402 fixes unrelated quest kills being withheld behind a pending event. Its source and unit regression do not establish an earned clear, event completion or native Castle arrival: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1402",
+          "PR1409 adds a real endgame-caller pending-credit regression. PR1414 passes nine prepared current-client Castle/replacement checks; a one-HP final hero and temporary protection are not an earned clear: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084"
         ],
         "unknowns": [
           "January 6 and June 13, 2012 captures document two-minute sealing, but exact 123.5.1 continuity, earthquake duration and dungeon-player eligibility remain unverified. The June 2 objectives page says all players on the server without resolving dungeon eligibility. Quest flags and the June roster alone do not establish which roots count toward closure; transformation/minion exclusions remain qualified. Remaining historical questions and the earned multiplayer journey stay tracked at https://github.com/OpenRotMG/Open-RotMG-Server/issues/787.",
@@ -1464,7 +1465,8 @@
             "differences": [
               "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380",
               "PR1084's partial native take binds one Cyclops death to one Cube God admission. It does not complete that event or establish probability or repeatability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1084#issuecomment-6472832990",
-              "PR1402 lets another defeated root receive closure credit while preserving the original pending event. That original source still waits for an eligible site; eventual admission and completion remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1402"
+              "PR1402 lets another defeated root receive closure credit while preserving the original pending event. That original source still waits for an eligible site; eventual admission and completion remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1402",
+              "PR1409 verifies unrelated credit through the actual defeat/endgame caller while an event remains pending. Its fixture does not earn, admit or complete that event: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1409#issuecomment-6632229761"
             ],
             "unknowns": [
               "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."
@@ -1820,7 +1822,8 @@
           "Fixed-angle Ghost volleys now use the compiled primary engine's centered fans. Seven phase/kind regression cases and a 12-assertion prepared native Solo fight cover corrected arrows, ordinary ghost escalation, Master stages/release/decay, final King defeat, 500 XP once and one observed loot bag. This does not accept every branch, reward policy or historical AI: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1023#issuecomment-6451937183",
           "Three later clean prepared native runs add SmallGroup/Mob/HugeMob, timeout actor cleanup, two-contributor private rewards versus a noncontributor, one committed pickup/no duplicate and Nexus reconnect/cold SQLite retention. Earlier blocked throws admitted fewer ghosts than requested; current walkability/ownership guards remain. These are scene-bound checks, not original populations or whole-feature acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1038#issuecomment-6453903821",
           "PR1245 keeps authored Ghost King tower cells immutable while registering god-spawn exclusion bounds. Procedural tower terrain policy remains separate; ordinary AI and rewards remain unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1245",
-          "PR1333 centers only generated Tower anchors at (13,13), a collision-safe reconstruction adaptation rather than recovered original coordinates. Kithio intentionally uses +6 east and bypasses child landing collision; the later modified 7.0 comparator centers. An eastern idle+3/toss+4 regression and six clean prepared native checks cover Master admission and same-encounter release without health/phase overrides. Authored site.spawn anchors and collision/ownership/budget guards are unchanged. One authored probe passed, not every authored tower: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1333"
+          "PR1333 centers only generated Tower anchors at (13,13), a collision-safe reconstruction adaptation rather than recovered original coordinates. Kithio intentionally uses +6 east and bypasses child landing collision; the later modified 7.0 comparator centers. An eastern idle+3/toss+4 regression and six clean prepared native checks cover Master admission and same-encounter release without health/phase overrides. Authored site.spawn anchors and collision/ownership/budget guards are unchanged. One authored probe passed, not every authored tower: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1333",
+          "Stunning the King no longer discards the required Ghost Master. Four-tier regressions and a prepared native before/after pair cover the fix; birth guards and other casters are unchanged. This is not historical or whole-feature certification: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1410"
         ],
         "unknowns": [
           "Authenticated 123.5.1 phase clocks, Company vulnerability and Solo toss geometry; primary comparator values are not original certification.",
@@ -5488,11 +5491,13 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Mandatory Castle traversal, anti-rush bridges/wall/quiet towers, paired guardians and Chamber; teleport disabled, respawning armours grant no XP/fame.",
-        "differences": [],
+        "differences": [
+          "The map is a client capture of one live castle (2014-17) cut to the 2012-03-31 wikiwiki.jp map wall for wall; which of the four start islands players arrive on follows a later server's thresholds."
+        ],
         "unknowns": [
-          "Exact 123.5.1 bridge geometry and spawn cohorts remain unverified; the Project-B candidate has one spawn region.",
+          "Arrival cohorts per island remain unverified; the bridge, wall and Living Floor geometry matches the 2012-03-31 map.",
           "Selected XML gives authored and respawned Haunted Armor zero XP. Build 123.4.4 specifically names respawns but does not establish a separate XP-bearing original identity.",
-          "Ten-tile activation, home orbits, deterministic phases, guaranteed survivor sword and its timings remain reconstruction choices, not accepted historical probabilities or choreography. See #866."
+          "Guardian block weights and intervals, the survivor's throw timer, Brute state switching and guardian equipment rates are fitted to 2012 footage, not recovered rules. See #866."
         ],
         "sources": [
           {
@@ -5502,6 +5507,14 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.4.4",
             "label": "Build 123.4.4 release notes"
+          },
+          {
+            "url": "https://wikiwiki.jp/rmd/Oryx%27s%20Castle",
+            "label": "Castle map image uploaded March 31, 2012 (oryxcastlemap.png), after Build 122"
+          },
+          {
+            "url": "https://youtu.be/HLraOCBJO94?t=612",
+            "label": "March 19, 2012 run: last wall, Quiet Bombs, hall armors and a guardian fight"
           }
         ],
         "checks": [
@@ -5513,7 +5526,7 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Build 122 documents longer bridges, three-deep wall and Quiet towers, not exact dimensions. Initial-versus-respawn reward mapping remains qualified by selected zero-XP XML."],
+            "unknowns": ["The 2012-03-31 map fixes the bridges, the three-deep wall and the Living Floors; initial-versus-respawn reward mapping remains qualified by selected zero-XP XML."],
             "sources": [{"url":"https://wikiwiki.jp/rmd/version/build122.0.1","label":"February 2012 Castle anti-rush announcement"},{"url":"https://wikiwiki.jp/rmd/version/build123.4.4","label":"August 2012 respawn XP/fame exclusion"}],
             "group": "layout"
           },
@@ -5525,8 +5538,8 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Later comparators have startup/coordinated movement but empty survivor states; the mixed-era guide describes a stationary sword. Exact target activation, choreography, sword probability and loot rates remain unresolved."],
-            "sources": [{"url":"https://anticosmic.blogspot.com/2012/07/oryx-castle-drops.html","label":"Build 123.3.2 drop diary; author warns sample is inconclusive"},{"url":"https://www.realmeye.com/wiki/stone-guardians","label":"September 2021 guardian guide; not target-era choreography proof"}],
+            "unknowns": ["Wake, blocks, the survivor's stone heal and throw and the stationary sword are measured from 2012 footage; block weights, the throw timer and guardian equipment rates are fitted, not recovered."],
+            "sources": [{"url":"https://anticosmic.blogspot.com/2012/07/oryx-castle-drops.html","label":"Build 123.3.2 drop diary; author warns sample is inconclusive"},{"url":"https://youtu.be/bBQRbAoRP_g?t=337","label":"April 1, 2012 solo guardian fight: hit wake, attack blocks, survivor stone heal, sword throw and break"},{"url":"https://web.archive.org/web/20120519152554/http://forums.wildshadow.com/wiki/realm-mad-god/stone-guardian","label":"May 2012 Stone Guardian page: soulbound drop list"},{"url":"https://www.realmeye.com/wiki/stone-guardians","label":"September 2021 guardian guide; not target-era choreography proof"}],
             "group": "boss"
           }
         ]
@@ -5541,14 +5554,24 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "Chamber access, Oryx1 phases/summons/rewards, locked Cellar and Incantation unlock; teleport disabled; target minions stasis-susceptible and give small XP.",
-        "differences": [],
+        "differences": [
+          "Oryx's chase speed, the chase-grid and rage cadences, Assassin counts and his own dance attacks are estimates; per-phase invulnerability windows are not modelled."
+        ],
         "unknowns": [
-          "Full target-era choreography/taunts, loot eligibility/rates and original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
+          "Oryx1 phase order, lengths, taunts, rage and loot are measured from five 2012 fights; phase weights, the pool switch, loot recipient rules and the original unlock range/lifetime remain unresolved in server issue #867. Prepared Chamber checks do not establish earned Castle entry."
         ],
         "sources": [
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://youtu.be/w5koziG9P1M?t=148",
+            "label": "September 13, 2012 group fight on Build 123.5.1: wake, random phases, rage heal"
+          },
+          {
+            "url": "https://youtu.be/fzgFSFVN8nY?t=344",
+            "label": "August 10, 2012 solo fight: the whole randomized fight in real time"
           }
         ],
         "checks": [
@@ -5559,9 +5582,9 @@
             "acceptance": "Check opening and later phases, artifacts/gaze/rage, actual minion susceptibility/rewards and completion. Use selected projectile definitions rather than later IDs.",
             "implementation": "present",
             "historical": "partial",
-            "differences": ["Current bounded cycle omits planets/moons and the chasing grid described in the June 2012 build 123.0.0 guide; continuity into 123.5.1 is not established. Later Valor's written dance-two subgraph loops until the HP transition, unlike the current repeating 85-second scheduler."],
-            "unknowns": ["Exact target-era phase selection/timings, taunts and loot recipient/probability rules remain open in server issue #867. June guide describes three outer artifacts versus current/later-comparator four. The five inspected definitions match modified 7.0; that does not authenticate choreography."],
-            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
+            "differences": ["No White Moons appear in 2012 footage, so none are spawned; a stun burst during the white planets and per-phase invulnerability windows are not modelled."],
+            "unknowns": ["Phase weights and the pool switch near 48k HP are fitted; the heal count (7 in one HP overlay, 8 in the Japanese wiki), Oryx's own dance attacks and loot recipient rules remain open in server issue #867."],
+            "sources": [{"url":"https://wikiwiki.jp/rmd/version/build123.5.1","label":"Target-build Minion of Oryx Stasis/XP changes"},{"url":"https://web.archive.org/web/20120610072217id_/http://forums.wildshadow.com/wiki/realm-mad-god/oryx-mad-god","label":"June10,2012 capture; explicitly updated for123.0.0"},{"url":"https://youtu.be/ZdjeB9t-n5w","label":"June 28, 2012 duo fight in real time: artifacts, gaze, dance, black planets, chase grid and rage"},{"url":"https://web.archive.org/web/20120614192502id_/http://forums.wildshadow.com/node/80667","label":"April-May 2012 log of 100 Oryx kills: soulbound drops after Build 123"},{"url":"https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_OryxChamberCXML.dat","label":"Pinned modified7.0 definitions comparator"},{"url":"https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.Oryx.cs","label":"Later/custom Oryx1 state graph comparator, not target specification"}],
             "group": "boss"
           },
           {
@@ -6943,10 +6966,13 @@
           "Modern issue365 bot preference gives each available population leader weight6 and each quieter Realm weight1, without certifying an original-server probability: https://github.com/OpenRotMG/Open-RotMG-Server/pull/386#issuecomment-6372514998",
           "Issue901 distinguishes full-but-visible Realm entrances from closed/hidden entrances and XML-locked Wine Cellars. Kithio WorldClosed removes the portal; modified 7.0 ClosePortal instead clears Usable. These related comparators are not independent historical votes. The two/three-Realm limit and reservation-inclusive occupancy remain explicit reconstruction policies: https://github.com/OpenRotMG/Open-RotMG-Server/issues/901",
           "Clean native 6ca925d passed eight bounded browsing checks, including live Full/refusal, reopening, both destinations and inventory/identity-preserving Nexus returns. An identical-revision attempt stopped at the tick-ACK guard during return; an unchanged retry passing does not explain or fix it. Prepared one-slot capacity and characters are not an 85-player load, earned journey, native closure or historical acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1191#issuecomment-6483478106",
-          "PR1356 additionally verifies selected entrance disappearance, a fresh legal replacement binding/entry and the stationary independent entrance in a prepared native journey. Full earned-closure and load acceptance remain unproved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1356"
+          "PR1356 additionally verifies selected entrance disappearance, a fresh legal replacement binding/entry and the stationary independent entrance in a prepared native journey. Full earned-closure and load acceptance remain unproved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1356",
+          "Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344",
+          "Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344",
+          "PR1414 passes eight browsing/refusal/return checks on final mergee1c678d8 and current clientc8ca9715, plus nine candidate-bound prepared replacement checks. One-slot local capacity is not a population or historical pass; the old tick-ACK-stop remains unexplained: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084"
         ],
         "unknowns": [
-          "Exact 123.5.1 name pool, continuity of the January 2012 85-player/eight-portal description, and population accounting across dungeons/in-flight reservations. Current reconstruction allows two or three Realms and hides closed entrances. Prepared closure/removal/replacement now has bounded native evidence; normal earned closure and the unexplained tick-ACK-stop take on an otherwise passing browsing revision remain tracked in server issue901."
+          "Exact 123.5.1 name pool, continuity of the January 2012 85-player/eight-portal description, and population accounting across dungeons/in-flight reservations. The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently. Prepared closure/removal/replacement now has bounded native evidence; normal earned closure and the unexplained tick-ACK-stop take on an otherwise passing browsing revision remain tracked in server issue901."
         ],
         "sources": [
           {
@@ -6960,6 +6986,14 @@
           {
             "url": "https://chronicawesome.wordpress.com/2012/02/22/realm-of-the-mad-god/",
             "label": "February 22, 2012 player account: 85-player Realms and Medusa/Cyclops labels; other gameplay interpretations are not adopted"
+          },
+          {
+            "url": "https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus",
+            "label": "June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"
+          },
+          {
+            "url": "https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version",
+            "label": "July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"
           }
         ]
       }

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src {{API_ORIGIN}}; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Export save | Open RotMG</title>
+  <meta name="description" content="Download your personal Open RotMG account progress. Your live account stays intact.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="{{SITE_URL}}export/">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <meta name="openrotmg-api" content="{{API_ORIGIN}}">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="style.css">
+  <script src="{{BASE}}backend.js" defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body class="about-page">
+<div class="site-shell">
+  <main class="page-main"><div class="about-copy">
+    <h1>Export save</h1>
+    <p>Download your whole personal account to keep a copy of your progress. This is not a selected-character export. Your live account stays intact.</p>
+    <p>The file excludes live login credentials, but it is <strong>not anonymized</strong>. Names, artwork and death descriptions can identify you. Keep it private.</p>
+    <h2>Before you export</h2>
+    <p>Leave the game on every device and wait for your character to finish saving. Use your registered game email and password below. Guest accounts cannot export.</p>
+    <form id="export-form" autocomplete="off">
+      <label for="email">Game email</label>
+      <input id="email" type="email" autocomplete="off" maxlength="254" required>
+      <label for="password">Game password</label>
+      <input id="password" type="password" autocomplete="off" maxlength="128" required>
+      <button type="submit" disabled>Download account save</button>
+    </form>
+    <noscript><p>JavaScript is required to authenticate and download your save without putting credentials in a URL.</p></noscript>
+    <p id="status" role="status" aria-live="polite">Your credentials are sent only to the game server for this request. This page does not store them.</p>
+    <h2>Using your save offline</h2>
+    <p>Offline import uses a new local password, not your live password. Local progress does not sync back to the live game. See the <a href="{{BASE}}single-player/">single-player preview</a> for availability.</p>
+    <p>This file is personal progress, not a full local backup. Functioning guild membership, social relationships, trade receipts, rankings and external integrations do not transfer. Historical guild contribution and Discord Realm Close counts are inert history, not working offline features.</p>
+  </div></main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation</p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+  </footer>
+</div>
+</body>
+</html>
