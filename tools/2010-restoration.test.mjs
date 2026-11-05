@@ -808,9 +808,88 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
+function removeRealmSdkEvidence(data, evidence) {
+  const closure = data.features.find(row => row.id === 'realm:realm-closure');
+  assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
+  assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
+  assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^PR1414 passes eight/);
+  for (const ref of realmSdkRefs) {
+    for (const id of evidence.sources[ref].checks) evidence.results[id].evidence = evidence.results[id].evidence.filter(key => key !== ref);
+    delete evidence.sources[ref];
+  }
+}
+
+test('SDK caller and prepared native subchecks preserve all incoming evidence without promoting acceptance', () => {
+  const data = JSON.parse(read('public/restoration/progress.json'));
+  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  for (const [index, ref] of realmSdkRefs.entries()) {
+    const source = evidence.sources[ref];
+    assert.equal(source.kind, index ? 'native' : 'regression');
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...source.checks].sort());
+    for (const id of source.checks) assert.equal(evidence.results[id].status, 'not-run');
+  }
+  assert.match(evidence.sources[realmSdkRefs[0]].limitations, /Synthetic pending-event fixture.*not an earned event/);
+  assert.match(evidence.sources[realmSdkRefs[1]].limitations, /does not explain or waive.*tick-ACK-stop/);
+  assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
+  assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
+  removeRealmSdkEvidence(data, evidence);
+  assert.equal(digest(JSON.stringify(data)), 'fdff0387f458b682b6c6356d087617c2e7321ffc68bdcbc6dbb6845a0e983e6c');
+  assert.equal(digest(JSON.stringify(evidence)), '541745ff1bb4adbfce80663488a0756ba172797ef8d2e262698780aedfed66fc');
+});
+
+const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
+function peelPopulation1344(data, evidence) {
+  const refs = Object.keys(population1344.fingerprints);
+  for (const [ref, hash] of Object.entries(population1344.fingerprints)) {
+    assert.ok(Object.hasOwn(evidence.sources, ref));
+    assert.equal(digest(JSON.stringify(evidence.sources[ref])), hash);
+    delete evidence.sources[ref];
+  }
+  const audit = data.features.find(row => row.id === 'home:browse-realm-portals').audit;
+  assert.equal(audit.historical, 'partial');
+  assert.deepEqual(audit.differences.splice(-2), population1344.notes);
+  assert.equal(audit.unknowns[0].split(population1344.newClause).length, 2);
+  audit.unknowns[0] = audit.unknowns[0].replace(population1344.newClause, population1344.oldClause);
+  assert.deepEqual(audit.sources.splice(-2), population1344.period);
+  for (const [id, expected] of [['home:browse-realm-portals', refs], ['realm:realm-closure', [refs[2]]]]) {
+    const row = evidence.results[id];
+    assert.equal(row.status, 'not-run');
+    assert.equal(row.evidence.filter(ref => refs.includes(ref)).length, expected.length);
+    assert.deepEqual(row.evidence.splice(-expected.length), expected);
+  }
+}
+
+test('1344 prepared pool and two-life closure evidence preserve actual69d values without promoting whole-feature/history acceptance', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+  const preserve = (data, evidence) => {
+    removeRealmSdkEvidence(data, evidence);
+    peelPopulation1344(data, evidence);
+    assert.equal(digest(JSON.stringify(data)), '324e87d46bfef7a264f70e2fbae18e7b313421bcb46d8271c51b53a8944cfd4a');
+    assert.equal(digest(JSON.stringify(evidence)), '753ed57e43ba1c09f1d35b5913d7331c6006e24a1802caa995ee4bc44184563a');
+  };
+  preserve(...fresh());
+  for (const mutate of [
+    (data, evidence) => evidence.results['home:browse-realm-portals'].status = 'passed',
+    data => data.features.find(row => row.id === 'home:browse-realm-portals').audit.historical = 'known-differences',
+    (data, evidence) => evidence.sources['nexus-closure-prepared-native-49986bc'].method += 'changed old evidence',
+    (data, evidence) => evidence.sources[Object.keys(population1344.fingerprints)[0]].method += 'incorrect new payload',
+    (data, evidence) => evidence.sources['realm-population-extra-fake'] = {kind: 'source'},
+    (data, evidence) => delete evidence.sources[Object.keys(population1344.fingerprints)[0]],
+    data => data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(),
+    (data, evidence) => evidence.results['home:browse-realm-portals'].evidence.push(Object.keys(population1344.fingerprints)[0]),
+    data => data.scope.target = 'different target',
+    (data, evidence) => evidence.sourceReview.unexpected = true,
+  ]) {
+    const pair = fresh();mutate(...pair);assert.throws(() => preserve(...pair));
+  }
+});
+
 test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
   const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  removeRealmSdkEvidence(data, evidence);
+  peelPopulation1344(data, evidence);
   const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
   const ids = ['realm:realm-closure', 'realm:event-admission'];
   const closure = data.features.find(row => row.id === ids[0]);
@@ -835,14 +914,14 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), '2d542f17d7b661ac4b83d20643eb79813d57a2420cdc2ce7a08aa0697585b3e4');
+  assert.equal(digest(JSON.stringify(data)), '885ed84235583ae067a858a0135a885e7e1828377fe39360c8c548cf06699147');
   assert.equal(digest(JSON.stringify(evidence)), 'a1aad2e7f99aa898fcf96027160d84babc4c6414eeb70c21b2a91ecbc7fd1db7');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '46e90930954b5d6ece2066218e384124d56f78c85893d79caddfc80df18c7470');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '36fddec159260f4f44de8f81f64482ac7d9900b52ca9ae440cc18eef44fe3875');
+  assert.equal(digest(bytes), '608fa86cb0e2d257c20a8a405449961e37f72edbc2261acf8b31ab1ceaff8fe5');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '1d2395a92a19eb1c28b039674b276039b703149f2d9710f48b66687a33807edf');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);

@@ -17,6 +17,22 @@ export function ranked(players, board) {
   let rank = 0, previous;
   return sorted.map((player, i) => {if (previous !== player[board]) rank = i + 1; previous = player[board]; return {...player, rank};});
 }
+export function reviewedAccounts(findings) {
+  if (!Array.isArray(findings)) throw new Error('Malformed reviewed findings');
+  const reviewed=new Map();
+  for (const finding of findings) {
+    if (!finding || Object.keys(finding).sort().join(',')!=='account,reviewed_on' || !Number.isSafeInteger(finding.account) || finding.account<1 || reviewed.has(finding.account) || !/^\d{4}-\d{2}-\d{2}$/.test(finding.reviewed_on) || new Date(`${finding.reviewed_on}T00:00:00Z`).toISOString().slice(0,10)!==finding.reviewed_on) throw new Error('Malformed reviewed finding');
+    reviewed.set(finding.account,finding.reviewed_on);
+  }
+  return reviewed;
+}
+export function cheatingLabel(account,reviewed) {
+  return reviewed.has(account)?`Cheating confirmed by manual review on ${reviewed.get(account)}. Account marker, not a verdict on this individual score.`:null;
+}
+function addBadge(node,account,reviewed) {
+  const label=cheatingLabel(account,reviewed);
+  if (label!==null) {const badge=el('span','cheating-badge','🤡');badge.title=label;badge.setAttribute('role','img');badge.setAttribute('aria-label',label);node.append(badge);}
+}
 const classes = {768:'Rogue',775:'Archer',782:'Wizard',784:'Priest',797:'Warrior',798:'Knight',799:'Paladin',800:'Assassin',801:'Necromancer',802:'Huntress',803:'Mystic',804:'Trickster',805:'Sorcerer'};
 const families = {1:'Swords',2:'Daggers',3:'Bows',17:'Staves',8:'Wands',13:'Cloaks',15:'Quivers',11:'Spells',4:'Tomes',16:'Helms',5:'Shields',12:'Seals',18:'Poisons',19:'Skulls',20:'Traps',21:'Orbs',22:'Prisms',23:'Scepters',6:'Leather armor',7:'Heavy armor',14:'Robes',9:'Rings',10:'Consumables'};
 const familyOrder = [1,2,3,17,8,13,15,11,4,16,5,12,18,19,20,21,22,23,6,7,14,9,10].map(slot => families[slot]).concat('Cloths');
@@ -98,7 +114,7 @@ function equipment(character,catalog) {
   }
   return tray;
 }
-function renderCollection(profile,catalog,scores) {
+function renderCollection(profile,catalog,scores,reviewed) {
   if (!Array.isArray(scores.collectible_items) || !Array.isArray(profile.items) || typeof profile.name!=='string') throw new Error('Malformed collection response');
   const eligible=new Set(scores.collectible_items),found=new Map(profile.items.map(i=>[i.item,i.found_at]));
   if (found.size!==profile.items.length || [...found.values()].some(time=>!Number.isSafeInteger(time)||time<0)) throw new Error('Malformed collection dates');
@@ -111,6 +127,7 @@ function renderCollection(profile,catalog,scores) {
   const items=catalog.filter(i=>eligible.has(i.id));
   if (items.length!==eligible.size || [...found.keys()].some(id=>!eligible.has(id))) throw new Error('Collection catalogue does not match the server');
   document.querySelector('#title').textContent=`${profile.name}’s collection`;
+  addBadge(document.querySelector('#title'),profile.account,reviewed);
   document.querySelector('#collected').textContent=`${found.size} / ${items.length}`;
   const total=document.querySelector('#collection-progress');total.max=items.length;total.value=found.size;
   const sets=document.querySelector('#sets');
@@ -146,20 +163,20 @@ async function start() {
   const status=document.querySelector('#status'),catalog=await json('items.json');
   if (account!==null) {
     if (!/^[1-9]\d*$/.test(account)) throw new Error('Invalid player');
-    const [profile,scores]=await Promise.all([json(`/api/collection/${account}`),json('/api/hiscores')]);
+    const [profile,scores,findings]=await Promise.all([json(`/api/collection/${account}`),json('/api/hiscores'),json('reviewed.json')]);
     if (profile.account!==Number(account)) throw new Error('Collection account does not match request');
-    renderCollection(profile,catalog,scores);status.hidden=true;return;
+    renderCollection(profile,catalog,scores,reviewedAccounts(findings));status.hidden=true;return;
   }
   document.querySelector('#metric').textContent=boards[board].title;
   const search=document.querySelector('#search'),body=document.querySelector('tbody'),byID=new Map(catalog.map(i=>[i.id,i]));
-  let rows=[],best=new Map();
+  let rows=[],best=new Map(),reviewed=new Map();
   const render=()=>{
     body.replaceChildren();
     for (const player of rows.filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase().trim()))) {
       const character=best.get(player.account),row=el('tr'),rank=el('td','rank',player.rank),identity=el('td'),name=el('div','player-identity');
       const playerLink=el(board==='collection'?'a':'span','player-name',player.name);
       if (board==='collection') playerLink.href=`?board=collection&player=${player.account}`;
-      name.append(portrait(character),playerLink);identity.append(name);
+      name.append(portrait(character),playerLink);addBadge(name,player.account,reviewed);identity.append(name);
       const gear=el('td','equipment');gear.append(equipment(character,byID));
       const value=el('td','metric-value');
       if (board==='collection') {const link=el('a','',player.collection.toLocaleString());link.href=`?board=collection&player=${player.account}`;link.setAttribute('aria-label',`${player.name}’s collection: ${player.collection} items`);value.append(link);}
@@ -171,9 +188,9 @@ async function start() {
   search.addEventListener('input',render);
   const refresh=async()=>{
     try {
-      const [scores,deaths]=await Promise.all([json('/api/hiscores'),graveyard()]);rows=ranked(scores.players,board);best=highestFameDeaths(deaths);render();
+      const [scores,deaths,findings]=await Promise.all([json('/api/hiscores'),graveyard(),json('reviewed.json')]);rows=ranked(scores.players,board);best=highestFameDeaths(deaths);reviewed=reviewedAccounts(findings);render();
       document.querySelector('#population').textContent=`${rows.length} players`;document.querySelector('#rankings').hidden=false;status.hidden=true;
-    } catch(error) {status.hidden=false;status.textContent=`Update failed: ${error.message}`;console.error(error);}
+    } catch(error) {document.querySelector('#rankings').hidden=true;status.hidden=false;status.textContent=`Update failed: ${error.message}`;console.error(error);}
   };
   await refresh();setInterval(refresh,60000);
 }
