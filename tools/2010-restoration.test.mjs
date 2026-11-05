@@ -829,12 +829,12 @@ function peelManor1384(data, evidence) {
   }
 }
 
-test('1384 initial-only payload inverse preserves every actual51d value and rejects narrow mutations', () => {
+test('1384 initial-only payload inverse preserves every actualc14 value and rejects narrow mutations', () => {
   const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
   const preserve = (data, evidence) => {
     peelManor1384(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), 'a9436497cd9f27e6a077540eb9389a605325b9268cb471a376265b4240c2cdc9');
-    assert.equal(digest(JSON.stringify(evidence)), 'f0f9ab9844a0772335eab4b32ff266c7deb0bedb206f42b8571936a3eeef51cf');
+    assert.equal(digest(JSON.stringify(data)), '9457b8172df2e9c1ca0b56270eb8198a85ec434138704e6f060526a245613b57');
+    assert.equal(digest(JSON.stringify(evidence)), '0138b6b68d3b2bd2ddbdc910fdad9e683128c90d63f4924e4caaf4cd9e63f81a');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -851,9 +851,39 @@ test('1384 initial-only payload inverse preserves every actual51d value and reje
   }
 });
 
+const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
+function removeRealmSdkEvidence(data, evidence) {
+  peelManor1384(data, evidence);
+  const closure = data.features.find(row => row.id === 'realm:realm-closure');
+  assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
+  assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
+  assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^PR1414 passes eight/);
+  for (const ref of realmSdkRefs) {
+    for (const id of evidence.sources[ref].checks) evidence.results[id].evidence = evidence.results[id].evidence.filter(key => key !== ref);
+    delete evidence.sources[ref];
+  }
+}
+
+test('SDK caller and prepared native subchecks preserve all incoming evidence without promoting acceptance', () => {
+  const data = JSON.parse(read('public/restoration/progress.json'));
+  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  for (const [index, ref] of realmSdkRefs.entries()) {
+    const source = evidence.sources[ref];
+    assert.equal(source.kind, index ? 'native' : 'regression');
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...source.checks].sort());
+    for (const id of source.checks) assert.equal(evidence.results[id].status, 'not-run');
+  }
+  assert.match(evidence.sources[realmSdkRefs[0]].limitations, /Synthetic pending-event fixture.*not an earned event/);
+  assert.match(evidence.sources[realmSdkRefs[1]].limitations, /does not explain or waive.*tick-ACK-stop/);
+  assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
+  assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
+  removeRealmSdkEvidence(data, evidence);
+  assert.equal(digest(JSON.stringify(data)), 'a9436497cd9f27e6a077540eb9389a605325b9268cb471a376265b4240c2cdc9');
+  assert.equal(digest(JSON.stringify(evidence)), 'f0f9ab9844a0772335eab4b32ff266c7deb0bedb206f42b8571936a3eeef51cf');
+});
+
 const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
 function peelPopulation1344(data, evidence) {
-  peelManor1384(data, evidence);
   const refs = Object.keys(population1344.fingerprints);
   for (const [ref, hash] of Object.entries(population1344.fingerprints)) {
     assert.ok(Object.hasOwn(evidence.sources, ref));
@@ -877,6 +907,7 @@ function peelPopulation1344(data, evidence) {
 test('1344 prepared pool and two-life closure evidence preserve actual69d values without promoting whole-feature/history acceptance', () => {
   const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
   const preserve = (data, evidence) => {
+    removeRealmSdkEvidence(data, evidence);
     peelPopulation1344(data, evidence);
     assert.equal(digest(JSON.stringify(data)), '65f9e71b33ac67233aa5e31150ae8d58424a9ebfac71223ed40c6c6ec86bd295');
     assert.equal(digest(JSON.stringify(evidence)), 'd9258c21b2d0776d5b64b60fe632399a1e6517389013c34effb409e3bdaf3357');
@@ -901,6 +932,7 @@ test('1344 prepared pool and two-life closure evidence preserve actual69d values
 test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
   const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  removeRealmSdkEvidence(data, evidence);
   peelPopulation1344(data, evidence);
   const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
   const ids = ['realm:realm-closure', 'realm:event-admission'];
@@ -932,8 +964,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '16232fa35b0d2b899180c2cdfdb8baa379913e9b01661b53be80b1ceff0e524b');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '63b7569281dbae51730a3279619ee7e87b942e0b87c747c5cd000b73776425eb');
+  assert.equal(digest(bytes), '1931b412281d304f36a3f2ed404596cdd42dda73a61db9059361e96d62cc3b0c');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '145e20768d5caee1e0c953dd80e20bf67849db0c024193e9737ce393f8997b0b');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);

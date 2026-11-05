@@ -25,6 +25,41 @@
       "method": "Parent-accepted paired PREPARED INITIAL visibility subsets: B4 startup before is a controlled intentional inverse of exactly the two Manor membership predicates on aab, NOT reporterf2ce code; separate fixedStartupONLY after uses actual fixedaab. Both same selected Manor12351, Wizard20/growth1384/statsnull, naturalHP564/conditions0, pose79.5,98.5, staff0xb08 only/empty other gear and bag, same original3000HP wall/damage{}, zero ownshots/hits/projectileHits/projectiles. Full actual native_state/inspect/TargetInfo/bootstrap bracketing proofs equal at World/tick/Directory/sharedelapsed0, frontend naturally playing/unoccluded before first SDK pause/pageclock. Before both brackets disclose known77,98 ground108; fixed both withhold77,98 and retain the wall face. Parent personally viewed originals SHA408a910607906e2758b32c73a09b0c7197bb11de93c326f470592a6822e76ac7 before and b03a629362ef5db5799067ec21515e2d27455b3661f8f2ba3710a99a224c3762 after: room leaks behind closed bookshelf before, black behind it after. After QA275928 passes with zero actions/elapsed and empty cleanup; executedc6ebb fixed ELF equals completed genuine new prebuild. Client4d171/rawSWF07ae/Ruffle0.7.1-openrotmg.16/bundle579236, private owned state/profiles/displays; actual float DOM8,123.875 at800x600/DPR1/scale1, no image editing.",
       "limitations": "ONLY static initial visibility with prepared backend paused0 and naturally playing native frontend, not normal unpaused gameplay, earned entry, combat survival, native weapon breaking, stationary post-break opening, whole-Manor or historical acceptance. WHOLE B4 later100ms case remains FAILED: finalWorld650 HP245 alive but Confused1024 violates condition0; A4 permanently stopped/unconsumed. Its100msPNG456d is NOT accepted: successful when observationWorld50 does not atomically bind capture state. Before is intentional source inversion, not recovered reporter pixels. Source-sent/API/page-qualified binding, not captured/decrypted MAPINFO or Flash internalinitialMap proof. All raw-index/raw.d continuity failures remain FAILED/unwaived, writer/cause unknown. Native evidence is frozen aab/controlledinverse, not a claim that current-union tests were native-tested; public CI/defaultclient selection is separate from local4d/.16 verification."
     },
+    "realm-credit-caller-regression-12020c1b": {
+      "kind": "regression",
+      "revision": "12020c1b46d0c656cf1d695de8938d2cac534198",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1409#issuecomment-6632229761",
+      "checks": [
+        "realm:realm-closure",
+        "realm:event-admission"
+      ],
+      "method": "PR1409 calls real defeat_entity and Directory.endgame_step twice with an already-pending event and occupied reserved sites. It verifies unrelated credit once, retention of the pending source, unchanged reserves, open admission and independent other Realm. Restoring the pre1402 Waiting result fails this regression; restoring current behavior passes. Pinned Rust1.94.1 targeted runs pass. Public CI41840478878 passes499 Rust tests; its executed merge tree equals the final ddd87d33 merge tree.",
+      "limitations": "Synthetic pending-event fixture at the actual caller boundary, not an earned event, native kill, admission/completion, full clear, Castle journey, rendered Phoenix arrow or historical policy. Counterfactual failure remains recorded. This adds a stronger regression subcheck without changing whole-feature gameplay or historical statuses."
+    },
+    "realm-portals-native-e1c678d8": {
+      "kind": "native",
+      "revision": "e1c678d8bf6f7a3b738e6529bd6481bbc8235e76",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084",
+      "checks": [
+        "home:browse-realm-portals"
+      ],
+      "method": "Fresh managed run fd3e79021ae84bfa879adfdc2b3c4f3e uses clean final mergee1c678d8 and current clientc8ca97152e09869af06d5f3b01e876ff6f0ce392 with patched Ruffle0.7.1-openrotmg.16. Eight assertions pass: differently named entrances, occupancy-specific Full, refusal preserving the exact living Nexus session and inventory, reopening after departure, exact distinct Realm destinations, both original lives and identity/equipment/XP/inventory-revision round trips. Actual Full and reopened native PNGs are inspected and publicly attached. Command0, reclaimed successful service, cleanup errors empty;137173wallms. Each browser uses its distinct owned creation receipt.",
+      "limitations": "Two prepared local characters and one-slot test capacity, not production72/85-player load, ordinary progression, earned closure or historical name/capacity/accounting policy. Patched current client is not pristine original-SWF fidelity proof. The earlier 47b061f6/client4d take and failed setup/owner-collision takes remain separately scoped. This successful current-input run does not explain or waive the old identical-revision tick-ACK-stop in PR1191. No cold-restart, process-attestation or whole-feature historical acceptance."
+    },
+    "realm-replacement-native-8837a2ed": {
+      "kind": "native",
+      "revision": "8837a2ede5efb9a03bb1ffdaf3567b39a0a668f7",
+      "date": "2026-11-04",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/pull/1414#issuecomment-6634801084",
+      "checks": [
+        "realm:realm-closure",
+        "home:browse-realm-portals"
+      ],
+      "method": "Fresh managed run32fa07ebfe1d42688af41ae45c522977 uses clean8837a2ed and current clientc8ca97152e09869af06d5f3b01e876ff6f0ce392. Nine prepared native assertions pass: original entrance round trip, refusal to repeat closure preparation after enrollment, native defeat of the prepared final hero, selected entrance disappearance, real-countdown same-character Castle handoff, fresh legal replacement, independent stationary other entrance, replacement-portal entry and living identity/inventory/revision preservation. Command0, reclaimed successful service, cleanup errors empty;236871wallms.",
+      "limitations": "Prepared final one-HP hero, temporary protection and lowered test capacity. Not an earned normal roster clear or earned event completion. Native input/state checks do not independently establish rendered Castle/camera-shake pixels, every eligible recipient, forced pending-departure suppression, measured two-second publication delay, cold database/restart durability, production load or historical policy. This run is bound to candidate8837a2ed, not relabeled as execution at the final merge."
+    },
     "realm-event-zone-source-be9d76f1": {
       "kind": "source",
       "revision": "be9d76f1724bb81430bbf26a706a9a0ebf7ce2a5",
@@ -6966,10 +7001,12 @@
         "quake-selected-as3-d035245",
         "realm-pending-credit-source-6dd0f153",
         "realm-pending-credit-regression-6dd0f153",
-        "realm-population-prepared-native-c4-69714806"
+        "realm-population-prepared-native-c4-69714806",
+        "realm-credit-caller-regression-12020c1b",
+        "realm-replacement-native-8837a2ed"
       ]
     },
-    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115","realm-closure-native-partial-42660ae","realm-pending-credit-source-6dd0f153","realm-pending-credit-regression-6dd0f153"]},
+    "realm:event-admission": {"status":"not-run","evidence":["quest-event-source-322c425","quest-event-regression-322c425","quest-event-native-741def5","realm-completion-regression-a972cb3","realm-welcome-native-9051115","realm-closure-native-partial-42660ae","realm-pending-credit-source-6dd0f153","realm-pending-credit-regression-6dd0f153","realm-credit-caller-regression-12020c1b"]},
     "realm:walk-and-dodge": {"status":"not-run","evidence":["walk-dodge-source-5ee46b7","walk-dodge-native-5ee46b7","quicksand-native-5ee46b7","walk-dodge-collision-native-59e9f64","native-client-policy-a6e6b21","native-client-policy-regression-a6e6b21","native-client-policy-public-a925e79","movement-combat-source-4992445","selected-client-ui-source-2bf948c","native-movement-source-4e3c253","native-movement-regression-4e3c253","native-movement-native-dec809c","collision-slide-source-6b253a1","collision-slide-regression-6b253a1","collision-slide-native-6b253a1","progress-save-source-cfc803f","progress-save-regression-cb122554"]},
     "realm:shoot-and-take-damage": {"status":"not-run","evidence":["native-shot-policy-source-8fecf3d","native-shot-policy-native-8fecf3d","native-dex-regression-c531740","native-dex-native-e736c05","movement-combat-source-4992445","combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe","berserk-correction-source-d35bb9c","berserk-correction-regression-dd30ce7"]},
     "access:combat-status-feedback": {"status":"not-run","evidence":["combat-source-6e52062","combat-regression-6014fce","combat-native-6474dfe"]},
@@ -7196,7 +7233,9 @@
         "nexus-closure-prepared-native-49986bc",
         "realm-population-policy-a42d227",
         "realm-population-prepared-native-p2-69714806",
-        "realm-population-prepared-native-c4-69714806"
+        "realm-population-prepared-native-c4-69714806",
+        "realm-portals-native-e1c678d8",
+        "realm-replacement-native-8837a2ed"
       ]
     },
     "home:buy-from-merchants": {"status":"passed","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d","merchant-purchases-source-b537b4d","merchant-regression-bc0d2d4","merchant-purchases-native-b537b4d"]},
