@@ -834,8 +834,8 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
-  assert.equal(digest(JSON.stringify(data)), 'fdff0387f458b682b6c6356d087617c2e7321ffc68bdcbc6dbb6845a0e983e6c');
-  assert.equal(digest(JSON.stringify(evidence)), '541745ff1bb4adbfce80663488a0756ba172797ef8d2e262698780aedfed66fc');
+  assert.equal(digest(JSON.stringify(data)), '92f50f4a2cf76c6eb8c0e6cd6dc0c001f7a13aa97d403831bbd24e9b3b0ba2f7');
+  assert.equal(digest(JSON.stringify(evidence)), '7cef0f77ecd4e07394601c6821eb56fbc79ad52ff2c8273235b901c1b6a5568e');
 });
 
 const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
@@ -865,8 +865,8 @@ test('1344 prepared pool and two-life closure evidence preserve actual69d values
   const preserve = (data, evidence) => {
     removeRealmSdkEvidence(data, evidence);
     peelPopulation1344(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), '324e87d46bfef7a264f70e2fbae18e7b313421bcb46d8271c51b53a8944cfd4a');
-    assert.equal(digest(JSON.stringify(evidence)), '753ed57e43ba1c09f1d35b5913d7331c6006e24a1802caa995ee4bc44184563a');
+    assert.equal(digest(JSON.stringify(data)), 'dca0694a8600e531d991ed76b2734ec643a173b190705bc4fb34cbf47e096299');
+    assert.equal(digest(JSON.stringify(evidence)), 'd37947a2e0079922f9f1628cd7156c2f89181db457047007caa77baadd83a5a6');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -914,14 +914,14 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), '885ed84235583ae067a858a0135a885e7e1828377fe39360c8c548cf06699147');
-  assert.equal(digest(JSON.stringify(evidence)), 'a1aad2e7f99aa898fcf96027160d84babc4c6414eeb70c21b2a91ecbc7fd1db7');
+  assert.equal(digest(JSON.stringify(data)), 'e3599b69bc85927f3b83818139332de73ae38b88b93d2aed95a94e1c46f72dba');
+  assert.equal(digest(JSON.stringify(evidence)), '07a6e389013bc4bd82e95613a10dec79cee33ec1ae2cf717354bd553dc2fae36');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '608fa86cb0e2d257c20a8a405449961e37f72edbc2261acf8b31ab1ceaff8fe5');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '1d2395a92a19eb1c28b039674b276039b703149f2d9710f48b66687a33807edf');
+  assert.equal(digest(bytes), '76024fb4148e5da292dd6221ed6cdaf3fc775107686850fcc31a6ded4610060d');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'f4f3067a12b74fd045c5621db8375119f82770278c3573ca3dacc8cddcc5659f');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
