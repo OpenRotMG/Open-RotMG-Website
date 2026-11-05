@@ -1,5 +1,5 @@
 export const boards = {
-  collection: {title: 'Collection', description: 'Items personally picked up from enemy drops'},
+  collection: {title: 'Collection', description: 'Items personally picked up from enemy drops and reward chests'},
   achievements: {title: 'Achievements', description: 'Achievements earned once per account.'},
   total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'},
   base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'},
@@ -61,6 +61,12 @@ export function ownershipCounts(ownership, eligible) {
   }
   return counts;
 }
+export function collectionSource(entry) {
+  if (entry===undefined) return 'Not yet obtained';
+  if (entry.source===null) return 'Source not recorded';
+  if (typeof entry.source!=='string' || !entry.source.trim() || [...entry.source].length>128 || /[\u0000-\u001f\u007f-\u009f]/.test(entry.source)) throw new Error('Malformed collection source');
+  return entry.source;
+}
 const percent=(count,total)=>new Intl.NumberFormat('en',{maximumFractionDigits:1}).format(100*count/total);
 export function highestFameDeaths(deaths) {
   if (!Array.isArray(deaths)) throw new Error('Malformed graveyard response');
@@ -117,8 +123,9 @@ function equipment(character,catalog) {
 }
 function renderCollection(profile,catalog,scores,reviewed) {
   if (!Array.isArray(scores.collectible_items) || !Array.isArray(profile.items) || typeof profile.name!=='string') throw new Error('Malformed collection response');
-  const eligible=new Set(scores.collectible_items),found=new Map(profile.items.map(i=>[i.item,i.found_at]));
-  if (found.size!==profile.items.length || [...found.values()].some(time=>!Number.isSafeInteger(time)||time<0)) throw new Error('Malformed collection dates');
+  const eligible=new Set(scores.collectible_items),found=new Map(profile.items.map(i=>[i.item,i]));
+  if (found.size!==profile.items.length || [...found.values()].some(entry=>!Number.isSafeInteger(entry.found_at)||entry.found_at<0)) throw new Error('Malformed collection dates');
+  for (const entry of found.values()) collectionSource(entry);
   const owners=ownershipCounts(profile.ownership,eligible),dialog=document.querySelector('#item-dialog');
   document.querySelector('#item-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{
@@ -146,7 +153,8 @@ function renderCollection(profile,catalog,scores,reviewed) {
       tile.addEventListener('click',()=>{
         document.querySelector('#item-preview').replaceChildren(sprite(item));
         document.querySelector('#item-name').textContent=item.name;
-        document.querySelector('#item-date').textContent=obtained?new Date(found.get(item.id)*1000).toLocaleString('en-GB',{timeZone:'UTC',dateStyle:'long',timeStyle:'long'}):'Not yet obtained';
+        document.querySelector('#item-date').textContent=obtained?new Date(found.get(item.id).found_at*1000).toLocaleString('en-GB',{timeZone:'UTC',dateStyle:'long',timeStyle:'long'}):'Not yet obtained';
+        document.querySelector('#item-source').textContent=collectionSource(found.get(item.id));
         const count=owners.get(item.id),population=profile.ownership.players;
         document.querySelector('#item-owners').textContent=`${percent(count,population)}% of players · ${count} / ${population}`;
         dialog.showModal();

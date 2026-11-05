@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts,achievementSets,achievementDate} from '../public/hiscores/app.js';
+import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts,collectionSource,achievementSets,achievementDate} from '../public/hiscores/app.js';
 
 test('achievement board ranks committed counts including zero and ties',()=>{
  assert.equal(boards.achievements?.title,'Achievements');
@@ -97,6 +97,17 @@ test('achievement detail dialog is accessible and API errors remain visible',asy
  for(const text of ['id="achievements"','id="achievement-dialog" aria-labelledby="achievement-name"','aria-label="Close achievement details"','aria-label="Achievement progress"'])assert.ok(index.includes(text));
  assert.ok(app.includes('renderAchievements(profile,scores,reviewedAccounts(findings))'));
  assert.ok(app.includes("addBadge(document.querySelector('#achievement-title'),profile.account,reviewed)"));assert.ok(app.includes('status.textContent=error.message'));assert.ok(app.includes("redirect:'error'"));
+});
+
+test('collection sources distinguish original enemies, chests, legacy records and missing items',()=>{
+ assert.equal(collectionSource({source:'Medusa'}),'Medusa');
+ assert.equal(collectionSource({source:'Oasis Giant chest'}),'Oasis Giant chest');
+ for (const count of [100,128]) assert.equal(collectionSource({source:'😀'.repeat(count)}),'😀'.repeat(count));
+ assert.throws(()=>collectionSource({source:'😀'.repeat(129)}),/Malformed collection source/);
+ assert.throws(()=>collectionSource({source:'Medusa\u0085'}),/Malformed collection source/);
+ assert.equal(collectionSource({source:null}),'Source not recorded');
+ assert.equal(collectionSource(undefined),'Not yet obtained');
+ for(const source of [undefined,0,'','   ','Medusa\n','x'.repeat(129)])assert.throws(()=>collectionSource({source}),/Malformed collection source/);
 });
 
 test('ownership percentages count zero-item players and reject invalid counts rather than guess',()=>{
