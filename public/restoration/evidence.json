@@ -37,6 +37,17 @@
       "method": "PR1409 calls real defeat_entity and Directory.endgame_step twice with an already-pending event and occupied reserved sites. It verifies unrelated credit once, retention of the pending source, unchanged reserves, open admission and independent other Realm. Restoring the pre1402 Waiting result fails this regression; restoring current behavior passes. Pinned Rust1.94.1 targeted runs pass. Public CI41840478878 passes499 Rust tests; its executed merge tree equals the final ddd87d33 merge tree.",
       "limitations": "Synthetic pending-event fixture at the actual caller boundary, not an earned event, native kill, admission/completion, full clear, Castle journey, rendered Phoenix arrow or historical policy. Counterfactual failure remains recorded. This adds a stronger regression subcheck without changing whole-feature gameplay or historical statuses."
     },
+    "realm-portals-native-b76d8f52": {
+      "kind": "native",
+      "revision": "b76d8f52006185dbf7e49c25385a2391448701e1",
+      "date": "2026-11-05",
+      "url": "https://github.com/OpenRotMG/Open-RotMG-Server/issues/901#issuecomment-6657634821",
+      "checks": [
+        "home:browse-realm-portals"
+      ],
+      "method": "Current-pool run ef36b6c1733a46898db9e7281e657bec with clientc8ca9715 and patched Ruffle0.7.1-openrotmg.16 passes eight native browsing, Full/refusal, reopening, distinct-destination and original-life/identity/equipment/XP/revision checks. Actual open, Full and reopened PNGs are inspected: Djinn0/1 Enter becomes1/1 Full then0/1 Enter, while Ogre stays0/85. Command0, collection reclaimed, cleanup errors empty;51429wallms. Read-only cold audit finds exactly two original accounts and characters alive, zero deaths, unchanged items and revisions. This rechecks population-pool changes after the earlier e1c678d8 take.",
+      "limitations": "Two prepared local characters, one-slot test capacity and another local85 slot, not production72 or85-player load, earned closure, pristine-client fidelity or original names/capacity/reservation accounting. The old identical-revision tick-ACK-stop remains unexplained and retained. Native closure/removal/replacement, independent timing and historical continuity remain separate; no whole-feature or historical promotion."
+    },
     "realm-portals-native-e1c678d8": {
       "kind": "native",
       "revision": "e1c678d8bf6f7a3b738e6529bd6481bbc8235e76",
@@ -7289,7 +7300,8 @@
         "realm-population-prepared-native-p2-69714806",
         "realm-population-prepared-native-c4-69714806",
         "realm-portals-native-e1c678d8",
-        "realm-replacement-native-8837a2ed"
+        "realm-replacement-native-8837a2ed",
+        "realm-portals-native-b76d8f52"
       ]
     },
     "home:buy-from-merchants": {"status":"passed","evidence":["partial-differences-source-4992445","merchant-offers-source-d47e03d","merchant-offers-regression-d47e03d","merchant-offers-native-d47e03d","merchant-purchases-source-b537b4d","merchant-regression-bc0d2d4","merchant-purchases-native-b537b4d"]},
