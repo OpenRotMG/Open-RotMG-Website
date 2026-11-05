@@ -808,8 +808,52 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const manor1384 = {"fingerprints":{"manor-intact-visibility-source-88f8f118":"226079b5fc113889fd7645a4f3fb577832c315d1ffbb5ea9814e654067ac0b39","manor-prepared-initial-visibility-native-aab37bf5":"faee09660e21fe59e9daad6ebdcb3cfe80d5ae9ba646da14574c0e78c3280cbf"},"note":"Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged.","ids":["dungeons:manor-of-the-immortals","dungeons:manor-of-the-immortals:secret-shelves-and-coffins"]};
+function peelManor1384(data, evidence) {
+  const refs = Object.keys(manor1384.fingerprints);
+  for (const [ref, hash] of Object.entries(manor1384.fingerprints)) {
+    assert.equal(digest(JSON.stringify(evidence.sources[ref])), hash);
+    assert.deepEqual(evidence.sources[ref].checks, manor1384.ids);
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...manor1384.ids].sort());
+    delete evidence.sources[ref];
+  }
+  const audit = data.features.find(row => row.id === manor1384.ids[0]).audit;
+  assert.equal(audit.historical, 'partial');
+  assert.equal(audit.differences.filter(note => note === manor1384.note).length, 1);
+  assert.deepEqual(audit.differences.splice(-1), [manor1384.note]);
+  for (const [index, id] of manor1384.ids.entries()) {
+    const row = evidence.results[id];
+    assert.equal(row.status, index ? 'passed' : 'not-run');
+    assert.equal(row.evidence.filter(ref => refs.includes(ref)).length, refs.length);
+    assert.deepEqual(row.evidence.splice(-refs.length), refs);
+  }
+}
+
+test('1384 initial-only payload inverse preserves every actualb3c value and rejects narrow mutations', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+  const preserve = (data, evidence) => {
+    peelManor1384(data, evidence);
+    assert.equal(digest(JSON.stringify(data)), '6fdc017db42fb25c58d733a0d05b196ff885c1df7cadc441c4a3864d22f0a0f7');
+    assert.equal(digest(JSON.stringify(evidence)), 'f36c972602ff62ad382b8ca1273cc6d8f146de6d530545c8b676d99ed243f53f');
+  };
+  preserve(...fresh());
+  for (const mutate of [
+    (data, evidence) => evidence.sources[Object.keys(manor1384.fingerprints)[1]].method += 'altered payload',
+    data => data.features.find(row => row.id === manor1384.ids[0]).audit.differences.push('altered new note'),
+    data => data.features.find(row => row.id === manor1384.ids[0]).audit.unknowns.push('extra old value'),
+    (data, evidence) => evidence.sources['unknown-manor-record'] = {kind:'source'},
+    (data, evidence) => evidence.sources['manor-layout-research-0af41a3'].limitations += 'altered old source',
+    (data, evidence) => evidence.results[manor1384.ids[0]].evidence.push(Object.keys(manor1384.fingerprints)[0]),
+    (data, evidence) => evidence.results[manor1384.ids[0]].status = 'passed',
+    (data, evidence) => evidence.results['unknown-manor-result'] = {status:'not-run',evidence:[]},
+  ]) {
+    const pair = fresh(); mutate(...pair); assert.throws(() => preserve(...pair));
+  }
+});
+
 const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
 function removeRealmSdkEvidence(data, evidence) {
+  peelManor1384(data, evidence);
   const closure = data.features.find(row => row.id === 'realm:realm-closure');
   assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
   assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
@@ -920,8 +964,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '76024fb4148e5da292dd6221ed6cdaf3fc775107686850fcc31a6ded4610060d');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'f4f3067a12b74fd045c5621db8375119f82770278c3573ca3dacc8cddcc5659f');
+  assert.equal(digest(bytes), 'ab178e66294bdfb0668abecb84a2c6857e4bae23142d985542ec2bf0428de9db');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '0eddfcfc7b1ae3114d5d01bd696b10426a19f54f340e0a6e70031722b225f735');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
