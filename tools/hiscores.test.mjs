@@ -80,6 +80,15 @@ test('achievement profiles validate all thirteen criteria, earned dates and diff
  for(const bad of [0,-1,NaN,1.5,8640000000001])assert.throws(()=>achievementDate(bad),/Malformed/);
  for(const bad of [[...earned,...earned],[{id:'unknown',earned_at:1}],[{id:'a',earned_at:0}]])assert.throws(()=>achievementSets(catalog,bad),/Malformed/);
  for(const bad of [catalog.slice(1),[catalog[0],...catalog.slice(0,12)],catalog.map((d,i)=>i===0?{...d,gold:100}:d)])assert.throws(()=>achievementSets(bad,earned),/Malformed/);
+ assert.ok(achievementSets(catalog,[]).flatMap(g=>g.items).every(d=>d.earned_at===null));
+ const three=catalog.slice(0,3).map(d=>({id:d.id,earned_at:earned[0].earned_at}));
+ assert.equal(achievementSets(catalog,three).flatMap(g=>g.items).filter(d=>d.earned_at!==null).length,3);
+ for(const fields of [{},{id:null},{id:true},{id:false},{id:17},{id:['a']},{id:[]},{id:{}}]){
+  const definition={...catalog[0]};delete definition.id;
+  const malformed=[{...definition,...fields},...catalog.slice(1)],paired=[{...structuredClone(fields),earned_at:earned[0].earned_at}];
+  assert.throws(()=>achievementSets(malformed,[]),/Malformed achievement catalog/);
+  assert.throws(()=>achievementSets(malformed,paired),/Malformed achievement catalog/);
+ }
  assert.throws(()=>ranked([{account:1,name:'Bad',achievements:14}],'achievements'),/Malformed/);
 });
 

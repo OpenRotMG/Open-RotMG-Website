@@ -161,7 +161,7 @@ export function achievementSets(catalog, earned) {
   const tiers={Easy:10,Medium:25,Hard:100},ids=new Set(),dates=new Map();
   if (!Array.isArray(catalog)||catalog.length!==13||!Array.isArray(earned)) throw new Error('Malformed achievement response');
   for (const d of catalog) {
-    if (!/^[a-z][a-z0-9_]*$/.test(d.id)||ids.has(d.id)||!Object.hasOwn(tiers,d.difficulty)||d.gold!==tiers[d.difficulty]||typeof d.name!=='string'||!d.name||typeof d.criterion!=='string'||!d.criterion) throw new Error('Malformed achievement catalog');
+    if (typeof d.id!=='string'||!/^[a-z][a-z0-9_]*$/.test(d.id)||ids.has(d.id)||!Object.hasOwn(tiers,d.difficulty)||d.gold!==tiers[d.difficulty]||typeof d.name!=='string'||!d.name||typeof d.criterion!=='string'||!d.criterion) throw new Error('Malformed achievement catalog');
     ids.add(d.id);
   }
   for (const row of earned) {
