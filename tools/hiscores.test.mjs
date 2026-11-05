@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts} from '../public/hiscores/app.js';
+import {boards,ranked,collectionSets,highestFameDeaths,graveyard,ownershipCounts,collectionSource} from '../public/hiscores/app.js';
 
 test('existing ranking boards and competition ties remain stable',()=>{
  assert.equal(boards.base_fame.title,'Living fame');
@@ -63,6 +63,14 @@ test('hiscores links use original pixel artwork and the selected uncluttered lay
  for(const removed of ['player-subline','character-column','equipment-heading'])assert.ok(!index.includes(removed)&&!app.includes(removed));
  assert.ok(app.includes("el(board==='collection'?'a':'span','player-name',player.name)"));
  assert.ok(app.includes('playerLink.href=`?board=collection&player=${player.account}`'));
+});
+
+test('collection sources distinguish original enemies, chests, legacy records and missing items',()=>{
+ assert.equal(collectionSource({source:'Medusa'}),'Medusa');
+ assert.equal(collectionSource({source:'Oasis Giant chest'}),'Oasis Giant chest');
+ assert.equal(collectionSource({source:null}),'Source not recorded');
+ assert.equal(collectionSource(undefined),'Not yet obtained');
+ for(const source of [undefined,0,'','   ','Medusa\n','x'.repeat(129)])assert.throws(()=>collectionSource({source}),/Malformed collection source/);
 });
 
 test('ownership percentages count zero-item players and reject invalid counts rather than guess',()=>{
