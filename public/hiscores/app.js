@@ -171,9 +171,9 @@ async function start() {
   const status=document.querySelector('#status'),catalog=await json('items.json');
   if (account!==null) {
     if (!/^[1-9]\d*$/.test(account)) throw new Error('Invalid player');
-    const [profile,scores,findings]=await Promise.all([json(`/api/collection/${account}`),json('/api/hiscores'),json('reviewed.json')]);
+    const [profile,scores]=await Promise.all([json(`/api/collection/${account}`),json('/api/hiscores')]);
     if (profile.account!==Number(account)) throw new Error('Collection account does not match request');
-    renderCollection(profile,catalog,scores,reviewedAccounts(findings));status.hidden=true;return;
+    renderCollection(profile,catalog,scores,reviewedAccounts(scores.reviewed_accounts));status.hidden=true;return;
   }
   document.querySelector('#metric').textContent=boards[board].title;
   const search=document.querySelector('#search'),body=document.querySelector('tbody'),byID=new Map(catalog.map(i=>[i.id,i]));
@@ -196,7 +196,7 @@ async function start() {
   search.addEventListener('input',render);
   const refresh=async()=>{
     try {
-      const [scores,deaths,findings]=await Promise.all([json('/api/hiscores'),graveyard(),json('reviewed.json')]);rows=ranked(scores.players,board);best=highestFameDeaths(deaths);reviewed=reviewedAccounts(findings);render();
+      const [scores,deaths]=await Promise.all([json('/api/hiscores'),graveyard()]);rows=ranked(scores.players,board);best=highestFameDeaths(deaths);reviewed=reviewedAccounts(scores.reviewed_accounts);render();
       document.querySelector('#population').textContent=`${rows.length} players`;document.querySelector('#rankings').hidden=false;status.hidden=true;
     } catch(error) {document.querySelector('#rankings').hidden=true;status.hidden=false;status.textContent=`Update failed: ${error.message}`;console.error(error);}
   };
