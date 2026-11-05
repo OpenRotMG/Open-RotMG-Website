@@ -924,8 +924,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '76024fb4148e5da292dd6221ed6cdaf3fc775107686850fcc31a6ded4610060d');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'f4f3067a12b74fd045c5621db8375119f82770278c3573ca3dacc8cddcc5659f');
+  assert.equal(digest(bytes), 'bb0ae111a6ce0e1e3aa5b76dba867654344b05a4c77c86aa8c58cac7c853547b');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'c59c05bcc8745fd11e9950a731f29ecb73b01c6fac1833a7680f651c9884dc98');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
