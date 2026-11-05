@@ -808,9 +808,40 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
+function removeRealmSdkEvidence(data, evidence) {
+  const closure = data.features.find(row => row.id === 'realm:realm-closure');
+  assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
+  assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
+  assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^PR1414 passes eight/);
+  for (const ref of realmSdkRefs) {
+    for (const id of evidence.sources[ref].checks) evidence.results[id].evidence = evidence.results[id].evidence.filter(key => key !== ref);
+    delete evidence.sources[ref];
+  }
+}
+
+test('SDK caller and prepared native subchecks preserve all incoming evidence without promoting acceptance', () => {
+  const data = JSON.parse(read('public/restoration/progress.json'));
+  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  for (const [index, ref] of realmSdkRefs.entries()) {
+    const source = evidence.sources[ref];
+    assert.equal(source.kind, index ? 'native' : 'regression');
+    assert.deepEqual(Object.entries(evidence.results).filter(([, row]) => row.evidence.includes(ref)).map(([id]) => id).sort(), [...source.checks].sort());
+    for (const id of source.checks) assert.equal(evidence.results[id].status, 'not-run');
+  }
+  assert.match(evidence.sources[realmSdkRefs[0]].limitations, /Synthetic pending-event fixture.*not an earned event/);
+  assert.match(evidence.sources[realmSdkRefs[1]].limitations, /does not explain or waive.*tick-ACK-stop/);
+  assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
+  assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
+  removeRealmSdkEvidence(data, evidence);
+  assert.equal(digest(JSON.stringify(data)), '65f9e71b33ac67233aa5e31150ae8d58424a9ebfac71223ed40c6c6ec86bd295');
+  assert.equal(digest(JSON.stringify(evidence)), 'd9258c21b2d0776d5b64b60fe632399a1e6517389013c34effb409e3bdaf3357');
+});
+
 test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
   const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  removeRealmSdkEvidence(data, evidence);
   const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
   const ids = ['realm:realm-closure', 'realm:event-admission'];
   const closure = data.features.find(row => row.id === ids[0]);
@@ -841,8 +872,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'a457206b883b0c059655b437b0c0e1457dffb4479565e71a47fa94dc492e562e');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '8c9757e01e1b0759a3444d9340f80cd09cdfe06562d2f3274b052c113a5d9a1c');
+  assert.equal(digest(bytes), '97792d581c6eb6022c40581c3e16787385a281b6efa709d5d9d098342ca78ebe');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '8e9aab2aafe214a1eacd93a02370cf9d55e3a9ce16e41e8cfc31b92d80fd8767');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
