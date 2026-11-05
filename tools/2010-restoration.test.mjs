@@ -808,11 +808,12 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
-const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed'];
+const realmSdkRefs = ['realm-credit-caller-regression-12020c1b', 'realm-portals-native-e1c678d8', 'realm-replacement-native-8837a2ed', 'realm-portals-native-b76d8f52'];
 function removeRealmSdkEvidence(data, evidence) {
   const closure = data.features.find(row => row.id === 'realm:realm-closure');
   assert.match(closure.audit.differences.pop(), /^PR1409 adds a real endgame-caller/);
   assert.match(closure.audit.checks.find(row => row.id === 'realm:event-admission').differences.pop(), /^PR1409 verifies unrelated credit/);
+  assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^Current pool b76d8f52 passes eight/);
   assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^PR1414 passes eight/);
   for (const ref of realmSdkRefs) {
     for (const id of evidence.sources[ref].checks) evidence.results[id].evidence = evidence.results[id].evidence.filter(key => key !== ref);
@@ -832,6 +833,9 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[0]].limitations, /Synthetic pending-event fixture.*not an earned event/);
   assert.match(evidence.sources[realmSdkRefs[1]].limitations, /does not explain or waive.*tick-ACK-stop/);
   assert.match(evidence.sources[realmSdkRefs[2]].limitations, /one-HP hero, temporary protection/);
+  assert.equal(evidence.sources[realmSdkRefs[3]].revision, 'b76d8f52006185dbf7e49c25385a2391448701e1');
+  assert.match(evidence.sources[realmSdkRefs[3]].method, /eight native.*51429wallms.*two original accounts/);
+  assert.match(evidence.sources[realmSdkRefs[3]].limitations, /not production72.*earned closure.*tick-ACK-stop remains unexplained.*no whole-feature or historical promotion/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
   assert.equal(digest(JSON.stringify(data)), '92f50f4a2cf76c6eb8c0e6cd6dc0c001f7a13aa97d403831bbd24e9b3b0ba2f7');
