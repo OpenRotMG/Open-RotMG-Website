@@ -1,5 +1,6 @@
 export const boards = {
   collection: {title: 'Collection', description: 'Items personally picked up from enemy drops and reward chests'},
+  achievements: {title: 'Achievements', description: 'Achievements earned once per account.'},
   total_fame: {title: 'Total fame', description: 'Available account fame. Earned from dead characters and reduced when spent.'},
   base_fame: {title: 'Living fame', description: 'Highest fame of an alive character per account.'},
   stars: {title: 'Stars', description: 'Class stars earned from each class’s best fame.'},
@@ -10,7 +11,7 @@ export function ranked(players, board) {
   if (!Array.isArray(players)) throw new Error('Malformed hiscores response');
   const seen = new Set();
   for (const p of players) {
-    if (!Number.isSafeInteger(p.account) || p.account < 1 || seen.has(p.account) || typeof p.name !== 'string' || !Number.isSafeInteger(p[board]) || p[board] < 0) throw new Error('Malformed hiscores player');
+    if (!Number.isSafeInteger(p.account) || p.account < 1 || seen.has(p.account) || typeof p.name !== 'string' || !Number.isSafeInteger(p[board]) || p[board] < 0 || (board==='achievements' && p[board]>13)) throw new Error('Malformed hiscores player');
     seen.add(p.account);
   }
   const sorted = [...players].sort((a, b) => b[board] - a[board] || a.account - b.account);
@@ -63,7 +64,7 @@ export function ownershipCounts(ownership, eligible) {
 export function collectionSource(entry) {
   if (entry===undefined) return 'Not yet obtained';
   if (entry.source===null) return 'Source not recorded';
-  if (typeof entry.source!=='string' || !entry.source.trim() || entry.source.length>128 || /[\u0000-\u001f\u007f-\u009f]/.test(entry.source)) throw new Error('Malformed collection source');
+  if (typeof entry.source!=='string' || !entry.source.trim() || [...entry.source].length>128 || /[\u0000-\u001f\u007f-\u009f]/.test(entry.source)) throw new Error('Malformed collection source');
   return entry.source;
 }
 const percent=(count,total)=>new Intl.NumberFormat('en',{maximumFractionDigits:1}).format(100*count/total);
@@ -164,6 +165,48 @@ function renderCollection(profile,catalog,scores,reviewed) {
   }
   document.querySelector('#collection').hidden=false;
 }
+export function achievementSets(catalog, earned) {
+  const tiers={Easy:10,Medium:25,Hard:100},ids=new Set(),dates=new Map();
+  if (!Array.isArray(catalog)||catalog.length!==13||!Array.isArray(earned)) throw new Error('Malformed achievement response');
+  for (const d of catalog) {
+    if (typeof d.id!=='string'||!/^[a-z][a-z0-9_]*$/.test(d.id)||ids.has(d.id)||!Object.hasOwn(tiers,d.difficulty)||d.gold!==tiers[d.difficulty]||typeof d.name!=='string'||!d.name||typeof d.criterion!=='string'||!d.criterion) throw new Error('Malformed achievement catalog');
+    ids.add(d.id);
+  }
+  for (const row of earned) {
+    if (!ids.has(row.id)||dates.has(row.id)||!Number.isSafeInteger(row.earned_at)||row.earned_at<=0||!Number.isFinite(new Date(row.earned_at*1000).getTime())) throw new Error('Malformed achievement dates');
+    dates.set(row.id,row.earned_at);
+  }
+  const groups=Object.entries(tiers).map(([difficulty,gold])=>({difficulty,gold,items:catalog.filter(d=>d.difficulty===difficulty).map(d=>({...d,earned_at:dates.has(d.id)?dates.get(d.id):null}))}));
+  if (groups.some((g,i)=>g.items.length!==[5,6,2][i])) throw new Error('Malformed achievement difficulties');
+  return groups;
+}
+export function achievementDate(time) {
+  if (time===null) return 'Not yet obtained';
+  if (!Number.isSafeInteger(time)||time<=0||!Number.isFinite(new Date(time*1000).getTime())) throw new Error('Malformed achievement date');
+  return new Date(time*1000).toLocaleString('en-GB',{timeZone:'UTC',dateStyle:'long',timeStyle:'long'});
+}
+function renderAchievements(profile,scores,reviewed) {
+  const groups=achievementSets(scores.achievement_catalog,profile.earned),dialog=document.querySelector('#achievement-dialog');
+  if (typeof profile.name!=='string') throw new Error('Malformed achievement profile');
+  document.querySelector('#achievement-title').textContent=`${profile.name}’s achievements`;addBadge(document.querySelector('#achievement-title'),profile.account,reviewed);
+  document.querySelector('#achievement-total').textContent=`${profile.earned.length} / 13`;
+  const progress=document.querySelector('#achievement-progress');progress.max=13;progress.value=profile.earned.length;
+  document.querySelector('#achievement-close').addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('click',event=>{const b=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<b.left||event.clientX>b.right||event.clientY<b.top||event.clientY>b.bottom))dialog.close();});
+  const sets=document.querySelector('#achievement-sets');
+  for (const group of groups) {
+    const section=el('section','set-card'),heading=el('div','set-heading'),grid=el('div','achievement-grid');
+    heading.append(el('h3','',group.difficulty),el('span','set-percent',`${group.items.filter(d=>d.earned_at!==null).length} / ${group.items.length}`));
+    for (const d of group.items) {
+      const obtained=d.earned_at!==null,tile=el('button',`achievement ${obtained?'obtained':'missing'}`);tile.type='button';tile.dataset.id=d.id;
+      tile.append(el('strong','',d.name),el('span','',`${d.gold} Gold · ${obtained?'Obtained':'Not yet obtained'}`));
+      tile.addEventListener('click',()=>{document.querySelector('#achievement-name').textContent=d.name;document.querySelector('#achievement-criterion').textContent=d.criterion;document.querySelector('#achievement-gold').textContent=`${d.gold} Gold, once per account`;document.querySelector('#achievement-date').textContent=achievementDate(d.earned_at);dialog.showModal();});
+      grid.append(tile);
+    }
+    section.append(heading,grid);sets.append(section);
+  }
+  document.querySelector('#achievements').hidden=false;
+}
 async function start() {
   const params=new URLSearchParams(location.search),board=params.get('board')??'collection',account=params.get('player');
   if (!Object.hasOwn(boards,board)) throw new Error('Unknown hiscore category');
@@ -171,9 +214,11 @@ async function start() {
   const status=document.querySelector('#status'),catalog=await json('items.json');
   if (account!==null) {
     if (!/^[1-9]\d*$/.test(account)) throw new Error('Invalid player');
-    const [profile,scores]=await Promise.all([json(`/api/collection/${account}`),json('/api/hiscores')]);
-    if (profile.account!==Number(account)) throw new Error('Collection account does not match request');
-    renderCollection(profile,catalog,scores,reviewedAccounts(scores.reviewed_accounts));status.hidden=true;return;
+    const achievement=board==='achievements';
+    const [profile,scores]=await Promise.all([json(`/api/${achievement?'achievements':'collection'}/${account}`),json('/api/hiscores')]);
+    if (profile.account!==Number(account)) throw new Error('Profile account does not match request');
+    if (achievement) renderAchievements(profile,scores,reviewedAccounts(scores.reviewed_accounts));else renderCollection(profile,catalog,scores,reviewedAccounts(scores.reviewed_accounts));
+    status.hidden=true;return;
   }
   document.querySelector('#metric').textContent=boards[board].title;
   const search=document.querySelector('#search'),body=document.querySelector('tbody'),byID=new Map(catalog.map(i=>[i.id,i]));
@@ -182,12 +227,13 @@ async function start() {
     body.replaceChildren();
     for (const player of rows.filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase().trim()))) {
       const character=best.get(player.account),row=el('tr'),rank=el('td','rank',player.rank),identity=el('td'),name=el('div','player-identity');
-      const playerLink=el(board==='collection'?'a':'span','player-name',player.name);
-      if (board==='collection') playerLink.href=`?board=collection&player=${player.account}`;
+      const profileBoard=board==='collection'||board==='achievements';
+      const playerLink=el(profileBoard?'a':'span','player-name',player.name);
+      if (profileBoard) playerLink.href=`?board=${board}&player=${player.account}`;
       name.append(portrait(character),playerLink);addBadge(name,player.account,reviewed);identity.append(name);
       const gear=el('td','equipment');gear.append(equipment(character,byID));
       const value=el('td','metric-value');
-      if (board==='collection') {const link=el('a','',player.collection.toLocaleString());link.href=`?board=collection&player=${player.account}`;link.setAttribute('aria-label',`${player.name}’s collection: ${player.collection} items`);value.append(link);}
+      if (profileBoard) {const link=el('a','',player[board].toLocaleString());link.href=`?board=${board}&player=${player.account}`;link.setAttribute('aria-label',`${player.name}’s ${boards[board].title}: ${player[board]}`);value.append(link);}
       else value.textContent=player[board].toLocaleString();
       row.dataset.account=player.account;row.append(rank,identity,gear,value);body.append(row);
     }
