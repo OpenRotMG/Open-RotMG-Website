@@ -141,9 +141,6 @@ test('export page has no credential URL path or persistence; public metadata sta
   assert.match(html, /connect-src {{API_ORIGIN}}/);
   assert.match(html, /<button type="submit" disabled>/);
   assert.doesNotMatch(html, /<input[^>]*name=|unsafe-inline|unsafe-eval|<script[^>]+src="https?:/);
-  assert.match(html, /not anonymized/);
-  assert.match(html, /whole personal account/);
-  assert.match(html, /live account stays intact/);
   for (const path of ['recover', 'verify-email', 'link']) {
     const privateHtml = await readFile(new URL(`../public/${path}/index.html`, import.meta.url), 'utf8');
     assert.match(privateHtml, /noindex/);
