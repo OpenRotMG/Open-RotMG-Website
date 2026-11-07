@@ -26,6 +26,9 @@ test('one card per item groups equal NPC rates and retains different rates and n
  const cards=catalogueFor(data(groups),art,sources);assert.equal(cards.length,1);assert.equal(cards[0].sprite.bag,4);
  assert.deepEqual(cards[0].rates.map(r=>[percentage(r.chance),r.npcs]),[['5%',['Guard']],['1%',['Abyss Idol','Malphas']]]);
  assert.deepEqual(cards[0].sources,[{chance:.001,url:'https://example.org/rates',npcs:['Abyss Idol','Malphas']}]);
+ const portal={id:0x718,name:'Snake Pit'},portals=[{...group('independent',[entry(.17,[0x718])],'Ogre King'),channel:'Dungeon portal'}];
+ const dungeon=catalogueFor({items:[portal],groups:portals},[],[]);assert.deepEqual(dungeon.map(c=>[c.filter,c.sprite,c.rates[0].npcs]),[['dungeon',null,['Ogre King']]]);
+ assert.deepEqual(cards.map(c=>c.filter),['4']);
  assert.throws(()=>catalogueFor(data(groups),[{id:1}],[]),/bag/);
  assert.throws(()=>catalogueFor(data(groups),art,[{url:'https://openrotmg.org/rates',rates:[]}]),/external/);
  assert.throws(()=>catalogueFor(data(groups),art,[{url:'https://example.org/rates',rates:[{items:[1],npc:'Malphas'}]}]),/source drop rate/);
@@ -40,13 +43,13 @@ test('only item-specific numeric references are published, without generic resea
  assert(doom.some(([npc,p,url])=>npc==='Septavius the Ghost God'&&p===.001&&url.endsWith('/node/4466')));
  assert(doom.some(([npc,p,url])=>npc==='Septavius the Ghost God'&&p===.005&&url.includes('fabiano-swagger-of-doom')));
 });
-test('page has only the four bag filters, full results, short sources and matching share artwork',()=>{
+test('page has only the bag and dungeon filters, full results, short sources and matching share artwork',()=>{
  const html=readFileSync(new URL('../public/drop-rates/index.html',import.meta.url),'utf8');
- assert.match(html,/<option value="4">White bag<\/option><option value="3">Blue bag<\/option><option value="2">Cyan bag<\/option><option value="1">Purple bag/);
+ assert.match(html,/<option value="4">White bag<\/option><option value="3">Blue bag<\/option><option value="2">Cyan bag<\/option><option value="1">Purple bag<\/option><option value="dungeon">Dungeons<\/option><\/select>/);
  assert.doesNotMatch(html,/Know what|historical odds|How to read|id="search"|id="category"|id="count"|previous|pagination|id="next"/);
  assert.match(html,/role="alert"/);assert.match(html,/app\.js\?v=\{\{DROP_RATES_VERSION\}\}/);assert.match(html,/style\.css\?v=\{\{DROP_RATES_VERSION\}\}/);
  const app=readFileSync(new URL('../public/drop-rates/app.js',import.meta.url),'utf8');
- assert.doesNotMatch(app,/Owner-selected|Historical rate unverified|General loot|Current implementation|source_file|eligibility|allocation|group.channel|toLocaleString|slice\(page/);
+ assert.doesNotMatch(app,/Owner-selected|Historical rate unverified|General loot|Current implementation|source_file|eligibility|allocation|toLocaleString|slice\(page/);
  const art=JSON.parse(readFileSync(new URL('../public/hiscores/items.json',import.meta.url)));assert(art.every(i=>Number.isInteger(i.bag)&&i.bag>=0&&i.bag<=4));assert.equal(art.find(i=>i.id===0xc02).bag,4);assert.equal(art.find(i=>i.id===0xa1f).bag,3);
  const about=readFileSync(new URL('../public/about/index.html',import.meta.url),'utf8');assert.match(about,/href="\{\{BASE\}\}drop-rates\/"/);
  const png=readFileSync(new URL('../public/drop-rates/social.png',import.meta.url));assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
