@@ -3203,9 +3203,11 @@
         "implementation": "present",
         "historical": "partial",
         "expected": "A disguised grave in a graveyard reveals Kage when damaged. The fight alternates human and protected flying forms, includes Specter Shots and Specter Mines, and can award a Manor entrance.",
-        "differences": [],
+        "differences": [
+          "The 2-4 tile grave spacing and Rock Path stones of 2012 graveyards are not reproduced."
+        ],
         "unknowns": [
-          "Exact target-era graveyard count/shape, human movement, reveal threshold, phase/volley/mine timings and reward probabilities. Two HighForest/HighPlains sites, reveal below 90% HP, 2/5/4-second phases, 2-second tosses and 50% Manor chance are comparator reconstruction, not authenticated original values.",
+          "Target-era graveyard count and shape, the protected-form shot cadence and reward probabilities. Two HighForest/HighPlains sites and the 50% Manor chance are kept reconstructions; the only 2012 figure, a forum post, suggests about 1 in 7. The reveal on the first hits, the 2.4-second intro, 6-10-second human and 7-second protected phases, 4-volley bursts every 2.45 seconds and mines about once a second are measured from 2012 footage (PR1434).",
           "Target-era quest-arrow and closure eligibility. March/April 2012 notes call Kage a new Realm Quest, but selected XML has no Quest flag; the later 7.0 quest dictionary still requires that flag. Current Kage is excluded from both systems; original server policy remains unresolved in issue #826."
         ],
         "sources": [
@@ -3224,6 +3226,14 @@
           {
             "url": "https://web.archive.org/web/20130525111810id_/https://forums.wildshadow.com/wiki/realm-mad-god/kage-kami",
             "label": "May 2013 capture: grave reveal, stationary human and protected chase; later than target"
+          },
+          {
+            "url": "https://youtu.be/tH9A8yA4XQI?t=94",
+            "label": "April 3, 2012 fight in real time: reveal on the first hits, intro taunt, both forms and the death portal"
+          },
+          {
+            "url": "https://youtu.be/jhp6TWhv_44",
+            "label": "August 29, 2012 fight in real time: two human and protected phase cycles"
           },
           {
             "url": "https://github.com/UniverseRealms/vanilla-7.0/blob/ba1fa22c58c24b4a2403860116656492d0133748/realm-server-master/Game/Logic/Database/HighLands.cs#L694-L769",
@@ -5127,10 +5137,11 @@
         "expected": "Manor access by Kage portal or key, connected vampire-filled rooms, breakable secret bookshelves, paired treasure coffins and impostors. Ruthven uses escalating daggers, hit-based life steal, protected bursts, thrown Coffin Creatures and four bat groups before returning. Ruthven's summoned bats grant no EXP. Rewards and an earned exit complete the adventure.",
         "differences": [
           "Layout stamps templates cut from one captured live instance plus 2014-2023 minimap shapes; template choice, socket and branch rules are reconstructed from seven layouts and 154 pre-rework runs, not a recovered generator.",
+          "Hall pack sizes, swarmer group sizes, the Hellhound fire rate and the 1-in-5 impostor share are estimates, and loot rates are fitted to 27 bags in 2012 footage (PR1434).",
         "Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged."
         ],
         "unknowns": [
-          "Original template weights, spawn distributions, attack/throw/transformation schedules, entrance odds, coffin wave/transform thresholds and reward probabilities remain unresolved; see server issue862.",
+          "Original template weights, spawn distributions, entrance odds and reward probabilities remain unresolved; see server issue862. Ruthven's cycle, dagger counts, rings, coffin throws and own bats, hall enemy movement and the coffin decision at 15000 HP are measured from five 2012 Ruthven fights and three 2012 hall runs (PR1434).",
           "Later all-breakable bookshelves and later reward changes must not be imported into the earlier target."
         ],
         "sources": [
@@ -5169,6 +5180,26 @@
           {
             "url": "https://youtu.be/ENLJy-w6F8Q",
             "label": "July 2012 run starting on the moat walkway with the Portal of Cowardice"
+          },
+          {
+            "url": "https://youtu.be/YJQPDEw20f4?t=88",
+            "label": "October 3, 2012 solo run at 1.0x: room Vampire Bat Swarmers chasing at about 6.5 tiles/s"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422072813/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "April 22, 2012 Wild Shadow Manor page: the summoned bats chase farther than the real ones"
+          },
+          {
+            "url": "https://web.archive.org/web/20120609023320id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven",
+            "label": "June 2012 Lord Ruthven wiki: drop list with Holy Water and no stat potion"
+          },
+          {
+            "url": "https://youtu.be/YJQPDEw20f4?t=208",
+            "label": "October 3, 2012 solo Ruthven fight at 1.0x: daggers, rings, coffin throws, bats and the Realm Portal"
+          },
+          {
+            "url": "https://youtu.be/wRCpJLqPxLw?t=8",
+            "label": "July 25, 2012 hall run in real time: Hellhound dashes and Nosferatu Bone Swipe"
           }
         ],
         "checks": [
@@ -5180,8 +5211,8 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Exact target coffin thresholds, wave counts and impostor/reward probabilities are unverified. Later Japanese13000HP behavior conflicts with current15000/8000 waves; the all-breakable bookshelf change is not dated to123.5.1."],
-            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"},{"url":"https://wikiwiki.jp/rmd/Manor%20of%20the%20Immortals","label":"Japanese wiki Manor page: hidden rooms behind bookshelves and coffins enclosed by shelves; mixed-era"}],
+            "unknowns": ["Impostor and reward probabilities are unverified (1 in 5 kept; 1 of 4 seen). 2012 footage shows the coffin decided at about 15000 HP, one wave of 1 Nosferatu and about 20 bats and no 8000 HP wave (PR1434); later Japanese13000HP text differs; the all-breakable bookshelf change is not dated to123.5.1. Coffin-wave bats fly about 5.6 tiles/s in a 1.0x October 2012 run (PR1443)."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"},{"url":"https://youtu.be/YJQPDEw20f4?t=159","label":"October 3, 2012 run at 1.0x: a genuine coffin's bat wave in flight"},{"url":"https://youtu.be/uOYS8_HhIZ4?t=128","label":"August 29, 2012 run with an HP overlay: an impostor coffin changing after 15000 HP"},{"url":"https://youtu.be/RouEGVH0_eQ?t=82","label":"August 5, 2012 run: a hidden room behind shelves and a genuine coffin wave"},{"url":"https://wikiwiki.jp/rmd/Manor%20of%20the%20Immortals","label":"Japanese wiki Manor page: hidden rooms behind bookshelves and coffins enclosed by shelves; mixed-era"}],
             "group": "layout"
           },
           {
@@ -5192,8 +5223,8 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Period prose supports actual-damage healing, four groups and eventual return; exact123.5.1 timers/counts and the complete attack schedule remain reconstructed. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
-            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"}],
+            "unknowns": ["Five 2012 fights give the 20.2-second cycle (daggers 2.5 s, ritual 5.7 s, bats 12 s), 3/5/18 daggers by HP, four 24-shot rings, about 19 own bats and actual-damage healing (PR1434). The dagger HP bands come from one fight, the volley direction rule is unknown and the decoy group count is kept. His own bats fly about 6.0 tiles/s and his bat cloud about 4.7, measured in a 1.0x October 2012 fight; the decoy groups were not told apart and take the same speeds (PR1443). Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"},{"url":"https://youtu.be/YJQPDEw20f4?t=218","label":"October 3, 2012 solo fight at 1.0x: Ruthven's own bats and bat cloud in flight"},{"url":"https://youtu.be/YJQPDEw20f4?t=208","label":"October 3, 2012 solo fight at 1.0x: the full cycle"},{"url":"https://youtu.be/Dn8ki2prSr0","label":"July 15, 2012 fight: rings on the map axes and the Realm Portal exit"}],
             "group": "boss"
           }
         ]

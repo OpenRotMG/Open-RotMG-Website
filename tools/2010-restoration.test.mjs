@@ -836,8 +836,8 @@ test('1384 initial-only payload inverse preserves every actualb3c value and reje
     assert.equal(evidence.results['home:browse-realm-portals'].evidence.pop(), 'realm-portals-native-b76d8f52');
     delete evidence.sources['realm-portals-native-b76d8f52'];
     peelManor1384(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), '6fdc017db42fb25c58d733a0d05b196ff885c1df7cadc441c4a3864d22f0a0f7');
-    assert.equal(digest(JSON.stringify(evidence)), 'f36c972602ff62ad382b8ca1273cc6d8f146de6d530545c8b676d99ed243f53f');
+    assert.equal(digest(JSON.stringify(data)), 'c62d8a030ee097614a5bfaac2d4f720663a5b13b4534f53ac017f4544ebafd9d');
+    assert.equal(digest(JSON.stringify(evidence)), '9c9ee8a0d6b7197c5571d50c1c442728d6dfabe50c1891f39d2589cf2268d6b8');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -885,8 +885,8 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[3]].limitations, /not production72.*earned closure.*tick-ACK-stop remains unexplained.*no whole-feature or historical promotion/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
-  assert.equal(digest(JSON.stringify(data)), '92f50f4a2cf76c6eb8c0e6cd6dc0c001f7a13aa97d403831bbd24e9b3b0ba2f7');
-  assert.equal(digest(JSON.stringify(evidence)), '7cef0f77ecd4e07394601c6821eb56fbc79ad52ff2c8273235b901c1b6a5568e');
+  assert.equal(digest(JSON.stringify(data)), '575be892325ff861d1d2cb3e60005b31871301039f70cab44ade586314799d4b');
+  assert.equal(digest(JSON.stringify(evidence)), '9ae13285e219da2c3b8b79035c65b4fdf6beefdb3afcd7c48b9a69c156876e85');
 });
 
 const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
@@ -916,8 +916,8 @@ test('1344 prepared pool and two-life closure evidence preserve actual69d values
   const preserve = (data, evidence) => {
     removeRealmSdkEvidence(data, evidence);
     peelPopulation1344(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), 'dca0694a8600e531d991ed76b2734ec643a173b190705bc4fb34cbf47e096299');
-    assert.equal(digest(JSON.stringify(evidence)), 'd37947a2e0079922f9f1628cd7156c2f89181db457047007caa77baadd83a5a6');
+    assert.equal(digest(JSON.stringify(data)), 'a1a437fa114d92b8e0941bcf3dac4becefeb342a91305f9993250acfe2abc856');
+    assert.equal(digest(JSON.stringify(evidence)), '4ba6841e8f05c6a71b18f986b1a9c46286a0ea10e4c1837bf808674047f7a97d');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -965,14 +965,14 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), 'e3599b69bc85927f3b83818139332de73ae38b88b93d2aed95a94e1c46f72dba');
-  assert.equal(digest(JSON.stringify(evidence)), '07a6e389013bc4bd82e95613a10dec79cee33ec1ae2cf717354bd553dc2fae36');
+  assert.equal(digest(JSON.stringify(data)), 'a5b9bf4cee38af499c77dedd553f177f66656076f4b3f1dd0bd85a8fa2eab207');
+  assert.equal(digest(JSON.stringify(evidence)), 'cae71f0ad0878b2b0038ac85fce62e4d826c6a3b0b7ca7be19cc80adb86e6208');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '0e8c7212cc0ee896a83741c96be8384f1ec29b6a93a6c7611ca16397efbc5d75');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'e6f7f4321b6b031f5fe4b5a2689f6af01a26d5837f5882568ccb0d2819eb14f4');
+  assert.equal(digest(bytes), 'b6770202fb992cc368aa35473eadccfc76790c87edaa1f152b6e9ec1adae1282');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '028bcff78168f8df7dc7e22025b10d0d729953be1ea71728e8d3bc570d22c8c6');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
