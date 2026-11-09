@@ -5210,7 +5210,7 @@
         "expected": "Davy Jones’s Locker includes entrance and key access, a traversable pirate dungeon, Davy, rewards and an exit. Original Ghost Ship access conditions, layout and encounter behavior remain unresolved.",
         "differences": [
           "Layout stamps templates cut from one captured live instance plus 2013-2018 minimap shapes; template choice, joins and door colouring are reconstructed from six layouts and 100 pre-2020 runs, not a recovered generator.",
-          "Encounter and drop tuning follows compared community references, not a certified original server build."
+          "Drop tuning follows compared community references, not a certified original server build. The lantern cycle, Davy's movement and the key rooms follow 2012 footage with labelled estimates (PR1444)."
         ],
         "unknowns": [
           "Original template weights and rates are fitted to lower bounds from partial footage; precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
@@ -5256,6 +5256,10 @@
           {
             "url": "https://www.realmeye.com/wiki/davy-jones-s-locker/2",
             "label": "RealmEye Locker layout minimap, 2014-03-18 revision"
+          },
+          {
+            "url": "https://web.archive.org/web/20130514132120/https://forums.wildshadow.com/wiki/realm-mad-god/davy-jones-locker",
+            "label": "Wild Shadow Locker page, last updated 123.4.1 (Wayback 2013-05-14): each key behind the door of the colour before it; lanterns make Davy vulnerable"
           }
         ],
         "checks": [
@@ -5268,7 +5272,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated."
+              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated. 2012 footage and the Wild Shadow page put every key but purple behind a door of the colour before it, with at least two red gates per run, and show locked rooms black until their gate opens (PR1444); how many spare rooms were purple-gated is unresolved (one keyless purple room in five solo runs, no doorless neck seen)."
             ],
             "sources": [
               {
@@ -5286,6 +5290,22 @@
               {
                 "url": "https://youtu.be/2C8h5dswJmg?t=281",
                 "label": "October 2012 run: red gate opens on contact with the key held; dead-end room behind it"
+              },
+              {
+                "url": "https://youtu.be/3BJGr4JLXu0?t=14",
+                "label": "August 13, 2012 guide card: green key in a blue room, red key in a green room, yellow key in a red room"
+              },
+              {
+                "url": "https://youtu.be/JV80D2whb1Y?t=14",
+                "label": "August 4, 2012 solo run: a closed purple gate on a keyless room and two red gates before the red key"
+              },
+              {
+                "url": "https://youtu.be/tMJCIHPjYdo?t=35",
+                "label": "August 4, 2012 solo run: the green key's room behind a closed purple gate"
+              },
+              {
+                "url": "https://web.archive.org/web/20130514132120/https://forums.wildshadow.com/wiki/realm-mad-god/davy-jones-locker",
+                "label": "Wild Shadow Locker page, last updated 123.4.1 (Wayback 2013-05-14): blue, green, red and yellow keys each behind the previous colour's door"
               }
             ],
             "group": "layout"
@@ -5298,10 +5318,10 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "Five-second vulnerability and independent 5+10-second lamp clocks follow FSoD; Valor gives a conflicting 2.5-second window."
+              "The window ends once Davy has lost 20% of his HP since it opened, an estimate from 15-23% summed from 2012 damage numbers, or after a kept 5-second cap. Davy keeps following in later cycles, though in 3 of 4 2012 fights he held his spawn tile from about the second window on (PR1444)."
             ],
             "unknowns": [
-              "Original server timing has not been recovered."
+              "Original server timing has not been recovered. 2012 footage gives lanterns that stay lit until all eight are lit, a window 0.5 s after the eighth that ends after about 1.4-2.1k of 9000 HP, all eight bursting together, a 1.9 tiles/s follow, a 6.0 tiles/s chase until a lantern is lit or hit and a 3.3 tiles/s walk home (PR1444). The follow stop, sight, leash and chase cap are estimates."
             ],
             "sources": [
               {
@@ -5311,6 +5331,22 @@
               {
                 "url": "https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.DavyJones.cs",
                 "label": "Valor comparator: conflicting 2.5-second window, not independent original evidence"
+              },
+              {
+                "url": "https://youtu.be/PGEViiWb5H4?t=7",
+                "label": "November 22, 2012 solo Warrior fight at 1.00x: four lantern cycles, all eight bursting together, the kill"
+              },
+              {
+                "url": "https://youtu.be/JV80D2whb1Y?t=188",
+                "label": "August 4, 2012 solo fight: lanterns lit at 188-191 s still lit when the set completes at 214 s"
+              },
+              {
+                "url": "https://youtu.be/nzZgHBdlEH8?t=666",
+                "label": "August 3, 2012 launch-day fight: Davy chasing at 6.0 tiles/s for 98 s"
+              },
+              {
+                "url": "https://youtu.be/3BJGr4JLXu0?t=273",
+                "label": "August 13, 2012 guide card: vulnerable until he takes a certain amount of damage"
               }
             ],
             "group": "boss"
@@ -5353,14 +5389,14 @@
         "historical": "partial",
         "expected": "Flying Brain access, lab and secret boss, target pools/equipment; 123.5.1 blue-pool transformation cure, melee-accessible Tesla Coil and entrance Cowardice portal. Green pools remain unresolved; a page last edited 2012-08-30 ties the secret room to destroying every coil and defeating Dr Terrible.",
         "differences": [
-          "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c",
+          "Server commit 8aa35c1, merged through server PR329, added a reconstructed Mad Lab with a fixed six-room layout and a Dr Terrible adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c Server PR1445 replaces both with a seeded tree of templates cut from the 2012 Wild Shadow wiki map and a Dr Terrible rebuilt from 123.5.1 footage. Template weights rest on two 2012 maps, decor identities on minimap colours, and heal, toss and cage details are labelled estimates.",
           "Server PR603 adds Tesla Coils, turrets and the Horrific Creation room, opened by destroying every coil and defeating Dr Terrible: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603",
           "Server PR743 adds aimed Blasts, a charge, eight-way Shockwave/Energy volleys and an attacking return from the DeHexxer. Shapes follow selected definitions and mixed-era descriptions; choreography/timing and low-HP variants remain reconstruction. PR1252 now gives each living damaging Creation contributor one private Defense potion using the Lab allocator; target-era allocation and other rewards remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/pull/743 https://github.com/OpenRotMG/Open-RotMG-Server/pull/1252",
           "Server PR1147's prepared journeys verify key entry, ordinary rooms, first boss, Wisdom and same-character exit, plus a separate Creation defeat with no duplicate clear. Its no-Creation-reward observation belongs to that older revision; PR1252 adds the Defense reward. Current player-pool checks remain in PR1097. None accepts the full dungeon or original semantics: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1147",
           "Issue1069 lowers only the existing Realm Flying Brain Mad Lab roll from17% to10% at server697bc6621e48534674b808c8d75fc0ac68e24700. This is a new project balance policy, not an authenticated123.5.1 rate or reproduction of the reported four-portal cluster. Eligibility, single RNG roll/request, coordinator and every other portal rate are unchanged. Source and deterministic tests do not establish native frequency, earned Lab entry or production acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/blob/697bc6621e48534674b808c8d75fc0ac68e24700/src/dungeon.rs#L101-L102"
         ],
         "unknowns": [
-          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. The full t0f0_BWpBtw uploader description is a retrospective 2013 edit attributing green-minion healing to Dr Terrible; target-labeled footage remains locally blocked and unviewed, so original helper behavior is not established. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
+          "Original green-pool mask and complete blue cure mask; original Creation choreography, timing, cloak/range behavior, slowed-pet reversion and low-HP thresholds; target-version reward identities and rates. PR1097 verifies current player-pool behavior, not original semantics. The full t0f0_BWpBtw uploader description is a retrospective 2013 edit attributing green-minion healing to Dr Terrible; the target-labeled footage itself (t0f0_BWpBtw, 2012-09-08) shows green Escaped Experiments healing Dr Terrible +500 inside his bubble, now restored (PR1445); heal cadence and reach remain estimates. Research: https://github.com/OpenRotMG/Open-RotMG-Server/issues/864#issuecomment-6476527813"
         ],
         "sources": [
           {
@@ -5370,6 +5406,22 @@
           {
             "url": "https://wikiwiki.jp/rmd/version/build123.5.1",
             "label": "Build 123.5.1 release notes"
+          },
+          {
+            "url": "https://web.archive.org/web/20130508122310/http://forums.wildshadow.com/wiki/realm-mad-god/mad-lab",
+            "label": "Wild Shadow Mad Lab page, last updated 123.5.1 (Wayback 2013-05-08): example layout, acid-room screenshot and room kit"
+          },
+          {
+            "url": "https://youtu.be/t0f0_BWpBtw?t=269",
+            "label": "September 8, 2012 solo run on the 123.5.1 build at 2x: Dr Terrible's 20/20 s cycle, +500 heals, rage and the Realm Portal"
+          },
+          {
+            "url": "https://youtu.be/C4sKt3Se0T0?t=40",
+            "label": "September 27, 2012 three-player run at about 2x: minions per bubble, heals, Horrific Creation's taunts and dark room"
+          },
+          {
+            "url": "https://youtu.be/s9XOYh8DJQ8?t=300",
+            "label": "October 9, 2012 run: zoomed-out minimap of a whole Lab, ten rooms from start to boss"
           }
         ],
         "checks": [
@@ -5381,11 +5433,11 @@
             "implementation": "partial",
             "historical": "partial",
             "differences": [
-              "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures. Ordinary robots still lack rewards; Dr Terrible rewards Wisdom and Creation rewards Defense."
+              "Every ordinary room but the acid room holds four robots drawn at random from five kinds. The one acid room has a turret on every tile of both long walls, firing every 3 seconds on staggered beats; the period rests on one 2012 screenshot and the beat order is an estimate. The serpentine acid-room variant seen on 2012-10-09 is not built. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures. Lab minions drop public Health and Magic potion bags (Magic only from Dr Terrible's minions) and owner-only equipment at estimated rates (PR1445)."
             ],
             "unknowns": [
-              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original room generation, ordinary loot and boss-helper healing semantics remain unverified; current comparator reconstruction is not target-era acceptance.",
-              "The uploader retrospective does not identify the healing helpers or establish their count, amount, cadence or range; it does not supply an original boss-helper implementation contract."
+              "Selected Enforcer Bot 3000 projectile0 has Stunned for 1 second, speed70 and lifetime3000ms; modified-7.0 XML instead has no condition, speed50 and lifetime1600ms. Preserve selected definitions. Original generator weights, ordinary loot rates and the boss-helper heal cadence and reach remain unverified; the room kit, the ten-room path and the +500 heals follow 2012 maps and footage (PR1445).",
+              "The uploader retrospective does not identify the healing helpers; 2012 footage does: Dr Terrible's Escaped Experiments heal +500 inside his bubble (t0f0_BWpBtw v332-335, C4sKt3Se0T0 v40). Their cadence and range remain estimates (PR1445)."
             ],
             "sources": [
               {
@@ -5395,6 +5447,18 @@
               {
                 "url": "https://github.com/moistosaurus/realm-cli/blob/a13c855dc5e09ee301fd0a66fcd303cfb5dff74e/src/kabam/rotmg/assets/EmbeddedData_MadLabCXML.dat",
                 "label": "Modified-7.0 comparator: lower boss defenses and different Enforcer projectiles; not selected target definitions"
+              },
+              {
+                "url": "https://web.archive.org/web/20130508122310/http://forums.wildshadow.com/wiki/realm-mad-god/mad-lab",
+                "label": "Wild Shadow Mad Lab page, last updated 123.5.1 (Wayback 2013-05-08): acid room lined with turrets"
+              },
+              {
+                "url": "https://youtu.be/xyUiQewDLg8?t=58",
+                "label": "September 16, 2012 run: the acid room in motion, stars scattered rather than fired in waves, no enemies"
+              },
+              {
+                "url": "https://youtu.be/t0f0_BWpBtw?t=213",
+                "label": "September 8, 2012 solo run: ten cage-minion brown bags, each one Magic Potion"
               }
             ],
             "group": "population"
@@ -5407,11 +5471,11 @@
             "implementation": "partial",
             "historical": "partial",
             "differences": [
-              "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants and the slowed-pet revert remain absent. Server PR1252 gives Creation one private Defense potion per living damaging contributor, using the existing Lab allocation policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1252 Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
+              "A Tesla Coil stands on every Lab Floor Power tile of the 2012 wiki map's rooms (about 90 per map; four under Dr Terrible's north wall, none in the start, L room, acid room or prefight corridor). All coils plus Dr Terrible open four Lab Emergency Walls into Horrific Creation's room north of his, which stays unsent and closed to blinks until they fall (PR1445). Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants and the slowed-pet revert remain absent. Server PR1252 gives Creation one private Defense potion per living damaging contributor, using the existing Lab allocation policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1252 Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"
             ],
             "unknowns": [
-              "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. The mixed-era wiki guarantees Defense to at least one player, not every contributor. Our per-contributor guarantee is reconstruction; target-era allocation, other equipment and drop rates remain unresolved. Native acceptance is separate from historical fidelity.",
-              "Inspected retained frames show vats and Dr Terrible aftermath, not Creation or complete masks. The independent December2012 Creation lead remains unviewed; neither establishes original choreography, cloak/range, low-HP or slowed-pet reversion."
+              "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. The mixed-era wiki guarantees Defense to at least one player, not every contributor. Our per-contributor guarantee is reconstruction; target-era allocation and drop rates remain unresolved. PR1445 adds T10/T11 weapons and armour, a T5 ability, the Experimental Ring and the Conducting Wand from 2012 reports, at estimated and Release 7.0 rates. Native acceptance is separate from historical fidelity.",
+              "Inspected retained frames show vats and Dr Terrible aftermath, not Creation or complete masks. The independent December2012 Creation lead remains unviewed; C4sKt3Se0T0 (2012-09-27) shows the Creation's room, pet form and taunts but was not timed; neither establishes original choreography, cloak/range, low-HP or slowed-pet reversion."
             ],
             "sources": [
               {
@@ -5433,6 +5497,18 @@
               {
                 "url": "https://wikiwiki.jp/rmd/::cmd/source?page=Horrific+Creation",
                 "label": "Mixed-era wiki source: Defense is guaranteed to at least one player; exact 123.5.1 allocation is unverified"
+              },
+              {
+                "url": "https://youtu.be/t0f0_BWpBtw?t=977",
+                "label": "September 8, 2012 solo run: a coil on a dark Lab Floor Power tile that stays when the coil is shot"
+              },
+              {
+                "url": "https://youtu.be/C4sKt3Se0T0?t=162",
+                "label": "September 27, 2012 run: Horrific Creation's taunts and its room"
+              },
+              {
+                "url": "https://www.reddit.com/r/RotMG/comments/z253d/_/c60u8dj",
+                "label": "August 30, 2012 comment: T11 and Defense from Horrific Creation"
               }
             ],
             "group": "boss"
