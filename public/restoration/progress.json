@@ -5210,7 +5210,7 @@
         "expected": "Davy Jones’s Locker includes entrance and key access, a traversable pirate dungeon, Davy, rewards and an exit. Original Ghost Ship access conditions, layout and encounter behavior remain unresolved.",
         "differences": [
           "Layout stamps templates cut from one captured live instance plus 2013-2018 minimap shapes; template choice, joins and door colouring are reconstructed from six layouts and 100 pre-2020 runs, not a recovered generator.",
-          "Encounter and drop tuning follows compared community references, not a certified original server build."
+          "Drop tuning follows compared community references, not a certified original server build. The lantern cycle, Davy's movement and the key rooms follow 2012 footage with labelled estimates (PR1444)."
         ],
         "unknowns": [
           "Original template weights and rates are fitted to lower bounds from partial footage; precise AI/drop probabilities and original sack/destructible presence remain unresolved.",
@@ -5256,6 +5256,10 @@
           {
             "url": "https://www.realmeye.com/wiki/davy-jones-s-locker/2",
             "label": "RealmEye Locker layout minimap, 2014-03-18 revision"
+          },
+          {
+            "url": "https://web.archive.org/web/20130514132120/https://forums.wildshadow.com/wiki/realm-mad-god/davy-jones-locker",
+            "label": "Wild Shadow Locker page, last updated 123.4.1 (Wayback 2013-05-14): each key behind the door of the colour before it; lanterns make Davy vulnerable"
           }
         ],
         "checks": [
@@ -5268,7 +5272,7 @@
             "historical": "partial",
             "differences": [],
             "unknowns": [
-              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated."
+              "Reload/re-entry is executed with paused loading and a peer retaining the instance; live-combat interruption and empty-instance retirement remain untested. Original generator and permission semantics are not authenticated. 2012 footage and the Wild Shadow page put every key but purple behind a door of the colour before it, with at least two red gates per run, and show locked rooms black until their gate opens (PR1444); how many spare rooms were purple-gated is unresolved (one keyless purple room in five solo runs, no doorless neck seen)."
             ],
             "sources": [
               {
@@ -5286,6 +5290,22 @@
               {
                 "url": "https://youtu.be/2C8h5dswJmg?t=281",
                 "label": "October 2012 run: red gate opens on contact with the key held; dead-end room behind it"
+              },
+              {
+                "url": "https://youtu.be/3BJGr4JLXu0?t=14",
+                "label": "August 13, 2012 guide card: green key in a blue room, red key in a green room, yellow key in a red room"
+              },
+              {
+                "url": "https://youtu.be/JV80D2whb1Y?t=14",
+                "label": "August 4, 2012 solo run: a closed purple gate on a keyless room and two red gates before the red key"
+              },
+              {
+                "url": "https://youtu.be/tMJCIHPjYdo?t=35",
+                "label": "August 4, 2012 solo run: the green key's room behind a closed purple gate"
+              },
+              {
+                "url": "https://web.archive.org/web/20130514132120/https://forums.wildshadow.com/wiki/realm-mad-god/davy-jones-locker",
+                "label": "Wild Shadow Locker page, last updated 123.4.1 (Wayback 2013-05-14): blue, green, red and yellow keys each behind the previous colour's door"
               }
             ],
             "group": "layout"
@@ -5298,10 +5318,10 @@
             "implementation": "present",
             "historical": "known-differences",
             "differences": [
-              "Five-second vulnerability and independent 5+10-second lamp clocks follow FSoD; Valor gives a conflicting 2.5-second window."
+              "The window ends once Davy has lost 20% of his HP since it opened, an estimate from 15-23% summed from 2012 damage numbers, or after a kept 5-second cap. Davy keeps following in later cycles, though in 3 of 4 2012 fights he held his spawn tile from about the second window on (PR1444)."
             ],
             "unknowns": [
-              "Original server timing has not been recovered."
+              "Original server timing has not been recovered. 2012 footage gives lanterns that stay lit until all eight are lit, a window 0.5 s after the eighth that ends after about 1.4-2.1k of 9000 HP, all eight bursting together, a 1.9 tiles/s follow, a 6.0 tiles/s chase until a lantern is lit or hit and a 3.3 tiles/s walk home (PR1444). The follow stop, sight, leash and chase cap are estimates."
             ],
             "sources": [
               {
@@ -5311,6 +5331,22 @@
               {
                 "url": "https://github.com/Omniraptyr/Valor-Server/blob/40fab9e80d8a44e922036d178b9d1f03aca66a44/VotR-Server/wServer/logic/db/BehaviorDb.DavyJones.cs",
                 "label": "Valor comparator: conflicting 2.5-second window, not independent original evidence"
+              },
+              {
+                "url": "https://youtu.be/PGEViiWb5H4?t=7",
+                "label": "November 22, 2012 solo Warrior fight at 1.00x: four lantern cycles, all eight bursting together, the kill"
+              },
+              {
+                "url": "https://youtu.be/JV80D2whb1Y?t=188",
+                "label": "August 4, 2012 solo fight: lanterns lit at 188-191 s still lit when the set completes at 214 s"
+              },
+              {
+                "url": "https://youtu.be/nzZgHBdlEH8?t=666",
+                "label": "August 3, 2012 launch-day fight: Davy chasing at 6.0 tiles/s for 98 s"
+              },
+              {
+                "url": "https://youtu.be/3BJGr4JLXu0?t=273",
+                "label": "August 13, 2012 guide card: vulnerable until he takes a certain amount of damage"
               }
             ],
             "group": "boss"
