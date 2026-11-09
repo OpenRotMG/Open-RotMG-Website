@@ -5182,6 +5182,14 @@
             "label": "July 2012 run starting on the moat walkway with the Portal of Cowardice"
           },
           {
+            "url": "https://youtu.be/YJQPDEw20f4?t=88",
+            "label": "October 3, 2012 solo run at 1.0x: room Vampire Bat Swarmers chasing at about 6.5 tiles/s"
+          },
+          {
+            "url": "https://web.archive.org/web/20120422072813/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals",
+            "label": "April 22, 2012 Wild Shadow Manor page: the summoned bats chase farther than the real ones"
+          },
+          {
             "url": "https://web.archive.org/web/20120609023320id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven",
             "label": "June 2012 Lord Ruthven wiki: drop list with Holy Water and no stat potion"
           },
@@ -5203,8 +5211,8 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Impostor and reward probabilities are unverified (1 in 5 kept; 1 of 4 seen). 2012 footage shows the coffin decided at about 15000 HP, one wave of 1 Nosferatu and about 20 bats and no 8000 HP wave (PR1434); later Japanese13000HP text differs; the all-breakable bookshelf change is not dated to123.5.1."],
-            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"},{"url":"https://youtu.be/uOYS8_HhIZ4?t=128","label":"August 29, 2012 run with an HP overlay: an impostor coffin changing after 15000 HP"},{"url":"https://youtu.be/RouEGVH0_eQ?t=82","label":"August 5, 2012 run: a hidden room behind shelves and a genuine coffin wave"},{"url":"https://wikiwiki.jp/rmd/Manor%20of%20the%20Immortals","label":"Japanese wiki Manor page: hidden rooms behind bookshelves and coffins enclosed by shelves; mixed-era"}],
+            "unknowns": ["Impostor and reward probabilities are unverified (1 in 5 kept; 1 of 4 seen). 2012 footage shows the coffin decided at about 15000 HP, one wave of 1 Nosferatu and about 20 bats and no 8000 HP wave (PR1434); later Japanese13000HP text differs; the all-breakable bookshelf change is not dated to123.5.1. Coffin-wave bats fly about 5.6 tiles/s in a 1.0x October 2012 run (PR1443)."],
+            "sources": [{"url":"https://web.archive.org/web/20120516045129id_/http://forums.wildshadow.com/wiki/realm-mad-god/manor-immortals","label":"May2012 Manor guide: genuine and impostor coffins"},{"url":"https://wikiwiki.jp/rmd/Coffin","label":"Later mixed-era coffin threshold comparison, not target authority"},{"url":"https://youtu.be/YJQPDEw20f4?t=159","label":"October 3, 2012 run at 1.0x: a genuine coffin's bat wave in flight"},{"url":"https://youtu.be/uOYS8_HhIZ4?t=128","label":"August 29, 2012 run with an HP overlay: an impostor coffin changing after 15000 HP"},{"url":"https://youtu.be/RouEGVH0_eQ?t=82","label":"August 5, 2012 run: a hidden room behind shelves and a genuine coffin wave"},{"url":"https://wikiwiki.jp/rmd/Manor%20of%20the%20Immortals","label":"Japanese wiki Manor page: hidden rooms behind bookshelves and coffins enclosed by shelves; mixed-era"}],
             "group": "layout"
           },
           {
@@ -5215,8 +5223,8 @@
             "implementation": "present",
             "historical": "partial",
             "differences": [],
-            "unknowns": ["Five 2012 fights give the 20.2-second cycle (daggers 2.5 s, ritual 5.7 s, bats 12 s), 3/5/18 daggers by HP, four 24-shot rings, about 19 own bats and actual-damage healing (PR1434). The dagger HP bands come from one fight, the volley direction rule is unknown and the decoy group count is kept. Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
-            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"},{"url":"https://youtu.be/YJQPDEw20f4?t=208","label":"October 3, 2012 solo fight at 1.0x: the full cycle"},{"url":"https://youtu.be/Dn8ki2prSr0","label":"July 15, 2012 fight: rings on the map axes and the Realm Portal exit"}],
+            "unknowns": ["Five 2012 fights give the 20.2-second cycle (daggers 2.5 s, ritual 5.7 s, bats 12 s), 3/5/18 daggers by HP, four 24-shot rings, about 19 own bats and actual-damage healing (PR1434). The dagger HP bands come from one fight, the volley direction rule is unknown and the decoy group count is kept. His own bats fly about 6.0 tiles/s and his bat cloud about 4.7, measured in a 1.0x October 2012 fight; the decoy groups were not told apart and take the same speeds (PR1443). Modified7.0 Ruthven12000HP/30DEF is not selected15000HP/95DEF.","Gameplay remainder (#862): mid-fight disconnect/reconnect and native multiplayer boss reward eligibility; late join and the earned-exit reconnect have separate receipts."],
+            "sources": [{"url":"https://web.archive.org/web/20120509113243id_/http://forums.wildshadow.com/wiki/realm-mad-god/lord-ruthven","label":"Build122.3.2-labelled Ruthven guide: actual-damage healing"},{"url":"https://wikiwiki.jp/rmd/version/build123.3.0","label":"June2012 notes: Ruthven bats no longer grant EXP"},{"url":"https://youtu.be/YJQPDEw20f4?t=218","label":"October 3, 2012 solo fight at 1.0x: Ruthven's own bats and bat cloud in flight"},{"url":"https://youtu.be/YJQPDEw20f4?t=208","label":"October 3, 2012 solo fight at 1.0x: the full cycle"},{"url":"https://youtu.be/Dn8ki2prSr0","label":"July 15, 2012 fight: rings on the map axes and the Realm Portal exit"}],
             "group": "boss"
           }
         ]
