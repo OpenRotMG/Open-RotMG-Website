@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {gzipSync, brotliCompressSync} from 'node:zlib';
+import {runInNewContext} from 'node:vm';
 import {exportAccount} from '../public/export/app.js';
 
 const save = {format: 1, content: '123.5.1', exported_at: 1793700000, name: 'Synthetic only'};
@@ -129,6 +130,28 @@ test('export deadline aborts a real stalled body, not only initial response head
       }}));
     }), /timed out/);
   } finally {AbortSignal.timeout = timeout; clearTimeout(keepAlive);}
+});
+
+test('actual export template and submit handler show pending/success/errors and re-enable the button', async () => {
+  const html=await readFile(new URL('../public/export/index.html',import.meta.url),'utf8');
+  const source=(await readFile(new URL('../public/export/app.js',import.meta.url),'utf8')).replace('export async function','async function');
+  const elements=new Map([...html.matchAll(/id="([^"]+)"/g)].map(([,id])=>[id,{value:'',textContent:''}]));
+  assert.match(html,/<p id="status" role="status" aria-live="polite"><\/p>/);
+  let submit,finish;const button={disabled:true},downloads=[];
+  elements.get('export-form').querySelector=selector=>{assert.equal(selector,'button');return button;};
+  elements.get('export-form').addEventListener=(event,fn)=>{assert.equal(event,'submit');submit=fn;};
+  const document={querySelector:selector=>elements.get(selector.slice(1))??null,body:{append(){}},createElement:()=>({click(){downloads.push(this.download);},remove(){}})};
+  const fetch=()=>new Promise(ok=>finish=ok);
+  runInNewContext(source,{document,history:{replaceState(){}},location:{pathname:'/export/'},addEventListener(){},Blob,Response,AbortSignal,setTimeout:fn=>fn(),URL:{createObjectURL:()=> 'blob:unit',revokeObjectURL(){}},OpenRotMGBackend:{fetch}});
+  for(const ok of [true,false]){
+    elements.get('email').value='owner@example.test';elements.get('password').value='synthetic-password';
+    const pending=submit({preventDefault(){}});
+    assert.equal(elements.get('status').textContent,'Preparing your account save…');assert(button.disabled);
+    assert.equal(elements.get('email').value,'');assert.equal(elements.get('password').value,'');
+    finish(ok?response():response('{"error":"invalid credentials"}',{status:401}));await pending;
+    assert.equal(button.disabled,false);assert.match(elements.get('status').textContent,ok?/sent to your browser/:/incorrect/);
+  }
+  assert.deepEqual(downloads,['openrotmg-account-1793700000.json']);
 });
 
 test('export page has no credential URL path or persistence; public metadata stays generic and existing private pages stay noindex', async () => {
