@@ -1325,7 +1325,8 @@
             "implementation": "present",
             "historical": "unreviewed",
             "differences": [
-              "Recovery follows compiled Kithio Oryx and Reproduce: the 60s clock refills roots below 75% and culls roots (with their families) above 150% while sparing those within 10 tiles of players; top-ups keep 16 tiles from players; Reproduce clocks advance in Kithio's three-chunk active zone and births skip player/arrival clearance; Djinn reproduces while Idle (PR1272, PR1280, PR1281, PR1290, PR1293). Remaining project differences: NPC movement/attacks still simulate within 20 tiles, reproduction is batched per second and families are placed eagerly. Original recovery parameters remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1293"
+              "Recovery uses a 60s check, refills below 75% and culls breeding species above 150% while sparing those within 10 tiles of players. Reproduce clocks advance in Kithio's three-chunk active zone; Djinn reproduces while Idle. Movement/attacks simulate within 20 tiles, reproduction is batched per second and families are placed eagerly. Original recovery parameters remain unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1293",
+              "PR1448 adds an owner-selected safety difference: natural reproduction requires both the parent and every offspring position to be outside every player's 20-tile visibility radius. Replenishment uses the same clearance. Refused births consume the normal cooldown; intentional children and combat summons retain their encounter rules. The later/custom betterSkillys comparator similarly gates Reproduce on visibility, but uses 30 tiles; neither value establishes the official 123.5.1 distance. https://github.com/OpenRotMG/Open-RotMG-Server/pull/1448"
             ],
             "unknowns": [],
             "sources": [],

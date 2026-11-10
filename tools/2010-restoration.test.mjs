@@ -836,7 +836,7 @@ test('1384 initial-only payload inverse preserves every actualb3c value and reje
     assert.equal(evidence.results['home:browse-realm-portals'].evidence.pop(), 'realm-portals-native-b76d8f52');
     delete evidence.sources['realm-portals-native-b76d8f52'];
     peelManor1384(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), '6fdc017db42fb25c58d733a0d05b196ff885c1df7cadc441c4a3864d22f0a0f7');
+    assert.equal(digest(JSON.stringify(data)), '2c8505a9ab54e43a8ee1942c789f72ea4691794e41bedc9002c19b423d0a979a');
     assert.equal(digest(JSON.stringify(evidence)), 'f36c972602ff62ad382b8ca1273cc6d8f146de6d530545c8b676d99ed243f53f');
   };
   preserve(...fresh());
@@ -885,7 +885,7 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[3]].limitations, /not production72.*earned closure.*tick-ACK-stop remains unexplained.*no whole-feature or historical promotion/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
-  assert.equal(digest(JSON.stringify(data)), '92f50f4a2cf76c6eb8c0e6cd6dc0c001f7a13aa97d403831bbd24e9b3b0ba2f7');
+  assert.equal(digest(JSON.stringify(data)), 'cfac5c0e5e34db02557b657bc61ea9e4091b767e437e31687e775b34a9a89d21');
   assert.equal(digest(JSON.stringify(evidence)), '7cef0f77ecd4e07394601c6821eb56fbc79ad52ff2c8273235b901c1b6a5568e');
 });
 
@@ -916,7 +916,7 @@ test('1344 prepared pool and two-life closure evidence preserve actual69d values
   const preserve = (data, evidence) => {
     removeRealmSdkEvidence(data, evidence);
     peelPopulation1344(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), 'dca0694a8600e531d991ed76b2734ec643a173b190705bc4fb34cbf47e096299');
+    assert.equal(digest(JSON.stringify(data)), 'bb0848335cec13e43a91ff12e0edd2236e10991de289c384913ede0dbe952704');
     assert.equal(digest(JSON.stringify(evidence)), 'd37947a2e0079922f9f1628cd7156c2f89181db457047007caa77baadd83a5a6');
   };
   preserve(...fresh());
@@ -965,13 +965,13 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), 'e3599b69bc85927f3b83818139332de73ae38b88b93d2aed95a94e1c46f72dba');
+  assert.equal(digest(JSON.stringify(data)), 'd00a3cebe1c187aa9552a0abcade2f5690a0e018e86cab6840c1d2e53bc9c84b');
   assert.equal(digest(JSON.stringify(evidence)), '07a6e389013bc4bd82e95613a10dec79cee33ec1ae2cf717354bd553dc2fae36');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '0e8c7212cc0ee896a83741c96be8384f1ec29b6a93a6c7611ca16397efbc5d75');
+  assert.equal(digest(bytes), '714b7d4ceed196b130f41d6b17cf3cb5da9110ee10758c92e62d22ca661242d8');
   assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'e6f7f4321b6b031f5fe4b5a2689f6af01a26d5837f5882568ccb0d2819eb14f4');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
