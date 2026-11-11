@@ -4,7 +4,7 @@ const invalid = () => new ExportError('The server returned an invalid export res
 const messages = {
   401: 'Email or password is incorrect. Use a registered game account, not a guest account.',
   409: 'Leave the game on every device, wait for your character to finish saving, then try again.',
-  403: 'Export was refused for this website origin. Open the official website and try again.',
+  403: 'Open https://openrotmg.org/export/ and try again from that page.',
   429: 'Too many export attempts. Wait a little before trying again.'
 };
 async function readBounded(response, limit) {
@@ -55,7 +55,13 @@ export async function exportAccount(email, password, fetchImpl = globalThis.Open
     const filename = /^attachment;\s*filename=("openrotmg-account-[1-9]\d*\.json"|openrotmg-account-[1-9]\d*\.json)$/.exec(disposition)?.[1].replaceAll('"', '');
     if (response.status !== 200 || !filename || !Number.isSafeInteger(Number(filename.match(/-(\d+)\.json$/)[1])) ||
         result.format !== 1 || result.content !== '123.5.1' || !Number.isSafeInteger(result.exported_at) || result.exported_at <= 0 || 'error' in result) throw invalid();
-    return {blob, filename};
+    if (typeof result.name !== 'string' || !result.name.trim() || result.name.length > 80 || result.name.includes('@')) throw invalid();
+    const account = result.name.normalize('NFKC').replace(/[^\p{L}\p{N}_-]+/gu, '-').replace(/^-+|-+$/g, '');
+    const exported = new Date(result.exported_at * 1000);
+    if (!account || !Number.isFinite(exported.getTime())) throw invalid();
+    const date = exported.toISOString().slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw invalid();
+    return {blob, filename: `openrotmg-account-${account}-${date}.json`};
   } catch (error) {
     if (error instanceof ExportError) throw error;
     throw new ExportError(error?.name === 'TimeoutError' || error?.name === 'AbortError'
@@ -85,7 +91,7 @@ function start() {
       document.body.append(link); link.click(); link.remove();
       // Browsers may start the download after the click task has finished.
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      status.textContent = 'Save file sent to your browser. Keep it private and check your downloads.';
+      status.textContent = `Your account save is ready. Check Downloads for ${filename}. Keep this file private.`;
     } catch (error) {status.textContent = error instanceof ExportError ? error.message : 'The browser could not start the download. No download was confirmed. Try again.';}
     finally {clear(); button.disabled = false;}
   });

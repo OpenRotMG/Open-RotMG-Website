@@ -9,6 +9,7 @@ import {exportAccount} from '../public/export/app.js';
 const save = {format: 1, content: '123.5.1', exported_at: 1793700000, name: 'Synthetic only'};
 const headers = {'content-type': 'application/json', 'cache-control': 'no-store', 'content-disposition': 'attachment; filename="openrotmg-account-1793700000.json"'};
 const response = (body = JSON.stringify(save), options = {}) => new Response(body, {headers, ...options});
+const filename='openrotmg-account-Synthetic-only-2026-11-03.json';
 const submit = reply => exportAccount('owner@example.test', 'synthetic-password', async () => reply);
 
 test('export uses only explicit owner credentials in a bounded no-store POST body, and preserves actual bytes', async () => {
@@ -21,7 +22,7 @@ test('export uses only explicit owner credentials in a bounded no-store POST bod
     assert.ok(request.signal instanceof AbortSignal);
     return response(bytes);
   });
-  assert.equal(result.filename, 'openrotmg-account-1793700000.json');
+  assert.equal(result.filename, filename);
   assert.equal(result.blob.type, 'application/json');
   assert.equal(await result.blob.text(), bytes);
   for (const [email, password] of [['', 'password'], ['owner@example.test', ''], [3, 'password']]) {
@@ -29,9 +30,17 @@ test('export uses only explicit owner credentials in a bounded no-store POST bod
   }
 });
 
+test('download names use the account name and UTC export date, never a login, path or local clock',async()=>{
+ for(const [name,expected] of [['Dan','Dan'],['日本語','日本語'],['../Dan\\\\name','Dan-name'],['  My Player  ','My-Player']]){
+  const bytes=JSON.stringify({...save,name,exported_at:Date.UTC(2026,10,12,0,1)/1000}),result=await submit(response(bytes));assert.equal(result.filename,`openrotmg-account-${expected}-2026-11-12.json`);assert.equal(await result.blob.text(),bytes);
+ }
+ for(const name of [undefined,null,3,'','...','owner@example.test','x'.repeat(81)])await assert.rejects(submit(response(JSON.stringify({...save,name}))),/invalid export response/);
+ for(const exported_at of [Number.MAX_SAFE_INTEGER,253402300800])await assert.rejects(submit(response(JSON.stringify({...save,exported_at}))),/invalid export response/);
+});
+
 test('export errors are validated JSON and static status-specific instructions, never server or network secrets', async () => {
   const secret = 'owner@example.test synthetic-password guid recovery-token';
-  for (const [status, expected] of [[401, /incorrect/], [409, /Leave the game/], [403, /origin/], [429, /Too many/], [500, /Try again later/], [503, /Try again later/]]) {
+  for (const [status, expected] of [[401, /incorrect/], [409, /Leave the game/], [403, /openrotmg.org\/export/], [429, /Too many/], [500, /Try again later/], [503, /Try again later/]]) {
     await assert.rejects(submit(response(JSON.stringify({error: secret}), {status})), error => expected.test(error.message) && !error.message.includes(secret));
   }
   for (const body of ['<html>error</html>', '{}', '{"error":3}', '{"error":"x","password":"leak"}', 'null']) {
@@ -54,7 +63,7 @@ test('no successful mock fallback: export refuses corrupt JSON, wrong envelope, 
     await assert.rejects(submit(response(undefined, {headers: {...headers, ...changed}})), /invalid export response/);
   }
   await assert.rejects(submit(response(undefined, {status: 201})), /invalid export response/);
-  assert.equal((await submit(response(undefined, {headers: {...headers, 'content-disposition': 'attachment; filename=openrotmg-account-1793700000.json'}}))).filename, 'openrotmg-account-1793700000.json');
+  assert.equal((await submit(response(undefined, {headers: {...headers, 'content-disposition': 'attachment; filename=openrotmg-account-1793700000.json'}}))).filename, filename);
 });
 
 test('export handles real HTTP compressed success, conflict, decoded limits and interrupted transport', async t => {
@@ -78,7 +87,7 @@ test('export handles real HTTP compressed success, conflict, decoded limits and 
         status = 200; body = JSON.stringify(save);
         const result = await request();
         assert.equal(await result.blob.text(), body);
-        assert.equal(result.filename, 'openrotmg-account-1793700000.json');
+        assert.equal(result.filename, filename);
       });
       await t.test(`${encoding} conflict keeps static leave-game instructions`, async () => {
         status = 409; body = JSON.stringify({error: 'owner@example.test synthetic-password '.repeat(10)});
@@ -149,9 +158,9 @@ test('actual export template and submit handler show pending/success/errors and 
     assert.equal(elements.get('status').textContent,'Preparing your account save…');assert(button.disabled);
     assert.equal(elements.get('email').value,'');assert.equal(elements.get('password').value,'');
     finish(ok?response():response('{"error":"invalid credentials"}',{status:401}));await pending;
-    assert.equal(button.disabled,false);assert.match(elements.get('status').textContent,ok?/sent to your browser/:/incorrect/);
+    assert.equal(button.disabled,false);assert.match(elements.get('status').textContent,ok?/account save is ready/:/incorrect/);
   }
-  assert.deepEqual(downloads,['openrotmg-account-1793700000.json']);
+  assert.deepEqual(downloads,[filename]);
 });
 
 test('export page has no credential URL path or persistence; public metadata stays generic and existing private pages stay noindex', async () => {
