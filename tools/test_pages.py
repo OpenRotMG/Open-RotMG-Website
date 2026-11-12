@@ -24,11 +24,17 @@ class PagesTest(unittest.TestCase):
         self.server = self.root / 'server'
         (self.client / 'vendor').mkdir(parents=True)
         (self.client / 'vendor/ruffle.js').write_bytes(b'fixture runtime')
+        (self.client / 'vendor/engine.wasm').write_bytes(b'fixture wasm')
         (self.server / 'data/sfx').mkdir(parents=True)
         (self.server / 'data/sfx/test.mp3').write_bytes(b'fixture audio')
         (self.root / 'dist/2010').mkdir(parents=True)
         (self.root / 'dist/2010/index.html').write_text('<html><head><title>2010 Preview</title><meta property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"><meta name="twitter:image" content="https://openrotmg.org/2010/social.png?v=fixture"><script src="preview.js"></script></head><body>Game</body></html>')
         (self.root / 'dist/diagnostics-build.json').write_text(json.dumps(self.expected))
+        (self.root / 'dist/draw').mkdir()
+        for page in ['index.html', 'draw/index.html']:
+            (self.root / 'dist' / page).write_text('<div id="game"></div><script src="/game.js"></script>')
+        (self.root / 'dist/game.js').write_bytes(b'fixture loader')
+        (self.root / 'dist/draw/native-texture-editor.swf').write_bytes(b'fixture editor')
         self.snapshot = self.root / 'backend.json'
         self.snapshot.write_text(json.dumps(self.expected))
         body = b'\x08\x00\x00\x18\x01\x00\x40\x00\x00\x00'  # RECT, frame header, ShowFrame, End
@@ -67,6 +73,13 @@ class PagesTest(unittest.TestCase):
         build = json.loads((self.root / 'dist/diagnostics-build.json').read_text())
         self.assertEqual(build['client_swf_sha256'], hashlib.sha256(movie).hexdigest())
         self.assertEqual(build['client_source_swf_sha256'], hashlib.sha256(self.swf).hexdigest())
+        for page in ['index.html', 'draw/index.html']:
+            html = (self.root / 'dist' / page).read_text()
+            hashes = json.loads(html.split("data-asset-hashes='")[1].split("'")[0])
+            for name, digest in hashes.items():
+                self.assertEqual(digest, hashlib.sha256((self.root / 'dist' / name.lstrip('/')).read_bytes()).hexdigest())
+            self.assertIn('/vendor/engine.wasm', hashes)
+            self.assertIn('src="/game.js?v=' + hashlib.sha256(b'fixture loader').hexdigest(), html)
         preview = (self.root / 'dist/2010/index.html').read_text()
         self.assertIn('https://www.openrotmg.org/2010/', preview)
         self.assertIn('property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"', preview)

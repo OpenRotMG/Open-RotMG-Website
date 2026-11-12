@@ -70,6 +70,17 @@ def assemble():
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
     mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)
     (dist / 'client.swf').write_bytes(mobile)
+    assets = {'/client.swf': hashlib.sha256(mobile).hexdigest(),
+              '/draw/native-texture-editor.swf': hashlib.sha256((dist / 'draw/native-texture-editor.swf').read_bytes()).hexdigest()}
+    assets.update(('/' + str(path.relative_to(dist)), hashlib.sha256(path.read_bytes()).hexdigest())
+                  for path in (dist / 'vendor').glob('*.wasm'))
+    script_version = hashlib.sha256((dist / 'game.js').read_bytes()).hexdigest()
+    for page in [dist / 'index.html', dist / 'draw/index.html']:
+        html = page.read_text()
+        if html.count('id="game"') != 1:
+            raise ValueError('Game page must have exactly one asset cache target: ' + str(page))
+        html = html.replace('src="/game.js"', 'src="/game.js?v=' + script_version + '"')
+        page.write_text(html.replace('id="game"', 'id="game" data-asset-hashes=\'' + json.dumps(assets, separators=(',', ':')) + '\''))
     build.update(server=expected['server'], client_source_swf_sha256=hashlib.sha256(swf).hexdigest(),
                  client_swf_sha256=hashlib.sha256(mobile).hexdigest())
     (dist / 'diagnostics-build.json').write_text(json.dumps(build))
