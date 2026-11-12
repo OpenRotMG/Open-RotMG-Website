@@ -8,8 +8,9 @@ test('single-player links the qualified fixed-version portable ZIPs', async () =
   const repo = 'https://github.com/OpenRotMG/Open-RotMG-Single-Player';
   const externalLinks = [...html.matchAll(/href="(https?:[^"{]+)"/g)].map(match => match[1]);
   assert.deepEqual(externalLinks, [
-    ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v0.1.3/openrotmg-singleplayer-0.1.3-${target}.zip`),
+    ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v0.1.4/openrotmg-singleplayer-0.1.4-${target}.zip`),
   ]);
+  assert.match(html,/Update and reopen/);assert.match(html,/one-time upgrade adds automatic launcher updates/);assert.match(html,/keep the old folder until your progress is confirmed/);
   assert.doesNotMatch(html, /Preview only|planned edition|not released yet|releases\/latest|\u2014/);
   const about = await readFile(new URL('../public/about/index.html', import.meta.url), 'utf8');
   assert.match(about, /Download the offline edition\./);
