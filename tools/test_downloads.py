@@ -16,7 +16,7 @@ from native_client import with_native_endpoints
 
 def movie():
     values = [b'127.0.0.1:8080', b'http://', b'realmofthemadgod.appspot.com', b'/char',
-              b'/sfx/music/sorc.mp3', b'/gold/', b'unchanged-gameplay']
+              b'/sfx/music/sorc.mp3', b'/gold/', b'RotMG', b'AssembleeGameClientOptions', b'unchanged-gameplay']
     abc = b'\x10\0\x2e\0\0\0\0' + u30(len(values) + 1)
     abc += b''.join(u30(len(value)) + value for value in values) + b'\0\0\0\0\0'
     payload = b'\0\0\0\0test\0' + abc
@@ -29,7 +29,7 @@ class DownloadsTest(unittest.TestCase):
         result = with_native_endpoints(movie(), 'https://game.example.test', 'https://example.test/')
         self.assertEqual(int.from_bytes(result[4:8], 'little'), len(result))
         for value in [b'game.example.test/legacy-api', b'https://', b'/native-char',
-                      b'/sfx/music/sorc.mp3', b'https://example.test/gold/', b'unchanged-gameplay']:
+                      b'/sfx/music/sorc.mp3', b'https://example.test/gold/', b'OpenRotMGOnline', b'OpenRotMGOnlineOptions', b'unchanged-gameplay']:
             self.assertIn(value, result)
         for value in [b'127.0.0.1:8080', b'realmofthemadgod.appspot.com', b'\x07http://']:
             self.assertNotIn(value, result)
@@ -65,7 +65,10 @@ class DownloadsTest(unittest.TestCase):
                 self.assertEqual(json.loads(archive.read('Open RotMG/build.json')), receipt)
                 for name in ['ruffle', 'Open RotMG.sh']:
                     self.assertEqual(archive.getinfo('Open RotMG/' + name).external_attr >> 16, 0o100755)
-                self.assertIn(b'--socket-allow game.example.test:2050 client.swf', archive.read('Open RotMG/Open RotMG.sh'))
+                launcher = archive.read('Open RotMG/Open RotMG.sh')
+                self.assertIn(b'--socket-allow game.example.test:2050 client.swf', launcher)
+                self.assertIn(b'umask 077\n', launcher)
+                self.assertIn(b'--save-directory "$PWD/player-data"', launcher)
             downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test', identity, fetch)
             self.assertEqual(first, (root / 'openrotmg-linux-x64.zip').read_bytes())
             for line in (root / 'SHA256SUMS').read_text().splitlines():
