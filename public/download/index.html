@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
+  <title>Downloads | Open RotMG</title>
+  <meta name="description" content="Download the Ruffle edition or standalone SWF. Play on the live server with your existing account.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="{{SITE_URL}}download/">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+</head>
+<body class="about-page">
+<div class="site-shell">
+  <main class="page-main"><div class="about-copy">
+    <h1>Downloads</h1>
+    <p>Play on the live server with your existing account.</p>
+    <h2>Ruffle</h2>
+    <p>Download, extract, play. No Flash installation needed.</p>
+    <p><a href="openrotmg-linux-x64.zip" download>Linux x64</a></p>
+    <p>Extract the ZIP and run <code>Open RotMG.sh</code>. Requires Linux x64 with glibc 2.39 or newer and an internet connection. If it fails to open, run the script from a terminal to see the error.</p>
+    <h2>SWF</h2>
+    <p>Just the game file, for your own player.</p>
+    <p><a href="openrotmg.swf" download>Download SWF</a></p>
+    <details id="setup"><summary>Setup instructions</summary>
+      <p>Open the downloaded file in the Ruffle player included in our Linux edition. Allow its connection to <code>{{NATIVE_HOST}}:2050</code> when prompted, then sign in or create an account.</p>
+      <p>The SWF is configured for Open RotMG's live server. It does not include a player or an offline server. Only the bundled Ruffle player has been tested. Other Ruffle builds and Adobe Flash Player have not been verified.</p>
+    </details>
+    <p><a href="SHA256SUMS">Checksums</a> · <a href="build.json">Build information</a> · <a href="https://github.com/OpenRotMG/Open-RotMG-Client/releases/tag/desktop-0.7.1-openrotmg.16">Ruffle build</a></p>
+    <p>Want to play offline? <a href="{{BASE}}single-player/">Single-player</a></p>
+  </div></main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation</p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+  </footer>
+</div>
+</body>
+</html>

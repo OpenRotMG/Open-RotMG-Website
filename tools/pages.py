@@ -8,6 +8,7 @@ import sys
 import urllib.request
 import zlib
 from mobile_camera import with_mobile_camera
+from downloads import build_downloads
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / '.local/pages-backend.json'
@@ -26,7 +27,8 @@ def download(path, limit=1024 * 1024):
 def identity():
     health = json.loads(download('/health'))
     client = json.loads(download('/diagnostics-build.json'))
-    result = {'server': health['revision'], 'process': health['process'], 'client': client['client'], 'runtime': client['runtime']}
+    result = {'server': health['revision'], 'process': health['process'], 'client': client['client'], 'runtime': client['runtime'],
+              'native_host': health['native_game']['host'] if health.get('native_game') else None}
     if (any(not re.fullmatch('[0-9a-f]{40}', result[key]) for key in ['server', 'client'])
             or type(result['process']) is not int or result['process'] <= 0):
         raise ValueError('Invalid deployed game/client identity')
@@ -66,6 +68,10 @@ def assemble():
     build = json.loads((dist / 'diagnostics-build.json').read_text())
     if build['client'] != expected['client'] or build['runtime'] != expected['runtime']:
         raise ValueError('Pages client/runtime differs from the deployed game')
+    if expected.get('native_host') != urllib.parse.urlsplit(API).hostname:
+        raise ValueError('Live native game transport must match the API host before publishing downloads')
+    desktop = build_downloads(dist / 'download', b'FWS' + swf[3:8] + body, API,
+                              os.environ['SITE_URL'], {**expected, 'website': build['website']})
     shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'vendor', dist / 'vendor')
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
     mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)
@@ -81,7 +87,7 @@ def assemble():
             raise ValueError('Game page must have exactly one asset cache target: ' + str(page))
         html = html.replace('src="/game.js"', 'src="/game.js?v=' + script_version + '"')
         page.write_text(html.replace('id="game"', 'id="game" data-asset-hashes=\'' + json.dumps(assets, separators=(',', ':')) + '\''))
-    build.update(server=expected['server'], client_source_swf_sha256=hashlib.sha256(swf).hexdigest(),
+    build.update(native_swf_sha256=desktop['swf_sha256'], server=expected['server'], client_source_swf_sha256=hashlib.sha256(swf).hexdigest(),
                  client_swf_sha256=hashlib.sha256(mobile).hexdigest())
     (dist / 'diagnostics-build.json').write_text(json.dumps(build))
     preview = dist / '2010/index.html'
