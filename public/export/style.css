@@ -3,4 +3,4 @@
 #export-form input:focus-visible { outline: 2px solid #dfbd77; outline-offset: 2px; }
 #export-form button { justify-self: start; margin-top: 6px; padding: 9px 13px; border: 1px solid #87744b; background: #282318; color: #f0cf83; }
 #export-form button:disabled { cursor: wait; opacity: .6; }
-#status { min-height: 3.2em; color: #cfbd93; }
+#status { white-space: pre-line; min-height: 3.2em; color: #cfbd93; }
