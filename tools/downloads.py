@@ -33,13 +33,14 @@ def build_downloads(root, source, api, site, identity, fetch=urlopen):
     files['COPYING-client.txt'] = (Path(__file__).resolve().parents[1] / 'LICENSE').read_bytes()
     files['client.swf'] = movie
     files['Open RotMG.sh'] = (
-        '#!/bin/sh\nset -eu\ncd -- "$(dirname -- "$0")"\n'
-        f'exec ./ruffle --socket-allow {shlex.quote(identity["native_host"] + ":2050")} client.swf\n'
+        '#!/bin/sh\nset -eu\numask 077\ncd -- "$(dirname -- "$0")"\n'
+        f'exec ./ruffle --save-directory "$PWD/player-data" --socket-allow {shlex.quote(identity["native_host"] + ":2050")} client.swf\n'
     ).encode()
     files['READ ME.txt'] = (
         'Open RotMG (online)\n\nRun Open RotMG.sh. An internet connection is required.\n'
         'Requires Linux x64 with glibc 2.39 or newer.\n'
         'Sign in with your existing online account. This is not the offline edition.\n'
+        'Your cached login is in player-data. Do not share that folder.\n'
         'If launch fails, run the script from a terminal to see the error.\n\n'
         f'Includes Open RotMG Ruffle {RUFFLE_VERSION}. Its licenses are in LICENSE.md.\n'
         f'Ruffle source and patches: https://github.com/OpenRotMG/Open-RotMG-Client/tree/{provenance["client"]}\n'

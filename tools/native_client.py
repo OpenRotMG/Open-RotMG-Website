@@ -24,6 +24,8 @@ def with_native_endpoints(source, api, site):
         b'http://': (endpoint.scheme + '://').encode(),
         b'realmofthemadgod.appspot.com': endpoint.netloc.encode(),
         b'/char': b'/native-char',
+        b'RotMG': b'OpenRotMGOnline',
+        b'AssembleeGameClientOptions': b'OpenRotMGOnlineOptions',
         b'/gold/': (site.rstrip('/') + '/gold/').encode(),
     }
     counts = dict.fromkeys(replacements, 0)
