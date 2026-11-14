@@ -72,7 +72,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
-  for (const page of ['export', 'single-player', 'rules']) {
+  for (const page of ['export', 'single-player', 'rules', 'download']) {
     const html = readFileSync(new URL(`../dist/${page}/index.html`, import.meta.url), 'utf8');
     const version = createHash('sha256').update(readFileSync(new URL(`../dist/${page}/social.png`, import.meta.url))).digest('hex').slice(0, 12);
     assert.ok(html.includes(`rel="canonical" href="${site.href}${page}/"`));
@@ -115,6 +115,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
     [`${site.pathname}export/`, 'Export save', 'Copy your personal account progress.'],
+    [`${site.pathname}download/`, 'Downloads', 'Ruffle edition and standalone SWF.'],
     [`${site.pathname}single-player/`, 'Single-player', 'Download the offline edition.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
     [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
@@ -174,7 +175,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
   assert.ok(sitemap.includes(`<loc>${site.href}gold/</loc>`));
-  for (const page of ['export', 'single-player']) assert.ok(sitemap.includes(`<loc>${site.href}${page}/</loc>`));
+  for (const page of ['export', 'single-player', 'download']) assert.ok(sitemap.includes(`<loc>${site.href}${page}/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));
