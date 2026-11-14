@@ -92,7 +92,7 @@ class PagesTest(unittest.TestCase):
     def test_backend_changes_before_or_during_download_cannot_publish_mixed_assets(self):
         changed = {**self.expected, 'process': 124}
         self.patch(pages, 'download', return_value=self.swf)
-        for replies in [[changed], [self.expected, changed]]:
+        for replies in [[changed], [self.expected, changed], [self.expected, self.expected, changed]]:
             with patch.object(pages, 'identity', side_effect=replies), self.assertRaisesRegex(ValueError, 'changed|Backend changed'):
                 pages.assemble()
         self.assertFalse((self.root / 'dist/client.swf').exists())

@@ -72,6 +72,8 @@ def assemble():
         raise ValueError('Live native game transport must match the API host before publishing downloads')
     desktop = build_downloads(dist / 'download', b'FWS' + swf[3:8] + body, API,
                               os.environ['SITE_URL'], {**expected, 'website': build['website']})
+    if identity() != expected:
+        raise ValueError('Backend changed during desktop download packaging')
     shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'vendor', dist / 'vendor')
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
     mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)

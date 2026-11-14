@@ -44,7 +44,7 @@ def build_downloads(root, source, api, site, identity, fetch=urlopen):
         f'Includes Open RotMG Ruffle {RUFFLE_VERSION}. Its licenses are in LICENSE.md.\n'
         f'Ruffle source and patches: https://github.com/OpenRotMG/Open-RotMG-Client/tree/{provenance["client"]}\n'
         'Exact Ruffle source and patch hashes: openrotmg.json\n'
-        'Client source: https://github.com/OpenRotMG/Open-RotMG-Client\n'
+        f'Client source: https://github.com/OpenRotMG/Open-RotMG-Client/tree/{identity["client"]}\n'
         f'Server/client transforms: https://github.com/OpenRotMG/Open-RotMG-Server/tree/{identity["server"]}\n'
         f'Download transform: https://github.com/OpenRotMG/Open-RotMG-Website/tree/{identity["website"]}\n'
         'Client license: COPYING-client.txt\n'
