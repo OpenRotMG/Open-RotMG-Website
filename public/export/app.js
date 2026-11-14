@@ -91,7 +91,7 @@ function start() {
       document.body.append(link); link.click(); link.remove();
       // Browsers may start the download after the click task has finished.
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      status.textContent = `Your account save is ready. Check Downloads for ${filename}. Keep this file private.`;
+      status.textContent = `Your account save is ready. Check Downloads for ${filename}.\nYour account password is "password".`;
     } catch (error) {status.textContent = error instanceof ExportError ? error.message : 'The browser could not start the download. No download was confirmed. Try again.';}
     finally {clear(); button.disabled = false;}
   });

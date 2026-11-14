@@ -158,7 +158,7 @@ test('actual export template and submit handler show pending/success/errors and 
     assert.equal(elements.get('status').textContent,'Preparing your account save…');assert(button.disabled);
     assert.equal(elements.get('email').value,'');assert.equal(elements.get('password').value,'');
     finish(ok?response():response('{"error":"invalid credentials"}',{status:401}));await pending;
-    assert.equal(button.disabled,false);assert.match(elements.get('status').textContent,ok?/account save is ready/:/incorrect/);
+    assert.equal(button.disabled,false);assert.match(elements.get('status').textContent,ok?/account save is ready/:/incorrect/);if(ok){assert.match(elements.get('status').textContent,/\nYour account password is "password"\./);assert(!elements.get('status').textContent.includes('Keep this file private'));}
   }
   assert.deepEqual(downloads,[filename]);
 });
