@@ -8,7 +8,7 @@ test('single-player links the qualified fixed-version portable ZIPs', async () =
   const repo = 'https://github.com/OpenRotMG/Open-RotMG-Single-Player';
   const externalLinks = [...html.matchAll(/href="(https?:[^"{]+)"/g)].map(match => match[1]);
   assert.deepEqual(externalLinks, [
-    ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v1.0.3/openrotmg-singleplayer-1.0.3-${target}.zip`),
+    ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v1.0.4/openrotmg-singleplayer-1.0.4-${target}.zip`),
   ]);
   assert.match(html,/Update and reopen/);assert.match(html,/Launchers without in-app updates need this one-time ZIP upgrade/);assert.match(html,/keep the old folder until your progress is confirmed/);
   assert.match(html,/Updates only run when you click them/);assert.match(html,/no install or internet connection is needed/);assert.doesNotMatch(html,/Server \+ client/);assert.match(html,/local bots, disabled by default/);assert.match(html,/updater that times out/);assert.match(html,/Existing passwords cannot be displayed/);assert.match(html,/Saves and backups stay in player data/);
