@@ -9,7 +9,9 @@ test('single-player links the qualified fixed-version portable ZIPs', async () =
   const externalLinks = [...html.matchAll(/href="(https?:[^"{]+)"/g)].map(match => match[1]);
   assert.deepEqual(externalLinks, [
     ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v1.0.5/openrotmg-singleplayer-1.0.5-${target}.zip`),
+    'https://openrotmg.org',
   ]);
+  for (const text of ['Can I play with friends?','No, this is a singleplayer release, fully offline. A self hosted server may be released later, but for now, use <a href="https://openrotmg.org">https://openrotmg.org</a> to play with friends.','Can I import my live server account into the singleplayer release?','Yes, use the "Import Account" option','Can I import my singleplayer account into the OpenRotMG server?','No, that would allow for duping']) assert(html.includes(text), text);
   assert.match(html,/no install or internet connection is needed/);assert.match(html,/<img class="launcher-shot" src="launcher.png"/);
   assert.doesNotMatch(html, /Saves and backups|Existing passwords|Updates only run|Upgrading from|Preview only|planned edition|not released yet|releases\/latest|\u2014/);
   const about = await readFile(new URL('../public/about/index.html', import.meta.url), 'utf8');
