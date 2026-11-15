@@ -1,13 +1,9 @@
 import hashlib
-import io
 import json
 from pathlib import Path
 import struct
-import tarfile
 import tempfile
 import unittest
-from unittest.mock import patch
-from zipfile import ZipFile
 
 import downloads
 from mobile_camera import u30
@@ -43,38 +39,11 @@ class DownloadsTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'API origin'):
             with_native_endpoints(movie(), 'https://user:secret@example.test', 'https://example.test')
 
-    def test_zip_contains_the_same_swf_executable_launchers_and_exact_build_identity(self):
-        runtime = io.BytesIO()
-        with tarfile.open(fileobj=runtime, mode='w:gz') as archive:
-            for name in ['ruffle', 'LICENSE.md', 'README.md', 'openrotmg.json']:
-                entry = tarfile.TarInfo(name)
-                data = (json.dumps({'version': downloads.RUFFLE_VERSION, 'client': 'f' * 40}).encode()
-                        if name == 'openrotmg.json' else ('fixture ' + name).encode())
-                entry.size = len(data)
-                archive.addfile(entry, io.BytesIO(data))
-        data = runtime.getvalue()
+    def test_downloads_publish_the_swf_with_its_checksum_and_build_identity(self):
         identity = {'native_host': 'game.example.test', 'server': 'a' * 40, 'website': 'b' * 40, 'client': 'c' * 40}
-        fetch = lambda *args, **kwargs: io.BytesIO(data)
-        with tempfile.TemporaryDirectory() as directory, patch.object(downloads, 'RUFFLE_SHA256', hashlib.sha256(data).hexdigest()):
-            root = Path(directory)
-            receipt = downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test', identity, fetch)
-            swf = (root / 'openrotmg.swf').read_bytes()
-            first = (root / 'openrotmg-linux-x64.zip').read_bytes()
-            with ZipFile(io.BytesIO(first)) as archive:
-                self.assertEqual(archive.read('Open RotMG/client.swf'), swf)
-                self.assertEqual(json.loads(archive.read('Open RotMG/build.json')), receipt)
-                for name in ['ruffle', 'Open RotMG.sh']:
-                    self.assertEqual(archive.getinfo('Open RotMG/' + name).external_attr >> 16, 0o100755)
-                launcher = archive.read('Open RotMG/Open RotMG.sh')
-                self.assertIn(b'--socket-allow game.example.test:2050 client.swf', launcher)
-                self.assertIn(b'umask 077\n', launcher)
-                self.assertIn(b'--save-directory "$PWD/player-data"', launcher)
-            downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test', identity, fetch)
-            self.assertEqual(first, (root / 'openrotmg-linux-x64.zip').read_bytes())
-            for line in (root / 'SHA256SUMS').read_text().splitlines():
-                digest, name = line.split('  ')
-                self.assertEqual(digest, hashlib.sha256((root / name).read_bytes()).hexdigest())
         with tempfile.TemporaryDirectory() as directory:
-            with self.assertRaisesRegex(ValueError, 'checksum'):
-                downloads.build_downloads(Path(directory), movie(), 'https://game.example.test', 'https://example.test', identity, fetch)
-            self.assertFalse((Path(directory) / 'openrotmg.swf').exists())
+            root = Path(directory)
+            receipt = downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test', identity)
+            swf = (root / 'openrotmg.swf').read_bytes()
+            self.assertEqual(json.loads((root / 'build.json').read_text()), receipt)
+            self.assertEqual((root / 'SHA256SUMS').read_text(), hashlib.sha256(swf).hexdigest() + '  openrotmg.swf\n')
