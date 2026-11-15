@@ -47,22 +47,22 @@ if (local && execFileSync('git', ['-C', client, 'status', '--porcelain'], {encod
   throw new Error('Local client build requires a clean exact client HEAD/tree.');
 }
 execFileSync('python3', [join(client, 'scripts/run.py'), '--prepare-only'], { stdio: 'inherit' });
-const runtimeFiles = await readdir(join(client, 'vendor'));
+const runtimeFiles = await readdir(join(client, 'web/vendor'));
 if (runtimeFiles.length !== 8 || !runtimeFiles.includes('ruffle.js') || !runtimeFiles.includes('openrotmg.json')) throw new Error('Expected the pinned dual Ruffle runtime and source provenance.');
-const runtimeSizes = JSON.stringify(Object.fromEntries(await Promise.all(runtimeFiles.filter(file => file.endsWith('.wasm')).map(async file => [file, (await stat(join(client, 'vendor', file))).size]))));
+const runtimeSizes = JSON.stringify(Object.fromEntries(await Promise.all(runtimeFiles.filter(file => file.endsWith('.wasm')).map(async file => [file, (await stat(join(client, 'web/vendor', file))).size]))));
 
 const lock = JSON.parse(await readFile(join(client, 'ruffle/lock.json'), 'utf8'));
 const selection = local
   ? localClientRelease(revision, execFileSync('git', ['-C', client, 'rev-parse', 'HEAD^{tree}'], {encoding: 'utf8'}).trim(), lock)
   : await clientRelease(revision, lock);
-const reference = await readFile(join(client, 'client.swf'));
+const reference = await readFile(join(client, 'web/client.swf'));
 if (createHash('sha256').update(reference).digest('hex') !== referenceSha256) throw new Error('Restoration reference data must be the unchanged original 123.5.1 client.');
 const dist = join(root, 'dist');
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist);
 await cp(join(root, 'public'), dist, { recursive: true });
 // Site ownership keeps adding the editor from changing an already-deployed client revision's files.
-await cp(join(client, 'native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
+await cp(join(client, 'web/native-texture-editor.swf'), join(dist, 'draw/native-texture-editor.swf'));
 await mkdir(join(dist, 'restoration/reference-data'), { recursive: true });
 await writeFile(join(dist, 'restoration', referenceClient), reference);
 const dropRatesVersion = createHash('sha256').update(await readFile(join(dist, 'drop-rates/app.js'))).update(await readFile(join(dist, 'drop-rates/style.css'))).digest('hex').slice(0, 12);
@@ -95,7 +95,7 @@ await render(dist);
 await writeFile(join(dist, 'diagnostics-build.json'), JSON.stringify({
   website: execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim(),
   dirty: execFileSync('git', ['status', '--porcelain'], {cwd: root, encoding: 'utf8'}).trim().length > 0,
-  ...selection, runtime: createHash('sha256').update(await readFile(join(client, 'vendor/openrotmg.json'))).digest('hex').slice(0, 16)
+  ...selection, runtime: createHash('sha256').update(await readFile(join(client, 'web/vendor/openrotmg.json'))).digest('hex').slice(0, 16)
 }));
 await writeFile(join(dist, '.nojekyll'), '');
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: ${site.pathname}\nDisallow: /vendor/\nDisallow: /client.swf\nDisallow: /sfx/\nDisallow: /legacy-api/\nDisallow: /game\nSitemap: ${site.href}sitemap.xml\n`);
