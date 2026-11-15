@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="openrotmg-api" content="{{API_ORIGIN}}">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' {{API_ORIGIN}}; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'">
 <title>Drop rates · Open RotMG</title>
-<meta name="description" content="Item drop rates, NPCs and sources. Browse white, blue, cyan and purple bag loot.">
+<meta name="description" content="Item drop rates, NPCs and sources. Browse white, blue, cyan and purple bag loot and dungeon portal chances.">
 <link rel="canonical" href="{{SITE_URL}}drop-rates/">
 <link rel="stylesheet" href="{{BASE}}style.css"><link rel="stylesheet" href="style.css?v={{DROP_RATES_VERSION}}">
 <script src="{{BASE}}backend.js" defer></script><script type="module" src="app.js?v={{DROP_RATES_VERSION}}"></script>
@@ -13,7 +13,7 @@
 <header class="drops-heading"><img src="{{BASE}}restoration/assets/player/loot-bag.png" alt=""><h1>Drop rates</h1></header>
 <p id="status" role="status">Loading…</p><p id="error" role="alert" hidden></p>
 <section id="catalogue" hidden>
-<label class="bag-filter">Bag<select id="bag"><option value="4">White bag</option><option value="3">Blue bag</option><option value="2">Cyan bag</option><option value="1">Purple bag</option></select></label>
+<label class="bag-filter">Show<select id="bag"><option value="4">White bag</option><option value="3">Blue bag</option><option value="2">Cyan bag</option><option value="1">Purple bag</option><option value="dungeon">Dungeons</option></select></label>
 <div id="drops"></div>
 </section>
 </main><footer class="site-footer"><p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p><p>2012 Realm of the Mad God reimplementation</p><nav aria-label="Project">{{PROJECT_NAV}}</nav></footer></div>

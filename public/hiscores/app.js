@@ -27,11 +27,11 @@ export function reviewedAccounts(findings) {
   return reviewed;
 }
 export function cheatingLabel(account,reviewed) {
-  return reviewed.has(account)?`Cheating confirmed by manual review on ${reviewed.get(account)}. Account marker, not a verdict on this individual score.`:null;
+  return reviewed.has(account)?'Uses cheat client':null;
 }
-function addBadge(node,account,reviewed) {
+function addBadge(node,account,reviewed,before) {
   const label=cheatingLabel(account,reviewed);
-  if (label!==null) {const badge=el('span','cheating-badge','🤡');badge.title=label;badge.setAttribute('role','img');badge.setAttribute('aria-label',label);node.append(badge);}
+  if (label!==null) {const badge=el('span','cheating-badge','🤡');badge.title=label;badge.setAttribute('role','img');badge.setAttribute('aria-label',label);node.insertBefore(badge,before??null);}
 }
 const classes = {768:'Rogue',775:'Archer',782:'Wizard',784:'Priest',797:'Warrior',798:'Knight',799:'Paladin',800:'Assassin',801:'Necromancer',802:'Huntress',803:'Mystic',804:'Trickster',805:'Sorcerer'};
 const families = {1:'Swords',2:'Daggers',3:'Bows',17:'Staves',8:'Wands',13:'Cloaks',15:'Quivers',11:'Spells',4:'Tomes',16:'Helms',5:'Shields',12:'Seals',18:'Poisons',19:'Skulls',20:'Traps',21:'Orbs',22:'Prisms',23:'Scepters',6:'Leather armor',7:'Heavy armor',14:'Robes',9:'Rings',10:'Consumables'};
@@ -133,8 +133,8 @@ function renderCollection(profile,catalog,scores,reviewed) {
   });
   const items=catalog.filter(i=>eligible.has(i.id));
   if (items.length!==eligible.size || [...found.keys()].some(id=>!eligible.has(id))) throw new Error('Collection catalogue does not match the server');
-  document.querySelector('#title').textContent=`${profile.name}’s collection`;
-  addBadge(document.querySelector('#title'),profile.account,reviewed);
+  const title=document.querySelector('#title');title.textContent=`${profile.name}’s collection`;
+  addBadge(title,profile.account,reviewed,title.firstChild);
   document.querySelector('#collected').textContent=`${found.size} / ${items.length}`;
   const total=document.querySelector('#collection-progress');total.max=items.length;total.value=found.size;
   const sets=document.querySelector('#sets');
@@ -184,7 +184,7 @@ async function start() {
       const character=best.get(player.account),row=el('tr'),rank=el('td','rank',player.rank),identity=el('td'),name=el('div','player-identity');
       const playerLink=el(board==='collection'?'a':'span','player-name',player.name);
       if (board==='collection') playerLink.href=`?board=collection&player=${player.account}`;
-      name.append(portrait(character),playerLink);addBadge(name,player.account,reviewed);identity.append(name);
+      name.append(portrait(character));addBadge(name,player.account,reviewed);name.append(playerLink);identity.append(name);
       const gear=el('td','equipment');gear.append(equipment(character,byID));
       const value=el('td','metric-value');
       if (board==='collection') {const link=el('a','',player.collection.toLocaleString());link.href=`?board=collection&player=${player.account}`;link.setAttribute('aria-label',`${player.name}’s collection: ${player.collection} items`);value.append(link);}

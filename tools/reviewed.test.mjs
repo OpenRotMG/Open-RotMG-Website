@@ -4,8 +4,7 @@ import {reviewedAccounts,cheatingLabel} from '../public/hiscores/app.js';
 
 test('badges require an explicit reviewed account, never a reported name',()=>{
   const reviewed=reviewedAccounts([{account:700001,reviewed_on:'2026-11-04'}]);
-  assert.match(cheatingLabel(700001,reviewed),/manual review on 2026-11-04/);
-  assert.match(cheatingLabel(700001,reviewed),/not a verdict on this individual score/);
+  assert.equal(cheatingLabel(700001,reviewed),'Uses cheat client');
   assert.equal(cheatingLabel(700002,reviewed),null);
   assert.equal(cheatingLabel('700001',reviewed),null);
   assert.equal(cheatingLabel(700001,reviewedAccounts([])),null);
