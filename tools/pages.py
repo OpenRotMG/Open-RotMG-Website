@@ -70,8 +70,7 @@ def assemble():
         raise ValueError('Pages client/runtime differs from the deployed game')
     if expected.get('native_host') != urllib.parse.urlsplit(API).hostname:
         raise ValueError('Live native game transport must match the API host before publishing downloads')
-    desktop = build_downloads(dist / 'download', b'FWS' + swf[3:8] + body, API,
-                              os.environ['SITE_URL'], {**expected, 'website': build['website']})
+    desktop = build_downloads(dist / 'download', b'FWS' + swf[3:8] + body, API, os.environ['SITE_URL'])
     if identity() != expected:
         raise ValueError('Backend changed during desktop download packaging')
     shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'vendor', dist / 'vendor')
