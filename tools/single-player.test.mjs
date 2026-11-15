@@ -10,9 +10,8 @@ test('single-player links the qualified fixed-version portable ZIPs', async () =
   assert.deepEqual(externalLinks, [
     ...['win32-x64', 'darwin-arm64', 'linux-x64'].map(target => `${repo}/releases/download/v1.0.5/openrotmg-singleplayer-1.0.5-${target}.zip`),
   ]);
-  assert.match(html,/Launchers without in-app updates need this one-time ZIP upgrade/);assert.match(html,/keep the old folder until your progress is confirmed/);
-  assert.match(html,/Updates only run when you click them/);assert.match(html,/no install or internet connection is needed/);assert.match(html,/separate Server \+ client and Launcher updates/);assert.match(html,/local bots, disabled by default/);assert.match(html,/updater that times out/);assert.match(html,/Existing passwords cannot be displayed/);assert.match(html,/Saves and backups stay in player data/);
-  assert.doesNotMatch(html, /Preview only|planned edition|not released yet|releases\/latest|\u2014/);
+  assert.match(html,/no install or internet connection is needed/);assert.match(html,/<img class="launcher-shot" src="launcher.png"/);
+  assert.doesNotMatch(html, /Saves and backups|Existing passwords|Updates only run|Upgrading from|Preview only|planned edition|not released yet|releases\/latest|\u2014/);
   const about = await readFile(new URL('../public/about/index.html', import.meta.url), 'utf8');
   assert.match(about, /Download the offline edition\./);
 });
