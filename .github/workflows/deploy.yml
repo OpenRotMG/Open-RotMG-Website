@@ -60,7 +60,7 @@ jobs:
       - name: Test and build the website
         working-directory: website
         run: |
-          python3 -B -m unittest discover -s ../client/tests -v
+          python3 -B -m unittest discover -s ../client/scripts -v
           npm test
           python3 -B -W error::ResourceWarning -m unittest discover -s tools -p 'test_*.py'
           python3 -B tools/package.py dist ../client "$GITHUB_SHA" "$RUNNER_TEMP/deploy.bundle"

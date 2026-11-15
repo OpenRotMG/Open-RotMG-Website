@@ -17,7 +17,7 @@ function showFailure(detail, error) {
 }
 
 // Ruffle reports no download progress, so count its runtime and movie bytes as its own fetches stream them.
-function showDownloads(movie, movieName, runtimeSizes) {
+function showDownloads(movie, movieName, runtimeSizes, assetHashes) {
   const bar = document.querySelector('#startup progress');
   const label = document.querySelector('#startup span');
   const vendor = new URL('/vendor/', document.baseURI);
@@ -30,17 +30,45 @@ function showDownloads(movie, movieName, runtimeSizes) {
       showFailure(`Download of ${url.pathname} failed: ${error.message}`, error);
       throw error;
     };
-    const response = await send(input, init).catch(interrupted);
+    const name = runtime ? 'game engine' : movieName;
+    const version = assetHashes[url.pathname];
+    const versioned = new URL(url);
+    let cache;
+    if (version) {
+      versioned.searchParams.set('v', version);
+      cache = await caches.open('openrotmg-game-assets-v1');
+      const cached = await cache.match(versioned.href);
+      if (cached) {
+        label.textContent = `Loading cached ${name}`;
+        bar.value = 1;
+        Object.defineProperty(cached, 'url', {value: url.href});
+        return cached;
+      }
+    }
+    const options = version ? {...init, integrity: 'sha256-' + btoa(String.fromCharCode(...version.match(/../g).map(byte => parseInt(byte, 16))))} : init;
+    const response = await send(version ? versioned.href : input, options).catch(interrupted);
     if (!response.ok) interrupted(new Error(`HTTP ${response.status}`));
     // Pages gzips the runtime, so its streamed size comes from the build rather than Content-Length.
     const total = runtime ? runtimeSizes[url.pathname.slice(vendor.pathname.length)] : !response.headers.get('content-encoding') && Number(response.headers.get('content-length'));
     if (!total) throw new Error(`Unknown download size for ${url.pathname}`);
-    const name = runtime ? 'game engine' : movieName;
+    // Cache API ignores Pages' ten-minute HTTP expiry; only a published content hash selects reusable bytes.
+    // https://developer.mozilla.org/en-US/docs/Web/API/Cache
+    const stored = cache ? cache.put(versioned.href, response.clone()).then(async () => {
+      for (const key of await cache.keys()) {
+        const path = new URL(key.url).pathname;
+        if (!Object.hasOwn(assetHashes, path) || (path === url.pathname && key.url !== versioned.href)) await cache.delete(key);
+      }
+      return null;
+    }).catch(error => error) : Promise.resolve(null);
     const reader = response.body.getReader();
     let loaded = 0;
     const counted = new Response(new ReadableStream({async pull(output) {
       const {done, value} = await reader.read().catch(interrupted);
-      if (done) return output.close();
+      if (done) {
+        const error = await stored;
+        if (error) interrupted(new Error(`Asset cache write failed: ${error.message}`));
+        return output.close();
+      }
       loaded += value.length;
       bar.value = loaded / total;
       label.textContent = `Downloading ${name}: ${(loaded / 1e6).toFixed(1)} of ${(total / 1e6).toFixed(1)} MB`;
@@ -86,7 +114,8 @@ function showDownloads(movie, movieName, runtimeSizes) {
   const browser = mode === 'game' ? Array.from(crypto.getRandomValues(new Uint8Array(32)), value => value.toString(16).padStart(2, '0')).join('') : null;
   const browserRules = browser ? [[/^https?:\/\/127\.0\.0\.1:8080\/char\/list$/, OpenRotMGBackend.url('/legacy-api/char/list').href + `?browser=${browser}`]] : [];
   const movie = new URL(movies[mode], document.baseURI);
-  showDownloads(movie, mode === 'game' ? 'game client' : 'pixel editor', JSON.parse(document.querySelector('#game').dataset.runtimeSizes));
+  const assets = document.querySelector('#game').dataset.assetHashes;
+  showDownloads(movie, mode === 'game' ? 'game client' : 'pixel editor', JSON.parse(document.querySelector('#game').dataset.runtimeSizes), assets === undefined ? {} : JSON.parse(assets));
   await player.ruffle().load({
     url: movie.href,
     autoplay: 'on',

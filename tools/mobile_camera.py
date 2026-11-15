@@ -34,7 +34,7 @@ class Code:
 
 def camera_abc():
     names = ['getDefinitionByName', 'setInterval', 'clearInterval', 'trace', 'root', 'stage', 'addEventListener',
-             'keyCode', 'data_', 'centerOnPlayer', 'allowRotation', 'cameraAngle', 'defaultCameraAngle',
+             'keyCode', 'data_', 'centerOnPlayer', 'allowRotation', 'cameraAngle', 'openrotmgCamera', '0', '1', '2',
              'openrotmgCameraTimer', 'void', 'focus', 'target', 'parent', 'player_',
              'openrotmgMouseMap', 'dispatchEvent', 'openrotmgMoveGame', 'openrotmgMoving', 'openrotmgMoveAngle',
              'mui_', 'map_', 'numChildren', 'getChildAt', '_-Dk', '_-ky', '_-vr', 'x', 'y', 'Math', 'cos', 'sin',
@@ -64,11 +64,16 @@ def camera_abc():
     def trace(value):
         return op(0x5D, 'trace') + text(value) + op(0x4F, 'trace') + b'\x01'
 
-    def reset_camera(data):
-        return (data + b'\x26' + op(0x61, 'centerOnPlayer')
-                + data + b'\x27' + op(0x61, 'allowRotation')
-                + data + b'\x24\0' + op(0x61, 'cameraAngle')
-                + data + b'\x24\0' + op(0x61, 'defaultCameraAngle'))
+    camera_settings = ['centerOnPlayer', 'allowRotation', 'cameraAngle']
+
+    # The backup lives in the saved options so closing the page mid-camera-mode restores them on the next load.
+    def restore_camera(code, data, label):
+        code.add(data + op(0x66, 'openrotmgCamera'))
+        code.branch(0x12, label)
+        for index, name in enumerate(camera_settings):
+            code.add(data + data + op(0x66, 'openrotmgCamera') + op(0x66, str(index)) + op(0x61, name))
+        code.add(data + op(0x6A, 'openrotmgCamera') + b'\x29')
+        code.label(label)
 
     parameters = op(0x5D, 'getDefinitionByName') + text(parameters_class) + op(0x46, 'getDefinitionByName') + b'\x01'
     root = parameters + op(0x66, 'root')
@@ -84,7 +89,7 @@ def camera_abc():
     install.branch(0x12, 'return')
     install.add(data)
     install.branch(0x12, 'return')
-    install.add(reset_camera(data))
+    restore_camera(install, data, 'restored')
     for event, method, capture, priority in [('keyDown', 1, False, 1000), ('keyDown', 6, False, -1000),
                                              ('keyUp', 6, False, -1000), ('textInput', 7, False, 1000),
                                              ('mouseDown', 2, True, 0), ('mouseUp', 3, True, 0), ('deactivate', 3, True, 0)]:
@@ -112,9 +117,14 @@ def camera_abc():
         command.branch(0x13, label)
     command.add(b'\x47')
     command.label('on')
+    command.add(data + op(0x66, 'openrotmgCamera'))
+    command.branch(0x11, 'enable')
+    command.add(data + b''.join(data + op(0x66, name) for name in camera_settings) + b'\x56\x03' + op(0x61, 'openrotmgCamera'))
+    command.label('enable')
     command.add(data + b'\x27' + op(0x61, 'centerOnPlayer') + data + b'\x26' + op(0x61, 'allowRotation') + trace('openrotmg.camera:on') + b'\x47')
     command.label('off')
-    command.add(reset_camera(data) + trace('openrotmg.camera:off') + b'\x47')
+    restore_camera(command, data, 'disabled')
+    command.add(trace('openrotmg.camera:off') + b'\x47')
     command.label('keyboard')
     command.add(stage + op(0x66, 'focus'))
     command.branch(0x12, 'shortcuts')

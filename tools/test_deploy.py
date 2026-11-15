@@ -25,23 +25,24 @@ class WebsiteDeploy(unittest.TestCase):
             (self.build / name).write_text(name)
         self.client = self.root / 'source'
         self.client.mkdir()
+        (self.client / 'web').mkdir()
         for name in ['index.html', 'client.swf']:
-            (self.client / name).write_text(name)
-        (self.client / '.gitignore').write_text('vendor/\nnative-texture-editor.swf\n')
+            (self.client / 'web' / name).write_text(name)
+        (self.client / '.gitignore').write_text('web/vendor/\nweb/native-texture-editor.swf\n')
         (self.client / 'editor').mkdir()
         (self.client / 'editor/lock.json').write_text(json.dumps({
             'sourceSha256': hashlib.sha256(b'client.swf').hexdigest(),
             'outputSha256': hashlib.sha256(b'editor').hexdigest()}))
-        (self.client / 'native-texture-editor.swf').write_bytes(b'editor')
+        (self.client / 'web/native-texture-editor.swf').write_bytes(b'editor')
         (self.build / 'draw').mkdir()
         (self.build / 'draw/native-texture-editor.swf').write_bytes(b'editor')
         subprocess.run(['git', 'init', '-q', str(self.client)], check=True)
         subprocess.run(['git', '-C', str(self.client), 'add', '.'], check=True)
         subprocess.run(['git', '-C', str(self.client), '-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'fixture'], check=True)
         self.client_revision = subprocess.check_output(['git', '-C', str(self.client), 'rev-parse', 'HEAD'], text=True).strip()
-        (self.client / 'vendor').mkdir()
-        (self.client / 'vendor/ruffle.js').write_text('runtime')
-        (self.client / 'vendor/openrotmg.json').write_text('{}')
+        (self.client / 'web/vendor').mkdir()
+        (self.client / 'web/vendor/ruffle.js').write_text('runtime')
+        (self.client / 'web/vendor/openrotmg.json').write_text('{}')
         (self.build / 'diagnostics-build.json').write_text(json.dumps({
             'website': REV, 'client': self.client_revision, 'dirty': False,
             'runtime': deploy.digest(b'{}')[:16], 'client_archive_sha256': 'd' * 64,
@@ -54,10 +55,10 @@ class WebsiteDeploy(unittest.TestCase):
         (self.live / 'old.html').write_text('previous site')
         self.live_client = self.root / 'client'
         self.live_client.mkdir()
-        for name in ['index.html', 'client.swf', '.gitignore', 'editor/lock.json', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
+        for name in ['index.html', 'client.swf', 'vendor/ruffle.js', 'vendor/openrotmg.json']:
             path = self.live_client / name
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes((self.client / name).read_bytes())
+            path.write_bytes((self.client / 'web' / name).read_bytes())
         self.before = deploy.files(self.live)
         for tree, revision in [(self.live, 'b' * 40), (self.live_client, self.client_revision)]:
             tree.with_suffix('.sha256.json').write_text(json.dumps(deploy.files(tree)))
