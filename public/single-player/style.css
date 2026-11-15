@@ -1,1 +1,4 @@
 .about-copy a { overflow-wrap: anywhere; }
+.launcher-shot { display: block; width: 100%; max-width: 490px; height: auto; margin: 0 0 1.5em; image-rendering: auto; }
+.faq dt { font-weight: 700; margin-top: 1em; }
+.faq dd { margin: 0.3em 0 0; }

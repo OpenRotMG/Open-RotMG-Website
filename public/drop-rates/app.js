@@ -31,8 +31,9 @@ export function percentage(chance){return new Intl.NumberFormat('en',{maximumFra
 export function catalogueFor(data,art,sources){
   const sprites=new Map(art.map(item=>[item.id,item])),catalogue=new Map();
   for(const row of rowsFor(data)){
-    const sprite=sprites.get(row.item.id);if(!sprite||!Number.isInteger(sprite.bag)||sprite.bag<0||sprite.bag>4)throw Error('Missing item artwork or bag: '+row.item.name);
-    if(!catalogue.has(row.item.id))catalogue.set(row.item.id,{item:row.item,sprite,rates:new Map(),sources:[],npcs:new Set()});
+    const portal=row.group.channel==='Dungeon portal',sprite=portal?null:sprites.get(row.item.id);
+    if(!portal&&(!sprite||!Number.isInteger(sprite.bag)||sprite.bag<0||sprite.bag>4))throw Error('Missing item artwork or bag: '+row.item.name);
+    if(!catalogue.has(row.item.id))catalogue.set(row.item.id,{item:row.item,sprite,filter:portal?'dungeon':String(sprite.bag),rates:new Map(),sources:[],npcs:new Set()});
     const card=catalogue.get(row.item.id),key=row.chance.toPrecision(12);
     if(!card.rates.has(key))card.rates.set(key,{chance:row.chance,npcs:new Set()});
     card.rates.get(key).npcs.add(row.group.enemy.name);card.npcs.add(row.group.enemy.name);
@@ -64,8 +65,10 @@ async function mount(){
     const cards=catalogueFor(data,art,sources),bag=document.querySelector('#bag'),target=document.querySelector('#drops');
     function render(){
       target.replaceChildren();
-      for(const card of cards.filter(card=>card.sprite.bag===Number(bag.value))){
-        const article=element('article',undefined,'drop'),head=element('div',undefined,'drop-head'),icon=element('span',undefined,'item-icon');icon.style.backgroundPosition=`${-card.sprite.x*2}px ${-card.sprite.y*2}px`;icon.setAttribute('aria-hidden','true');head.append(icon,element('h2',card.item.name));article.append(head);
+      for(const card of cards.filter(card=>card.filter===bag.value)){
+        const article=element('article',undefined,'drop'),head=element('div',undefined,'drop-head');
+        if(card.sprite){const icon=element('span',undefined,'item-icon');icon.style.backgroundPosition=`${-card.sprite.x*2}px ${-card.sprite.y*2}px`;icon.setAttribute('aria-hidden','true');head.append(icon);}
+        head.append(element('h2',card.item.name));article.append(head);
         const rates=element('ul',undefined,'rates');
         for(const rate of card.rates){const li=element('li');li.append(element('span',percentage(rate.chance),'chance'),element('span',rate.npcs.join(', ')));rates.append(li);}
         article.append(rates);
