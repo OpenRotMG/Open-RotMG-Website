@@ -1,5 +1,4 @@
 import hashlib
-import json
 from pathlib import Path
 import struct
 import tempfile
@@ -39,11 +38,8 @@ class DownloadsTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'API origin'):
             with_native_endpoints(movie(), 'https://user:secret@example.test', 'https://example.test')
 
-    def test_downloads_publish_the_swf_with_its_checksum_and_build_identity(self):
-        identity = {'native_host': 'game.example.test', 'server': 'a' * 40, 'website': 'b' * 40, 'client': 'c' * 40}
+    def test_downloads_publish_the_native_swf(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            receipt = downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test', identity)
-            swf = (root / 'openrotmg.swf').read_bytes()
-            self.assertEqual(json.loads((root / 'build.json').read_text()), receipt)
-            self.assertEqual((root / 'SHA256SUMS').read_text(), hashlib.sha256(swf).hexdigest() + '  openrotmg.swf\n')
+            receipt = downloads.build_downloads(root, movie(), 'https://game.example.test', 'https://example.test')
+            self.assertEqual(receipt['swf_sha256'], hashlib.sha256((root / 'openrotmg.swf').read_bytes()).hexdigest())
