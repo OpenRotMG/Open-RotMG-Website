@@ -41,10 +41,10 @@ export function renderFeed(feed, document, now = Date.now()) {
     original.href = `https://discord.com/channels/${feed.source.guild_id}/${feed.source.channel_id}/${post.id}`; original.textContent = 'View original on Discord';
     meta.append(' · ', original);
     body.className = 'content'; body.textContent = post.content.slice(headline.length).trim();
-    article.append(heading, meta, body);
+    article.append(meta, heading, body);
     for (const attachment of post.attachments ?? []) {
-      const figure = document.createElement('figure'), link = document.createElement('a');
-      figure.className = 'attachment'; link.href = attachment.url; link.textContent = attachment.filename;
+      const figure = document.createElement('figure');
+      figure.className = 'attachment';
       let media;
       if (['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/avif'].includes(attachment.content_type)) {
         media = document.createElement('img'); media.alt = attachment.filename; media.loading = 'lazy';
@@ -60,15 +60,17 @@ export function renderFeed(feed, document, now = Date.now()) {
           figure.append(error);
         }, {once: true});
         figure.append(media);
+      } else {
+        const link = document.createElement('a'); link.href = attachment.url; link.textContent = attachment.filename; figure.append(link);
       }
-      figure.append(link); article.append(figure);
+      article.append(figure);
     }
     nodes.push(article);
   }
   // The minute polling must not replace a playing video when only synced_at changes.
   if (changed) {container.replaceChildren(...nodes); renderedSources.set(container, source);}
   document.querySelector('#status').textContent = feed.synced_at === null ? 'Updates have not been synced yet.'
-    : `${feed.source.posts.length ? 'Recent updates' : 'No updates posted yet'}. Last synced ${new Date(feed.synced_at * 1000).toLocaleString()}.${now - feed.synced_at * 1000 > 300000 ? ' Sync is overdue; these posts may be out of date.' : ''}`;
+    : `${feed.source.posts.length ? '' : 'No updates posted yet. '}${now - feed.synced_at * 1000 > 300000 ? 'Sync is overdue; these posts may be out of date.' : ''}`;
 }
 async function start() {
   const refresh = async () => {
