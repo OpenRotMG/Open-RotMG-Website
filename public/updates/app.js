@@ -30,18 +30,12 @@ export function renderFeed(feed, document, now = Date.now()) {
   const container = document.querySelector('#updates');
   const source = JSON.stringify(feed.source), changed = renderedSources.get(container) !== source, nodes = [];
   if (changed && feed.source) for (const post of feed.source.posts) {
-    const article = document.createElement('article'), heading = document.createElement('h2'), permalink = document.createElement('a');
-    const meta = document.createElement('p'), date = document.createElement('time'), original = document.createElement('a'), body = document.createElement('p');
+    const article = document.createElement('article'), permalink = document.createElement('a'), date = document.createElement('time'), body = document.createElement('p');
     article.className = 'update'; article.id = post.id;
-    const headline = post.content.split('\n', 1)[0];
-    permalink.href = `#${post.id}`; permalink.textContent = headline; heading.append(permalink);
     date.dateTime = new Date(post.published_at * 1000).toISOString(); date.textContent = new Date(post.published_at * 1000).toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'});
-    meta.className = 'meta'; meta.append(date);
-    if (post.edited_at !== null) meta.append(` · Edited ${new Date(post.edited_at * 1000).toLocaleDateString()}`);
-    original.href = `https://discord.com/channels/${feed.source.guild_id}/${feed.source.channel_id}/${post.id}`; original.textContent = 'View original on Discord';
-    meta.append(' · ', original);
-    body.className = 'content'; body.textContent = post.content.slice(headline.length).trim();
-    article.append(meta, heading, body);
+    permalink.className = 'date'; permalink.href = `#${post.id}`; permalink.append(date);
+    body.className = 'content'; body.textContent = post.content;
+    article.append(permalink, body);
     for (const attachment of post.attachments ?? []) {
       const figure = document.createElement('figure');
       figure.className = 'attachment';
