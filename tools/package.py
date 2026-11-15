@@ -27,15 +27,16 @@ def package(root, client, revision, output):
     subprocess.run(['git', '-C', str(client), 'diff', '--exit-code', 'HEAD'], check=True)
     if build['client'] != actual:
         raise ValueError('Client build revision mismatch')
-    names = subprocess.check_output(['git', '-C', str(client), 'ls-files', '-z']).decode().split('\0')[:-1]
-    names += [str(p.relative_to(client)) for p in (client / 'vendor').rglob('*') if p.is_file()]
+    # The live server serves only the client's web root.
+    names = subprocess.check_output(['git', '-C', str(client), 'ls-files', '-z', '--', 'web']).decode().split('\0')[:-1]
+    names += [str(p.relative_to(client)) for p in (client / 'web/vendor').rglob('*') if p.is_file()]
     lock = json.loads((client / 'editor/lock.json').read_text())
-    if (hashlib.sha256((client / 'client.swf').read_bytes()).hexdigest() != lock['sourceSha256']
+    if (hashlib.sha256((client / 'web/client.swf').read_bytes()).hexdigest() != lock['sourceSha256']
             or hashlib.sha256(files['draw/native-texture-editor.swf']).hexdigest() != lock['outputSha256']):
         raise ValueError('Native editor asset checksum mismatch')
     if any((client / name).is_symlink() for name in names):
         raise ValueError('Symlink in client build')
-    files = {'site/' + n: d for n, d in files.items()} | {'client/' + n: (client / n).read_bytes() for n in names}
+    files = {'site/' + n: d for n, d in files.items()} | {'client/' + n.removeprefix('web/'): (client / n).read_bytes() for n in names}
     files['helper/deploy.py'] = (Path(__file__).parent / 'deploy.py').read_bytes()
     metadata = {'revision': revision, 'client_revision': actual,
                 'manifest': {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}}

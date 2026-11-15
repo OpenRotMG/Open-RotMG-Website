@@ -73,7 +73,7 @@ def assemble():
     desktop = build_downloads(dist / 'download', b'FWS' + swf[3:8] + body, API, os.environ['SITE_URL'])
     if identity() != expected:
         raise ValueError('Backend changed during desktop download packaging')
-    shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'vendor', dist / 'vendor')
+    shutil.copytree(Path(os.environ['CLIENT_DIR']) / 'web/vendor', dist / 'vendor')
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
     mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)
     (dist / 'client.swf').write_bytes(mobile)

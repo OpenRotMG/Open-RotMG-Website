@@ -22,9 +22,9 @@ class PagesTest(unittest.TestCase):
         self.expected = {'server': 'a' * 40, 'client': 'b' * 40, 'runtime': 'c' * 16, 'process': 123, 'native_host': 'game.example.test'}
         self.client = self.root / 'client'
         self.server = self.root / 'server'
-        (self.client / 'vendor').mkdir(parents=True)
-        (self.client / 'vendor/ruffle.js').write_bytes(b'fixture runtime')
-        (self.client / 'vendor/engine.wasm').write_bytes(b'fixture wasm')
+        (self.client / 'web/vendor').mkdir(parents=True)
+        (self.client / 'web/vendor/ruffle.js').write_bytes(b'fixture runtime')
+        (self.client / 'web/vendor/engine.wasm').write_bytes(b'fixture wasm')
         (self.server / 'data/sfx').mkdir(parents=True)
         (self.server / 'data/sfx/test.mp3').write_bytes(b'fixture audio')
         (self.root / 'dist/2010').mkdir(parents=True)
