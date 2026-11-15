@@ -72,7 +72,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.ok(home.includes(`rel="canonical" href="${site.href}"`));
   assert.ok(about.includes(`rel="canonical" href="${site.href}about/"`));
   assert.ok(gold.includes(`rel="canonical" href="${site.href}gold/"`));
-  for (const page of ['export', 'single-player']) {
+  for (const page of ['export', 'single-player', 'rules', 'download']) {
     const html = readFileSync(new URL(`../dist/${page}/index.html`, import.meta.url), 'utf8');
     const version = createHash('sha256').update(readFileSync(new URL(`../dist/${page}/social.png`, import.meta.url))).digest('hex').slice(0, 12);
     assert.ok(html.includes(`rel="canonical" href="${site.href}${page}/"`));
@@ -80,6 +80,15 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     assert.doesNotMatch(html, /noindex|\u2014|\{\{/);
     assert.match(html, /Native Realm of the Mad God pixel art over historical gameplay/);
   }
+  const rules = readFileSync(new URL('../dist/rules/index.html', import.meta.url), 'utf8');
+  assert.ok(about.includes('href="/rules/"'));
+  assert.ok(rules.includes('href="/about/">About</a>'));
+  assert.ok(readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8').includes(`<loc>${site.href}rules/</loc>`));
+  assert.match(rules, /<h1>Rules<\/h1>\s*<ul>/);
+  assert.match(rules, /<h2>Cheating<\/h2>\s*<ul>/);
+  assert.match(rules, /time machine, not a remake server/);
+  assert.match(rules, /without warning/);
+  assert.match(rules, /hiscores.*permanent/);
   assert.match(gold, /You cannot buy Gold in Open RotMG\./);
   assert.match(gold, /<h2>One-time Gold<\/h2>/);
   assert.match(gold, /<h2>Repeatable Gold<\/h2>/);
@@ -98,6 +107,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   assert.doesNotMatch(gold, /<strong>|How to get|methods|Ranks include|Collect at least|posted to GitHub|once per game account|reviewed|suggestions/);
   const aboutLinks = [...about.matchAll(/<li><a href="([^"]+)">.*?<strong>(.*?)<\/strong><small>(.*?)<\/small>.*?<\/a><\/li>/g)].map(match => match.slice(1));
   assert.deepEqual(aboutLinks, [
+    [`${site.pathname}rules/`, 'Rules', 'The spirit of the server.'],
     [`${site.pathname}drop-rates/`, 'Drop rates', 'Item drop rates and sources.'],
     [`${site.pathname}hiscores/`, 'Hiscores', 'Includes collection logs.'],
     [`${site.pathname}cctv/`, 'Bot CCTV', 'Watch bots play live.'],
@@ -105,6 +115,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
     [`${site.pathname}export/`, 'Export save', 'Copy your personal account progress.'],
+    [`${site.pathname}download/`, 'Downloads', 'Game SWF and Flash Player.'],
     [`${site.pathname}single-player/`, 'Single-player', 'Download the offline edition.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],
     [`${site.pathname}restoration/`, 'Restoration', 'Completion tracker.'],
@@ -164,7 +175,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const sitemap = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${site.href}sitemap.xml`));
   assert.ok(sitemap.includes(`<loc>${site.href}gold/</loc>`));
-  for (const page of ['export', 'single-player']) assert.ok(sitemap.includes(`<loc>${site.href}${page}/</loc>`));
+  for (const page of ['export', 'single-player', 'download']) assert.ok(sitemap.includes(`<loc>${site.href}${page}/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}about/</loc>`));
   assert.ok(sitemap.includes(`<loc>${site.href}updates/</loc>`));

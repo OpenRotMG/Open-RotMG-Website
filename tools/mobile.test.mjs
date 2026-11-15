@@ -20,7 +20,7 @@ function fixture(hash = '') {
   let now = 0, sequence = 0;
   const advance = ms => { now += ms; for (const [id, timer] of timers) if (timer.at <= now) { timers.delete(id); timer.fn(); } };
   const canvas = {getBoundingClientRect: () => ({left: 0, top: 0, width: 400, height: 300}), dispatchEvent: event => sent.push(event)};
-  let focused = 0, settings = [true, false, 0, 0];
+  let focused = 0, settings = [true, false, 0, 0], saved = null;
   const api = {textFocused: false, inWorld: true, moving: false, angle: null, chatOpens: 0};
   const shadowRoot = {activeElement: null, querySelector: selector => selector === 'canvas' ? canvas : keyboard};
   const keyboard = Object.assign(element(), {value: '', focus(options) { assert.equal(options.preventScroll, true); shadowRoot.activeElement = this; }});
@@ -33,8 +33,8 @@ function fixture(hash = '') {
   const player = {...element({left: 0, top: 0, width: 400, height: 300}), focus: () => focused++, shadowRoot, ruffle: () => api, dispatchEvent(event) {
     sent.push(event);
     if (event.type !== 'keydown') return;
-    if (event.code === 'F13') {settings = [false, true, settings[2], settings[3]]; api.traceObserver?.('openrotmg.camera:on');}
-    if (event.code === 'F14') {settings = [true, false, 0, 0]; api.traceObserver?.('openrotmg.camera:off');}
+    if (event.code === 'F13') {saved ??= settings; settings = [false, true, settings[2], settings[3]]; api.traceObserver?.('openrotmg.camera:on');}
+    if (event.code === 'F14') {settings = [...saved.slice(0, 3), settings[3]]; saved = null; api.traceObserver?.('openrotmg.camera:off');}
     if (event.code === 'F15') api.traceObserver?.(`openrotmg.keyboard:${api.textFocused ? 'text' : 'shortcuts'}`);
     if (event.code === 'F16' && event.key.length === 1) {api.angle = (event.key.charCodeAt(0) - 0xe000) * Math.PI / 1800; api.traceObserver?.('openrotmg.move:direction');}
     else if (event.code === 'F16') {api.moving = api.inWorld && !api.textFocused; api.traceObserver?.(`openrotmg.move:${api.moving ? 'ready' : 'idle'}`);}
@@ -103,7 +103,7 @@ test('camera mode aims forward, holds fire, keeps 360-degree movement, and rotat
   assert.equal(f['#aim-cursor'].style.top, '25%');
   f.setSettings([false, true, 2, 1]);
   f['#mobile-exit'].fire('click');
-  assert.deepEqual(f.settings(), [true, false, 0, 0], 'camera off resets angle and centering instead of restoring old settings');
+  assert.deepEqual(f.settings(), [true, false, 0, 1], 'camera off restores the player’s own camera options');
   assert.equal(f.sent.findLast(e => e.type.startsWith('pointer')).type, 'pointerup');
   assert.equal(f['#mobile-camera'].attributes['aria-pressed'], 'false');
   assert.equal(f.api.moving, false);
