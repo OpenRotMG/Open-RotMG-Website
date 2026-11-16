@@ -809,7 +809,18 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
 });
 
 const manor1384 = {"fingerprints":{"manor-intact-visibility-source-88f8f118":"226079b5fc113889fd7645a4f3fb577832c315d1ffbb5ea9814e654067ac0b39","manor-prepared-initial-visibility-native-aab37bf5":"faee09660e21fe59e9daad6ebdcb3cfe80d5ae9ba646da14574c0e78c3280cbf"},"note":"Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged.","ids":["dungeons:manor-of-the-immortals","dungeons:manor-of-the-immortals:secret-shelves-and-coffins"]};
+const godlands1489 = {"ref":"godlands-density-source-4ec4e0d","hash":"b6a8aa7424d4bac414727f6cfed1317795d5734ef3a5c5e04a8ab4143c42bbb5","notes":{"realm:population-ecology":"Godlands (Mountains) keeps the full Kithio target and every other terrain keeps the two-thirds tuning, because owner-observed farming emptied the Godlands: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1489","realm:population-recovery":"Godlands tops up on every 60s Oryx check whenever below target, instead of Kithio's 75% threshold, after two accounts killed about 30 gods per minute: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1489"}};
+function peelGodlands1489(data, evidence) {
+  assert.equal(digest(JSON.stringify(evidence.sources[godlands1489.ref])), godlands1489.hash);
+  delete evidence.sources[godlands1489.ref];
+  const checks = data.features.find(row => row.id === 'realm:realm-generation').audit.checks;
+  for (const [id, note] of Object.entries(godlands1489.notes)) {
+    assert.equal(evidence.results[id].evidence.pop(), godlands1489.ref);
+    assert.equal(checks.find(row => row.id === id).differences.pop(), note);
+  }
+}
 function peelManor1384(data, evidence) {
+  peelGodlands1489(data, evidence);
   const refs = Object.keys(manor1384.fingerprints);
   for (const [ref, hash] of Object.entries(manor1384.fingerprints)) {
     assert.equal(digest(JSON.stringify(evidence.sources[ref])), hash);
@@ -971,8 +982,8 @@ test('pending-event credit evidence preserves every incoming value and does not 
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), '22756c89e6a2b173b4c2d5a2de3c94f804af3bd2c5764fbf20496de2cc430f77');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), '2a480376dac278477f5f38aa1a7389660189c2d4f39f3aad1f98273ba69faa08');
+  assert.equal(digest(bytes), '4151728d8d89e8ec308cb8e2b7ae800cb0c0591e002efb35449e984ba68bf863');
+  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'ecffe9b4eef224ea9c9f768e8b66f8adb71683be281986b44dbc65b88a30db90');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);
