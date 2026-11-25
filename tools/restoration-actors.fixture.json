@@ -1,0 +1,50 @@
+{
+  "0x01c7": [
+    "<Behavior range=\"5\" healing=\"100\" cooldown=\"1.0\" color=\"0xFFFFFF\">HealZap</Behavior>"
+  ],
+  "0x06c6": [
+    "<SoulboundLoot prob=\"0.04\">Magic Potion</SoulboundLoot>"
+  ],
+  "0x0d06": [
+    "<SoulboundLoot tier=\"7\" prob=\".05\" threshold=\".18\">Armor</SoulboundLoot>",
+    "<SoulboundLoot tier=\"3\" prob=\".01\" threshold=\".01\">ClassSpecial</SoulboundLoot>",
+    "<SoulboundLoot tier=\"4\" prob=\".024\" threshold=\".18\">ClassSpecial</SoulboundLoot>",
+    "<SoulboundLoot tier=\"5\" prob=\".01\" threshold=\".18\">ClassSpecial</SoulboundLoot>",
+    "<SoulboundLoot tier=\"3\" prob=\".01\" threshold=\".01\">Ring</SoulboundLoot>",
+    "<SoulboundLoot prob=\".3\" min=\"1\">Potion of Dexterity</SoulboundLoot>",
+    "<SoulboundLoot prob=\".02\" threshold=\".18\">Sprite Wand</SoulboundLoot>",
+    "<SoulboundLoot prob=\".001\" threshold=\".18\">Wine Cellar Incantation</SoulboundLoot>",
+    "<SoulboundLoot prob=\".001\" threshold=\".15\">Staff of Extreme Prejudice</SoulboundLoot>",
+    "<SoulboundLoot prob=\".001\" threshold=\".15\">Cloak of the Planewalker</SoulboundLoot>"
+  ],
+  "0x0925": [
+    "<Behavior childIds=\"Skeleton\" cooldown=\"8\" maxChildren=\"4\">MakeMinions</Behavior>",
+    "<Behavior childIds=\"Skeleton Swordsman\" cooldown=\"8\" maxChildren=\"2\">MakeMinions</Behavior>",
+    "<Behavior childIds=\"Skeleton Veteran\" cooldown=\"8\" maxChildren=\"1\">MakeMinions</Behavior>",
+    "<Behavior childIds=\"Skeleton Mage\" cooldown=\"8\" maxChildren=\"1\">MakeMinions</Behavior>"
+  ],
+  "0x0927": [
+    "<Transition hitpointsLessThan=\".9999\">Boast</Transition>"
+  ],
+  "0x060e": [
+    "<Behavior prob=\".03\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x060f": [
+    "<Behavior prob=\".04\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x0610": [
+    "<Behavior prob=\".03\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x0613": [
+    "<Behavior prob=\".03\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x06c4": [
+    "<Behavior prob=\".03\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x06c7": [
+    "<Behavior prob=\".03\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ],
+  "0x06d1": [
+    "<Behavior prob=\".05\" childId=\"Pirate Cave Portal\">MetamorphoseAtDeath</Behavior>"
+  ]
+}

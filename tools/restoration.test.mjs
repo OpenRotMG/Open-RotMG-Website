@@ -1,11 +1,34 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,readdirSync} from 'node:fs';
+import {join,relative} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {validateCatalogue,validateEvidence,validateSources,records,matches,workCounts,accepted,views} from '../public/restoration/catalogue.js';
+import {validateCatalogue,validateEvidence,validateSources,records,matches,workCounts,accepted,views,current} from '../public/restoration/catalogue.js';
 const load=file=>JSON.parse(readFileSync(new URL('../public/restoration/'+file,import.meta.url),'utf8'));
-const catalogue=()=>load('progress.json'),ledger=()=>load('evidence.json');
+import {bindNative,withoutNativeBindings} from './bind-restoration-native.mjs';
+const catalogue=()=>load('progress.json'),boundLedger=()=>load('evidence.json');
+function ledger() {
+  const evidence=withoutNativeBindings(boundLedger());
+  for(const [ref,source] of Object.entries(evidence.sources))if(ref.startsWith('xml-prior:')){
+    for(const id of source.checks)evidence.results[id].evidence=evidence.results[id].evidence.filter(r=>r!==ref);
+    delete evidence.sources[ref];
+  }
+  return evidence;
+}
 const digest=values=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
+const recorded=(evidence,id)=>evidence.results[id].prior??evidence.results[id].status;
+const probe='xml-final:probe';
+function addScopedProof(evidence,ids){
+  const binding={caseSha256:'1'.repeat(64),packageSha256:evidence.migration.packageSha256,binarySha256:evidence.migration.binarySha256,
+    dependencyFingerprint:'2'.repeat(64),scopeSha256:evidence.migration.scopeSha256,job:'openrotmg/qa-jobs/'+'3'.repeat(32),scope:'prepared',
+    disposition:'final-executable',basis:'Probe only',passes:ids,limits:Object.fromEntries(ids.map(id=>[id,'Probe only']))};
+  evidence.migration.dependencies.probe=binding.dependencyFingerprint;
+  const m=evidence.migration;
+  evidence.sources[probe]={kind:'native',revision:m.revision,fingerprint:m.fingerprint,date:m.date,checks:ids,binding,
+    url:`https://github.com/OpenRotMG/Open-RotMG-Server/blob/${m.revision}/scripts/cases/realm-portals.mjs`,method:'Probe only',limitations:'Probe only'};
+  for(const id of ids)evidence.results[id]={...evidence.results[id],status:'passed',evidence:[...new Set([...evidence.results[id].evidence,probe])]};
+}
 const untestedLedger=()=>{const evidence=ledger();for(const result of Object.values(evidence.results))result.status='not-run';return evidence;};
 
 test('event-zone evidence records preparation without promoting gameplay or history',()=>{
@@ -15,7 +38,7 @@ test('event-zone evidence records preparation without promoting gameplay or hist
   for(const [id,status,historical] of rows){
     const feature=data.features.find(f=>f.id===id);
     assert.deepEqual(evidence.results[id].evidence.slice(-2),refs);
-    assert.equal(evidence.results[id].status,status);assert.equal(feature.audit.historical,historical);assert.equal(accepted(feature,evidence),false);
+    assert.equal(recorded(evidence,id),status);assert.equal(feature.audit.historical,historical);assert.equal(accepted(feature,evidence),false);
   }
   for(const [index,ref] of refs.entries()){
     const source=evidence.sources[ref];
@@ -110,7 +133,7 @@ test('Guild Hall first-upgrade acceptance does not certify original layouts or e
   const data=catalogue(),evidence=ledger(),id='social:guild-hall',component=id+':shared-access-and-first-upgrade',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
   assert.equal(evidence.results[id].status,'not-run');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
-  assert.equal(evidence.results[component].status,'passed');
+  assert.equal(recorded(evidence,component),'passed');
   for(const kind of ['native','regression'])assert(evidence.results[component].evidence.some(ref=>evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
   assert.match(feature.audit.unknowns.join(' '),/250,000.*production price/);
 });
@@ -119,8 +142,8 @@ test('reconnect research preserves idle proof without accepting original server 
   const data=catalogue(),evidence=ledger(),id='access:reconnect-safely',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
   assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
-  assert.equal(evidence.results[id].status,'passed');
-  assert.equal(evidence.results['access:idle-disconnect'].status,'passed');
+  assert.equal(recorded(evidence,id),'passed');
+  assert.equal(recorded(evidence,'access:idle-disconnect'),'passed');
   assert.equal(evidence.sources['reconnect-native-aa4e65d0'].kind,'native');
   assert(evidence.results[id].evidence.includes('reconnect-native-aa4e65d0'));
   assert(evidence.results['access:world-loading-presentation'].evidence.includes('reconnect-native-aa4e65d0'));
@@ -156,7 +179,7 @@ test('cloth roster evidence does not certify seasonal sales or full rendering',(
 test('six native drakes pass without accepting original policy or a seventh egg',()=>{
   const data=catalogue(),evidence=ledger(),id='style:summon-a-drake',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
-  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(recorded(evidence,id),'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
   assert.deepEqual(evidence.results[id].evidence,['drakes-research-4006cea','drakes-native-16583cb']);
   assert.match(feature.audit.unknowns.join(' '),/damage attribution.*travel\/disconnect\/death/);
   assert.match(feature.audit.unknowns.join(' '),/Do not infer a seventh egg/);
@@ -165,7 +188,7 @@ test('six native drakes pass without accepting original policy or a seventh egg'
 test('Magic Potion consumption passes without accepting deployment or original hue',()=>{
   const data=catalogue(),evidence=ledger(),id='gear:magic-potions',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
-  assert.equal(evidence.results[id].status,'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
+  assert.equal(recorded(evidence,id),'passed');assert.equal(feature.audit.historical,'partial');assert.equal(accepted(feature,evidence),false);
   for(const [ref,kind] of [['magic-potions-research-3389a2c','source'],['magic-potions-regression-62c38f4','regression'],['magic-potions-native-3389a2c','native']]){
     assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
@@ -195,7 +218,7 @@ test('Worlds1–3 gameplay acceptance preserves history and whole-bank gaps',()=
   for(const n of ['01','02','03']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
     assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');
-    assert.equal(evidence.results[id].status,'passed');
+    assert.equal(recorded(evidence,id),'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world01-03-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
     assert.match(row.rule.differences.join(' '),/Original identity.*reuse rights remain unverified/);
     if(n!=='01')assert.match(row.rule.acceptance,/Compare the image-guided reconstruction with its source at registered scale and orientation/);
@@ -207,7 +230,7 @@ test('Worlds4–8 and10–13 playable acceptance keeps historical and map-bank g
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
   for(const n of ['04','05','06','07','08','10','11','12','13']){
     const id='realm:map-world-'+n,row=rows.find(r=>r.id===id);
-    assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(evidence.results[id].status,'passed');
+    assert.equal(row.rule.implementation,'present');assert.equal(row.rule.historical,'unreviewed');assert.equal(recorded(evidence,id),'passed');
     for(const kind of ['source','regression','native'])assert(evidence.results[id].evidence.some(ref=>ref.startsWith('world'+n+'-')&&evidence.sources[ref].kind===kind&&evidence.sources[ref].checks.includes(id)));
     assert.match(row.rule.unknowns.join(' '),/authored.*reuse rights remain unverified/);
   }
@@ -244,14 +267,14 @@ test('Worlds4–8 and10–13 playable acceptance keeps historical and map-bank g
   for(const key of ['realm:realm-generation','realm:map-registration'])assert.equal(evidence.results[key].status,'not-run');
 });
 
-test('stable 211 parents and 71 components remain separate from evidence',()=>{
+test('stable 211 parents and 74 components remain separate from evidence',()=>{
   const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence);
-  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,282);
-  assert.equal(new Set(rows.map(r=>r.id)).size,282);
-  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,71);
+  assert.equal(data.features.length,211);assert.equal(data.categories.length,9);assert.equal(rows.length,285);
+  assert.equal(new Set(rows.map(r=>r.id)).size,285);
+  assert.equal(rows.filter(r=>r.id!==r.feature.id).length,74);
   assert.equal(rows.filter(r=>r.id.startsWith('realm:map-world-')).length,13);
   assert.equal(digest(data.features.map(f=>f.id)),'d4590c87ab5751a89132a40ed16a37258b5f407ba70d9f5be84724a113b9fa3a');
-  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'6c077c8c43e3cc970fa4fa6f3cb0350713c364707bd913c0138f920cf13f1226');
+  assert.equal(digest(rows.filter(r=>r.id!==r.feature.id).map(r=>r.id)),'161fc1b57c656b488fd800b1556527b1ee7058d3645b2bcca7d2072b93aaf1e4');
   assert(data.features.every(f=>!accepted(f,evidence)));
   assert(data.features.every(f=>!Object.hasOwn(f,'stage')));
 });
@@ -261,7 +284,7 @@ test('Chamber receipts preserve partial history and the failed rejected-slot ret
   validateEvidence(data,evidence);
   assert.equal(accepted(feature,evidence),false);assert.equal(feature.audit.historical,'partial');
   for(const key of [id,id+':oryx-one-phase-and-minion-contract'])assert.equal(evidence.results[key].status,'not-run');
-  assert.equal(evidence.results[id+':incantation-unlock-transaction'].status,'failed');
+  assert.equal(recorded(evidence,id+':incantation-unlock-transaction'),'failed');
   for(const key of [id,...feature.audit.checks.map(c=>c.id)])assert(evidence.results[key].evidence.includes('chamber-native-partial-2ab46ff'));
   assert.match(evidence.sources['chamber-native-partial-2ab46ff'].limitations,/Neither full case passes/);
   assert.match(feature.audit.checks[1].differences.join(' '),/slot latched/);
@@ -270,7 +293,7 @@ test('Chamber receipts preserve partial history and the failed rejected-slot ret
 test('Spider Den egg and column acceptance does not accept every entrance or original history',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:spider-den',component=id+':egg-and-cover-environment',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
-  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(recorded(evidence,component),'passed');
   assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks[0].historical,'partial');assert.equal(accepted(feature,evidence),false);
   for(const ref of ['spider-journey-native-57551f0','spider-cover-native-44b376d']){
     assert.equal(evidence.sources[ref].kind,'native');assert.deepEqual(evidence.sources[ref].checks,[id,component]);
@@ -288,7 +311,8 @@ test('Arachna exit evidence separates prepared native return from parent-route u
     assert(evidence.results[id].evidence.includes(ref));assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);
   }
   for(const kind of ['source','native','regression'])assert(evidence.results[id].evidence.includes(`spider-teleport-${kind}-2f96d35f`));
-  assert.match(feature.audit.differences.join(' '),/Arachna completion to Realm Portal0x704 instead of Nexus-only0x71d/);
+  assert.match(feature.audit.differences.join(' '),/Arachna’s linked world declaration explicitly supplies a Realm Portal/);
+  assert.match(feature.audit.priorEngine.join(' '),/Arachna completion to Realm Portal0x704 instead of Nexus-only0x71d/);
   assert.match(feature.audit.unknowns.join(' '),/not authenticated historical acceptance/);
   const native=evidence.sources['spider-exit-native-7684fd0e'];
   assert.equal(native.revision,'7684fd0e70c0e4070551b147955d86b0b42e43b8');
@@ -304,7 +328,7 @@ test('Ent and Ghost God bounded receipts do not accept original history or acqui
       assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
     }
     assert.match(feature.audit.unknowns.join(' '),/multiplayer eligibility, pickup\/reconnect/);
-    assert.match(feature.audit.differences.join(' '),/angular-history prediction/);
+    assert.match(feature.audit.priorEngine.join(' '),/angular-history prediction/);
   }
 });
 
@@ -315,7 +339,8 @@ test('Slime God evidence cannot accept original RNG or the whole encounter',()=>
   for(const [ref,kind] of [['slime-god-native-471824b','native'],['slime-god-reward-regression-ce4394d','regression'],['slime-god-research-fd52882','source']]){
     assert.equal(evidence.sources[ref].kind,kind);assert.deepEqual(evidence.sources[ref].checks,[id]);assert(evidence.results[id].evidence.includes(ref));
   }
-  assert.match(feature.audit.differences.join(' '),/Toxic Sewers.*October2016/);
+  assert.match(feature.audit.priorEngine.join(' '),/Toxic Sewers.*October2016/);
+  assert.match(feature.audit.differences.join(' '),/2% private Defense roll/);
   assert.match(feature.audit.unknowns.join(' '),/prediction\/cooldown/);
 });
 
@@ -392,11 +417,11 @@ test('Davy ordinary-route pass is separate from crate and historical acceptance'
     assert.deepEqual(evidence.sources[ref].checks,ids);
     assert.deepEqual(Object.entries(evidence.results).filter(([,r])=>r.evidence.includes(ref)).map(([id])=>id),ids);
   }
-  assert.equal(evidence.results[ids[0]].status,'passed');assert.equal(evidence.results[ids[1]].status,'not-run');
+  assert.equal(recorded(evidence,ids[0]),'passed');assert.equal(evidence.results[ids[1]].status,'not-run');
   const clear='davy-clear-native-479ccff';assert(evidence.results[ids[0]].evidence.includes(clear));
   assert.equal(evidence.sources[clear].kind,'native');assert.equal(evidence.sources[clear].revision,'479ccff0d1dd3be484c4a662ee43949262924926');
   assert.deepEqual(evidence.sources[clear].checks,[ids[0],'dungeons:davy-jones-s-locker:colored-key-door-chain','dungeons:davy-jones-s-locker:lantern-vulnerability-cycle']);
-  assert.equal(evidence.results['dungeons:davy-jones-s-locker:lantern-vulnerability-cycle'].status,'passed');
+  assert.equal(recorded(evidence,'dungeons:davy-jones-s-locker:lantern-vulnerability-cycle'),'passed');
   assert.equal(accepted(data.features.find(f=>f.id===ids[0]),evidence),false);
 });
 
@@ -418,7 +443,7 @@ test('Leviathan cadence receipts do not accept the whole encounter',()=>{
 
 test('Pirate Cave exit evidence stays scoped without accepting the cave',()=>{
   const data=catalogue(),evidence=ledger(),id='dungeons:pirate-cave',roster='dungeons:pirate-cave:officers-and-cave-roster';
-  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[roster].status,'passed');
+  validateEvidence(data,evidence);assert.equal(evidence.results[id].status,'not-run');assert.equal(recorded(evidence,roster),'passed');
   for(const key of [id,roster])for(const ref of ['pirate-research-fd52882','pirate-journey-native-749847f'])assert(evidence.results[key].evidence.includes(ref));
   assert.deepEqual(evidence.sources['pirate-journey-native-749847f'].checks,[id,roster]);
   assert(evidence.results[id].evidence.includes('pirate-generation-native-c8b4f98'));
@@ -470,7 +495,7 @@ test('Tomb release records source restoration without inventing full acceptance'
 
 test('Undead endpoint footage keeps scoped evidence and existing acceptance separate',()=>{
   const data=catalogue(),evidence=ledger(),ids=['dungeons:undead-lair','dungeons:undead-lair:entrance-end-dressing'];
-  validateEvidence(data,evidence);assert.equal(evidence.results[ids[0]].status,'not-run');assert.equal(evidence.results[ids[1]].status,'passed');
+  validateEvidence(data,evidence);assert.equal(evidence.results[ids[0]].status,'not-run');assert.equal(recorded(evidence,ids[1]),'passed');
   for(const ref of ['udl-endpoint-regression-3bdaddb','udl-endpoint-native-3bdaddb']){
     const source=evidence.sources[ref];assert.equal(source.revision,'3bdaddb834b37ca671d7a885ea09b9089812c072');assert.deepEqual(source.checks,ids);
     for(const id of ids)assert(evidence.results[id].evidence.includes(ref));
@@ -550,11 +575,11 @@ test('Stars hiscores do not accept original Legends or all class-star rules',()=
 test('Inventory native verification does not imply historical acceptance',()=>{
   const data=catalogue(),evidence=ledger();validateEvidence(data,evidence);
   const ids=['realm:shoot-and-take-damage','gear:inventory-and-equipment'];
-  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(evidence.results[id].status,id===ids[0]?'not-run':'passed');assert.equal(accepted(row.feature,evidence),false);
+  for(const id of ids){const row=records(data).find(r=>r.id===id);assert.equal(recorded(evidence,id),id===ids[0]?'not-run':'passed');assert.equal(accepted(row.feature,evidence),false);
     for(const ref of ['native-dex-regression-c531740','native-dex-native-e736c05']){assert(evidence.results[id].evidence.includes(ref));assert.deepEqual(evidence.sources[ref].checks,ids);}}
   assert.equal(evidence.sources['native-dex-regression-c531740'].revision,'c531740f75ffc977c55dfaa31bca5b509fc8469b');
   assert.equal(evidence.sources['native-dex-native-e736c05'].revision,'e736c0573a644947566dcd206abac5f23fcd5fa6');
-  for(const id of [ids[1],'gear:ability-activation-contract']){assert.equal(evidence.results[id].status,'passed');assert.equal(records(data).find(r=>r.id===id).rule.historical,'partial');}
+  for(const id of [ids[1],'gear:ability-activation-contract']){assert.equal(recorded(evidence,id),'passed');assert.equal(records(data).find(r=>r.id===id).rule.historical,'partial');}
   for(const [id,ref] of [[ids[1],'inventory-native-c5f52f74'],['gear:ability-activation-contract','ability-contract-native-7a756fca'],['gear:ability-activation-contract','ability-refusals-native-d6caa5d1']])assert(evidence.results[id].evidence.includes(ref));
 });
 
@@ -611,7 +636,7 @@ test('controls research retains prior passes without accepting the missing chat 
   assert.equal(feature.audit.implementation,'partial');assert.equal(feature.audit.historical,'partial');
   assert.match(feature.audit.differences.join(' '),/empty cleanText/);
   assert.equal(evidence.results[feature.id].status,'not-run');assert.equal(accepted(feature,evidence),false);
-  for(const check of feature.audit.checks){assert.equal(check.historical,'partial');assert.equal(evidence.results[check.id].status,'passed');assert(evidence.results[check.id].evidence.includes('controls-display-research-d15f321'));}
+  for(const check of feature.audit.checks){assert.equal(check.historical,'partial');assert.equal(recorded(evidence,check.id),'passed');assert(evidence.results[check.id].evidence.includes('controls-display-research-d15f321'));}
   assert.equal(evidence.sources['controls-display-research-d15f321'].kind,'source');
   assert.equal(evidence.sources['controls-minimap-sight-native-544ff3f'].revision,'544ff3f239fef79e531be00919fe3625b38a30d2');
   const native=evidence.sources['controls-display-native-e4d8ef46'];
@@ -628,7 +653,7 @@ test('minimap menu passes only its cross-revision functional scope and preserves
     ['minimap-guild-edge-native-d9f3eb2','d9f3eb27dd8d78a5049cff4b2cecb3a45c6abfed','2026-10-24'],
     ['minimap-guild-pause-native-21b5980','21b5980f2ccd057ddf5f53c10a472d774b6126a8','2026-10-24']
   ];
-  assert.deepEqual(evidence.results[id],{status:'passed',evidence:[old,...receipts.map(([ref])=>ref),'controls-display-research-d15f321']});
+  assert.deepEqual(evidence.results[id],{status:'not-run',prior:'passed',evidence:[old,...receipts.map(([ref])=>ref),'controls-display-research-d15f321']});
   for(const [ref,revision,date] of receipts){
     const source=evidence.sources[ref];assert.equal(source.kind,'native');assert.equal(source.revision,revision);assert.equal(source.date,date);
     assert.equal(source.url,'https://github.com/OpenRotMG/Open-RotMG-Server/pull/492#issuecomment-6388142018');assert.deepEqual(source.checks,[id]);
@@ -686,7 +711,9 @@ test('executed acceptance requires an exact ID, revision and test/native receipt
   evidence.results[id]={status:'passed',evidence:[]};assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
   evidence.sources.test={kind:'source',revision:'a'.repeat(40),date:'2026-10-21',method:'Read the handler',limitations:'No execution',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/'+ 'a'.repeat(40)+'/src/world.rs'};
   evidence.results[id].evidence=['test'];assert.throws(()=>validateEvidence(data,evidence),/without test\/native evidence/);
-  evidence.sources.test.kind='regression';evidence.sources.test.method='Executed scenario and asserted the saved result';validateEvidence(data,evidence);
+  evidence.sources.test.kind='regression';evidence.sources.test.method='Executed scenario and asserted the saved result';assert.throws(()=>validateEvidence(data,evidence),/Stale passed after XML migration: heroes:warrior$/);
+  Object.assign(evidence.sources.test,{kind:'native',revision:evidence.migration.revision,fingerprint:evidence.migration.fingerprint});
+  assert.throws(()=>validateEvidence(data,evidence),/Stale passed/);addScopedProof(evidence,[id]);validateEvidence(data,evidence);
   evidence.sources.test.checks=['heroes:wizard'];assert.throws(()=>validateEvidence(data,evidence),/Invalid result binding/);
   evidence.sources.test.checks=[id];evidence.sources.test.revision='main';assert.throws(()=>validateEvidence(data,evidence),/Invalid execution evidence/);
 });
@@ -704,13 +731,11 @@ test('missing and orphan results fail explicitly instead of assuming untested',(
 
 test('one component pass cannot accept its whole feature or historical rules',()=>{
   const data=catalogue(),evidence=ledger(),f=data.features.find(f=>f.id==='dungeons:manor-of-the-immortals'),id=f.audit.checks[0].id;
-  evidence.sources.test={kind:'native',revision:'a'.repeat(40),date:'2026-10-21',method:'Ordinary room journey',limitations:'No historical sign-off',checks:[id],url:'https://github.com/OpenRotMG/Open-RotMG-Website/pull/38'};
-  evidence.results[id]={status:'passed',evidence:[...evidence.results[id].evidence,'test']};validateEvidence(data,evidence);
+  addScopedProof(evidence,[id]);validateEvidence(data,evidence);
   assert.equal(accepted(f,evidence),false);assert.equal(f.audit.checks[0].historical,'partial');
   for(const rule of [f.audit,...f.audit.checks]){rule.historical='verified';rule.unknowns=[];rule.differences=[];rule.sources=f.audit.sources;}
   assert.equal(accepted(f,evidence),false);
-  evidence.sources.test.checks=[f.id,...f.audit.checks.map(c=>c.id)];
-  for(const check of evidence.sources.test.checks)evidence.results[check]={status:'passed',evidence:[...new Set([...evidence.results[check].evidence,'test'])]};
+  addScopedProof(evidence,[f.id,...f.audit.checks.map(c=>c.id)]);
   validateEvidence(data,evidence);assert.equal(accepted(f,evidence),true);
   f.audit.checks[0].historical='known-differences';f.audit.checks[0].differences=['Deliberately substituted behavior'];
   assert.equal(accepted(f,evidence),false);
@@ -741,7 +766,7 @@ test('category and condition sprites stay original and distinct',()=>{
 test('god bag placement evidence preserves existing loot statuses and partial history',()=>{
   const data=catalogue(),evidence=ledger(),id='gear:loot-and-ownership',component='gear:loot-bag-presentation',feature=data.features.find(f=>f.id===id);
   validateEvidence(data,evidence);
-  assert.equal(evidence.results[id].status,'not-run');assert.equal(evidence.results[component].status,'passed');
+  assert.equal(evidence.results[id].status,'not-run');assert.equal(recorded(evidence,component),'passed');
   assert.equal(feature.audit.historical,'partial');assert.equal(feature.audit.checks.find(c=>c.id===component).historical,'partial');assert.equal(accepted(feature,evidence),false);
   const ref='god-loot-placement-source-f2c37955',source=evidence.sources[ref];
   for(const key of [id,component])assert(evidence.results[key].evidence.includes(ref));
@@ -757,4 +782,200 @@ test('god bag placement evidence preserves existing loot statuses and partial hi
   const common=evidence.sources['god-loot-common-native-d534980c'];
   assert.equal(common.kind,'native');assert.match(common.method,/passes17 assertions\/121800game ms/);
   assert.match(common.limitations,/NOT a native visual demonstration of Godscatter/);
+});
+
+test('XML migration keeps earlier receipts without treating an earlier XML build as current',()=>{
+  const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence),m=evidence.migration;
+  assert.equal(m.from,'79a4c92b9a130af8ca346f488902eaa10a202e20');
+  assert.equal(m.revision,m.reviewedRevision);
+  assert.equal(m.runtimeRevision,m.packageRevision);
+  assert.equal(m.reviewedRevision,m.runtimeRevision);
+  assert(m.url.endsWith(`/commit/${m.reviewedRevision}`));
+  for(const id of ['access:email-verification','access:change-password','access:keybinding-input-lifecycle'])assert.equal(evidence.results[id].prior,'passed');
+  assert(!Object.hasOwn(m,'unaffected'));
+  const prior=Object.entries(evidence.results).filter(([,r])=>r.prior);
+  assert(prior.length >= 72);assert.equal(prior.filter(([,r])=>r.prior==='failed').length,3);
+  for(const [,r] of prior){assert.equal(r.status,'not-run');assert(r.evidence.some(ref=>evidence.sources[ref].kind!=='source'&&!current(evidence,ref)) || !r.evidence.length);}
+  assert(Object.values(evidence.results).every(r=>r.status==='not-run'));
+  for(const [ref,id,count] of [['stheno-native-d4ea0207','dungeons:snake-pit',19],['shore-snakes-native-d4ea0207','realm:pythons',6]]){
+    assert(!current(evidence,ref));assert.deepEqual(evidence.sources[ref].checks,[id]);assert.equal(evidence.results[id].evidence.at(-1),ref);
+    assert.equal(evidence.results[id].status,'not-run');assert.match(evidence.sources[ref].method,new RegExp(`${count===19?'19':'six'} native assertions.*c672de9a`));
+  }
+  assert.match(evidence.sources['stheno-native-d4ea0207'].limitations,/Does not pass the whole Snake Pit/);
+  assert.equal(Object.entries(evidence.sources).filter(([ref,s])=>s.fingerprint&&!ref.startsWith('xml-prior:')).length,2);
+  for(const row of rows){const key=row.id===row.feature.id?'feature':'check';assert.equal(new URLSearchParams(`${key}=${encodeURIComponent(row.id)}`).get(key),row.id);}
+  assert(data.features.every(f=>!accepted(f,evidence)));
+});
+
+test('changed dependencies invalidate a receipt while unrelated dependency changes do not',()=>{
+  const data=catalogue(),evidence=ledger(),id='dungeons:spider-den';
+  addScopedProof(evidence,[id]);
+  assert(current(evidence,probe));
+  evidence.migration.dependencies.beachzone='0'.repeat(64);
+  validateEvidence(data,evidence);assert(current(evidence,probe));
+  evidence.migration.dependencies.probe='0'.repeat(64);
+  assert(!current(evidence,probe));assert.throws(()=>validateEvidence(data,evidence),/Stale passed after XML migration: dungeons:spider-den$/);
+  evidence.results[id].status='not-run';validateEvidence(data,evidence);
+});
+
+test('fresh gameplay needs a scoped native receipt and final-executable claims retain exact pins',()=>{
+  const data=catalogue(),id='dungeons:spider-den';
+  const attempt=mutate=>{const evidence=ledger();addScopedProof(evidence,[id]);mutate(evidence.sources[probe],evidence);return ()=>validateEvidence(data,evidence);};
+  attempt(()=>{})();
+  for(const mutate of [s=>s.fingerprint='0'.repeat(64),s=>delete s.fingerprint,
+    s=>s.revision='79a4c92b9a130af8ca346f488902eaa10a202e20',s=>s.kind='regression',s=>s.kind='source',
+    s=>s.binding.packageSha256='0'.repeat(64),s=>s.binding.caseOverlaySha256='invalid']){
+    assert.throws(attempt(mutate),/Invalid native binding: xml-final:probe$/);
+  }
+  assert.throws(attempt(s=>s.binding.dependencyFingerprint='0'.repeat(64)),/Stale passed after XML migration/);
+  const evidence=ledger(),pit='dungeons:snake-pit';addScopedProof(evidence,[pit]);evidence.results[pit].evidence=[probe];
+  assert.throws(()=>validateEvidence(data,evidence),/Unbound execution evidence: stheno-native-d4ea0207/);
+  for(const mutate of [m=>m.dependencies=[],m=>m.dependencies.bad='invalid',m=>m.fingerprint='invalid',m=>m.revision='main',m=>m.reviewedRevision='main']){
+    const invalid=ledger();mutate(invalid.migration);assert.throws(()=>validateEvidence(data,invalid),/Invalid XML migration record/);
+  }
+});
+
+test('XML runtime facts distinguish preserved, authored and corrected definitions pinned to the migration',()=>{
+  const data=catalogue(),evidence=ledger(),rows=validateEvidence(data,evidence),facts=rows.flatMap(r=>r.rule.runtime??[]);
+  assert.deepEqual([...new Set(facts.map(f=>f.provenance))].sort(),['authored','corrected','preserved']);
+  assert(facts.every(f=>f.url.startsWith(`https://github.com/OpenRotMG/Open-RotMG-Server/blob/${evidence.migration.reviewedRevision}/`)));
+  const rule=id=>rows.find(r=>r.id===id).rule.runtime;
+  assert.match(rule('dungeons:snake-pit')[1].url,/src\/loot\/evaluator\/tests\.rs#L723-L750$/);
+  assert.match(rule('dungeons:snake-pit')[0].artifact,/1ed014d85ab0378b5ee7529d9c20515e2adb3906\/data\/reference\/release-7\.0\/xml\/dungeons\/snakePit\.xml#L173$/);
+  assert.match(rule('realm:map-world-07')[0].fact,/terrain-band-median-v1.*not original per-cell height/);assert.equal(rule('realm:map-world-07')[0].provenance,'authored');
+  assert.deepEqual(rule('dungeons:ocean-trench').map(f=>f.provenance),['preserved','authored']);assert.match(rule('dungeons:ocean-trench')[1].fact,/10 HP every 150 ms. No recovered value/);
+  for(const id of ['realm:red-demon','realm:deathmage','realm:great-coil-snake'])assert(rule(id).some(f=>f.provenance==='authored'&&/LandmarkChest, not recovered server XML/.test(f.fact)));
+  assert.equal(rule('realm:bandit-leader')[0].provenance,'corrected');
+  assert.match(data.features.find(f=>f.id==='heroes:archer').audit.differences[0],/obtainable in the candidate via an authored drop/);
+  assert.match(rule('heroes:archer')[0].fact,/authored Actual Greater Nature Sprite drop.*0\.1%.*any damage/);
+  assert.match(rule('dungeons:mad-lab').at(-1).fact,/ten per run/);
+  assert.match(rule('dungeons:beachzone')[0].fact,/3,000 HP every 0\.2 seconds.*each roll at 15%.*not verified/);
+  assert.match(rule('dungeons:beachzone')[1].fact,/leaving a texture-setting state clears/);
+  assert.match(rule('realm:ghost-king').at(-1).fact,/reverses at walls/);
+  assert.match(rule('realm:shield-orcs')[0].fact,/issuer is already gone/);
+  assert.match(rule('gear:loot-and-ownership')[0].fact,/48 hours.*one hour/);
+  assert.equal(matches(rows.find(r=>r.id==='dungeons:snake-pit'),evidence,'all','Bulwark'),true);
+  for(const [mutate,error] of [[f=>f.provenance='recovered',/Invalid runtime source/],[f=>delete f.artifact,/Preserved definition without pinned artifact/],[f=>f.artifact=f.url,/Preserved definition without pinned artifact/],[f=>f.extra=true,/Invalid runtime source/]]){
+    const changed=catalogue();mutate(changed.features.find(f=>f.id==='dungeons:snake-pit').audit.runtime[0]);assert.throws(()=>validateCatalogue(changed),error);
+  }
+  const changed=catalogue();changed.features.find(f=>f.id==='dungeons:snake-pit').audit.runtime[0].url=rule('dungeons:snake-pit')[0].url.replace(evidence.migration.reviewedRevision,'main');
+  assert.throws(()=>validateEvidence(changed,evidence),/Runtime source not commit-pinned: dungeons:snake-pit$/);
+});
+
+test('preserved artifacts are historical citations only when pinned under data/reference and qualified',()=>{
+  const ok={url:'https://github.com/OpenRotMG/Open-RotMG-Server/blob/1ed014d85ab0378b5ee7529d9c20515e2adb3906/data/reference/release-7.0/xml/dungeons/snakePit.xml#L173',label:'Release 7.0 Stheno',qualification:'MPGH 2017 Release 7.0 attachment; not authenticated 123.5.1'};
+  validateSources([ok],'probe');
+  assert.throws(()=>validateSources([{...ok,qualification:' '}],'probe'),/Unqualified preserved artifact: probe/);
+  for(const url of [ok.url.replace('1ed014d85ab0378b5ee7529d9c20515e2adb3906','main'),ok.url.replace('data/reference/release-7.0/xml/dungeons/snakePit.xml','data/game/123.5.1/actors.xml'),ok.url.replace('/OpenRotMG/','/dginovker/'),ok.url.replace('data/reference/release-7.0','data/reference/../../src'),ok.url.replace('/blob/','/tree/')])
+    assert.throws(()=>validateSources([{...ok,url}],'probe'),/Project code is not a historical source/,url);
+});
+
+test('July 2010 catalogue and page bytes are unchanged by the XML migration',()=>{
+  const walk=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(join(dir,e.name)):[join(dir,e.name)]);
+  const root=fileURLToPath(new URL('..',import.meta.url)),hash=createHash('sha256');
+  for(const file of [...walk(join(root,'public/restoration/2010')),...walk(join(root,'public/2010'))].map(f=>relative(root,f)).sort()){hash.update(file);hash.update(readFileSync(join(root,file)));}
+  assert.equal(hash.digest('hex'),'974936dec22a161a809af3962b16edcfcbedfb759223a7cfd1a6fa006063d271');
+});
+
+test('native evidence requires exact rebased execution and leaves predecessor endpoints historical',()=>{
+  const data=catalogue(),e=boundLedger(),m=e.migration;
+  validateEvidence(data,e);
+  const active=Object.entries(e.sources).filter(([ref])=>ref.startsWith('xml-final:'));
+  for(const [ref,source] of active){
+    assert.equal(source.revision,m.revision);
+    assert.equal(source.binding.disposition,'final-executable');
+    assert.equal(source.binding.packageSha256,m.packageSha256);
+    assert.equal(source.binding.binarySha256,m.binarySha256);
+    assert.equal(source.fingerprint,m.fingerprint);
+    assert(current(e,ref));
+  }
+  for(const [id,caseName] of [
+    ['dungeons:oryx-s-castle:earned-guardians-and-chamber','xml-earned-oryx'],
+    ['dungeons:mad-lab:earned-coils-and-clear','horrific-creation-earned'],
+  ]){
+    if(e.sources[`xml-final:${caseName}`])continue;
+    assert.equal(e.results[id].status,'not-run');
+    assert(e.results[id].evidence.some(ref=>ref.startsWith('xml-prior:')&&ref.endsWith(':'+caseName)&&!current(e,ref)));
+  }
+  if(active.length){
+    const [ref,sample]=active[0];
+    sample.binding.scopeSha256='0'.repeat(64);
+    assert.throws(()=>validateEvidence(data,e),new RegExp(`Invalid native binding: ${ref}`));
+  }
+});
+
+test('native refresh binds the final receipt and case-only overlays and rejects stale or in-delta carries',()=>{
+  const evidence=boundLedger(),m=evidence.migration, id='gear:ability-activation-contract';
+  const map=JSON.parse(readFileSync(new URL('restoration-native-map.json',import.meta.url)));
+  const names=map.checks[id].cases;
+  const [carryName,finalName]=names;
+  addScopedProof(evidence,[id]);
+  const {binding:b}=evidence.sources[probe], src={revision:'a'.repeat(40)};
+  b.passes=[];delete evidence.sources[probe];evidence.results[id].evidence=evidence.results[id].evidence.filter(ref=>ref!==probe);
+  evidence.results[id].status='not-run';
+  const final={id:finalName,case:`examples/testing/${finalName}.mjs`,case_sha256:map.cases[finalName][0],proof_scope:map.cases[finalName][1],status:'passed',variant:{},runtime_env:{}};
+  const clientManifest='7'.repeat(64), overlayHash='6'.repeat(64);
+  const capture={status:'passed',case_sha256:final.case_sha256,case_revision:src.revision,returncode:0,
+    collection:{status:'reclaimed',time:1795267851},assertions:['observed outcome'],binary_sha256:m.binarySha256,
+    data_fingerprint:m.fingerprint,observed_inputs:{case:final.case_sha256,serverBinary:m.binarySha256,clientManifest},
+    archive_sha256:b.packageSha256,job:b.job,case_overlay_sha256:overlayHash};
+  const [caseSha,proofScope]=map.cases[carryName];
+  const stale={id:carryName,case:`examples/testing/${carryName}.mjs`,case_sha256:caseSha,proof_scope:proofScope,
+    variant:{},runtime_env:{},status:'historical_carry_only',terminal_result:'historical_carry_only',case_revision:'b'.repeat(40),returncode:0,collection:capture.collection,
+    assertions:['earlier observation'],source:{head:'b'.repeat(40),dirty:false},data_fingerprint:m.fingerprint,
+    observed_inputs:{case:caseSha,serverBinary:'b'.repeat(64)},binary_sha256:'b'.repeat(64),
+    package_sha256:'c'.repeat(64),job:'openrotmg/qa-jobs/'+'d'.repeat(32)};
+  stale.attempts=[{...stale,status:'passed'}];
+  const carry={...stale,scope_rationale:['No observation depends on the runtime delta'],final_executable_receipt:null,
+    carry_capture:Object.fromEntries(['job','binary_sha256','package_sha256','data_fingerprint','case_sha256'].map(k=>[k,stale[k]]))};
+  const overlay={...final,final_executable_receipt:capture};
+  const input={case_head:m.revision,revision:m.packageRevision,runtime_revision:m.runtimeRevision,expected_source_data_fingerprint:m.fingerprint,
+    package:{revision:m.packageRevision,archive_sha256:m.packageSha256,local_equal_archive_sha256:m.localPackageSha256,
+      binary_sha256:m.binarySha256,all_member_bytes_modes_sizes_identical:true},
+    total:2,scope:'Scope review',rows:[{...final,final_executable_receipt:structuredClone(capture)},stale]};
+  const scope={case_head:m.revision,runtime_head:m.runtimeRevision,ledger_sha256:m.ledgerSha256,
+    data_fingerprint:m.fingerprint,binary_sha256:m.binarySha256,runtime_archive_sha256:m.packageSha256,
+    local_equal_archive_sha256:m.localPackageSha256,client_manifest_sha256:clientManifest,selected_count:2,rows:[overlay,carry],
+    case_overlays:[{archive_sha256:overlayHash,base_archive_sha256:b.packageSha256,binary_sha256:m.binarySha256,
+      revision:src.revision,unchanged_data_members:327,changed_members:['docs/xml-migration-differences.md',final.case],affected_case_ids:[finalName]}]};
+  const spec={cases:Object.fromEntries(names.map(name=>[name,map.cases[name]])),checks:{[id]:map.checks[id]}};
+  const caseHash=(_,file)=>file===final.case?final.case_sha256:caseSha;
+  const deps=requests=>Object.fromEntries(requests.map(([name,,,,fp])=>[name, ['8'.repeat(64),fp==='0'.repeat(64)?'9'.repeat(64):'8'.repeat(64)]]));
+  const refresh=(l=input,s=scope,hash=caseHash)=>bindNative(evidence,l,s,spec,hash,deps);
+  const accepted=refresh();
+  const {local_equal_archive_sha256: _duplicate, ...scopeWithLedgerPackage}=scope;
+  assert.deepEqual(refresh(input,scopeWithLedgerPackage),accepted);
+  assert.equal(accepted.results[id].status,'passed');
+  assert.equal(accepted.sources[`xml-final:${carryName}`].binding.disposition,'carry-only');
+  assert.equal(accepted.sources[`xml-final:${finalName}`].binding.disposition,'final-executable');
+  assert.equal(accepted.sources[`xml-final:${finalName}`].binding.caseOverlaySha256,overlayHash);
+  assert.deepEqual(bindNative(accepted,input,scope,spec,caseHash,deps),accepted);
+  const unseenCapture=target=>requests=>({...deps(requests),[carryName]:[target,null]});
+  assert.deepEqual(bindNative(accepted,input,scope,spec,caseHash,unseenCapture('8'.repeat(64))),accepted);
+  const changedDependency=bindNative(accepted,input,scope,spec,caseHash,unseenCapture('9'.repeat(64)));
+  assert.equal(changedDependency.results[id].status,'not-run');
+  assert.equal(changedDependency.sources[`xml-prior:${stale.job.split('/').at(-1)}:${carryName}`].binding.dependencyFingerprint,'8'.repeat(64));
+  const staleData=structuredClone(input);staleData.rows[1].data_fingerprint=staleData.rows[1].attempts[0].data_fingerprint='0'.repeat(64);
+  const changedScope=structuredClone(scope);changedScope.rows[1].carry_capture.data_fingerprint='0'.repeat(64);
+  assert.equal(refresh(staleData,changedScope).results[id].status,'not-run');
+  assert.equal(refresh(input,scope,(rev,file)=>file===stale.case?'0'.repeat(64):caseHash(rev,file)).results[id].status,'not-run');
+  const delta=structuredClone(scope), deltaInput=structuredClone(input);delta.rows[1].status=deltaInput.rows[1].status='pending';
+  assert.equal(refresh(deltaInput,delta).results[id].status,'not-run');
+  assert.throws(()=>refresh({...input,revision:'0'.repeat(40)}),/Native ledger does not match/);
+  assert.throws(()=>refresh(input,scope,(rev,file)=>rev===src.revision?'0'.repeat(64):caseHash(rev,file)),/Unqualified final-executable receipt/);
+  for(const [mutate,error] of [
+    [(l,s)=>{s.local_equal_archive_sha256='0'.repeat(64)},/Scope local-equal archive differs/],
+    [(l,s)=>{s.rows[0].final_executable_receipt.job=stale.job},/Scope receipt mismatch/],
+    [(l,s)=>{for(const row of [s.rows[0],l.rows[0]])row.final_executable_receipt.observed_inputs.serverBinary=stale.binary_sha256},/Unqualified final-executable receipt/],
+    [(l,s)=>{for(const row of [s.rows[0],l.rows[0]])row.final_executable_receipt.archive_sha256=stale.package_sha256},/Unqualified final-executable receipt/],
+    [(l,s)=>{s.case_overlays[0].changed_members.push('data/game.xml')},/Invalid case-only overlay/],
+    [(l,s)=>{s.case_overlays[0].affected_case_ids=[]},/Unqualified case overlay/],
+    [(l,s)=>{for(const row of [s.rows[0],l.rows[0]])row.final_executable_receipt.observed_inputs.clientManifest='0'.repeat(64)},/Unqualified final-executable receipt/],
+    [(l,s)=>{s.rows[1].proof_scope='earned'},/Re-review changed proof scope/],
+    [(l,s)=>{s.rows[1].carry_capture.package_sha256=b.packageSha256},/Carry capture mismatch/],
+    [l=>{l.rows[1].attempts[0].status='failed'},/Missing passed attempt/],
+  ]){
+    const l=structuredClone(input),s=structuredClone(scope);mutate(l,s);
+    assert.throws(()=>refresh(l,s),error);
+  }
 });

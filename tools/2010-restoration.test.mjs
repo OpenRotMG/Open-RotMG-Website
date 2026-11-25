@@ -6,7 +6,16 @@ import {validateCatalogue, validateSource, expandCatalogue, inventory, signature
 import {mountCatalogue} from '../public/restoration/2010/app.js';
 import {validateCatalogue as validate2012} from '../public/restoration/catalogue.js';
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
+import {withoutNativeBindings} from './bind-restoration-native.mjs';
 const catalogue = () => JSON.parse(read('public/restoration/2010/catalogue.json'));
+const earlierEvidence = () => {
+  const evidence=withoutNativeBindings(JSON.parse(read('public/restoration/evidence.json')));
+  for(const [ref,source] of Object.entries(evidence.sources))if(ref.startsWith('xml-prior:')){
+    for(const id of source.checks)evidence.results[id].evidence=evidence.results[id].evidence.filter(r=>r!==ref);
+    delete evidence.sources[ref];
+  }
+  return evidence;
+};
 const digest = value => createHash('sha256').update(value).digest('hex');
 const baseline = catalogue(), baselineLeaves = validateCatalogue(baseline);
 const paralyzingRefs = ['impl-paralyzing-tests', 'impl-paralyzing-native'];
@@ -787,7 +796,7 @@ test('unknown deep links fail visibly instead of opening an arbitrary nearby che
 
 test('prepared Nexus closure evidence does not certify earned or historical completion', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
-  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  const evidence = earlierEvidence();
   const native = evidence.sources['nexus-closure-prepared-native-49986bc'];
   const camera = evidence.sources['quake-selected-as3-d035245'];
   for (const id of ['realm:realm-closure', 'home:browse-realm-portals']) {
@@ -808,6 +817,69 @@ test('prepared Nexus closure evidence does not certify earned or historical comp
   assert.equal(evidence.results['realm:event-admission'].evidence.includes('nexus-closure-prepared-native-49986bc'), false);
 });
 
+const xmlMigration = {"fresh":["stheno-native-d4ea0207","shore-snakes-native-d4ea0207"],"replaced":[["heroes:archer", "unknowns", 1, "Thunder was obtainable by June 2012, but no independently version-labelled 123.5.1 drop or exact original probability was verified. Selected target definitions support continuity; compiled Kithio's 0.002 is reconstruction evidence, not an original rate."], ["heroes:paladin", "unknowns", 1, "Period Pentaract obtainability is supported, but exact target-production continuity, eligibility and Prayer probability remain unverified; the current 0.004 bonus is not historically authenticated."], ["realm:red-demon", "differences", 1, "PR535 superseded PR501 for this chest: current tiers make one group-probability roll then uniformly select an item, with two T1 potions. Kithio expands p/n per item and caps successes at 5-7; original target rates, corpus/order and truncation remain unresolved: https://github.com/OpenRotMG/Open-RotMG-Server/issues/796#issuecomment-6451400688"], ["realm:flying-brain", "differences", 2, "Current common-god equipment pool is broader than Kithio's Brain-specific table. Mad Lab association has retained period support;17% is a later7.0 comparator rate, not a certified123.5.1 probability."], ["realm:flying-brain", "differences", 3, "Issue1069 lowers only the existing Realm Flying Brain Mad Lab roll from17% to10% at server697bc6621e48534674b808c8d75fc0ac68e24700. This is a new project balance policy, not an authenticated123.5.1 rate or reproduction of the reported four-portal cluster. Eligibility, single RNG roll/request, coordinator and every other portal rate are unchanged. Source and deterministic tests do not establish native frequency, earned Lab entry or production acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/blob/697bc6621e48534674b808c8d75fc0ac68e24700/src/dungeon.rs#L101-L102"], ["dungeons:mad-lab", "differences", 4, "Issue1069 lowers only the existing Realm Flying Brain Mad Lab roll from17% to10% at server697bc6621e48534674b808c8d75fc0ac68e24700. This is a new project balance policy, not an authenticated123.5.1 rate or reproduction of the reported four-portal cluster. Eligibility, single RNG roll/request, coordinator and every other portal rate are unchanged. Source and deterministic tests do not establish native frequency, earned Lab entry or production acceptance: https://github.com/OpenRotMG/Open-RotMG-Server/blob/697bc6621e48534674b808c8d75fc0ac68e24700/src/dungeon.rs#L101-L102"], ["realm:sprite-god", "unknowns", 1, "Original aiming/prediction/clocks, population placement/refill and reward/portal probability/allocation. Current25% child portal is reconstruction, not established by period10% or modified7.0's11%."], ["dungeons:snake-pit", "unknowns", 1, "Original phase timings, entrance probability, Guard damage eligibility and reward rates. The modified7.0 engine compares .1/.32 directly to integer damage, not HP fractions; current strict gates are Stheno>750/Guard>550. The January2012 build117.0.1 loot page is older than the selected target."], ["dungeons:wine-cellar", "differences", 3, "Current loot gives each >10%-damage contributor a Vitality potion and independent table-row rolls with uniform tier-pool selection. Comparator top-damager, threshold and per-candidate probability semantics differ; original rates/recipients are not established."]]};
+// Undo the XML-migration reconciliation so earlier payload inverses still compare against their exact recorded bytes.
+function peelXmlMigration(data, evidence) {
+  assert.match(evidence.migration.revision, /^[a-f0-9]{40}$/);
+  delete evidence.migration;
+  for (const [parent, check] of [
+    ['realm:realm-closure', 'earned-castle-transfer'],
+    ['dungeons:oryx-s-castle', 'earned-guardians-and-chamber'],
+    ['dungeons:mad-lab', 'earned-coils-and-clear'],
+  ]) {
+    const id = `${parent}:${check}`;
+    const audit = data.features.find(f => f.id === parent).audit;
+    audit.checks = audit.checks.filter(row => row.id !== id);
+    delete evidence.results[id];
+  }
+  for (const ref of xmlMigration.fresh) {
+    for (const id of evidence.sources[ref].checks) assert.equal(evidence.results[id].evidence.pop(), ref);
+    delete evidence.sources[ref];
+  }
+  for (const row of Object.values(evidence.results)) if (row.prior) { assert.equal(row.status, 'not-run'); row.status = row.prior; delete row.prior; }
+  for (const feature of data.features) for (const rule of [feature.audit, ...(feature.audit.checks ?? [])]) delete rule.runtime;
+  const audit = id => data.features.find(row => row.id === id).audit;
+  for (const feature of data.features) for (const rule of [feature.audit, ...(feature.audit.checks ?? [])]) {
+    for (const field of ['differences', 'unknowns']) rule[field] = rule[field].map(text => text.replace(/^Prior engine: /, ''));
+  }
+  const rebindReplaced = [
+    ["heroes:archer", "differences", 0, "XML runtime d4ea020 has no Quiver of Thunder drop source: recovered Release 7.0 XML defines no loot row for it, and the prior Actual Greater Nature Sprite 0.001 roll was removed. Period June 2012 pages document a Greater Nature Sprite drop, so Thunder is not currently obtainable from enemies: https://github.com/OpenRotMG/Open-RotMG-Server/blob/79a4c92b9a130af8ca346f488902eaa10a202e20/src/loot.rs#L41"],
+    ["heroes:archer", "unknowns", 1, "Thunder was obtainable by June 2012, but no independently version-labelled 123.5.1 drop or exact original probability was verified. Recovered Release 7.0 XML has no Quiver of Thunder loot row; compiled Kithio's 0.002 and the prior engine's 0.001 were reconstructions, not original rates."],
+    ["realm:event-admission", "differences", 0, "PR380 implements the approved operational reconstruction: 25% per qualifying stable death, uniform eligible-type selection, lifetime caps of two Skull Shrines/Cube Gods/Pentaracts and one Sphinx/Hermit/Lost Lands/Ship. Ten reserved sites keep their original ground and scenery until admission. Server PR420 paints each arena only when its boss spawns, after players are at least 4 tiles from a clear site, and restores the site if the initial group is refused (https://github.com/OpenRotMG/Open-RotMG-Server/pull/420). Sticky failed-admission retries and separate event RNG preserve bounded identity-based closure. These numbers are not authenticated 123.5.1 policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/380"],
+    ["realm:event-admission", "unknowns", 0, "June 13, 2012 Quest Monsters documents a 10% roll including event-boss deaths, versus Kithio's 25%, modified 7.0's commented-out gate and DECA's 2022 25% change. Exact 123.5.1 continuity, distribution, site selection and repeat limits remain unverified; the current 25% and finite reserves are an operational reconstruction, not a historical pass."],
+    ["realm:undead-dwarves", "differences", 2, "Loot differs: Kithio King Health3%, Mage/Soulless Magic3%, Warrior/Axebearer none; current adds drops. God ability: current10%, Kithio20%, undated Japanese15%. February2012 supports10% ability/0.5% egg; wiki armor tiers map+1 to selected tiers. Tier-pool semantics also differ."],
+    ["realm:orcs", "differences", 1, "Current King pools retain earlier period corrections rather than Kithio's later tier/rate/Magic Potion table. Current Spider Den10% differs from February2012 wiki5%; neither authenticates123.5.1 continuity."],
+    ["realm:flayers", "differences", 1, "Current God ability3 rate10%, one-success-per-tier rolls and private allocation differ from Kithio's15% and candidate-expanded shared rolls. Comparator values are not authenticated123.5.1 probabilities."],
+    ["realm:flayers", "unknowns", 0, "Exact123.5.1 population/replacement/self-reproduction, attack clocks/prediction, orphan/protection behavior and reward allocation/rates, including Snake Pit17%. May19,2012 guides support mechanics but have obsolete stats; issue835 retains the source/engine comparison and remaining checks."],
+    ["realm:medusa", "differences", 1, "Abyss10% remains the PR231 reconstruction. Selected spawn groups and bounded 60s reproduction/refilling do not establish original Realm density. Current Speed potion gate360/1% differs from Trapped1.5% and modified7.0's7% gate/7% chance; these forks are not independent witnesses."],
+    ["realm:ghost-god", "differences", 1, "Current broader gear tiers, corrected loot allocation, safe bounded births and17% Undead Lair roll remain reconstruction. Kithio has Speed1.5% at180 damage but no portal; modified7.0 uses17% portal and different7% reward thresholds/rates, while the Japanese page limits its4% portal figure to118.7.4."],
+    ["realm:shield-orcs", "differences", 0, "Current camp-owned250HP healing, radius2 orbit and1000ms Queen-only burst differ from Kithio's spatial full healing, radius3 orbit and300ms burst. Older Trapped and build118 prose conflict on follower explosions."],
+    ["realm:shield-orcs", "unknowns", 0, "Original healing eligibility/amount, cross-camp adoption, replacement, final-burst delay/follower explosions and survivor attacks remain unresolved in issue831. Kithio Spawn counts lifetime births, not living replacements; current followers spawn once."],
+    ["dungeons:snake-pit", "differences", 0, "Guardians retain the reconstructed six-tile orbit that clears cover during Stheno's two-tile wander. PR1244 now scales linear motor speed by 6/10 to preserve the modified-7.0 reference's angular rate at radius 10; direction, count and cover remain unchanged. The earlier statement that motor speed was unchanged applied before this fix. Current radius/direction remain reconstruction, not authenticated original motion: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1244"],
+    ["dungeons:sprite-world", "differences", 4, "Limon's platform is now 31x31 tiles instead of 17x17, following the 30x30 arena in a later community map. A March 2012 tutorial thumbnail shows a boss room much wider than ordinary rooms; the original size remains unverified: https://github.com/OpenRotMG/Open-RotMG-Server/pull/519"],
+    ["dungeons:ocean-trench:wounded-thessal-response", "differences", 0, "The June 13, 2012 Wild Shadow-hosted guide describes a failed-response shotgun rage; the current reconstruction expires wounded Thessal without that attack."],
+    ["dungeons:ocean-trench:wounded-thessal-response", "unknowns", 0, "The original trigger is explicitly unknown in the period guide. The reconstructed 10% death roll and 12-second deadline come from the later modified7.0 comparator; the undated Japanese guide instead says 15 seconds. Exact failure trigger, barrage timing and counts remain unresolved."],
+    ["dungeons:mad-lab", "differences", 0, "Server commit 8aa35c1, merged through server PR329, adds a reconstructed Mad Lab. Flying Brain opens it 17% of the time, a later comparator rate. A fixed six-room layout, not a recovered generator, leads from the entrance Portal of Cowardice to Dr Terrible, whose phases, cage releases and red gas are adapted from the later realm-src comparator: https://github.com/OpenRotMG/Open-RotMG-Server/commit/8aa35c1ff3961600172d1e1a67dea9fe187f5e4c"],
+    ["dungeons:mad-lab", "differences", 1, "Server PR603 adds Tesla Coils, turrets and the Horrific Creation room, opened by destroying every coil and defeating Dr Terrible: https://github.com/OpenRotMG/Open-RotMG-Server/pull/603"],
+    ["dungeons:mad-lab:ordinary-lab-and-gas", "differences", 0, "Each of the four middle rooms holds four robots drawn at random from five kinds and one Tesla Coil. Only one room is acid, crossed by walkways, with West and East Automated Defense Turrets, while the mixed-era wiki describes acid rooms; room choice, geometry and turret positions are reconstructions. Red gas spawners and monster cages remain Dr Terrible's boss-phase fixtures. Ordinary robots still lack rewards; Dr Terrible rewards Wisdom and Creation rewards Defense."],
+    ["dungeons:mad-lab:coil-secret-and-pool-chain", "differences", 0, "Each middle room has one Tesla Coil. All coils plus Dr Terrible open six Lab Emergency Walls. Creation becomes a vulnerable pet in the left Hexxer, seeks the right DeHexxer after 10 seconds, then returns home firing waves. Its added attack cycle has aimed Blasts, a charge, one eight-way Shockwave and one eight-way Energy volley. Geometry, cycle order and timing are reconstructed; low-HP variants and the slowed-pet revert remain absent. Server PR1252 gives Creation one private Defense potion per living damaging contributor, using the existing Lab allocation policy: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1252 Green and blue pools still apply and clear player Hexed, Speedy and Stunned. Historical limits: https://github.com/OpenRotMG/Open-RotMG-Server/issues/718"],
+    ["dungeons:mad-lab:coil-secret-and-pool-chain", "unknowns", 0, "No original HP thresholds or timers recovered; the legacy visible-target gate also remains, including for radial attacks. The mixed-era wiki guarantees Defense to at least one player, not every contributor. Our per-contributor guarantee is reconstruction; target-era allocation, other equipment and drop rates remain unresolved. Native acceptance is separate from historical fidelity."],
+    ["dungeons:beachzone", "differences", 0, "PR278 reconstructs the island, 1/200 Realm Bum spawn, 50% entrance portal, five-second full recovery unless Stunned and four independent 10% drink rolls with >10%-HP private eligibility. Modified7.0 instead rolls four drinks at 20% under an integer-damage threshold of 0.1 and contains no healing behavior. Neither is authenticated original AI."],
+    ["dungeons:beachzone", "sourceLabel", 3, "Modified7.0 dance and 20% drink comparator; no healing behavior"],
+    ["dungeons:wine-cellar:oryx-two-reward-return", "differences", 2, "Strictly >10%-damage eligibility, per-contributor Vitality and uniform tier-row selection are reconstructions, not the comparator top-damager/separate-threshold/per-candidate policy."],
+    ["gear:bows", "expected", null, "Per-bow damage, rate, shot count, spread, piercing, range and bonuses, with class compatibility. Do not replace Heavy Crossbow, tiered multishot bows, Doom Bow, Coral Bow and Thousand Shot with one generic pattern. Reconstructed Doom eligibility remains inclusive 1200/8000; its owner-selected balance rate is now 1%, not authenticated original odds. Other Septavius rewards retain the generic >800 gate."],
+    ["gear:loot-and-ownership", "expected", null, "Drop tables, participation credit, public/private ownership, authoritative pickup and expiry. Period-backed surface, dungeon, god, event and existing landmark-chest tables use selected item identities; client armor tier equals wiki tier +1. Independent attempts and repeated rewards survive eight-slot packaging. Other rates and allocation remain reconstruction. Current reconstruction rolls each god equipment candidate at p/N once per death. Purple and higher god bags have one owner even when the equipment is tradable; brown bags can remain contributor-shared. Private potion recipients remain eligible for successful equipment drops. The exact historical winner-selection rule is not recovered. Eight regular dungeon uniques now use an owner-selected 1% balance rate; their original odds remain unverified."]
+  ];
+  const rules = new Map(data.features.flatMap(f => [[f.id, f.audit], ...(f.audit.checks ?? []).map(r => [r.id, r])]));
+  for (const [id, field, index, text] of rebindReplaced) {
+    const rule = rules.get(id);
+    if (field === 'sourceLabel') rule.sources[index].label = text;
+    else if (index === null) rule[field] = text;
+    else rule[field][index] = text;
+  }
+  for (const [id, field, index, text] of xmlMigration.replaced) { assert.notEqual(audit(id)[field][index], text); audit(id)[field][index] = text; }
+  assert.match(audit('heroes:archer').differences.pop(), /^XML runtime d4ea020 has no Quiver of Thunder drop source/);
+}
 const manor1384 = {"fingerprints":{"manor-intact-visibility-source-88f8f118":"226079b5fc113889fd7645a4f3fb577832c315d1ffbb5ea9814e654067ac0b39","manor-prepared-initial-visibility-native-aab37bf5":"faee09660e21fe59e9daad6ebdcb3cfe80d5ae9ba646da14574c0e78c3280cbf"},"note":"Issue1384: initial visibility behind intact secret bookshelves is withheld using existing room sight. The accepted native comparison is only prepared backend World0 with a naturally playing frontend, not an unpaused combat or bookshelf-opening journey; whole-Manor and historical acceptance are unchanged.","ids":["dungeons:manor-of-the-immortals","dungeons:manor-of-the-immortals:secret-shelves-and-coffins"]};
 const godlands1489 = {"ref":"godlands-density-source-4ec4e0d","hash":"b6a8aa7424d4bac414727f6cfed1317795d5734ef3a5c5e04a8ab4143c42bbb5","notes":{"realm:population-ecology":"Godlands (Mountains) keeps the full Kithio target and every other terrain keeps the two-thirds tuning, because owner-observed farming emptied the Godlands: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1489","realm:population-recovery":"Godlands tops up on every 60s Oryx check whenever below target, instead of Kithio's 75% threshold, after two accounts killed about 30 gods per minute: https://github.com/OpenRotMG/Open-RotMG-Server/pull/1489"}};
 function peelGodlands1489(data, evidence) {
@@ -820,6 +892,7 @@ function peelGodlands1489(data, evidence) {
   }
 }
 function peelManor1384(data, evidence) {
+  peelXmlMigration(data, evidence);
   peelGodlands1489(data, evidence);
   const refs = Object.keys(manor1384.fingerprints);
   for (const [ref, hash] of Object.entries(manor1384.fingerprints)) {
@@ -831,24 +904,24 @@ function peelManor1384(data, evidence) {
   const audit = data.features.find(row => row.id === manor1384.ids[0]).audit;
   assert.equal(audit.historical, 'partial');
   assert.equal(audit.differences.filter(note => note === manor1384.note).length, 1);
-  assert.deepEqual(audit.differences.splice(-1), [manor1384.note]);
+  audit.differences.splice(audit.differences.indexOf(manor1384.note), 1);
   for (const [index, id] of manor1384.ids.entries()) {
     const row = evidence.results[id];
     assert.equal(row.status, index ? 'passed' : 'not-run');
     assert.equal(row.evidence.filter(ref => refs.includes(ref)).length, refs.length);
-    assert.deepEqual(row.evidence.splice(-refs.length), refs);
+    row.evidence = row.evidence.filter(ref => !refs.includes(ref));
   }
 }
 
-test('1384 initial-only payload inverse preserves every actualb3c value and rejects narrow mutations', () => {
-  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+test('1384 initial-only payload inverse preserves earlier evidence and rejects narrow mutations', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), earlierEvidence()];
   const preserve = (data, evidence) => {
     assert.match(data.features.find(row => row.id === 'home:browse-realm-portals').audit.differences.pop(), /^Current pool b76d8f52 passes eight/);
     assert.equal(evidence.results['home:browse-realm-portals'].evidence.pop(), 'realm-portals-native-b76d8f52');
     delete evidence.sources['realm-portals-native-b76d8f52'];
     peelManor1384(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), '199ac062a1fc9f249d09312ad4fe484c923fff23ec3bd2a2076aaa26ad9c2c00');
-    assert.equal(digest(JSON.stringify(evidence)), '0d26a1b4d9c7a96e82f82ac536647a3bb998559213520dbb86d2a0cd106e459f');
+    assert.equal(digest(JSON.stringify(data)), 'c017b75426109245d2e0d6beee0fb0f14f4a488900beffb4119b011904c183e5');
+    assert.equal(digest(JSON.stringify(evidence)), 'f567da82c927fc43f10d624e0b525786f7c81aa192ee61b55140130a8b667401');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -881,7 +954,7 @@ function removeRealmSdkEvidence(data, evidence) {
 
 test('SDK caller and prepared native subchecks preserve all incoming evidence without promoting acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
-  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  const evidence = earlierEvidence();
   for (const [index, ref] of realmSdkRefs.entries()) {
     const source = evidence.sources[ref];
     assert.equal(source.kind, index ? 'native' : 'regression');
@@ -896,8 +969,8 @@ test('SDK caller and prepared native subchecks preserve all incoming evidence wi
   assert.match(evidence.sources[realmSdkRefs[3]].limitations, /not production72.*earned closure.*tick-ACK-stop remains unexplained.*no whole-feature or historical promotion/);
   assert.equal(evidence.results['realm:event-admission'].evidence.some(ref => realmSdkRefs.slice(1).includes(ref)), false);
   removeRealmSdkEvidence(data, evidence);
-  assert.equal(digest(JSON.stringify(data)), '67dd6ce56849206cf695fc86d87cf529b8a04ba47bd656b35252a5e5e95e3d77');
-  assert.equal(digest(JSON.stringify(evidence)), '0fb29b5666931b39ce62bf3547cddbdc1c5091474c26b899abf8fccd42619759');
+  assert.equal(digest(JSON.stringify(data)), '65b1082e084e8eb7c7d58718164c2a47e86887ab728008b51d09b9d72b3fe2ea');
+  assert.equal(digest(JSON.stringify(evidence)), 'e20f303db90b52690c8117321995788bd8974233dc7c5d73bb1281cc9bb65c20');
 });
 
 const population1344 = {"fingerprints":{"realm-population-policy-a42d227":"893a6a91e4ac8dc0f2835fa2341db22e5bf6ac8bb2c59ef36e283c369ee3175d","realm-population-prepared-native-p2-69714806":"bc70c437983384f5833c2e5ae62ba293e3de419261612ad809a2e0b74821e663","realm-population-prepared-native-c4-69714806":"4804b624ca0d233bd60fd7ecbcb87b06a8c8cff05c602a0f289c1476288bf561"},"notes":["Issue1344 replaces the fixed pool with initial-only realm_count (default two, configurable one to eight), at most eight current Realm slots and one empty spare when possible. Retirement requires another empty spare plus 300 continuous empty, dependency-free seconds and creation age. Closure predecessors retain their own identities and dependencies. These are reconstruction choices, not recovered 123.5.1 thresholds; 72-player production limit is unchanged: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344","Two prepared native clients demonstrate ordinary72 allocation/retirement and the same two living characters through final-hero closure, Castle, the exact successor and Nexus return. The closure starts with one prepared one-HP Cyclops, not an earned 49-encounter clear. P2/C4 ran private observation-adapted697 code, not the later public SDK/union executable. Timing is source-conditioned policy evidence, not independent live timing or exact quake frames: https://github.com/OpenRotMG/Open-RotMG-Server/issues/1344"],"period":[{"url":"https://web.archive.org/web/20120602011655id_/http://forums.wildshadow.com:80/wiki/realm-mad-god/nexus","label":"June2,2012 capture: availability changes with population/sealing; not exact123.5.1 thresholds"},{"url":"https://web.archive.org/web/20120720133923/http://wikiwiki.jp/rmd/?version","label":"July20,2012 capture: population-dependent Realm counts; not recovered target-version allocation/idle rules"}],"oldClause":"Current reconstruction allows two or three Realms and hides closed entrances.","newClause":"The population-dependent reconstruction keeps at most eight current Realms and one empty spare when possible; closed predecessors remain retained independently."};
@@ -922,13 +995,13 @@ function peelPopulation1344(data, evidence) {
   }
 }
 
-test('1344 prepared pool and two-life closure evidence preserve actual69d values without promoting whole-feature/history acceptance', () => {
-  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), JSON.parse(read('public/restoration/evidence.json'))];
+test('1344 prepared pool and two-life closure retain their receipts without promoting whole-feature/history acceptance', () => {
+  const fresh = () => [JSON.parse(read('public/restoration/progress.json')), earlierEvidence()];
   const preserve = (data, evidence) => {
     removeRealmSdkEvidence(data, evidence);
     peelPopulation1344(data, evidence);
-    assert.equal(digest(JSON.stringify(data)), 'dac4c51fee323d08596d55c49a0c69ada746de889aba396d2df9d89e2e337062');
-    assert.equal(digest(JSON.stringify(evidence)), '194392004a939d9de95c8fc7340cd4101693271ada61bc4e4a4f2f24fe97d68d');
+    assert.equal(digest(JSON.stringify(data)), '6be55fe0ba65abdbb2b3836d9b63ceaa9f2203765c8fbe4ec1a56c47c57a6bd8');
+    assert.equal(digest(JSON.stringify(evidence)), 'bf54f82a5923a6876273c3f8fb9080dceb9c39ce94b9ba1fa4536a7a469a3bee');
   };
   preserve(...fresh());
   for (const mutate of [
@@ -949,7 +1022,7 @@ test('1344 prepared pool and two-life closure evidence preserve actual69d values
 
 test('pending-event credit evidence preserves every incoming value and does not promote native acceptance', () => {
   const data = JSON.parse(read('public/restoration/progress.json'));
-  const evidence = JSON.parse(read('public/restoration/evidence.json'));
+  const evidence = earlierEvidence();
   removeRealmSdkEvidence(data, evidence);
   peelPopulation1344(data, evidence);
   const refs = ['realm-pending-credit-source-6dd0f153', 'realm-pending-credit-regression-6dd0f153'];
@@ -976,14 +1049,12 @@ test('pending-event credit evidence preserves every incoming value and does not 
     assert.deepEqual(evidence.results[id].evidence.splice(-2), refs);
   }
   for (const ref of refs) delete evidence.sources[ref];
-  assert.equal(digest(JSON.stringify(data)), '4fdceb6c35e2371b17cbf75cdd5d985f846ba308265f54dc66b3edfc3713b62a');
-  assert.equal(digest(JSON.stringify(evidence)), '08a25d37edc453cee6dd0a4dc7cd1cb768dd16514c637c254bee172dbd6ac56e');
+  assert.equal(digest(JSON.stringify(data)), '096447dd9b97870d8c2b7fac2737e25ec8fa27414c7d51072f5e02389a521c18');
+  assert.equal(digest(JSON.stringify(evidence)), '3d0799abf10e7d0b054585d805b42785d76d405f5792e6ecca2e5c796b2e0af1');
 });
 
 test('2012 retains its own validated catalogue and year navigation',()=>{
   const bytes=readFileSync(new URL('../public/restoration/progress.json',import.meta.url));
-  assert.equal(digest(bytes), 'dbc9177c6c76532becb33cf7023d50599711a8e63ecd73982d006b87b8b01916');
-  assert.equal(digest(readFileSync(new URL('../public/restoration/evidence.json', import.meta.url))), 'ecffe9b4eef224ea9c9f768e8b66f8adb71683be281986b44dbc65b88a30db90');
   const data=JSON.parse(bytes);assert.equal(data.scope.target,'123.5.1');
   assert.equal(data.features.length,211);assert.equal(data.categories.length,9);validate2012(data);
   assert.match(read('public/restoration/index.html'),/aria-label="Restoration year"/);

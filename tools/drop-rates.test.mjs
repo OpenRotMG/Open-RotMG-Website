@@ -1,56 +1,90 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {rowsFor,catalogueFor,percentage} from '../public/drop-rates/app.js';
-const item={id:1,name:'Doom Bow'},other={id:2,name:'Other item'};
-const group=(mode,entries,name='Septavius')=>({enemy:{name},mode,entries});
-const entry=(probability,items)=>({probability,items});
-const data=groups=>({items:[item,other],groups});
-const art=[{id:1,bag:4,x:0,y:0},{id:2,bag:1,x:16,y:0}];
-test('rates combine repeated rewards without losing tier selection, order or chest caps',()=>{
- assert.deepEqual(rowsFor(data([group('independent',[entry(.1,[1,2])])])).map(r=>Number(r.chance.toFixed(4))),[.05,.05]);
- assert.equal(rowsFor(data([group('ordered',[entry(.9,[2]),entry(.1,[1])])])).find(r=>r.item.id===1).chance.toFixed(4),'0.0100');
- assert.equal(rowsFor(data([group('independent',[entry(.5,[1]),entry(.5,[1])])]))[0].chance,.75);
- assert.equal(rowsFor(data([group('ordered',[entry(.2,[1]),entry(.4,[1])])]))[0].chance,.52);
- const items=Array.from({length:8},(_,id)=>({id,name:'Item '+id}));
- const rows=rowsFor({items,groups:[group('capped',items.map(i=>entry(1,[i.id])))]});
- assert.deepEqual(rows.map(r=>Number(r.chance.toFixed(4))),[1,1,1,.8,.6,.4,.2,0]);
- assert.equal(rowsFor(data([group('capped',[entry(.5,[1]),entry(.5,[1])])]))[0].chance,.75);
- assert.equal(percentage(.01),'1%');assert.equal(percentage(.001),'0.1%');
- assert.throws(()=>rowsFor(data([group('mystery',[])])),/Missing loot rules/);
- assert.throws(()=>rowsFor(data([group('independent',[entry(-1,[1])])])),/probability/);
+import {cardsFor,percentage} from '../public/drop-rates/app.js';
+const read=path=>readFileSync(new URL(path,import.meta.url),'utf8');
+// The fixture is a slice of the runtime archive’s loopback API response, not the case overlay.
+const snapshot=JSON.parse(read('drop-rates.fixture.json')),art=JSON.parse(read('../public/hiscores/items.json'));
+const rowsOf=(cards,name,source)=>cards.find(card=>card.name===name).rows.filter(row=>row.source===source);
+test('server facts render as plain wording per source row, with exact facts and citations in Details',()=>{
+ const {migration}=JSON.parse(read('../public/restoration/evidence.json'));
+ assert.deepEqual([snapshot.revision,snapshot.content_fingerprint],[migration.packageRevision,migration.fingerprint]);
+ assert.equal(migration.dropRatesReceiptSha256,'2a450dce50ae3e468d02818ad76312490d8f92377b49331adc0006d26ecac44b');
+ const cards=cardsFor(snapshot,art);
+ const [thunder]=rowsOf(cards,'Quiver of Thunder','Actual Greater Nature Sprite');
+ assert.equal(thunder.summary,'Each eligible player rolls 0.1% per kill · Deal any damage · Soulbound (only you can see it) · Reconstructed drop, not recovered with the encounter');
+ assert.match(thunder.facts.join('\n'),/Corrected: .*authored legacy-derived drop: private Quiver of Thunder/);
+ assert.equal(thunder.facts.at(-2),'Drop row origin: Authored: Legacy-derived Quiver of Thunder; recovered testingObjects.xml has no loot for this object. Origin: 79a4c92b:src/loot.rs:41');
+ assert.match(thunder.facts.at(-1),/actors\.xml:3688/);
+ const [bulwark]=rowsOf(cards,'Wand of the Bulwark','Stheno the Snake Queen');
+ assert.equal(percentage(bulwark.attempt),'0.1%');
+ assert.equal(bulwark.summary,'Each eligible player rolls 0.1% per kill · Deal at least 15% of its health · Soulbound (only you can see it)');
+ assert.equal(bulwark.facts[0],'Bernoulli attempt 0.1%; uniform pool choice 100% among 1 item; item attempt before min/max 0.1%.');
+ assert.match(bulwark.facts.join('\n'),/Eligibility \(threshold 0\.15\): each living nondeparting durable character .*damage\/maxHP >= threshold\./);
+ assert.match(bulwark.facts.join('\n'),/Final per-player chance not projected: Attempt and pool probabilities are not final/);
+ assert.match(bulwark.facts.join('\n'),/Recovered: .* Origin: data\/reference\/release-7\.0\/xml\/dungeons\/snakePit\.xml:173/);
+ assert.equal(bulwark.facts.at(-1),'Source row 9: game/123.5.1/actors.xml:3057 › Stheno the Snake Queen › @root');
+ const [speed]=rowsOf(cards,'Potion of Speed','Stheno the Snake Queen');
+ assert.equal(percentage(speed.attempt),'30%');assert.equal(speed.summary,'Each eligible player rolls 30% per kill · Deal any damage · Soulbound (only you can see it) · If anyone is eligible, at least 1 is given out in total per kill, even if the rolls fall short');
+ const limitFacts='Minimum 1: total row allocations per encounter, only when private recipients/public gate exist. Maximum none: total row successes; stop Bernoullis at maximum before minimum top-up.';
+ assert(speed.facts.includes(limitFacts));
+ const [attack]=rowsOf(cards,'Potion of Attack','Skull Shrine');
+ assert.equal(percentage(attack.attempt),'4.1667%');
+ assert.equal(attack.summary,'Each eligible player rolls 25% per kill for one of 6 equally likely items (4.1667% for this item on that roll) · Deal at least 10% of its health · Soulbound (only you can see it) · If anyone is eligible, at least 1 item from the 6-item pool is given out in total per kill, even if the rolls fall short');
+ assert(attack.facts.includes(limitFacts));
+ assert.equal(attack.facts.at(-1),'Source row 14: game/123.5.1/actors.xml:8220 › Skull Shrine › @root');
+ const [mana]=rowsOf(cards,'Potion of Mana','Thessal the Mermaid Goddess');
+ assert.equal(percentage(mana.attempt),'18%');assert.equal(mana.summary,'Each eligible player rolls 18% per kill · Deal any damage · Soulbound (only you can see it) · If anyone is eligible, at least 2 are given out in total per kill, even if the rolls fall short');
+ const sword=rowsOf(cards,'Dragonsoul Sword','Stheno the Snake Queen');
+ assert.deepEqual(sword.map(row=>[percentage(row.attempt),row.summary.split(' · ')[0],row.facts[0]]),[['1.4%','Each eligible player rolls 7% per kill for one of 5 equally likely items (1.4% for this item on that roll)','Bernoulli attempt 7%; uniform pool choice 20% among 5 items; item attempt before min/max 1.4%.']]);
+ const wine=cards.find(card=>card.name==='Wine Cellar Incantation');
+ assert.deepEqual(wine.rows.map(row=>[row.source,percentage(row.attempt),row.summary.split(' · ')[1]]),[['Thessal the Mermaid Goddess','1.5%','Deal any damage'],['Stheno the Snake Queen','0.1%','Deal at least 18% of its health']]);
+ const [chest]=rowsOf(cards,'Dragonsoul Sword','Red Demon landmark chest');
+ assert.equal(chest.summary,'One shared roll per chest: 12.5% for one of 5 equally likely items (2.5% for this item on that roll) · Reconstructed chest contents');
+ assert.deepEqual(chest.facts.slice(0,3),["Public contents of each landmark chest created with this landmark's Realm site; not the landmark's death loot and not every container of this kind.",'No success ceiling.','Chest: game/123.5.1/game.xml:1385']);
+ assert.match(chest.facts.join('\n'),/Eligibility \(threshold 0\): once per chest creation; no contributor or damage gate\.\nMinimum 0:.*\nFinal per-player chance not projected: .*\nAuthored: .*not recovered server XML\. Origin: https:\/\/web\.archive\.org\//);
+ const portals=cards.filter(card=>card.filter==='dungeon');
+ assert.deepEqual(portals.map(card=>[card.name,card.sprite,card.rows.map(row=>[row.source,percentage(row.attempt),row.summary])]),[
+  ['Mad Lab Portal',null,[['Flying Brain','2%','If its death behavior is active when it dies: 2% roll to open a Mad Lab Portal. A successful roll does not guarantee it opens.']]],
+  ['Manor of the Immortals Portal',null,[['Kage Kami','33%','If its death behavior is active when it dies: 33% roll to open a Manor of the Immortals Portal. A successful roll does not guarantee it opens.']]]
+ ]);
+ const [kage]=rowsOf(cards,'Manor of the Immortals Portal','Kage Kami');
+ assert.equal(kage.facts[0],snapshot.objects.find(o=>o.name==='Kage Kami').death_births[0].condition);
+ assert.equal(kage.facts.at(-1),'Behavior: game/123.5.1/actors.xml:2560 › Kage Kami › @root');
+ assert.equal(cards.find(card=>card.name==='Wand of the Bulwark').filter,'4');
+ assert(!cards.some(card=>card.name==='Ocean Vent'));
+ const capped={...snapshot,landmark_chests:[{...snapshot.landmark_chests[0],success_ceiling:{min:3,max:7,draw:'uniform inclusive, before rows; later rows stop drawing once reached'}}]};
+ assert.match(rowsOf(cardsFor(capped,art),'Dragonsoul Sword','Red Demon landmark chest')[0].summary,/ · Reconstructed chest contents · Each chest has a random cap of 3 to 7 items\. Later rolls are skipped once it hits that cap\.$/);
+ for(const row of cards.flatMap(card=>card.rows))assert.doesNotMatch(row.summary,/Bernoulli|seeded|nondeparting|durable|threshold|attempt|projected|chance per|always drops/);
+ const pools=[...snapshot.objects,...snapshot.landmark_chests].flatMap(source=>source.rows).reduce((n,row)=>n+row.source_row.pool.length,0);
+ assert.equal(cards.reduce((n,card)=>n+card.rows.length,0),pools+2,'every source row and pool item stays separate');
 });
-test('one card per item groups equal NPC rates and retains different rates and numeric sources',()=>{
- const groups=[group('independent',[entry(.01,[1])],'Malphas'),group('independent',[entry(.01,[1])],'Abyss Idol'),group('independent',[entry(.05,[1])],'Guard'),group('independent',[entry(.01,[1])],'Malphas')];
- const sources=[{url:'https://example.org/rates',rates:[{items:[1],npc:'Malphas',probability:.001},{items:[1],npc:'Abyss Idol',probability:.001},{items:[1],npc:'Unrelated enemy',probability:.2}]}];
- const cards=catalogueFor(data(groups),art,sources);assert.equal(cards.length,1);assert.equal(cards[0].sprite.bag,4);
- assert.deepEqual(cards[0].rates.map(r=>[percentage(r.chance),r.npcs]),[['5%',['Guard']],['1%',['Abyss Idol','Malphas']]]);
- assert.deepEqual(cards[0].sources,[{chance:.001,url:'https://example.org/rates',npcs:['Abyss Idol','Malphas']}]);
- const portal={id:0x718,name:'Snake Pit'},portals=[{...group('independent',[entry(.17,[0x718])],'Ogre King'),channel:'Dungeon portal'}];
- const dungeon=catalogueFor({items:[portal],groups:portals},[],[]);assert.deepEqual(dungeon.map(c=>[c.filter,c.sprite,c.rates[0].npcs]),[['dungeon',null,['Ogre King']]]);
- assert.deepEqual(cards.map(c=>c.filter),['4']);
- assert.throws(()=>catalogueFor(data(groups),[{id:1}],[]),/bag/);
- assert.throws(()=>catalogueFor(data(groups),art,[{url:'https://openrotmg.org/rates',rates:[]}]),/external/);
- assert.throws(()=>catalogueFor(data(groups),art,[{url:'https://example.org/rates',rates:[{items:[1],npc:'Malphas'}]}]),/source drop rate/);
+test('capped private rows show a shared stopping point and unsupported facts are explicit errors',()=>{
+ assert.throws(()=>cardsFor({...snapshot,schema_version:1},art),/Unsupported drop-rate schema 1; this page requires schema_version 2/);
+ assert.throws(()=>cardsFor({groups:[],items:[]},art),/Unsupported drop-rate schema undefined/);
+ const object=snapshot.objects[0],row=object.rows[0],mutate=change=>({...snapshot,objects:[{...object,rows:[change(structuredClone(row))]}]});
+ assert.throws(()=>cardsFor(mutate(r=>{r.source_row.ownership='Guild';return r;}),art),/Unsupported loot row 0/);
+ assert.throws(()=>cardsFor(mutate(r=>{r.final_probability.status='projected';return r;}),art),/Unsupported loot row 0/);
+ const stheno=snapshot.objects.find(o=>o.name==='Stheno the Snake Queen'),speed=structuredClone(stheno.rows.find(r=>r.row_index===4));
+ speed.source_row.max=1;
+ const capped={...snapshot,objects:[{...stheno,rows:[speed]}],landmark_chests:[]};
+ assert.match(rowsOf(cardsFor(capped,art),'Potion of Speed',stheno.name)[0].summary,/^Each eligible player can roll 30% per kill .* · Rolling stops after 1 successful roll per kill across all eligible players$/);
+ speed.maximum_scope='per player';
+ assert.throws(()=>cardsFor(capped,art),/Unsupported loot limits/);
+ assert.throws(()=>cardsFor(mutate(r=>{r.source_row.min=1;r.guarantee_is_per_player=true;return r;}),art),/Unsupported loot limits/);
+ const kage=structuredClone(snapshot.objects.find(o=>o.name==='Kage Kami'));
+ kage.death_births[0].condition='Unknown activation rule';
+ assert.throws(()=>cardsFor({...snapshot,objects:[kage]},art),/Unsupported portal condition from Kage Kami/);
+ assert.throws(()=>cardsFor(snapshot,art.filter(item=>item.id!==3076)),/Missing item or artwork 3076/);
+ const chest=snapshot.landmark_chests[0],withChest=change=>({...snapshot,landmark_chests:[change(structuredClone(chest))]});
+ assert.throws(()=>cardsFor(withChest(c=>{c.rows[0].source_row.ownership='Private';return c;}),art),/Unsupported loot row 0 from Red Demon landmark chest/);
+ assert.throws(()=>cardsFor(withChest(c=>({...c,provenance:'Recovered'})),art),/Unsupported provenance Recovered for Red Demon landmark chest/);
 });
-test('only item-specific numeric references are published, without generic research or our code',()=>{
- const sources=JSON.parse(readFileSync(new URL('../public/drop-rates/sources.json',import.meta.url)));assert(sources.length>200);
- for(const source of sources){
-  const url=new URL(source.url);assert.equal(url.protocol,'https:');assert(!url.hostname.endsWith('openrotmg.org'));assert.doesNotMatch(source.url,/Open-RotMG-|trapped\/rotmg_svr/);assert(source.rates.length);
-  for(const rate of source.rates){assert(rate.npc);assert(rate.items.length);assert(rate.items.every(Number.isSafeInteger));assert(Number.isFinite(rate.probability)&&rate.probability>=0&&rate.probability<=1);}
- }
- const doom=sources.flatMap(s=>s.rates.filter(r=>r.items.includes(0xc02)).map(r=>[r.npc,r.probability,s.url]));
- assert(doom.some(([npc,p,url])=>npc==='Septavius the Ghost God'&&p===.001&&url.endsWith('/node/4466')));
- assert(doom.some(([npc,p,url])=>npc==='Septavius the Ghost God'&&p===.005&&url.includes('fabiano-swagger-of-doom')));
-});
-test('page has only the bag and dungeon filters, full results, short sources and matching share artwork',()=>{
- const html=readFileSync(new URL('../public/drop-rates/index.html',import.meta.url),'utf8');
- assert.match(html,/<option value="4">White bag<\/option><option value="3">Blue bag<\/option><option value="2">Cyan bag<\/option><option value="1">Purple bag<\/option><option value="dungeon">Dungeons<\/option><\/select>/);
- assert.doesNotMatch(html,/Know what|historical odds|How to read|id="search"|id="category"|id="count"|previous|pagination|id="next"/);
+test('page renders server facts only, with every bag reachable and matching share artwork',()=>{
+ const html=read('../public/drop-rates/index.html');
+ assert.match(html,/<option value="4">White bag<\/option><option value="3">Blue bag<\/option><option value="2">Cyan bag<\/option><option value="1">Purple bag<\/option><option value="0">Brown bag<\/option><option value="dungeon">Dungeons<\/option><\/select>/);
  assert.match(html,/role="alert"/);assert.match(html,/app\.js\?v=\{\{DROP_RATES_VERSION\}\}/);assert.match(html,/style\.css\?v=\{\{DROP_RATES_VERSION\}\}/);
- const app=readFileSync(new URL('../public/drop-rates/app.js',import.meta.url),'utf8');
- assert.doesNotMatch(app,/Owner-selected|Historical rate unverified|General loot|Current implementation|source_file|eligibility|allocation|toLocaleString|slice\(page/);
- const art=JSON.parse(readFileSync(new URL('../public/hiscores/items.json',import.meta.url)));assert(art.every(i=>Number.isInteger(i.bag)&&i.bag>=0&&i.bag<=4));assert.equal(art.find(i=>i.id===0xc02).bag,4);assert.equal(art.find(i=>i.id===0xa1f).bag,3);
- const about=readFileSync(new URL('../public/about/index.html',import.meta.url),'utf8');assert.match(about,/href="\{\{BASE\}\}drop-rates\/"/);
+ assert.doesNotMatch(read('../public/drop-rates/app.js'),/survival|capped|ordered|sources\.json|reduce\(/);
+ assert.match(read('../public/about/index.html'),/href="\{\{BASE\}\}drop-rates\/"/);
  const png=readFileSync(new URL('../public/drop-rates/social.png',import.meta.url));assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
 });

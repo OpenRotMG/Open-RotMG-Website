@@ -1,4 +1,4 @@
-import {implementationLabels,historicalLabels,functionalLabels,views,groups,dungeonGates,checks,validateEvidence,matches,workCounts,accepted} from './catalogue.js';
+import {implementationLabels,historicalLabels,functionalLabels,provenanceLabels,views,groups,dungeonGates,checks,validateEvidence,matches,workCounts,accepted,current} from './catalogue.js';
 
 export async function mountCatalogue(document,fetch,window,logger=console) {
   const $=id=>document.getElementById(id);
@@ -16,35 +16,62 @@ export async function mountCatalogue(document,fetch,window,logger=console) {
   try {
     const load=async file=>{const response=await fetch(file);if(!response.ok)throw new Error(`${file}: HTTP ${response.status}`);return response.json();};
     const [data,evidence]=await Promise.all([load('progress.json'),load('evidence.json')]);
-    const all=validateEvidence(data,evidence),byId=new Map(all.map(r=>[r.id,r])),componentCount=all.length-data.features.length;
+    const all=validateEvidence(data,evidence),byId=new Map(all.map(r=>[r.id,r])),componentCount=all.length-data.features.length,migration=evidence.migration,reviewed=migration.reviewedRevision.slice(0,7);
+    $('migration').textContent=`Reviewed server ${reviewed} · Case head ${migration.revision.slice(0,7)} · Runtime ${migration.runtimeRevision.slice(0,7)}. ${migration.qualification}`;$('migration').hidden=false;
     const icon=path=>{const n=el('img');n.src=path;n.alt='';n.className='sprite';return n;};
-    const state=row=>{const n=el('span',undefined,'audit-state');n.append(el('span',implementationLabels[row.rule.implementation],`implementation-${row.rule.implementation}`),el('span',`Gameplay: ${functionalLabels[evidence.results[row.id].status]}`,`functional-${evidence.results[row.id].status}`),el('span',`History: ${historicalLabels[row.rule.historical]}`,`historical-${row.rule.historical}`));return n;};
-    const historicalSources=sources=>{const n=el('div');for(const source of sources){const p=el('p',undefined,'citation');p.append(el('strong',source.label+': '),link(source.url,source.url));n.append(p);}return n;};
-    function appendEvidence(node,refs) {
-      for(const ref of refs){const s=evidence.sources[ref],p=el('p',undefined,'citation');p.append(el('strong',`${s.kind} · ${s.date} · revision ${s.revision}`),el('br'),link(s.url,s.url),el('br'),el('span',s.method),el('br'),el('span','Limits: '+s.limitations));node.append(p);}
+    const scopes={earned:'Earned milestones',prepared:'Prepared start',protected:'Protected combat'};
+    const captureLabel=b=>b.disposition==='carry-only' ? `Earlier capture ${b.binarySha256.slice(0,8)}; scope-reviewed carry` : b.scopeSha256===migration.scopeSha256 ? 'Final executable' : 'Capture on the then-target executable';
+    const gameplay=(id,result)=>{
+      const bindings=result.evidence.filter(ref=>current(evidence,ref)).map(ref=>evidence.sources[ref].binding).filter(b=>b?.passes.includes(id));
+      if(result.status!=='passed'||!bindings.length)return functionalLabels[result.status]+(result.prior?` (prior engine: ${functionalLabels[result.prior]})`:'');
+      return `Passed (${[...new Set(bindings.map(captureLabel))].join(' + ')}) · ${[...new Set(bindings.map(b=>scopes[b.scope]))].join(' / ')}`;
+    };
+    const state=row=>{const n=el('span',undefined,'audit-state'),result=evidence.results[row.id];
+      n.append(el('span',implementationLabels[row.rule.implementation],`implementation-${row.rule.implementation}`),el('span',`Gameplay: ${gameplay(row.id,result)}`,`functional-${result.status}`),el('span',`History: ${historicalLabels[row.rule.historical]}`,`historical-${row.rule.historical}`));return n;};
+    const historicalSources=sources=>{const n=el('div');for(const source of sources){const p=el('p',undefined,'citation');p.append(el('strong',source.label+': '),link(source.url,source.url));if(source.qualification)p.append(el('br'),el('span','Preserved artifact qualification: '+source.qualification));n.append(p);}return n;};
+    function appendEvidence(node,refs,id) {
+      for(const ref of refs){const s=evidence.sources[ref],p=el('p',undefined,'citation'),b=s.binding;
+        p.append(el('strong',`${b?`${scopes[b.scope]} · ${captureLabel(b)}`:s.kind} · ${s.date} · captured at ${s.revision}${s.fingerprint?` · runtime inputs ${s.fingerprint}`:''}`),el('br'),link(s.url,s.url),el('br'),el('span',s.method),el('br'),el('span','Limits: '+(b?`${b.limits[id]} ${s.limitations}`:s.limitations)));
+        if(b){const details=el('details');details.append(el('summary','Receipt identifiers'),el('p',`${b.basis}. Job: ${b.job} · Case SHA-256: ${b.caseSha256} · Dependency SHA-256: ${b.dependencyFingerprint} · Package SHA-256: ${b.packageSha256}${b.caseOverlaySha256?` · Case overlay SHA-256: ${b.caseOverlaySha256}`:""} · Executable SHA-256: ${b.binarySha256}${b.disposition==='carry-only'?` · Executable scope SHA-256: ${b.scopeSha256}`:""}`));p.append(details);}
+        node.append(p);}
     }
     function functionalProof(id) {
-      const result=evidence.results[id],n=el('div'),refs=result.evidence.filter(ref=>evidence.sources[ref].kind!=='source');
-      n.append(el('p',functionalLabels[result.status]));
+      const result=evidence.results[id],n=el('div'),refs=result.evidence.filter(ref=>evidence.sources[ref].kind!=='source'),fresh=refs.filter(ref=>current(evidence,ref)),older=refs.filter(ref=>!fresh.includes(ref));
+      n.append(el('p',gameplay(id,result)));
       if(!refs.length)n.append(el('p','No executed acceptance result is bound to this ID. This does not assert that no prior testing exists.'));
-      appendEvidence(n,refs);return n;
+      if(fresh.length){n.append(el('h4',`Evidence for reviewed server ${reviewed}${result.status==='not-run'?' (partial observations; check still pending)':''}`));appendEvidence(n,fresh,id);}
+      if(older.length){const archive=el('div');appendEvidence(archive,older,id);n.append(priorEngine(`Earlier server receipts${result.prior?` (prior-engine result: ${functionalLabels[result.prior].toLowerCase()})`:''}. Not acceptance for ${reviewed}.`,archive));}
+      return n;
+    }
+    function runtimeSources(facts) {
+      const n=el('div');n.append(el('p',`Source facts at the cited server revisions. These include recovered XML and project-authored changes; they are not gameplay results.`));
+      for(const f of facts){const p=el('p',undefined,'citation');p.append(el('strong',provenanceLabels[f.provenance]+': '),el('span',f.fact),el('br'),link(f.url,f.url));if(f.artifact)p.append(el('br'),link(f.artifact,f.artifact));n.append(p);}
+      return n;
+    }
+    function priorEngine(title,body) {
+      const details=el('details',undefined,'prior-engine');
+      details.append(el('summary',title),body);
+      return details;
     }
     function openRecord(row) {
       const f=row.feature,r=row.rule,component=row.id!==f.id;
       $('feature-title').textContent=component?`${f.name}: ${r.name}`:f.name;
       $('feature-icon').hidden=!f.icon;if(f.icon)$('feature-icon').src=f.icon;else $('feature-icon').removeAttribute('src');
       $('feature-status').replaceChildren(state(row));
-      const content=[section('Historical target / requirement',r.expected)];
+      const content=[];
+      if(r.runtime)content.push(section('Candidate runtime sources',runtimeSources(r.runtime)));
+      content.push(section('Historical target / requirement',r.expected));
       if(component)content.push(section('Observable acceptance check',r.acceptance));
       else if(f.category==='dungeons')content.push(section('Whole-dungeon acceptance',list(Object.entries(dungeonGates).map(([key,text])=>`${groups[key]}: ${text}`))));
       if(r.differences.length)content.push(section('Known / intentional differences',list(r.differences)));
       content.push(section('Historical research',r.unknowns.length?list(r.unknowns):r.historical==='unreviewed'?'This component has no independent historical sign-off. Parent questions and source qualifications still apply.':'No additional local questions recorded; this is not automatic historical acceptance.'));
       if(component&&f.audit.unknowns.length)content.push(section('Parent historical questions',list(f.audit.unknowns)));
+      if(r.priorEngine?.length)content.push(priorEngine('Prior-engine history',list(r.priorEngine)));
       if(r.sources.length)content.push(section('Historical references',historicalSources(r.sources)));
       if(component)content.push(section('Parent research leads (not component sign-off)',historicalSources(f.audit.sources)));
       content.push(section('Recorded gameplay acceptance',functionalProof(row.id)));
-      const review=evidence.sourceReview,source=el('div');source.append(el('p',`Last whole-catalogue source audit: server ${review.revision.slice(0,7)}, ${review.date}. ${review.qualification}`),link(review.url,review.url));appendEvidence(source,evidence.results[row.id].evidence.filter(ref=>evidence.sources[ref].kind==='source'));content.push(section('Implementation review provenance',source));
-      content.push(section('Update this check',`For restoration-related PRs, identify ${row.id} in the PR comment. When source support changes, update this row's implementation and differences in progress.json. Bind executed evidence to that ID in the evidence ledger. Include tested revision, date, method, result and limitations. Source inspection cannot pass gameplay acceptance; a merged PR cannot establish historical accuracy.`));
+      const review=evidence.sourceReview,source=el('div');source.append(el('p',`Last whole-catalogue source audit: server ${review.revision.slice(0,7)}, ${review.date}. ${review.qualification}`),link(review.url,review.url));appendEvidence(source,evidence.results[row.id].evidence.filter(ref=>evidence.sources[ref].kind==='source'));content.push(priorEngine('Earlier implementation reviews',source));
+      content.push(section('Update this check',`For restoration-related PRs, identify ${row.id} in the PR comment. When source support changes, update this row's implementation and differences in progress.json. Bind executed evidence to that ID in the evidence ledger. Include tested revision, date, method, result and limitations. Gameplay results need pinned native observations and matching check dependencies for reviewed server ${reviewed}. Source inspection cannot pass gameplay acceptance; a merged PR cannot establish historical accuracy.`));
       content.push(section('Stable check identity',link(row.id,`#${component?'check':'feature'}=${encodeURIComponent(row.id)}`)));
       if(!component)content.push(section('Feature completion',accepted(f,evidence)?'All recorded requirements and acceptance checks are satisfied.':'Not accepted. The parent and every component need source support, recorded gameplay acceptance and historical sign-off without unresolved questions or differences.'));
       $('feature-audit').replaceChildren(...content);if(!dialog.open)dialog.showModal();
@@ -94,7 +121,7 @@ export async function mountCatalogue(document,fetch,window,logger=console) {
         const title=el('h3');title.append(icon(area.icon),el('span',area.name));card.append(title,el('p',area.summary));
         card.append(el('p',`Needs research: ${stats.research} → Needs implementation: ${stats.implementation} → Needs verification: ${stats.verification} | Known differences: ${stats.differences}`,'area-counts'));
         const gaps=fs.flatMap(f=>f.audit.differences.map(text=>`${f.name}: ${text}`));
-        if(gaps.length)card.append(section('Current differences',list(gaps.slice(0,2))));
+        if(gaps.length)card.append(section('Recorded differences',list(gaps.slice(0,2))));
         else card.append(el('p','No known implementation differences are recorded here. This does not establish completed verification.','work-note'));
         const next=all.filter(r=>r.feature.category===area.id&&matches(r,evidence,'implementation')).slice(0,3);
         if(next.length)card.append(section('Implementation checks to investigate',list(next.map(r=>r.id===r.feature.id?r.feature.name:r.rule.name))));
