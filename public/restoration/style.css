@@ -42,6 +42,8 @@ dialog::backdrop { background: #000b; }
 #feature-audit li, .category-questions li { margin: 8px 0; }
 #feature-audit, .category-questions { overflow-wrap: anywhere; }
 .citation { font-size: 11px; }
+.prior-engine { margin-top: 14px; padding: 8px 12px; border-left: 3px solid #90836d; background: #292720; color: #dfd4be; }
+.prior-engine summary { cursor: pointer; font-weight: bold; }
 .category-questions { padding: 7px 10px; font-size: 11px; }
 .category-questions h3 { font-size: 12px; }
 .category-questions .citation { margin: 3px 0; }
