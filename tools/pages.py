@@ -24,6 +24,13 @@ def download(path, limit=1024 * 1024):
     return data
 
 
+def build_easy(movie):
+    # The Easy Client derives from the served movie so it keeps every server-side client patch.
+    sys.path.insert(0, str(Path(os.environ['CLIENT_DIR']) / 'scripts'))
+    from build_easy import build
+    return build(Path(os.environ['RABCDASM']), movie)
+
+
 def identity():
     health = json.loads(download('/health'))
     client = json.loads(download('/diagnostics-build.json'))
@@ -77,19 +84,21 @@ def assemble():
     shutil.copytree(Path(os.environ['SERVER_DIR']) / 'data/sfx', dist / 'sfx')
     mobile = with_mobile_camera(b'FWS' + swf[3:8] + body)
     (dist / 'client.swf').write_bytes(mobile)
-    assets = {'/client.swf': hashlib.sha256(mobile).hexdigest(),
+    easy = with_mobile_camera(build_easy(b'FWS' + swf[3:8] + body))
+    (dist / 'easy.swf').write_bytes(easy)
+    assets = {'/client.swf': hashlib.sha256(mobile).hexdigest(), '/easy.swf': hashlib.sha256(easy).hexdigest(),
               '/draw/native-texture-editor.swf': hashlib.sha256((dist / 'draw/native-texture-editor.swf').read_bytes()).hexdigest()}
     assets.update(('/' + str(path.relative_to(dist)), hashlib.sha256(path.read_bytes()).hexdigest())
                   for path in (dist / 'vendor').glob('*.wasm'))
     script_version = hashlib.sha256((dist / 'game.js').read_bytes()).hexdigest()
-    for page in [dist / 'index.html', dist / 'draw/index.html']:
+    for page in [dist / 'index.html', dist / 'easy/index.html', dist / 'draw/index.html']:
         html = page.read_text()
         if html.count('id="game"') != 1:
             raise ValueError('Game page must have exactly one asset cache target: ' + str(page))
         html = html.replace('src="/game.js"', 'src="/game.js?v=' + script_version + '"')
         page.write_text(html.replace('id="game"', 'id="game" data-asset-hashes=\'' + json.dumps(assets, separators=(',', ':')) + '\''))
     build.update(native_swf_sha256=desktop['swf_sha256'], server=expected['server'], client_source_swf_sha256=hashlib.sha256(swf).hexdigest(),
-                 client_swf_sha256=hashlib.sha256(mobile).hexdigest())
+                 client_swf_sha256=hashlib.sha256(mobile).hexdigest(), easy_swf_sha256=hashlib.sha256(easy).hexdigest())
     (dist / 'diagnostics-build.json').write_text(json.dumps(build))
     preview = dist / '2010/index.html'
     head = re.search(r'<head>(.*?)</head>', preview.read_text(), re.S)

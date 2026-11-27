@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="openrotmg-api" content="{{API_ORIGIN}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' {{API_ORIGIN}} {{SOCKET_ORIGIN}}; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'">
+  <script src="{{BASE}}backend.js" defer></script>
+  <title>Easy Client | Open RotMG</title>
+  <meta name="description" content="Play Open RotMG zoomed out. Right-click a player to teleport, rotate with Q and E, press R for the Nexus, and use /vault and /realm.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="{{SITE_URL}}easy/">
+  <link rel="stylesheet" href="{{BASE}}style.css">
+  <script src="{{BASE}}vendor/ruffle.js?v={{CLIENT_REVISION}}" defer></script>
+  <script src="{{BASE}}diagnostics.js" defer></script>
+  <script src="{{BASE}}bug-report.js" defer></script>
+  <script src="{{BASE}}mobile.js" defer></script>
+  <script src="{{BASE}}game.js" defer></script>
+</head>
+<body class="game-page">
+<div class="site-shell">
+  <main class="page-main">
+    <h1 class="screen-reader">Open RotMG Easy Client</h1>
+    <p class="alpha-warning" role="note">Open RotMG is in early alpha. Saves will be reset before Beta release.</p>
+    <div id="game" data-mode="easy" data-runtime-sizes='{{RUNTIME_SIZES}}' aria-label="Realm of the Mad God 123.5.1">
+      <div id="startup" role="status">
+        <img src="{{BASE}}amulet-of-resurrection.png" width="96" height="96" alt="">
+        <strong>Easy Client</strong>
+        <span>Loading client…</span>
+        <progress max="1" value="0"></progress>
+        <button type="button" hidden>Retry</button>
+        <a href="https://ruffle.rs/">Powered by Ruffle</a>
+      </div>
+      <div id="aim-cursor" aria-hidden="true" hidden></div>
+    </div>
+    <div id="mobile-controls">
+      <div class="mobile-side">
+        <div class="mobile-shortcuts"><button id="mobile-chat" type="button" aria-label="Open chat" title="Chat"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3h16v13H9l-5 5V3Z"/><path d="M8 8h8M8 12h5"/></svg></button></div>
+        <div id="move-stick" aria-label="Move in any direction"><span></span></div><button type="button" data-code="Insert">Nexus</button>
+      </div>
+      <div class="mobile-side">
+        <div class="mobile-shortcuts" role="group" aria-label="Minimap zoom"><button id="mobile-zoom-out" type="button" aria-label="Zoom minimap out" title="Zoom minimap out">−</button><button id="mobile-zoom-in" type="button" aria-label="Zoom minimap in" title="Zoom minimap in">+</button></div>
+        <div id="aim-pad" aria-label="Tap to click; hold to aim or rotate Q/E while firing"><span></span></div><button type="button" data-code="Space">Ability</button>
+      </div>
+      <div id="mobile-toolbar"><button id="mobile-keyboard" type="button">Keyboard</button><button id="mobile-camera" type="button" aria-pressed="false">Camera rotate</button><button id="mobile-exit" type="button">Exit mobile controls</button></div>
+    </div>
+    <noscript><p class="notice">JavaScript is required to load the preserved Flash client through Ruffle.</p></noscript>
+    <p id="load-error" class="notice" role="alert" hidden></p>
+  </main>
+  <footer class="site-footer">
+    <p class="site-signature"><img src="{{BASE}}amulet-of-resurrection.png" width="17" height="17" alt="">Open RotMG</p>
+    <p>2012 Realm of the Mad God reimplementation</p>
+    <nav aria-label="Project">{{PROJECT_NAV}}</nav>
+    <section id="bug-report" aria-label="Bug report" hidden>
+      <form id="bug-form">
+        <label for="bug-description">Describe the bug</label>
+        <textarea id="bug-description" rows="5" maxlength="4000" required placeholder="Describe the bug here (link references appreciated!)"></textarea>
+        <p>Reports, game diagnostics and screenshots are public. Do not include passwords or personal information.</p>
+        <p>Recent game diagnostics are attached when a character is connected. You can also report without signing in. Only your game canvas is captured, never your desktop.</p>
+        <img id="bug-screenshot" alt="Game screenshot attached to this report" hidden>
+        <button id="bug-refresh" type="button">Refresh screenshot</button>
+        <button type="submit" disabled>Submit bug report</button>
+        <p id="bug-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </footer>
+</div>
+</body>
+</html>
