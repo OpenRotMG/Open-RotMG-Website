@@ -5,7 +5,7 @@ export const boards = {
   stars: {title: 'Stars', description: 'Class stars earned from each class’s best fame.'},
   quests: {title: 'Quests', description: 'Assigned quests completed by all of an account’s characters, alive or dead.'}
 };
-export function ranked(players, board) {
+export function ranked(players, board, excluded = new Set()) {
   if (!Object.hasOwn(boards, board)) throw new Error('Unknown hiscore category');
   if (!Array.isArray(players)) throw new Error('Malformed hiscores response');
   const seen = new Set();
@@ -13,7 +13,7 @@ export function ranked(players, board) {
     if (!Number.isSafeInteger(p.account) || p.account < 1 || seen.has(p.account) || typeof p.name !== 'string' || !Number.isSafeInteger(p[board]) || p[board] < 0) throw new Error('Malformed hiscores player');
     seen.add(p.account);
   }
-  const sorted = [...players].sort((a, b) => b[board] - a[board] || a.account - b.account);
+  const sorted = players.filter(p => !excluded.has(p.account)).sort((a, b) => b[board] - a[board] || a.account - b.account);
   let rank = 0, previous;
   return sorted.map((player, i) => {if (previous !== player[board]) rank = i + 1; previous = player[board]; return {...player, rank};});
 }
@@ -177,7 +177,8 @@ async function start() {
   }
   document.querySelector('#metric').textContent=boards[board].title;
   const search=document.querySelector('#search'),body=document.querySelector('tbody'),byID=new Map(catalog.map(i=>[i.id,i]));
-  let rows=[],best=new Map(),reviewed=new Map();
+  const showCheaters=document.querySelector('#show-cheaters'),population=document.querySelector('#population');
+  let players=[],rows=[],best=new Map(),reviewed=new Map();
   const render=()=>{
     body.replaceChildren();
     for (const player of rows.filter(p=>p.name.toLowerCase().includes(search.value.toLowerCase().trim()))) {
@@ -193,11 +194,18 @@ async function start() {
     }
     if (!body.children.length) {const row=el('tr'),cell=el('td','empty','No matching players.');cell.colSpan=4;row.append(cell);body.append(row);}
   };
+  const updateRanks=()=>{
+    rows=ranked(players,board,showCheaters.checked ? undefined : reviewed);
+    render();
+    population.textContent=`${rows.length} players`;
+  };
   search.addEventListener('input',render);
+  showCheaters.addEventListener('change',updateRanks);
   const refresh=async()=>{
     try {
-      const [scores,deaths]=await Promise.all([json('/api/hiscores'),graveyard()]);rows=ranked(scores.players,board);best=highestFameDeaths(deaths);reviewed=reviewedAccounts(scores.reviewed_accounts);render();
-      document.querySelector('#population').textContent=`${rows.length} players`;document.querySelector('#rankings').hidden=false;status.hidden=true;
+      const [scores,deaths]=await Promise.all([json('/api/hiscores'),graveyard()]);
+      players=scores.players;best=highestFameDeaths(deaths);reviewed=reviewedAccounts(scores.reviewed_accounts);updateRanks();
+      document.querySelector('#rankings').hidden=false;status.hidden=true;
     } catch(error) {document.querySelector('#rankings').hidden=true;status.hidden=false;status.textContent=`Update failed: ${error.message}`;console.error(error);}
   };
   await refresh();setInterval(refresh,60000);
