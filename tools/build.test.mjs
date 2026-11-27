@@ -41,6 +41,9 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
   const sharedHiscores = readFileSync(new URL('../dist/hiscores/index.html', import.meta.url), 'utf8');
   for (const key of ['og:image', 'twitter:image']) assert.ok(sharedHiscores.includes(`=\"${key}\" content=\"${site.href}${customImage}\"`));
   assert.match(sharedHiscores, /Native Realm of the Mad God pixel art over historical gameplay/);
+  const hiscoresVersion = createHash('sha256').update(readFileSync(new URL('../public/hiscores/app.js', import.meta.url))).update(readFileSync(new URL('../public/hiscores/style.css', import.meta.url))).digest('hex').slice(0, 12);
+  assert.ok(sharedHiscores.includes(`src="app.js?v=${hiscoresVersion}"`));
+  assert.ok(sharedHiscores.includes(`href="style.css?v=${hiscoresVersion}"`));
   const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
   assert.ok(!home.includes(customImage));
   for (const file of readdirSync(new URL('../dist/', import.meta.url), {recursive: true}).filter(file => file.endsWith('.html'))) {
