@@ -69,6 +69,18 @@ jobs:
           name: deployment
           path: ${{ runner.temp }}/deploy.bundle
           retention-days: 1
+      - name: Build the pinned Easy Client assembler
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends gdc
+          git clone --quiet https://github.com/CyberShadow/RABCDAsm "$RUNNER_TEMP/rabcdasm"
+          cd "$RUNNER_TEMP/rabcdasm"
+          git checkout --quiet "$(jq -r .assemblerCommit "$CLIENT_DIR/spectator/lock.json")"
+          git apply "$CLIENT_DIR/spectator/rabcdasm-determinism.patch"
+          for tool in rabcdasm rabcasm; do
+            gdc -O1 -o "$tool" "$tool.d" abcfile.d asprogram.d assembler.d autodata.d common.d disassembler.d murmurhash2a.d swffile.d zlibx.d
+          done
+          echo "RABCDASM=$RUNNER_TEMP/rabcdasm" >> "$GITHUB_ENV"
       - name: Assemble independent static game assets
         working-directory: website
         run: python3 -B tools/pages.py assemble

@@ -31,7 +31,8 @@ class PagesTest(unittest.TestCase):
         (self.root / 'dist/2010/index.html').write_text('<html><head><title>2010 Preview</title><meta property="og:image" content="https://openrotmg.org/2010/social.png?v=fixture"><meta name="twitter:image" content="https://openrotmg.org/2010/social.png?v=fixture"><script src="preview.js"></script></head><body>Game</body></html>')
         (self.root / 'dist/diagnostics-build.json').write_text(json.dumps({**self.expected, 'website': 'd' * 40}))
         (self.root / 'dist/draw').mkdir()
-        for page in ['index.html', 'draw/index.html']:
+        (self.root / 'dist/easy').mkdir()
+        for page in ['index.html', 'easy/index.html', 'draw/index.html']:
             (self.root / 'dist' / page).write_text('<div id="game"></div><script src="/game.js"></script>')
         (self.root / 'dist/game.js').write_bytes(b'fixture loader')
         (self.root / 'dist/draw/native-texture-editor.swf').write_bytes(b'fixture editor')
@@ -46,6 +47,7 @@ class PagesTest(unittest.TestCase):
         env.start()
         self.addCleanup(env.stop)
         self.desktop = self.patch(pages, 'build_downloads', return_value={'swf_sha256': 'e' * 64})
+        self.easy = self.patch(pages, 'build_easy', side_effect=lambda movie: movie)
 
     def patch(self, target, name, *args, **kwargs):
         p = patch.object(target, name, *args, **kwargs)
@@ -69,6 +71,8 @@ class PagesTest(unittest.TestCase):
         movie = (self.root / 'dist/client.swf').read_bytes()
         self.assertIn(b'openrotmg-mobile-camera\x00', movie)
         self.assertEqual(movie[8:], pages.with_mobile_camera(b'FWS' + self.swf[3:8] + zlib.decompress(self.swf[8:]))[8:])
+        self.assertEqual(self.easy.call_args.args[0][8:], zlib.decompress(self.swf[8:]))
+        self.assertEqual((self.root / 'dist/easy.swf').read_bytes(), movie)
         self.assertTrue((self.root / 'dist/vendor/ruffle.js').is_file())
         self.assertTrue((self.root / 'dist/sfx/test.mp3').is_file())
         build = json.loads((self.root / 'dist/diagnostics-build.json').read_text())
@@ -76,7 +80,8 @@ class PagesTest(unittest.TestCase):
         self.assertEqual(self.desktop.call_args.args[2:4], ('https://game.example.test', 'https://example.test/'))
         self.assertEqual(build['client_swf_sha256'], hashlib.sha256(movie).hexdigest())
         self.assertEqual(build['client_source_swf_sha256'], hashlib.sha256(self.swf).hexdigest())
-        for page in ['index.html', 'draw/index.html']:
+        self.assertEqual(build['easy_swf_sha256'], hashlib.sha256(movie).hexdigest())
+        for page in ['index.html', 'easy/index.html', 'draw/index.html']:
             html = (self.root / 'dist' / page).read_text()
             hashes = json.loads(html.split("data-asset-hashes='")[1].split("'")[0])
             for name, digest in hashes.items():

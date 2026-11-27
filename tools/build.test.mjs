@@ -118,6 +118,7 @@ test('site builds with metadata, strict same-origin WSS and preserved reference 
     [`${site.pathname}updates/`, 'Updates', 'Discord channel mirror.'],
     [`${site.pathname}gold/`, 'Gold', 'Learn how it works.'],
     [`${site.pathname}export/`, 'Export save', 'Copy your personal account progress.'],
+    [`${site.pathname}easy/`, 'Easy Client', 'Zoom out and teleport with right-click.'],
     [`${site.pathname}download/`, 'Downloads', 'Game SWF and Flash Player.'],
     [`${site.pathname}single-player/`, 'Single-player', 'Download the offline edition.'],
     ['https://github.com/OpenRotMG', 'Source Code', 'Host your own.'],

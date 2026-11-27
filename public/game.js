@@ -91,11 +91,12 @@ function showDownloads(movie, movieName, runtimeSizes, assetHashes) {
   }, {once: true});
   window.OpenRotMGDiagnostics.start(socketEndpoint, player);
   // Pages may still have the pre-controls movie cached under its old URL.
-  const movies = {game: '/client.swf?mobile-camera=4', editor: '/draw/native-texture-editor.swf'};
+  const movies = {game: '/client.swf?mobile-camera=4', easy: '/easy.swf', editor: '/draw/native-texture-editor.swf'};
   const mode = document.querySelector('#game').dataset.mode;
   if (!Object.hasOwn(movies, mode)) throw new Error(`Unknown client mode: ${mode}`);
-  if (mode === 'game') OpenRotMGMobile.start(player);
-  if (mode === 'game') void OpenRotMGBackend.fetch('/health', {cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000)}).then(response => {
+  const playable = mode !== 'editor';
+  if (playable) OpenRotMGMobile.start(player);
+  if (playable) void OpenRotMGBackend.fetch('/health', {cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000)}).then(response => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
   }).catch(error => {
     const notice = document.querySelector('#load-error');
@@ -111,11 +112,11 @@ function showDownloads(movie, movieName, runtimeSizes, assetHashes) {
     if (result.tab !== payload.tab) throw new Error('Invalid browser authentication response');
     return result.tab;
   }
-  const browser = mode === 'game' ? Array.from(crypto.getRandomValues(new Uint8Array(32)), value => value.toString(16).padStart(2, '0')).join('') : null;
+  const browser = playable ? Array.from(crypto.getRandomValues(new Uint8Array(32)), value => value.toString(16).padStart(2, '0')).join('') : null;
   const browserRules = browser ? [[/^https?:\/\/127\.0\.0\.1:8080\/char\/list$/, OpenRotMGBackend.url('/legacy-api/char/list').href + `?browser=${browser}`]] : [];
   const movie = new URL(movies[mode], document.baseURI);
   const assets = document.querySelector('#game').dataset.assetHashes;
-  showDownloads(movie, mode === 'game' ? 'game client' : 'pixel editor', JSON.parse(document.querySelector('#game').dataset.runtimeSizes), assets === undefined ? {} : JSON.parse(assets));
+  showDownloads(movie, playable ? 'game client' : 'pixel editor', JSON.parse(document.querySelector('#game').dataset.runtimeSizes), assets === undefined ? {} : JSON.parse(assets));
   await player.ruffle().load({
     url: movie.href,
     autoplay: 'on',
